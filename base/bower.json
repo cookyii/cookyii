@@ -1,0 +1,25 @@
+{
+  "name": "cookyii/base",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cookyii/base",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "resolutions": {
+    "angular": "1.3.15"
+  },
+  "dependencies": {
+    "angular-redactor": "1.1.4",
+    "angular-timer": "1.3.1",
+    "angular-scroll-pane": "1.0.2",
+    "angular-slider": "0.2.14",
+    "angular-elastic": "2.4.2",
+    "lightbox": "2.7.1",
+    "jScrollPane": "2.0.21",
+    "iCheck": "1.0.2",
+    "Sortable": "1.2.0",
+    "jquery-form": "3.45.0",
+    "jquery.scrollTo": "2.1.0",
+    "sweetalert": "0.5.0",
+    "owl.carousel": "*"
+  }
+}

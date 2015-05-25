@@ -1,0 +1,9 @@
+/.idea
+/.c9
+/.environment.php
+/.credentials.php
+/composer.phar
+/components
+/htpasswd
+/node_modules
+/vendor

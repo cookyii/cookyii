@@ -1,0 +1,36 @@
+include:
+  - 'web-app/tests'
+  - 'backend-app/tests'
+  - 'crm-app/tests'
+paths:
+    log: _output
+settings:
+    colors: true
+coverage:
+    enabled: true
+    include:
+        - common/authclient/*.php
+        - common/commands/*.php
+        - common/config/*.php
+        - common/helpers/*.php
+        - web-app/assets/*.php
+        - web-app/commands/*.php
+        - web-app/components/*.php
+        - web-app/config/*.php
+        - web-app/controllers/*.php
+        - web-modules/*.php
+        - backend-app/assets/*.php
+        - backend-app/commands/*.php
+        - backend-app/components/*.php
+        - backend-app/config/*.php
+        - backend-app/controllers/*.php
+        - backend-modules/*.php
+        - crm-app/assets/*.php
+        - crm-app/commands/*.php
+        - crm-app/components/*.php
+        - crm-app/config/*.php
+        - crm-app/controllers/*.php
+        - crm-modules/*.php
+        - globals.php
+    exclude:
+        - vendor
