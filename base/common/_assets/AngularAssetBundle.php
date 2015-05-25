@@ -24,6 +24,7 @@ class AngularAssetBundle extends \yii\web\AssetBundle
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-loader.js',
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.min.js',
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js',
 
         // angular material
         'https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.js',

@@ -1,23 +1,27 @@
-"use strict";
+(function (ng, $) {
+  "use strict";
 
-angular.module('CrmApp', [
-  'ngSanitize', 'ngMaterial',
-  'ui.bootstrap',
-  'angular-loading-bar'
-])
+  ng.module('CrmApp', [
+    'ngSanitize',
+    'ngMaterial',
+    'ui.bootstrap',
+    'angular-loading-bar'
+  ])
 
-  .config([
-    '$httpProvider', '$mdThemingProvider',
-    function ($httpProvider, $mdThemingProvider) {
-      $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-      $httpProvider.defaults.headers.common['X-CSRF-Token'] = yii.getCsrfToken();
+    .config([
+      '$httpProvider', '$mdThemingProvider',
+      function ($httpProvider, $mdThemingProvider) {
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        $httpProvider.defaults.headers.common['X-CSRF-Token'] = yii.getCsrfToken();
 
-      var $token = jQuery('meta[name=token]');
-      if ($token.length > 0) {
-        //$httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + $token.prop('content');
-        // @todo конфликт с http auth сервера
+        var $token = $('meta[name=token]');
+        if ($token.length > 0) {
+          //      $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + $token.prop('content');
+          //      @todo конфликт с http auth сервера
+        }
+
+        $mdThemingProvider.theme('default');
       }
+    ]);
 
-      $mdThemingProvider.theme('default');
-    }
-  ]);
+})(angular, jQuery);

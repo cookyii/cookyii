@@ -18,6 +18,6 @@ class RespondAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $jsOptions = [
-        'condition' => ['lt IE 9'],
+        'condition' => 'lt IE 9',
     ];
 }
