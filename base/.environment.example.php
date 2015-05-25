@@ -19,9 +19,9 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 define('USE_SSL', false);
 
 /** Домен для версии приложения */
+define('DOMAIN_FRONTEND', 'www.myproject.lc');
 define('DOMAIN_BACKEND', 'backend.myproject.lc');
 define('DOMAIN_CRM', 'crm.myproject.lc');
-define('DOMAIN_WEB', 'www.myproject.lc');
 
 /** Данные подключения к БД */
 define('DB_HOST', 'localhost');

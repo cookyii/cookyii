@@ -29,10 +29,10 @@ class Controller extends \yii\web\Controller
         $this->checkUseSsl(true);
 
         if (isset($_GET['clear'])) {
-            \Yii::$app->get('cache')->flush();
-            if (function_exists('apc_clear_cache')) {
-                apc_clear_cache();
-            }
+            Cache()->flush();
+            Cache('session')->flush();
+            Cache('authManager')->flush();
+            Cache('schema')->flush();
         }
 
 //        if (!User()->isGuest) {

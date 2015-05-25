@@ -4,7 +4,7 @@
  * @author Revin Roman http://phptime.ru
  */
 
-defined('APP_NAME') or define('APP_NAME', 'Application Name');
+defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App CRM');
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -37,8 +37,13 @@ return [
         'user' => $params['component.user'],
         'postman' => $params['component.postman'],
         'cache' => $params['component.cache'],
+        'cache.session' => $params['component.cache.session'],
+        'cache.authManager' => $params['component.cache.authManager'],
+        'cache.schema' => $params['component.cache.schema'],
+        'cache.query' => $params['component.cache.query'],
         'urlManager' => $params['component.urlManager.crm'],
-        'urlManager.cake' => $params['component.urlManager.cake'],
+        'urlManager.frontend' => $params['component.urlManager.frontend'],
+        'urlManager.backend' => $params['component.urlManager.backend'],
         'authManager' => $params['component.authManager'],
         'i18n' => $params['component.i18n'],
         'log' => $params['component.log'],

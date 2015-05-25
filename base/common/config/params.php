@@ -10,65 +10,47 @@ $defaultDbConfig = [
     'class' => yii\db\Connection::class,
     'charset' => 'utf8',
     'enableSchemaCache' => true,
-    'schemaCache' => new yii\caching\ApcCache(['keyPrefix' => 'foodbook-schema-']),
+    'schemaCache' => 'cache.schema',
 ];
 
 return [
     'component.db.production' => ArrayHelper::merge(
         $defaultDbConfig,
         [
-            'dsn' => MYSQL_DSN,
-            'username' => MYSQL_USER,
-            'password' => MYSQL_PASS,
+            'dsn' => DB_DSN,
+            'username' => DB_USER,
+            'password' => DB_PASS,
             'tablePrefix' => 'yii_'
         ]
     ),
     'component.db.test' => ArrayHelper::merge(
         $defaultDbConfig,
         [
-            'dsn' => MYSQL_TEST_DSN,
-            'username' => MYSQL_TEST_USER,
-            'password' => MYSQL_TEST_PASS,
+            'dsn' => DB_TEST_DSN,
+            'username' => DB_TEST_USER,
+            'password' => DB_TEST_PASS,
             'tablePrefix' => 'yii_'
         ]
     ),
     'component.session' => [
         'class' => yii\web\CacheSession::class,
-        'cache' => [
-            'class' => yii\caching\ApcCache::class,
-            'keyPrefix' => 'foodbook-session-',
-        ],
+        'cache' => 'cache.session',
     ],
     'component.security' => [
         'class' => yii\base\Security::class,
         'passwordHashStrategy' => 'password_hash',
     ],
-    'component.errorHandler' => [
-        'errorAction' => 'site/error',
-    ],
     'component.log' => [
         'class' => yii\log\Dispatcher::class,
         'targets' => [],
+    ],
+    'component.view' => [
+        'class' => yii\web\View::class,
     ],
     'component.user' => [
         'class' => yii\web\User::class,
         'enableAutoLogin' => true,
         'loginUrl' => ['/'],
-    ],
-    'component.postman' => [
-        'class' => rmrevin\yii\postman\Component::class,
-        'driver' => 'smtp',
-        'default_from' => [SMTP_USER, 'foodbook.cake'],
-        'subject_prefix' => 'foodbook.cake / ',
-        'smtp_config' => [
-            'host' => SMTP_HOST,
-            'port' => SMTP_PORT,
-            'auth' => true,
-            'user' => SMTP_USER,
-            'password' => SMTP_PASSWORD,
-            'secure' => SMTP_ENCRYPT === true ? 'ssl' : '',
-            'debug' => false,
-        ],
     ],
     'component.authManager' => [
         'class' => yii\rbac\DbManager::class,
@@ -76,14 +58,27 @@ return [
         'itemChildTable' => '{{%rbac_item_child}}',
         'assignmentTable' => '{{%rbac_assignment}}',
         'ruleTable' => '{{%rbac_rule}}',
-        'cache' => [
-            'class' => yii\caching\ApcCache::class,
-            'keyPrefix' => 'foodbook-rbac-',
-        ],
+        'cache' => 'cache.authManager',
     ],
     'component.cache' => [
-        'class' => yii\caching\DbCache::class, // apc cache not available in cli!
-        'keyPrefix' => 'foodbook-',
+        'class' => yii\caching\DbCache::class,
+        'keyPrefix' => 'normal-',
+    ],
+    'component.cache.session' => [
+        'class' => yii\caching\ApcCache::class, // apc cache not available in cli!
+        'keyPrefix' => 'session-',
+    ],
+    'component.cache.authManager' => [
+        'class' => yii\caching\ApcCache::class, // apc cache not available in cli!
+        'keyPrefix' => 'authManager-',
+    ],
+    'component.cache.schema' => [
+        'class' => yii\caching\ApcCache::class, // apc cache not available in cli!
+        'keyPrefix' => 'schema-',
+    ],
+    'component.cache.query' => [
+        'class' => yii\caching\ApcCache::class, // apc cache not available in cli!
+        'keyPrefix' => 'query-',
     ],
     'component.assetManager' => [
         'basePath' => '@webroot/assets',
@@ -93,22 +88,31 @@ return [
             yii\bootstrap\BootstrapAsset::class => [
                 'css' => [],
             ],
-            yii\authclient\widgets\AuthChoiceStyleAsset::class => [
-                'css' => [],
-            ],
         ],
     ],
-    'component.urlManager.cake' => [
+    'component.urlManager.frontend' => [
         'class' => yii\web\UrlManager::class,
         'baseUrl' => '/',
-        'hostInfo' => (USE_SSL ? 'https' : 'http') . '://' . DOMAIN_CAKE,
+        'hostInfo' => (USE_SSL ? 'https' : 'http') . '://' . DOMAIN_FRONTEND,
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'ruleConfig' => [
             'class' => yii\web\UrlRule::class,
             'encodeParams' => false,
         ],
-        'rules' => require(\Yii::getAlias('@cake/config/urls.php')),
+        'rules' => require(\Yii::getAlias('@frontend/config/urls.php')),
+    ],
+    'component.urlManager.backend' => [
+        'class' => yii\web\UrlManager::class,
+        'baseUrl' => '/',
+        'hostInfo' => (USE_SSL ? 'https' : 'http') . '://' . DOMAIN_BACKEND,
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+        'ruleConfig' => [
+            'class' => yii\web\UrlRule::class,
+            'encodeParams' => false,
+        ],
+        'rules' => require(\Yii::getAlias('@backend/config/urls.php')),
     ],
     'component.urlManager.crm' => [
         'class' => yii\web\UrlManager::class,
@@ -122,38 +126,38 @@ return [
         ],
         'rules' => require(\Yii::getAlias('@crm/config/urls.php')),
     ],
-    'component.view' => [
-        'class' => yii\web\View::class,
+    'component.errorHandler' => [
+        'errorAction' => 'site/error',
     ],
     'component.i18n' => [
     ],
     'component.request' => [
-        'cookieValidationKey' => sha1(APP_NAME . '.cookie.key.35d42g46sdh46f34h'),
+        'cookieValidationKey' => sha1(APP_NAME . '.cookie.key.sd45hadf63ljkjd554ang4576sj'),
         'parsers' => [
             'application/json' => yii\web\JsonParser::class,
         ],
     ],
     'component.formatter' => [
         'class' => common\components\Formatter::class,
-        'locale' => 'ru',
-        'timeZone' => 'Etc/GMT-3',
+        'locale' => 'en',
+        'timeZone' => 'Etc/GMT-0',
         'dateFormat' => 'dd MMMM y',
         'timeFormat' => 'HH:mm',
         'datetimeFormat' => 'dd MMMM y HH:mm',
     ],
-    'component.authClientCollection' => [
-        'class' => yii\authclient\Collection::class,
-        'clients' => [
-            'facebook' => [
-                'class' => yii\authclient\clients\Facebook::class,
-                'clientId' => FACEBOOK_CLIENT_ID,
-                'clientSecret' => FACEBOOK_CLIENT_SECRET,
-            ],
+    'component.postman' => [
+        'class' => rmrevin\yii\postman\Component::class,
+        'driver' => 'smtp',
+        'default_from' => [SMTP_USER, 'cookyii'],
+        'subject_prefix' => 'cookyii / ',
+        'smtp_config' => [
+            'host' => SMTP_HOST,
+            'port' => SMTP_PORT,
+            'auth' => true,
+            'user' => SMTP_USER,
+            'password' => SMTP_PASSWORD,
+            'secure' => SMTP_ENCRYPT === true ? 'ssl' : '',
+            'debug' => false,
         ],
-    ],
-    'component.xxtea' => [
-        'class' => rmrevin\yii\xxtea\Component::class,
-        'key' => 'G4kfKqoRj37Clmw4', // 16 letters
-        'base64_encode' => true,
     ],
 ];
