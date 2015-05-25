@@ -100,7 +100,7 @@ return [
             'class' => yii\web\UrlRule::class,
             'encodeParams' => false,
         ],
-        'rules' => require(\Yii::getAlias('@frontend/config/urls.php')),
+//        'rules' => require(\Yii::getAlias('@frontend/config/urls.php')),
     ],
     'component.urlManager.backend' => [
         'class' => yii\web\UrlManager::class,
@@ -112,7 +112,7 @@ return [
             'class' => yii\web\UrlRule::class,
             'encodeParams' => false,
         ],
-        'rules' => require(\Yii::getAlias('@backend/config/urls.php')),
+//        'rules' => require(\Yii::getAlias('@backend/config/urls.php')),
     ],
     'component.urlManager.crm' => [
         'class' => yii\web\UrlManager::class,
