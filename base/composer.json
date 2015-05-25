@@ -1,14 +1,13 @@
 {
-  "name": "cookyii/cookyii-dev",
-  "description": "Cookyii CMF - Development Package",
+  "name": "cookyii/base",
+  "description": "Base application for Cookyii CMF",
   "keywords": [
     "yii2",
     "framework",
-    "cookie",
+    "cookee",
     "cookyii",
     "cmf"
   ],
-  "homepage": "http://www.yiiframework.com/",
   "type": "yii2-extension",
   "license": "BSD-3-Clause",
   "authors": [
@@ -22,10 +21,6 @@
   "support": {
     "issues": "https://github.com/cookyii/cookyii/issues?state=open",
     "source": "https://github.com/cookyii/cookyii"
-  },
-  "minimum-stability": "dev",
-  "replace": {
-    "cookyii/base": "self.version"
   },
   "require": {
     "php": ">=5.5.0",
@@ -51,20 +46,10 @@
     "codeception/specify": "0.4.*",
     "codeception/verify": "0.2.*"
   },
-  "suggest": {
-  },
   "autoload": {
-    "psr-4": {
-      "cookyii\\": "base/"
-    }
+    "psr-4": {"cookyii\\": ""}
   },
   "bin": [
-    "base/yii"
-  ],
-  "extra": {
-    "asset-installer-paths": {
-      "npm-asset-library": "vendor/npm",
-      "bower-asset-library": "vendor/bower"
-    }
-  }
+    "yii"
+  ]
 }
