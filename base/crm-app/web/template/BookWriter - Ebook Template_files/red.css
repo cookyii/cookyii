@@ -1,0 +1,26 @@
+.highlight { color: #CB3737 }
+/**************************
+****** Home Section *******
+**************************/
+.coloroverlay { background: rgba(209, 68, 68, 0.9) }
+.btn-colored { background-color: #CB3737 }
+.btn-colored:hover { background-color: #AF0B0B }
+.btn-learn:hover,
+.btn-learn:focus { color: #212C3C }
+.btn-download { background-color: #212C3C }
+.btn-download:hover { color: #212C3C }
+/**************************
+******* Subscription ******
+**************************/
+#subscribe { background: #CB3737 }
+.subscribe-input:focus { outline: 0 }
+.subscribe-submit { background: #212C3C }
+.subscribe-submit:hover { background-color: #3C557A }
+#counter > .coloroverlay { background: rgba(209, 68, 68, 0.9) }
+#download > .coloroverlay { background: rgba(209, 68, 68, 0.9) }
+#books .owl-theme .owl-controls .owl-prev { background: #CB3737 }
+#books .owl-theme .owl-controls .owl-next { background: #CB3737 }
+#about { background: #CB3737 }
+#contactbtn { background: #212C3C }
+#contact { background: #212C3C }
+.socials li a:hover { color: #CB3737 }

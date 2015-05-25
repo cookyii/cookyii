@@ -1,0 +1,193 @@
+@media (max-width: 966px){
+img.logo {
+height: 30px;
+}
+h1 {
+font-size: 1.5rem;
+}
+h4 {
+font-size: 0.85rem;
+line-height: 1rem;
+}
+p {
+font-size: 0.70rem;
+line-height: 1.425em;
+}
+a.btn {
+margin: 10px 10px 0 0;
+}
+.btn-download,
+.btn-learn,
+.btn-blue {
+padding: 15px 15px;
+}
+.review h1 {
+font-size: .80rem;
+line-height: 1.2rem;
+}
+h2 {
+font-size: 1.8rem;
+line-height: 2rem;
+}
+#reviews h4 {
+font-size: 0.55rem;
+}
+#owl-reviews .review img {
+width: 55px;
+height: 55px;
+margin-top: 0;
+}
+#reviews h2 {
+line-height: 0;
+}
+#reviews img.img-responsive {
+padding-top: 40px;
+}
+#download a.btn-learn {
+padding: 10px;
+}
+#about img.img-responsive {
+padding-top: 100px;
+}
+#overview {
+padding-top: 4rem;
+padding-bottom: 4rem;
+}
+}
+
+@media (max-width: 966px){
+.container {
+width: 95%;
+}
+}
+
+@media (max-width: 640px){
+.coloroverlay {
+text-align: center;
+}
+#home img.img-responsive {
+width: 85%;
+margin: 0 auto;
+padding-top: 50px;
+}
+#learn {
+text-align: center;
+padding: 30px 40px 30px 40px;
+}
+#overview{
+padding: 40px;
+text-align: center;
+}
+#overview .text{
+padding-top:40px;
+}
+#reviews {
+padding-top: 0;
+padding-bottom: 40px;
+}
+#reviews h2 {
+line-height: 1.4;
+}
+#books {
+padding: 40px;
+}
+#about {
+padding: 40px 40px 0 40px;
+text-align: center;
+}
+#about img.img-responsive {
+padding-top: 10px;
+}
+#awards {
+padding: 40px 40px 0 40px;
+text-align: center;
+}
+#awards img.img-responsive {
+width: 120px;
+margin: 0 auto;
+}
+}
+
+@media (max-width: 460px){
+#awards img.img-responsive {
+width: 120px;
+margin: 0 auto;
+}
+#learn,
+#overview,
+#books,
+#awards{padding: 10px;}
+#home .coloroverlay {
+padding-top: 80px;
+}
+input#subscriber-email,
+button#subscribe-button {
+width: 95%;
+margin: 0 auto;
+}
+input#subscriber-email {
+text-align: center;
+}
+#subscribe {
+padding-bottom: 3.8rem;
+padding-left: 20px;
+padding-right: 20px;
+}
+.form-group .subscibe {
+display: block;
+}
+#download > .coloroverlay {
+padding-top: 2.5rem;
+padding-bottom: 4.5rem;
+}
+#owl-books {
+margin-top: 0rem;
+}
+#about i.fa.fa-2x {
+padding: 0 2px;
+}
+#overview{
+padding-bottom: 2rem;
+}
+#about{
+padding: 10px 10px 0 10px;
+}
+#contactbtn {
+padding-bottom: 1rem;
+padding-top: 1rem;
+}
+#footer {
+padding-bottom: 2rem;
+}
+.space {
+padding-top: 10px;
+padding-bottom: 10px;
+}
+#contact {
+padding-bottom: 3rem;
+}
+}
+
+
+@media (max-width: 340px){
+h2 {
+font-size: 1.2rem;
+line-height: 1.5rem;
+}
+#subscribe h2 {
+font-size: 1.5rem;
+line-height: 1.5rem;
+}
+.section-title {
+margin-bottom: 0rem;
+}
+input#subscriber-email,
+button#subscribe-button {
+width: 100%;
+margin: 0 auto;
+}
+.social-icons li {
+padding-left: 0.2rem;
+padding-right: 0.2rem;
+}
+}
