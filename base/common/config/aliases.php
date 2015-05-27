@@ -6,8 +6,8 @@ Yii::setAlias('base', $base);
 Yii::setAlias('common', '@base/common');
 Yii::setAlias('environment', '@base/environments/' . YII_ENV);
 
-Yii::setAlias('web', '@base/web-app');
-Yii::setAlias('web/modules', '@base/web-modules');
+Yii::setAlias('frontend', '@base/frontend-app');
+Yii::setAlias('frontend/modules', '@base/frontend-modules');
 
 Yii::setAlias('backend', '@base/backend-app');
 Yii::setAlias('backend/modules', '@base/backend-modules');

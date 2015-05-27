@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta-runner name="PHP - Collect coverage">
+    <description>Collect coverage</description>
+    <settings>
+        <parameters>
+            <param name="system.php.workingDir.dir" value="" spec="text description='Working directory (if empty - current working directory will be used)' display='normal' label='Working directory:' validationMode='any'" />
+        </parameters>
+        <build-runners>
+            <runner id="RUNNER_14" name="" type="Ant">
+                <parameters>
+                    <param name="build-file"><![CDATA[<project name="Collect coverage">
+
+<condition property="php.workingDir" value="${teamcity.build.workingDir}">
+   <not>
+      <matches pattern=".+" string="${php.workingDir.dir}"/>
+   </not>
+</condition>
+<property name="php.workingDir" value="${php.workingDir.dir}" />
+
+<property name="phpunit.coverage.clover" value="${teamcity.build.tempDir}/_output/coverage.xml"/>
+<property name="phpunit.coverage.dir" value="${teamcity.build.workingDir}/_output/coverage"/>
+<property name="phpunit.coverage.zip" value="${teamcity.build.workingDir}/coverage.zip"/>
+
+<target name="collectCoverage">
+  <zip destfile="${phpunit.coverage.zip}" basedir="${phpunit.coverage.dir}" />
+  <echo>##teamcity[publishArtifacts '${phpunit.coverage.zip}']</echo>
+</target>
+
+</project>]]></param>
+                    <param name="build-file-path" value="build.xml" />
+                    <param name="target" value="collectCoverage" />
+                    <param name="teamcity.coverage.emma.include.source" value="true" />
+                    <param name="teamcity.coverage.emma.instr.parameters" value="-ix -*Test*" />
+                    <param name="teamcity.coverage.idea.includePatterns" value="*" />
+                    <param name="teamcity.step.mode" value="default" />
+                    <param name="use-custom-build-file" value="true" />
+                </parameters>
+            </runner>
+        </build-runners>
+        <requirements />
+    </settings>
+</meta-runner>

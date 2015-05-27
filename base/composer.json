@@ -25,6 +25,8 @@
   "require": {
     "php": ">=5.5.0",
 
+    "cookyii/build": "dev-master",
+
     "yiisoft/yii2": "2.0.4",
     "yiisoft/yii2-composer": "2.0.3",
     "yiisoft/yii2-bootstrap": "2.0.4",

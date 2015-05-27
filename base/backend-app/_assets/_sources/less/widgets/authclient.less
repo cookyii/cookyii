@@ -1,0 +1,72 @@
+@facebook-color: #3b5998;
+@github-color: #333333;
+@google-color: #dd4b39;
+@linkedin-color: #007bb6;
+@live-color: #2672ec;
+@twitter-color: #00aced;
+@vkontakte-color: #45668e;
+@yandex-color: #ffdb4c;
+
+ul.auth-clients {
+  list-style: none;
+  padding: 0;
+  > li {
+    display: inline-block;
+    > a.auth-link {
+      display: block;
+      padding: 10px 20px;
+      font-size: 2em;
+      width: 70px;
+      vertical-align: middle;
+      &.facebook {
+        background-color: @facebook-color; color: #ffffff;
+        &:hover, &:focus {
+          background-color: darken(@facebook-color, 10%);
+        }
+      }
+      &.github {
+        background-color: @github-color; color: #ffffff;
+        &:hover, &:focus {
+          background-color: darken(@github-color, 10%);
+        }
+      }
+      &.google {
+        background-color: @google-color; color: #ffffff;
+        &:hover, &:focus {
+          background-color: darken(@google-color, 10%);
+        }
+      }
+      &.linkedin {
+        background-color: @linkedin-color; color: #ffffff;
+        &:hover, &:focus {
+          background-color: darken(@linkedin-color, 10%);
+        }
+      }
+      &.live {
+        background-color: @live-color; color: #ffffff;
+        &:hover, &:focus {
+          background-color: darken(@live-color, 10%);
+        }
+      }
+      &.twitter {
+        background-color: @twitter-color; color: #ffffff;
+        &:hover, &:focus {
+          background-color: darken(@twitter-color, 10%);
+        }
+      }
+      &.vkontakte {
+        background-color: @vkontakte-color; color: #ffffff;
+        &:hover, &:focus {
+          background-color: darken(@vkontakte-color, 10%);
+        }
+      }
+      &.yandex {
+        background-color: @yandex-color; color: #333333;
+        &:hover, &:focus {
+          background-color: darken(@yandex-color, 10%);
+        }
+      }
+    }
+  }
+}
+
