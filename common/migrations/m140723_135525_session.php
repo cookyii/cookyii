@@ -1,5 +1,7 @@
 <?php
 
+use yii\db\mysql\Schema;
+
 class m140723_135525_session extends \common\components\Migration
 {
 
@@ -7,7 +9,7 @@ class m140723_135525_session extends \common\components\Migration
     {
         $this->createTable('{{%session}}', [
             'id' => 'CHAR(40) NOT NULL  PRIMARY KEY',
-            'expire' => \yii\db\mysql\Schema::TYPE_INTEGER,
+            'expire' => Schema::TYPE_INTEGER,
             'data' => 'LONGBLOB',
         ]);
     }

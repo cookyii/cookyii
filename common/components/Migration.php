@@ -1,7 +1,7 @@
 <?php
 /**
  * Migration.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\components;
@@ -12,8 +12,6 @@ namespace common\components;
  */
 class Migration extends \yii\db\Migration
 {
-
-    use \common\traits\SwitchableMigrationTrait;
 
     /**
      * @inheritdoc

@@ -19,12 +19,12 @@ class AngularAssetBundle extends \yii\web\AssetBundle
 
     public $js = [
         // angular official
-        'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js',
-        'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-cookies.min.js',
-        'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-loader.js',
-        'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.min.js',
-        'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js',
-        'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-cookies.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-loader.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-sanitize.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-aria.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-animate.min.js',
 
         // angular material
         'https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.js',
@@ -37,6 +37,6 @@ class AngularAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        \yii\web\JqueryAsset::class,
+        'yii\web\JqueryAsset',
     ];
 }

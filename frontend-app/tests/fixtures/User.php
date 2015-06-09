@@ -1,7 +1,7 @@
 <?php
 /**
  * User.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace frontend\tests\fixtures;

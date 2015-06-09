@@ -1,7 +1,7 @@
 <?php
 /**
  * TagInterface.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace cookyii\interfaces\category;

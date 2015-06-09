@@ -1,7 +1,7 @@
 <?php
 /**
  * PageInterface.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace cookyii\interfaces\page;

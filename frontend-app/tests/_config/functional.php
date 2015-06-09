@@ -1,7 +1,7 @@
 <?php
 /**
  * functional.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 $_SERVER['SCRIPT_FILENAME'] = ERP_ENTRY_FILE;

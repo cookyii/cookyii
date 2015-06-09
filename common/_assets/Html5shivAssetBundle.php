@@ -1,7 +1,7 @@
 <?php
 /**
  * Html5shivAssetBundle.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\_assets;
