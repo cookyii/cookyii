@@ -1,7 +1,7 @@
 <?php
 /**
  * unit.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 $params = array_merge(

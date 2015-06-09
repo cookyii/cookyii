@@ -1,7 +1,7 @@
 <?php
 /**
  * ActiveField.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\widgets\angular\material;

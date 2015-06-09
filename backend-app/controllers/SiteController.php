@@ -1,7 +1,7 @@
 <?php
 /**
  * SiteController.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace backend\controllers;
@@ -22,11 +22,11 @@ class SiteController extends \backend\components\Controller
     {
         return [
             'error' => [
-                'class' => \yii\web\ErrorAction::class,
+                'class' => 'yii\web\ErrorAction',
             ],
             'captcha' => [
-                'class' => \yii\captcha\CaptchaAction::class,
-                'fixedVerifyCode' => YII_DEBUG ? 'testme' : null,
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_DEBUG ? 'random' : null,
             ],
         ];
     }
@@ -36,6 +36,6 @@ class SiteController extends \backend\components\Controller
      */
     public function actionIndex()
     {
-        throw new \yii\web\NotFoundHttpException;
+        throw new \yii\web\ServerErrorHttpException('Under construction');
     }
 }

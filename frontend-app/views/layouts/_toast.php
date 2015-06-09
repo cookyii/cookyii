@@ -1,7 +1,7 @@
 <?php
 /**
  * _toast.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 use rmrevin\yii\fontawesome\FA;

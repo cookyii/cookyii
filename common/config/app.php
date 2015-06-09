@@ -1,7 +1,7 @@
 <?php
 /**
  * app.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 $vendor_dir = realpath(__DIR__ . '/../../vendor');

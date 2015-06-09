@@ -1,7 +1,7 @@
 <?php
 /**
  * SoftDeleteTrait.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\traits\ActiveRecord;

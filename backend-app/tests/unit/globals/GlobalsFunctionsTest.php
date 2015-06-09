@@ -1,7 +1,7 @@
 <?php
 /**
  * GlobalsFunctionsTest.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace backend\tests\unit\globals;

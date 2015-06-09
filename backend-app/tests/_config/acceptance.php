@@ -1,7 +1,7 @@
 <?php
 /**
  * acceptance.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 defined('YII_APP_BASE_PATH') or define('YII_APP_BASE_PATH', dirname(dirname(dirname(__DIR__))));

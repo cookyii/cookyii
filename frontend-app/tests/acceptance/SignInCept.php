@@ -1,7 +1,7 @@
 <?php
 /**
  * SignInCept.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 $fixtures = include(Yii::getAlias('@tests/fixtures/_data/account-user.php'));

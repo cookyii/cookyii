@@ -1,13 +1,13 @@
 <?php
 /**
  * params.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 return [
     'component.user' => [
-        'class' => yii\web\User::class,
-        'identityClass' => backend\components\SimpleUser::class,
+        'class' => 'yii\web\User',
+        'identityClass' => 'resources\User',
         'enableAutoLogin' => true,
         'loginUrl' => ['/'],
     ],

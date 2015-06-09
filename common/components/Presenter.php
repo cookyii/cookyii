@@ -1,7 +1,7 @@
 <?php
 /**
  * Presenter.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\components;

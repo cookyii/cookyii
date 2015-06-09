@@ -1,7 +1,7 @@
 <?php
 /**
  * CompletionTrait.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\traits\ActiveRecord;
@@ -16,6 +16,22 @@ namespace common\traits\ActiveRecord;
  */
 trait CompletionTrait
 {
+
+    /**
+     * @return bool
+     */
+    public function isCompleted()
+    {
+        return $this->completed === 1;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotCompleted()
+    {
+        return $this->completed === 0;
+    }
 
     /**
      * @return bool

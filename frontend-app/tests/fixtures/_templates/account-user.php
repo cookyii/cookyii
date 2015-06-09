@@ -1,7 +1,7 @@
 <?php
 /**
  * account-user.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  *
  * @var $faker \Faker\Generator
  * @var $index integer

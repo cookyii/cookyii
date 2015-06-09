@@ -1,7 +1,7 @@
 <?php
 /**
  * wide.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  *
  * @var yii\web\View $this
  * @var string $content

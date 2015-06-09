@@ -1,7 +1,7 @@
 <?php
 /**
  * error.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  *
  * @var yii\web\View $this
  * @var string $name
@@ -19,10 +19,10 @@ $controller = $this->context;
 
 $controller->layout = '//wide';
 
-$title = $label = Yii::t('app', 'Ошибка');
+$title = $label = Yii::t('app', 'Error');
 $label_options = [];
 if ($exception instanceof HttpException) {
-    $title = $label = Yii::t('app', 'Ошибка {number}', ['number' => $exception->statusCode]);
+    $title = $label = Yii::t('app', 'Error {number}', ['number' => $exception->statusCode]);
     Html::addCssClass($label_options, 'code');
 }
 
@@ -51,7 +51,9 @@ $this->title = $title;
         if (!empty($message)) {
             echo Html::tag('p', nl2br(Html::encode($message)), ['class' => 'text']);
         }
-        if (isset($_GET['vvv']) && !empty($exception->getMessage())) {
+
+        $message = $exception->getMessage();
+        if (isset($_GET['vvv']) && !empty($message)) {
             echo Html::tag('p', nl2br(Html::encode($exception->getMessage())), ['class' => 'text small']);
         }
         ?>

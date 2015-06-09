@@ -1,7 +1,7 @@
 <?php
 /**
  * globals.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 @umask(0002);

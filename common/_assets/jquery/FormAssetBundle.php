@@ -1,7 +1,7 @@
 <?php
 /**
  * FormAssetBundle.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\_assets\jquery;
@@ -18,6 +18,6 @@ class FormAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        \yii\web\JqueryAsset::class,
+        'yii\web\JqueryAsset',
     ];
 }

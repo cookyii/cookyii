@@ -1,7 +1,7 @@
 <?php
 /**
  * _layout.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  *
  * @var yii\web\View $this
  * @var string $content
@@ -24,10 +24,15 @@ $controller = $this->context;
 $User = User()->identity;
 
 $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()]);
-$this->registerLinkTag(['rel' => 'shortcut icon', 'href' => '/favicon.ico']);
+$this->registerLinkTag(['rel' => 'shortcut icon', 'href' => '/favicon.png']);
 $this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon.png']);
-$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-72x72.png']);
-$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-114x114.png']);
+$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-57x57.png', 'sizes' => '57x57']);
+$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-72x72.png', 'sizes' => '72x72']);
+$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-76x76.png', 'sizes' => '76x76']);
+$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-114x114.png', 'sizes' => '114x114']);
+$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-120x120.png', 'sizes' => '120x120']);
+$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-144x144.png', 'sizes' => '144x144']);
+$this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch-icon-152x152.png', 'sizes' => '152x152']);
 
 $this->registerLinkTag([
     'rel' => 'stylesheet',

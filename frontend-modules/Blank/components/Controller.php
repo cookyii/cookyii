@@ -1,7 +1,7 @@
 <?php
 /**
  * Controller.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace frontend\modules\Blank\components;

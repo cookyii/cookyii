@@ -1,19 +1,17 @@
 <?php
 /**
  * console.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App frontend');
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require(__DIR__ . '/params.php')
 );
 
-$params['component.urlManager']['rules'] = require(__DIR__ . '/urls.php');
+$params['component.i18n']['translations'] = include(__DIR__ . '/translations.php');
 
 return [
     'id' => 'frontend-console-app',
@@ -22,26 +20,22 @@ return [
     'aliases' => ['@tests' => '@frontend/tests'],
     'controllerNamespace' => 'frontend\commands',
     'controllerMap' => [
-        'rbac' => frontend\commands\RbacCommand::class,
+        'rbac' => 'frontend\commands\RbacCommand',
         'migrate' => [
-            'class' => yii\console\controllers\MigrateController::class,
+            'class' => 'yii\console\controllers\MigrateController',
             'templateFile' => '@common/views/migration.php',
             'migrationPath' => '@common/migrations',
         ],
     ],
     'modules' => [],
     'components' => [
-        'db' => $params['component.db.production'],
-        'db.test' => $params['component.db.test'],
+        'db' => $params['component.db'],
         'security' => $params['component.security'],
         'user' => $params['component.user'],
-        'postman' => $params['component.postman'],
         'cache' => $params['component.cache'],
-        'cache.session' => $params['component.cache.session'],
         'cache.authManager' => $params['component.cache.authManager'],
         'cache.schema' => $params['component.cache.schema'],
         'cache.query' => $params['component.cache.query'],
-        'urlManager.crm' => $params['component.urlManager.crm'],
         'urlManager' => $params['component.urlManager.frontend'],
         'urlManager.backend' => $params['component.urlManager.backend'],
         'authManager' => $params['component.authManager'],

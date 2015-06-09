@@ -1,7 +1,7 @@
 <?php
 /**
  * AppAsset.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace frontend\_assets;
@@ -27,20 +27,20 @@ class AppAsset extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        \common\_assets\Html5shivAssetBundle::class,
-        \common\_assets\RespondAssetBundle::class,
-        \common\_assets\ModernizrAssetBundle::class,
+        'common\_assets\Html5shivAssetBundle',
+        'common\_assets\RespondAssetBundle',
+        'common\_assets\ModernizrAssetBundle',
 
-        \yii\web\YiiAsset::class,
-        \yii\web\JqueryAsset::class,
-        \yii\bootstrap\BootstrapAsset::class,
-        \yii\bootstrap\BootstrapPluginAsset::class,
-        \rmrevin\yii\fontawesome\CDNAssetBundle::class,
-        \common\_assets\AnimateCssAssetBundle::class,
-        \common\_assets\SweetAlertAssetBundle::class,
-        \common\_assets\AngularAssetBundle::class,
-        \common\_assets\jquery\FormAssetBundle::class,
-        \common\_assets\jquery\ScrollToAssetBundle::class,
-        \common\_assets\jquery\JScrollPaneAssetBundle::class,
+        'yii\web\YiiAsset',
+        'yii\web\JqueryAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'rmrevin\yii\fontawesome\CDNAssetBundle',
+        'common\_assets\AnimateCssAssetBundle',
+        'common\_assets\SweetAlertAssetBundle',
+        'common\_assets\AngularAssetBundle',
+        'common\_assets\jquery\FormAssetBundle',
+        'common\_assets\jquery\ScrollToAssetBundle',
+        'common\_assets\jquery\JScrollPaneAssetBundle',
     ];
 }

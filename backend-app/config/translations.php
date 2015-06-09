@@ -1,13 +1,13 @@
 <?php
 /**
  * translations.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 return [
-    'account' => common\components\RussianMessageSource::class,
-    'client' => common\components\RussianMessageSource::class,
-    'event' => common\components\RussianMessageSource::class,
-    'order' => common\components\RussianMessageSource::class,
-    'comment' => common\components\RussianMessageSource::class,
+    'account' => 'yii\i18n\PhpMessageSource',
+    'client' => 'yii\i18n\PhpMessageSource',
+    'event' => 'yii\i18n\PhpMessageSource',
+    'order' => 'yii\i18n\PhpMessageSource',
+    'comment' => 'yii\i18n\PhpMessageSource',
 ];

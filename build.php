@@ -1,7 +1,7 @@
 <?php
 /**
  * build.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 $apps = [];
@@ -194,9 +194,8 @@ function appendLessTask(array &$config, $task_name, $app)
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => [
                 cmd($app, '{node}/lessc --source-map-map-inline {assets}/less/styles.less > {assets}/css/styles-raw.css'),
-                cmd($app, '{node}/autoprefixer {assets}/css/styles-raw.css > -o {assets}/css/styles.css'),
+                cmd($app, '{node}/autoprefixer {assets}/css/styles-raw.css -o {assets}/css/styles.css'),
                 cmd($app, '{node}/csso -i {assets}/css/styles.css -o {assets}/css/styles-o.css'),
-                cmd($app, 'rm {assets}/css/styles-raw.css'),
             ],
         ],
     ];
