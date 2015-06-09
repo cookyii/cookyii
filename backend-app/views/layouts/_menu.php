@@ -1,7 +1,7 @@
 <?php
 /**
  * _menu.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  *
  * @var yii\web\View $this
  */

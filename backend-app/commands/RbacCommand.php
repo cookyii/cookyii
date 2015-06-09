@@ -1,7 +1,7 @@
 <?php
 /**
  * RbacCommand.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace backend\commands;

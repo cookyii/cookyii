@@ -1,7 +1,7 @@
 <?php
 /**
  * Controller.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace common\rest;
@@ -20,26 +20,26 @@ abstract class Controller extends \yii\rest\Controller
     {
         return [
             'contentNegotiator' => [
-                'class' => \yii\filters\ContentNegotiator::class,
+                'class' => 'yii\filters\ContentNegotiator',
                 'formats' => [
                     'application/json' => \yii\web\Response::FORMAT_JSON,
                     'application/xml' => \yii\web\Response::FORMAT_XML,
                 ],
             ],
             'verbFilter' => [
-                'class' => \yii\filters\VerbFilter::class,
+                'class' => 'yii\filters\VerbFilter',
                 'actions' => $this->verbs(),
             ],
 
             'authenticator' => [
-                'class' => \yii\filters\auth\CompositeAuth::class,
-//                'class' => HttpBearerAuth::class,
+                'class' => 'yii\filters\auth\CompositeAuth',
+//                'class' => 'yii\filters\auth\HttpBearerAuth',
             ],
             'rateLimiter' => [
-                'class' => \yii\filters\RateLimiter::class,
+                'class' => 'yii\filters\RateLimiter',
             ],
             'access' => [
-                'class' => \yii\filters\AccessControl::class,
+                'class' => 'yii\filters\AccessControl',
                 'rules' => $this->accessRules(),
             ],
         ];

@@ -1,7 +1,7 @@
 <?php
 /**
  * migration.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  *
  * This view is used by yii\console\controllers\MigrateController
  * The following variables are available in this view:
@@ -11,7 +11,7 @@
 echo "<?php\n";
 ?>
 
-use yii\db\Schema;
+use yii\db\mysql\Schema;
 
 class <?= $className ?> extends \common\components\Migration
 {

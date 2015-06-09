@@ -1,7 +1,7 @@
 <?php
 /**
  * _bootstrap.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);
