@@ -1,7 +1,0 @@
-/acceptance/AcceptanceTester.php
-/functional/FunctionalTester.php
-/unit/UnitTester.php
-
-/acceptance.suite.yml
-/functional.suite.yml
-/unit.suite.yml
