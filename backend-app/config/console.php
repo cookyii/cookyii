@@ -20,7 +20,7 @@ return [
     'aliases' => ['@tests' => '@backend/tests'],
     'controllerNamespace' => 'backend\commands',
     'controllerMap' => [
-        'rbac' => 'backend\commands\RbacCommand',
+        'rbac' => 'common\commands\RbacCommand',
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
             'templateFile' => '@common/views/migration.php',

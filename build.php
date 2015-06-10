@@ -99,6 +99,10 @@ $config = [
 
     'rbac' => [
         '.description' => 'Update rbac rules',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\CommandTask',
+            'commandline' => './frontend rbac/update',
+        ],
     ],
 ];
 
@@ -108,7 +112,6 @@ if (!empty($apps)) {
         appendClearTask($config, 'clear', $app);
         appendLessTask($config, 'less', $app);
         appendMigrateTask($config, 'migrate', $app);
-        appendRbacTask($config, 'rbac', $app);
     }
 }
 
@@ -194,22 +197,6 @@ function appendMigrateTask(array &$config, $task_name, $app)
     $config[$task_name][$app] = [
         'class' => 'cookyii\build\tasks\CommandTask',
         'commandline' => cmd($app, './{a} migrate'),
-    ];
-}
-
-/**
- * @param array $config
- * @param string $task_name
- * @param string $app
- */
-function appendRbacTask(array &$config, $task_name, $app)
-{
-    appendTask($config, $task_name);
-
-    $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
-    $config[$task_name][$app] = [
-        'class' => 'cookyii\build\tasks\CommandTask',
-        'commandline' => cmd($app, './{a} rbac/update'),
     ];
 }
 

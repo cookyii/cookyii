@@ -22,7 +22,7 @@ namespace resources;
  * @property boolean $activated
  * @property boolean $deleted
  *
- * @property \resources\User\helpers\Present $present
+ * @property \resources\helpers\UserPresent $present
  *
  * @method queries\UserQuery hasMany($class, $link)
  * @method queries\UserQuery hasOne($class, $link)
@@ -138,7 +138,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         if ($this->present === null) {
             $this->present = \Yii::createObject([
-                'class' => helpers\UserPresent::class,
+                'class' => 'resources\helpers\UserPresent',
                 'Model' => $this,
             ]);
         }
@@ -162,7 +162,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::find()
-            ->byToken(XXTEA()->decrypt($token))
+            ->byToken($token)
             ->one();
     }
 
