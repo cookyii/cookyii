@@ -42,16 +42,17 @@ $this->registerLinkTag([
 $this->beginPage();
 
 ?><!DOCTYPE html>
-<?= Html::beginTag('html', [
+<html <?= Html::renderTagAttributes([
     'lang' => Yii::$app->language,
     'ng-app' => 'BackendApp',
-]) ?>
+]) ?>>
 <head>
     <!--[if IE]>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    <?
+    <?php
+
     echo Html::csrfMetaTags();
     echo Html::tag('title', $title);
 
@@ -61,12 +62,13 @@ $this->beginPage();
     }
 
     $this->head()
+
     ?>
 </head>
-<body>
-<? $this->beginBody() ?>
+<body class="skin-blue sidebar-mini">
+<?php
 
-<?
+$this->beginBody();
 
 if ($controller->hideLoader === false) {
     echo Html::tag('div', '<md-progress-circular class="md-warn md-hue-3" md-mode="indeterminate"></md-progress-circular>', [
@@ -77,7 +79,13 @@ if ($controller->hideLoader === false) {
     ]);
 }
 
-echo $content;
+?>
+<div class="wrapper">
+    <?php
+    echo $content;
+    ?>
+</div>
+<?php
 
 $this->endBody();
 
@@ -86,6 +94,6 @@ echo $this->render('_toast');
 ?>
 
 </body>
-</html><?
+</html><?php
 
 $this->endPage();

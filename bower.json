@@ -12,6 +12,7 @@
     "angular-redactor": "1.1.*",
     "angular-scroll-pane": "1.0.*",
     "angular-elastic": "2.4.*",
+    "admin-lte": "2.1.*",
     "jScrollPane": "2.0.*",
     "jquery-form": "3.45.*",
     "jquery.scrollTo": "2.1.*",

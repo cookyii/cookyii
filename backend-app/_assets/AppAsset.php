@@ -17,6 +17,8 @@ class AppAsset extends \yii\web\AssetBundle
 
     public $css = [
         'css/angular-material.css',
+        'css/AdminLTE.min.css',
+        'css/skins/_all-skins.min.css',
         'css/styles.css',
     ];
 

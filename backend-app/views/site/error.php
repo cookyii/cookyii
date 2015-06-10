@@ -20,10 +20,8 @@ $controller = $this->context;
 $controller->layout = '//wide';
 
 $title = $label = Yii::t('app', 'Error');
-$label_options = [];
 if ($exception instanceof HttpException) {
     $title = $label = Yii::t('app', 'Error {number}', ['number' => $exception->statusCode]);
-    Html::addCssClass($label_options, 'code');
 }
 
 $this->title = $title;
@@ -31,34 +29,35 @@ $this->title = $title;
 ?>
 
 <style>
-    .error-panel {
-        margin-top: -100px;
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 100px 150px;
-        text-align: center;
-        color: #000000;
-    }
-    .error-panel p.text { font-size: 2em; }
-    .error-panel p.text.small { font-size: 1.5em; }
-    .error-panel a.back { font-size: 1.2em; }
+    .wrapper { display: flex; align-items: center; justify-content: center; }
+    .content-wrapper { margin-left: 0; min-height: initial; }
+    .content-wrapper .content { padding: 90px 60px 90px; min-height: initial; }
+    .content-wrapper .content .error-page { margin: 0; }
+    .content-wrapper .content .error-page .error-content { margin-left: 0; }
+    .content-wrapper .content .error-page .error-content h3 { margin-top: 0; }
 </style>
 
-<div layout="row" layout-align="center center" style="height: 100%">
-    <div class="error-panel">
-        <?
-        echo Html::tag('h1', $label, $label_options);
+<div class="content-wrapper">
+    <section class="content">
+        <div class="error-page">
+            <div class="error-content">
+                <h3><i class="fa fa-warning text-red"></i> <?= $label ?></h3>
+                <?php
+                if (!empty($message)) {
+                    echo Html::tag('p', nl2br(Html::encode($message)), ['class' => 'text']);
+                }
 
-        if (!empty($message)) {
-            echo Html::tag('p', nl2br(Html::encode($message)), ['class' => 'text']);
-        }
+                $message = $exception->getMessage();
+                if (isset($_GET['vvv']) && !empty($message)) {
+                    echo Html::tag('p', nl2br(Html::encode($exception->getMessage())), ['class' => 'text small']);
+                }
+                ?>
 
-        $message = $exception->getMessage();
-        if (isset($_GET['vvv']) && !empty($message)) {
-            echo Html::tag('p', nl2br(Html::encode($exception->getMessage())), ['class' => 'text small']);
-        }
-        ?>
-        <br>
-
-        <?= Html::a(Yii::t('app', 'Вернуться на главную'), ['/'], ['class' => 'back']) ?>
-    </div>
+                <p>
+                    We will work on fixing that right away.
+                    Meanwhile, you may <?= Html::a('return to dashboard', ['/']) ?>.
+                </p>
+            </div>
+        </div>
+    </section>
 </div>
