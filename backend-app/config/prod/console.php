@@ -4,4 +4,4 @@
  * @author Revin Roman
  */
 
-return include __DIR__ . '/console.php';
+return include __DIR__ . '/../console.php';

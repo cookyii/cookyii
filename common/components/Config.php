@@ -39,9 +39,11 @@ class Config
      */
     public static function reload($app, $type)
     {
-        $common_config_alias = sprintf('@common/config/%s', sprintf('%s.php', $type));
-        $config_alias = sprintf('@%s/config/%s', $app, sprintf('%s.php', $type));
-        $local_config_alias = sprintf('@%s/config/%s', $app, sprintf('.%s.%s.php', getenv('YII_ENV'), $type));
+        $filename = sprintf('%s.php', $type);
+
+        $common_config_alias = sprintf('@common/config/%s', $filename);
+        $config_alias = sprintf('@%s/config/%s', $app, $filename);
+        $local_config_alias = sprintf('@%s/config/%s/%s', $app, getenv('YII_ENV'), $filename);
 
         $common_config = \Yii::getAlias($common_config_alias);
         $config = \Yii::getAlias($config_alias);

@@ -4,7 +4,7 @@
  * @author Revin Roman
  */
 
-$config = include __DIR__ . '/app.php';
+$config = include __DIR__ . '/../app.php';
 
 if (!isset($config['bootstrap'])) {
     $config['bootstrap'] = [];
