@@ -2,12 +2,12 @@
 
 use yii\db\mysql\Schema;
 
-class m150317_103004_user extends \common\components\Migration
+class m150610_170045_user extends \common\components\Migration
 {
 
     static $socials = ['facebook', 'github', 'google', 'linkedin', 'live', 'twitter', 'vkontakte', 'yandex'];
 
-    public function safeUp()
+    public function up()
     {
         $this->createTable(
             '{{%user}}',
@@ -31,13 +31,30 @@ class m150317_103004_user extends \common\components\Migration
         $this->createIndex('idx_auth_key', '{{%user}}', ['auth_key']);
         $this->createIndex('idx_working', '{{%user}}', ['activated', 'deleted']);
 
+        $this->createTable(
+            '{{%user_attribute}}',
+            [
+                'user_id' => Schema::TYPE_INTEGER,
+                'key' => Schema::TYPE_STRING,
+                'value_str' => Schema::TYPE_STRING,
+                'value_int' => Schema::TYPE_INTEGER,
+                'value_float' => Schema::TYPE_DECIMAL . '(10,6)',
+                'value_text' => Schema::TYPE_TEXT,
+                'value_blob' => Schema::TYPE_BINARY,
+                'FOREIGN KEY (user_id) REFERENCES {{%user}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
+            ]
+        );
+
+        $this->createIndex('idx_key', '{{%user_attribute}}', ['key']);
+        $this->createIndex('idx_user_id_key', '{{%user_attribute}}', ['user_id', 'key']);
+
         $this->createTable('{{%user_auth_response}}', [
             'id' => Schema::TYPE_PK,
+            'user_ip' => Schema::TYPE_INTEGER,
             'received_at' => Schema::TYPE_INTEGER,
             'client' => Schema::TYPE_STRING,
             'response' => Schema::TYPE_TEXT,
             'result' => Schema::TYPE_TEXT,
-            'user_ip' => Schema::TYPE_BIGINT,
         ]);
 
         $this->createIndex('idx_received_at', '{{%user_auth_response}}', ['received_at']);
@@ -46,13 +63,13 @@ class m150317_103004_user extends \common\components\Migration
             $this->createTable('{{%user_auth_' . $social . '}}', [
                 'user_id' => Schema::TYPE_INTEGER,
                 'social_id' => Schema::TYPE_STRING,
-                'PRIMARY KEY (user_id,social_id)',
+                'PRIMARY KEY (user_id, social_id)',
                 'FOREIGN KEY (user_id) REFERENCES {{%user}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
             ]);
         }
     }
 
-    public function safeDown()
+    public function down()
     {
         foreach (static::$socials as $social) {
             $this->dropTable('{{%user_auth_' . $social . '}}');

@@ -2,10 +2,10 @@
 
 use yii\db\mysql\Schema;
 
-class m150429_105855_cache extends \common\components\Migration
+class m150610_170000_cache extends \common\components\Migration
 {
 
-    public function safeUp()
+    public function up()
     {
         $this->createTable('{{%cache}}', [
             'id' => Schema::TYPE_STRING . '(128) NOT NULL',
@@ -13,9 +13,11 @@ class m150429_105855_cache extends \common\components\Migration
             'data' => 'LONGBLOB',
             'PRIMARY KEY (id)',
         ]);
+
+        $this->createIndex('idx_expire', '{{%cache}}', ['expire']);
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%cache}}');
     }

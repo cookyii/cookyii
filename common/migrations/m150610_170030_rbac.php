@@ -2,7 +2,7 @@
 
 use yii\db\mysql\Schema;
 
-class m140415_063026_rbac extends \common\components\Migration
+class m150610_170030_rbac extends \common\components\Migration
 {
 
     /**
@@ -18,7 +18,7 @@ class m140415_063026_rbac extends \common\components\Migration
         return $authManager;
     }
 
-    public function safeUp()
+    public function up()
     {
         $authManager = $this->getAuthManager();
 
@@ -41,7 +41,8 @@ class m140415_063026_rbac extends \common\components\Migration
             'PRIMARY KEY (name)',
             'FOREIGN KEY (rule_name) REFERENCES ' . $authManager->ruleTable . ' (name) ON DELETE SET NULL ON UPDATE CASCADE',
         ]);
-        $this->createIndex('idx-auth_item-type', $authManager->itemTable, 'type');
+
+        $this->createIndex('idx_type', $authManager->itemTable, 'type');
 
         $this->createTable($authManager->itemChildTable, [
             'parent' => Schema::TYPE_STRING . '(64) NOT NULL',
@@ -60,7 +61,7 @@ class m140415_063026_rbac extends \common\components\Migration
         ]);
     }
 
-    public function safeDown()
+    public function down()
     {
         $authManager = $this->getAuthManager();
 

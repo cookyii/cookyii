@@ -16,12 +16,12 @@ use yii\db\mysql\Schema;
 class <?= $className ?> extends \common\components\Migration
 {
 
-    public function safeUp()
+    public function up()
     {
 
     }
 
-    public function safeDown()
+    public function down()
     {
         echo "<?= $className ?> cannot be reverted.\n";
 
