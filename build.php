@@ -4,10 +4,13 @@
  * @author Revin Roman
  */
 
-$apps = [];
+/** @var array $apps list of existing applications */
+$apps = ['frontend', 'backend'];
 
+/** Automatic detection applications */
 automaticDetectionApplications($apps);
 
+/** @var array $config build configuration */
 $config = [
     'default' => [
         '.description' => 'Default build',
@@ -25,7 +28,6 @@ $config = [
             '.depends' => [
                 'environment/check',
                 'clear',
-                'environment/init/production',
                 'composer/selfupdate', 'composer/install',
                 'npm', 'less',
                 'migrate', 'rbac',
@@ -36,7 +38,6 @@ $config = [
             '.depends' => [
                 'environment/check',
                 'clear',
-                'environment/init/demo',
                 'composer/selfupdate', 'composer/install-dev',
                 'npm', 'less',
                 'migrate', 'rbac',
@@ -47,7 +48,6 @@ $config = [
             '.depends' => [
                 'environment/check',
                 'clear',
-                'environment/init',
                 'composer/selfupdate', 'composer/install-dev',
                 'npm', 'less',
                 'migrate', 'rbac',
@@ -65,27 +65,6 @@ $config = [
                     . 'Need fill environment file' . "\n"
                     . '%s' . "\n"
                     . 'Template is .env.dist',
-            ],
-        ],
-        'init' => [
-            '.description' => 'Initialize a new environment (manual selection)',
-            '.task' => [
-                'class' => 'cookyii\build\tasks\CommandTask',
-                'commandline' => './init',
-            ],
-            'production' => [
-                '.description' => 'Initialize a new environment (selected Production)',
-                '.task' => [
-                    'class' => 'cookyii\build\tasks\CommandTask',
-                    'commandline' => './init --env=Production --force',
-                ],
-            ],
-            'demo' => [
-                '.description' => 'Initialize a new environment (selected Demo)',
-                '.task' => [
-                    'class' => 'cookyii\build\tasks\CommandTask',
-                    'commandline' => './init --env=Demo --force',
-                ],
             ],
         ],
     ],
@@ -123,6 +102,7 @@ $config = [
     ],
 ];
 
+// create applications tasks
 if (!empty($apps)) {
     foreach ($apps as $app) {
         appendClearTask($config, 'clear', $app);
