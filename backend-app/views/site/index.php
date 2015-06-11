@@ -6,20 +6,41 @@
  * @var yii\web\View $this
  */
 
-$this->title = 'Welcome!';
+use rmrevin\yii\fontawesome\FA;
+
+$this->title = 'Welcome to Cookyii Backend!';
+
+\backend\views\site\_assets\IndexAssetBundle::register($this);
 
 ?>
 
-<section class="content-header">
-    <h1>
-        Welcome to Cookyii Backend
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-    </ol>
-</section>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="side-panel">
+    <md-toolbar class="md-accent">
+        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+    </md-toolbar>
+    <md-content ng-controller="RightCtrl" layout-padding>
+        <form>
+            <md-input-container>
+                <label for="testInput">Test input</label>
+                <input type="text" id="testInput"
+                       ng-model="data" md-sidenav-focus>
+            </md-input-container>
+        </form>
+        <md-button ng-click="close()" class="md-primary">
+            Close Sidenav Right
+        </md-button>
+    </md-content>
+</md-sidenav>
 
-<section class="content">
+<section class="content" ng-controller="IndexController">
+    <md-button class="md-accent md-fab md-fab-bottom-right" ng-click="toggleSidePanel()">
+        FAB
+    </md-button>
+
+    <md-button class="md-warn md-fab md-fab-top-right" ng-click="t()">
+        <?= FA::icon('plus') ?>
+    </md-button>
+
     <!-- Small boxes (Stat box) -->
     <div class="row">
         <div class="col-lg-3 col-xs-6">

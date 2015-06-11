@@ -47,7 +47,7 @@ use rmrevin\yii\fontawesome\FA;
     </md-toast>
 </script>
 
-<script type="text/ng-template" id="toast-danger.html">
+<script type="text/ng-template" id="toast-error.html">
     <md-toast class="danger">
         <span flex>
             <?= FA::icon('times')->fixedWidth() ?>

@@ -28,7 +28,7 @@ class AngularAssetBundle extends \yii\web\AssetBundle
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-animate.min.js',
 
         // angular material
-        'https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.js',
+        'https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js',
 
         // plugins
         'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js',
