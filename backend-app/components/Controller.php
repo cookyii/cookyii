@@ -15,7 +15,7 @@ class Controller extends \yii\web\Controller
 
     public $loader = true;
 
-    public $layout = 'main';
+    public $layout = '//main';
 
     public $public = false;
 

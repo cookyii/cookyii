@@ -3,34 +3,29 @@
 angular.module('BackendApp')
 
   .controller('UserListController', [
-    '$rootScope', '$scope', '$element', '$http', '$timeout', '$mdToast', '$location',
-    function ($rootScope, $scope, $element, $http, $timeout, $mdToast, $location) {
-      var _config = {},
-        users_sum = null,
-        loaded = false,
+    '$rootScope', '$scope', '$element', '$http', '$timeout', '$mdToast', '$location', 'UserRes',
+    function ($rootScope, $scope, $element, $http, $timeout, $mdToast, $location, UserRes) {
+      var loaded = false,
         query = $location.search(),
         page = typeof query.page === 'undefined' ? 1 : query.page;
 
       $scope.users = [];
 
-      $scope.init = function (config) {
-        _config = angular.extend({}, _config, config);
-      };
+      $scope.searchFocus = false;
+      $scope.search = typeof query.search === 'undefined'
+        ? null
+        : query.search;
 
-      $scope.role = typeof query.role === 'undefined' ? 'all' : query.role;
-      $scope.setRole = function (role) {
-        $location.search('role', role);
-        $scope.role = role;
-
-        reloadUserList(false);
-      };
-
-      $scope.search = typeof query.search === 'undefined' ? null : query.search;
       $scope.doSearch = function () {
         $location.search('search', $scope.search);
 
         reloadUserList(false);
       };
+
+      $scope.toggleSearchFocus = function () {
+        $scope.searchFocus = !$scope.searchFocus;
+      };
+
       $scope.clearSearch = function () {
         $scope.search = null;
         $scope.doSearch();
@@ -39,6 +34,7 @@ angular.module('BackendApp')
       $scope.pagination = {
         currentPage: page
       };
+
       $scope.doPageChanged = function () {
         if (loaded === true) {
           $location.search('page', $scope.pagination.currentPage);
@@ -47,7 +43,10 @@ angular.module('BackendApp')
         reloadUserList(false);
       };
 
-      $scope.sort = typeof query.sort === 'undefined' ? '-id' : query.sort;
+      $scope.sort = typeof query.sort === 'undefined'
+        ? '-id'
+        : query.sort;
+
       $scope.setSort = function (sort) {
         if ($scope.sort === sort) {
           $scope.sort = '-' + sort;
@@ -129,31 +128,28 @@ angular.module('BackendApp')
       function reloadUserList(setTimeout) {
         setTimeout = typeof setTimeout === 'boolean' ? setTimeout : true;
 
-        $http({
-          method: 'GET',
-          url: _config.url.list,
-          data: {},
-          params: {
-            role: $scope.role,
-            search: $scope.search,
-            page: loaded ? $scope.pagination.currentPage : page,
-            sort: $scope.sort
-          },
-          ignoreLoadingBar: true
-        }).success(function (response) {
-          if (users_sum !== response.sum) {
-            $scope.pagination = response.pagination;
+        UserRes.query({
+          search: $scope.search,
+          sort: $scope.sort,
+          page: loaded ? $scope.pagination.currentPage : page
+        }, function (users, headers) {
+          var _headers = headers();
 
-            $scope.users = response.items;
-            users_sum = response.sum;
-          }
+          $scope.pagination = {
+            totalCount: _headers['x-pagination-total-count'],
+            pageCount: _headers['x-pagination-page-count'],
+            currentPage: _headers['x-pagination-current-page'],
+            perPage: _headers['x-pagination-per-page']
+          };
+
+          $scope.users = users;
 
           if (setTimeout) {
             $timeout(reloadUserList, 5000);
           }
 
           loaded = true;
-        }).error(defaultHttpErrorHandler);
+        });
       }
     }
   ]);

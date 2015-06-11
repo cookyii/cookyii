@@ -19,10 +19,12 @@ $letters = array_map(function ($val) { return mb_substr($val, 0, 1, 'utf-8'); },
 /** @var \resources\User $User */
 $User = User()->identity;
 
+$menu_items = include(__DIR__ . '/_menu.php');
+
 ?>
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><?= implode('', $letters) ?></span>
             <span class="logo-lg"><?= APP_NAME ?></span>
@@ -86,7 +88,6 @@ $User = User()->identity;
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 <?
-                $menu_items = include(__DIR__ . '/_menu.php');
                 foreach ($menu_items as $item) {
                     echo renderItem($item);
                 }
@@ -97,6 +98,10 @@ $User = User()->identity;
     </aside>
 
     <div class="content-wrapper">
+        <section class="content-header">
+            <h1><?= $this->title ?></h1>
+        </section>
+
         <?= $content ?>
     </div>
 

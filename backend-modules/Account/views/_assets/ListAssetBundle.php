@@ -20,6 +20,7 @@ class ListAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $js = [
+        'UserRes.js',
         'UserListController.js',
         'UserEditController.js',
     ];

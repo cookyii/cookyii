@@ -11,7 +11,7 @@ use rmrevin\yii\fontawesome\FA;
 /** @var backend\components\Controller $Controller */
 $Controller = $this->context;
 
-return [
+$menu = [
     [
         'label' => Yii::t('app', 'Link'),
         'url' => ['/'],
@@ -73,3 +73,21 @@ return [
         ],
     ],
 ];
+
+foreach (\Yii::$app->modules as $module => $conf) {
+    $Module = null;
+
+    if (is_string($conf)) {
+        $Module = new $conf($module);
+    }
+
+    if (is_object($conf)) {
+        $Module = $conf;
+    }
+
+    if ($Module instanceof \backend\interfaces\BackendModuleInterface) {
+        $menu = array_merge($menu, $Module->menu($this->context));
+    }
+}
+
+return $menu;

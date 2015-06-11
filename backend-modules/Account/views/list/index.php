@@ -7,14 +7,14 @@
  * @var Account\forms\AccountEditForm $AccountEditForm
  */
 
-use common\widgets\Modal;
 use backend\modules\Account;
+use common\widgets\Modal;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-$this->title = Yii::t('account', 'Список аккаунтов');
+$this->title = Yii::t('account', 'Accounts management');
 
 Account\views\_assets\ListAssetBundle::register($this);
 
@@ -36,18 +36,18 @@ function sortLink($type, $label)
 $r = \resources\User::getAllRoles();
 
 $roles = [
-    \backend\Permissions::ROLE_USER => [
-        'label' => $r[\backend\Permissions::ROLE_USER],
+    \common\Roles::USER => [
+        'label' => $r[\common\Roles::USER],
         'icon' => 'user',
         'class' => ''
     ],
-    \backend\Permissions::ROLE_MANAGER => [
-        'label' => $r[\backend\Permissions::ROLE_MANAGER],
+    \common\Roles::MANAGER => [
+        'label' => $r[\common\Roles::MANAGER],
         'icon' => 'user',
         'class' => ''
     ],
-    \backend\Permissions::ROLE_ADMIN => [
-        'label' => $r[\backend\Permissions::ROLE_ADMIN],
+    \common\Roles::ADMIN => [
+        'label' => $r[\common\Roles::ADMIN],
         'icon' => 'user',
         'class' => ''
     ],
@@ -65,80 +65,19 @@ $roles = [
     ],
 ];
 
-$angular_options = [
-    'url' => [
-        'list' => Url::toRoute(['/rest/account/list']),
-        'delete' => Url::toRoute(['/rest/account/delete']),
-        'restore' => Url::toRoute(['/rest/account/restore']),
-    ]
-];
-
 ?>
 
-    <div <?= Html::renderTagAttributes([
+    <section <?= Html::renderTagAttributes([
+        'class' => 'content',
         'ng-controller' => 'UserListController',
-        'ng-init' => 'init(' . Json::encode($angular_options) . ')',
     ]) ?>>
-        <div class="mail-box-header">
-            <div class="row">
-                <div class="col-md-2"><h2><?= $this->title ?></h2></div>
-                <div class="col-md-2">
-                    <div class="btn-group pull-right">
-                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle">
-                            <?
-                            foreach ($roles as $role => $data) {
-                                if ($data !== '|') {
-                                    $icon = empty($data['icon']) ? null : FA::icon($data['icon'], ['class' => $data['class']]);
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Accounts list</h3>
 
-                                    $label = $data['label'];
-                                    if (mb_strlen($label, 'utf-8') > 15) {
-                                        $label = mb_substr($label, 0, 15, 'utf-8') . '...';
-                                    }
-
-                                    echo Html::tag('span', $icon . ' ' . $label, [
-                                        'ng-show' => 'role === "' . $role . '"',
-                                    ]);
-                                }
-                            }
-                            ?>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu credits-dropdown-filter-purchase">
-                            <?
-                            foreach ($roles as $role => $data) {
-                                if ($data === '|') {
-                                    echo '<li class="divider"></li>';
-                                } else {
-                                    $icon = empty($data['icon']) ? null : FA::icon($data['icon'], ['class' => $data['class']]);
-                                    echo Html::tag('li', Html::a($icon . ' ' . $data['label'], null, [
-                                        'ng-click' => 'setRole("' . $role . '")'
-                                    ]));
-                                }
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group m-b">
-                        <?= Html::textInput(null, null, [
-                            'class' => 'form-control',
-                            'placeholder' => Yii::t('account', 'Поиск пользователя'),
-                            'maxlength' => 100,
-                            'ng-model' => 'search',
-                        ]) ?>
-                        <a ng-click="clearSearch()" ng-show="search" class="clear-search">
-                            <?= FA::icon('times') ?>
-                        </a>
-                        <span class="input-group-btn">
-                            <a class="btn btn-primary" ng-click="doSearch()"><i class="fa fa-search"></i></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-4">
+                <div class="box-tools">
                     <?= Html::tag('pagination', null, [
-                        'class' => 'pull-right',
-                        'ng-show' => 'pagination.pageCount > 1',
+                        'class' => 'pagination pagination-sm no-margin pull-right',
                         'ng-model' => 'pagination.currentPage',
                         'total-items' => 'pagination.totalCount',
                         'items-per-page' => 'pagination.perPage',
@@ -147,62 +86,85 @@ $angular_options = [
                         'previous-text' => '‹',
                         'next-text' => '›',
                     ]) ?>
+
+                    <form ng-submit="doSearch()" class="pull-right">
+                        <div class="input-group search" ng-class="{'wide':search.length>0||searchFocus}">
+                            <?= Html::textInput(null, null, [
+                                'class' => 'form-control input-sm pull-right',
+                                'placeholder' => Yii::t('account', 'Search'),
+                                'maxlength' => 100,
+                                'ng-model' => 'search',
+                                'ng-focus' => 'toggleSearchFocus()',
+                                'ng-blur' => 'toggleSearchFocus()',
+                            ]) ?>
+                            <a ng-click="clearSearch()" ng-show="search" class="clear-search">
+                                <?= FA::icon('times') ?>
+                            </a>
+
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default" ng-click="doSearch()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="mail-box">
-            <table class="table table-hover table-accounts">
-                <thead>
-                <tr>
-                    <td class="id"><?= sortLink('id', Yii::t('account', 'ID')) ?></td>
-                    <td class="email"><?= sortLink('email', Yii::t('account', 'Email')) ?></td>
-                    <td class="name"><?= sortLink('name', Yii::t('account', 'Имя')) ?></td>
-                    <td class="updated"><?= sortLink('updated_at', Yii::t('account', 'Изменён')) ?></td>
-                    <td class="actions">&nbsp;</td>
-                </tr>
-                </thead>
-                <tbody>
-                <?
-                $options = [
-                    'title' => Yii::t('account', 'Редактировать аккаунт'),
-                    'ng-class' => '{deleted:user.deleted}',
-                ];
-                ?>
-                <tr ng-show="users.length === 0">
-                    <td colspan="5" class="text-center text-italic text-light">
-                        <?= Yii::t('account', 'Пользователи не найдены') ?>
-                    </td>
-                </tr>
-                <tr ng-repeat="user in users" <?= Html::renderTagAttributes($options) ?>>
-                    <td class="id clickable" ng-click="edit(user.id, $event)">{{ user.id }}</td>
-                    <td class="email clickable" ng-click="edit(user.id, $event)">{{ user.email }}</td>
-                    <td class="name clickable" ng-click="edit(user.id, $event)">
-                        {{ user.name }}
-                        <?= Html::tag('span', '{{ role_name }}', [
-                            'class' => 'label',
-                            'ng-repeat' => '(role, role_name) in user.roles',
-                            'ng-class' => '"role-" + role'
-                        ]) ?>
-                    </td>
-                    <td class="updated clickable" ng-click="edit(user.id, $event)">{{ user.updated_at }}</td>
-                    <td class="actions">
-                        <?
-                        echo Html::a(FA::icon('times'), ['delete'], [
-                            'class' => 'delete',
-                            'title' => Yii::t('account', 'Удалить аккаунт'),
-                            'ng-click' => 'delete(user.id, $event)',
-                            'ng-show' => '!user.deleted',
-                        ]);
-                        echo Html::a(FA::icon('undo'), ['restore'], [
-                            'title' => Yii::t('account', 'Восстановить аккаунт'),
-                            'ng-click' => 'restore(user.id, $event)',
-                            'ng-show' => 'user.deleted',
-                        ]);
-                        ?>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
+            <div class="box-body no-padding">
+                <table class="table table-hover table-accounts">
+                    <thead>
+                    <tr>
+                        <td class="id"><?= sortLink('id', Yii::t('account', 'ID')) ?></td>
+                        <td class="email"><?= sortLink('email', Yii::t('account', 'Email')) ?></td>
+                        <td class="name"><?= sortLink('name', Yii::t('account', 'Имя')) ?></td>
+                        <td class="updated"><?= sortLink('updated_at', Yii::t('account', 'Изменён')) ?></td>
+                        <td class="actions">&nbsp;</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?
+                    $options = [
+                        'title' => Yii::t('account', 'Редактировать аккаунт'),
+                        'ng-class' => '{deleted:user.deleted}',
+                    ];
+                    ?>
+                    <tr ng-show="users.length === 0">
+                        <td colspan="5" class="text-center text-italic text-light">
+                            <?= Yii::t('account', 'Пользователи не найдены') ?>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="user in users" <?= Html::renderTagAttributes($options) ?>>
+                        <td class="id clickable" ng-click="edit(user.id, $event)">{{ user.id }}</td>
+                        <td class="email clickable" ng-click="edit(user.id, $event)">{{ user.email }}</td>
+                        <td class="name clickable" ng-click="edit(user.id, $event)">
+                            {{ user.name }}
+                            <?= Html::tag('span', '{{ role_name }}', [
+                                'class' => 'label',
+                                'ng-repeat' => '(role, role_name) in user.roles',
+                                'ng-class' => '"role-" + role'
+                            ]) ?>
+                        </td>
+                        <td class="updated clickable" ng-click="edit(user.id, $event)">{{ user.updated_at }}</td>
+                        <td class="actions">
+                            <?
+                            echo Html::a(FA::icon('times'), ['delete'], [
+                                'class' => 'delete',
+                                'title' => Yii::t('account', 'Удалить аккаунт'),
+                                'ng-click' => 'delete(user.id, $event)',
+                                'ng-show' => '!user.deleted',
+                            ]);
+                            echo Html::a(FA::icon('undo'), ['restore'], [
+                                'title' => Yii::t('account', 'Восстановить аккаунт'),
+                                'ng-click' => 'restore(user.id, $event)',
+                                'ng-show' => 'user.deleted',
+                            ]);
+                            ?>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <?
@@ -212,7 +174,7 @@ $angular_options = [
             'ng-click' => 'addUser($event)',
         ]);
         ?>
-    </div>
+    </section>
 
 <?
 

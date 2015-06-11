@@ -2,8 +2,7 @@
   "use strict";
 
   ng.module('BackendApp', [
-    'ngSanitize',
-    'ngMaterial',
+    'ngSanitize', 'ngResource', 'ngMaterial',
     'ui.bootstrap',
     'angular-loading-bar'
   ])
