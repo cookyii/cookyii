@@ -14,9 +14,7 @@ angular
 
     $scope.t = function () {
       toast($mdToast, 'success', {
-        message: {
-          text: 'Click'
-        }
+        message: 'Click'
       });
     };
   })

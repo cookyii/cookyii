@@ -36,7 +36,7 @@ class UserController extends \yii\rest\ActiveController
                 $Query->search($search);
             }
 
-            $Query->withoutDeleted();
+//            $Query->withoutDeleted();
 
             return new \yii\data\ActiveDataProvider([
                 'query' => $Query,
@@ -44,6 +44,25 @@ class UserController extends \yii\rest\ActiveController
             ]);
         };
 
+        $actions['restore'] = [
+            'class' => 'common\rest\RestoreAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
+
         return $actions;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function verbs()
+    {
+        $verbs = parent::verbs();
+
+        $verbs['update'] = ['PUT'];
+        $verbs['restore'] = ['PATCH'];
+
+        return $verbs;
     }
 }

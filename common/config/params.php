@@ -73,10 +73,6 @@ return [
         'hostInfo' => sprintf('http://%s', getenv('FRONTEND_DOMAIN')),
         'enablePrettyUrl' => true,
         'showScriptName' => false,
-        'ruleConfig' => [
-            'class' => 'yii\web\UrlRule',
-            'encodeParams' => false,
-        ],
         'rules' => require(\Yii::getAlias('@frontend/config/urls.php')),
     ],
     'component.urlManager.backend' => [
@@ -85,10 +81,6 @@ return [
         'hostInfo' => sprintf('http://%s', getenv('BACKEND_DOMAIN')),
         'enablePrettyUrl' => true,
         'showScriptName' => false,
-        'ruleConfig' => [
-            'class' => 'yii\web\UrlRule',
-            'encodeParams' => false,
-        ],
         'rules' => require(\Yii::getAlias('@backend/config/urls.php')),
     ],
     'component.errorHandler' => [

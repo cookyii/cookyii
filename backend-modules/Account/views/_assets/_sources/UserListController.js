@@ -3,11 +3,15 @@
 angular.module('BackendApp')
 
   .controller('UserListController', [
-    '$rootScope', '$scope', '$element', '$http', '$timeout', '$mdToast', '$location', 'UserRes',
-    function ($rootScope, $scope, $element, $http, $timeout, $mdToast, $location, UserRes) {
-      var loaded = false,
-        query = $location.search(),
-        page = typeof query.page === 'undefined' ? 1 : query.page;
+    '$rootScope', '$scope', '$element', '$http', '$timeout', '$mdToast', '$location', 'UserResource',
+    function ($rootScope, $scope, $element, $http, $timeout, $mdToast, $location, User) {
+      var query = $location.search(),
+        loaded = false,
+        refreshInterval = 5000;
+
+      var page = typeof query.page === 'undefined'
+        ? 1
+        : query.page;
 
       $scope.users = [];
 
@@ -15,6 +19,10 @@ angular.module('BackendApp')
       $scope.search = typeof query.search === 'undefined'
         ? null
         : query.search;
+
+      $rootScope.$on('ListRefresh', function () {
+        reloadUserList(false);
+      });
 
       $scope.doSearch = function () {
         $location.search('search', $scope.search);
@@ -59,76 +67,54 @@ angular.module('BackendApp')
         reloadUserList(false);
       };
 
-      $scope.addUser = function (e) {
-        $rootScope.edit_account_id = null;
+      $scope.addUser = function () {
+        $rootScope.$emit('editAccount', null);
         jQuery('#AccountEditFormModal')
           .modal('show');
-
-        e.preventDefault();
       };
 
-      $scope.edit = function (user_id, e) {
-        $rootScope.edit_account_id = user_id;
+      $scope.edit = function (user) {
+        $rootScope.$emit('editAccount', user);
         jQuery('#AccountEditFormModal')
           .modal('show');
-
-        e.preventDefault();
       };
 
-      $scope.delete = function (user_id, e) {
-        $http({
-          method: 'DELETE',
-          url: _config.url.delete,
-          params: {user: user_id}
-        }).success(function (response) {
-          if (true === response.result) {
-            toast($mdToast, 'success', {
-              message: response.message
-            });
-          } else {
-            toast($mdToast, 'error', {
-              message: response.message
-            });
-          }
+      $scope.remove = function (user) {
+        user.$remove(function () {
+          toast($mdToast, 'success', {
+            message: 'Account successfully removed'
+          });
 
           reloadUserList(false);
-        }).error(defaultHttpErrorHandler);
-
-        e.preventDefault();
+        }, function () {
+          toast($mdToast, 'error', {
+            message: 'Error removing account'
+          });
+        });
       };
 
-      $scope.restore = function (user_id, e) {
-        $http({
-          method: 'PUT',
-          url: _config.url.restore,
-          params: {user: user_id}
-        }).success(function (response) {
-          if (true === response.result) {
-            toast($mdToast, 'success', {
-              message: response.message
-            });
-          } else {
-            toast($mdToast, 'error', {
-              message: response.message
-            });
-          }
+      $scope.restore = function (user) {
+        user.$restore(function () {
+          toast($mdToast, 'success', {
+            message: 'Account successfully restored'
+          });
 
           reloadUserList(false);
-        }).error(defaultHttpErrorHandler);
-
-        e.preventDefault();
+        }, function () {
+          toast($mdToast, 'error', {
+            message: 'Error restoring account'
+          });
+        });
       };
-
-      $rootScope.$on('ListRefresh', function () {
-        reloadUserList(false);
-      });
 
       $timeout(reloadUserList);
 
       function reloadUserList(setTimeout) {
-        setTimeout = typeof setTimeout === 'boolean' ? setTimeout : true;
+        setTimeout = typeof setTimeout === 'boolean'
+          ? setTimeout
+          : true;
 
-        UserRes.query({
+        User.query({
           search: $scope.search,
           sort: $scope.sort,
           page: loaded ? $scope.pagination.currentPage : page
@@ -145,7 +131,7 @@ angular.module('BackendApp')
           $scope.users = users;
 
           if (setTimeout) {
-            $timeout(reloadUserList, 5000);
+            $timeout(reloadUserList, refreshInterval);
           }
 
           loaded = true;

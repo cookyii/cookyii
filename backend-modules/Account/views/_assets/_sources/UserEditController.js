@@ -3,9 +3,9 @@
 angular.module('BackendApp')
 
   .controller('UserEditController', [
-    '$rootScope', '$scope', '$element', '$http', '$mdToast',
-    function ($rootScope, $scope, $modal, $http, $mdToast) {
-      var _config = {},
+    '$rootScope', '$scope', '$element', '$http', '$mdToast', 'UserResource',
+    function ($rootScope, $scope, $modal, $http, $mdToast, User) {
+      var UserInstance,
         defaultValues = {
           roles: [],
           activated: true,
@@ -15,86 +15,78 @@ angular.module('BackendApp')
 
       $scope.in_progress = false;
 
-      $scope.init = function (config) {
-        _config = angular.extend({}, _config, config);
-      };
-
       resetData();
       resetErrors();
 
       $scope.submit = function (e) {
-        $scope.in_progress = true;
+        var handler;
+
         resetErrors();
 
-        $http({
-          method: 'POST',
-          url: _config.url.edit,
-          params: {user: $rootScope.edit_account_id},
-          data: {
-            _csrf: angular.element('meta[name="csrf-token"]').attr('content'),
-            AccountEditForm: $scope.data
-          }
-        })
-          .success(function (response) {
-            if (true === response.result) {
-              toast($mdToast, 'success', {
-                message: response.message
-              });
+        $scope.in_progress = true;
 
-              $modal.modal('hide');
-              $rootScope.$broadcast('ListRefresh');
-            } else {
-              if (typeof response.errors !== 'undefined') {
-                $scope.error = response.errors;
-              } else {
-                toast($mdToast, 'error', {
-                  message: response.message
-                });
-              }
-            }
-          })
-          .error(defaultHttpErrorHandler)
-          .finally(function () {
-            $scope.in_progress = false;
+        if (UserInstance === null) {
+          handler = function (a, b) {
+            new User($scope.data).$save(a, b);
+          };
+        } else {
+          handler = function (a, b) {
+            UserInstance.$update(a, b);
+          };
+        }
+
+        handler(function () {
+          toast($mdToast, 'success', {
+            message: 'Account successfully updated'
           });
+
+          $modal.modal('hide');
+          $rootScope.$broadcast('ListRefresh');
+
+          $scope.in_progress = false;
+        }, function (response) {
+          if (typeof response.data !== 'undefined') {
+            angular.forEach(response.data, function (val, index) {
+              $scope.error[val.field] = val.message;
+            });
+          } else {
+            toast($mdToast, 'error', {
+              message: 'Error updating account'
+            });
+          }
+
+          $scope.in_progress = false;
+        });
 
         e.preventDefault();
       };
 
-      $modal.find('#AccountEditForm').bind('reset', function (e) {
+      $modal.find('#AccountEditForm').bind('reset', function () {
         $modal.modal('hide');
-        e.preventDefault();
       });
 
-      $modal.bind('show.bs.modal', function () {
-        var user_id = $rootScope.edit_account_id;
+      $rootScope.$on('editAccount', function (event, user) {
+        UserInstance = user;
 
         resetData();
         resetErrors();
 
-        if (user_id === null) {
+        if (user === null) {
           $scope.data.roles.user = true;
         } else {
-          $http({
-            method: 'GET',
-            url: _config.url.get,
-            data: {},
-            params: {
-              user: user_id
-            },
-            ignoreLoadingBar: true
-          }).success(function (response) {
-            $scope.data = response;
+          $scope.data = user;
 
-            var roles = angular.copy($scope.data.roles);
-            $scope.data.roles = {};
+          $scope.data.activated = $scope.data.activated === 1;
+          $scope.data.deleted = $scope.data.deleted === 1;
 
-            angular.forEach(roles, function (label, key) {
-              $scope.data.roles[key] = true;
-            });
-            $scope.data.roles.user = true;
+          var roles = angular.copy($scope.data.roles);
+          $scope.data.roles = {};
 
-          }).error(defaultHttpErrorHandler);
+          angular.forEach(roles, function (label, key) {
+            $scope.data.roles[key] = true;
+          });
+
+          $scope.data.roles.user = true;
         }
       });
 

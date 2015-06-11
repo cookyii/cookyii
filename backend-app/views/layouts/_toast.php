@@ -12,8 +12,7 @@ use rmrevin\yii\fontawesome\FA;
     <md-toast class="info">
         <span flex>
             <?= FA::icon('info')->fixedWidth() ?>
-            <strong ng-show="false">{{ message.title }}<br></strong>
-            <span>{{ message.text }}</span>
+            <span>{{ message }}</span>
         </span>
         <md-button ng-click="resolve()" class="md-action">
             {{ action }}
@@ -25,8 +24,7 @@ use rmrevin\yii\fontawesome\FA;
     <md-toast class="success">
         <span flex>
             <?= FA::icon('check')->fixedWidth() ?>
-            <strong ng-show="false">{{ message.title }}<br></strong>
-            <span>{{ message.text }}</span>
+            <span>{{ message }}</span>
         </span>
         <md-button ng-click="resolve()" class="md-action">
             {{ action }}
@@ -38,8 +36,7 @@ use rmrevin\yii\fontawesome\FA;
     <md-toast class="warning">
         <span flex>
             <?= FA::icon('exclamation-triangle')->fixedWidth() ?>
-            <strong ng-show="false">{{ message.title }}<br></strong>
-            <span>{{ message.text }}</span>
+            <span>{{ message }}</span>
         </span>
         <md-button ng-click="resolve()" class="md-action">
             {{ action }}
@@ -51,8 +48,7 @@ use rmrevin\yii\fontawesome\FA;
     <md-toast class="danger">
         <span flex>
             <?= FA::icon('times')->fixedWidth() ?>
-            <strong ng-show="false">{{ message.title }}<br></strong>
-            <span>{{ message.text }}</span>
+            <span>{{ message }}</span>
         </span>
         <md-button ng-click="resolve()" class="md-action">
             {{ action }}

@@ -33,8 +33,22 @@ class Controller extends \yii\web\Controller
             Cache('query')->flush();
         }
 
-        if (!$this->public && User()->isGuest) {
-            User()->loginRequired();
+        if (!$this->public) {
+            if (User()->isGuest) {
+                User()->loginRequired();
+            } else {
+                /** @var \resources\User $User */
+                $User = User()->identity;
+
+                if (($reason = $User->isAvailable()) !== true) {
+                    switch ($reason) {
+                        case 'not-activated':
+                            throw new \yii\web\ForbiddenHttpException('You account is not activated.');
+                        case 'deleted':
+                            throw new \yii\web\ForbiddenHttpException('You account removed.');
+                    }
+                }
+            }
         }
     }
 }

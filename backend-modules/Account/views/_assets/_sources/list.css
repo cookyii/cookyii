@@ -3,3 +3,11 @@
 .search.wide { width: 300px; }
 /*********************************** Table *****************/
 .table-accounts { }
+.table-accounts .id { width: 70px; }
+.table-accounts .name { text-align: right; }
+.table-accounts .email { width: 200px; }
+.table-accounts .updated { }
+.table-accounts .actions { width: 70px; text-align: center; }
+.table-accounts .actions > a { opacity: 0.1; }
+.table-accounts tr:hover .actions > a,
+.table-accounts tr:focus .actions > a { opacity: 0.9; }

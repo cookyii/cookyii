@@ -6,6 +6,7 @@
 
 return [
     'account/auth/<authclient>' => 'account/sign/auth',
-    'account/rest/user' => 'account/rest/user/index',
     'accounts' => 'account/list/index',
+
+    ['class' => 'common\rest\UrlRule', 'controller' => 'account/rest/user']
 ];

@@ -13,6 +13,8 @@ namespace backend\controllers;
 class SiteController extends \backend\components\Controller
 {
 
+    public $public = true;
+
     /**
      * @inheritdoc
      */
@@ -30,10 +32,10 @@ class SiteController extends \backend\components\Controller
     }
 
     /**
-     * @throws \yii\web\NotFoundHttpException
+     * @return \yii\web\Response
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['/dash']);
     }
 }

@@ -116,8 +116,8 @@ $roles = [
                     <thead>
                     <tr>
                         <td class="id"><?= sortLink('id', Yii::t('account', 'ID')) ?></td>
-                        <td class="email"><?= sortLink('email', Yii::t('account', 'Email')) ?></td>
                         <td class="name"><?= sortLink('name', Yii::t('account', 'Имя')) ?></td>
+                        <td class="email"><?= sortLink('email', Yii::t('account', 'Email')) ?></td>
                         <td class="updated"><?= sortLink('updated_at', Yii::t('account', 'Изменён')) ?></td>
                         <td class="actions">&nbsp;</td>
                     </tr>
@@ -135,28 +135,23 @@ $roles = [
                         </td>
                     </tr>
                     <tr ng-repeat="user in users" <?= Html::renderTagAttributes($options) ?>>
-                        <td class="id clickable" ng-click="edit(user.id, $event)">{{ user.id }}</td>
-                        <td class="email clickable" ng-click="edit(user.id, $event)">{{ user.email }}</td>
-                        <td class="name clickable" ng-click="edit(user.id, $event)">
-                            {{ user.name }}
-                            <?= Html::tag('span', '{{ role_name }}', [
-                                'class' => 'label',
-                                'ng-repeat' => '(role, role_name) in user.roles',
-                                'ng-class' => '"role-" + role'
-                            ]) ?>
+                        <td class="id clickable" ng-click="edit(user)">{{ user.id }}</td>
+                        <td class="name clickable" ng-click="edit(user)">{{ user.name }}</td>
+                        <td class="email clickable" ng-click="edit(user)">{{ user.email }}</td>
+                        <td class="updated clickable" ng-click="edit(user)">
+                            {{ user.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
                         </td>
-                        <td class="updated clickable" ng-click="edit(user.id, $event)">{{ user.updated_at }}</td>
                         <td class="actions">
                             <?
-                            echo Html::a(FA::icon('times'), ['delete'], [
+                            echo Html::tag('a', FA::icon('times'), [
                                 'class' => 'delete',
                                 'title' => Yii::t('account', 'Удалить аккаунт'),
-                                'ng-click' => 'delete(user.id, $event)',
+                                'ng-click' => 'remove(user)',
                                 'ng-show' => '!user.deleted',
                             ]);
-                            echo Html::a(FA::icon('undo'), ['restore'], [
+                            echo Html::tag('a', FA::icon('undo'), [
                                 'title' => Yii::t('account', 'Восстановить аккаунт'),
-                                'ng-click' => 'restore(user.id, $event)',
+                                'ng-click' => 'restore(user)',
                                 'ng-show' => 'user.deleted',
                             ]);
                             ?>
@@ -168,10 +163,10 @@ $roles = [
         </div>
 
         <?
-        echo Html::a(FA::icon('plus')->fixedWidth(), '#', [
-            'class' => 'btn btn-danger btn-action',
-            'title' => Yii::t('account', 'Создать новый аккаунт'),
-            'ng-click' => 'addUser($event)',
+        echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
+            'class' => 'md-warn md-fab md-fab-bottom-right',
+            'title' => Yii::t('account', 'Create new account'),
+            'ng-click' => 'addUser()',
         ]);
         ?>
     </section>
@@ -204,10 +199,12 @@ echo Modal::widget([
             <div class="col-lg-12">
                 <?
                 echo $form->field($AccountEditForm, 'name')
-                    ->textInput();
+                    ->label(false)
+                    ->textInput(['placeholder' => $AccountEditForm->getAttributeLabel('name')]);
 
                 echo $form->field($AccountEditForm, 'email')
-                    ->emailInput();
+                    ->label(false)
+                    ->textInput(['placeholder' => $AccountEditForm->getAttributeLabel('email')]);
 
                 echo Html::tag('strong', Yii::t('account', 'Роли пользователя'));
 
@@ -240,7 +237,8 @@ echo Modal::widget([
         <?
 
         echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('account', 'Сохранить'), [
-            'class' => 'btn btn-primary'
+            'class' => 'btn btn-primary',
+            'ng-disabled' => 'in_progress',
         ]);
 
         echo Html::resetButton(Yii::t('account', 'Отменить'), [
