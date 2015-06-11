@@ -16,6 +16,10 @@ use yii\helpers\Html;
 class ActiveField extends \yii\widgets\ActiveField
 {
 
+    public $template = "{label}\n{input}\n{icon}\n{hint}\n{error}";
+
+    public $options = ['class' => 'form-group has-feedback'];
+
     public $errorOptions = ['class' => 'error-balloon'];
 
     /**
@@ -33,6 +37,9 @@ class ActiveField extends \yii\widgets\ActiveField
             if (!isset($this->parts['{error}'])) {
                 $this->parts['{error}'] = $this->_error($this->model, $this->attribute, $this->errorOptions);
             }
+            if (!isset($this->parts['{icon}'])) {
+                $this->parts['{icon}'] = '';
+            }
             if (!isset($this->parts['{hint}'])) {
                 $this->parts['{hint}'] = '';
             }
@@ -45,11 +52,16 @@ class ActiveField extends \yii\widgets\ActiveField
     }
 
     /**
+     * @param string $icon
      * @return self
      */
-    public function errorToLeft()
+    public function icon($icon)
     {
-        Html::addCssClass($this->errorOptions, 'left');
+        $this->parts['{icon}'] = Html::tag(
+            'span',
+            null,
+            ['class' => sprintf('glyphicon glyphicon-%s form-control-feedback', $icon)]
+        );
 
         return $this;
     }

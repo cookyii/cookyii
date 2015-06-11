@@ -13,8 +13,6 @@ namespace backend\controllers;
 class SiteController extends \backend\components\Controller
 {
 
-    public $public = true;
-
     /**
      * @inheritdoc
      */
@@ -36,6 +34,6 @@ class SiteController extends \backend\components\Controller
      */
     public function actionIndex()
     {
-        throw new \yii\web\ServerErrorHttpException('Under construction');
+        return $this->render('index');
     }
 }

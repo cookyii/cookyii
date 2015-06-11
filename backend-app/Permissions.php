@@ -14,4 +14,6 @@ class Permissions
 {
 
     const ACCESS = 'backend.access';
+
+    const ACCOUNT_ACCESS = 'backend.account.access';
 }

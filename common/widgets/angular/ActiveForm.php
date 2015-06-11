@@ -17,7 +17,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
     public $name;
 
-    public $fieldClass = \common\widgets\angular\ActiveField::class;
+    public $fieldClass = 'common\widgets\angular\ActiveField';
 
     public $enableClientScript = false;
 

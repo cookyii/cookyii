@@ -23,6 +23,7 @@ class AppAsset extends \yii\web\AssetBundle
     ];
 
     public $js = [
+        'js/app.js',
         'js/functions.js',
         'js/scripts.js',
         'js/BackendApp.js',

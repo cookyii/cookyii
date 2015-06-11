@@ -1,7 +1,6 @@
 /.idea
 /.c9
 /.env
-/.credentials.env
 /composer.phar
 /htpasswd
 /node_modules

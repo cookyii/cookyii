@@ -9,6 +9,6 @@ return [
         'class' => 'yii\web\User',
         'identityClass' => 'resources\User',
         'enableAutoLogin' => true,
-        'loginUrl' => ['/'],
+        'loginUrl' => ['/account/sign/in'],
     ],
 ];

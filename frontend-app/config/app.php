@@ -4,7 +4,7 @@
  * @author Revin Roman
  */
 
-defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App frontend');
+defined('APP_NAME') or define('APP_NAME', 'Cookyii Frontend');
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),

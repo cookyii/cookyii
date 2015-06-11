@@ -13,10 +13,10 @@ class m150610_170045_user extends \common\components\Migration
             '{{%user}}',
             [
                 'id' => Schema::TYPE_PK,
-                'login' => Schema::TYPE_STRING,
                 'name' => Schema::TYPE_STRING,
                 'email' => Schema::TYPE_STRING,
                 'avatar' => Schema::TYPE_STRING,
+                'password_hash' => Schema::TYPE_STRING . ' NOT NULL',
                 'token' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'auth_key' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'created_at' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
@@ -76,6 +76,7 @@ class m150610_170045_user extends \common\components\Migration
         }
 
         $this->dropTable('{{%user_auth_response}}');
+        $this->dropTable('{{%user_attribute}}');
         $this->dropTable('{{%user}}');
     }
 }

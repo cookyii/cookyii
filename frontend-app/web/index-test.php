@@ -9,6 +9,7 @@ defined('YII_ENV') or define('YII_ENV', 'test');
 
 require(__DIR__ . '/../../vendor/autoload.php');
 
+require(__DIR__ . '/../credentials.php');
 require(__DIR__ . '/../../env.php');
 require(__DIR__ . '/../../globals.php');
 

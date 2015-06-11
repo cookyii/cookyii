@@ -6,6 +6,8 @@
 
 defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App backend');
 
+
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/params.php')
@@ -20,6 +22,7 @@ return [
     'aliases' => ['@tests' => '@backend/tests'],
     'controllerNamespace' => 'backend\commands',
     'controllerMap' => [
+        'user' => 'backend\modules\Account\commands\UserCommand',
         'rbac' => 'common\commands\RbacCommand',
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',

@@ -1,0 +1,33 @@
+/*********************************** General ***************/
+.mail-box-header { margin: -1px -15px 0; }
+.mail-box { margin: 0 -15px 81px; }
+/*********************************** Table *****************/
+.table-accounts { margin-bottom: 0; }
+.table-accounts tr { }
+.table-accounts tr td { }
+.table-accounts tr td.id { width: 50px; }
+.table-accounts tr td.email { width: 180px; text-align: right; }
+.table-accounts tr td.name { }
+.table-accounts tr td.name span.label { display: inline-block; margin: 0 5px 3px 5px; }
+.table-accounts tr td.name span.label.role-admin { background-color: #ed5565; color: white; }
+.table-accounts tr td.name span.label.role-manager { background-color: #f8ac59; color: white; }
+.table-accounts tr td.name span.label.role-buyer_legal { background-color: #1ab394; color: white; }
+.table-accounts tr td.name span.label.role-buyer_individual { background-color: #1ab394; color: white; }
+.table-accounts tr td.name span.label.role-seller { background-color: #23c6c8; color: white; }
+.table-accounts tr td.updated { width: 180px; }
+.table-accounts tr td.actions { width: 60px; text-align: right; }
+.table-accounts tr td.actions > a { opacity: 0; margin-left: 4px; font-size: 1.25em; }
+.table-accounts tr td.actions > a.delete { color: firebrick; }
+.table-accounts tr td.asc > a:after,
+.table-accounts tr td.desc > a:after { font-family: FontAwesome; margin-left: 4px; }
+.table-accounts tr td.asc > a:after { content: "\f162"; }
+.table-accounts tr td.desc > a:after { content: "\f163"; }
+.table-accounts tr:hover td.actions > a { opacity: 1; }
+.table-accounts tr.deleted { }
+.table-accounts tr.deleted td { }
+.table-accounts tr.deleted td.id,
+.table-accounts tr.deleted td.name,
+.table-accounts tr.deleted td.email,
+.table-accounts tr.deleted td.updated { color: #adadad; text-decoration: line-through; }
+/*********************************** Edit form *************/
+#AccountEditForm .roles > label { display: block; margin: 5px 0 0 0; cursor: pointer; }

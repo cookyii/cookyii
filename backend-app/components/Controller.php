@@ -13,11 +13,11 @@ namespace backend\components;
 class Controller extends \yii\web\Controller
 {
 
-    public $hideLoader = false;
-
-    public $public = false;
+    public $loader = true;
 
     public $layout = 'main';
+
+    public $public = false;
 
     /**
      * @inheritdoc
@@ -31,6 +31,10 @@ class Controller extends \yii\web\Controller
             Cache('authManager')->flush();
             Cache('schema')->flush();
             Cache('query')->flush();
+        }
+
+        if (!$this->public && User()->isGuest) {
+            User()->loginRequired();
         }
     }
 }

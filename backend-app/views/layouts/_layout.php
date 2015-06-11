@@ -65,12 +65,12 @@ $this->beginPage();
 
     ?>
 </head>
-<body class="skin-blue sidebar-mini">
+<body class="sidebar-mini skin-purple">
 <?php
 
 $this->beginBody();
 
-if ($controller->hideLoader === false) {
+if ($controller->loader === true) {
     echo Html::tag('div', '<md-progress-circular class="md-warn md-hue-3" md-mode="indeterminate"></md-progress-circular>', [
         'id' => 'global-loader',
         'class' => 'loader-layout',

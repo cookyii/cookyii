@@ -4,7 +4,7 @@
  * @author Revin Roman
  */
 
-defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App backend');
+defined('APP_NAME') or define('APP_NAME', 'Cookyii Backend');
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -20,6 +20,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'account' => 'backend\modules\Account\Module',
     ],
     'components' => [
         'db' => $params['component.db'],
@@ -40,6 +41,7 @@ return [
         'errorHandler' => $params['component.errorHandler'],
         'log' => $params['component.log'],
         'request' => $params['component.request.backend'],
+        'authClientCollection' => $params['component.authClientCollection'],
     ],
     'params' => $params,
 ];

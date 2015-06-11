@@ -112,6 +112,10 @@ return [
         'timeFormat' => 'HH:mm',
         'datetimeFormat' => 'dd MMMM y HH:mm',
     ],
+    'component.authClientCollection' => [
+        'class' => 'yii\authclient\Collection',
+        'clients' => include __DIR__ . '/_authclients.php',
+    ],
     'component.postman' => [
         'class' => 'rmrevin\yii\postman\Component',
         'driver' => 'smtp',

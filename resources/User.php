@@ -11,10 +11,10 @@ namespace resources;
  * @package resources
  *
  * @property integer $id
- * @property string $login
  * @property string $name
  * @property string $email
  * @property string $avatar
+ * @property string $password_hash
  * @property string $token
  * @property string $auth_key
  * @property integer $created_at
@@ -30,9 +30,11 @@ namespace resources;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
-    use User\traits\UserSocialTrait;
+    use \resources\User\traits\UserSocialTrait;
     use \common\traits\ActiveRecord\ActivationTrait;
     use \common\traits\ActiveRecord\SoftDeleteTrait;
+
+    public $password;
 
     /**
      * @inheritdoc
@@ -61,14 +63,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             /** type validators */
-            [['name', 'login', 'avatar'], 'string', 'length' => [1, 255]],
+            [['name', 'avatar', 'password', 'password_hash'], 'string'],
             [['activated', 'deleted'], 'boolean'],
 
             /** semantic validators */
             [['email'], 'email'],
             [['email'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
-            [['name', 'login'], 'required'],
-            [['name', 'login', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
+            [['email'], 'required'],
+            [['name', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
             [['activated'], 'in', 'range' => [self::NOT_ACTIVATED, self::ACTIVATED]],
             [['deleted'], 'in', 'range' => [self::NOT_DELETED, self::DELETED]],
 
@@ -191,6 +193,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return Security()->validatePassword($password, $this->password_hash);
+    }
+
+    /**
      * @return array
      */
     public function getRoles()
@@ -231,9 +242,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function getAllRoles()
     {
         return [
-            \crm\Permissions::ROLE_ADMIN => \Yii::t('account', 'Администратор'),
-            \crm\Permissions::ROLE_MANAGER => \Yii::t('account', 'Менеджер'),
-            \crm\Permissions::ROLE_USER => \Yii::t('account', 'Пользователь'),
+            \common\Roles::ADMIN => \Yii::t('account', 'Администратор'),
+            \common\Roles::MANAGER => \Yii::t('account', 'Менеджер'),
+            \common\Roles::USER => \Yii::t('account', 'Пользователь'),
         ];
     }
 
@@ -244,8 +255,21 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             function (\yii\base\ModelEvent $Event) {
                 /** @var self $Model */
                 $Model = $Event->sender;
+                $Model->password_hash = Security()->generatePasswordHash($this->password);
                 $Model->auth_key = Security()->generateRandomString();
                 $Model->token = Security()->generateRandomString();
+            }
+        );
+
+
+        $this->on(
+            self::EVENT_BEFORE_UPDATE,
+            function (\yii\base\ModelEvent $Event) {
+                /** @var self $Model */
+                $Model = $Event->sender;
+                if (!empty($this->password)) {
+                    $Model->password_hash = Security()->generatePasswordHash($this->password);
+                }
             }
         );
     }

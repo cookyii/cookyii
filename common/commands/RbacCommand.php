@@ -70,6 +70,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     {
         return [
             RF::Permission(BP::ACCESS, 'It has access to the backend'),
+            RF::Permission(BP::ACCOUNT_ACCESS, 'It has access to account module'),
         ];
     }
 
@@ -99,6 +100,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     {
         return [
             R::ADMIN => [
+                BP::ACCOUNT_ACCESS,
             ],
             R::MANAGER => [
                 BP::ACCESS,
