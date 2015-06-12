@@ -20,11 +20,38 @@ class UserController extends \yii\rest\ActiveController
     /**
      * @inheritdoc
      */
+    protected function verbs()
+    {
+        $verbs = parent::verbs();
+
+        $verbs['activate'] = ['POST'];
+        $verbs['deactivate'] = ['POST'];
+        $verbs['update'] = ['PUT'];
+        $verbs['restore'] = ['PATCH'];
+
+        return $verbs;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         $actions = parent::actions();
 
         $actions['index']['prepareDataProvider'] = [$this, 'prepareListDataProvider'];
+
+        $actions['activate'] = [
+            'class' => 'common\rest\ActivateAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
+
+        $actions['deactivate'] = [
+            'class' => 'common\rest\DeactivateAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
 
         $actions['restore'] = [
             'class' => 'common\rest\RestoreAction',
@@ -81,18 +108,5 @@ class UserController extends \yii\rest\ActiveController
             'query' => $Query,
             'pagination' => ['pageSize' => 15],
         ]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function verbs()
-    {
-        $verbs = parent::verbs();
-
-        $verbs['update'] = ['PUT'];
-        $verbs['restore'] = ['PATCH'];
-
-        return $verbs;
     }
 }

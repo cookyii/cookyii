@@ -17,12 +17,14 @@ angular.module('BackendApp')
 
       $scope.deleted = typeof query.deleted === 'undefined'
         ? false
-        : query.deleted;
+        : query.deleted === 'true';
 
       $scope.toggleDeleted = function () {
         $scope.deleted = !$scope.deleted;
 
-        $location.search('deleted', $scope.deleted);
+        console.log($scope.deleted);
+
+        $location.search('deleted', $scope.deleted === true ? 'true' : 'false');
 
         reloadUserList(false);
       };
@@ -98,9 +100,19 @@ angular.module('BackendApp')
       };
 
       $scope.edit = function (user) {
-        $rootScope.$emit('editAccount', user);
+        $rootScope.$emit('editAccount', angular.copy(user));
         jQuery('#AccountEditFormModal')
           .modal('show');
+      };
+
+      $scope.toggleActivated = function (user) {
+        if (user.activated === 1) {
+          user.$deactivate();
+        } else {
+          user.$activate();
+        }
+
+        reloadUserList(false);
       };
 
       $scope.remove = function (user) {

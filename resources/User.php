@@ -242,9 +242,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function getAllRoles()
     {
         return [
-            \common\Roles::ADMIN => \Yii::t('account', 'Администратор'),
-            \common\Roles::MANAGER => \Yii::t('account', 'Менеджер'),
-            \common\Roles::USER => \Yii::t('account', 'Пользователь'),
+            \common\Roles::ADMIN => \Yii::t('account', 'Administrator'),
+            \common\Roles::MANAGER => \Yii::t('account', 'Manager'),
+            \common\Roles::CLIENT => \Yii::t('account', 'Client'),
+            \common\Roles::USER => \Yii::t('account', 'User'),
         ];
     }
 

@@ -13,7 +13,7 @@ namespace common\widgets\angular\material;
 class ActiveForm extends \common\widgets\angular\ActiveForm
 {
 
-    public $fieldClass = \common\widgets\angular\material\ActiveField::class;
+    public $fieldClass = 'common\widgets\angular\material\ActiveField';
 
     /**
      * Generates a form field.

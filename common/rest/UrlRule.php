@@ -13,12 +13,17 @@ namespace common\rest;
 class UrlRule extends \yii\rest\UrlRule
 {
 
+    /**
+     * @inheritdoc
+     */
     public $patterns = [
-        'PUT {id}' => 'update',
-        'PATCH {id}' => 'restore',
         'DELETE {id}' => 'delete',
-        'GET,HEAD {id}' => 'view',
+        'PATCH {id}' => 'restore',
+        'POST activate/{id}' => 'activate',
+        'POST deactivate/{id}' => 'deactivate',
+        'PUT {id}' => 'update',
         'POST' => 'create',
+        'GET,HEAD {id}' => 'view',
         'GET,HEAD' => 'index',
         '{id}' => 'options',
         '' => 'options',

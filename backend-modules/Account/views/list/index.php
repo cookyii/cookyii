@@ -37,10 +37,10 @@ $r = \resources\User::getAllRoles();
 
 $roles = [
     'all' => Yii::t('account', 'All roles'),
-    \common\Roles::USER => Yii::t('account', 'Users'),
-    \common\Roles::CLIENT => Yii::t('account', 'Clients'),
-    \common\Roles::MANAGER => Yii::t('account', 'Managers'),
     \common\Roles::ADMIN => Yii::t('account', 'Administrators'),
+    \common\Roles::MANAGER => Yii::t('account', 'Managers'),
+    \common\Roles::CLIENT => Yii::t('account', 'Clients'),
+    \common\Roles::USER => Yii::t('account', 'Users'),
 ];
 
 ?>
@@ -53,6 +53,8 @@ $roles = [
             <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
                 <div class="box-filter">
                     <h3><?= Yii::t('account', 'Filter') ?></h3>
+
+                    <hr>
 
                     <ul>
                         <?
@@ -76,7 +78,9 @@ $roles = [
                         ?>
                     </ul>
 
-                    <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('account', 'Show remover users'), [
+                    <hr>
+
+                    <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('account', 'Removed accounts'), [
                         'ng-click' => 'toggleDeleted()',
                         'ng-class' => Json::encode(['selected' => new \yii\web\JsExpression('deleted === true')]),
                     ]) ?>
@@ -127,6 +131,7 @@ $roles = [
                         <table class="table table-hover table-accounts">
                             <thead>
                             <tr>
+                                <td class="activated">&nbsp;</td>
                                 <td class="id"><?= sortLink('id', Yii::t('account', 'ID')) ?></td>
                                 <td class="name"><?= sortLink('name', Yii::t('account', 'Имя')) ?></td>
                                 <td class="email"><?= sortLink('email', Yii::t('account', 'Email')) ?></td>
@@ -147,6 +152,20 @@ $roles = [
                                 </td>
                             </tr>
                             <tr ng-repeat="user in users" <?= Html::renderTagAttributes($options) ?>>
+                                <td class="activated clickable">
+                                    <?= FA::icon('circle', [
+                                        'class' => 'text-red',
+                                        'title' => Yii::t('account', 'Account deactivated'),
+                                        'ng-if' => 'user.activated === 0',
+                                        'ng-click' => 'toggleActivated(user)',
+                                    ]) ?>
+                                    <?= FA::icon('circle', [
+                                        'class' => 'text-green',
+                                        'title' => Yii::t('account', 'Account activated'),
+                                        'ng-if' => 'user.activated === 1',
+                                        'ng-click' => 'toggleActivated(user)',
+                                    ]) ?>
+                                </td>
                                 <td class="id clickable" ng-click="edit(user)">{{ user.id }}</td>
                                 <td class="name clickable" ng-click="edit(user)">{{ user.name }}</td>
                                 <td class="email clickable" ng-click="edit(user)">{{ user.email }}</td>
@@ -156,12 +175,13 @@ $roles = [
                                 <td class="actions">
                                     <?
                                     echo Html::tag('a', FA::icon('times'), [
-                                        'class' => 'delete',
+                                        'class' => 'text-red',
                                         'title' => Yii::t('account', 'Удалить аккаунт'),
                                         'ng-click' => 'remove(user)',
                                         'ng-show' => '!user.deleted',
                                     ]);
                                     echo Html::tag('a', FA::icon('undo'), [
+                                        'class' => 'text-orange',
                                         'title' => Yii::t('account', 'Восстановить аккаунт'),
                                         'ng-click' => 'restore(user)',
                                         'ng-show' => 'user.deleted',
@@ -235,32 +255,20 @@ echo Modal::widget([
 
                 echo Html::tag('strong', Yii::t('account', 'Роли пользователя'));
 
-                echo $form->field($AccountEditForm, 'roles')
+                echo $form->field($AccountEditForm, 'roles', [
+                    'class' => 'common\widgets\angular\material\ActiveField',
+                    'options' => ['class' => 'form-group narrow'],
+                ])
                     ->label(false)
-                    ->checkboxList(Account\forms\AccountEditForm::getRoleValues(), ['class' => 'roles'], [
+                    ->checkboxList(Account\forms\AccountEditForm::getRoleValues(), ['class' => 'roles checkbox-list'], [
                         'user' => ['disabled' => true],
                     ]);
-
-
                 ?>
             </div>
         </div>
 
         <hr>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <?
-                echo $form->field($AccountEditForm, 'activated')
-                    ->label(false)
-                    ->checkbox();
-
-                echo $form->field($AccountEditForm, 'deleted')
-                    ->label(false)
-                    ->checkbox();
-                ?>
-            </div>
-        </div>
         <?
 
         echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('account', 'Сохранить'), [

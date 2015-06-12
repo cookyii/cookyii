@@ -1,8 +1,11 @@
+/*********************************** Other *****************/
+.content-wrapper { padding-bottom: 35px; }
 /*********************************** Search ****************/
 .search { width: 150px; margin-right: 100px; transition: width .4s ease-out; }
 .search.wide { width: 300px; }
 /*********************************** Table *****************/
 .table-accounts { }
+.table-accounts .activated { width: 50px; text-align: center; font-size: 20px; padding: 4px; }
 .table-accounts .id { width: 70px; }
 .table-accounts .name { text-align: right; }
 .table-accounts .email { width: 200px; }

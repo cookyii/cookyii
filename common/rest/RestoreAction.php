@@ -12,9 +12,10 @@ namespace common\rest;
  */
 class RestoreAction extends \yii\rest\Action
 {
+
     /**
-     * Deletes a model.
-     * @param mixed $id id of the model to be deleted.
+     * Restore a model.
+     * @param mixed $id id of the model to be restored.
      * @throws \yii\web\ServerErrorHttpException on failure.
      */
     public function run($id)
