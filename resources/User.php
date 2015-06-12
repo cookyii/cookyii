@@ -52,7 +52,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::class,
+            'yii\behaviors\TimestampBehavior',
         ];
     }
 

@@ -129,7 +129,7 @@ class UserController extends \yii\rest\ActiveController
             $Query->search($search);
         }
 
-        $deleted = Request()->get('deleted', false);
+        $deleted = Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

@@ -15,9 +15,6 @@ angular.module('BackendApp')
 
       $scope.users = [];
 
-      $scope.deleted = typeof query.deleted === 'undefined'
-        ? false
-        : query.deleted === 'true';
 
       function _refresh() {
         reloadUserList(false);
@@ -36,6 +33,10 @@ angular.module('BackendApp')
           }
         }, 400);
       };
+
+      $scope.deleted = typeof query.deleted === 'undefined'
+        ? false
+        : query.deleted === 'true';
 
       $scope.toggleDeleted = function () {
         $scope.deleted = !$scope.deleted;
@@ -159,6 +160,7 @@ angular.module('BackendApp')
           : true;
 
         User.query({
+          deactivated: $scope.deactivated,
           deleted: $scope.deleted,
           role: $scope.role,
           search: $scope.search,

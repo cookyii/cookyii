@@ -222,6 +222,16 @@ class UserQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     * @return self
+     */
+    public function withoutDeactivated()
+    {
+        $this->andWhere(['activated' => \resources\User::ACTIVATED]);
+
+        return $this;
+    }
+
+    /**
      * @param string $query
      * @return self
      */
