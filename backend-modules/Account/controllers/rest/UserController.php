@@ -17,6 +17,28 @@ class UserController extends \yii\rest\ActiveController
 
     public $modelClass = 'resources\User';
 
+    public $serializer = 'common\rest\Serializer';
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['httpCache'] = [
+            'class' => 'yii\filters\HttpCache',
+            'only' => ['index'],
+            'lastModified' => function ($action, $params) {
+                return (new \yii\db\Query())
+                    ->from('{{%user}}')
+                    ->max('updated_at');
+            }
+        ];
+
+        return $behaviors;
+    }
+
     /**
      * @inheritdoc
      */
@@ -60,6 +82,14 @@ class UserController extends \yii\rest\ActiveController
         ];
 
         return $actions;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function serializeData($data)
+    {
+        return parent::serializeData($data);
     }
 
     /**

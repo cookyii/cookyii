@@ -111,7 +111,7 @@ $roles = [
                                         'maxlength' => 100,
                                         'ng-model' => 'search',
                                         'ng-focus' => 'toggleSearchFocus()',
-                                        'ng-blur' => 'toggleSearchFocus()',
+                                        'ng-blur' => 'doSearch()',
                                     ]) ?>
                                     <a ng-click="clearSearch()" ng-show="search" class="clear-search">
                                         <?= FA::icon('times') ?>
@@ -142,29 +142,23 @@ $roles = [
                             <tbody>
                             <?
                             $options = [
-                                'title' => Yii::t('account', 'Редактировать аккаунт'),
-                                'ng-class' => '{deleted:user.deleted}',
+                                'title' => Yii::t('account', 'Edit account'),
+                                'ng-class' => '{deactivated:user.activated===0,deleted:user.deleted}',
                             ];
                             ?>
                             <tr ng-show="users.length === 0">
-                                <td colspan="5" class="text-center text-italic text-light">
-                                    <?= Yii::t('account', 'Пользователи не найдены') ?>
+                                <td colspan="6" class="text-center text-italic text-light">
+                                    <?= Yii::t('account', 'Accounts not found') ?>
                                 </td>
                             </tr>
-                            <tr ng-repeat="user in users" <?= Html::renderTagAttributes($options) ?>>
+                            <tr ng-repeat="user in users track by user.id" <?= Html::renderTagAttributes($options) ?>>
                                 <td class="activated clickable">
-                                    <?= FA::icon('circle', [
-                                        'class' => 'text-red',
-                                        'title' => Yii::t('account', 'Account deactivated'),
-                                        'ng-if' => 'user.activated === 0',
-                                        'ng-click' => 'toggleActivated(user)',
-                                    ]) ?>
-                                    <?= FA::icon('circle', [
-                                        'class' => 'text-green',
-                                        'title' => Yii::t('account', 'Account activated'),
-                                        'ng-if' => 'user.activated === 1',
-                                        'ng-click' => 'toggleActivated(user)',
-                                    ]) ?>
+                                    <md-switch ng-model="user.activated"
+                                               ng-true-value="1" ng-false-value="0"
+                                               ng-change="toggleActivated(user)"
+                                               title="User active"
+                                               aria-label="User active">
+                                    </md-switch>
                                 </td>
                                 <td class="id clickable" ng-click="edit(user)">{{ user.id }}</td>
                                 <td class="name clickable" ng-click="edit(user)">{{ user.name }}</td>
@@ -176,13 +170,13 @@ $roles = [
                                     <?
                                     echo Html::tag('a', FA::icon('times'), [
                                         'class' => 'text-red',
-                                        'title' => Yii::t('account', 'Удалить аккаунт'),
+                                        'title' => Yii::t('account', 'Remove account'),
                                         'ng-click' => 'remove(user)',
                                         'ng-show' => '!user.deleted',
                                     ]);
                                     echo Html::tag('a', FA::icon('undo'), [
-                                        'class' => 'text-orange',
-                                        'title' => Yii::t('account', 'Восстановить аккаунт'),
+                                        'class' => 'text-light-blue',
+                                        'title' => Yii::t('account', 'Restore account'),
                                         'ng-click' => 'restore(user)',
                                         'ng-show' => 'user.deleted',
                                     ]);
@@ -214,6 +208,7 @@ $roles = [
             'class' => 'md-warn md-fab md-fab-bottom-right',
             'title' => Yii::t('account', 'Create new account'),
             'ng-click' => 'addUser()',
+            'aria-label' => 'Add user',
         ]);
         ?>
     </section>
@@ -233,7 +228,7 @@ echo Modal::widget([
         'ng-controller' => 'UserEditController',
         'ng-init' => 'init(' . Json::encode($angular_options) . ')',
     ],
-    'header' => Html::tag('h3', Yii::t('account', 'Редактирование аккаунта')),
+    'header' => Html::tag('h3', Yii::t('account', 'Account information')),
     'content' => function () use ($AccountEditForm) {
         /** @var \common\widgets\angular\ActiveForm $form */
         $form = \common\widgets\angular\ActiveForm::begin([

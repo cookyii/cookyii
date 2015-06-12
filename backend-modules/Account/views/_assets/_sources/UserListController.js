@@ -19,14 +19,30 @@ angular.module('BackendApp')
         ? false
         : query.deleted === 'true';
 
+      function _refresh() {
+        reloadUserList(false);
+      }
+
+      $timeout(reloadUserList);
+
+      $rootScope.$on('ListRefresh', _refresh);
+
+      $scope.toggleActivated = function (user) {
+        $timeout(function () {
+          if (user.activated === 1) {
+            user.$activate(_refresh, _refresh);
+          } else {
+            user.$deactivate(_refresh, _refresh);
+          }
+        }, 400);
+      };
+
       $scope.toggleDeleted = function () {
         $scope.deleted = !$scope.deleted;
 
-        console.log($scope.deleted);
-
         $location.search('deleted', $scope.deleted === true ? 'true' : 'false');
 
-        reloadUserList(false);
+        _refresh();
       };
 
       $scope.role = typeof query.role === 'undefined'
@@ -38,7 +54,7 @@ angular.module('BackendApp')
 
         $location.search('role', role);
 
-        reloadUserList(false);
+        _refresh();
       };
 
       $scope.searchFocus = false;
@@ -46,18 +62,16 @@ angular.module('BackendApp')
         ? null
         : query.search;
 
-      $rootScope.$on('ListRefresh', function () {
-        reloadUserList(false);
-      });
-
       $scope.doSearch = function () {
+        $scope.searchFocus = false;
+
         $location.search('search', $scope.search);
 
-        reloadUserList(false);
+        _refresh();
       };
 
       $scope.toggleSearchFocus = function () {
-        $scope.searchFocus = !$scope.searchFocus;
+        $scope.searchFocus = true;
       };
 
       $scope.clearSearch = function () {
@@ -74,7 +88,7 @@ angular.module('BackendApp')
           $location.search('page', $scope.pagination.currentPage);
         }
 
-        reloadUserList(false);
+        _refresh();
       };
 
       $scope.sort = typeof query.sort === 'undefined'
@@ -90,7 +104,7 @@ angular.module('BackendApp')
 
         $location.search('sort', $scope.sort);
 
-        reloadUserList(false);
+        _refresh();
       };
 
       $scope.addUser = function () {
@@ -105,23 +119,13 @@ angular.module('BackendApp')
           .modal('show');
       };
 
-      $scope.toggleActivated = function (user) {
-        if (user.activated === 1) {
-          user.$deactivate();
-        } else {
-          user.$activate();
-        }
-
-        reloadUserList(false);
-      };
-
       $scope.remove = function (user) {
         user.$remove(function () {
           toast($mdToast, 'success', {
             message: 'Account successfully removed'
           });
 
-          reloadUserList(false);
+          _refresh();
         }, function () {
           toast($mdToast, 'error', {
             message: 'Error removing account'
@@ -135,7 +139,7 @@ angular.module('BackendApp')
             message: 'Account successfully restored'
           });
 
-          reloadUserList(false);
+          _refresh();
         }, function () {
           toast($mdToast, 'error', {
             message: 'Error restoring account'
@@ -143,9 +147,13 @@ angular.module('BackendApp')
         });
       };
 
-      $timeout(reloadUserList);
-
       function reloadUserList(setTimeout) {
+        if ($scope.searchFocus === true) {
+          $timeout(reloadUserList, refreshInterval);
+
+          return;
+        }
+
         setTimeout = typeof setTimeout === 'boolean'
           ? setTimeout
           : true;

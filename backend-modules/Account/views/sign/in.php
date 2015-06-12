@@ -19,12 +19,10 @@ Account\views\_assets\SignInAssetBundle::register($this);
 
 <div class="login-box" ng-controller="SignInController">
     <div class="login-logo">
-        <a href=""><b>Cookyii</b> BACKEND</a>
+        <b>COOKYII</b>BACKEND
     </div>
 
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-
         <?php
         $form = common\widgets\angular\ActiveForm::begin([
             'name' => 'SignInForm',
@@ -49,7 +47,7 @@ Account\views\_assets\SignInAssetBundle::register($this);
         <div class="row">
             <div class="col-xs-8">
                 <?
-                echo $form->field($SignInForm, 'remember')
+                echo $form->field($SignInForm, 'remember', ['class' => 'common\widgets\angular\material\ActiveField'])
                     ->label(false)
                     ->checkbox();
                 ?>
@@ -60,46 +58,51 @@ Account\views\_assets\SignInAssetBundle::register($this);
         </div>
         <?php
         common\widgets\angular\ActiveForm::end();
-        ?>
-        <div class="social-auth-links text-center">
-            <p>- OR -</p>
-            <?php
-            $authAuthChoice = yii\authclient\widgets\AuthChoice::begin([
-                'baseAuthUrl' => ['/account/sign/auth'],
-                'popupMode' => false,
-                'autoRender' => false,
-            ]);
 
-            foreach ($authAuthChoice->getClients() as $Client) {
-                $name = $Client->getName();
-                $icon = $name;
-                if ($icon === 'live') {
-                    $icon = 'windows';
-                }
-                if ($icon === 'vkontakte') {
-                    $icon = 'vk';
-                }
-                if ($icon === 'yandex') {
-                    $icon = 'yahoo';
-                }
+        $authAuthChoice = yii\authclient\widgets\AuthChoice::begin([
+            'baseAuthUrl' => ['/account/sign/auth'],
+            'popupMode' => false,
+            'autoRender' => false,
+        ]);
 
-                $icon = FA::icon($icon);
+        $AuthAuthChoiceClients = $authAuthChoice->getClients();
 
-                echo Html::a(
-                    sprintf('%s Sign in using %s', $icon, $Client->getName()),
-                    $authAuthChoice->createClientUrl($Client),
-                    [
-                        'class' => sprintf('btn btn-block btn-flat btn-social btn-%s', $name),
-                    ]
-                );
-            }
-
-            yii\authclient\widgets\AuthChoice::end();
+        if (!empty($AuthAuthChoiceClients)) {
             ?>
-        </div>
+            <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <?php
+                foreach ($authAuthChoice->getClients() as $Client) {
+                    $name = $Client->getName();
+                    $icon = $name;
+                    if ($icon === 'live') {
+                        $icon = 'windows';
+                    }
+                    if ($icon === 'vkontakte') {
+                        $icon = 'vk';
+                    }
+                    if ($icon === 'yandex') {
+                        $icon = 'yahoo';
+                    }
+
+                    $icon = FA::icon($icon);
+
+                    echo Html::a(
+                        sprintf('%s Sign in using %s', $icon, $Client->getName()),
+                        $authAuthChoice->createClientUrl($Client),
+                        [
+                            'class' => sprintf('btn btn-block btn-flat btn-social btn-%s', $name),
+                        ]
+                    );
+                }
+                ?>
+            </div>
+        <?php
+        }
+        yii\authclient\widgets\AuthChoice::end();
+
+        ?>
 
         <a href="#">I forgot my password</a><br>
-        <a href="register.html" class="text-center">Register a new membership</a>
-
     </div>
 </div>
