@@ -15,6 +15,30 @@ angular.module('BackendApp')
 
       $scope.users = [];
 
+      $scope.deleted = typeof query.deleted === 'undefined'
+        ? false
+        : query.deleted;
+
+      $scope.toggleDeleted = function () {
+        $scope.deleted = !$scope.deleted;
+
+        $location.search('deleted', $scope.deleted);
+
+        reloadUserList(false);
+      };
+
+      $scope.role = typeof query.role === 'undefined'
+        ? 'all'
+        : query.role;
+
+      $scope.setRole = function (role) {
+        $scope.role = role;
+
+        $location.search('role', role);
+
+        reloadUserList(false);
+      };
+
       $scope.searchFocus = false;
       $scope.search = typeof query.search === 'undefined'
         ? null
@@ -115,6 +139,8 @@ angular.module('BackendApp')
           : true;
 
         User.query({
+          deleted: $scope.deleted,
+          role: $scope.role,
           search: $scope.search,
           sort: $scope.sort,
           page: loaded ? $scope.pagination.currentPage : page

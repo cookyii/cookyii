@@ -11,3 +11,8 @@
 .table-accounts .actions > a { opacity: 0.1; }
 .table-accounts tr:hover .actions > a,
 .table-accounts tr:focus .actions > a { opacity: 0.9; }
+.table-accounts tr.deleted { }
+.table-accounts tr.deleted .id,
+.table-accounts tr.deleted .name,
+.table-accounts tr.deleted .email,
+.table-accounts tr.deleted .updated { text-decoration: line-through; color: #A6A6A6; }

@@ -327,7 +327,7 @@ function renderItem($item)
             $label .= $item['icon'] . ' ';
         }
 
-        $label .= $item['label']
+        $label .= Html::tag('span', $item['label'])
             . FA::icon('angle-left')->pullRight();
 
         foreach ($item['items'] as $subitem) {
