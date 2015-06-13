@@ -16,6 +16,7 @@ namespace common\traits\ActiveRecord;
  *
  * При повторном вызове метода delete, запись будет удалена полностью из базы
  *
+ * @property bool $activated
  * @property bool $deleted
  *
  * @method hasAttribute
@@ -56,10 +57,17 @@ trait SoftDeleteTrait
         if (true === $permanently || $this->isDeleted()) {
             // permanently delete
             $result = parent::delete();
+
+
         } else {
             // soft delete
             $this->deleted = 1;
-            $result = $this->update(false, ['deleted']);
+
+            if (($this->hasAttribute('activated') || $this->hasProperty('activated'))) {
+                $this->activated = 0;
+            }
+
+            $result = $this->update(false, ['activated', 'deleted']);
         }
 
         return $result;
@@ -78,6 +86,10 @@ trait SoftDeleteTrait
 
         $this->deleted = 0;
 
-        return $this->update(false, ['deleted']);
+        if (($this->hasAttribute('activated') || $this->hasProperty('activated'))) {
+            $this->activated = 1;
+        }
+
+        return $this->update(false, ['activated', 'deleted']);
     }
 }

@@ -24,4 +24,4 @@ md-switch { margin: 0 10px; }
 .table-accounts tr.deleted .id,
 .table-accounts tr.deleted .name,
 .table-accounts tr.deleted .email,
-.table-accounts tr.deleted .updated { text-decoration: line-through; color: #B8B8B8; }
+.table-accounts tr.deleted .updated { text-decoration: line-through; }

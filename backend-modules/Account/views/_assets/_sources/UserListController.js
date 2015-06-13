@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('UserListController', [
-    '$rootScope', '$scope', '$element', '$http', '$timeout', '$mdToast', '$location', 'UserResource',
-    function ($rootScope, $scope, $element, $http, $timeout, $mdToast, $location, User) {
+    '$rootScope', '$scope', '$element', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'UserResource',
+    function ($rootScope, $scope, $element, $http, $timeout, $mdToast, $mdDialog, $location, User) {
       var query = $location.search(),
         loaded = false,
         refreshInterval = 5000;
@@ -120,16 +120,25 @@ angular.module('BackendApp')
           .modal('show');
       };
 
-      $scope.remove = function (user) {
-        user.$remove(function () {
-          toast($mdToast, 'success', {
-            message: 'Account successfully removed'
-          });
+      $scope.remove = function (user, e) {
+        var confirm = $mdDialog.confirm()
+          .parent(angular.element(document.body))
+          .title('Would you like to delete this account?')
+          .ok('Please do it!')
+          .cancel('Cancel')
+          .targetEvent(e);
 
-          _refresh();
-        }, function () {
-          toast($mdToast, 'error', {
-            message: 'Error removing account'
+        $mdDialog.show(confirm).then(function () {
+          user.$remove(function () {
+            toast($mdToast, 'success', {
+              message: 'Account successfully removed'
+            });
+
+            _refresh();
+          }, function () {
+            toast($mdToast, 'error', {
+              message: 'Error removing account'
+            });
           });
         });
       };

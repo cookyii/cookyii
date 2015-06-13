@@ -133,9 +133,9 @@ $roles = [
                             <tr>
                                 <td class="activated">&nbsp;</td>
                                 <td class="id"><?= sortLink('id', Yii::t('account', 'ID')) ?></td>
-                                <td class="name"><?= sortLink('name', Yii::t('account', 'Имя')) ?></td>
+                                <td class="name"><?= sortLink('name', Yii::t('account', 'Name')) ?></td>
                                 <td class="email"><?= sortLink('email', Yii::t('account', 'Email')) ?></td>
-                                <td class="updated"><?= sortLink('updated_at', Yii::t('account', 'Изменён')) ?></td>
+                                <td class="updated"><?= sortLink('updated_at', Yii::t('account', 'Updated at')) ?></td>
                                 <td class="actions">&nbsp;</td>
                             </tr>
                             </thead>
@@ -171,7 +171,7 @@ $roles = [
                                     echo Html::tag('a', FA::icon('times'), [
                                         'class' => 'text-red',
                                         'title' => Yii::t('account', 'Remove account'),
-                                        'ng-click' => 'remove(user)',
+                                        'ng-click' => 'remove(user, $event)',
                                         'ng-show' => '!user.deleted',
                                     ]);
                                     echo Html::tag('a', FA::icon('undo'), [
@@ -248,7 +248,7 @@ echo Modal::widget([
                     ->label(false)
                     ->textInput(['placeholder' => $AccountEditForm->getAttributeLabel('email')]);
 
-                echo Html::tag('strong', Yii::t('account', 'Роли пользователя'));
+                echo Html::tag('strong', Yii::t('account', 'Roles'));
 
                 echo $form->field($AccountEditForm, 'roles', [
                     'class' => 'common\widgets\angular\material\ActiveField',
@@ -266,12 +266,12 @@ echo Modal::widget([
 
         <?
 
-        echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('account', 'Сохранить'), [
+        echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('account', 'Save'), [
             'class' => 'btn btn-primary',
             'ng-disabled' => 'in_progress',
         ]);
 
-        echo Html::resetButton(Yii::t('account', 'Отменить'), [
+        echo Html::resetButton(Yii::t('account', 'Cancek'), [
             'class' => 'btn btn-link'
         ]);
 
