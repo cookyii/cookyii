@@ -23,6 +23,7 @@ class UrlRule extends \yii\rest\UrlRule
         'POST deactivate/{id}' => 'deactivate',
         'PUT {id}' => 'update',
         'POST' => 'create',
+        'GET,HEAD detail/{id}' => 'detail',
         'GET,HEAD {id}' => 'view',
         'GET,HEAD' => 'index',
         '{id}' => 'options',

@@ -1,0 +1,5 @@
+.rbac { }
+.rbac .level { border-left: 3px solid #DDDDDD; margin-left: 5px; padding-left: 5px; }
+.rbac .level > a { display: block; padding: 8px; }
+.rbac .level > a:hover { background-color: #DDDDDD; }
+.rbac .level > a > i { margin-right: 6px; }

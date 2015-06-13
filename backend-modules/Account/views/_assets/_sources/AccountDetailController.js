@@ -2,21 +2,37 @@
 
 angular.module('BackendApp')
 
-  .controller('UserEditController', [
-    '$rootScope', '$scope', '$element', '$http', '$mdToast', 'UserResource',
-    function ($rootScope, $scope, $modal, $http, $mdToast, User) {
-      var UserInstance,
+  .controller('AccountDetailController', [
+    '$scope', '$location', '$http', '$mdToast', 'UserResource',
+    function ($scope, $location, $http, $mdToast, User) {
+      var query = $location.search(),
+        UserInstance,
         defaultValues = {
           roles: [],
           activated: true,
           deleted: false
         },
-        defaultErrors = {};
+        defaultErrors = {},
+        user_id;
+
+      user_id = typeof query.id === 'undefined'
+        ? null
+        : parseInt(query.id);
 
       $scope.in_progress = false;
 
       resetData();
       resetErrors();
+
+      $scope.rbacOpened = {};
+
+      $scope.toggleRbacGroup = function (key) {
+        if (typeof $scope.rbacOpened[key] === 'undefined') {
+          $scope.rbacOpened[key] = false;
+        }
+
+        $scope.rbacOpened[key] = !$scope.rbacOpened[key];
+      };
 
       $scope.submit = function (e) {
         var handler;
@@ -40,9 +56,6 @@ angular.module('BackendApp')
             message: 'Account successfully updated'
           });
 
-          $modal.modal('hide');
-          $rootScope.$broadcast('ListRefresh');
-
           $scope.in_progress = false;
         }, function (response) {
           if (typeof response.data !== 'undefined') {
@@ -61,34 +74,17 @@ angular.module('BackendApp')
         e.preventDefault();
       };
 
-      $modal.find('#AccountEditForm').bind('reset', function () {
-        $modal.modal('hide');
-      });
+      reloadUserData();
 
-      $rootScope.$on('editAccount', function (event, user) {
-        UserInstance = user;
-
-        resetData();
-        resetErrors();
-
-        if (user === null) {
-          $scope.data.roles.user = true;
-        } else {
-          $scope.data = user;
-
-          $scope.data.activated = $scope.data.activated === 1;
-          $scope.data.deleted = $scope.data.deleted === 1;
-
-          var roles = angular.copy($scope.data.roles);
-          $scope.data.roles = {};
-
-          angular.forEach(roles, function (label, key) {
-            $scope.data.roles[key] = true;
-          });
-
-          $scope.data.roles.user = true;
+      function reloadUserData() {
+        if (user_id === null) {
+          return;
         }
-      });
+
+        User.detail({user: user_id}, function (user) {
+          $scope.data = user;
+        });
+      }
 
       function resetData() {
         $scope.data = angular.copy(defaultValues);

@@ -141,7 +141,9 @@ class ActiveField extends \yii\widgets\ActiveField
 
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
 
-        $this->parts['{input}'] = Html::tag('md-checkbox', $this->model->getAttributeLabel($this->attribute), $options);
+        $label = ArrayHelper::remove($options, 'label', $this->model->getAttributeLabel($this->attribute));
+
+        $this->parts['{input}'] = Html::tag('md-checkbox', $label, $options);
 
         return $this;
     }

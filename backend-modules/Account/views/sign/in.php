@@ -46,7 +46,7 @@ Account\views\_assets\SignInAssetBundle::register($this);
         ?>
         <div class="row">
             <div class="col-xs-8">
-                <?
+                <?php
                 echo $form->field($SignInForm, 'remember', ['class' => 'common\widgets\angular\material\ActiveField'])
                     ->label(false)
                     ->checkbox();

@@ -7,6 +7,7 @@
 namespace backend\modules\Account\forms;
 
 use rmrevin\yii\rbac\RbacFactory;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class AccountEditForm
@@ -22,30 +23,15 @@ class AccountEditForm extends \yii\base\Model
 
     public $name;
     public $email;
-    public $roles = [];
     public $activated;
     public $deleted;
+    public $roles = [];
+    public $permissions = [];
 
     public function init()
     {
         if (!($this->User instanceof \resources\User)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('account', 'Not specified user to edit.'));
-        }
-
-        $User = $this->User;
-
-        if (false === $User->isNewRecord) {
-            $this->name = $User->name;
-            $this->email = $User->email;
-            $this->activated = $User->activated;
-            $this->deleted = $User->deleted;
-
-            $Roles = AuthManager()->getRolesByUser($User->id);
-            foreach ($Roles as $role => $Role) {
-                $this->roles[] = $role;
-            }
-        } else {
-
         }
 
         $this->on(
@@ -73,6 +59,7 @@ class AccountEditForm extends \yii\base\Model
             [['email'], 'email'],
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
             [['roles'], 'checkRoles', 'skipOnEmpty' => false],
+            [['permissions'], 'checkPermissions', 'skipOnEmpty' => false],
 
             /** default values */
             [['activated'], 'default', 'value' => \resources\User::ACTIVATED],
@@ -115,10 +102,23 @@ class AccountEditForm extends \yii\base\Model
      */
     public function checkRoles($attribute)
     {
-        $roles = array_keys(\resources\User::getAllRoles());
+        $roles = static::getRoleValues();
         foreach ($this->$attribute as $role => $value) {
-            if (false === in_array($role, $roles)) {
+            if (!isset($roles[$role])) {
                 $this->addError($attribute, \Yii::t('account', 'Bad role'));
+            }
+        }
+    }
+
+    /**
+     * @param string $attribute
+     */
+    public function checkPermissions($attribute)
+    {
+        $permissions = static::getPermissionValues();
+        foreach ($this->$attribute as $permission => $value) {
+            if (!isset($permissions[$permission])) {
+                $this->addError($attribute, \Yii::t('account', 'Bad permission'));
             }
         }
     }
@@ -160,6 +160,63 @@ class AccountEditForm extends \yii\base\Model
      */
     public static function getRoleValues()
     {
-        return \resources\User::getAllRoles();
+        return ArrayHelper::map(AuthManager()->getRoles(), 'name', 'description');
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPermissionValues()
+    {
+        return ArrayHelper::map(AuthManager()->getPermissions(), 'name', 'description');
+    }
+
+    /**
+     * @return array
+     */
+    public static function getGroupedPermissionValues()
+    {
+        $permissions = static::getPermissionValues();
+
+        $result = [
+            'items' => [],
+            'children' => [],
+        ];
+
+        if (!empty($permissions)) {
+            foreach ($permissions as $permission => $description) {
+                if (empty($permission)) {
+                    continue;
+                }
+
+                $part = explode('.', $permission);
+
+                if (empty($part) || count($part) < 1) {
+                    continue;
+                }
+
+                $count = count($part);
+
+                if ($count === 1) {
+                    if (!in_array($permission, $result['items'], true)) {
+                        $result['items'][$permission] = $description;
+                    }
+                } else {
+                    $g1 = sprintf('%s.*', $part[0]);
+
+                    if (!isset($result['children'][$g1])) {
+                        $result['children'][$g1] = [
+                            'items' => [],
+                        ];
+                    }
+
+                    if (!in_array($permission, $result['children'][$g1]['items'], true)) {
+                        $result['children'][$g1]['items'][$permission] = $description;
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 }

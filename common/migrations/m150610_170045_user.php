@@ -32,7 +32,7 @@ class m150610_170045_user extends \common\components\Migration
         $this->createIndex('idx_working', '{{%user}}', ['activated', 'deleted']);
 
         $this->createTable(
-            '{{%user_attribute}}',
+            '{{%user_property}}',
             [
                 'user_id' => Schema::TYPE_INTEGER,
                 'key' => Schema::TYPE_STRING,
@@ -41,12 +41,12 @@ class m150610_170045_user extends \common\components\Migration
                 'value_float' => Schema::TYPE_DECIMAL . '(10,6)',
                 'value_text' => Schema::TYPE_TEXT,
                 'value_blob' => Schema::TYPE_BINARY,
+                'created_at' => Schema::TYPE_INTEGER,
+                'updated_at' => Schema::TYPE_INTEGER,
+                'PRIMARY KEY (`user_id`, `key`)',
                 'FOREIGN KEY (user_id) REFERENCES {{%user}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
             ]
         );
-
-        $this->createIndex('idx_key', '{{%user_attribute}}', ['key']);
-        $this->createIndex('idx_user_id_key', '{{%user_attribute}}', ['user_id', 'key']);
 
         $this->createTable('{{%user_auth_response}}', [
             'id' => Schema::TYPE_PK,
@@ -63,7 +63,7 @@ class m150610_170045_user extends \common\components\Migration
             $this->createTable('{{%user_auth_' . $social . '}}', [
                 'user_id' => Schema::TYPE_INTEGER,
                 'social_id' => Schema::TYPE_STRING,
-                'PRIMARY KEY (user_id, social_id)',
+                'PRIMARY KEY (`user_id`, `social_id`)',
                 'FOREIGN KEY (user_id) REFERENCES {{%user}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
             ]);
         }
@@ -76,7 +76,7 @@ class m150610_170045_user extends \common\components\Migration
         }
 
         $this->dropTable('{{%user_auth_response}}');
-        $this->dropTable('{{%user_attribute}}');
+        $this->dropTable('{{%user_property}}');
         $this->dropTable('{{%user}}');
     }
 }

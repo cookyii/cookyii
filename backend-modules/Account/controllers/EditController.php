@@ -1,7 +1,7 @@
 <?php
 /**
- * ListController.php
- * @author Revin Roman http://phptime.ru
+ * EditController.php
+ * @author Revin Roman
  */
 
 namespace backend\modules\Account\controllers;
@@ -9,10 +9,10 @@ namespace backend\modules\Account\controllers;
 use backend\modules\Account;
 
 /**
- * Class ListController
+ * Class EditController
  * @package backend\modules\Account\controllers
  */
-class ListController extends Account\components\Controller
+class EditController extends Account\components\Controller
 {
 
     /**
@@ -40,6 +40,10 @@ class ListController extends Account\components\Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $AccountEditForm = new Account\forms\AccountEditForm(['User' => new \resources\User()]);
+
+        return $this->render('index', [
+            'AccountEditForm' => $AccountEditForm,
+        ]);
     }
 }

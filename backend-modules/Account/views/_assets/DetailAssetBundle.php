@@ -1,27 +1,27 @@
 <?php
 /**
- * ListAssetBundle.php
- * @author Revin Roman http://phptime.ru
+ * DetailAssetBundle.php
+ * @author Revin Roman
  */
 
 namespace backend\modules\Account\views\_assets;
 
 /**
- * Class ListAssetBundle
+ * Class DetailAssetBundle
  * @package backend\modules\Account\views\_assets
  */
-class ListAssetBundle extends \yii\web\AssetBundle
+class DetailAssetBundle extends \yii\web\AssetBundle
 {
 
     public $sourcePath = '@backend/modules/Account/views/_assets/_sources';
 
     public $css = [
-        'list.css',
+        'detail.css',
     ];
 
     public $js = [
         'UserResource.js',
-        'AccountListController.js',
+        'AccountDetailController.js',
     ];
 
     public $depends = [

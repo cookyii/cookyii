@@ -22,6 +22,8 @@ namespace resources;
  * @property boolean $activated
  * @property boolean $deleted
  *
+ * @property \resources\User\Property[] $properties
+ *
  * @property \resources\helpers\UserPresent $present
  *
  * @method queries\UserQuery hasMany($class, $link)
@@ -35,6 +37,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     use \common\traits\ActiveRecord\SoftDeleteTrait;
 
     public $password;
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        unset($fields['password_hash'], $fields['token'], $fields['auth_key']);
+
+        return $fields;
+    }
 
     /**
      * @inheritdoc
@@ -64,6 +77,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             /** type validators */
             [['name', 'avatar', 'password', 'password_hash'], 'string'],
+            [['created_at', 'updated_at'], 'integer'],
             [['activated', 'deleted'], 'boolean'],
 
             /** semantic validators */
@@ -220,6 +234,70 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $result;
     }
 
+    private $_properties = null;
+
+    /**
+     * @param bool $reload
+     * @return array
+     */
+    public function properties($reload = false)
+    {
+        if ($this->_properties === null || $reload === true) {
+            $this->_properties = [];
+
+            $Properties = $this->properties;
+            if (!empty($Properties)) {
+                foreach ($Properties as $Property) {
+                    $this->_properties[$Property->key] = [
+                        'str' => $Property->value_str,
+                        'int' => $Property->value_int,
+                        'float' => $Property->value_float,
+                        'text' => $Property->value_text,
+                        'blob' => $Property->value_blob,
+                    ];
+                }
+            }
+        }
+
+        return $this->_properties;
+    }
+
+    /**
+     * @param string $key
+     * @param string|null $type
+     * @param mixed $default
+     * @param bool $reload
+     * @return mixed
+     */
+    public function property($key, $type = null, $default = null, $reload = false)
+    {
+        $result = $default;
+
+        $properties = $this->properties($reload);
+
+        if (!empty($properties)) {
+            if (empty($type)) {
+                $result = isset($properties[$key])
+                    ? $properties[$key]
+                    : $default;
+            } else {
+                $result = isset($properties[$key]) && isset($properties[$key][$type])
+                    ? $properties[$key][$type]
+                    : $default;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return queries\UserQuery
+     */
+    public function getProperties()
+    {
+        return $this->hasMany('resources\User\Property', ['user_id' => 'id']);
+    }
+
     /**
      * @return \resources\queries\UserQuery
      */
@@ -249,6 +327,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 
+    /**
+     * Events
+     */
     private function events()
     {
         $this->on(

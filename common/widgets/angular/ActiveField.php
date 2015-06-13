@@ -160,10 +160,9 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         Html::addCssClass($this->options, 'checkbox');
 
-        $options['iCheck'] = true;
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
 
-        $options['label'] = $this->model->getAttributeLabel($this->attribute);
+        $options['label'] = ArrayHelper::remove($options, 'label', $this->model->getAttributeLabel($this->attribute));
 
         $this->parts['{input}'] = Html::activeCheckbox($this->model, $this->attribute, $options);
 

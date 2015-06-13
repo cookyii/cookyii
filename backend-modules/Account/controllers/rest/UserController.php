@@ -17,8 +17,6 @@ class UserController extends \yii\rest\ActiveController
 
     public $modelClass = 'resources\User';
 
-    public $serializer = 'common\rest\Serializer';
-
     /**
      * @inheritdoc
      */
@@ -50,6 +48,7 @@ class UserController extends \yii\rest\ActiveController
         $verbs['deactivate'] = ['POST'];
         $verbs['update'] = ['PUT'];
         $verbs['restore'] = ['PATCH'];
+        $verbs['detail'] = ['GET'];
 
         return $verbs;
     }
@@ -62,6 +61,12 @@ class UserController extends \yii\rest\ActiveController
         $actions = parent::actions();
 
         $actions['index']['prepareDataProvider'] = [$this, 'prepareListDataProvider'];
+
+        $actions['detail'] = [
+            'class' => 'backend\modules\Account\controllers\rest\UserController\DetailAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
 
         $actions['activate'] = [
             'class' => 'common\rest\ActivateAction',

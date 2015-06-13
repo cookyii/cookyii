@@ -2,9 +2,9 @@
 
 angular.module('BackendApp')
 
-  .controller('UserListController', [
-    '$rootScope', '$scope', '$element', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'UserResource',
-    function ($rootScope, $scope, $element, $http, $timeout, $mdToast, $mdDialog, $location, User) {
+  .controller('AccountListController', [
+    '$scope', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'UserResource',
+    function ($scope, $http, $timeout, $mdToast, $mdDialog, $location, User) {
       var query = $location.search(),
         loaded = false,
         refreshInterval = 5000;
@@ -15,14 +15,11 @@ angular.module('BackendApp')
 
       $scope.users = [];
 
-
       function _refresh() {
         reloadUserList(false);
       }
 
       $timeout(reloadUserList);
-
-      $rootScope.$on('ListRefresh', _refresh);
 
       $scope.toggleActivated = function (user) {
         $timeout(function () {
@@ -109,15 +106,11 @@ angular.module('BackendApp')
       };
 
       $scope.addUser = function () {
-        $rootScope.$emit('editAccount', null);
-        jQuery('#AccountEditFormModal')
-          .modal('show');
+        location.href = '/account/edit';
       };
 
       $scope.edit = function (user) {
-        $rootScope.$emit('editAccount', angular.copy(user));
-        jQuery('#AccountEditFormModal')
-          .modal('show');
+        location.href = '/account/edit#?id='+user.id;
       };
 
       $scope.remove = function (user, e) {
