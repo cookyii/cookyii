@@ -33,7 +33,7 @@ $this->beginContent('@app/views/layouts/_layout.php', ['content' => $content]);
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <?
+                    <?php
                     $menu_items = include(__DIR__ . '/_menu-left.php');
                     foreach ($menu_items as $item) {
                         echo renderItem($item);
@@ -47,7 +47,7 @@ $this->beginContent('@app/views/layouts/_layout.php', ['content' => $content]);
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <?
+                    <?php
                     $menu_items = include(__DIR__ . '/_menu-right.php');
                     foreach ($menu_items as $item) {
                         echo renderItem($item);
@@ -69,7 +69,7 @@ $this->beginContent('@app/views/layouts/_layout.php', ['content' => $content]);
             <strong><?= APP_NAME ?></strong> &copy; 2015
         </div>
     </div>
-<?
+<?php
 
 $this->endContent();
 

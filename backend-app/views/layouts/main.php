@@ -87,8 +87,7 @@ $menu_items = include(__DIR__ . '/_menu.php');
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
-                <?
-                foreach ($menu_items as $item) {
+                <?php                foreach ($menu_items as $item) {
                     echo renderItem($item);
                 }
                 ?>
@@ -274,7 +273,7 @@ $menu_items = include(__DIR__ . '/_menu.php');
         <strong>Copyright &copy; 2015 <?= APP_NAME ?>.</strong> All rights reserved.
     </footer>
 
-<?
+<?php
 
 $this->endContent();
 

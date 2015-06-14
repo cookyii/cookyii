@@ -195,8 +195,11 @@ function appendMigrateTask(array &$config, $task_name, $app)
 
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
-        'class' => 'cookyii\build\tasks\CommandTask',
-        'commandline' => cmd($app, './{a} migrate'),
+        '.description' => 'Compile all less styles for `board` application',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\CommandTask',
+            'commandline' => cmd($app, './{a} migrate'),
+        ],
     ];
 }
 

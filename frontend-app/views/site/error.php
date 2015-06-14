@@ -45,7 +45,8 @@ $this->title = $title;
 
 <div layout="row" layout-align="center center" style="height: 100%">
     <div class="error-panel">
-        <?
+        <?php
+
         echo Html::tag('h1', $label, $label_options);
 
         if (!empty($message)) {
