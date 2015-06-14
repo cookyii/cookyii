@@ -15,13 +15,13 @@ $this->title = $AccountEditForm->isNewAccount()
     ? Yii::t('account', 'Create new account')
     : Yii::t('account', 'Edit account');
 
-Account\views\_assets\DetailAssetBundle::register($this);
+Account\views\_assets\EditAssetBundle::register($this);
 
 ?>
 
     <section <?= Html::renderTagAttributes([
         'class' => 'content',
-        'ng-controller' => 'AccountDetailController',
+        'ng-controller' => 'AccountEditController',
     ]) ?>>
 
         <?php
@@ -56,8 +56,8 @@ Account\views\_assets\DetailAssetBundle::register($this);
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="box">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="box general">
                     <div class="box-header">
                         <h3 class="box-title"><?= Yii::t('account', 'General information') ?></h3>
                     </div>
@@ -88,25 +88,68 @@ Account\views\_assets\DetailAssetBundle::register($this);
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="box rbac">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="box properties">
                     <div class="box-header">
                         <h3 class="box-title"><?= Yii::t('account', 'Properties') ?></h3>
                     </div>
 
                     <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <ul class="list">
+                                    <li ng-repeat="property in data.properties track by property.key">
+                                        <a ng-click="editProperty(property)"
+                                           ng-class="{active:editPropertyKey === property.key}">
+                                            <span>{{ property.key }}</span> &ndash;
+                                            {{ property.value }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 value">
+                                <div class="form-group property-group has-feedback field-accounteditform-property"
+                                     ng-repeat="property in data.properties track by property.key"
+                                     ng-show="editPropertyKey === property.key">
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="box rbac">
-                    <div class="box-header">
-                        <h3 class="box-title"><?= Yii::t('account', 'History') ?></h3>
-                    </div>
+                                    <input type="text" id="accounteditform-property"
+                                           class="form-control" name="AccountEditForm[property]"
+                                           title="Property" placeholder="Property" ng-model="property.key"
+                                           tabindex="0"
+                                           aria-invalid="false">
 
-                    <div class="box-body">
+                                    <select class="form-control" ng-model="property.type">
+                                        <?php
+                                        echo Html::renderSelectOptions(false, \resources\User\Property::getAllTypes(), $options = [
+                                            'prompt' => 'prompt',
+                                        ]);
+                                        ?>
+                                    </select>
 
+                                    <div ng-switch="property.type">
+                                        <div ng-switch-when="<?= \resources\User\Property::TYPE_STRING ?>">
+                                            <textarea class="form-control" ng-model="property.value_str"></textarea>
+                                        </div>
+                                        <div ng-switch-when="<?= \resources\User\Property::TYPE_INTEGER ?>">
+                                            <input class="form-control" type="text" ng-model="property.value_int">
+                                        </div>
+                                        <div ng-switch-when="<?= \resources\User\Property::TYPE_FLOAT ?>">
+                                            <input class="form-control" type="text" ng-model="property.value_float">
+                                        </div>
+                                        <div ng-switch-when="<?= \resources\User\Property::TYPE_TEXT ?>">
+                                                <textarea class="form-control"
+                                                          ng-model="property.value_text"></textarea>
+                                        </div>
+                                        <div ng-switch-when="<?= \resources\User\Property::TYPE_BLOB ?>">
+                                            <input type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="error-balloon ng-binding ng-hide" ng-show="error.properties[key]"
+                                 aria-hidden="true"></div>
+                        </div>
                     </div>
                 </div>
             </div>

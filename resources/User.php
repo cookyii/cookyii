@@ -248,12 +248,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $Properties = $this->properties;
             if (!empty($Properties)) {
                 foreach ($Properties as $Property) {
-                    $this->_properties[$Property->key] = [
-                        'str' => $Property->value_str,
-                        'int' => $Property->value_int,
-                        'float' => $Property->value_float,
-                        'text' => $Property->value_text,
-                        'blob' => $Property->value_blob,
+                    $this->_properties[] = [
+                        'key' => $Property->key,
+                        'type' => (string)$Property->type,
+                        'value' => $Property->value(),
+                        'value_str' => $Property->value_str,
+                        'value_int' => $Property->value_int,
+                        'value_float' => $Property->value_float,
+                        'value_text' => $Property->value_text,
+                        'value_blob' => $Property->value_blob,
                     ];
                 }
             }
@@ -266,24 +269,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      * @param string $key
      * @param string|null $type
      * @param mixed $default
-     * @param bool $reload
      * @return mixed
      */
-    public function property($key, $type = null, $default = null, $reload = false)
+    public function property($key, $type = null, $default = null)
     {
         $result = $default;
 
-        $properties = $this->properties($reload);
-
-        if (!empty($properties)) {
-            if (empty($type)) {
-                $result = isset($properties[$key])
-                    ? $properties[$key]
-                    : $default;
-            } else {
-                $result = isset($properties[$key]) && isset($properties[$key][$type])
-                    ? $properties[$key][$type]
-                    : $default;
+        $Properties = $this->properties;
+        if (!empty($Properties)) {
+            foreach ($Properties as $Property) {
+                if ($key === $Property->key) {
+                    $result = $Property->value($type);
+                }
             }
         }
 

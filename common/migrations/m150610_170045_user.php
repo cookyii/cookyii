@@ -35,6 +35,7 @@ class m150610_170045_user extends \common\components\Migration
             '{{%user_property}}',
             [
                 'user_id' => Schema::TYPE_INTEGER,
+                'type' => Schema::TYPE_SMALLINT,
                 'key' => Schema::TYPE_STRING,
                 'value_str' => Schema::TYPE_STRING,
                 'value_int' => Schema::TYPE_INTEGER,

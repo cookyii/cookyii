@@ -1,16 +1,16 @@
 <?php
 /**
- * DetailAssetBundle.php
+ * EditAssetBundle.php
  * @author Revin Roman
  */
 
 namespace backend\modules\Account\views\_assets;
 
 /**
- * Class DetailAssetBundle
+ * Class EditAssetBundle
  * @package backend\modules\Account\views\_assets
  */
-class DetailAssetBundle extends \yii\web\AssetBundle
+class EditAssetBundle extends \yii\web\AssetBundle
 {
 
     public $sourcePath = '@backend/modules/Account/views/_assets/_sources';
@@ -21,7 +21,7 @@ class DetailAssetBundle extends \yii\web\AssetBundle
 
     public $js = [
         'UserResource.js',
-        'AccountDetailController.js',
+        'AccountEditController.js',
     ];
 
     public $depends = [

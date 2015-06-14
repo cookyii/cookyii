@@ -36,7 +36,7 @@ $this->registerLinkTag(['rel' => 'apple-touch-icon', 'href' => '/img/apple-touch
 
 $this->registerLinkTag([
     'rel' => 'stylesheet',
-    'href' => '//fonts.googleapis.com/css?family=Open+Sans:200,400,700&subset=latin,cyrillic'
+    'href' => '//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic'
 ]);
 
 $this->beginPage();

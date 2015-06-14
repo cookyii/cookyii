@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .controller('AccountDetailController', [
+  .controller('AccountEditController', [
     '$scope', '$location', '$http', '$timeout', '$mdToast', 'UserResource',
     function ($scope, $location, $http, $timeout, $mdToast, User) {
       var hash = null,
@@ -77,6 +77,16 @@ angular.module('BackendApp')
 
       $scope.reloadPage = function () {
         location.reload();
+      };
+
+      $scope.editPropertyKey = typeof query.editPropertyKey === 'undefined'
+        ? null
+        : query.editPropertyKey;
+
+      $scope.editProperty = function (property) {
+        $scope.editPropertyKey = property.key;
+
+        $location.search('editPropertyKey', $scope.editPropertyKey);
       };
 
       $scope.userUpdatedWarning = false;
