@@ -47,6 +47,8 @@ class DetailAction extends \yii\rest\Action
             }
         }
 
+        $result['hash'] = sha1(serialize($result));
+
         return $result;
     }
 

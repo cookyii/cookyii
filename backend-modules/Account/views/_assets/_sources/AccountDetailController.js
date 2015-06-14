@@ -3,9 +3,10 @@
 angular.module('BackendApp')
 
   .controller('AccountDetailController', [
-    '$scope', '$location', '$http', '$mdToast', 'UserResource',
-    function ($scope, $location, $http, $mdToast, User) {
-      var query = $location.search(),
+    '$scope', '$location', '$http', '$timeout', '$mdToast', 'UserResource',
+    function ($scope, $location, $http, $timeout, $mdToast, User) {
+      var hash = null,
+        query = $location.search(),
         UserInstance,
         defaultValues = {
           roles: [],
@@ -74,6 +75,12 @@ angular.module('BackendApp')
         e.preventDefault();
       };
 
+      $scope.reloadPage = function () {
+        location.reload();
+      };
+
+      $scope.userUpdatedWarning = false;
+
       reloadUserData();
 
       function reloadUserData() {
@@ -83,7 +90,26 @@ angular.module('BackendApp')
 
         User.detail({user: user_id}, function (user) {
           $scope.data = user;
+
+          hash = user.hash;
         });
+
+        $timeout(checkUserUpdate, 5000);
+      }
+
+      function checkUserUpdate() {
+        User.detail({user: user_id}, function (user) {
+          if (hash !== user.hash) {
+            userUpdatedWarning();
+          }
+        });
+
+        $timeout(checkUserUpdate, 5000);
+      }
+
+      function userUpdatedWarning() {
+        $scope.userUpdatedWarning = true;
+        console.warn('user updated, reload page');
       }
 
       function resetData() {
