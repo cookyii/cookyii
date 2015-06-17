@@ -250,13 +250,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
                 foreach ($Properties as $Property) {
                     $this->_properties[] = [
                         'key' => $Property->key,
-                        'type' => (string)$Property->type,
-                        'value' => $Property->value(),
-                        'value_str' => $Property->value_str,
-                        'value_int' => $Property->value_int,
-                        'value_float' => $Property->value_float,
-                        'value_text' => $Property->value_text,
-                        'value_blob' => $Property->value_blob,
+                        'value' => $Property->value,
                     ];
                 }
             }
@@ -267,11 +261,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     /**
      * @param string $key
-     * @param string|null $type
      * @param mixed $default
      * @return mixed
      */
-    public function property($key, $type = null, $default = null)
+    public function property($key, $default = null)
     {
         $result = $default;
 
@@ -279,7 +272,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         if (!empty($Properties)) {
             foreach ($Properties as $Property) {
                 if ($key === $Property->key) {
-                    $result = $Property->value($type);
+                    $result = $Property->value;
                 }
             }
         }

@@ -11,24 +11,13 @@ namespace resources\User;
  * @package resources\User
  *
  * @property integer $user_id
- * @property integer $type
  * @property string $key
- * @property string $value_str
- * @property integer $value_int
- * @property float $value_float
- * @property string $value_text
- * @property string $value_blob
+ * @property string $value
  * @property integer $created_at
  * @property integer $updated_at
  */
 class Property extends \yii\db\ActiveRecord
 {
-
-    const TYPE_STRING = 100;
-    const TYPE_INTEGER = 200;
-    const TYPE_FLOAT = 300;
-    const TYPE_TEXT = 400;
-    const TYPE_BLOB = 500;
 
     /**
      * @inheritdoc
@@ -47,91 +36,39 @@ class Property extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['key', 'value_str', 'value_text', 'value_blob'], 'string'],
-            [['user_id', 'type', 'value_int', 'created_at', 'updated_at'], 'integer'],
-            [['value_float'], 'number'],
+            [['key', 'value'], 'string'],
+            [['user_id', 'created_at', 'updated_at'], 'integer'],
 
             /** semantic validators */
-            [['user_id', 'type', 'key'], 'required'],
-            [['key', 'value_str', 'value_int', 'value_float', 'value_text', 'value_blob'], 'filter', 'filter' => 'str_clean'],
-            [['type'], 'in', 'range' => array_keys(static::getAllTypes())],
+            [['user_id', 'key'], 'required'],
+            [['key', 'value'], 'filter', 'filter' => 'str_clean'],
 
             /** default values */
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
             'user_id' => \Yii::t('account', 'User'),
-            'type' => \Yii::t('account', 'Type'),
             'key' => \Yii::t('account', 'Key'),
-            'value_str' => \Yii::t('account', 'Value'),
-            'value_int' => \Yii::t('account', 'Value'),
-            'value_float' => \Yii::t('account', 'Value'),
-            'value_text' => \Yii::t('account', 'Value'),
-            'value_blob' => \Yii::t('account', 'Value'),
+            'value' => \Yii::t('account', 'Value'),
             'created_at' => \Yii::t('account', 'Created at'),
             'updated_at' => \Yii::t('account', 'Updated at'),
         ];
     }
 
     /**
-     * @param integer|null $type
-     * @param mixed $defaultValue
-     * @return mixed
-     */
-    public function value($type = null, $defaultValue = null)
-    {
-        $result = $defaultValue;
-
-        $type = empty($type) && !$this->isNewRecord
-            ? $this->type
-            : $type;
-
-        switch ($type) {
-            case static::TYPE_STRING:
-                $result = $this->value_str;
-                break;
-            case static::TYPE_INTEGER:
-                $result = $this->value_int;
-                break;
-            case static::TYPE_FLOAT:
-                $result = $this->value_float;
-                break;
-            case static::TYPE_TEXT:
-                $result = $this->value_text;
-                break;
-            case static::TYPE_BLOB:
-                $result = $this->value_blob;
-                break;
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param mixed $value
-     * @throws \yii\base\UserException
-     */
-    public function setValues($value)
-    {
-        $this->value_str = (string)$value;
-        $this->value_int = (int)$value;
-        $this->value_float = (float)$value;
-        $this->value_text = (string)$value;
-        $this->value_blob = (string)$value;
-    }
-
-    /**
      * @param integer $user_id
      * @param string $key
-     * @param integer $type
      * @param mixed $value
      * @return static
      * @throw \InvalidArgumentException
      */
-    public static function push($user_id, $key, $type, $value)
+    public static function push($user_id, $key, $value)
     {
         /** @var static $Property */
         $Property = static::find()
@@ -146,46 +83,12 @@ class Property extends \yii\db\ActiveRecord
         $Property->setAttributes([
             'user_id' => $user_id,
             'key' => $key,
-            'type' => $type,
+            'value' => (string)$value,
         ]);
-
-        switch ($type) {
-            default:
-                throw new \InvalidArgumentException(\Yii::t('account', 'Invalid property type (use `Property::TYPE_*`)'));
-            case static::TYPE_STRING:
-                $Property->value_str = (string)$value;
-                break;
-            case static::TYPE_INTEGER:
-                $Property->value_int = (integer)$value;
-                break;
-            case static::TYPE_FLOAT:
-                $Property->value_float = (float)$value;
-                break;
-            case static::TYPE_TEXT:
-                $Property->value_text = (string)$value;
-                break;
-            case static::TYPE_BLOB:
-                $Property->value_blob = $value;
-                break;
-        }
 
         $Property->validate() && $Property->save();
 
         return $Property;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getAllTypes()
-    {
-        return [
-            static::TYPE_STRING => \Yii::t('account', 'String'),
-            static::TYPE_INTEGER => \Yii::t('account', 'Integer'),
-            static::TYPE_FLOAT => \Yii::t('account', 'Float'),
-            static::TYPE_TEXT => \Yii::t('account', 'Text'),
-            static::TYPE_BLOB => \Yii::t('account', 'Blob'),
-        ];
     }
 
     /**

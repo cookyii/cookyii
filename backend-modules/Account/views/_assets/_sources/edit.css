@@ -3,16 +3,20 @@
 .properties .properties-search { border-color: transparent; box-shadow: none; }
 .properties .properties-search:focus { }
 .properties ul.list { list-style: none; padding: 0; }
-.properties ul.list > li { }
+.properties ul.list > li { overflow: hidden; }
 .properties ul.list > li > a { display: block; padding: 5px 8px; border-left: 3px solid transparent; }
-.properties ul.list > li > a > span { font-weight: 600; }
+.properties ul.list > li > a > div { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.properties ul.list > li > a > div.key { font-weight: 600; }
+.properties ul.list > li > a > div.value { margin-left: 5px; font-size: 0.9em; color: #bdbdbd; }
 .properties ul.list > li > a:hover,
 .properties ul.list > li > a:focus { background-color: #f4f4f9; text-decoration: none; }
 .properties ul.list > li > a.active { background-color: #f4f4f9; border-left: 3px solid #e3e3f4; text-decoration: none; }
-.properties ul.list > li > a > .value { margin-left: 5px; }
-.properties ul.list > li.empty > a { font-style: inherit; }
+.properties ul.list > li > a:hover > div.value,
+.properties ul.list > li > a:focus > div.value,
+.properties ul.list > li > a.active > div.value { color: #444444; }
+.properties ul.list > li.more { border-top: 1px dotted #dddddd; }
+.properties ul.list > li.empty { font-style: italic; padding: 5px 10px; }
 .properties ul.list > li.placeholder > a { color: #848484; }
 .properties .property-group { }
 .properties .property-group input,
-.properties .property-group select,
-.properties .property-group textarea { margin-top: 5px; }
+.properties .property-group textarea { margin-top: 5px; height: 30px; }

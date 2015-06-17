@@ -34,4 +34,15 @@ class UserPropertyQuery extends \yii\db\ActiveQuery
 
         return $this;
     }
+
+    /**
+     * @param string $value
+     * @return self
+     */
+    public function byValue($value)
+    {
+        $this->andWhere(['like', 'value', $value]);
+
+        return $this;
+    }
 }

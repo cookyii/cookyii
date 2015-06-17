@@ -7,7 +7,6 @@ angular.module('BackendApp')
     function ($scope, $location, $http, $timeout, $mdToast, $mdDialog, User) {
       var hash = null,
         query = $location.search(),
-        UserInstance,
         defaultValues = {
           roles: [],
           activated: true,
@@ -19,13 +18,13 @@ angular.module('BackendApp')
         ? null
         : parseInt(query.id);
 
-      $scope.in_progress = false;
+      $scope.inProgress = false;
 
-      $scope.$on('reloadUserData', function (e, callback) {
-        $scope.reload(callback);
+      $scope.$on('reloadUserData', function (e) {
+        $scope.reload();
       });
 
-      $scope.reload = function (callback) {
+      $scope.reload = function () {
         $scope.userUpdatedWarning = false;
         $scope.editedProperty = null;
 
@@ -35,12 +34,9 @@ angular.module('BackendApp')
 
         User.detail({user: user_id}, function (user) {
           $scope.data = user;
-
-          if (typeof callback === 'function') {
-            callback(user);
-          }
-
           hash = user.hash;
+
+          $scope.$broadcast('userDataReloaded', user);
         });
       };
 
@@ -48,15 +44,15 @@ angular.module('BackendApp')
         var handler;
 
         $scope.error = {};
-        $scope.in_progress = true;
+        $scope.inProgress = true;
 
-        if (UserInstance === null) {
+        if (user_id === null) {
           handler = function (a, b) {
             new User($scope.data).$save(a, b);
           };
         } else {
           handler = function (a, b) {
-            UserInstance.$update(a, b);
+            $scope.data.$update(a, b);
           };
         }
 
@@ -65,7 +61,9 @@ angular.module('BackendApp')
             message: 'Account successfully updated'
           });
 
-          $scope.in_progress = false;
+          $scope.reload();
+
+          $scope.inProgress = false;
         }, function (response) {
           if (typeof response.data !== 'undefined') {
             angular.forEach(response.data, function (val, index) {
@@ -77,7 +75,7 @@ angular.module('BackendApp')
             });
           }
 
-          $scope.in_progress = false;
+          $scope.inProgress = false;
         });
 
         e.preventDefault();
@@ -85,7 +83,7 @@ angular.module('BackendApp')
 
       $scope.userUpdatedWarning = false;
 
-      $scope.reload();
+      $timeout($scope.reload);
       $timeout(checkUserUpdate, 5000);
 
       function checkUserUpdate() {

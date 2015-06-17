@@ -3,23 +3,43 @@
 angular.module('BackendApp')
 
   .controller('AccountEditPropertyController', [
-    '$scope', '$location', '$http', '$timeout', '$mdToast', '$mdDialog', 'UserResource',
-    function ($scope, $location, $http, $timeout, $mdToast, $mdDialog, User) {
-      var hash = null,
-        query = $location.search(),
-        defaultValues = {
-          roles: [],
-          activated: true,
-          deleted: false
-        },
+    '$scope', '$window', '$location', '$http', '$timeout', '$mdToast', '$mdDialog',
+    function ($scope, $window, $location, $http, $timeout, $mdToast, $mdDialog) {
+      var query = $location.search(),
         user_id;
 
       user_id = typeof query.id === 'undefined'
         ? null
         : parseInt(query.id);
 
+      $scope.limit = 5;
+      $scope.detailedList = false;
+
       $scope.isNewProperty = false;
       $scope.editedProperty = null;
+
+      $scope.$on('userDataReloaded', function (e, user) {
+        if (query.prop === '__new') {
+          $scope.create();
+        } else {
+          angular.forEach(user.properties, function (item) {
+            if (item.key === query.prop) {
+              $scope.edit(item);
+            }
+          });
+        }
+      });
+
+      $scope.toggleAllProperties = function () {
+        $scope.detailedList = !$scope.detailedList;
+      };
+
+      $scope.cancel = function () {
+        $scope.isNewProperty = false;
+        $scope.editedProperty = null;
+
+        $location.search('prop', null);
+      };
 
       $scope.create = function () {
         $scope.isNewProperty = true;
@@ -31,6 +51,12 @@ angular.module('BackendApp')
       $scope.edit = function (property) {
         $scope.isNewProperty = false;
         $scope.editedProperty = property;
+
+        $timeout(function () {
+          // need for adjust angular elastic
+          angular.element($window)
+            .trigger('resize');
+        }, 100);
 
         $location.search('prop', $scope.editedProperty.key);
       };
@@ -61,7 +87,7 @@ angular.module('BackendApp')
             } else {
               $location.search('prop', $scope.editedProperty.key);
 
-              $scope.$emit('reloadUserData', onReloadedUserData);
+              $scope.$emit('reloadUserData');
 
               toast($mdToast, 'success', {
                 message: response.message
@@ -98,7 +124,7 @@ angular.module('BackendApp')
                   message: response.message
                 });
               } else {
-                $scope.$emit('reloadUserData', onReloadedUserData);
+                $scope.$emit('reloadUserData');
 
                 $location.search('prop', null);
 
@@ -116,17 +142,5 @@ angular.module('BackendApp')
             });
         });
       };
-
-      function onReloadedUserData(user) {
-        if (query.prop === '__new') {
-          $scope.create();
-        } else {
-          angular.forEach(user.properties, function (item) {
-            if (item.key === query.prop) {
-              $scope.edit(item);
-            }
-          });
-        }
-      }
     }
   ]);

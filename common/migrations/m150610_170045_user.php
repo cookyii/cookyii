@@ -31,24 +31,6 @@ class m150610_170045_user extends \common\components\Migration
         $this->createIndex('idx_auth_key', '{{%user}}', ['auth_key']);
         $this->createIndex('idx_working', '{{%user}}', ['activated', 'deleted']);
 
-        $this->createTable(
-            '{{%user_property}}',
-            [
-                'user_id' => Schema::TYPE_INTEGER,
-                'type' => Schema::TYPE_SMALLINT,
-                'key' => Schema::TYPE_STRING,
-                'value_str' => Schema::TYPE_STRING,
-                'value_int' => Schema::TYPE_INTEGER,
-                'value_float' => Schema::TYPE_DECIMAL . '(10,6)',
-                'value_text' => Schema::TYPE_TEXT,
-                'value_blob' => Schema::TYPE_BINARY,
-                'created_at' => Schema::TYPE_INTEGER,
-                'updated_at' => Schema::TYPE_INTEGER,
-                'PRIMARY KEY (`user_id`, `key`)',
-                'FOREIGN KEY (user_id) REFERENCES {{%user}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
-            ]
-        );
-
         $this->createTable('{{%user_auth_response}}', [
             'id' => Schema::TYPE_PK,
             'user_ip' => Schema::TYPE_INTEGER,
@@ -77,7 +59,6 @@ class m150610_170045_user extends \common\components\Migration
         }
 
         $this->dropTable('{{%user_auth_response}}');
-        $this->dropTable('{{%user_property}}');
         $this->dropTable('{{%user}}');
     }
 }

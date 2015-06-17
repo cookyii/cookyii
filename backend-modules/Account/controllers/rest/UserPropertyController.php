@@ -31,7 +31,7 @@ class UserPropertyController extends \yii\rest\Controller
         $property = Request()->post('property', []);
 
         $property_key = str_clean(isset($property['key']) ? $property['key'] : null);
-        $property_type = isset($property['type']) ? (int)$property['type'] : null;
+        $property_value = isset($property['value']) ? $property['value'] : null;
 
         if (empty($user_id)) {
             throw new \yii\web\BadRequestHttpException('Empty user id');
@@ -39,10 +39,6 @@ class UserPropertyController extends \yii\rest\Controller
 
         if (empty($property_key)) {
             throw new \yii\web\BadRequestHttpException('Empty property key');
-        }
-
-        if (empty($property_type) || !array_key_exists($property_type, \resources\User\Property::getAllTypes())) {
-            throw new \yii\web\BadRequestHttpException('Invalid property type');
         }
 
         /** @var \resources\User\Property|null $Property */
@@ -72,8 +68,7 @@ class UserPropertyController extends \yii\rest\Controller
         }
 
         $Property->key = $property_key;
-        $Property->type = $property_type;
-        $Property->setValues(isset($property['value']) ? $property['value'] : null);
+        $Property->value = $property_value;
 
         $Property->validate() && $Property->save();
 
