@@ -62,6 +62,12 @@ class UserController extends \yii\rest\ActiveController
 
         $actions['index']['prepareDataProvider'] = [$this, 'prepareListDataProvider'];
 
+        $actions['edit'] = [
+            'class' => 'backend\modules\Account\controllers\rest\UserController\EditFormAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
+
         $actions['detail'] = [
             'class' => 'backend\modules\Account\controllers\rest\UserController\DetailAction',
             'modelClass' => $this->modelClass,

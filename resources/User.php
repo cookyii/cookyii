@@ -333,7 +333,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             }
         );
 
-
         $this->on(
             self::EVENT_BEFORE_UPDATE,
             function (\yii\base\ModelEvent $Event) {

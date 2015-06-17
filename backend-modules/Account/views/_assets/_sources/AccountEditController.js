@@ -8,9 +8,7 @@ angular.module('BackendApp')
       var hash = null,
         query = $location.search(),
         defaultValues = {
-          roles: [],
-          activated: true,
-          deleted: false
+          roles: []
         },
         user_id;
 
@@ -41,42 +39,53 @@ angular.module('BackendApp')
       };
 
       $scope.submit = function (e) {
-        var handler;
+        var $form = angular.element('#AccountEditForm');
 
         $scope.error = {};
         $scope.inProgress = true;
 
-        if (user_id === null) {
-          handler = function (a, b) {
-            new User($scope.data).$save(a, b);
-          };
-        } else {
-          handler = function (a, b) {
-            $scope.data.$update(a, b);
-          };
-        }
-
-        handler(function () {
-          toast($mdToast, 'success', {
-            message: 'Account successfully updated'
-          });
-
-          $scope.reload();
-
-          $scope.inProgress = false;
-        }, function (response) {
-          if (typeof response.data !== 'undefined') {
-            angular.forEach(response.data, function (val, index) {
-              $scope.error[val.field] = val.message;
-            });
-          } else {
-            toast($mdToast, 'error', {
-              message: 'Error updating account'
-            });
+        $http({
+          method: 'POST',
+          url: $form.attr('action'),
+          data: {
+            _csrf: $form.find('input[name="_csrf"]').val(),
+            user_id: user_id,
+            AccountEditForm: $scope.data
           }
+        })
+          .success(function (response) {
+            if (response.result === false) {
+              if (typeof response.errors !== 'undefined') {
+                angular.forEach(response.errors, function (message, field) {
+                  $scope.error[field] = message;
+                });
+              } else {
+                toast($mdToast, 'error', {
+                  message: 'Error updating account'
+                });
+              }
+            } else {
+              toast($mdToast, 'success', {
+                message: 'Account successfully updated'
+              });
 
-          $scope.inProgress = false;
-        });
+              $scope.reload();
+            }
+          })
+          .error(function (response) {
+            if (typeof response.data !== 'undefined') {
+              angular.forEach(response.data, function (val, index) {
+                $scope.error[val.field] = val.message;
+              });
+            } else {
+              toast($mdToast, 'error', {
+                message: 'Error updating account'
+              });
+            }
+          })
+          .finally(function(){
+            $scope.inProgress = false;
+          });
 
         e.preventDefault();
       };

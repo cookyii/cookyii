@@ -6,7 +6,6 @@
 
 namespace backend\modules\Account\forms;
 
-use rmrevin\yii\rbac\RbacFactory;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -23,25 +22,14 @@ class AccountEditForm extends \yii\base\Model
 
     public $name;
     public $email;
-    public $activated;
-    public $deleted;
-    public $roles = [];
-    public $permissions = [];
+    public $new_password;
+    public $new_password_app;
 
     public function init()
     {
         if (!($this->User instanceof \resources\User)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('account', 'Not specified user to edit.'));
         }
-
-        $this->on(
-            self::EVENT_BEFORE_VALIDATE,
-            function (\yii\base\Event $Event) {
-                /** @var self $Model */
-                $Model = $Event->sender;
-                $Model->roles[\common\Roles::USER] = true;
-            }
-        );
     }
 
     /**
@@ -51,19 +39,15 @@ class AccountEditForm extends \yii\base\Model
     {
         return [
             /** type validators */
-            [['name', 'email'], 'string'],
-            [['activated', 'deleted'], 'boolean'],
+            [['name', 'email', 'new_password', 'new_password_app'], 'string'],
 
             /** semantic validators */
-            [['email'], 'required'],
+            [['name', 'email'], 'required'],
             [['email'], 'email'],
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
-            [['roles'], 'checkRoles', 'skipOnEmpty' => false],
-            [['permissions'], 'checkPermissions', 'skipOnEmpty' => false],
+            [['new_password_app'], 'compare', 'compareAttribute' => 'new_password', 'operator' => '==='],
 
             /** default values */
-            [['activated'], 'default', 'value' => \resources\User::ACTIVATED],
-            [['deleted'], 'default', 'value' => \resources\User::NOT_DELETED],
         ];
     }
 
@@ -75,9 +59,8 @@ class AccountEditForm extends \yii\base\Model
         return [
             'name' => \Yii::t('account', 'Username'),
             'email' => \Yii::t('account', 'Email'),
-            'roles' => \Yii::t('account', 'Roles'),
-            'activated' => \Yii::t('account', 'Account activated'),
-            'deleted' => \Yii::t('account', 'Account removed'),
+            'new_password' => \Yii::t('account', 'New password'),
+            'new_password_app' => \Yii::t('account', 'Approve new password'),
         ];
     }
 
@@ -86,7 +69,7 @@ class AccountEditForm extends \yii\base\Model
      */
     public function formAction()
     {
-        return ['/rest/account/edit'];
+        return ['/account/rest/edit'];
     }
 
     /**
@@ -98,32 +81,6 @@ class AccountEditForm extends \yii\base\Model
     }
 
     /**
-     * @param string $attribute
-     */
-    public function checkRoles($attribute)
-    {
-        $roles = static::getRoleValues();
-        foreach ($this->$attribute as $role => $value) {
-            if (!isset($roles[$role])) {
-                $this->addError($attribute, \Yii::t('account', 'Bad role'));
-            }
-        }
-    }
-
-    /**
-     * @param string $attribute
-     */
-    public function checkPermissions($attribute)
-    {
-        $permissions = static::getPermissionValues();
-        foreach ($this->$attribute as $permission => $value) {
-            if (!isset($permissions[$permission])) {
-                $this->addError($attribute, \Yii::t('account', 'Bad permission'));
-            }
-        }
-    }
-
-    /**
      * @return bool
      */
     public function save()
@@ -132,23 +89,20 @@ class AccountEditForm extends \yii\base\Model
 
         $User->name = $this->name;
         $User->email = $this->email;
-        $User->activated = $this->activated;
-        $User->deleted = $this->deleted;
+
+        if (!empty($this->new_password)) {
+            $User->password = $this->new_password;
+        }
 
         $result = $User->validate() && $User->save();
 
         if ($User->hasErrors()) {
             $this->populateErrors($User, 'name');
-        } else {
-            AuthManager()->revokeAll($User->id);
-            foreach ($this->roles as $role => $value) {
-                if ($value === true) {
-                    AuthManager()->assign(RbacFactory::Role($role), $User->id);
-                }
-            }
         }
 
-        AuthManager()->invalidateCache();
+        if (AuthManager() instanceof \yii\rbac\DbManager) {
+            AuthManager()->invalidateCache();
+        }
 
         $this->User = $User;
 
