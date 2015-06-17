@@ -45,7 +45,7 @@ Account\views\_assets\EditAssetBundle::register($this);
                             <?= Yii::t('account', 'Recommended {refresh} the page.', [
                                 'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('account', 'Refresh'), null, [
                                     'class' => 'btn btn-danger btn-xs',
-                                    'ng-click' => 'reloadPage();',
+                                    'ng-click' => 'reload()',
                                 ])
                             ]) ?>
                         </span>
@@ -88,57 +88,119 @@ Account\views\_assets\EditAssetBundle::register($this);
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-controller="AccountEditPropertyController">
                 <div class="box properties">
                     <div class="box-header">
                         <h3 class="box-title"><?= Yii::t('account', 'Properties') ?></h3>
+
+                        <div class="box-tools">
+                            <?= Html::button(FA::icon('plus'), [
+                                'class' => 'btn btn-slim btn-info pull-right',
+                                'ng-click' => 'create()',
+                                'title' => Yii::t('account', 'Create new property'),
+                            ]) ?>
+                        </div>
                     </div>
 
                     <div class="box-body">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+                                <div class="input-group">
+                                    <?= Html::textInput(null, null, [
+                                        'class' => 'form-control properties-search input-sm',
+                                        'placeholder' => Yii::t('account', 'Search'),
+                                        'maxlength' => 100,
+                                        'ng-model' => 'propertySearch',
+                                    ]) ?>
+                                    <a ng-click="propertySearch = undefined"
+                                       ng-show="propertySearch"
+                                       style="right: 10px;"
+                                       class="clear-search"
+                                       aria-hidden="false">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+
                                 <ul class="list">
-                                    <li ng-repeat="property in data.properties track by property.key">
-                                        <a ng-click="editProperty(property)"
-                                           ng-class="{active:editPropertyKey === property.key}">
-                                            <span>{{ property.key }}</span> &ndash;
+                                    <li class="placeholder">
+                                        <a class="active"
+                                           ng-if="editedProperty && isNewProperty">
+                                            <span ng-show="editedProperty.key">
+                                                {{ editedProperty.key }}
+                                            </span>
+
+                                            <div ng-hide="editedProperty.key">
+                                                New property
+                                            </div>
+
+                                            {{ editedProperty.value }}
+                                        </a>
+                                    </li>
+                                    <li ng-repeat="property in data.properties | filter:search as searchResults">
+                                        <a ng-click="edit(property)"
+                                           ng-class="{active:editedProperty.key === property.key}">
+                                            <span>{{ property.key }}</span>
+
                                             {{ property.value }}
                                         </a>
+                                    </li>
+                                    <li class="empty" ng-if="searchResults.length === 0">
+                                        <?= Yii::t('account', 'No properties.') ?>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 value">
                                 <div class="form-group property-group has-feedback field-accounteditform-property"
-                                     ng-repeat="property in data.properties track by property.key"
-                                     ng-show="editPropertyKey === property.key">
+                                     ng-show="editedProperty !== null">
+
+                                    <div class="actions text-right">
+                                        <?= Html::button(Yii::t('account', 'Delete'), [
+                                            'class' => 'btn btn-slim btn-link text-red',
+                                            'ng-click' => 'remove(editedProperty, $event)',
+                                            'ng-class' => '{invisible:isNewProperty}',
+                                        ]) ?>
+                                        <?= Html::button(FA::icon('check') . ' ' . Yii::t('account', 'Save'), [
+                                            'class' => 'btn btn-slim btn-success',
+                                            'ng-click' => 'save(editedProperty)',
+                                        ]) ?>
+                                    </div>
 
                                     <input type="text" id="accounteditform-property"
-                                           class="form-control" name="AccountEditForm[property]"
-                                           title="Property" placeholder="Property" ng-model="property.key"
+                                           class="form-control input-sm"
+                                           title="Property key" placeholder="Property key"
+                                           ng-model="editedProperty.key"
                                            tabindex="0"
                                            aria-invalid="false">
 
-                                    <select class="form-control" ng-model="property.type">
+                                    <select class="form-control input-sm" ng-model="editedProperty.type">
                                         <?php
                                         echo Html::renderSelectOptions(false, \resources\User\Property::getAllTypes(), $options = [
-                                            'prompt' => 'prompt',
+                                            'prompt' => 'Property type',
                                         ]);
                                         ?>
                                     </select>
 
-                                    <div ng-switch="property.type">
+                                    <div ng-switch="editedProperty.type">
                                         <div ng-switch-when="<?= \resources\User\Property::TYPE_STRING ?>">
-                                            <textarea class="form-control" ng-model="property.value_str"></textarea>
+                                            <textarea class="form-control input-sm"
+                                                      placeholder="Property value"
+                                                      ng-model="editedProperty.value"></textarea>
                                         </div>
                                         <div ng-switch-when="<?= \resources\User\Property::TYPE_INTEGER ?>">
-                                            <input class="form-control" type="text" ng-model="property.value_int">
+                                            <input class="form-control input-sm" type="text"
+                                                   placeholder="Property value"
+                                                   ng-model="editedProperty.value">
                                         </div>
                                         <div ng-switch-when="<?= \resources\User\Property::TYPE_FLOAT ?>">
-                                            <input class="form-control" type="text" ng-model="property.value_float">
+                                            <input class="form-control input-sm" type="text"
+                                                   placeholder="Property value"
+                                                   ng-model="editedProperty.value">
                                         </div>
                                         <div ng-switch-when="<?= \resources\User\Property::TYPE_TEXT ?>">
-                                                <textarea class="form-control"
-                                                          ng-model="property.value_text"></textarea>
+                                                <textarea class="form-control input-sm"
+                                                          placeholder="Property value"
+                                                          ng-model="editedProperty.value"></textarea>
                                         </div>
                                         <div ng-switch-when="<?= \resources\User\Property::TYPE_BLOB ?>">
                                             <input type="file">
@@ -146,27 +208,24 @@ Account\views\_assets\EditAssetBundle::register($this);
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="error-balloon ng-binding ng-hide" ng-show="error.properties[key]"
-                                 aria-hidden="true"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <hr>
 
         <?php
 
         echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('account', 'Save'), [
-            'class' => 'btn btn-primary',
+            'class' => 'btn btn-success',
             'ng-disabled' => 'in_progress',
         ]);
 
-        echo Html::resetButton(Yii::t('account', 'Cancek'), [
-            'class' => 'btn btn-link'
+        echo Html::button(Yii::t('account', 'Cancel'), [
+            'class' => 'btn btn-link',
+            'ng-click' => 'reload()',
         ]);
 
         \common\widgets\angular\ActiveForm::end();

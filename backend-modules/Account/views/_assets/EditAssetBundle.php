@@ -16,12 +16,13 @@ class EditAssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@backend/modules/Account/views/_assets/_sources';
 
     public $css = [
-        'detail.css',
+        'edit.css',
     ];
 
     public $js = [
         'UserResource.js',
         'AccountEditController.js',
+        'AccountEditPropertyController.js',
     ];
 
     public $depends = [

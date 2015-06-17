@@ -1,0 +1,18 @@
+.general { }
+.properties { }
+.properties .properties-search { border-color: transparent; box-shadow: none; }
+.properties .properties-search:focus { }
+.properties ul.list { list-style: none; padding: 0; }
+.properties ul.list > li { }
+.properties ul.list > li > a { display: block; padding: 5px 8px; border-left: 3px solid transparent; }
+.properties ul.list > li > a > span { font-weight: 600; }
+.properties ul.list > li > a:hover,
+.properties ul.list > li > a:focus { background-color: #f4f4f9; text-decoration: none; }
+.properties ul.list > li > a.active { background-color: #f4f4f9; border-left: 3px solid #e3e3f4; text-decoration: none; }
+.properties ul.list > li > a > .value { margin-left: 5px; }
+.properties ul.list > li.empty > a { font-style: inherit; }
+.properties ul.list > li.placeholder > a { color: #848484; }
+.properties .property-group { }
+.properties .property-group input,
+.properties .property-group select,
+.properties .property-group textarea { margin-top: 5px; }

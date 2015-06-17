@@ -1,9 +1,0 @@
-.general { }
-.properties { }
-.properties ul.list { list-style: none; padding: 0; }
-.properties ul.list > li { }
-.properties ul.list > li > a { display: block; padding: 2px 5px; }
-.properties ul.list > li > a > span { font-weight: 600; }
-.properties ul.list > li > a:hover,
-.properties ul.list > li > a:focus { background-color: #f4f4f9; text-decoration: none; }
-.properties ul.list > li > a.active { background-color: #e3e3f4; text-decoration: none; }

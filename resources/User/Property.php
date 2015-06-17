@@ -60,15 +60,32 @@ class Property extends \yii\db\ActiveRecord
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'user_id' => \Yii::t('account', 'User'),
+            'type' => \Yii::t('account', 'Type'),
+            'key' => \Yii::t('account', 'Key'),
+            'value_str' => \Yii::t('account', 'Value'),
+            'value_int' => \Yii::t('account', 'Value'),
+            'value_float' => \Yii::t('account', 'Value'),
+            'value_text' => \Yii::t('account', 'Value'),
+            'value_blob' => \Yii::t('account', 'Value'),
+            'created_at' => \Yii::t('account', 'Created at'),
+            'updated_at' => \Yii::t('account', 'Updated at'),
+        ];
+    }
+
     /**
      * @param integer|null $type
+     * @param mixed $defaultValue
      * @return mixed
      */
-    public function value($type = null)
+    public function value($type = null, $defaultValue = null)
     {
-        $result = null;
+        $result = $defaultValue;
 
-        $type = empty($type)
+        $type = empty($type) && !$this->isNewRecord
             ? $this->type
             : $type;
 
@@ -91,6 +108,19 @@ class Property extends \yii\db\ActiveRecord
         }
 
         return $result;
+    }
+
+    /**
+     * @param mixed $value
+     * @throws \yii\base\UserException
+     */
+    public function setValues($value)
+    {
+        $this->value_str = (string)$value;
+        $this->value_int = (int)$value;
+        $this->value_float = (float)$value;
+        $this->value_text = (string)$value;
+        $this->value_blob = (string)$value;
     }
 
     /**

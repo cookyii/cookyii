@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountEditController', [
-    '$scope', '$location', '$http', '$timeout', '$mdToast', 'UserResource',
-    function ($scope, $location, $http, $timeout, $mdToast, User) {
+    '$scope', '$location', '$http', '$timeout', '$mdToast', '$mdDialog', 'UserResource',
+    function ($scope, $location, $http, $timeout, $mdToast, $mdDialog, User) {
       var hash = null,
         query = $location.search(),
         UserInstance,
@@ -13,7 +13,6 @@ angular.module('BackendApp')
           activated: true,
           deleted: false
         },
-        defaultErrors = {},
         user_id;
 
       user_id = typeof query.id === 'undefined'
@@ -22,24 +21,33 @@ angular.module('BackendApp')
 
       $scope.in_progress = false;
 
-      resetData();
-      resetErrors();
+      $scope.$on('reloadUserData', function (e, callback) {
+        $scope.reload(callback);
+      });
 
-      $scope.rbacOpened = {};
+      $scope.reload = function (callback) {
+        $scope.userUpdatedWarning = false;
+        $scope.editedProperty = null;
 
-      $scope.toggleRbacGroup = function (key) {
-        if (typeof $scope.rbacOpened[key] === 'undefined') {
-          $scope.rbacOpened[key] = false;
+        if (user_id === null) {
+          $scope.data = angular.copy(defaultValues);
         }
 
-        $scope.rbacOpened[key] = !$scope.rbacOpened[key];
+        User.detail({user: user_id}, function (user) {
+          $scope.data = user;
+
+          if (typeof callback === 'function') {
+            callback(user);
+          }
+
+          hash = user.hash;
+        });
       };
 
       $scope.submit = function (e) {
         var handler;
 
-        resetErrors();
-
+        $scope.error = {};
         $scope.in_progress = true;
 
         if (UserInstance === null) {
@@ -75,37 +83,10 @@ angular.module('BackendApp')
         e.preventDefault();
       };
 
-      $scope.reloadPage = function () {
-        location.reload();
-      };
-
-      $scope.editPropertyKey = typeof query.editPropertyKey === 'undefined'
-        ? null
-        : query.editPropertyKey;
-
-      $scope.editProperty = function (property) {
-        $scope.editPropertyKey = property.key;
-
-        $location.search('editPropertyKey', $scope.editPropertyKey);
-      };
-
       $scope.userUpdatedWarning = false;
 
-      reloadUserData();
-
-      function reloadUserData() {
-        if (user_id === null) {
-          return;
-        }
-
-        User.detail({user: user_id}, function (user) {
-          $scope.data = user;
-
-          hash = user.hash;
-        });
-
-        $timeout(checkUserUpdate, 5000);
-      }
+      $scope.reload();
+      $timeout(checkUserUpdate, 5000);
 
       function checkUserUpdate() {
         User.detail({user: user_id}, function (user) {
@@ -119,15 +100,6 @@ angular.module('BackendApp')
 
       function userUpdatedWarning() {
         $scope.userUpdatedWarning = true;
-        console.warn('user updated, reload page');
-      }
-
-      function resetData() {
-        $scope.data = angular.copy(defaultValues);
-      }
-
-      function resetErrors() {
-        $scope.error = angular.copy(defaultErrors);
       }
     }
   ]);
