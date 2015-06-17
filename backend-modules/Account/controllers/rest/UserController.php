@@ -68,6 +68,12 @@ class UserController extends \yii\rest\ActiveController
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
+        $actions['roles'] = [
+            'class' => 'backend\modules\Account\controllers\rest\UserController\RolesAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
+
         $actions['detail'] = [
             'class' => 'backend\modules\Account\controllers\rest\UserController\DetailAction',
             'modelClass' => $this->modelClass,

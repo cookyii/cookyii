@@ -16,6 +16,8 @@ angular.module('BackendApp')
         ? null
         : parseInt(query.id);
 
+      $scope.isNewUser = user_id === null;
+
       $scope.inProgress = false;
 
       $scope.$on('reloadUserData', function (e) {
@@ -33,6 +35,8 @@ angular.module('BackendApp')
         User.detail({user: user_id}, function (user) {
           $scope.data = user;
           hash = user.hash;
+
+          $scope.data.roles.user = true;
 
           $scope.$broadcast('userDataReloaded', user);
         });
@@ -83,7 +87,7 @@ angular.module('BackendApp')
               });
             }
           })
-          .finally(function(){
+          .finally(function () {
             $scope.inProgress = false;
           });
 

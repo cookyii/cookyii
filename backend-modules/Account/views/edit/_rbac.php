@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 ?>
 
-    <div class="box rbac">
+    <div class="box rbac" ng-controller="AccountRolesController">
         <div class="box-header">
             <h3 class="box-title"><?= Yii::t('account', 'Roles') ?></h3>
         </div>
@@ -19,6 +19,7 @@ use yii\helpers\Html;
             foreach (\resources\User::getAllRoles() as $role => $label) {
                 $options = [
                     'ng-model' => sprintf('data.roles.%s', $role),
+                    'ng-change' => 'saveRoles()',
                     'value' => $role,
                 ];
 

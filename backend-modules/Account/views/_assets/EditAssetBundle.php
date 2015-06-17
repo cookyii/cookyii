@@ -22,6 +22,7 @@ class EditAssetBundle extends \yii\web\AssetBundle
     public $js = [
         'UserResource.js',
         'AccountEditController.js',
+        'AccountRolesController.js',
         'AccountEditPropertyController.js',
     ];
 
