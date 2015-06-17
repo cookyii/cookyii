@@ -15,10 +15,16 @@ use yii\helpers\Html;
 class ActiveForm extends \yii\widgets\ActiveForm
 {
 
+    /** @var string */
     public $name;
 
+    /** @var string */
+    public $controller;
+
+    /** @inheritdoc */
     public $fieldClass = 'common\widgets\angular\ActiveField';
 
+    /** @inheritdoc */
     public $enableClientScript = false;
 
     /**
@@ -32,6 +38,10 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
         if (!isset($this->options['ng-submit'])) {
             $this->options['ng-submit'] = 'submit($event)';
+        }
+
+        if (!empty($this->controller)) {
+            $this->options['ng-controller'] = $this->controller;
         }
 
         $this->options['name'] = $this->name;

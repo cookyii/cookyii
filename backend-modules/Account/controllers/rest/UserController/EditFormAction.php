@@ -56,6 +56,7 @@ class EditFormAction extends \yii\rest\Action
             $result = [
                 'result' => true,
                 'message' => \Yii::t('account', 'Account successfully saved'),
+                'account_id' => $User->id,
             ];
         }
 

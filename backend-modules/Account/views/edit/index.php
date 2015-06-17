@@ -21,7 +21,7 @@ Account\views\_assets\EditAssetBundle::register($this);
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'AccountEditController',
+    'ng-controller' => 'AccountDetailController',
 ]) ?>>
 
     <div class="row" ng-show="userUpdatedWarning">
@@ -52,12 +52,12 @@ Account\views\_assets\EditAssetBundle::register($this);
             echo $this->render('_general', ['AccountEditForm' => $AccountEditForm]);
             ?>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-if="!isNewUser">
             <?php
             echo $this->render('_rbac');
             ?>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5" ng-if="!isNewUser">
             <?php
             echo $this->render('_properties');
             ?>

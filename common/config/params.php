@@ -56,7 +56,7 @@ return [
         'keyPrefix' => 'schema-',
     ],
     'component.cache.query' => [
-        'class' => 'yii\caching\ApcCache', // apc cache not available in cli!
+        'class' => 'yii\caching\DummyCache',
         'keyPrefix' => 'query-',
     ],
     'component.assetManager' => [

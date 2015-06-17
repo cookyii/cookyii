@@ -2,15 +2,10 @@
 
 angular.module('BackendApp')
 
-  .controller('AccountEditPropertyController', [
+  .controller('AccountPropertiesController', [
     '$scope', '$window', '$location', '$http', '$timeout', '$mdToast', '$mdDialog',
     function ($scope, $window, $location, $http, $timeout, $mdToast, $mdDialog) {
-      var query = $location.search(),
-        user_id;
-
-      user_id = typeof query.id === 'undefined'
-        ? null
-        : parseInt(query.id);
+      var query = $location.search();
 
       $scope.limit = 5;
       $scope.detailedList = false;
@@ -67,7 +62,7 @@ angular.module('BackendApp')
           url: '/account/rest/user-property',
           data: {
             key: query.prop,
-            user_id: user_id,
+            user_id: $scope.$parent.getUserId(),
             property: $scope.editedProperty
           }
         })
@@ -115,7 +110,7 @@ angular.module('BackendApp')
             url: '/account/rest/user-property',
             params: {
               key: query.prop,
-              user_id: user_id
+              user_id: $scope.$parent.getUserId()
             }
           })
             .success(function (response) {

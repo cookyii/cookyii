@@ -18,8 +18,8 @@ use yii\helpers\Html;
             <?
             foreach (\resources\User::getAllRoles() as $role => $label) {
                 $options = [
-                    'ng-model' => sprintf('data.roles.%s', $role),
                     'ng-change' => 'saveRoles()',
+                    'ng-model' => sprintf('data.roles.%s', $role),
                     'value' => $role,
                 ];
 

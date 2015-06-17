@@ -67,7 +67,7 @@ trait SoftDeleteTrait
                 $this->activated = 0;
             }
 
-            $result = $this->update(false, ['activated', 'deleted']);
+            $result = $this->update(true, ['activated', 'deleted']);
         }
 
         return $result;
@@ -90,6 +90,6 @@ trait SoftDeleteTrait
             $this->activated = 1;
         }
 
-        return $this->update(false, ['activated', 'deleted']);
+        return $this->update(true, ['activated', 'deleted']);
     }
 }

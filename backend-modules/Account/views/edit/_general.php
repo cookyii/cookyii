@@ -15,6 +15,7 @@ use yii\helpers\Html;
 $form = \common\widgets\angular\ActiveForm::begin([
     'name' => 'AccountEditForm',
     'action' => $AccountEditForm->formAction(),
+    'controller' => 'AccountEditController',
 ]);
 
 ?>

@@ -34,6 +34,7 @@ class DetailAction extends \yii\rest\Action
         foreach ($roles as $role => $conf) {
             $result['roles'][$role] = true;
         }
+        $result['roles'][\common\Roles::USER] = true;
 
         $permissions = AuthManager()->getPermissionsByUser($model->id);
         foreach ($permissions as $permission => $conf) {

@@ -43,18 +43,6 @@ angular.module('BackendApp')
         _refresh();
       };
 
-      $scope.role = typeof query.role === 'undefined'
-        ? 'all'
-        : query.role;
-
-      $scope.setRole = function (role) {
-        $scope.role = role;
-
-        $location.search('role', role);
-
-        _refresh();
-      };
-
       $scope.searchFocus = false;
       $scope.search = typeof query.search === 'undefined'
         ? null
@@ -164,7 +152,6 @@ angular.module('BackendApp')
         User.query({
           deactivated: $scope.deactivated,
           deleted: $scope.deleted,
-          role: $scope.role,
           search: $scope.search,
           sort: $scope.sort,
           page: loaded ? $scope.pagination.currentPage : page

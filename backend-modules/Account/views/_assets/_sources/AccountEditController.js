@@ -3,44 +3,10 @@
 angular.module('BackendApp')
 
   .controller('AccountEditController', [
-    '$scope', '$location', '$http', '$timeout', '$mdToast', '$mdDialog', 'UserResource',
-    function ($scope, $location, $http, $timeout, $mdToast, $mdDialog, User) {
-      var hash = null,
-        query = $location.search(),
-        defaultValues = {
-          roles: []
-        },
-        user_id;
-
-      user_id = typeof query.id === 'undefined'
-        ? null
-        : parseInt(query.id);
-
-      $scope.isNewUser = user_id === null;
+    '$scope', '$http', '$timeout', '$mdToast',
+    function ($scope, $http, $timeout, $mdToast) {
 
       $scope.inProgress = false;
-
-      $scope.$on('reloadUserData', function (e) {
-        $scope.reload();
-      });
-
-      $scope.reload = function () {
-        $scope.userUpdatedWarning = false;
-        $scope.editedProperty = null;
-
-        if (user_id === null) {
-          $scope.data = angular.copy(defaultValues);
-        }
-
-        User.detail({user: user_id}, function (user) {
-          $scope.data = user;
-          hash = user.hash;
-
-          $scope.data.roles.user = true;
-
-          $scope.$broadcast('userDataReloaded', user);
-        });
-      };
 
       $scope.submit = function (e) {
         var $form = angular.element('#AccountEditForm');
@@ -53,7 +19,7 @@ angular.module('BackendApp')
           url: $form.attr('action'),
           data: {
             _csrf: $form.find('input[name="_csrf"]').val(),
-            user_id: user_id,
+            user_id: $scope.$parent.getUserId(),
             AccountEditForm: $scope.data
           }
         })
@@ -65,13 +31,17 @@ angular.module('BackendApp')
                 });
               } else {
                 toast($mdToast, 'error', {
-                  message: 'Error updating account'
+                  message: 'Save error'
                 });
               }
             } else {
               toast($mdToast, 'success', {
-                message: 'Account successfully updated'
+                message: 'Account successfully saved'
               });
+
+              if ($scope.$parent.isNewUser) {
+                $location.search('id', response.account_id);
+              }
 
               $scope.reload();
             }
@@ -93,24 +63,5 @@ angular.module('BackendApp')
 
         e.preventDefault();
       };
-
-      $scope.userUpdatedWarning = false;
-
-      $timeout($scope.reload);
-      $timeout(checkUserUpdate, 5000);
-
-      function checkUserUpdate() {
-        User.detail({user: user_id}, function (user) {
-          if (hash !== user.hash) {
-            userUpdatedWarning();
-          }
-        });
-
-        $timeout(checkUserUpdate, 5000);
-      }
-
-      function userUpdatedWarning() {
-        $scope.userUpdatedWarning = true;
-      }
     }
   ]);

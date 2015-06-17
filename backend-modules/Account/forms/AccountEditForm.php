@@ -90,6 +90,11 @@ class AccountEditForm extends \yii\base\Model
         $User->name = $this->name;
         $User->email = $this->email;
 
+        if ($User->isNewRecord) {
+            $User->activated = \resources\User::NOT_ACTIVATED;
+            $User->deleted = \resources\User::NOT_DELETED;
+        }
+
         if (!empty($this->new_password)) {
             $User->password = $this->new_password;
         }

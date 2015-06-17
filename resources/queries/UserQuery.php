@@ -168,40 +168,6 @@ class UserQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param integer|array $role
-     * @return self
-     */
-    public function byRole($role)
-    {
-        switch ($role) {
-            default:
-                $this->withoutDeleted();
-
-                $assignments = (new \yii\db\Query())
-                    ->select('*')
-                    ->from(AuthManager()->assignmentTable)
-                    ->andWhere(['item_name' => $role])
-                    ->all();
-
-                $users_id = array_unique(ArrayHelper::getColumn($assignments, 'user_id'));
-                if (empty($users_id)) {
-                    $this->andWhere('1=0');
-                } else {
-                    $this->andWhere(['id' => $users_id]);
-                }
-                break;
-            case 'deleted':
-                $this->onlyDeleted();
-                break;
-            case 'all':
-                $this->withoutDeleted();
-                break;
-        }
-
-        return $this;
-    }
-
-    /**
      * @return $this
      */
     public function onlyDeleted()

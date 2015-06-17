@@ -20,26 +20,6 @@ class UserController extends \yii\rest\ActiveController
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-
-        $behaviors['httpCache'] = [
-            'class' => 'yii\filters\HttpCache',
-            'only' => ['index'],
-            'lastModified' => function ($action, $params) {
-                return (new \yii\db\Query())
-                    ->from('{{%user}}')
-                    ->max('updated_at');
-            }
-        ];
-
-        return $behaviors;
-    }
-
-    /**
-     * @inheritdoc
-     */
     protected function verbs()
     {
         $verbs = parent::verbs();
@@ -120,26 +100,6 @@ class UserController extends \yii\rest\ActiveController
 
         /** @var \resources\queries\UserQuery $Query */
         $Query = $modelClass::find();
-
-        $role = str_clean(Request()->get('role'));
-        switch ($role) {
-            default:
-            case 'all':
-                break;
-            case \common\Roles::USER:
-                $Query->byRole(\common\Roles::USER);
-                break;
-            case \common\Roles::CLIENT:
-                $Query->byRole(\common\Roles::CLIENT);
-                break;
-            case \common\Roles::MANAGER:
-                $Query->byRole(\common\Roles::MANAGER);
-                break;
-            case \common\Roles::ADMIN:
-                $Query->byRole(\common\Roles::ADMIN);
-                break;
-
-        }
 
         $search = str_clean(Request()->get('search'));
         if (!empty($search)) {

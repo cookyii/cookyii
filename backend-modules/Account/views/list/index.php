@@ -31,16 +31,6 @@ function sortLink($type, $label)
     ]);
 }
 
-$r = \resources\User::getAllRoles();
-
-$roles = [
-    'all' => Yii::t('account', 'All roles'),
-    \common\Roles::ADMIN => Yii::t('account', 'Administrators'),
-    \common\Roles::MANAGER => Yii::t('account', 'Managers'),
-    \common\Roles::CLIENT => Yii::t('account', 'Clients'),
-    \common\Roles::USER => Yii::t('account', 'Users'),
-];
-
 ?>
 
 <section <?= Html::renderTagAttributes([
@@ -51,30 +41,6 @@ $roles = [
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
                 <h3><?= Yii::t('account', 'Filter') ?></h3>
-
-                <hr>
-
-                <ul>
-                    <?php
-                    foreach ($roles as $role => $label) {
-                        $encode_role = Json::encode($role);
-
-                        $anchor = Html::tag('a', $label, [
-                            'ng-click' => sprintf('setRole(%s)', $encode_role),
-                        ]);
-
-                        $options = [
-                            'ng-class' => Json::encode(['selected' => new \yii\web\JsExpression(sprintf('role === %s', $encode_role))]),
-                        ];
-
-                        if ($role === 'all') {
-                            Html::addCssClass($options, 'pad');
-                        }
-
-                        echo Html::tag('li', $anchor, $options);
-                    }
-                    ?>
-                </ul>
 
                 <hr>
 
