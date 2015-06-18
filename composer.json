@@ -53,6 +53,7 @@
       "cookyii\\modules\\Page\\": "./modules/Page",
       "cookyii\\modules\\Account\\": "./modules/Account",
       "cookyii\\modules\\Media\\": "./modules/Media",
+      "components\\": "./components",
       "resources\\": [
         "./resources",
         "./modules/Page/resources",
