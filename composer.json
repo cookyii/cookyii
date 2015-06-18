@@ -50,7 +50,12 @@
   "autoload": {
     "psr-4": {
       "cookyii\\modules\\Account\\": "./modules/Account",
-      "cookyii\\modules\\Media\\": "./modules/Media"
+      "cookyii\\modules\\Media\\": "./modules/Media",
+      "resources\\": [
+        "./resources",
+        "./modules/Account/resources",
+        "./modules/Media/resources"
+      ]
     }
   },
   "extra": {

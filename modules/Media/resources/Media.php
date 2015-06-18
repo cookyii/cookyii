@@ -108,7 +108,7 @@ class Media extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param \cookyii\modules\Media\resources\ResourceInterface $Resource
+     * @param \cookyii\modules\Media\media\ResourceInterface $Resource
      * @return static
      * @throws \Exception
      */
@@ -151,7 +151,7 @@ class Media extends \yii\db\ActiveRecord
     {
         $image = \Yii::getAlias(static::getMediaModule()->placeholderAlias);
 
-        $Resource = new \cookyii\modules\Media\resources\InternalResource($image);
+        $Resource = new \cookyii\modules\Media\media\InternalResource($image);
 
         return static::push($Resource);
     }

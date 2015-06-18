@@ -56,7 +56,11 @@ angular.module('BackendApp')
         $location.search('prop', $scope.editedProperty.key);
       };
 
-      $scope.save = function (property) {
+      $scope.save = function (property, createNew) {
+        createNew = typeof createNew === 'boolean'
+          ? createNew
+          : false;
+
         $http({
           method: 'POST',
           url: '/account/rest/property',
@@ -80,7 +84,9 @@ angular.module('BackendApp')
                 });
               }
             } else {
-              $location.search('prop', $scope.editedProperty.key);
+              if (!createNew) {
+                $location.search('prop', $scope.editedProperty.key);
+              }
 
               $scope.$emit('reloadAccountData');
 

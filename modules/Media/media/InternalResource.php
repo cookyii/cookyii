@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Media\resources;
+namespace cookyii\modules\Media\media;
 
 /**
  * Class InternalResource
- * @package cookyii\modules\Media\resources
+ * @package cookyii\modules\Media\media
  */
 class InternalResource extends AbstractResource implements ResourceInterface
 {

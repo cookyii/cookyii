@@ -30,6 +30,9 @@
     "cookyii/interfaces": "dev-master"
   },
   "autoload": {
-    "psr-4": {"cookyii\\module\\Page": ""}
+    "psr-4": {
+      "cookyii\\modules\\Page\\": "",
+      "resources\\": "./resources"
+    }
   }
 }

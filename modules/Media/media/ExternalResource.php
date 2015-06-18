@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Media\resources;
+namespace cookyii\modules\Media\media;
 
 /**
  * Class ExternalResource
- * @package cookyii\modules\Media\resources
+ * @package cookyii\modules\Media\media
  */
 class ExternalResource extends AbstractResource implements ResourceInterface
 {

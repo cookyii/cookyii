@@ -4,7 +4,7 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Media\resources;
+namespace cookyii\modules\Media\media;
 
 use backend\modules\Media;
 use yii\helpers\FileHelper;
@@ -12,7 +12,7 @@ use yii\helpers\StringHelper;
 
 /**
  * Class AbstractResource
- * @package cookyii\modules\Media\resources
+ * @package cookyii\modules\Media\media
  */
 abstract class AbstractResource implements ResourceInterface
 {

@@ -30,7 +30,10 @@
     "cookyii/interfaces": "dev-master"
   },
   "autoload": {
-    "psr-4": {"cookyii\\modules\\Account\\": ""}
+    "psr-4": {
+      "cookyii\\modules\\Account\\": "",
+      "resources\\": "./resources"
+    }
   },
   "extra": {
     "bootstrap": "cookyii\\modules\\Account\\Bootstrap"

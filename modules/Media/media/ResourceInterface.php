@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Media\resources;
+namespace cookyii\modules\Media\media;
 
 /**
  * Interface ResourceInterface
- * @package cookyii\modules\Media\resources
+ * @package cookyii\modules\Media\media
  */
 interface ResourceInterface
 {

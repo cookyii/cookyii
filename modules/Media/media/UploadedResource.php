@@ -4,13 +4,13 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Media\resources;
+namespace cookyii\modules\Media\media;
 
 use yii\helpers\FileHelper;
 
 /**
  * Class UploadedResource
- * @package cookyii\modules\Media\resources
+ * @package cookyii\modules\Media\media
  */
 class UploadedResource extends AbstractResource implements ResourceInterface
 {

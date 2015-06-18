@@ -34,7 +34,10 @@
     "cookyii/interfaces": "dev-master"
   },
   "autoload": {
-    "psr-4": {"cookyii\\modules\\Media\\": ""}
+    "psr-4": {
+      "cookyii\\modules\\Media\\": "",
+      "resources\\": "./resources"
+    }
   },
   "extra": {
     "bootstrap": "cookyii\\modules\\Media\\Bootstrap"

@@ -95,7 +95,7 @@ use yii\helpers\Html;
                         <?= Html::button(Yii::t('account', 'Delete'), [
                             'class' => 'btn btn-slim btn-link text-red',
                             'ng-click' => 'remove(editedProperty, $event)',
-                            'ng-class' => '{invisible:isNewProperty}',
+                            'ng-if' => '!isNewProperty',
                         ]) ?>
                         <?= Html::button(Yii::t('account', 'Cancel'), [
                             'class' => 'btn btn-slim btn-link',
@@ -103,7 +103,14 @@ use yii\helpers\Html;
                         ]) ?>
                         <?= Html::button(FA::icon('check') . ' ' . Yii::t('account', 'Save'), [
                             'class' => 'btn btn-slim btn-success',
-                            'ng-click' => 'save(editedProperty)',
+                            'ng-click' => 'save(editedProperty, false)',
+                            'title' => Yii::t('account', 'Save and edit property'),
+                        ]) ?>
+                        <?= Html::button(FA::icon('check') . ' ' . FA::icon('plus'), [
+                            'class' => 'btn btn-slim btn-success',
+                            'ng-click' => 'save(editedProperty, true)',
+                            'ng-if' => 'isNewProperty',
+                            'title' => Yii::t('account', 'Save and create new property'),
                         ]) ?>
                     </div>
 
