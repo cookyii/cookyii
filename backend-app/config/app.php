@@ -6,12 +6,14 @@
 
 defined('APP_NAME') or define('APP_NAME', 'Cookyii Backend');
 
+$config = require(__DIR__ . '/../../common/config/app.php');
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/params.php')
 );
 
-return [
+return array_merge($config, [
     'id' => 'backend-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
@@ -47,4 +49,4 @@ return [
         'authClientCollection' => $params['component.authClientCollection'],
     ],
     'params' => $params,
-];
+]);

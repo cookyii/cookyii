@@ -6,6 +6,10 @@
 
 $config = include __DIR__ . '/../app.php';
 
+if (!isset($config['extensions'])) {
+    $config['extensions'] = [];
+}
+
 if (!isset($config['bootstrap'])) {
     $config['bootstrap'] = [];
 }
@@ -24,5 +28,7 @@ if (!isset($config['modules']['debug'])) {
         'allowedIPs' => ['*'],
     ];
 }
+
+include __DIR__.'/_extensions.php';
 
 return $config;

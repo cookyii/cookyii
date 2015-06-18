@@ -6,12 +6,14 @@
 
 defined('APP_NAME') or define('APP_NAME', 'Cookyii Frontend');
 
+$config = require(__DIR__ . '/../../common/config/app.php');
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/params.php')
 );
 
-return [
+return array_merge($config, [
     'id' => 'frontend-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
@@ -40,4 +42,4 @@ return [
         'log' => $params['component.log'],
     ],
     'params' => $params,
-];
+]);
