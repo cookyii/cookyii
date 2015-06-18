@@ -21,7 +21,7 @@ defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 require(__DIR__ . '/../common/config/aliases.php');
 
-common\components\Config::init('backend', 'console');
+components\Config::init('backend', 'console');
 
-exit((new yii\console\Application(common\components\Config::$config))
+exit((new yii\console\Application(components\Config::$config))
     ->run());

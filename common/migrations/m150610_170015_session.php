@@ -2,7 +2,7 @@
 
 use yii\db\mysql\Schema;
 
-class m150610_170015_session extends \common\components\Migration
+class m150610_170015_session extends \components\db\Migration
 {
 
     public function up()

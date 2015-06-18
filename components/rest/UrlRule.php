@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\rest;
+namespace components\rest;
 
 /**
  * Class UrlRule
- * @package common\rest
+ * @package components\rest
  */
 class UrlRule extends \yii\rest\UrlRule
 {

@@ -9,7 +9,7 @@ require(__DIR__ . '/../../globals.php');
 require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
 require(__DIR__ . '/../../common/config/aliases.php');
 
-common\components\Config::init('backend', 'app');
+components\Config::init('backend', 'app');
 
-(new yii\web\Application(common\components\Config::$config))
+(new yii\web\Application(components\Config::$config))
     ->run();

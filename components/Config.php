@@ -4,17 +4,20 @@
  * @author Revin Roman
  */
 
-namespace common\components;
+namespace components;
 
 /**
  * Class Config
- * @package common\components
+ * @package components
  */
 class Config
 {
 
     static $config = [];
 
+    /**
+     * Disabled constructor
+     */
     private function __construct()
     {
 

@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\traits\ActiveRecord;
+namespace components\db\traits;
 
 /**
  * Trait PopulateErrorsTrait
- * @package common\helpers
+ * @package components\db\traits
  *
  * @method hasProperty
  * @method hasAttribute

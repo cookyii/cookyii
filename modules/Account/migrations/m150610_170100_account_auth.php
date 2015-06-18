@@ -2,7 +2,7 @@
 
 use yii\db\mysql\Schema;
 
-class m150610_170100_account_auth extends \common\components\Migration
+class m150610_170100_account_auth extends \components\db\Migration
 {
 
     static $socials = ['facebook', 'github', 'google', 'linkedin', 'live', 'twitter', 'vkontakte', 'yandex'];

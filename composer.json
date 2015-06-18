@@ -49,7 +49,6 @@
   },
   "autoload": {
     "psr-4": {
-      "cookyii\\": "",
       "cookyii\\modules\\Account\\": "./modules/Account",
       "cookyii\\modules\\Media\\": "./modules/Media"
     }

@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\rest;
+namespace components\rest\actions;
 
 /**
  * Class ActivateAction
- * @package common\rest
+ * @package components\rest\actions
  */
 class ActivateAction extends \yii\rest\Action
 {

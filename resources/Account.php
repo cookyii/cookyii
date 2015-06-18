@@ -33,8 +33,8 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
     use \resources\Account\traits\UserSocialTrait;
-    use \common\traits\ActiveRecord\ActivationTrait;
-    use \common\traits\ActiveRecord\SoftDeleteTrait;
+    use \components\db\traits\ActivationTrait;
+    use \components\db\traits\SoftDeleteTrait;
 
     public $password;
 

@@ -3,6 +3,7 @@
 $base = realpath(__DIR__ . '/../..');
 
 Yii::setAlias('base', $base);
+Yii::setAlias('components', '@base/components');
 Yii::setAlias('common', '@base/common');
 Yii::setAlias('resources', '@base/resources');
 Yii::setAlias('messages', '@base/messages');

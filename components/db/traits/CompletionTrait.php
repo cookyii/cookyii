@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\traits\ActiveRecord;
+namespace components\db\traits;
 
 /**
  * Trait CompletionTrait
- * @package common\traits\ActiveRecord
+ * @package components\db\traits
  *
  * @property boolean $completed
  *

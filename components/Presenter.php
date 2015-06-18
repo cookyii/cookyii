@@ -4,13 +4,13 @@
  * @author Revin Roman
  */
 
-namespace common\components;
+namespace components;
 
 use yii\helpers\Inflector;
 
 /**
  * Class Presenter
- * @package common\components
+ * @package components
  */
 abstract class Presenter extends \yii\base\Object
 {

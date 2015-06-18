@@ -13,7 +13,7 @@ echo "<?php\n";
 
 use yii\db\mysql\Schema;
 
-class <?= $className ?> extends \common\components\Migration
+class <?= $className ?> extends \components\db\Migration
 {
 
     public function up()

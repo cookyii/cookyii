@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\components;
+namespace components\db;
 
 /**
  * Class Migration
- * @package common\components
+ * @package components\db
  */
 class Migration extends \yii\db\Migration
 {

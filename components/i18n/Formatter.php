@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\components;
+namespace components\i18n;
 
 /**
  * Class Formatter
- * @package common\components
+ * @package components\i18n
  */
 class Formatter extends \yii\i18n\Formatter
 {

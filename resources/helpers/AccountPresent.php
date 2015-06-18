@@ -14,7 +14,7 @@ namespace resources\helpers;
  * @property string $created_at
  * @property string $updated_at
  */
-class AccountPresent extends \common\components\Presenter
+class AccountPresent extends \components\Presenter
 {
 
     /** @var \resources\Account */

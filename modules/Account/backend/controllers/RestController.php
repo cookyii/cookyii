@@ -12,7 +12,7 @@ use cookyii\modules\Account;
  * Class RestController
  * @package cookyii\modules\Account\backend\controllers
  */
-class RestController extends \common\rest\Controller
+class RestController extends \components\rest\Controller
 {
 
     /**

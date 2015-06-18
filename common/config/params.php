@@ -99,7 +99,7 @@ return [
         'parsers' => ['application/json' => 'yii\web\JsonParser'],
     ],
     'component.formatter' => [
-        'class' => common\components\Formatter::className(),
+        'class' => components\i18n\Formatter::className(),
         'locale' => 'en',
         'timeZone' => 'Etc/GMT-0',
         'dateFormat' => 'dd MMMM y',

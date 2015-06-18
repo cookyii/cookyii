@@ -63,19 +63,19 @@ class AccountController extends \yii\rest\ActiveController
         ];
 
         $actions['activate'] = [
-            'class' => \common\rest\ActivateAction::className(),
+            'class' => \components\rest\actions\ActivateAction::className(),
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['deactivate'] = [
-            'class' => \common\rest\DeactivateAction::className(),
+            'class' => \components\rest\actions\DeactivateAction::className(),
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['restore'] = [
-            'class' => \common\rest\RestoreAction::className(),
+            'class' => \components\rest\actions\RestoreAction::className(),
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];

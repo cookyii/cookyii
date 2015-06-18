@@ -2,7 +2,7 @@
 
 use yii\db\mysql\Schema;
 
-class m150610_170030_rbac extends \common\components\Migration
+class m150610_170030_rbac extends \components\db\Migration
 {
 
     /**

@@ -13,5 +13,5 @@ return [
     'POST account/rest/property' => 'account/rest/property/push',
     'DELETE account/rest/property' => 'account/rest/property/delete',
 
-    ['class' => 'common\rest\UrlRule', 'controller' => 'account/rest/account']
+    ['class' => components\rest\UrlRule::className(), 'controller' => 'account/rest/account']
 ];

@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\traits\ActiveRecord;
+namespace components\db\traits;
 
 /**
  * Trait SoftDeleteTrait
- * @package common\traits\ActiveRecord
+ * @package components\db\traits
  *
  * Трейт переопределяет метод delete в ActiveRecord классе.
  * Теперь, при первом вызове метода delete, запись не будет физически удалена из базы данных,

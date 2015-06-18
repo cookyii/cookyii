@@ -24,7 +24,8 @@ Account\backend\_assets\SignInAssetBundle::register($this);
 
     <div class="login-box-body">
         <?php
-        $form = common\widgets\angular\ActiveForm::begin([
+        /** @var \components\widgets\angular\ActiveForm $form */
+        $form = \components\widgets\angular\ActiveForm::begin([
             'name' => 'SignInForm',
             'action' => $SignInForm->formAction(),
         ]);
@@ -57,7 +58,7 @@ Account\backend\_assets\SignInAssetBundle::register($this);
             </div>
         </div>
         <?php
-        common\widgets\angular\ActiveForm::end();
+        \components\widgets\angular\ActiveForm::end();
 
         $authAuthChoice = yii\authclient\widgets\AuthChoice::begin([
             'baseAuthUrl' => ['/account/sign/auth'],

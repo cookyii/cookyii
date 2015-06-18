@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 class AccountEditForm extends \yii\base\Model
 {
 
-    use \common\traits\ActiveRecord\PopulateErrorsTrait;
+    use \components\db\traits\PopulateErrorsTrait;
 
     /** @var \resources\Account */
     public $Account;

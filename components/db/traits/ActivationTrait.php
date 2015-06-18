@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace common\traits\ActiveRecord;
+namespace components\db\traits;
 
 /**
  * Trait ActivationTrait
- * @package common\traits\ActiveRecord
+ * @package components\db\traits
  *
  * @property bool $activated
  *

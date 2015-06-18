@@ -4,16 +4,16 @@
  * @author Revin Roman
  */
 
-namespace common\widgets\angular\material;
+namespace components\widgets\angular\material;
 
 /**
  * Class ActiveForm
- * @package common\widgets\angular\material
+ * @package components\widgets\angular\material
  */
-class ActiveForm extends \common\widgets\angular\ActiveForm
+class ActiveForm extends \components\widgets\angular\ActiveForm
 {
 
-    public $fieldClass = 'common\widgets\angular\material\ActiveField';
+    public $fieldClass = 'components\widgets\angular\material\ActiveField';
 
     /**
      * Generates a form field.
@@ -23,7 +23,7 @@ class ActiveForm extends \common\widgets\angular\ActiveForm
      * @param string $attribute the attribute name or expression. See [[Html::getAttributeName()]] for the format
      * about attribute expression.
      * @param array $options the additional configurations for the field object
-     * @return \common\widgets\angular\material\ActiveField the created ActiveField object
+     * @return \components\widgets\angular\material\ActiveField the created ActiveField object
      * @see fieldConfig
      */
     public function field($model, $attribute, $options = [])
