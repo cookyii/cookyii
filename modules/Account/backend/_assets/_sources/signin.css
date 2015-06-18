@@ -1,1 +1,4 @@
-.field-signinform-remember { margin: -5px 0 0 0; }
+.login-box { }
+.login-box .login-logo { color: #a4eeff; }
+.login-box .login-logo strong { color: #e4953b; }
+.login-box .field-signinform-remember { margin: -5px 0 0 0; }

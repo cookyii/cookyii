@@ -19,7 +19,8 @@ Account\backend\_assets\SignInAssetBundle::register($this);
 
 <div class="login-box" ng-controller="SignInController">
     <div class="login-logo">
-        <b>COOKYII</b>BACKEND
+        <img src="/img/cookyii.png"/>
+        <strong>COOKYII</strong>BACKEND
     </div>
 
     <div class="login-box-body">
@@ -48,7 +49,7 @@ Account\backend\_assets\SignInAssetBundle::register($this);
         <div class="row">
             <div class="col-xs-8">
                 <?php
-                echo $form->field($SignInForm, 'remember', ['class' => 'common\widgets\angular\material\ActiveField'])
+                echo $form->field($SignInForm, 'remember', ['class' => 'components\widgets\angular\material\ActiveField'])
                     ->label(false)
                     ->checkbox();
                 ?>
@@ -60,7 +61,7 @@ Account\backend\_assets\SignInAssetBundle::register($this);
         <?php
         \components\widgets\angular\ActiveForm::end();
 
-        $authAuthChoice = yii\authclient\widgets\AuthChoice::begin([
+        $authAuthChoice = \yii\authclient\widgets\AuthChoice::begin([
             'baseAuthUrl' => ['/account/sign/auth'],
             'popupMode' => false,
             'autoRender' => false,
@@ -100,7 +101,7 @@ Account\backend\_assets\SignInAssetBundle::register($this);
             </div>
         <?php
         }
-        yii\authclient\widgets\AuthChoice::end();
+        \yii\authclient\widgets\AuthChoice::end();
 
         ?>
 
