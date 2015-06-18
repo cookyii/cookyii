@@ -4,13 +4,13 @@
  * @author Revin Roman
  */
 
-namespace backend\modules\Media\components;
+namespace cookyii\modules\Media\components;
 
 use Imagine;
 
 /**
  * Class Image
- * @package backend\modules\Media\components
+ * @package cookyii\modules\Media\components
  */
 class Image extends \yii\imagine\Image
 {

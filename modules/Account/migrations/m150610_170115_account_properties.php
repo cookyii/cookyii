@@ -11,7 +11,7 @@ class m150610_170115_account_properties extends \components\db\Migration
             '{{%account_property}}',
             [
                 'account_id' => Schema::TYPE_INTEGER,
-                'key' => Schema::TYPE_STRING,
+                'key' => Schema::TYPE_STRING . ' NOT NULL',
                 'value' => Schema::TYPE_TEXT,
                 'created_at' => Schema::TYPE_INTEGER,
                 'updated_at' => Schema::TYPE_INTEGER,

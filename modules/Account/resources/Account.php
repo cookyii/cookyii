@@ -41,17 +41,6 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public function fields()
-    {
-        $fields = parent::fields();
-        unset($fields['password_hash'], $fields['token'], $fields['auth_key']);
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function init()
     {
         parent::init();
@@ -67,6 +56,17 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             \yii\behaviors\TimestampBehavior::className(),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        unset($fields['password_hash'], $fields['token'], $fields['auth_key']);
+
+        return $fields;
     }
 
     /**

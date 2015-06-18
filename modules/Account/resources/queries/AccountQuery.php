@@ -166,7 +166,7 @@ class AccountQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return $this
+     * @return self
      */
     public function onlyDeleted()
     {

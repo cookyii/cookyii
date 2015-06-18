@@ -19,11 +19,13 @@ return array_merge($config, [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
+        'cookyii\modules\Page\backend\Bootstrap',
         'cookyii\modules\Account\backend\Bootstrap',
         'cookyii\modules\Media\Bootstrap',
         'log',
     ],
     'modules' => [
+        'page' => cookyii\modules\Page\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
         'media' => cookyii\modules\Media\Module::className(),
     ],

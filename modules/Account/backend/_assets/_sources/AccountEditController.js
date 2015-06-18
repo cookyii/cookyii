@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountEditController', [
-    '$scope', '$http', '$timeout', '$mdToast',
-    function ($scope, $http, $timeout, $mdToast) {
+    '$scope', '$http', '$location', '$timeout', '$mdToast',
+    function ($scope, $http, $location, $timeout, $mdToast) {
 
       $scope.inProgress = false;
 

@@ -4,7 +4,7 @@
   ng.module('BackendApp', [
     'ngSanitize', 'ngResource', 'ngMaterial',
     'ui.bootstrap',
-    'angular-loading-bar', 'truncate', 'monospaced.elastic'
+    'angular-loading-bar', 'truncate', 'monospaced.elastic', 'angular-redactor'
   ])
 
     .config([

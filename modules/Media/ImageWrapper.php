@@ -6,7 +6,7 @@
 
 namespace cookyii\modules\Media;
 
-use backend\modules\Media\components\Image;
+use cookyii\modules\Media\components\Image;
 use Imagine\Image\ImageInterface;
 use Imagine\Image\ManipulatorInterface;
 use yii\helpers\FileHelper;

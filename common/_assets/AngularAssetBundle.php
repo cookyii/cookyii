@@ -36,6 +36,7 @@ class AngularAssetBundle extends \yii\web\AssetBundle
         'https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js',
         'angular-elastic/elastic.js',
         'angular-truncate/src/truncate.js',
+        'angular-redactor/angular-redactor.js',
     ];
 
     public $depends = [

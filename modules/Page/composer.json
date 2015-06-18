@@ -27,7 +27,9 @@
     "php": ">=5.5.0",
 
     "cookyii/base": "dev-master",
-    "cookyii/interfaces": "dev-master"
+    "cookyii/interfaces": "dev-master",
+    "cookyii/module-account": "dev-master",
+    "cookyii/module-media": "dev-master"
   },
   "autoload": {
     "psr-4": {

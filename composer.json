@@ -35,6 +35,7 @@
     "rmrevin/yii2-minify-view": "1.8.*",
     "rmrevin/yii2-rbac-command": "1.1.*",
     "rmrevin/yii2-power-migration": "1.1.*",
+    "rmrevin/yii2-imperavi-bundle": "1.0.*",
 
     "vlucas/phpdotenv": "2.0.*"
   },
@@ -49,10 +50,12 @@
   },
   "autoload": {
     "psr-4": {
+      "cookyii\\modules\\Page\\": "./modules/Page",
       "cookyii\\modules\\Account\\": "./modules/Account",
       "cookyii\\modules\\Media\\": "./modules/Media",
       "resources\\": [
         "./resources",
+        "./modules/Page/resources",
         "./modules/Account/resources",
         "./modules/Media/resources"
       ]

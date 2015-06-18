@@ -15,4 +15,9 @@ return [
         'version' => '0.0.0.0',
         'alias' => ['@cookyii/module-media' => \Yii::getAlias('@modules/Media')],
     ],
+    'cookyii/module-page' => [
+        'name' => 'cookyii/module-page',
+        'version' => '0.0.0.0',
+        'alias' => ['@cookyii/module-page' => \Yii::getAlias('@modules/Page')],
+    ],
 ];

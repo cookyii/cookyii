@@ -30,7 +30,7 @@ angular.module('BackendApp')
         if ($scope.getAccountId() === null) {
           $scope.data = angular.copy(defaultValues);
         } else {
-          Account.detail({account: $scope.getAccountId()}, function (account) {
+          Account.detail({id: $scope.getAccountId()}, function (account) {
             $scope.data = account;
             hash = account.hash;
 
@@ -46,7 +46,7 @@ angular.module('BackendApp')
 
       function checkAccountUpdate() {
         if ($scope.getAccountId() !== null) {
-          Account.detail({account: $scope.getAccountId()}, function (account) {
+          Account.detail({id: $scope.getAccountId()}, function (account) {
             if (hash !== account.hash) {
               $scope.accountUpdatedWarning = true;
             }

@@ -49,7 +49,7 @@ class Controller extends \yii\web\Controller
                     }
                 }
 
-                if (!User()->can(\common\Roles::MANAGER)) {
+                if (!User()->can(\backend\Permissions::ACCESS)) {
                     throw new \yii\web\ForbiddenHttpException('Access denied.');
                 }
             }

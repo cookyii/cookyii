@@ -11,9 +11,7 @@ use cookyii\modules\Account;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = $AccountEditForm->isNewAccount()
-    ? Yii::t('account', 'Create new account')
-    : Yii::t('account', 'Edit account');
+$this->title = Yii::t('account', 'Edit account');
 
 Account\backend\_assets\EditAssetBundle::register($this);
 

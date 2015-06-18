@@ -99,7 +99,7 @@ class Media extends \yii\db\ActiveRecord
      */
     public function getAbsolutePath()
     {
-        $upload_path = static::getMediaModule()->uploadWebPath;
+        $upload_path = static::getMediaModule()->uploadPath;
 
         $p1 = StringHelper::byteSubstr($this->name, 0, 2);
         $p2 = StringHelper::byteSubstr($this->name, 2, 2);

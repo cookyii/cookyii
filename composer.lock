@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "00ab2588d49b41c9d83727ff91747b7a",
+    "hash": "0899ebb906d66005e58d9b0e3ec7877f",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -501,6 +501,52 @@
                 "yii"
             ],
             "time": "2015-05-09 08:36:03"
+        },
+        {
+            "name": "rmrevin/yii2-imperavi-bundle",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-imperavi-bundle.git",
+                "reference": "78ceec972f5f2e2b135c1029a4bbfe1e860d7cc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-imperavi-bundle/zipball/78ceec972f5f2e2b135c1029a4bbfe1e860d7cc4",
+                "reference": "78ceec972f5f2e2b135c1029a4bbfe1e860d7cc4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\imperavi\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Revin",
+                    "email": "xgismox@gmail.com",
+                    "homepage": "http://rmrevin.ru/"
+                }
+            ],
+            "description": "Yii 2 Asset bundle with Imperavi WYSIWYG redactor",
+            "keywords": [
+                "Redactor",
+                "asset",
+                "bundle",
+                "imperavi",
+                "wysiwyg",
+                "yii"
+            ],
+            "time": "2015-06-18 17:43:46"
         },
         {
             "name": "rmrevin/yii2-minify-view",

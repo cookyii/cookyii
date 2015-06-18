@@ -17,8 +17,8 @@ class m150610_170045_account extends \components\db\Migration
                 'password_hash' => Schema::TYPE_STRING . ' NOT NULL',
                 'token' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'auth_key' => Schema::TYPE_STRING . '(32) NOT NULL',
-                'created_at' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
-                'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
+                'created_at' => Schema::TYPE_INTEGER,
+                'updated_at' => Schema::TYPE_INTEGER,
                 'activated' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
                 'deleted' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
             ]
