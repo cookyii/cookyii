@@ -13,7 +13,7 @@ namespace backend\views\_assets;
 class DashAssetBundle extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@backend/views/site/_assets/_sources';
+    public $sourcePath = '@backend/views/_assets/_sources';
 
     public $css = [
         'dash.css',
