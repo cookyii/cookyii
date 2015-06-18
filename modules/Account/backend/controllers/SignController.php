@@ -90,85 +90,85 @@ class SignController extends Account\backend\components\Controller
      */
     public function authSuccessCallback(\yii\authclient\ClientInterface $Client)
     {
-        $AuthResponse = new \resources\User\Auth\Response;
+        $AuthResponse = new \resources\Account\Auth\Response;
         $AuthResponse->client = $Client->getId();
 
         $attributes = $Client->getUserAttributes();
         $AuthResponse->response = Json::encode($attributes);
 
-        $UserQuery = \resources\User::find();
+        $AccountQuery = \resources\Account::find();
 
         switch ($Client->getId()) {
             case 'facebook':
-                $UserQuery->byFacebookId($attributes['id']);
+                $AccountQuery->byFacebookId($attributes['id']);
                 break;
             case 'github':
-                $UserQuery->byGithubId($attributes['id']);
+                $AccountQuery->byGithubId($attributes['id']);
                 break;
             case 'google':
-                $UserQuery->byGoogleId($attributes['id']);
+                $AccountQuery->byGoogleId($attributes['id']);
                 break;
             case 'linkedin':
-                $UserQuery->byLinkedinId($attributes['id']);
+                $AccountQuery->byLinkedinId($attributes['id']);
                 break;
             case 'live':
-                $UserQuery->byLiveId($attributes['id']);
+                $AccountQuery->byLiveId($attributes['id']);
                 break;
             case 'twitter':
-                $UserQuery->byTwitterId($attributes['id']);
+                $AccountQuery->byTwitterId($attributes['id']);
                 break;
             case 'vkontakte':
-                $UserQuery->byVkontakteId($attributes['id']);
+                $AccountQuery->byVkontakteId($attributes['id']);
                 break;
             case 'yandex':
-                $UserQuery->byYandexId($attributes['id']);
+                $AccountQuery->byYandexId($attributes['id']);
                 break;
         }
 
-        /** @var \resources\User $User */
-        $User = $UserQuery->one();
+        /** @var \resources\Account $Account */
+        $Account = $AccountQuery->one();
 
-        if ($User instanceof \resources\User) {
-            if (true !== ($reason = $User->isAvailable())) {
+        if ($Account instanceof \resources\Account) {
+            if (true !== ($reason = $Account->isAvailable())) {
                 switch ($reason) {
                     default:
                     case true:
                         break;
                     case 'not-activated':
-                        $User->addError('activated', \Yii::t('account', 'Account is not activated.'));
+                        $Account->addError('activated', \Yii::t('account', 'Account is not activated.'));
                         break;
                     case 'deleted':
-                        $User->addError('deleted', \Yii::t('account', 'Account removed.'));
+                        $Account->addError('deleted', \Yii::t('account', 'Account removed.'));
                         break;
                 }
 
-                $AuthResponse->result = Json::encode($User->getErrors());
+                $AuthResponse->result = Json::encode($Account->getErrors());
             } else {
-                $AuthResponse->result = Json::encode($User->id);
+                $AuthResponse->result = Json::encode($Account->id);
             }
         } else {
-            $User = new \resources\User();
-            $User->appendClientAttributes($Client);
+            $Account = new \resources\Account();
+            $Account->appendClientAttributes($Client);
 
-            if ($User->save()) {
-                $User->createSocialLink($Client);
+            if ($Account->save()) {
+                $Account->createSocialLink($Client);
 
-                $AuthResponse->result = Json::encode($User->id);
+                $AuthResponse->result = Json::encode($Account->id);
 
-                AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $User->id);
+                AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
             } else {
-                $AuthResponse->result = Json::encode($User->getErrors());
+                $AuthResponse->result = Json::encode($Account->getErrors());
             }
         }
 
         $AuthResponse->save();
 
-        if ($User instanceof \resources\User && !$User->isNewRecord && !$User->hasErrors()) {
-            $User->save();
+        if ($Account instanceof \resources\Account && !$Account->isNewRecord && !$Account->hasErrors()) {
+            $Account->save();
 
-            User()->login($User, 86400);
+            User()->login($Account, 86400);
         } else {
-            $errors = $User->getFirstErrors();
+            $errors = $Account->getFirstErrors();
 
             if (isset($errors['activated'])) {
                 throw new \yii\web\ForbiddenHttpException($errors['activated']);

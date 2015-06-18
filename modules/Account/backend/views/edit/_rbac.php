@@ -17,7 +17,7 @@ use yii\helpers\Html;
 
         <div class="box-body">
             <?
-            foreach (\resources\User::getAllRoles() as $role => $label) {
+            foreach (\resources\Account::getAllRoles() as $role => $label) {
                 $options = [
                     'ng-change' => 'saveRoles()',
                     'ng-model' => sprintf('data.roles.%s', $role),

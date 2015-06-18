@@ -40,7 +40,9 @@ class EditController extends Account\backend\components\Controller
      */
     public function actionIndex()
     {
-        $AccountEditForm = new Account\backend\forms\AccountEditForm(['User' => new \resources\User()]);
+        $AccountEditForm = new Account\backend\forms\AccountEditForm([
+            'Account' => new \resources\Account(),
+        ]);
 
         return $this->render('index', [
             'AccountEditForm' => $AccountEditForm,

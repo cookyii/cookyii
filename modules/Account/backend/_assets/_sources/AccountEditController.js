@@ -19,7 +19,7 @@ angular.module('BackendApp')
           url: $form.attr('action'),
           data: {
             _csrf: $form.find('input[name="_csrf"]').val(),
-            user_id: $scope.$parent.getUserId(),
+            account_id: $scope.$parent.getAccountId(),
             AccountEditForm: $scope.data
           }
         })
@@ -39,7 +39,7 @@ angular.module('BackendApp')
                 message: 'Account successfully saved'
               });
 
-              if ($scope.$parent.isNewUser) {
+              if ($scope.$parent.isNewAccount) {
                 $location.search('id', response.account_id);
               }
 

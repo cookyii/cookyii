@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountListController', [
-    '$scope', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'UserResource',
-    function ($scope, $http, $timeout, $mdToast, $mdDialog, $location, User) {
+    '$scope', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'AccountResource',
+    function ($scope, $http, $timeout, $mdToast, $mdDialog, $location, Account) {
       var query = $location.search(),
         loaded = false,
         refreshInterval = 5000;
@@ -13,20 +13,20 @@ angular.module('BackendApp')
         ? 1
         : query.page;
 
-      $scope.users = [];
+      $scope.accounts = [];
 
       function _refresh() {
-        reloadUserList(false);
+        reloadAccountList(false);
       }
 
-      $timeout(reloadUserList);
+      $timeout(reloadAccountList);
 
-      $scope.toggleActivated = function (user) {
+      $scope.toggleActivated = function (account) {
         $timeout(function () {
-          if (user.activated === 1) {
-            user.$activate(_refresh, _refresh);
+          if (account.activated === 1) {
+            account.$activate(_refresh, _refresh);
           } else {
-            user.$deactivate(_refresh, _refresh);
+            account.$deactivate(_refresh, _refresh);
           }
         }, 400);
       };
@@ -93,15 +93,15 @@ angular.module('BackendApp')
         _refresh();
       };
 
-      $scope.addUser = function () {
+      $scope.addAccount = function () {
         location.href = '/account/edit';
       };
 
-      $scope.edit = function (user) {
-        location.href = '/account/edit#?id='+user.id;
+      $scope.edit = function (account) {
+        location.href = '/account/edit#?id=' + account.id;
       };
 
-      $scope.remove = function (user, e) {
+      $scope.remove = function (account, e) {
         var confirm = $mdDialog.confirm()
           .parent(angular.element(document.body))
           .title('Would you like to delete this account?')
@@ -110,7 +110,7 @@ angular.module('BackendApp')
           .targetEvent(e);
 
         $mdDialog.show(confirm).then(function () {
-          user.$remove(function () {
+          account.$remove(function () {
             toast($mdToast, 'success', {
               message: 'Account successfully removed'
             });
@@ -124,8 +124,8 @@ angular.module('BackendApp')
         });
       };
 
-      $scope.restore = function (user) {
-        user.$restore(function () {
+      $scope.restore = function (account) {
+        account.$restore(function () {
           toast($mdToast, 'success', {
             message: 'Account successfully restored'
           });
@@ -138,9 +138,9 @@ angular.module('BackendApp')
         });
       };
 
-      function reloadUserList(setTimeout) {
+      function reloadAccountList(setTimeout) {
         if ($scope.searchFocus === true) {
-          $timeout(reloadUserList, refreshInterval);
+          $timeout(reloadAccountList, refreshInterval);
 
           return;
         }
@@ -149,13 +149,13 @@ angular.module('BackendApp')
           ? setTimeout
           : true;
 
-        User.query({
+        Account.query({
           deactivated: $scope.deactivated,
           deleted: $scope.deleted,
           search: $scope.search,
           sort: $scope.sort,
           page: loaded ? $scope.pagination.currentPage : page
-        }, function (users, headers) {
+        }, function (accounts, headers) {
           var _headers = headers();
 
           $scope.pagination = {
@@ -165,10 +165,10 @@ angular.module('BackendApp')
             perPage: _headers['x-pagination-per-page']
           };
 
-          $scope.users = users;
+          $scope.accounts = accounts;
 
           if (setTimeout) {
-            $timeout(reloadUserList, refreshInterval);
+            $timeout(reloadAccountList, refreshInterval);
           }
 
           loaded = true;

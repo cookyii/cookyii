@@ -20,7 +20,7 @@ class ListAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $js = [
-        'UserResource.js',
+        'AccountResource.js',
         'AccountListController.js',
     ];
 

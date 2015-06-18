@@ -106,42 +106,42 @@ function sortLink($type, $label)
                         <?php
                         $options = [
                             'title' => Yii::t('account', 'Edit account'),
-                            'ng-class' => '{deactivated:user.activated===0,deleted:user.deleted}',
+                            'ng-class' => '{deactivated:account.activated===0,deleted:account.deleted}',
                         ];
                         ?>
-                        <tr ng-show="users.length === 0">
+                        <tr ng-show="accounts.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
                                 <?= Yii::t('account', 'Accounts not found') ?>
                             </td>
                         </tr>
-                        <tr ng-repeat="user in users track by user.id" <?= Html::renderTagAttributes($options) ?>>
+                        <tr ng-repeat="account in accounts track by account.id" <?= Html::renderTagAttributes($options) ?>>
                             <td class="activated clickable">
-                                <md-switch ng-model="user.activated"
+                                <md-switch ng-model="account.activated"
                                            ng-true-value="1" ng-false-value="0"
-                                           ng-change="toggleActivated(user)"
-                                           title="User {{ user.activated === 1 ? 'activated' : 'deactivated' }}"
-                                           aria-label="User {{ user.activated === 1 ? 'activated' : 'deactivated' }}">
+                                           ng-change="toggleActivated(account)"
+                                           title="Account {{ account.activated === 1 ? 'activated' : 'deactivated' }}"
+                                           aria-label="Account {{ account.activated === 1 ? 'activated' : 'deactivated' }}">
                                 </md-switch>
                             </td>
-                            <td class="id clickable" ng-click="edit(user)">{{ user.id }}</td>
-                            <td class="name clickable" ng-click="edit(user)">{{ user.name }}</td>
-                            <td class="email clickable" ng-click="edit(user)">{{ user.email }}</td>
-                            <td class="updated clickable" ng-click="edit(user)">
-                                {{ user.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
+                            <td class="id clickable" ng-click="edit(account)">{{ account.id }}</td>
+                            <td class="name clickable" ng-click="edit(account)">{{ account.name }}</td>
+                            <td class="email clickable" ng-click="edit(account)">{{ account.email }}</td>
+                            <td class="updated clickable" ng-click="edit(account)">
+                                {{ account.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
                             </td>
                             <td class="actions">
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
                                     'title' => Yii::t('account', 'Remove account'),
-                                    'ng-click' => 'remove(user, $event)',
-                                    'ng-show' => '!user.deleted',
+                                    'ng-click' => 'remove(account, $event)',
+                                    'ng-show' => '!account.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
                                     'title' => Yii::t('account', 'Restore account'),
-                                    'ng-click' => 'restore(user)',
-                                    'ng-show' => 'user.deleted',
+                                    'ng-click' => 'restore(account)',
+                                    'ng-show' => 'account.deleted',
                                 ]);
                                 ?>
                             </td>
@@ -170,8 +170,8 @@ function sortLink($type, $label)
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
         'title' => Yii::t('account', 'Create new account'),
-        'ng-click' => 'addUser()',
-        'aria-label' => 'Add user',
+        'ng-click' => 'addAccount()',
+        'aria-label' => 'Add account',
     ]);
     ?>
 </section>

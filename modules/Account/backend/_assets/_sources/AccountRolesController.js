@@ -10,12 +10,12 @@ angular.module('BackendApp')
           method: 'PUT',
           url: '/account/rest/roles',
           data: {
-            user_id: $scope.$parent.getUserId(),
+            account_id: $scope.$parent.getAccountId(),
             roles: $scope.$parent.data.roles
           }
         })
           .success(function (response) {
-            $scope.$emit('reloadUserData');
+            $scope.$emit('reloadAccountData');
           })
           .error(function (response, status) {
             toast($mdToast, 'error', {

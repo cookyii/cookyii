@@ -3,56 +3,56 @@
 angular.module('BackendApp')
 
   .controller('AccountDetailController', [
-    '$scope', '$location', '$timeout', 'UserResource',
-    function ($scope, $location, $timeout, User) {
+    '$scope', '$location', '$timeout', 'AccountResource',
+    function ($scope, $location, $timeout, Account) {
       var hash = null,
         query = $location.search(),
         defaultValues = {roles: []};
 
-      $scope.getUserId = function () {
+      $scope.getAccountId = function () {
         return typeof query.id === 'undefined'
           ? null
           : parseInt(query.id);
       };
 
-      $scope.isNewUser = $scope.getUserId() === null;
+      $scope.isNewAccount = $scope.getAccountId() === null;
 
-      $scope.$on('reloadUserData', function (e) {
+      $scope.$on('reloadAccountData', function (e) {
         $scope.reload();
       });
 
       $scope.reload = function () {
-        $scope.isNewUser = $scope.getUserId() === null;
+        $scope.isNewAccount = $scope.getAccountId() === null;
 
-        $scope.userUpdatedWarning = false;
+        $scope.accountUpdatedWarning = false;
         $scope.editedProperty = null;
 
-        if ($scope.getUserId() === null) {
+        if ($scope.getAccountId() === null) {
           $scope.data = angular.copy(defaultValues);
         } else {
-          User.detail({user: $scope.getUserId()}, function (user) {
-            $scope.data = user;
-            hash = user.hash;
+          Account.detail({account: $scope.getAccountId()}, function (account) {
+            $scope.data = account;
+            hash = account.hash;
 
-            $scope.$broadcast('userDataReloaded', user);
+            $scope.$broadcast('accountDataReloaded', account);
           });
         }
       };
 
       $timeout($scope.reload);
-      $timeout(checkUserUpdate, 5000);
+      $timeout(checkAccountUpdate, 5000);
 
-      $scope.userUpdatedWarning = false;
+      $scope.accountUpdatedWarning = false;
 
-      function checkUserUpdate() {
-        if ($scope.getUserId() !== null) {
-          User.detail({user: $scope.getUserId()}, function (user) {
-            if (hash !== user.hash) {
-              $scope.userUpdatedWarning = true;
+      function checkAccountUpdate() {
+        if ($scope.getAccountId() !== null) {
+          Account.detail({account: $scope.getAccountId()}, function (account) {
+            if (hash !== account.hash) {
+              $scope.accountUpdatedWarning = true;
             }
           });
 
-          $timeout(checkUserUpdate, 5000);
+          $timeout(checkAccountUpdate, 5000);
         }
       }
     }

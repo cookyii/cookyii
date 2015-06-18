@@ -17,8 +17,8 @@ class AccountEditForm extends \yii\base\Model
 
     use \common\traits\ActiveRecord\PopulateErrorsTrait;
 
-    /** @var \resources\User */
-    public $User;
+    /** @var \resources\Account */
+    public $Account;
 
     public $name;
     public $email;
@@ -27,7 +27,7 @@ class AccountEditForm extends \yii\base\Model
 
     public function init()
     {
-        if (!($this->User instanceof \resources\User)) {
+        if (!($this->Account instanceof \resources\Account)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('account', 'Not specified user to edit.'));
         }
     }
@@ -77,7 +77,7 @@ class AccountEditForm extends \yii\base\Model
      */
     public function isNewAccount()
     {
-        return $this->User->isNewRecord;
+        return $this->Account->isNewRecord;
     }
 
     /**
@@ -85,31 +85,31 @@ class AccountEditForm extends \yii\base\Model
      */
     public function save()
     {
-        $User = $this->User;
+        $Account = $this->Account;
 
-        $User->name = $this->name;
-        $User->email = $this->email;
+        $Account->name = $this->name;
+        $Account->email = $this->email;
 
-        if ($User->isNewRecord) {
-            $User->activated = \resources\User::NOT_ACTIVATED;
-            $User->deleted = \resources\User::NOT_DELETED;
+        if ($Account->isNewRecord) {
+            $Account->activated = \resources\Account::NOT_ACTIVATED;
+            $Account->deleted = \resources\Account::NOT_DELETED;
         }
 
         if (!empty($this->new_password)) {
-            $User->password = $this->new_password;
+            $Account->password = $this->new_password;
         }
 
-        $result = $User->validate() && $User->save();
+        $result = $Account->validate() && $Account->save();
 
-        if ($User->hasErrors()) {
-            $this->populateErrors($User, 'name');
+        if ($Account->hasErrors()) {
+            $this->populateErrors($Account, 'name');
         }
 
         if (AuthManager() instanceof \yii\rbac\DbManager) {
             AuthManager()->invalidateCache();
         }
 
-        $this->User = $User;
+        $this->Account = $Account;
 
         return $result;
     }

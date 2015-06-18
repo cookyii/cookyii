@@ -17,8 +17,6 @@ class SignInForm extends \yii\base\Model
     public $password;
     public $remember;
 
-    private $_User = null;
-
     const REMEMBER_TIME = 864000; // 10 days
 
     /**
@@ -63,8 +61,8 @@ class SignInForm extends \yii\base\Model
      */
     public function validatePassword($attribute)
     {
-        $User = $this->getUser();
-        if (!$User || !$User->validatePassword($this->$attribute)) {
+        $Account = $this->getAccount();
+        if (!$Account || !$Account->validatePassword($this->$attribute)) {
             $this->addError($attribute, \Yii::t('account', 'Account not found.'));
         }
     }
@@ -75,11 +73,11 @@ class SignInForm extends \yii\base\Model
     public function login()
     {
         if ($this->validate()) {
-            $User = $this->getUser();
+            $Account = $this->getAccount();
 
-            if (true === ($reason = $User->isAvailable())) {
+            if (true === ($reason = $Account->isAvailable())) {
                 return User()->login(
-                    $User,
+                    $Account,
                     $this->remember === 'true'
                         ? static::REMEMBER_TIME
                         : 0
@@ -99,17 +97,19 @@ class SignInForm extends \yii\base\Model
         return false;
     }
 
+    private $_Account = null;
+
     /**
-     * @return \resources\User
+     * @return \resources\Account
      */
-    private function getUser()
+    private function getAccount()
     {
-        if ($this->_User === null) {
-            $this->_User = \resources\User::find()
+        if ($this->_Account === null) {
+            $this->_Account = \resources\Account::find()
                 ->byEmail($this->email)
                 ->one();
         }
 
-        return $this->_User;
+        return $this->_Account;
     }
 }

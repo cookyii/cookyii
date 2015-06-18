@@ -7,7 +7,7 @@
 return [
     'component.user' => [
         'class' => 'yii\web\User',
-        'identityClass' => 'resources\User',
+        'identityClass' => 'resources\Account',
         'enableAutoLogin' => true,
         'loginUrl' => ['/'],
     ],

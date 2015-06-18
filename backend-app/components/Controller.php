@@ -37,16 +37,20 @@ class Controller extends \yii\web\Controller
             if (User()->isGuest) {
                 User()->loginRequired();
             } else {
-                /** @var \resources\User $User */
-                $User = User()->identity;
+                /** @var \resources\Account $Account */
+                $Account = User()->identity;
 
-                if (($reason = $User->isAvailable()) !== true) {
+                if (($reason = $Account->isAvailable()) !== true) {
                     switch ($reason) {
                         case 'not-activated':
                             throw new \yii\web\ForbiddenHttpException('You account is not activated.');
                         case 'deleted':
                             throw new \yii\web\ForbiddenHttpException('You account removed.');
                     }
+                }
+
+                if (!User()->can(\common\Roles::MANAGER)) {
+                    throw new \yii\web\ForbiddenHttpException('Access denied.');
                 }
             }
         }

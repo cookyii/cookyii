@@ -24,7 +24,7 @@ Account\backend\_assets\EditAssetBundle::register($this);
     'ng-controller' => 'AccountDetailController',
 ]) ?>>
 
-    <div class="row" ng-show="userUpdatedWarning">
+    <div class="row" ng-show="accountUpdatedWarning">
         <div class="col-xs-12 col-lg-6">
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><?= FA::icon('warning') ?></span>
@@ -33,7 +33,7 @@ Account\backend\_assets\EditAssetBundle::register($this);
                     <strong class="info-box-text"><?= Yii::t('account', 'Warning') ?></strong>
 
                     <span class="progress-description">
-                        <?= Yii::t('account', 'The data of this user has been changed.') ?><br>
+                        <?= Yii::t('account', 'The data of this account has been changed.') ?><br>
                         <?= Yii::t('account', 'Recommended {refresh} the page.', [
                             'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('account', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',
@@ -52,12 +52,12 @@ Account\backend\_assets\EditAssetBundle::register($this);
             echo $this->render('_general', ['AccountEditForm' => $AccountEditForm]);
             ?>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-if="!isNewUser">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-if="!isNewAccount">
             <?php
             echo $this->render('_rbac');
             ?>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5" ng-if="!isNewUser">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5" ng-if="!isNewAccount">
             <?php
             echo $this->render('_properties');
             ?>

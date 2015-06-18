@@ -13,11 +13,11 @@ angular.module('BackendApp')
       $scope.isNewProperty = false;
       $scope.editedProperty = null;
 
-      $scope.$on('userDataReloaded', function (e, user) {
+      $scope.$on('accountDataReloaded', function (e, account) {
         if (query.prop === '__new') {
           $scope.create();
         } else {
-          angular.forEach(user.properties, function (item) {
+          angular.forEach(account.properties, function (item) {
             if (item.key === query.prop) {
               $scope.edit(item);
             }
@@ -59,10 +59,10 @@ angular.module('BackendApp')
       $scope.save = function (property) {
         $http({
           method: 'POST',
-          url: '/account/rest/user-property',
+          url: '/account/rest/property',
           data: {
             key: query.prop,
-            user_id: $scope.$parent.getUserId(),
+            account_id: $scope.$parent.getAccountId(),
             property: $scope.editedProperty
           }
         })
@@ -82,7 +82,7 @@ angular.module('BackendApp')
             } else {
               $location.search('prop', $scope.editedProperty.key);
 
-              $scope.$emit('reloadUserData');
+              $scope.$emit('reloadAccountData');
 
               toast($mdToast, 'success', {
                 message: response.message
@@ -107,10 +107,10 @@ angular.module('BackendApp')
         $mdDialog.show(confirm).then(function () {
           $http({
             method: 'DELETE',
-            url: '/account/rest/user-property',
+            url: '/account/rest/property',
             params: {
               key: query.prop,
-              user_id: $scope.$parent.getUserId()
+              account_id: $scope.$parent.getAccountId()
             }
           })
             .success(function (response) {
@@ -119,7 +119,7 @@ angular.module('BackendApp')
                   message: response.message
                 });
               } else {
-                $scope.$emit('reloadUserData');
+                $scope.$emit('reloadAccountData');
 
                 $location.search('prop', null);
 
