@@ -13,20 +13,13 @@ $Controller = $this->context;
 
 $menu = [
     [
-        'label' => Yii::t('app', 'Link'),
-        'url' => ['/'],
+        'label' => Yii::t('app', 'Dashboard'),
+        'url' => ['/dash/index'],
         'icon' => FA::icon('home'),
         'visible' => true,
-        'selected' => true,
+        'selected' => $Controller->id === 'dash',
     ],
-    [
-        'label' => Yii::t('app', 'Link'),
-        'url' => ['/'],
-        'icon' => FA::icon('list'),
-        'visible' => true,
-        'selected' => false,
-    ],
-    [
+    /*[
         'label' => Yii::t('app', 'Dropdown'),
         'url' => ['/'],
         'icon' => FA::icon('user'),
@@ -71,7 +64,7 @@ $menu = [
                 'selected' => false,
             ],
         ],
-    ],
+    ],*/
 ];
 
 foreach (\Yii::$app->modules as $module => $conf) {

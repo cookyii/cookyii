@@ -4,4 +4,6 @@
  * @author Revin Roman
  */
 
-return [];
+return [
+    '/dash' => 'dash/index'
+];
