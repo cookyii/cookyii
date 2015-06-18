@@ -1,0 +1,42 @@
+{
+  "name": "cookyii/module-media",
+  "description": "Module  for media management for Cookyii CMF",
+  "keywords": [
+    "yii2",
+    "cookyii",
+    "cmf",
+    "module",
+    "media",
+    "file",
+    "photo",
+    "video",
+    "audio",
+    "document"
+  ],
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Revin Roman",
+      "email": "roman@rmrevin.ru",
+      "homepage": "https://rmrevin.ru/",
+      "role": "Founder and project lead"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/cookyii/module-media/issues?state=open",
+    "source": "https://github.com/cookyii/module-media"
+  },
+  "require": {
+    "php": ">=5.4.0",
+
+    "cookyii/base": "dev-master",
+    "cookyii/interfaces": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {"cookyii\\modules\\Media\\": ""}
+  },
+  "extra": {
+    "bootstrap": "cookyii\\modules\\Media\\Bootstrap"
+  }
+}

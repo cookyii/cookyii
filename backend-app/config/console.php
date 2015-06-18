@@ -6,14 +6,10 @@
 
 defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App backend');
 
-
-
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/params.php')
 );
-
-$params['component.urlManager']['rules'] = require(__DIR__ . '/urls.php');
 
 return [
     'id' => 'backend-console-app',
@@ -22,10 +18,10 @@ return [
     'aliases' => ['@tests' => '@backend/tests'],
     'controllerNamespace' => 'backend\commands',
     'controllerMap' => [
-        'user' => 'backend\modules\Account\commands\UserCommand',
-        'rbac' => 'common\commands\RbacCommand',
+        'user' => cookyii\modules\Account\commands\UserCommand::className(),
+        'rbac' => common\commands\RbacCommand::className(),
         'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
+            'class' => yii\console\controllers\MigrateController::className(),
             'templateFile' => '@common/views/migration.php',
             'migrationPath' => '@common/migrations',
         ],

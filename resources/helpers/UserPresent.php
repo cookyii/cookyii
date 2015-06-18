@@ -1,7 +1,7 @@
 <?php
 /**
  * UserPresent.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
  */
 
 namespace resources\helpers;

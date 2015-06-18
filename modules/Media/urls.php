@@ -4,4 +4,5 @@
  * @author Revin Roman
  */
 
-return [];
+return [
+];

@@ -6,7 +6,7 @@
 
 return [
     'component.db' => [
-        'class' => 'yii\db\Connection',
+        'class' => yii\db\Connection::className(),
         'charset' => 'utf8',
         'enableSchemaCache' => true,
         'schemaCache' => 'cache.schema',
@@ -18,25 +18,25 @@ return [
         'tablePrefix' => 'yii_'
     ],
     'component.session' => [
-        'class' => 'yii\web\DbSession',
+        'class' => yii\web\DbSession::className(),
     ],
     'component.security' => [
-        'class' => 'yii\base\Security',
+        'class' => yii\base\Security::className(),
     ],
     'component.log' => [
-        'class' => 'yii\log\Dispatcher',
+        'class' => yii\log\Dispatcher::className(),
         'targets' => [],
     ],
     'component.view' => [
-        'class' => 'yii\web\View',
+        'class' => yii\web\View::className(),
     ],
     'component.user' => [
-        'class' => 'yii\web\User',
+        'class' => yii\web\User::className(),
         'enableAutoLogin' => true,
         'loginUrl' => ['/'],
     ],
     'component.authManager' => [
-        'class' => 'yii\rbac\DbManager',
+        'class' => yii\rbac\DbManager::className(),
         'itemTable' => '{{%rbac_item}}',
         'itemChildTable' => '{{%rbac_item_child}}',
         'assignmentTable' => '{{%rbac_assignment}}',
@@ -44,19 +44,19 @@ return [
         'cache' => 'cache.authManager',
     ],
     'component.cache' => [
-        'class' => 'yii\caching\DbCache',
+        'class' => yii\caching\DbCache::className(),
         'keyPrefix' => 'normal-',
     ],
     'component.cache.authManager' => [
-        'class' => 'yii\caching\ApcCache', // apc cache not available in cli!
+        'class' => yii\caching\ApcCache::className(), // apc cache not available in cli!
         'keyPrefix' => 'authManager-',
     ],
     'component.cache.schema' => [
-        'class' => 'yii\caching\ApcCache', // apc cache not available in cli!
+        'class' => yii\caching\ApcCache::className(), // apc cache not available in cli!
         'keyPrefix' => 'schema-',
     ],
     'component.cache.query' => [
-        'class' => 'yii\caching\DummyCache',
+        'class' => yii\caching\DummyCache::className(),
         'keyPrefix' => 'query-',
     ],
     'component.assetManager' => [
@@ -64,11 +64,11 @@ return [
         'baseUrl' => '@web/assets',
         'linkAssets' => true,
         'bundles' => [
-            'yii\bootstrap\BootstrapAsset' => ['css' => []],
+            yii\bootstrap\BootstrapAsset::className() => ['css' => []],
         ],
     ],
     'component.urlManager.frontend' => [
-        'class' => 'yii\web\UrlManager',
+        'class' => yii\web\UrlManager::className(),
         'baseUrl' => '/',
         'hostInfo' => sprintf('http://%s', getenv('FRONTEND_DOMAIN')),
         'enablePrettyUrl' => true,
@@ -77,7 +77,7 @@ return [
         'rules' => require(\Yii::getAlias('@frontend/config/urls.php')),
     ],
     'component.urlManager.backend' => [
-        'class' => 'yii\web\UrlManager',
+        'class' => yii\web\UrlManager::className(),
         'baseUrl' => '/',
         'hostInfo' => sprintf('http://%s', getenv('BACKEND_DOMAIN')),
         'enablePrettyUrl' => true,
@@ -99,7 +99,7 @@ return [
         'parsers' => ['application/json' => 'yii\web\JsonParser'],
     ],
     'component.formatter' => [
-        'class' => 'common\components\Formatter',
+        'class' => common\components\Formatter::className(),
         'locale' => 'en',
         'timeZone' => 'Etc/GMT-0',
         'dateFormat' => 'dd MMMM y',
@@ -107,22 +107,7 @@ return [
         'datetimeFormat' => 'dd MMMM y HH:mm',
     ],
     'component.authClientCollection' => [
-        'class' => 'yii\authclient\Collection',
+        'class' => yii\authclient\Collection::className(),
         'clients' => include __DIR__ . '/_authclients.php',
-    ],
-    'component.postman' => [
-        'class' => 'rmrevin\yii\postman\Component',
-        'driver' => 'smtp',
-        'default_from' => [getenv('SMTP_USER'), 'cookyii'],
-        'subject_prefix' => 'cookyii / ',
-        'smtp_config' => [
-            'host' => getenv('SMTP_HOST'),
-            'port' => getenv('SMTP_PORT'),
-            'auth' => true,
-            'user' => getenv('SMTP_USER'),
-            'password' => getenv('SMTP_PASSWORD'),
-            'secure' => getenv('SMTP_ENCRYPT') === 'true' ? 'ssl' : '',
-            'debug' => false,
-        ],
     ],
 ];

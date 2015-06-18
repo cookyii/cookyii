@@ -28,6 +28,7 @@
     "yiisoft/yii2-bootstrap": "2.0.*",
     "yiisoft/yii2-imagine": "2.0.*",
     "yiisoft/yii2-authclient": "2.0.*",
+    "yiisoft/yii2-swiftmailer": "2.0.*",
 
     "rmrevin/yii2-fontawesome": "2.10.*",
     "rmrevin/yii2-socicon": "1.0.*",
@@ -48,7 +49,9 @@
   },
   "autoload": {
     "psr-4": {
-      "cookyii\\": ""
+      "cookyii\\": "",
+      "cookyii\\modules\\Account\\": "./modules/Account",
+      "cookyii\\modules\\Media\\": "./modules/Media"
     }
   },
   "extra": {

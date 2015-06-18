@@ -11,16 +11,19 @@ $params = array_merge(
     require(__DIR__ . '/params.php')
 );
 
-$params['component.i18n']['translations'] = include(__DIR__ . '/translations.php');
-
 return [
     'id' => 'backend-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'cookyii\modules\Account\backend\Bootstrap',
+        'cookyii\modules\Media\Bootstrap',
+        'log',
+    ],
     'modules' => [
-        'account' => 'backend\modules\Account\Module',
+        'account' => cookyii\modules\Account\backend\Module::className(),
+        'media' => cookyii\modules\Media\Module::className(),
     ],
     'components' => [
         'db' => $params['component.db'],
@@ -31,6 +34,7 @@ return [
         'assetManager' => $params['component.assetManager'],
         'urlManager.frontend' => $params['component.urlManager.frontend'],
         'urlManager' => $params['component.urlManager.backend'],
+        'request' => $params['component.request.backend'],
         'view' => $params['component.view'],
         'i18n' => $params['component.i18n'],
         'formatter' => $params['component.formatter'],
@@ -40,7 +44,6 @@ return [
         'cache.query' => $params['component.cache.query'],
         'errorHandler' => $params['component.errorHandler'],
         'log' => $params['component.log'],
-        'request' => $params['component.request.backend'],
         'authClientCollection' => $params['component.authClientCollection'],
     ],
     'params' => $params,

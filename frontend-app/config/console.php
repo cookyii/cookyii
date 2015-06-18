@@ -11,8 +11,6 @@ $params = array_merge(
     require(__DIR__ . '/params.php')
 );
 
-$params['component.i18n']['translations'] = include(__DIR__ . '/translations.php');
-
 return [
     'id' => 'frontend-console-app',
     'name' => APP_NAME,
@@ -20,9 +18,9 @@ return [
     'aliases' => ['@tests' => '@frontend/tests'],
     'controllerNamespace' => 'frontend\commands',
     'controllerMap' => [
-        'rbac' => 'common\commands\RbacCommand',
+        'rbac' => common\commands\RbacCommand::className(),
         'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
+            'class' => yii\console\controllers\MigrateController::className(),
             'templateFile' => '@common/views/migration.php',
             'migrationPath' => '@common/migrations',
         ],
