@@ -1,6 +1,7 @@
 angular
   .module('BackendApp')
-  .controller('IndexController', function ($scope, $timeout, $mdToast, $mdSidenav, $mdUtil, $log) {
+
+  .controller('DashController', function ($scope, $timeout, $mdToast, $mdSidenav, $mdUtil, $log) {
     $scope.toggleSidePanel = buildToggler('side-panel');
     /**
      * Build handler to open/close a SideNav; when animation finishes

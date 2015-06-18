@@ -20,7 +20,7 @@ return array_merge($config, [
     'aliases' => ['@tests' => '@backend/tests'],
     'controllerNamespace' => 'backend\commands',
     'controllerMap' => [
-        'user' => cookyii\modules\Account\commands\UserCommand::className(),
+        'account' => cookyii\modules\Account\commands\UserCommand::className(),
         'rbac' => common\commands\RbacCommand::className(),
         'migrate' => [
             'class' => components\console\controllers\MigrateController::className(),

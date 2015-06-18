@@ -4,16 +4,19 @@
  * @author Revin Roman
  */
 
-namespace backend\views\site\_assets;
+namespace backend\views\_assets;
 
-
-class IndexAssetBundle extends \yii\web\AssetBundle
+/**
+ * Class DashAssetBundle
+ * @package backend\views\site\_assets
+ */
+class DashAssetBundle extends \yii\web\AssetBundle
 {
 
     public $sourcePath = '@backend/views/site/_assets/_sources';
 
     public $css = [
-        'index.css',
+        'dash.css',
     ];
 
     public $js = [
