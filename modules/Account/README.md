@@ -32,12 +32,7 @@ return [
 ];
 ```
 
-### 2. Execute new migrations
-```bash
-./frontend migrate
-```
-
-### 3. Add new permissions
+### 2. Add new permissions
 In `rbac/update` command add "merge" class `cookyii\modules\Account\backend\Permissions`:
 ```php
 // ./common/commands/RbacCommand.php
@@ -55,7 +50,12 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
 
 ```
 
-### 4. Update permissions
+### 3. Update permissions
 ```bash
 ./backend rbac/update
+```
+
+### 4. Execute new migrations
+```bash
+./frontend migrate
 ```

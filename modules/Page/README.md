@@ -32,9 +32,27 @@ return [
 ];
 ```
 
-### 2. Execute new migrations
-```bash
-./frontend migrate
+### 2. Dependencies
+Also, you need to configure the modules [account](https://github.com/cookyii/module-account)
+and [media](https://github.com/cookyii/module-media) (they are already downloaded).
+
+```php
+// ./backend-app/config/app.php
+
+return [
+    // ...
+    'bootstrap' => [
+        // some components ...
+        'account', 'page', 'media',
+    ],
+    'modules' => [
+        // some modules ...
+        'account' => 'cookyii\modules\Account\backend\Module',
+        'page' => 'cookyii\modules\Page\backend\Module',
+        'media' => 'cookyii\modules\Media\backend\Module',
+    ],
+    // ...
+];
 ```
 
 ### 3. Add new permissions
@@ -47,6 +65,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     
     public $backendMerge = [
         // ...
+        'cookyii\modules\Account\backend\Permissions',
         'cookyii\modules\Page\backend\Permissions',
     ];
 }
@@ -58,6 +77,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
 ./backend rbac/update
 ```
 
-### 5. Dependencies
-Also, you need to configure the modules [account](https://github.com/cookyii/module-account)
-and [media](https://github.com/cookyii/module-media) (they are already downloaded).
+### 5. Execute new migrations
+```bash
+./frontend migrate
+```
