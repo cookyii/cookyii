@@ -12,7 +12,7 @@ use yii\helpers\FileHelper;
  * Class Module
  * @package cookyii\modules\Media
  */
-class Module extends \yii\base\Module
+class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
 {
 
     /** @var string */
@@ -99,6 +99,19 @@ class Module extends \yii\base\Module
         $this->storageWebPath = \Yii::getAlias($this->storageWebAlias);
         $this->uploadWebPath = \Yii::getAlias($this->uploadWebAlias);
         $this->uploadPath = \Yii::getAlias($this->uploadAlias);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function bootstrap($APP)
+    {
+        $APP->getI18n()
+            ->translations['media'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => 'en-US',
+            'basePath' => '@app/messages',
+        ];
     }
 
     /**

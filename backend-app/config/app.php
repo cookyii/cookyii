@@ -19,8 +19,8 @@ return array_merge($config, [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
+        'account',
         'cookyii\modules\Page\backend\Bootstrap',
-        'cookyii\modules\Account\backend\Bootstrap',
         'cookyii\modules\Media\Bootstrap',
         'log',
     ],

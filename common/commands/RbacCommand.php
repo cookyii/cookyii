@@ -6,10 +6,12 @@
 
 namespace common\commands;
 
-use backend\Permissions as BP;
-use common\Roles as R;
-use frontend\Permissions as FP;
-use rmrevin\yii\rbac\RbacFactory as RF;
+use backend;
+use common\Roles;
+use cookyii\modules\Account;
+use cookyii\modules\Page;
+use frontend;
+use rmrevin\yii\rbac\RbacFactory as F;
 
 /**
  * Class RbacCommand
@@ -21,16 +23,25 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     /** @var string|null */
     public $forceAssign = 'user';
 
+    /** @var array */
+    public $frontendMerge = [];
+
+    /** @var array */
+    public $backendMerge = [
+        'cookyii\modules\Account\backend\Permissions',
+        'cookyii\modules\Page\backend\Permissions',
+    ];
+
     /**
      * @return \yii\rbac\Role[]
      */
     protected function roles()
     {
         return [
-            RF::Role(R::ADMIN, 'Administrator'),
-            RF::Role(R::MANAGER, 'Manager'),
-            RF::Role(R::CLIENT, 'Client'),
-            RF::Role(R::USER, 'User'),
+            F::Role(Roles::ADMIN, 'Administrator'),
+            F::Role(Roles::MANAGER, 'Manager'),
+            F::Role(Roles::CLIENT, 'Client'),
+            F::Role(Roles::USER, 'User'),
         ];
     }
 
@@ -58,9 +69,12 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
      */
     private function frontendPermissions()
     {
-        return [
-            RF::Permission(FP::ACCESS, 'It has access to the frontend'),
-        ];
+        return array_merge(
+            [
+                F::Permission(frontend\Permissions::ACCESS, 'It has access to the frontend'),
+            ],
+            $this->expandMergeClasses($this->frontendMerge)
+        );
     }
 
     /**
@@ -68,11 +82,13 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
      */
     private function backendPermissions()
     {
-        return [
-            RF::Permission(BP::ACCESS, 'It has access to the backend'),
-            RF::Permission(BP::PAGE_ACCESS, 'It has access to page module'),
-            RF::Permission(BP::ACCOUNT_ACCESS, 'It has access to account module'),
-        ];
+        return array_merge(
+            [
+                F::Permission(backend\Permissions::ACCESS, 'It has access to the backend'),
+                F::Permission(backend\Permissions::ACCESS, 'It has access to the backend'),
+            ],
+            $this->expandMergeClasses($this->backendMerge)
+        );
     }
 
     /**
@@ -81,16 +97,16 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     protected function inheritanceRoles()
     {
         return [
-            R::ADMIN => [
-                R::MANAGER,
+            Roles::ADMIN => [
+                Roles::MANAGER,
             ],
-            R::MANAGER => [
-                R::USER,
+            Roles::MANAGER => [
+                Roles::USER,
             ],
-            R::CLIENT => [
-                R::USER,
+            Roles::CLIENT => [
+                Roles::USER,
             ],
-            R::USER => [],
+            Roles::USER => [],
         ];
     }
 
@@ -100,18 +116,45 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     protected function inheritancePermissions()
     {
         return [
-            R::ADMIN => [
-                BP::ACCOUNT_ACCESS,
+            Roles::ADMIN => [
+                Account\backend\Permissions::ACCOUNT_ACCESS,
             ],
-            R::MANAGER => [
-                BP::ACCESS,
-                BP::PAGE_ACCESS,
+            Roles::MANAGER => [
+                backend\Permissions::ACCESS,
+                Page\backend\Permissions::PAGE_ACCESS,
             ],
-            R::CLIENT => [
+            Roles::CLIENT => [
             ],
-            R::USER => [
-                FP::ACCESS,
+            Roles::USER => [
+                frontend\Permissions::ACCESS,
             ],
         ];
+    }
+
+    /**
+     * @param array $classList
+     * @return array
+     */
+    private function expandMergeClasses(array $classList)
+    {
+        $result = [];
+
+        if (!empty($classList)) {
+            foreach ($classList as $class) {
+                if (!class_exists($class)) {
+                    echo sprintf('----- Merge class `%s` not exists.', $class) . PHP_EOL;
+                    continue;
+                }
+
+                $perms = (array)call_user_func([$class, 'get']);
+                if (!empty($perms)) {
+                    foreach ($perms as $perm => $desc) {
+                        $result[$perm] = F::Permission($perm, $desc);
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 }

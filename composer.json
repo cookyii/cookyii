@@ -1,6 +1,13 @@
 {
   "name": "cookyii/project",
-  "description": "Cookyii CMF - Development repo",
+  "description": "Base application for Cookyii CMF",
+  "keywords": [
+    "yii2",
+    "framework",
+    "cookie",
+    "cookyii",
+    "cmf"
+  ],
   "type": "yii2-extension",
   "license": "BSD-3-Clause",
   "authors": [
@@ -18,10 +25,18 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "replace": {
-    "cookyii/base": "self.version"
+    "cookyii/base": "self.version",
+    "cookyii/module-account": "self.version",
+    "cookyii/module-page": "self.version",
+    "cookyii/module-media": "self.version"
   },
   "require": {
     "php": ">=5.4.0",
+
+    "cookyii/base": "dev-master",
+    "cookyii/module-account": "dev-master",
+    "cookyii/module-page": "dev-master",
+    "cookyii/module-media": "dev-master",
 
     "yiisoft/yii2": "2.0.4",
     "yiisoft/yii2-composer": "2.0.*",
@@ -30,12 +45,12 @@
     "yiisoft/yii2-authclient": "2.0.*",
     "yiisoft/yii2-swiftmailer": "2.0.*",
 
-    "rmrevin/yii2-fontawesome": "2.10.*",
-    "rmrevin/yii2-socicon": "1.0.*",
-    "rmrevin/yii2-minify-view": "1.8.*",
-    "rmrevin/yii2-rbac-command": "1.1.*",
-    "rmrevin/yii2-power-migration": "1.1.*",
-    "rmrevin/yii2-imperavi-bundle": "1.0.*",
+    "rmrevin/yii2-fontawesome": "~2.10",
+    "rmrevin/yii2-socicon": "~1.0",
+    "rmrevin/yii2-minify-view": "~1.8",
+    "rmrevin/yii2-rbac-command": "~1.3",
+    "rmrevin/yii2-power-migration": "~1.1",
+    "rmrevin/yii2-imperavi-bundle": "~1.0",
 
     "vlucas/phpdotenv": "2.0.*"
   },

@@ -1,3 +1,6 @@
+Accounts management module
+=========================
+
 Installation
 ------------
 
@@ -5,14 +8,54 @@ Installation
 composer require cookyii/module-account:dev-master
 ```
 
-After downloading in `backend` config in section `bootstrap` add:
+Configuration
+-------------
+
+### 1. Update config
+In `backend` `app` config 
+in section `modules` add `cookyii\modules\Account\backend\Module`
+and in section `bootstrap` add `account`:
 ```php
+// ./backend-app/config/app.php
+
 return [
     // ...
     'bootstrap' => [
         // some components ...
-        'cookyii\modules\Account\backend\Bootstrap'
+        'account'
+    ],
+    'modules' => [
+        // some modules ...
+        'account' => 'cookyii\modules\Account\backend\Module',
     ],
     // ...
 ];
+```
+
+### 2. Execute new migrations
+```bash
+./frontend migrate
+```
+
+### 3. Add new permissions
+In `rbac/update` command add "merge" class `cookyii\modules\Account\backend\Permissions`:
+```php
+// ./common/commands/RbacCommand.php
+
+class RbacCommand extends \rmrevin\yii\rbac\Command
+{
+    
+    public $backendMerge = [
+        // ...
+        'cookyii\modules\Account\backend\Permissions',
+    ];
+    
+    // ...
+}
+
+```
+
+### 4. Update permissions
+```bash
+./backend rbac/update
 ```

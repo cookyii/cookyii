@@ -26,8 +26,7 @@
   "require": {
     "php": ">=5.4.0",
 
-    "cookyii/base": "dev-master",
-    "cookyii/interfaces": "dev-master"
+    "cookyii/base": "dev-master"
   },
   "autoload": {
     "psr-4": {

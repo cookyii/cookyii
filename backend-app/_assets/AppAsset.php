@@ -38,7 +38,7 @@ class AppAsset extends \yii\web\AssetBundle
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'rmrevin\yii\fontawesome\CDNAssetBundle',
+        'rmrevin\yii\fontawesome\cdn\AssetBundle',
         'rmrevin\yii\imperavi\AssetBundle',
         'rmrevin\yii\imperavi\plugins\FileManagerPluginAssetBundle',
         'rmrevin\yii\imperavi\plugins\ImageManagerPluginAssetBundle',

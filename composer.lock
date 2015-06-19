@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0899ebb906d66005e58d9b0e3ec7877f",
+    "hash": "0cbb789206029ce5cb081d7933dae26c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -452,16 +452,16 @@
         },
         {
             "name": "rmrevin/yii2-fontawesome",
-            "version": "2.10.1",
+            "version": "2.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-                "reference": "4315b9a83343fb2217a0018d974e9dbeb2d34a1d"
+                "reference": "2f083b0a5488c4e5f17970ecef3a741cbcf95ea4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/4315b9a83343fb2217a0018d974e9dbeb2d34a1d",
-                "reference": "4315b9a83343fb2217a0018d974e9dbeb2d34a1d",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/2f083b0a5488c4e5f17970ecef3a741cbcf95ea4",
+                "reference": "2f083b0a5488c4e5f17970ecef3a741cbcf95ea4",
                 "shasum": ""
             },
             "require": {
@@ -500,7 +500,7 @@
                 "font",
                 "yii"
             ],
-            "time": "2015-05-09 08:36:03"
+            "time": "2015-06-19 12:13:33"
         },
         {
             "name": "rmrevin/yii2-imperavi-bundle",
@@ -550,16 +550,16 @@
         },
         {
             "name": "rmrevin/yii2-minify-view",
-            "version": "1.8.5",
+            "version": "1.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-minify-view.git",
-                "reference": "34e59067317e7cd05e06b3ed3a67cb528cf4388b"
+                "reference": "d4a446e41c191814596cff3c473062b902213f1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/34e59067317e7cd05e06b3ed3a67cb528cf4388b",
-                "reference": "34e59067317e7cd05e06b3ed3a67cb528cf4388b",
+                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/d4a446e41c191814596cff3c473062b902213f1a",
+                "reference": "d4a446e41c191814596cff3c473062b902213f1a",
                 "shasum": ""
             },
             "require": {
@@ -591,7 +591,7 @@
                 "view",
                 "yii2"
             ],
-            "time": "2015-06-10 14:29:57"
+            "time": "2015-06-19 11:23:18"
         },
         {
             "name": "rmrevin/yii2-power-migration",
@@ -638,16 +638,16 @@
         },
         {
             "name": "rmrevin/yii2-rbac-command",
-            "version": "1.1.3",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-rbac-command.git",
-                "reference": "6fce586261b1ebcdb3f36f3e9edccc73acc3db4a"
+                "reference": "71cd53fe1dce51e2edf26cf07fa016f82a3c47eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-rbac-command/zipball/6fce586261b1ebcdb3f36f3e9edccc73acc3db4a",
-                "reference": "6fce586261b1ebcdb3f36f3e9edccc73acc3db4a",
+                "url": "https://api.github.com/repos/rmrevin/yii2-rbac-command/zipball/71cd53fe1dce51e2edf26cf07fa016f82a3c47eb",
+                "reference": "71cd53fe1dce51e2edf26cf07fa016f82a3c47eb",
                 "shasum": ""
             },
             "require": {
@@ -677,7 +677,7 @@
                 "rbac",
                 "yii"
             ],
-            "time": "2015-04-24 13:24:06"
+            "time": "2015-06-19 10:41:41"
         },
         {
             "name": "rmrevin/yii2-socicon",
@@ -1808,16 +1808,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.1.5",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "be2286cb8c7e1773eded49d9719219e6f74f9e3e"
+                "reference": "631e365cf26bb2c078683e8d9bcf8bc631ac4d44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/be2286cb8c7e1773eded49d9719219e6f74f9e3e",
-                "reference": "be2286cb8c7e1773eded49d9719219e6f74f9e3e",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/631e365cf26bb2c078683e8d9bcf8bc631ac4d44",
+                "reference": "631e365cf26bb2c078683e8d9bcf8bc631ac4d44",
                 "shasum": ""
             },
             "require": {
@@ -1866,7 +1866,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-06-09 13:05:42"
+            "time": "2015-06-19 07:11:55"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2002,16 +2002,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "db63be1159c81df649cd0260e30249a586d4129e"
+                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/db63be1159c81df649cd0260e30249a586d4129e",
-                "reference": "db63be1159c81df649cd0260e30249a586d4129e",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
+                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
                 "shasum": ""
             },
             "require": {
@@ -2047,7 +2047,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-06-12 07:34:24"
+            "time": "2015-06-19 03:43:16"
         },
         {
             "name": "phpunit/phpunit",
@@ -3107,7 +3107,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "cookyii/base": 20,
+        "cookyii/module-account": 20,
+        "cookyii/module-page": 20,
+        "cookyii/module-media": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -31,7 +31,6 @@
     "php": ">=5.4.0",
 
     "cookyii/base": "dev-master",
-    "cookyii/interfaces": "dev-master",
     "cookyii/module-account": "dev-master"
   },
   "autoload": {
@@ -39,8 +38,5 @@
       "cookyii\\modules\\Media\\": "",
       "resources\\": "./resources"
     }
-  },
-  "extra": {
-    "bootstrap": "cookyii\\modules\\Media\\Bootstrap"
   }
 }
