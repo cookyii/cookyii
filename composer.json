@@ -67,12 +67,14 @@
     "psr-4": {
       "cookyii\\modules\\Page\\": "./modules/Page",
       "cookyii\\modules\\Account\\": "./modules/Account",
+      "cookyii\\modules\\Postman\\": "./modules/Postman",
       "cookyii\\modules\\Media\\": "./modules/Media",
       "components\\": "./components",
       "resources\\": [
         "./resources",
         "./modules/Page/resources",
         "./modules/Account/resources",
+        "./modules/Postman/resources",
         "./modules/Media/resources"
       ]
     }

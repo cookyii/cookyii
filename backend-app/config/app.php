@@ -20,13 +20,15 @@ return array_merge($config, [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
         'account',
-        'cookyii\modules\Page\backend\Bootstrap',
-        'cookyii\modules\Media\Bootstrap',
+        'page',
+        'postman',
+        'media',
         'log',
     ],
     'modules' => [
         'page' => cookyii\modules\Page\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
+        'postman' => cookyii\modules\Postman\backend\Module::className(),
         'media' => cookyii\modules\Media\Module::className(),
     ],
     'components' => [

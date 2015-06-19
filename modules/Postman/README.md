@@ -1,11 +1,11 @@
-Pages management module
-=======================
+Emails management module
+========================
 
 Installation
 ------------
 
 ```bash
-composer require cookyii/module-page:dev-master
+composer require cookyii/module-postman:dev-master
 ```
 
 Configuration
@@ -13,7 +13,7 @@ Configuration
 
 ### 1. Update config
 In `backend` `app` config
-in section `modules` add `cookyii\modules\Page\backend\Module`
+in section `modules` add `cookyii\modules\Postman\backend\Module`
 and in section `bootstrap` add `page`:
 ```php
 // ./backend-app/config/app.php
@@ -22,11 +22,11 @@ return [
     // ...
     'bootstrap' => [
         // some components ...
-        'page'
+        'postman'
     ],
     'modules' => [
         // some modules ...
-        'page' => 'cookyii\modules\Page\backend\Module',
+        'postman' => 'cookyii\modules\Postman\backend\Module',
     ],
     // ...
 ];
@@ -35,9 +35,7 @@ return [
 ### 2. Dependencies
 Also, you need to configure the following modules (they are already downloaded):
 
-* [`cookyii/module-account`](https://github.com/cookyii/module-account)
-* [`cookyii/module-postman`](https://github.com/cookyii/module-postman)
-* [`cookyii/module-media`](https://github.com/cookyii/module-media)
+* [`cookyii/module-media`](https://github.com/cookyii/module-media).
 
 ```php
 // ./backend-app/config/app.php
@@ -46,12 +44,10 @@ return [
     // ...
     'bootstrap' => [
         // some components ...
-        'account', 'page', 'postman', 'media',
+        'postman', 'media',
     ],
     'modules' => [
         // some modules ...
-        'account' => 'cookyii\modules\Account\backend\Module',
-        'page' => 'cookyii\modules\Page\backend\Module',
         'postman' => 'cookyii\modules\Postman\backend\Module',
         'media' => 'cookyii\modules\Media\backend\Module',
     ],
@@ -69,8 +65,6 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     
     public $backendMerge = [
         // ...
-        'cookyii\modules\Account\backend\Permissions',
-        'cookyii\modules\Page\backend\Permissions',
         'cookyii\modules\Postman\backend\Permissions',
     ];
 }

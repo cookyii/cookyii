@@ -32,28 +32,7 @@ return [
 ];
 ```
 
-### 2. Dependencies
-Also, you need to configure the module [account](https://github.com/cookyii/module-account) (it is already downloaded).
-
-```php
-// ./backend-app/config/app.php
-
-return [
-    // ...
-    'bootstrap' => [
-        // some components ...
-        'account', 'media',
-    ],
-    'modules' => [
-        // some modules ...
-        'account' => 'cookyii\modules\Account\backend\Module',
-        'media' => 'cookyii\modules\Media\backend\Module',
-    ],
-    // ...
-];
-```
-
-### 3. Execute new migrations
+### 2. Execute new migrations
 ```bash
 ./frontend migrate
 ```

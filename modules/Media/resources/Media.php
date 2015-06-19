@@ -19,6 +19,10 @@ use yii\helpers\StringHelper;
  * @property string $name
  * @property string $origin_name
  * @property string $sha1
+ * @property integer $created_by
+ * @property integer $updated_by
+ * @property integer $created_at
+ * @property integer $updated_at
  */
 class Media extends \yii\db\ActiveRecord
 {
@@ -29,6 +33,18 @@ class Media extends \yii\db\ActiveRecord
     /** @var string */
     public $path;
 
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            \yii\behaviors\BlameableBehavior::className(),
+            \yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -37,6 +53,23 @@ class Media extends \yii\db\ActiveRecord
         parent::init();
 
         $this->events();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            /** type validators */
+            [['mime', 'name', 'origin_name', 'sha1'], 'string'],
+            [['size', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
+
+            /** semantic validators */
+            [['mime', 'name', 'origin_name', 'sha1'], 'filter', 'filter' => 'str_clean'],
+
+            /** default values */
+        ];
     }
 
     /**
@@ -218,7 +251,7 @@ class Media extends \yii\db\ActiveRecord
      */
     private function events()
     {
-        $this->on(static::EVENT_BEFORE_INSERT, function (\yii\base\ModelEvent $Event) {
+        $this->on(static::EVENT_BEFORE_VALIDATE, function (\yii\base\ModelEvent $Event) {
             /** @var static $Model */
             $Model = $Event->sender;
             $Model->size = filesize($Model->path);

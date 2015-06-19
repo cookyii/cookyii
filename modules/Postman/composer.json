@@ -1,17 +1,14 @@
 {
-  "name": "cookyii/module-media",
-  "description": "Media management module for Cookyii CMF",
+  "name": "cookyii/module-postman",
+  "description": "Emails management module for Cookyii CMF",
   "keywords": [
     "yii2",
     "cookyii",
     "cmf",
     "module",
-    "media",
-    "file",
-    "photo",
-    "video",
-    "audio",
-    "document"
+    "email",
+    "letters",
+    "queue"
   ],
   "type": "yii2-extension",
   "license": "BSD-3-Clause",
@@ -24,17 +21,18 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/cookyii/module-media/issues?state=open",
-    "source": "https://github.com/cookyii/module-media"
+    "issues": "https://github.com/cookyii/module-postman/issues?state=open",
+    "source": "https://github.com/cookyii/module-postman"
   },
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5.0",
 
-    "cookyii/base": "dev-master"
+    "cookyii/base": "dev-master",
+    "cookyii/module-media": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "cookyii\\modules\\Media\\": "",
+      "cookyii\\modules\\Postman\\": "",
       "resources\\": "./resources"
     }
   }

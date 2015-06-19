@@ -4,17 +4,18 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Page\backend;
+namespace cookyii\modules\Postman\backend;
 
-use cookyii\modules\Page;
 use rmrevin\yii\fontawesome\FA;
 
 /**
  * Class Module
- * @package cookyii\modules\Page\backend
+ * @package cookyii\modules\Postman\backend
  */
 class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface, \yii\base\BootstrapInterface
 {
+
+    public $defaultRoute = 'sign/in';
 
     /**
      * @inheritdoc
@@ -23,12 +24,12 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
     {
         return [
             [
-                'label' => \Yii::t('account', 'Pages'),
-                'url' => ['/page/list/index'],
-                'icon' => FA::icon('file'),
-                'visible' => User()->can(Page\backend\Permissions::PAGE_ACCESS),
-                'selected' => $Controller->module->id === 'page',
-                'sort' => 8000,
+                'label' => \Yii::t('account', 'Postman'),
+                'url' => ['/postman'],
+                'icon' => FA::icon('envelope'),
+                'visible' => User()->can(\cookyii\modules\Postman\backend\Permissions::POSTMAN_ACCESS),
+                'selected' => $Controller->module->id === 'postman',
+                'sort' => 9000,
             ],
         ];
     }
@@ -42,7 +43,7 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
             ->addRules(include(__DIR__ . '/urls.php'));
 
         $app->getI18n()
-            ->translations['page'] = [
+            ->translations['postman'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en-US',
             'basePath' => '@app/messages',

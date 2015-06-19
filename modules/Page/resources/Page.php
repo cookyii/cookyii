@@ -53,12 +53,12 @@ class Page extends \yii\db\ActiveRecord
             [['slug'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['slug', 'title'], 'required'],
             [['slug', 'title'], 'filter', 'filter' => 'str_clean'],
-            [['activated'], 'in', 'range' => [self::NOT_ACTIVATED, self::ACTIVATED]],
-            [['deleted'], 'in', 'range' => [self::NOT_DELETED, self::DELETED]],
+            [['activated'], 'in', 'range' => [static::NOT_ACTIVATED, static::ACTIVATED]],
+            [['deleted'], 'in', 'range' => [static::NOT_DELETED, static::DELETED]],
 
             /** default values */
-            [['activated'], 'default', 'value' => self::NOT_ACTIVATED],
-            [['deleted'], 'default', 'value' => self::NOT_DELETED],
+            [['activated'], 'default', 'value' => static::NOT_ACTIVATED],
+            [['deleted'], 'default', 'value' => static::NOT_DELETED],
         ];
     }
 

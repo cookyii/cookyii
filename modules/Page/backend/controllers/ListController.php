@@ -6,13 +6,13 @@
 
 namespace cookyii\modules\Page\backend\controllers;
 
-use cookyii\modules\Account;
+use cookyii\modules\Page;
 
 /**
  * Class ListController
  * @package cookyii\modules\Page\backend\controllers
  */
-class ListController extends Account\backend\components\Controller
+class ListController extends Page\backend\components\Controller
 {
 
     /**
@@ -27,7 +27,7 @@ class ListController extends Account\backend\components\Controller
                     [
                         'allow' => true,
                         'actions' => ['index'],
-                        'roles' => [\backend\Permissions::PAGE_ACCESS],
+                        'roles' => [Page\backend\Permissions::PAGE_ACCESS],
                     ],
 
                 ],

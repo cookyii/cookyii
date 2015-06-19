@@ -85,12 +85,12 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['email'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['email'], 'required'],
             [['name', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
-            [['activated'], 'in', 'range' => [self::NOT_ACTIVATED, self::ACTIVATED]],
-            [['deleted'], 'in', 'range' => [self::NOT_DELETED, self::DELETED]],
+            [['activated'], 'in', 'range' => [static::NOT_ACTIVATED, static::ACTIVATED]],
+            [['deleted'], 'in', 'range' => [static::NOT_DELETED, static::DELETED]],
 
             /** default values */
-            [['activated'], 'default', 'value' => self::NOT_ACTIVATED],
-            [['deleted'], 'default', 'value' => self::NOT_DELETED],
+            [['activated'], 'default', 'value' => static::NOT_ACTIVATED],
+            [['deleted'], 'default', 'value' => static::NOT_DELETED],
         ];
     }
 
@@ -323,9 +323,9 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     private function events()
     {
         $this->on(
-            self::EVENT_BEFORE_INSERT,
+            static::EVENT_BEFORE_INSERT,
             function (\yii\base\ModelEvent $Event) {
-                /** @var self $Model */
+                /** @var static $Model */
                 $Model = $Event->sender;
                 $Model->password_hash = Security()->generatePasswordHash($this->password);
                 $Model->auth_key = Security()->generateRandomString();
@@ -334,9 +334,9 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         );
 
         $this->on(
-            self::EVENT_BEFORE_UPDATE,
+            static::EVENT_BEFORE_UPDATE,
             function (\yii\base\ModelEvent $Event) {
-                /** @var self $Model */
+                /** @var static $Model */
                 $Model = $Event->sender;
                 if (!empty($this->password)) {
                     $Model->password_hash = Security()->generatePasswordHash($this->password);

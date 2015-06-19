@@ -76,7 +76,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
 
         $this->scanDirectory($this->migrationPath, $applied, $migrations);
 
-        ksort($migrations);
+        sort($migrations);
 
         return $migrations;
     }

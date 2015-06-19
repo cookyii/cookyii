@@ -27,7 +27,7 @@ class EditController extends Account\backend\components\Controller
                     [
                         'allow' => true,
                         'actions' => ['index'],
-                        'roles' => [\backend\Permissions::ACCOUNT_ACCESS],
+                        'roles' => [Account\backend\Permissions::ACCOUNT_ACCESS],
                     ],
 
                 ],

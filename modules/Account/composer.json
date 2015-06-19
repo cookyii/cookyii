@@ -26,7 +26,8 @@
   "require": {
     "php": ">=5.4.0",
 
-    "cookyii/base": "dev-master"
+    "cookyii/base": "dev-master",
+    "cookyii/module-postman": "dev-master"
   },
   "autoload": {
     "psr-4": {

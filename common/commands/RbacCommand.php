@@ -10,6 +10,7 @@ use backend;
 use common\Roles;
 use cookyii\modules\Account;
 use cookyii\modules\Page;
+use cookyii\modules\Postman;
 use frontend;
 use rmrevin\yii\rbac\RbacFactory as F;
 
@@ -30,6 +31,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     public $backendMerge = [
         'cookyii\modules\Account\backend\Permissions',
         'cookyii\modules\Page\backend\Permissions',
+        'cookyii\modules\Postman\backend\Permissions',
     ];
 
     /**
@@ -85,7 +87,6 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
         return array_merge(
             [
                 F::Permission(backend\Permissions::ACCESS, 'It has access to the backend'),
-                F::Permission(backend\Permissions::ACCESS, 'It has access to the backend'),
             ],
             $this->expandMergeClasses($this->backendMerge)
         );
@@ -122,6 +123,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
             Roles::MANAGER => [
                 backend\Permissions::ACCESS,
                 Page\backend\Permissions::PAGE_ACCESS,
+                Postman\backend\Permissions::POSTMAN_ACCESS,
             ],
             Roles::CLIENT => [
             ],

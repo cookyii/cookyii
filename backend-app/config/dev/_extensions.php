@@ -12,14 +12,19 @@ return [
         'version' => '0.0.0.0',
         'alias' => ['@cookyii/module-account' => $base . '/modules/Account'],
     ],
+    'cookyii/module-page' => [
+        'name' => 'cookyii/module-page',
+        'version' => '0.0.0.0',
+        'alias' => ['@cookyii/module-page' => $base . '/modules/Page'],
+    ],
     'cookyii/module-media' => [
         'name' => 'cookyii/module-media',
         'version' => '0.0.0.0',
         'alias' => ['@cookyii/module-media' => $base . '/modules/Media'],
     ],
-    'cookyii/module-page' => [
-        'name' => 'cookyii/module-page',
+    'cookyii/module-postman' => [
+        'name' => 'cookyii/module-postman',
         'version' => '0.0.0.0',
-        'alias' => ['@cookyii/module-page' => $base . '/modules/Page'],
+        'alias' => ['@cookyii/module-postman' => $base . '/modules/Postman'],
     ],
 ];
