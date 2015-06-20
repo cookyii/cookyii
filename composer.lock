@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e703751a27b29a4bbf0412196f9c5887",
+    "hash": "715e3f7b9310742ffc14694b5a7a5cb1",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -680,6 +680,57 @@
             "time": "2015-06-19 17:36:50"
         },
         {
+            "name": "rmrevin/yii2-rollbar",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-rollbar.git",
+                "reference": "ee70c2e55841ccf85dd2c1dc6b47d942c373858f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-rollbar/zipball/ee70c2e55841ccf85dd2c1dc6b47d942c373858f",
+                "reference": "ee70c2e55841ccf85dd2c1dc6b47d942c373858f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "rollbar/rollbar": "0.13.*",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\rollbar\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Revin",
+                    "email": "xgismox@gmail.com",
+                    "homepage": "http://rmrevin.ru/"
+                }
+            ],
+            "description": "Yii2 error handler rollbar",
+            "keywords": [
+                "error",
+                "font",
+                "rollbar",
+                "yii"
+            ],
+            "time": "2015-06-20 10:46:05"
+        },
+        {
             "name": "rmrevin/yii2-socicon",
             "version": "1.0.0",
             "source": {
@@ -725,6 +776,55 @@
                 "yii"
             ],
             "time": "2015-05-03 11:07:29"
+        },
+        {
+            "name": "rollbar/rollbar",
+            "version": "v0.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rollbar/rollbar-php.git",
+                "reference": "f392af0c62b03d8538ef76e5da93c562c01700e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/f392af0c62b03d8538ef76e5da93c562c01700e4",
+                "reference": "f392af0c62b03d8538ef76e5da93c562c01700e4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/rollbar.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rollbar, Inc.",
+                    "email": "support@rollbar.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Monitors errors and exceptions and reports them to Rollbar",
+            "homepage": "http://github.com/rollbar/rollbar-php",
+            "keywords": [
+                "debugging",
+                "errors",
+                "exceptions",
+                "logging",
+                "monitoring"
+            ],
+            "time": "2015-06-16 22:10:25"
         },
         {
             "name": "swiftmailer/swiftmailer",

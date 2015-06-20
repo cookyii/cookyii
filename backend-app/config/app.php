@@ -2,6 +2,7 @@
 /**
  * app.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 defined('APP_NAME') or define('APP_NAME', 'Cookyii Backend');

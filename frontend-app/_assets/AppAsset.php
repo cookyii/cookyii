@@ -2,6 +2,7 @@
 /**
  * AppAsset.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 namespace frontend\_assets;

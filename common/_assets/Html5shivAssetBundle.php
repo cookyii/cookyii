@@ -2,6 +2,7 @@
 /**
  * Html5shivAssetBundle.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 namespace common\_assets;

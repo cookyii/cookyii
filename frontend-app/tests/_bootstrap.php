@@ -2,6 +2,7 @@
 /**
  * _bootstrap.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);

@@ -1,7 +1,8 @@
 <?php
 /**
- * app.dev.php
+ * app.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 $config = include __DIR__ . '/../app.php';

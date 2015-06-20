@@ -1,7 +1,7 @@
 <?php
 /**
  * Module.php
- * @author Revin Roman
+ * @author Some Developer
  */
 
 namespace frontend\modules\Blank;

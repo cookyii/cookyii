@@ -2,6 +2,7 @@
 /**
  * wide.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  *
  * @var yii\web\View $this
  * @var string $content

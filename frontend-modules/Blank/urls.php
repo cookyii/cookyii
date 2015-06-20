@@ -1,7 +1,7 @@
 <?php
 /**
  * urls.php
- * @author Revin Roman
+ * @author Some Developer
  */
 
 return [

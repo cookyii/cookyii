@@ -1,7 +1,7 @@
 <?php
 /**
  * Controller.php
- * @author Revin Roman
+ * @author Some Developer
  */
 
 namespace backend\modules\Blank\components;

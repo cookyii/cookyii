@@ -1,7 +1,8 @@
 <?php
 /**
- * .dev.console.php
+ * console.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 $config = include __DIR__ . '/../console.php';

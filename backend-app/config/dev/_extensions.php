@@ -1,7 +1,8 @@
 <?php
 /**
  * _extensions.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 $base = realpath(__DIR__ . '/../../..');

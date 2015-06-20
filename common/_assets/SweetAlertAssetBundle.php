@@ -2,6 +2,7 @@
 /**
  * SweetAlertAssetBundle.php
  * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 namespace common\_assets;
