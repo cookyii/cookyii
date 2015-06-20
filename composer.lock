@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "715e3f7b9310742ffc14694b5a7a5cb1",
+    "hash": "911ef0493c49e8105f7a7b5b237a3ed8",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -681,16 +681,16 @@
         },
         {
             "name": "rmrevin/yii2-rollbar",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-rollbar.git",
-                "reference": "ee70c2e55841ccf85dd2c1dc6b47d942c373858f"
+                "reference": "99560e71305c2d80e485c701776ad4a45bc88912"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-rollbar/zipball/ee70c2e55841ccf85dd2c1dc6b47d942c373858f",
-                "reference": "ee70c2e55841ccf85dd2c1dc6b47d942c373858f",
+                "url": "https://api.github.com/repos/rmrevin/yii2-rollbar/zipball/99560e71305c2d80e485c701776ad4a45bc88912",
+                "reference": "99560e71305c2d80e485c701776ad4a45bc88912",
                 "shasum": ""
             },
             "require": {
@@ -728,7 +728,7 @@
                 "rollbar",
                 "yii"
             ],
-            "time": "2015-06-20 10:46:05"
+            "time": "2015-06-20 20:20:45"
         },
         {
             "name": "rmrevin/yii2-socicon",

@@ -182,6 +182,11 @@ function str_clean($str)
     return trim(preg_replace('/(\r?\n){2,}/', "\n\n", strip_tags($str)));
 }
 
+/**
+ * @param $email
+ * @param $size
+ * @return string
+ */
 function gravatar($email, $size)
 {
     $hash = md5(strtolower(trim($email)));

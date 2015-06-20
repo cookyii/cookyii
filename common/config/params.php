@@ -5,6 +5,8 @@
  * @link https://rmrevin.ru
  */
 
+$ROLLBAR_ACCESS_TOKEN = getenv('ROLLBAR_ACCESS_TOKEN');
+
 return [
     'component.db' => [
         'class' => yii\db\Connection::className(),
@@ -17,6 +19,14 @@ return [
         'username' => getenv('DB_USER'),
         'password' => getenv('DB_PASS'),
         'tablePrefix' => 'yii_'
+    ],
+    'component.rollbar' => [
+        'class' => rmrevin\yii\rollbar\Component::className(),
+        'accessToken' => $ROLLBAR_ACCESS_TOKEN,
+        'enabled' => !empty($ROLLBAR_ACCESS_TOKEN) && $ROLLBAR_ACCESS_TOKEN !== 'null',
+        'useLogger' => YII_DEBUG,
+        'environment' => YII_ENV,
+        'reportSuppressed' => true,
     ],
     'component.session' => [
         'class' => yii\web\DbSession::className(),
@@ -85,11 +95,6 @@ return [
         'showScriptName' => false,
         'cache' => false,
         'rules' => require(\Yii::getAlias('@backend/config/urls.php')),
-    ],
-    'component.errorHandler' => [
-        'errorAction' => 'site/error',
-    ],
-    'component.i18n' => [
     ],
     'component.request.frontend' => [
         'cookieValidationKey' => getenv('FRONTEND_COOKIE_VALIDATION_KEY'),
