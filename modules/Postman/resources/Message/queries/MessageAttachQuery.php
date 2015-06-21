@@ -1,17 +1,17 @@
 <?php
 /**
- * LetterAttachQuery.php
+ * MessageAttachQuery.php
  * @author Revin Roman
  * @link https://rmrevin.ru
  */
 
-namespace resources\Letter\queries;
+namespace resources\Postman\Message\queries;
 
 /**
- * Class LetterAttachQuery
- * @package resources\Letter\queries
+ * Class MessageAttachQuery
+ * @package resources\Postman\Message\queries
  */
-class LetterAttachQuery extends \yii\db\ActiveQuery
+class MessageAttachQuery extends \yii\db\ActiveQuery
 {
 
     /**

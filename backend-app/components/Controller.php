@@ -11,7 +11,7 @@ namespace backend\components;
  * Class Controller
  * @package backend\components
  */
-class Controller extends \yii\web\Controller
+abstract class Controller extends \components\web\Controller
 {
 
     public $loader = true;
@@ -22,22 +22,16 @@ class Controller extends \yii\web\Controller
 
     /**
      * @inheritdoc
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function init()
     {
         parent::init();
 
-        if (isset($_GET['clear'])) {
-            Cache()->flush();
-            Cache('authManager')->flush();
-            Cache('schema')->flush();
-            Cache('query')->flush();
-        }
+        $this->on(self::EVENT_BEFORE_ACTION, function (\yii\base\ActionEvent $ActionEvent) {
+            $Action = $ActionEvent->action;
 
-        if (!$this->public) {
-            if (User()->isGuest) {
-                User()->loginRequired();
-            } else {
+            if (!User()->isGuest && !in_array($Action->getUniqueId(), ['site/error'], true)) {
                 /** @var \resources\Account $Account */
                 $Account = User()->identity;
 
@@ -49,11 +43,25 @@ class Controller extends \yii\web\Controller
                             throw new \yii\web\ForbiddenHttpException('You account removed.');
                     }
                 }
-
-                if (!User()->can(\backend\Permissions::ACCESS)) {
-                    throw new \yii\web\ForbiddenHttpException('Access denied.');
-                }
             }
-        }
+        });
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => $this->accessRules(),
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    abstract protected function accessRules();
 }

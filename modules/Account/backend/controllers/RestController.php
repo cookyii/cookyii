@@ -18,7 +18,7 @@ class RestController extends \components\rest\Controller
     /**
      * @inheritdoc
      */
-    public function accessRules()
+    protected function accessRules()
     {
         return [
             [

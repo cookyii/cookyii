@@ -104,6 +104,12 @@ return [
         'cookieValidationKey' => getenv('BACKEND_COOKIE_VALIDATION_KEY'),
         'parsers' => ['application/json' => 'yii\web\JsonParser'],
     ],
+    'component.i18n' => [
+        'class' => yii\i18n\I18N::className(),
+        'translations' => [
+            'cookyii' => yii\i18n\PhpMessageSource::className(),
+        ],
+    ],
     'component.formatter' => [
         'class' => components\i18n\Formatter::className(),
         'locale' => 'en',

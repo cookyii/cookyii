@@ -15,6 +15,20 @@ class DashController extends \backend\components\Controller
 {
 
     /**
+     * @inheritdoc
+     */
+    protected function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['@'],
+            ],
+        ];
+    }
+
+    /**
      * @throws \yii\web\NotFoundHttpException
      */
     public function actionIndex()

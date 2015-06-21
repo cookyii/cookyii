@@ -10,7 +10,6 @@
 use cookyii\modules\Page;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
-use yii\helpers\Json;
 
 /** @var \components\widgets\angular\ActiveForm $form */
 $form = \components\widgets\angular\ActiveForm::begin([

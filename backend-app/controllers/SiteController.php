@@ -19,6 +19,20 @@ class SiteController extends \backend\components\Controller
     /**
      * @inheritdoc
      */
+    protected function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'actions' => ['index', 'error', 'captcha'],
+                'roles' => ['?', '@'],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         return [

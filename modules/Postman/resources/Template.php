@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Letter;
+namespace resources\Postman;
 
 /**
  * Class Template
- * @package resources\Letter
+ * @package resources\Postman
  *
  * @property integer $id
  * @property string $code
@@ -50,11 +50,11 @@ class Template extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Letter\queries\LetterTemplateQuery
+     * @return \resources\Postman\queries\TemplateQuery
      */
     public static function find()
     {
-        return new \resources\Letter\queries\LetterTemplateQuery(get_called_class());
+        return new \resources\Postman\queries\TemplateQuery(get_called_class());
     }
 
     /**
@@ -62,7 +62,7 @@ class Template extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%postman_letter_template}}';
+        return '{{%postman_template}}';
     }
 
     const NOT_USE_LAYOUT = 0;

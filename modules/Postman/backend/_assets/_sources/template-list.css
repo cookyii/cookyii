@@ -1,0 +1,26 @@
+/*********************************** Other *****************/
+.content-wrapper { padding-bottom: 35px; }
+md-switch { margin: 0 10px; }
+/*********************************** Search ****************/
+.search { width: 150px; margin-right: 100px; transition: width .4s ease-out; }
+.search.wide { width: 300px; }
+/*********************************** Table *****************/
+.table-templates { }
+.table-templates td.activated { width: 65px; padding: 6px 0; }
+.table-templates td.id { width: 70px; }
+.table-templates td.title { }
+.table-templates td.updated { }
+.table-templates td.actions { width: 70px; text-align: center; font-size: 1.45em; padding: 4px; }
+.table-templates td.actions > a { opacity: 0.1; }
+.table-templates tr:hover .actions > a,
+.table-templates tr:focus .actions > a { opacity: 0.9; }
+.table-templates tr.deactivated { }
+.table-templates tr.deactivated .id,
+.table-templates tr.deactivated .name,
+.table-templates tr.deactivated .email,
+.table-templates tr.deactivated .updated { color: #b8b8b8; }
+.table-templates tr.deleted { }
+.table-templates tr.deleted .id,
+.table-templates tr.deleted .name,
+.table-templates tr.deleted .email,
+.table-templates tr.deleted .updated { text-decoration: line-through; }

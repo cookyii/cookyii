@@ -1,17 +1,17 @@
 <?php
 /**
- * LetterTemplateQuery.php
+ * TemplateQuery.php
  * @author Revin Roman
  * @link https://rmrevin.ru
  */
 
-namespace resources\Letter\queries;
+namespace resources\Postman\queries;
 
 /**
- * Class LetterTemplateQuery
- * @package resources\Letter\queries
+ * Class TemplateQuery
+ * @package resources\Postman\queries
  */
-class LetterTemplateQuery extends \yii\db\ActiveQuery
+class TemplateQuery extends \yii\db\ActiveQuery
 {
 
     /**
@@ -41,7 +41,7 @@ class LetterTemplateQuery extends \yii\db\ActiveQuery
      */
     public function withoutDeleted()
     {
-        $this->andWhere(['deleted' => \resources\Letter\Template::NOT_DELETED]);
+        $this->andWhere(['deleted' => \resources\Postman\Template::NOT_DELETED]);
 
         return $this;
     }

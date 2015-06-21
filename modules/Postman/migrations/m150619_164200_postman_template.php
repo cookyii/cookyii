@@ -3,12 +3,12 @@
 use yii\db\mysql\Schema;
 use yii\helpers\Json;
 
-class m150619_164200_postman_letter_template extends \components\db\Migration
+class m150619_164200_postman_template extends \components\db\Migration
 {
 
     public function up()
     {
-        $this->createTable('{{%postman_letter_template}}', [
+        $this->createTable('{{%postman_template}}', [
             'id' => Schema::TYPE_PK,
             'code' => Schema::TYPE_STRING,
             'subject' => Schema::TYPE_TEXT,
@@ -23,40 +23,44 @@ class m150619_164200_postman_letter_template extends \components\db\Migration
             'deleted' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
         ]);
 
-        $this->createIndex('idx_code', '{{%postman_letter_template}}', ['code'], true);
+        $this->createIndex('idx_code', '{{%postman_template}}', ['code'], true);
 
-        $this->createTable('{{%postman_letter_template_attach}}', [
-            'letter_template_id' => Schema::TYPE_INTEGER,
+        $this->createTable('{{%postman_template_attach}}', [
+            'template_id' => Schema::TYPE_INTEGER,
             'media_id' => Schema::TYPE_INTEGER,
             'embed' => Schema::TYPE_BOOLEAN,
-            'PRIMARY KEY (`letter_template_id`, `media_id`)',
-            'FOREIGN KEY (letter_template_id) REFERENCES {{%postman_letter_template}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
+            'PRIMARY KEY (`template_id`, `media_id`)',
+            'FOREIGN KEY (template_id) REFERENCES {{%postman_template}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
             'FOREIGN KEY (media_id) REFERENCES {{%media}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
         ]);
 
         $time = time();
 
         $params = [
-            'subject' => 'Letter subject',
-            'content' => 'Letter content',
+            [
+                'key' => 'subject',
+                'description' => 'Message subject',
+            ],
+            [
+                'key' => 'content',
+                'description' => 'Message content',
+            ],
         ];
 
         $content = [
-            'text' => '<!--Letter header-->' . PHP_EOL
-                . '{subject}' . PHP_EOL
+            'text' => '{subject}' . PHP_EOL
                 . '----------------------------' . PHP_EOL
                 . '{content}' . PHP_EOL
                 . PHP_EOL
-                . 'Good bye!'
-                . '<!--Letter footer-->' . PHP_EOL,
-            'html' => '<div class="header">{subject}</div>'
-                . '<div class="content">{content}</div>'
+                . 'Good bye!',
+            'html' => '<div class="header">{subject}</div>' . PHP_EOL
+                . '<div class="content">{content}</div>' . PHP_EOL
                 . '<br><div class="footer">Good bye!</div>',
         ];
 
-        $this->insert('{{%postman_letter_template}}', [
+        $this->insert('{{%postman_template}}', [
             'code' => '.layout',
-            'subject' => 'Base layout fod letter',
+            'subject' => 'Base layout for message',
             'content_text' => $content['text'],
             'content_html' => $content['html'],
             'params' => Json::encode($params),
@@ -69,22 +73,25 @@ class m150619_164200_postman_letter_template extends \components\db\Migration
         ]);
 
         $params = [
-            'param1' => 'This is a variable placeholder',
+            [
+                'key' => 'param1',
+                'description' => 'This is a variable placeholder',
+            ],
         ];
 
         $address = [
             [
-                'type' => 0, // filed "reply to"
+                'type' => '1', // filed "reply to"
                 'email' => 'support@example.com',
                 'name' => 'Support',
             ],
             [
-                'type' => 1, // filed "to"
+                'type' => '2', // filed "to"
                 'email' => 'west.a@example.com',
                 'name' => 'Adam West',
             ],
             [
-                'type' => 2, // filed "cc"
+                'type' => '3', // filed "cc"
                 'email' => 'bob@example.com',
                 'name' => null,
             ],
@@ -96,13 +103,13 @@ class m150619_164200_postman_letter_template extends \components\db\Migration
                 . 'This is a variable: {param1}.' . PHP_EOL
                 . PHP_EOL
                 . 'Good bye!',
-            'html' => '<p><strong>Hello!</strong></p>'
-                . '<p>This is an example <i>htmk</i> letter.</p>'
-                . '<p>This is a variable: <i>{param1}</i>.</p>'
+            'html' => '<p><strong>Hello!</strong></p>' . PHP_EOL
+                . '<p>This is an example <i>htmk</i> letter.</p>' . PHP_EOL
+                . '<p>This is a variable: <i>{param1}</i>.</p>' . PHP_EOL
                 . '<br><p>Good bye!</p>',
         ];
 
-        $this->insert('{{%postman_letter_template}}', [
+        $this->insert('{{%postman_template}}', [
             'code' => 'example',
             'subject' => 'Good Day!',
             'content_text' => $content['text'],
@@ -119,7 +126,7 @@ class m150619_164200_postman_letter_template extends \components\db\Migration
 
     public function down()
     {
-        $this->dropTable('{{%postman_letter_template_attach}}');
-        $this->dropTable('{{%postman_letter_template}}');
+        $this->dropTable('{{%postman_template_attach}}');
+        $this->dropTable('{{%postman_template}}');
     }
 }

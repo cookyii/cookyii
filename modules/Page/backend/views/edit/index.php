@@ -28,12 +28,12 @@ Page\backend\_assets\EditAssetBundle::register($this);
                 <span class="info-box-icon"><?= FA::icon('warning') ?></span>
 
                 <div class="info-box-content">
-                    <strong class="info-box-text"><?= Yii::t('account', 'Warning') ?></strong>
+                    <strong class="info-box-text"><?= Yii::t('cookyii', 'Warning') ?></strong>
 
                     <span class="progress-description">
-                        <?= Yii::t('account', 'The data of this page has been changed.') ?><br>
-                        <?= Yii::t('account', 'Recommended {refresh} the page.', [
-                            'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('account', 'Refresh'), null, [
+                        <?= Yii::t('cookyii', 'The data of this page has been changed.') ?><br>
+                        <?= Yii::t('cookyii', 'Recommended {refresh} the page.', [
+                            'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('cookyii', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',
                                 'ng-click' => 'reload()',
                             ])

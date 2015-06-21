@@ -42,6 +42,8 @@ return array_merge($config, [
         'urlManager' => $params['component.urlManager.frontend'],
         'urlManager.backend' => $params['component.urlManager.backend'],
         'authManager' => $params['component.authManager'],
+        'i18n' => $params['component.i18n'],
+        'formatter' => $params['component.formatter'],
         'log' => $params['component.log'],
         'rollbar' => $params['component.rollbar'],
         'errorHandler' => [

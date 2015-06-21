@@ -1,16 +1,16 @@
 <?php
 /**
- * LetterQuery.php
+ * MessageQuery.php
  * @author Revin Roman http://phptime.ru
  */
 
-namespace resources\queries;
+namespace resources\Postman\queries;
 
 /**
- * Class LetterQuery
- * @package resources\queries
+ * Class MessageQuery
+ * @package resources\Postman\queries
  */
-class LetterQuery extends \yii\db\ActiveQuery
+class MessageQuery extends \yii\db\ActiveQuery
 {
 
     /**
@@ -40,6 +40,6 @@ class LetterQuery extends \yii\db\ActiveQuery
      */
     public function onlyNew()
     {
-        return $this->byStatus([\resources\Letter::STATUS_NEW]);
+        return $this->byStatus([\resources\Postman\Message::STATUS_NEW]);
     }
 }

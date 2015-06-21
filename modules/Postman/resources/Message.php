@@ -1,14 +1,14 @@
 <?php
 /**
- * Page.php
+ * Message.php
  * @author Revin Roman http://phptime.ru
  */
 
-namespace resources;
+namespace resources\Postman;
 
 /**
- * Class Page
- * @package resources
+ * Class Message
+ * @package resources\Postman
  *
  * @property integer $id
  * @property string $subject
@@ -19,7 +19,7 @@ namespace resources;
  * @property integer $created_at
  * @property integer $sent_at
  */
-class Letter extends \yii\db\ActiveRecord
+class Message extends \yii\db\ActiveRecord
 {
 
     /**
@@ -69,11 +69,11 @@ class Letter extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\queries\LetterQuery
+     * @return \resources\Postman\queries\MessageQuery
      */
     public static function find()
     {
-        return new \resources\queries\LetterQuery(get_called_class());
+        return new \resources\Postman\queries\MessageQuery(get_called_class());
     }
 
     /**
@@ -81,7 +81,7 @@ class Letter extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%postman_letter}}';
+        return '{{%postman_message}}';
     }
 
     const STATUS_NEW = 0;

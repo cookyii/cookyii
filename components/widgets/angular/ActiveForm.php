@@ -37,7 +37,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
         }
 
         if (!isset($this->options['ng-submit'])) {
-            $this->options['ng-submit'] = 'submit($event)';
+            $this->options['ng-submit'] = sprintf('submit(%s, $event)', $this->name);
         }
 
         if (!empty($this->controller)) {

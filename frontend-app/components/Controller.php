@@ -11,27 +11,28 @@ namespace frontend\components;
  * Class Controller
  * @package frontend\components
  */
-class Controller extends \yii\web\Controller
+abstract class Controller extends \components\web\Controller
 {
 
     public $hideLoader = false;
-
-    public $public = false;
 
     public $layout = 'main';
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function behaviors()
     {
-        parent::init();
-
-        if (isset($_GET['clear'])) {
-            Cache()->flush();
-            Cache('authManager')->flush();
-            Cache('schema')->flush();
-            Cache('query')->flush();
-        }
+        return [
+            'access' => [
+                'class' => 'yii\filters\AccessControl',
+                'rules' => $this->accessRules(),
+            ],
+        ];
     }
+
+    /**
+     * @return array
+     */
+    abstract protected function accessRules();
 }

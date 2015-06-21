@@ -18,19 +18,13 @@ class ListController extends Account\backend\components\Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function accessRules()
     {
         return [
-            'access' => [
-                'class' => \yii\filters\AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['index'],
-                        'roles' => [Account\backend\Permissions::ACCOUNT_ACCESS],
-                    ],
-
-                ],
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => [Account\backend\Permissions::ACCOUNT_ACCESS],
             ],
         ];
     }

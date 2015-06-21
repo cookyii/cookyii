@@ -13,4 +13,6 @@ if (!isset($config['extensions'])) {
 
 $config['extensions'] = array_merge($config['extensions'], include __DIR__ . '/_extensions.php');
 
+$config['components']['rollbar']['enabled'] = false;
+
 return $config;

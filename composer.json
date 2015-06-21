@@ -71,11 +71,12 @@
       "cookyii\\modules\\Postman\\": "./modules/Postman",
       "cookyii\\modules\\Media\\": "./modules/Media",
       "components\\": "./components",
+      "resources\\Postman\\": "./modules/Postman/resources",
       "resources\\": [
         "./resources",
         "./modules/Page/resources",
         "./modules/Account/resources",
-        "./modules/Postman/resources",
+        "",
         "./modules/Media/resources"
       ]
     }

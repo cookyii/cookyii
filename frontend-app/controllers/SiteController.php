@@ -14,7 +14,19 @@ namespace frontend\controllers;
 class SiteController extends \frontend\components\Controller
 {
 
-    public $public = true;
+    /**
+     * @inheritdoc
+     */
+    protected function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['?', '@'],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

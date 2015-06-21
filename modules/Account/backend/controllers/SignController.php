@@ -22,23 +22,18 @@ class SignController extends Account\backend\components\Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function accessRules()
     {
         return [
-            'access' => [
-                'class' => 'yii\filters\AccessControl',
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['in', 'auth'],
-                        'roles' => ['?', '@'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['out'],
-                        'roles' => ['@'],
-                    ],
-                ],
+            [
+                'allow' => true,
+                'actions' => ['in', 'auth'],
+                'roles' => ['?', '@'],
+            ],
+            [
+                'allow' => true,
+                'actions' => ['out'],
+                'roles' => ['@'],
             ],
         ];
     }

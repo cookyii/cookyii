@@ -15,6 +15,20 @@ use frontend\modules\Blank;
 class DefaultController extends Blank\components\Controller
 {
 
+    /**
+     * @inheritdoc
+     */
+    protected function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'actions' => ['index'],
+                'roles' => ['@', '?'],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         throw new \yii\web\ForbiddenHttpException;

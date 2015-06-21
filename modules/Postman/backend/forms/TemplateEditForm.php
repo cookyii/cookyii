@@ -1,6 +1,6 @@
 <?php
 /**
- * LetterTemplateEditForm.php
+ * TemplateEditForm.php
  * @author Revin Roman
  */
 
@@ -9,15 +9,15 @@ namespace cookyii\modules\Postman\backend\forms;
 use yii\helpers\Json;
 
 /**
- * Class LetterTemplateEditForm
+ * Class TemplateEditForm
  * @package cookyii\modules\Postman\backend\forms
  */
-class LetterTemplateEditForm extends \yii\base\Model
+class TemplateEditForm extends \yii\base\Model
 {
 
     use \components\db\traits\PopulateErrorsTrait;
 
-    /** @var \resources\Letter\Template */
+    /** @var \resources\Postman\Template */
     public $Template;
 
     public $code;
@@ -31,7 +31,7 @@ class LetterTemplateEditForm extends \yii\base\Model
 
     public function init()
     {
-        if (!($this->Template instanceof \resources\Letter\Template)) {
+        if (!($this->Template instanceof \resources\Postman\Template)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('postman', 'Not specified template to edit.'));
         }
     }
@@ -53,7 +53,7 @@ class LetterTemplateEditForm extends \yii\base\Model
             [['address', 'params'], 'safe'],
 
             /** default values */
-            [['use_layout'], 'default', 'value' => \resources\Letter\Template::USE_LAYOUT],
+            [['use_layout'], 'default', 'value' => \resources\Postman\Template::USE_LAYOUT],
         ];
     }
 
@@ -79,7 +79,7 @@ class LetterTemplateEditForm extends \yii\base\Model
      */
     public function formAction()
     {
-        return ['/postman/rest/edit'];
+        return ['/postman/rest/template/edit'];
     }
 
     /**
@@ -107,7 +107,7 @@ class LetterTemplateEditForm extends \yii\base\Model
         $Template->use_layout = $this->use_layout;
 
         if ($Template->isNewRecord) {
-            $Template->deleted = \resources\Letter\Template::NOT_DELETED;
+            $Template->deleted = \resources\Postman\Template::NOT_DELETED;
         }
 
         $result = $Template->validate() && $Template->save();

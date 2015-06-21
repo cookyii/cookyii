@@ -5,13 +5,13 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Letter\Template;
+namespace resources\Postman\Message;
 
 /**
  * Class Attach
- * @package resources\Letter\Template
+ * @package resources\Postman\Message
  *
- * @property integer $letter_template_id
+ * @property integer $letter_id
  * @property integer $media_id
  * @property integer $embed
  */
@@ -25,11 +25,11 @@ class Attach extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['letter_template_id', 'media_id'], 'integer'],
+            [['letter_id', 'media_id'], 'integer'],
             [['type'], 'boolean'],
 
             /** semantic validators */
-            [['letter_template_id', 'media_id'], 'required'],
+            [['letter_id', 'media_id'], 'required'],
 
             /** default values */
             [['embed'], 'default', 'value' => static::EMBED_NO],
@@ -37,11 +37,11 @@ class Attach extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Letter\Template\queries\LetterTemplateAttachQuery
+     * @return \resources\Postman\Message\queries\MessageAttachQuery
      */
     public static function find()
     {
-        return new \resources\Letter\Template\queries\LetterTemplateAttachQuery(get_called_class());
+        return new \resources\Postman\Message\queries\MessageAttachQuery(get_called_class());
     }
 
     /**
@@ -49,7 +49,7 @@ class Attach extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%postman_letter_template_attach}}';
+        return '{{%postman_message_attach}}';
     }
 
     const EMBED_NO = 0;

@@ -1,17 +1,17 @@
 <?php
 /**
- * LetterTemplateAttachQuery.php
+ * TemplateAttachQuery.php
  * @author Revin Roman
  * @link https://rmrevin.ru
  */
 
-namespace resources\Letter\Template\queries;
+namespace resources\Postman\Template\queries;
 
 /**
- * Class LetterTemplateAttachQuery
- * @package resources\Letter\Template\queries
+ * Class TemplateAttachQuery
+ * @package resources\Postman\Template\queries
  */
-class LetterTemplateAttachQuery extends \yii\db\ActiveQuery
+class TemplateAttachQuery extends \yii\db\ActiveQuery
 {
 
     /**

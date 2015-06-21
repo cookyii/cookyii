@@ -10,7 +10,7 @@ namespace cookyii\modules\Page\backend\components;
  * Class Controller
  * @package cookyii\modules\Page\backend\components
  */
-class Controller extends \backend\components\Controller
+abstract class Controller extends \backend\components\Controller
 {
 
 }

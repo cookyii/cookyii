@@ -315,10 +315,6 @@ function renderItem($item)
         return null;
     }
 
-    if (true === $item['selected']) {
-        Html::addCssClass($options, 'active');
-    }
-
     $anchor_options = [];
 
     if (!isset($item['items']) || empty($item['items'])) {
@@ -359,9 +355,19 @@ function renderItem($item)
             $subitems .= renderItem($subitem);
         }
 
-        $subitems = Html::tag('ul', $subitems, ['class' => 'treeview-menu']);
+        $opt = ['class' => 'treeview-menu'];
+
+        if (true === $item['selected']) {
+            Html::addCssClass($opt, 'menu-open');
+        }
+
+        $subitems = Html::tag('ul', $subitems, $opt);
 
         Html::addCssClass($options, 'treeview');
+    }
+
+    if (true === $item['selected']) {
+        Html::addCssClass($options, 'active');
     }
 
     return Html::tag(

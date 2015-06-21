@@ -1,0 +1,21 @@
+form { }
+form .box-notify {
+  position: fixed;
+  top: 50px; left: 0; right: 0;
+  z-index: 1;
+  display: none;
+  background-color: #ffd696;
+  padding: 10px 0;
+  text-align: center;
+}
+form.ng-dirty .box-notify { display: block; }
+form .box-notify .btn { margin-left: 10px; }
+.general { }
+.param { }
+.param textarea { height: 34px; }
+ul.nav.nav-tabs { margin-bottom: 20px; margin-top: -40px; }
+.left-chunk { padding-top: 22px; }
+@media (max-width: 991px) {
+  .left-chunk { padding-top: 0; }
+  ul.nav.nav-tabs { margin-top: 10px; }
+}
