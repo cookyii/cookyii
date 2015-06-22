@@ -24,6 +24,7 @@ class TemplateEditForm extends \yii\base\Model
     public $subject;
     public $content_text;
     public $content_html;
+    public $styles;
     public $address;
     public $params;
     public $description;
@@ -43,12 +44,12 @@ class TemplateEditForm extends \yii\base\Model
     {
         return [
             /** type validators */
-            [['code', 'subject', 'content_text', 'content_html', 'description'], 'string'],
+            [['code', 'subject', 'description', 'content_text', 'content_html', 'styles'], 'string'],
             [['use_layout'], 'boolean'],
 
             /** semantic validators */
             [['code', 'subject'], 'required'],
-            [['code', 'subject', 'description'], 'filter', 'filter' => 'str_clean'],
+            [['code', 'subject', 'description', 'styles'], 'filter', 'filter' => 'str_clean'],
             [['content_text', 'content_html'], 'filter', 'filter' => 'trim'],
             [['address', 'params'], 'safe'],
 
@@ -123,6 +124,7 @@ class TemplateEditForm extends \yii\base\Model
         $Template->subject = $this->subject;
         $Template->content_text = $this->content_text;
         $Template->content_html = $this->content_html;
+        $Template->styles = $this->styles;
         $Template->address = Json::encode($address);
         $Template->params = Json::encode($params);
         $Template->description = $this->description;

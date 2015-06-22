@@ -27,6 +27,8 @@ class DetailAction extends \yii\rest\Action
 
         $result = $model->attributes;
 
+        $result['use_layout'] = $result['use_layout'] === \resources\Postman\Template::USE_LAYOUT;
+
         $result['address'] = empty($result['address'])
             ? null
             : Json::decode($result['address']);

@@ -20,6 +20,17 @@ return [
         'password' => getenv('DB_PASS'),
         'tablePrefix' => 'yii_'
     ],
+    'component.mailer' => [
+        'class' => yii\swiftmailer\Mailer::className(),
+        'transport' => [
+            'class' => 'Swift_SmtpTransport',
+            'host' => getenv('SMTP_HOST'),
+            'username' => getenv('SMTP_USER'),
+            'password' => getenv('SMTP_PASS'),
+            'port' => getenv('SMTP_PORT'),
+            'encryption' => getenv('SMTP_ENC'),
+        ],
+    ],
     'component.rollbar' => [
         'class' => rmrevin\yii\rollbar\Component::className(),
         'accessToken' => $ROLLBAR_ACCESS_TOKEN,

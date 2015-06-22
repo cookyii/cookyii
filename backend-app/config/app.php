@@ -35,6 +35,7 @@ return array_merge($config, [
     ],
     'components' => [
         'db' => $params['component.db'],
+        'mailer' => $params['component.mailer'],
         'request' => $params['component.request.frontend'],
         'security' => $params['component.security'],
         'session' => $params['component.session'],

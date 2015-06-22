@@ -56,6 +56,7 @@ angular.module('BackendApp')
           + 'type=' + encodeURIComponent(type)
           + '&subject=' + encodeURIComponent(template.subject)
           + '&content=' + encodeURIComponent(type === 'html' ? template.content_html : template.content_text)
+          + '&styles=' + encodeURIComponent(template.styles)
           + '&use_layout=' + encodeURIComponent(template.use_layout);
       };
 

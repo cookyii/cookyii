@@ -44,7 +44,9 @@ $form = \components\widgets\angular\ActiveForm::begin([
                         ->textInput();
 
                     echo $form->field($TemplateEditForm, 'subject')
-                        ->textInput();
+                        ->textInput([
+                            'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
+                        ]);
 
                     echo $form->field($TemplateEditForm, 'description')
                         ->textarea(['msd-elastic' => true]);
@@ -62,12 +64,21 @@ $form = \components\widgets\angular\ActiveForm::begin([
                             <div class="col-xs-12 col-sm-6 col-md-9">
                                 <?php
                                 echo $form->field($TemplateEditForm, 'content_text')
+                                    ->label('text/plain content')
                                     ->textarea([
                                         'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
                                         'msd-elastic' => true,
                                     ]);
 
                                 echo $form->field($TemplateEditForm, 'content_html')
+                                    ->label('text/html content')
+                                    ->textarea([
+                                        'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
+                                        'msd-elastic' => true,
+                                    ]);
+
+                                echo $form->field($TemplateEditForm, 'styles')
+                                    ->label('CSS styles')
                                     ->textarea([
                                         'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
                                         'msd-elastic' => true,
@@ -176,11 +187,11 @@ $form = \components\widgets\angular\ActiveForm::begin([
                             </div>
                         </tab>
                         <tab heading="Preview" active="tabs.preview" select="selectTab('preview')">
-                            <h3>Text</h3>
+                            <label>text/plain preview</label>
 
                             <iframe ng-src="{{ previewUrl(data, 'text') }}" class="preview"></iframe>
 
-                            <h3>Html</h3>
+                            <label>text/html preview</label>
 
                             <iframe ng-src="{{ previewUrl(data, 'html') }}" class="preview"></iframe>
                         </tab>

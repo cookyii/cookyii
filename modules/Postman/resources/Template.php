@@ -16,6 +16,7 @@ namespace resources\Postman;
  * @property string $subject
  * @property string $content_text
  * @property string $content_html
+ * @property string $styles
  * @property string $address
  * @property string $params
  * @property string $description
@@ -34,13 +35,13 @@ class Template extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['code', 'subject', 'content_text', 'content_html', 'address', 'params', 'description'], 'string'],
+            [['code', 'subject', 'content_text', 'content_html', 'styles', 'address', 'params', 'description'], 'string'],
             [['created_at', 'updated_at'], 'integer'],
             [['use_layout', 'deleted'], 'boolean'],
 
             /** semantic validators */
             [['code', 'subject'], 'required'],
-            [['code', 'subject', 'address', 'params', 'description'], 'filter', 'filter' => 'str_clean'],
+            [['code', 'subject', 'styles', 'address', 'params', 'description'], 'filter', 'filter' => 'str_clean'],
             [['content_text', 'content_html'], 'filter', 'filter' => 'trim'],
 
             /** default values */

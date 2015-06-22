@@ -14,9 +14,10 @@ class m150619_164200_postman_template extends \components\db\Migration
             'subject' => Schema::TYPE_TEXT,
             'content_text' => Schema::TYPE_TEXT,
             'content_html' => Schema::TYPE_TEXT,
+            'styles' => Schema::TYPE_TEXT,
+            'description' => Schema::TYPE_TEXT,
             'address' => Schema::TYPE_TEXT,
             'params' => Schema::TYPE_TEXT,
-            'description' => Schema::TYPE_TEXT,
             'use_layout' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 1',
             'created_at' => Schema::TYPE_INTEGER,
             'updated_at' => Schema::TYPE_INTEGER,
@@ -53,19 +54,31 @@ class m150619_164200_postman_template extends \components\db\Migration
                 . '{content}' . PHP_EOL
                 . PHP_EOL
                 . 'Good bye!',
-            'html' => '<div class="header">{subject}</div>' . PHP_EOL
-                . '<div class="content">{content}</div>' . PHP_EOL
-                . '<br><div class="footer">Good bye!</div>',
+            'html' => '<html>' . PHP_EOL
+                . '<head>' . PHP_EOL
+                . '    <title>{subject}</title>' . PHP_EOL
+                . '</head>' . PHP_EOL
+                . '<body>' . PHP_EOL
+                . '    <div class="header">{subject}</div>' . PHP_EOL
+                . '    <div class="content">{content}</div>' . PHP_EOL
+                . '    <br>' . PHP_EOL
+                . '     <div class="footer">Good bye!</div>' . PHP_EOL
+                . '</body>' . PHP_EOL
+                . '</html>',
         ];
+
+        $styles = 'div.header { color: #333; }' . PHP_EOL
+            . 'div.footer { font-size: 10px; color: #eee; }';
 
         $this->insert('{{%postman_template}}', [
             'code' => '.layout',
             'subject' => 'Base layout for message',
             'content_text' => $content['text'],
             'content_html' => $content['html'],
+            'styles' => $styles,
+            'description' => 'This is a special template that is a wrapper for all letters.',
             'params' => Json::encode($params),
             'address' => null,
-            'description' => 'This is a special template that is a wrapper for all letters.',
             'use_layout' => 0,
             'created_at' => $time,
             'updated_at' => $time,
@@ -104,19 +117,22 @@ class m150619_164200_postman_template extends \components\db\Migration
                 . PHP_EOL
                 . 'Good bye!',
             'html' => '<p><strong>Hello!</strong></p>' . PHP_EOL
-                . '<p>This is an example <i>htmk</i> letter.</p>' . PHP_EOL
+                . '<p>This is an example <i>html</i> letter.</p>' . PHP_EOL
                 . '<p>This is a variable: <i>{param1}</i>.</p>' . PHP_EOL
                 . '<br><p>Good bye!</p>',
         ];
+
+        $styles = 'p { color: #333; }';
 
         $this->insert('{{%postman_template}}', [
             'code' => 'example',
             'subject' => 'Good Day!',
             'content_text' => $content['text'],
             'content_html' => $content['html'],
+            'styles' => $styles,
+            'description' => 'This is a sample letter template.',
             'address' => Json::encode($address),
             'params' => Json::encode($params),
-            'description' => 'This is a sample letter template.',
             'use_layout' => 1,
             'created_at' => $time,
             'updated_at' => $time,
