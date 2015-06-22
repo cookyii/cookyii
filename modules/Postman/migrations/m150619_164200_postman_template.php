@@ -49,8 +49,8 @@ class m150619_164200_postman_template extends \components\db\Migration
         ];
 
         $content = [
-            'text' => '{subject}' . PHP_EOL
-                . '----------------------------' . PHP_EOL
+            'text' => 'Hello username,' . PHP_EOL
+                . '---------------' . PHP_EOL
                 . '{content}' . PHP_EOL
                 . PHP_EOL
                 . 'Good bye!',
@@ -59,7 +59,7 @@ class m150619_164200_postman_template extends \components\db\Migration
                 . '    <title>{subject}</title>' . PHP_EOL
                 . '</head>' . PHP_EOL
                 . '<body>' . PHP_EOL
-                . '    <div class="header">{subject}</div>' . PHP_EOL
+                . '    <div class="header">Hello username,</div>' . PHP_EOL
                 . '    <div class="content">{content}</div>' . PHP_EOL
                 . '    <br>' . PHP_EOL
                 . '     <div class="footer">Good bye!</div>' . PHP_EOL
@@ -67,8 +67,8 @@ class m150619_164200_postman_template extends \components\db\Migration
                 . '</html>',
         ];
 
-        $styles = 'div.header { color: #333; }' . PHP_EOL
-            . 'div.footer { font-size: 10px; color: #eee; }';
+        $styles = 'div.header { color: #333; font-weight: bold; }' . PHP_EOL
+            . 'div.footer { font-size: 12px; color: #919191; }';
 
         $this->insert('{{%postman_template}}', [
             'code' => '.layout',
@@ -111,15 +111,10 @@ class m150619_164200_postman_template extends \components\db\Migration
         ];
 
         $content = [
-            'text' => 'Hello!' . PHP_EOL
-                . 'This is an example plain letter.' . PHP_EOL
-                . 'This is a variable: {param1}.' . PHP_EOL
-                . PHP_EOL
-                . 'Good bye!',
-            'html' => '<p><strong>Hello!</strong></p>' . PHP_EOL
-                . '<p>This is an example <i>html</i> letter.</p>' . PHP_EOL
-                . '<p>This is a variable: <i>{param1}</i>.</p>' . PHP_EOL
-                . '<br><p>Good bye!</p>',
+            'text' => 'This is an example plain letter.' . PHP_EOL
+                . 'This is a variable: {param1}.' . PHP_EOL,
+            'html' => '<p>This is an example <i>html</i> letter.</p>' . PHP_EOL
+                . '<p>This is a variable: <i>{param1}</i>.</p>',
         ];
 
         $styles = 'p { color: #333; }';

@@ -15,6 +15,7 @@ angular.module('BackendApp')
 
       $scope.tabs = {
         content: selectedTab === 'content',
+        styles: selectedTab === 'styles',
         address: selectedTab === 'address',
         params: selectedTab === 'params',
         preview: selectedTab === 'preview'
@@ -22,6 +23,10 @@ angular.module('BackendApp')
 
       $scope.selectTab = function (tab) {
         $location.search('tab', tab);
+
+        $timeout(function () {
+          jQuery(window).trigger('resize');
+        });
       };
 
       $scope.addAddress = function () {

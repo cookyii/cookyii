@@ -55,7 +55,9 @@ $form = \components\widgets\angular\ActiveForm::begin([
                         'class' => \components\widgets\angular\material\ActiveField::className(),
                     ])
                         ->label(false)
-                        ->checkbox();
+                        ->checkbox([
+                            'ng-if' => sprintf('data.code !== "%s"', \resources\Postman\Message::LAYOUT_CODE),
+                        ]);
                     ?>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
@@ -76,13 +78,6 @@ $form = \components\widgets\angular\ActiveForm::begin([
                                         'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
                                         'msd-elastic' => true,
                                     ]);
-
-                                echo $form->field($TemplateEditForm, 'styles')
-                                    ->label('CSS styles')
-                                    ->textarea([
-                                        'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
-                                        'msd-elastic' => true,
-                                    ]);
                                 ?>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 20px;">
@@ -92,6 +87,18 @@ $form = \components\widgets\angular\ActiveForm::begin([
                                     </dt>
                                     <dd ng-repeat-end ng-bind-html="param.description | nl2br"></dd>
                                 </dl>
+                            </div>
+                        </tab>
+                        <tab heading="Styles" active="tabs.styles" select="selectTab('styles')">
+                            <div class="col-xs-12 col-sm-6 col-md-9">
+                                <?php
+                                echo $form->field($TemplateEditForm, 'styles')
+                                    ->label('CSS styles')
+                                    ->textarea([
+                                        'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
+                                        'msd-elastic' => true,
+                                    ]);
+                                ?>
                             </div>
                         </tab>
                         <tab heading="Address" active="tabs.address" select="selectTab('address')">
