@@ -110,21 +110,16 @@ $form = \components\widgets\angular\ActiveForm::begin([
                                         ], [
                                             'class' => 'form-control',
                                             'ng-model' => 'address.type',
-                                            'required' => true,
                                         ]) ?>
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                         <?= Html::tag('input', null, [
-                                            'type' => 'email',
+                                            'type' => 'text',
                                             'name' => 'address[email][{{ $index }}]',
                                             'class' => 'form-control',
                                             'ng-model' => 'address.email',
                                             'placeholder' => Yii::t('postman', 'Email'),
-                                            'required' => true,
                                         ]) ?>
-                                        <span
-                                            ng-show="TemplateEditForm['address[email][{{ $index }}]'].$error.required">Tell us your email.</span>
-                                        <span ng-show="TemplateEditForm['address[email][{{ $index }}]'].$error.email">This is not a valid email.</span>
                                     </div>
                                     <div class="col-xs-11 col-sm-5 col-md-5 col-lg-3">
                                         <?= Html::tag('input', null, [
@@ -161,7 +156,6 @@ $form = \components\widgets\angular\ActiveForm::begin([
                                             'class' => 'form-control',
                                             'ng-model' => 'param.key',
                                             'placeholder' => Yii::t('postman', 'Key'),
-                                            'required' => true,
                                         ]) ?>
                                     </div>
                                     <div class="col-xs-11 col-sm-5 col-md-5 col-lg-5">

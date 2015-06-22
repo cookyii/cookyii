@@ -7,7 +7,14 @@ angular.module('BackendApp')
     function ($scope, $location, $timeout, Template) {
       var hash = null,
         query = $location.search(),
-        defaultValues = {roles: []};
+        defaultValues = {
+          subject: null,
+          content_text: null,
+          content_html: null,
+          use_layout: true,
+          address: [],
+          params: []
+        };
 
       $scope.getTemplateId = function () {
         return typeof query.id === 'undefined'

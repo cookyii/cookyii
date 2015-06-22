@@ -41,6 +41,7 @@ class Template extends \yii\db\ActiveRecord
 
             /** semantic validators */
             [['code', 'subject'], 'required'],
+            [['code'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['code', 'subject', 'styles', 'address', 'params', 'description'], 'filter', 'filter' => 'str_clean'],
             [['content_text', 'content_html'], 'filter', 'filter' => 'trim'],
 

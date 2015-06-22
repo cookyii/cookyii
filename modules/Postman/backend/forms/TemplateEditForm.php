@@ -101,7 +101,7 @@ class TemplateEditForm extends \yii\base\Model
         $address = [];
         if (!empty($this->address) && is_array($this->address)) {
             foreach ($this->address as $addr) {
-                if ($addr === null) {
+                if ($addr === null || empty($addr['email'])) {
                     continue;
                 }
 
@@ -111,12 +111,12 @@ class TemplateEditForm extends \yii\base\Model
 
         $params = [];
         if (!empty($this->params) && is_array($this->params)) {
-            foreach ($this->params as $prm) {
-                if ($prm === null) {
+            foreach ($this->params as $param) {
+                if ($param === null || empty($param['key'])) {
                     continue;
                 }
 
-                $params[] = $prm;
+                $params[] = $param;
             }
         }
 
