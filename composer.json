@@ -52,6 +52,7 @@
     "rmrevin/yii2-power-migration": "~1.1",
     "rmrevin/yii2-imperavi-bundle": "~1.0",
     "rmrevin/yii2-rollbar": "~1.1",
+    "rmrevin/yii2-favicon-widget": "~1.0",
 
     "vlucas/phpdotenv": "2.0.*"
   },
