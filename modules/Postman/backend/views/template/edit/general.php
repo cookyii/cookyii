@@ -10,6 +10,7 @@
 use cookyii\modules\Postman;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
+use yii\helpers\Json;
 
 /** @var \components\widgets\angular\ActiveForm $form */
 $form = \components\widgets\angular\ActiveForm::begin([
@@ -61,10 +62,16 @@ $form = \components\widgets\angular\ActiveForm::begin([
                             <div class="col-xs-12 col-sm-6 col-md-9">
                                 <?php
                                 echo $form->field($TemplateEditForm, 'content_text')
-                                    ->textarea(['msd-elastic' => true]);
+                                    ->textarea([
+                                        'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
+                                        'msd-elastic' => true,
+                                    ]);
 
                                 echo $form->field($TemplateEditForm, 'content_html')
-                                    ->textarea(['msd-elastic' => true]);
+                                    ->textarea([
+                                        'ng-model-options' => Json::encode(['debounce' => ['default' => 1000]]),
+                                        'msd-elastic' => true,
+                                    ]);
                                 ?>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 20px;">
@@ -77,42 +84,105 @@ $form = \components\widgets\angular\ActiveForm::begin([
                             </div>
                         </tab>
                         <tab heading="Address" active="tabs.address" select="selectTab('address')">
-                            <div class="address" ng-repeat="address in data.address">
+                            <div class="address" ng-repeat="address in data.address track by $index"
+                                 ng-if="address !== undefined">
                                 <label>&nbsp;</label>
 
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                        <select ng-model="address.type" class="form-control">
-                                            <option>Select type</option>
-                                            <option value="1">Reply to</option>
-                                            <option value="2">To</option>
-                                            <option value="3">Cc</option>
-                                            <option value="4">Bcc</option>
-                                        </select>
+                                        <?= Html::dropDownList('address.type[{{ $index }}]', null, [
+                                            'null' => Yii::t('postman', 'Select type'),
+                                            '1' => Yii::t('postman', 'Reply to'),
+                                            '2' => Yii::t('postman', 'To'),
+                                            '3' => Yii::t('postman', 'Cc'),
+                                            '4' => Yii::t('postman', 'Bcc'),
+                                        ], [
+                                            'class' => 'form-control',
+                                            'ng-model' => 'address.type',
+                                            'required' => true,
+                                        ]) ?>
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                        <input type="text" ng-model="address.email" class="form-control">
+                                        <?= Html::tag('input', null, [
+                                            'type' => 'email',
+                                            'name' => 'address[email][{{ $index }}]',
+                                            'class' => 'form-control',
+                                            'ng-model' => 'address.email',
+                                            'placeholder' => Yii::t('postman', 'Email'),
+                                            'required' => true,
+                                        ]) ?>
+                                        <span
+                                            ng-show="TemplateEditForm['address[email][{{ $index }}]'].$error.required">Tell us your email.</span>
+                                        <span ng-show="TemplateEditForm['address[email][{{ $index }}]'].$error.email">This is not a valid email.</span>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                        <input type="text" ng-model="address.name" class="form-control">
+                                    <div class="col-xs-11 col-sm-5 col-md-5 col-lg-3">
+                                        <?= Html::tag('input', null, [
+                                            'type' => 'text',
+                                            'name' => 'address.name[{{ $index }}]',
+                                            'class' => 'form-control',
+                                            'ng-model' => 'address.name',
+                                            'placeholder' => Yii::t('postman', 'Name'),
+                                        ]) ?>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                        <a ng-click="removeAddress($index)" class="remove">
+                                            <?= FA::icon('times') ?>
+                                        </a>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="actions">
+                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('postman', 'New address'), null, [
+                                    'ng-click' => 'addAddress()',
+                                ]) ?>
                             </div>
                         </tab>
                         <tab heading="Parameters" active="tabs.params" select="selectTab('params')">
-                            <div class="param" ng-repeat="param in data.params track by param.key">
+                            <div class="param" ng-repeat="param in data.params"
+                                 ng-if="param !== undefined">
                                 <label>&nbsp;</label>
 
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                        <input type="text" ng-model="param.key" class="form-control">
+                                        <?= Html::tag('input', null, [
+                                            'type' => 'text',
+                                            'class' => 'form-control',
+                                            'ng-model' => 'param.key',
+                                            'placeholder' => Yii::t('postman', 'Key'),
+                                            'required' => true,
+                                        ]) ?>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
-                                        <textarea ng-model="param.description" msd-elastic
-                                                  class="form-control"></textarea>
+                                    <div class="col-xs-11 col-sm-5 col-md-5 col-lg-5">
+                                        <?= Html::tag('textarea', null, [
+                                            'class' => 'form-control',
+                                            'ng-model' => 'param.description',
+                                            'placeholder' => Yii::t('postman', 'Description'),
+                                            'msd-elastic' => true,
+                                        ]) ?>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                        <a ng-click="removeParameter($index)" class="remove">
+                                            <?= FA::icon('times') ?>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="actions">
+                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('postman', 'New parameter'), null, [
+                                    'ng-click' => 'addParameter()',
+                                ]) ?>
+                            </div>
+                        </tab>
+                        <tab heading="Preview" active="tabs.preview" select="selectTab('preview')">
+                            <h3>Text</h3>
+
+                            <iframe ng-src="{{ previewUrl(data, 'text') }}" class="preview"></iframe>
+
+                            <h3>Html</h3>
+
+                            <iframe ng-src="{{ previewUrl(data, 'html') }}" class="preview"></iframe>
                         </tab>
                     </tabset>
                 </div>

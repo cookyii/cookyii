@@ -48,8 +48,8 @@ class TemplateEditForm extends \yii\base\Model
 
             /** semantic validators */
             [['code', 'subject'], 'required'],
-            [['code', 'subject', 'content_text', 'address', 'params', 'description'], 'filter', 'filter' => 'str_clean'],
-            [['content_html'], 'filter', 'filter' => 'trim'],
+            [['code', 'subject', 'description'], 'filter', 'filter' => 'str_clean'],
+            [['content_text', 'content_html'], 'filter', 'filter' => 'trim'],
             [['address', 'params'], 'safe'],
 
             /** default values */
@@ -97,12 +97,34 @@ class TemplateEditForm extends \yii\base\Model
     {
         $Template = $this->Template;
 
+        $address = [];
+        if (!empty($this->address) && is_array($this->address)) {
+            foreach ($this->address as $addr) {
+                if ($addr === null) {
+                    continue;
+                }
+
+                $address[] = $addr;
+            }
+        }
+
+        $params = [];
+        if (!empty($this->params) && is_array($this->params)) {
+            foreach ($this->params as $prm) {
+                if ($prm === null) {
+                    continue;
+                }
+
+                $params[] = $prm;
+            }
+        }
+
         $Template->code = $this->code;
         $Template->subject = $this->subject;
         $Template->content_text = $this->content_text;
         $Template->content_html = $this->content_html;
-        $Template->address = Json::encode($this->address);
-        $Template->params = Json::encode($this->params);
+        $Template->address = Json::encode($address);
+        $Template->params = Json::encode($params);
         $Template->description = $this->description;
         $Template->use_layout = $this->use_layout;
 

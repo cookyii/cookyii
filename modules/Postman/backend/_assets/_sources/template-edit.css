@@ -14,6 +14,10 @@ form .box-notify .btn { margin-left: 10px; }
 .param { }
 .param textarea { height: 34px; }
 ul.nav.nav-tabs { margin-bottom: 20px; margin-top: -40px; }
+div.address a.remove, div.param a.remove { color: orangered; font-size: 1.8em; display: block; text-align: center; opacity: 0.1; line-height: 1.2; }
+div.address:hover a.remove, div.param:hover a.remove { opacity: 0.8; }
+iframe.preview { width: 100%; min-height: 200px; border: 1px solid #dddddd; }
+.actions { margin: 10px 5px; }
 .left-chunk { padding-top: 22px; }
 @media (max-width: 991px) {
   .left-chunk { padding-top: 0; }

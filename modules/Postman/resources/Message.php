@@ -56,6 +56,58 @@ class Message extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param string $subject
+     * @param string $content_text
+     * @param string $content_html
+     * @param bool $use_layout
+     * @return self
+     */
+    public static function compose($subject, $content_text, $content_html, $use_layout = true)
+    {
+        $layout_text = '{content}';
+        $layout_html = '{content}';
+
+        if ($use_layout) {
+            /** @var Template $LayoutTemplate */
+            $LayoutTemplate = Template::find()
+                ->byCode('.layout')
+                ->one();
+
+            if (!empty($LayoutTemplate)) {
+                $layout_text = $LayoutTemplate->content_text;
+                $layout_html = $LayoutTemplate->content_html;
+            }
+        }
+
+        $Message = new self;
+        $Message->subject = $subject;
+
+        $replace_text = [
+            '{subject}' => $subject,
+            '{content}' => $content_text,
+        ];
+
+        $Message->content_text = str_replace(
+            array_keys($replace_text),
+            array_values($replace_text),
+            $layout_text
+        );
+
+        $replace_html = [
+            '{subject}' => $subject,
+            '{content}' => $content_html,
+        ];
+
+        $Message->content_html = str_replace(
+            array_keys($replace_html),
+            array_values($replace_html),
+            $layout_html
+        );
+
+        return $Message;
+    }
+
+    /**
      * @return array
      */
     public static function getAllStatuses()

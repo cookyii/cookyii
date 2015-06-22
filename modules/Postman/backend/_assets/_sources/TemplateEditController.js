@@ -16,73 +16,114 @@ angular.module('BackendApp')
       $scope.tabs = {
         content: selectedTab === 'content',
         address: selectedTab === 'address',
-        params: selectedTab === 'params'
+        params: selectedTab === 'params',
+        preview: selectedTab === 'preview'
       };
 
       $scope.selectTab = function (tab) {
         $location.search('tab', tab);
       };
 
+      $scope.addAddress = function () {
+        $scope.$parent.data.address.push({
+          type: 'null',
+          email: null,
+          name: null
+        });
+      };
+
+      $scope.removeAddress = function (index) {
+        delete $scope.$parent.data.address[index];
+      };
+
+      $scope.addParameter = function () {
+        $scope.$parent.data.params.push({
+          key: null,
+          description: null
+        });
+      };
+
+      $scope.removeParameter = function (index) {
+        delete $scope.$parent.data.params[index];
+      };
+
+      $scope.previewUrl = function (template, type) {
+        if (typeof template === 'undefined') {
+          return false;
+        }
+
+        return '/postman/template/preview?'
+          + 'type=' + encodeURIComponent(type)
+          + '&subject=' + encodeURIComponent(template.subject)
+          + '&content=' + encodeURIComponent(type === 'html' ? template.content_html : template.content_text)
+          + '&use_layout=' + encodeURIComponent(template.use_layout);
+      };
+
       $scope.submit = function (TemplateEditForm, e) {
         var $form = angular.element('#TemplateEditForm');
 
-        $scope.error = {};
-        $scope.inProgress = true;
+        if (TemplateEditForm.$valid === true) {
+          TemplateEditForm.$setPristine();
 
-        TemplateEditForm.$setPristine();
+          $scope.error = {};
+          $scope.inProgress = true;
+          $http({
+            method: 'POST',
+            url: $form.attr('action'),
+            data: {
+              _csrf: $form.find('input[name="_csrf"]').val(),
+              template_id: $scope.$parent.getTemplateId(),
+              TemplateEditForm: $scope.data
+            }
+          })
+            .success(function (response) {
+              if (response.result === false) {
+                TemplateEditForm.$setDirty();
 
-        $http({
-          method: 'POST',
-          url: $form.attr('action'),
-          data: {
-            _csrf: $form.find('input[name="_csrf"]').val(),
-            template_id: $scope.$parent.getTemplateId(),
-            TemplateEditForm: $scope.data
-          }
-        })
-          .success(function (response) {
-            if (response.result === false) {
+                if (typeof response.errors !== 'undefined') {
+                  angular.forEach(response.errors, function (message, field) {
+                    $scope.error[field] = message;
+                  });
+                } else {
+                  toast($mdToast, 'error', {
+                    message: 'Save error'
+                  });
+                }
+              } else {
+                toast($mdToast, 'success', {
+                  message: 'Template successfully saved'
+                });
+
+                if ($scope.$parent.isNewTemplate) {
+                  $location.search('id', response.template_id);
+                }
+
+                $scope.reload();
+              }
+            })
+            .error(function (response) {
               TemplateEditForm.$setDirty();
 
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
-                  $scope.error[field] = message;
+              if (typeof response.data !== 'undefined') {
+                angular.forEach(response.data, function (val, index) {
+                  $scope.error[val.field] = val.message;
                 });
               } else {
                 toast($mdToast, 'error', {
-                  message: 'Save error'
+                  message: 'Error updating template'
                 });
               }
-            } else {
-              toast($mdToast, 'success', {
-                message: 'Template successfully saved'
-              });
-
-              if ($scope.$parent.isNewTemplate) {
-                $location.search('id', response.template_id);
-              }
-
-              $scope.reload();
-            }
-          })
-          .error(function (response) {
-            TemplateEditForm.$setDirty();
-
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
-                $scope.error[val.field] = val.message;
-              });
-            } else {
-              toast($mdToast, 'error', {
-                message: 'Error updating template'
-              });
-            }
-          })
-          .finally(function () {
-            $scope.inProgress = false;
+            })
+            .finally(function () {
+              $scope.inProgress = false;
+            });
+        } else {
+          toast($mdToast, 'error', {
+            message: 'This form was completed incorrectly, please check all fields.'
           });
+        }
 
         e.preventDefault();
-      };
+      }
     }
   ]);
