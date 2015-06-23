@@ -5,13 +5,13 @@
  * @link https://rmrevin.ru
  */
 
-namespace backend\rest\controllers;
+namespace components\rest\controllers;
 
 use cookyii\modules\Media;
 
 /**
  * Class ImperaviUploadController
- * @package backend\rest\controllers
+ * @package components\rest\controllers
  */
 abstract class ImperaviUploadController extends \yii\rest\Controller
 {
