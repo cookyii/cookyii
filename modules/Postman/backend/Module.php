@@ -27,7 +27,7 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
                 'label' => \Yii::t('account', 'Postman'),
                 'url' => ['/postman'],
                 'icon' => FA::icon('envelope'),
-                'visible' => User()->can(\cookyii\modules\Postman\backend\Permissions::POSTMAN_ACCESS),
+                'visible' => User()->can(\cookyii\modules\Postman\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'postman',
                 'sort' => 9000,
                 'items' => [
@@ -35,14 +35,12 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
                         'label' => \Yii::t('account', 'Messages'),
                         'url' => ['/postman/message/list'],
                         'icon' => FA::icon('send'),
-                        'visible' => User()->can(\cookyii\modules\Postman\backend\Permissions::POSTMAN_ACCESS),
                         'selected' => $Controller->module->id === 'postman' && $Controller->id === 'message',
                     ],
                     [
                         'label' => \Yii::t('account', 'Templates'),
                         'url' => ['/postman/template/list'],
                         'icon' => FA::icon('table'),
-                        'visible' => User()->can(\cookyii\modules\Postman\backend\Permissions::POSTMAN_ACCESS),
                         'selected' => $Controller->module->id === 'postman' && $Controller->id === 'template',
                     ],
                 ],

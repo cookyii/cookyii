@@ -10,6 +10,7 @@ namespace common\commands;
 use backend;
 use common\Roles;
 use cookyii\modules\Account;
+use cookyii\modules\Feed;
 use cookyii\modules\Page;
 use cookyii\modules\Postman;
 use frontend;
@@ -33,6 +34,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
         'cookyii\modules\Account\backend\Permissions',
         'cookyii\modules\Page\backend\Permissions',
         'cookyii\modules\Postman\backend\Permissions',
+        'cookyii\modules\Feed\backend\Permissions',
     ];
 
     /**
@@ -119,12 +121,13 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     {
         return [
             Roles::ADMIN => [
-                Account\backend\Permissions::ACCOUNT_ACCESS,
+                Account\backend\Permissions::ACCESS,
             ],
             Roles::MANAGER => [
                 backend\Permissions::ACCESS,
-                Page\backend\Permissions::PAGE_ACCESS,
-                Postman\backend\Permissions::POSTMAN_ACCESS,
+                Page\backend\Permissions::ACCESS,
+                Postman\backend\Permissions::ACCESS,
+                Feed\backend\Permissions::ACCESS,
             ],
             Roles::CLIENT => [
             ],

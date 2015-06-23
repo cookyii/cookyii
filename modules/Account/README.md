@@ -1,5 +1,5 @@
 Accounts management module
-=========================
+==========================
 
 Installation
 ------------

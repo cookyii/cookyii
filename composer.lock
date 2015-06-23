@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32902ee0573738e59c36d80f67028023",
+    "hash": "16f420e4d24160bf18fc10b5d33fbadd",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -3256,6 +3256,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "cookyii/base": 20,
+        "cookyii/module-feed": 20,
         "cookyii/module-account": 20,
         "cookyii/module-page": 20,
         "cookyii/module-postman": 20,

@@ -13,7 +13,7 @@ namespace cookyii\modules\Account\backend;
 class Permissions
 {
 
-    const ACCOUNT_ACCESS = 'backend.account.access';
+    const ACCESS = 'backend.account.access';
 
     /**
      * @return array
@@ -21,7 +21,7 @@ class Permissions
     public static function get()
     {
         return [
-            static::ACCOUNT_ACCESS => 'It has access to account backend module',
+            static::ACCESS => 'It has access to account backend module',
         ];
     }
 }

@@ -26,7 +26,7 @@ class TemplateController extends Postman\backend\components\Controller
             [
                 'allow' => true,
                 'actions' => ['list', 'edit', 'preview'],
-                'roles' => [Postman\backend\Permissions::POSTMAN_ACCESS],
+                'roles' => [Postman\backend\Permissions::ACCESS],
             ],
         ];
     }

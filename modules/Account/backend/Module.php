@@ -28,7 +28,7 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
                 'label' => \Yii::t('account', 'Accounts'),
                 'url' => ['/account/list/index'],
                 'icon' => FA::icon('user'),
-                'visible' => User()->can(Account\backend\Permissions::ACCOUNT_ACCESS),
+                'visible' => User()->can(Account\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'account',
                 'sort' => 10000,
             ],

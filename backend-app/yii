@@ -8,18 +8,21 @@
  * @license http://www.yiiframework.com/license/
  */
 
-require(__DIR__ . '/../vendor/autoload.php');
+$baseDir = realpath(__DIR__ . '/..');
 
-require(__DIR__ . '/credentials.php');
-require(__DIR__ . '/../env.php');
-require(__DIR__ . '/../globals.php');
+require($baseDir . '/vendor/autoload.php');
+
+require($baseDir . '/backend-app/credentials.php');
+require($baseDir . '/env.php');
+
+components\Config::requireGlobals($baseDir);
 
 // fcgi doesn't have STDIN and STDOUT defined by default
 defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
 defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
 
-require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
-require(__DIR__ . '/../common/config/aliases.php');
+require($baseDir . '/vendor/yiisoft/yii2/Yii.php');
+require($baseDir . '/common/config/aliases.php');
 
 components\Config::init('backend', 'console');
 

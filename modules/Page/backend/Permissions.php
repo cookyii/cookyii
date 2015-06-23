@@ -13,7 +13,7 @@ namespace cookyii\modules\Page\backend;
 class Permissions
 {
 
-    const PAGE_ACCESS = 'backend.page.access';
+    const ACCESS = 'backend.page.access';
 
     /**
      * @return array
@@ -21,7 +21,7 @@ class Permissions
     public static function get()
     {
         return [
-            static::PAGE_ACCESS => 'It has access to page backend module',
+            static::ACCESS => 'It has access to page backend module',
         ];
     }
 }

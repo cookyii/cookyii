@@ -21,7 +21,7 @@ class DashAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $js = [
-        'IndexController.js',
+        'DashController.js',
     ];
 
     public $depends = [

@@ -13,7 +13,7 @@ namespace cookyii\modules\Postman\backend;
 class Permissions
 {
 
-    const POSTMAN_ACCESS = 'backend.postman.access';
+    const ACCESS = 'backend.postman.access';
 
     /**
      * @return array
@@ -21,7 +21,7 @@ class Permissions
     public static function get()
     {
         return [
-            static::POSTMAN_ACCESS => 'It has access to postman backend module',
+            static::ACCESS => 'It has access to postman backend module',
         ];
     }
 }

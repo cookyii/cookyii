@@ -24,7 +24,7 @@ class ListController extends Page\backend\components\Controller
             [
                 'allow' => true,
                 'actions' => ['index'],
-                'roles' => [Page\backend\Permissions::PAGE_ACCESS],
+                'roles' => [Page\backend\Permissions::ACCESS],
             ],
         ];
     }

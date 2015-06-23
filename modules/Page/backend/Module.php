@@ -26,7 +26,7 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
                 'label' => \Yii::t('account', 'Pages'),
                 'url' => ['/page/list/index'],
                 'icon' => FA::icon('file'),
-                'visible' => User()->can(Page\backend\Permissions::PAGE_ACCESS),
+                'visible' => User()->can(Page\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'page',
                 'sort' => 8000,
             ],
