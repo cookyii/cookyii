@@ -9,5 +9,5 @@ return [
 
     'POST page/rest/edit' => 'page/rest/page/edit',
 
-    ['class' => components\rest\UrlRule::className(), 'controller' => 'page/rest/page']
+    ['class' => components\rest\UrlRule::className(), 'controller' => 'page/rest/page'],
 ];

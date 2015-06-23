@@ -24,7 +24,7 @@ angular.module('BackendApp')
 
       $scope.inProgress = false;
 
-      $scope.submit = function (e) {
+      $scope.submit = function (PageEditForm, e) {
         var $form = angular.element('#PageEditForm');
 
         $scope.error = {};

@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountController.php
+ * PageController.php
  * @author Revin Roman
  */
 
@@ -25,7 +25,6 @@ class PageController extends \yii\rest\ActiveController
         $verbs = parent::verbs();
 
         $verbs['edit'] = ['POST'];
-        $verbs['roles'] = ['PUT'];
         $verbs['detail'] = ['GET'];
         $verbs['activate'] = ['POST'];
         $verbs['deactivate'] = ['POST'];
@@ -75,14 +74,6 @@ class PageController extends \yii\rest\ActiveController
         ];
 
         return $actions;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function serializeData($data)
-    {
-        return parent::serializeData($data);
     }
 
     /**

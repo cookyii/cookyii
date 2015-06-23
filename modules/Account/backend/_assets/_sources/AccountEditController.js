@@ -8,7 +8,7 @@ angular.module('BackendApp')
 
       $scope.inProgress = false;
 
-      $scope.submit = function (e) {
+      $scope.submit = function (AccountEditForm, e) {
         var $form = angular.element('#AccountEditForm');
 
         $scope.error = {};
