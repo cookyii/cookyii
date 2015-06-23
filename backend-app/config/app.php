@@ -18,6 +18,7 @@ return array_merge($config, [
     'id' => 'backend-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
+    'extensions' => array_merge($config['extensions'], include __DIR__ . '/../../.extensions.php'),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
         'account',

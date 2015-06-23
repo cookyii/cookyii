@@ -18,8 +18,6 @@ class AppAsset extends \yii\web\AssetBundle
 
     public $css = [
         'css/angular-material.css',
-//        'css/AdminLTE.min.css',
-//        'css/skins/_all-skins.min.css',
         'css/styles.css',
     ];
 
@@ -46,9 +44,9 @@ class AppAsset extends \yii\web\AssetBundle
         'rmrevin\yii\imperavi\plugins\FullScreenPluginAssetBundle',
         'common\_assets\AnimateCssAssetBundle',
         'common\_assets\SweetAlertAssetBundle',
-        'common\_assets\AngularAssetBundle',
-        'common\_assets\jquery\FormAssetBundle',
-        'common\_assets\jquery\ScrollToAssetBundle',
-        'common\_assets\jquery\JScrollPaneAssetBundle',
+        'common\_assets\angular\AngularAssetBundle',
+        'common\_assets\jquery\cdn\FormAssetBundle',
+        'common\_assets\jquery\cdn\ScrollToAssetBundle',
+        'common\_assets\jquery\cdn\JScrollPaneAssetBundle',
     ];
 }

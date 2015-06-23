@@ -5,19 +5,17 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets\jquery;
+namespace common\_assets\jquery\cdn;
 
 /**
  * Class FormAssetBundle
- * @package common\_assets\jquery
+ * @package common\_assets\jquery\cdn
  */
 class FormAssetBundle extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@bower';
-
     public $js = [
-        'jquery-form/jquery.form.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js',
     ];
 
     public $depends = [

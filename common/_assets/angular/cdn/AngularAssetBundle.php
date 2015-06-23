@@ -1,16 +1,15 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: revin
- * Date: 16.12.14
- * Time: 18:41
+ * AngularAssetBundle.php
+ * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
-namespace common\_assets;
+namespace common\_assets\angular\cdn;
 
 /**
  * Class AngularAssetBundle
- * @package common\_assets
+ * @package common\_assets\angular\cdn
  */
 class AngularAssetBundle extends \yii\web\AssetBundle
 {

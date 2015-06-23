@@ -39,7 +39,7 @@ class AppAsset extends \yii\web\AssetBundle
         'rmrevin\yii\fontawesome\CDNAssetBundle',
         'common\_assets\AnimateCssAssetBundle',
         'common\_assets\SweetAlertAssetBundle',
-        'common\_assets\AngularAssetBundle',
+        'common\_assets\angular\AngularAssetBundle',
         'common\_assets\jquery\FormAssetBundle',
         'common\_assets\jquery\ScrollToAssetBundle',
         'common\_assets\jquery\JScrollPaneAssetBundle',

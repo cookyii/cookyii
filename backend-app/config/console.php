@@ -19,6 +19,7 @@ return array_merge($config, [
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
     'aliases' => ['@tests' => '@backend/tests'],
+    'extensions' => array_merge($config['extensions'], include __DIR__ . '/../../.extensions.php'),
     'controllerNamespace' => 'backend\commands',
     'controllerMap' => [
         'account' => cookyii\modules\Account\commands\UserCommand::className(),
