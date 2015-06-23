@@ -13,19 +13,44 @@
  * @param mixed $var variable to be dumped
  * @param integer $depth maximum depth that the dumper should go into the variable. Defaults to 10.
  * @param boolean $highlight whether the result should be syntax-highlighted
- * @return void output the string representation of the variable
+ * @param bool $return whether the result should be returned (true) or print (false)
+ * @return string|null
  */
-function dump($var, $depth = 10, $highlight = true)
+function dump($var, $depth = 10, $highlight = true, $return = false)
 {
-    echo \yii\helpers\VarDumper::dumpAsString($var, $depth, $highlight);
+    $dump = \yii\helpers\VarDumper::dumpAsString($var, $depth, $highlight);
+
+    if ($return === true) {
+        return $dump;
+    } else {
+        echo $dump;
+    }
+
+    return null;
 }
 
 /**
- * @return \yii\db\Connection
+ * @return \yii\web\Request|\yii\console\Request
  */
-function Db()
+function Request()
 {
-    return \Yii::$app->getDb();
+    return \Yii::$app->getRequest();
+}
+
+/**
+ * @return \yii\web\Response|\yii\console\Response
+ */
+function Response()
+{
+    return \Yii::$app->getResponse();
+}
+
+/**
+ * @return \yii\web\Session
+ */
+function Session()
+{
+    return \Yii::$app->get('session'); // `get()` for console application
 }
 
 /**
@@ -34,6 +59,18 @@ function Db()
 function Security()
 {
     return \Yii::$app->getSecurity();
+}
+
+/**
+ * @param string|null $type
+ * @return \yii\web\UrlManager
+ * @throws \yii\base\InvalidConfigException
+ */
+function UrlManager($type = null)
+{
+    $type = empty($type) ? '' : ('.' . $type);
+
+    return \Yii::$app->get('urlManager' . $type);
 }
 
 /**
@@ -65,47 +102,11 @@ function Cache($type = null)
 }
 
 /**
- * @return \yii\i18n\Formatter
+ * @return \yii\db\Connection
  */
-function Formatter()
+function Db()
 {
-    return \Yii::$app->getFormatter();
-}
-
-/**
- * @return \yii\web\Request|\yii\console\Request
- */
-function Request()
-{
-    return \Yii::$app->getRequest();
-}
-
-/**
- * @return \yii\web\Response|\yii\console\Response
- */
-function Response()
-{
-    return \Yii::$app->getResponse();
-}
-
-/**
- * @return \yii\base\View|\yii\web\View
- */
-function View()
-{
-    return \Yii::$app->getView();
-}
-
-/**
- * @param string|null $type
- * @return \yii\web\UrlManager
- * @throws \yii\base\InvalidConfigException
- */
-function UrlManager($type = null)
-{
-    $type = empty($type) ? '' : ('.' . $type);
-
-    return \Yii::$app->get('urlManager' . $type);
+    return \Yii::$app->getDb();
 }
 
 /**
@@ -114,6 +115,22 @@ function UrlManager($type = null)
 function I18N()
 {
     return \Yii::$app->getI18n();
+}
+
+/**
+ * @return \yii\i18n\Formatter
+ */
+function Formatter()
+{
+    return \Yii::$app->getFormatter();
+}
+
+/**
+ * @return \yii\base\View|\yii\web\View
+ */
+function View()
+{
+    return \Yii::$app->getView();
 }
 
 /**
@@ -130,14 +147,6 @@ function Mailer()
 function AuthManager()
 {
     return \Yii::$app->getAuthManager();
-}
-
-/**
- * @return \yii\web\Session
- */
-function Session()
-{
-    return \Yii::$app->get('session');
 }
 
 /**
@@ -179,7 +188,16 @@ function nulled($value)
  */
 function str_clean($str)
 {
-    return trim(preg_replace('/(\r?\n){2,}/', "\n\n", strip_tags($str)));
+    return str_pretty(strip_tags($str));
+}
+
+/**
+ * @param string $str
+ * @return string
+ */
+function str_pretty($str)
+{
+    return trim(preg_replace('/(\r?\n){2,}/', "\n\n", $str));
 }
 
 /**

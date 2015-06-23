@@ -27,6 +27,8 @@
     "issues": "https://github.com/cookyii/module-media/issues?state=open",
     "source": "https://github.com/cookyii/module-media"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=5.4.0",
 

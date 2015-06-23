@@ -33,7 +33,6 @@ class Media extends \yii\db\ActiveRecord
     /** @var string */
     public $path;
 
-
     /**
      * @inheritdoc
      */

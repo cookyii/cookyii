@@ -28,6 +28,7 @@
     "cookyii/base": "self.version",
     "cookyii/module-account": "self.version",
     "cookyii/module-page": "self.version",
+    "cookyii/module-postman": "self.version",
     "cookyii/module-media": "self.version"
   },
   "require": {
@@ -36,6 +37,7 @@
     "cookyii/base": "dev-master",
     "cookyii/module-account": "dev-master",
     "cookyii/module-page": "dev-master",
+    "cookyii/module-postman": "dev-master",
     "cookyii/module-media": "dev-master",
 
     "yiisoft/yii2": "2.0.4",

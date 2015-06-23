@@ -23,12 +23,16 @@
     "issues": "https://github.com/cookyii/module-page/issues?state=open",
     "source": "https://github.com/cookyii/module-page"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
-    "php": ">=5.5.0",
+    "php": ">=5.4.0",
 
     "cookyii/base": "dev-master",
     "cookyii/module-account": "dev-master",
-    "cookyii/module-media": "dev-master"
+    "cookyii/module-media": "dev-master",
+
+    "rmrevin/yii2-fontawesome": "~2.10"
   },
   "autoload": {
     "psr-4": {

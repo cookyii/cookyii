@@ -1,13 +1,16 @@
 <?php
 
-require(__DIR__ . '/../../vendor/autoload.php');
+$baseDir = realpath(__DIR__ . '/../..');
 
-require(__DIR__ . '/../credentials.php');
-require(__DIR__ . '/../../env.php');
-require(__DIR__ . '/../../globals.php');
+require($baseDir . '/vendor/autoload.php');
 
-require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
-require(__DIR__ . '/../../common/config/aliases.php');
+require($baseDir . '/frontend-app/credentials.php');
+require($baseDir . '/env.php');
+
+components\Config::requireGlobals($baseDir);
+
+require($baseDir . '/vendor/yiisoft/yii2/Yii.php');
+require($baseDir . '/common/config/aliases.php');
 
 components\Config::init('frontend', 'app');
 

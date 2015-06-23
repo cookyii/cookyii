@@ -60,4 +60,21 @@ class Config
 
         static::$config = require($_config);
     }
+
+    /**
+     * @param $baseDir
+     * @throw \RuntimeException
+     */
+    public static function requireGlobals($baseDir)
+    {
+        if (file_exists($baseDir . '/globals.php')) {
+            require($baseDir . '/globals.php');
+        } elseif (file_exists($baseDir . '/components/globals.php')) {
+            require($baseDir . '/components/globals.php');
+        } elseif (file_exists($baseDir . '/vendor/cookyii/base/globals.php')) {
+            require($baseDir . '/vendor/cookyii/base/globals.php');
+        } else {
+            throw new \RuntimeException('Unable to locate a file `globals.php`');
+        }
+    }
 }

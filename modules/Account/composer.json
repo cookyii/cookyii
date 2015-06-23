@@ -23,11 +23,15 @@
     "issues": "https://github.com/cookyii/module-account/issues?state=open",
     "source": "https://github.com/cookyii/module-account"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=5.4.0",
 
     "cookyii/base": "dev-master",
-    "cookyii/module-postman": "dev-master"
+    "cookyii/module-postman": "dev-master",
+
+    "rmrevin/yii2-fontawesome": "~2.10"
   },
   "autoload": {
     "psr-4": {
