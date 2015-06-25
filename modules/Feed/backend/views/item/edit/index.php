@@ -4,22 +4,22 @@
  * @author Revin Roman
  *
  * @var yii\web\View $this
- * @var Feed\backend\forms\SectionEditForm $SectionEditForm
+ * @var Feed\backend\forms\ItemEditForm $ItemEditForm
  */
 
 use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = Yii::t('feed', 'Edit section');
+$this->title = Yii::t('feed', 'Edit item');
 
-Feed\backend\_assets\EditSectionAssetBundle::register($this);
+Feed\backend\_assets\EditItemAssetBundle::register($this);
 
 ?>
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'SectionDetailController',
+    'ng-controller' => 'ItemDetailController',
 ]) ?>>
 
     <div class="row" ng-show="sectionUpdatedWarning">
@@ -31,7 +31,7 @@ Feed\backend\_assets\EditSectionAssetBundle::register($this);
                     <strong class="info-box-text"><?= Yii::t('cookyii', 'Warning') ?></strong>
 
                     <span class="progress-description">
-                        <?= Yii::t('cookyii', 'The data of this section has been changed.') ?><br>
+                        <?= Yii::t('cookyii', 'The data of this item has been changed.') ?><br>
                         <?= Yii::t('cookyii', 'Recommended {refresh} the page.', [
                             'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('cookyii', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',
@@ -45,9 +45,9 @@ Feed\backend\_assets\EditSectionAssetBundle::register($this);
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <?php
-            echo $this->render('_general', ['SectionEditForm' => $SectionEditForm]);
+            echo $this->render('_general', ['ItemEditForm' => $ItemEditForm]);
             ?>
         </div>
     </div>

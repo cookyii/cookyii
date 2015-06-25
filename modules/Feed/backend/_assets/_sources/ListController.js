@@ -132,7 +132,7 @@ angular.module('BackendApp')
       };
 
       $scope.addItem = function () {
-        location.href = '/feed/item/edit#?section=' + $scope.section;
+        location.href = '/feed/item/edit#?section=' + $scope.sections[$scope.section].id;
       };
 
       $scope.editItem = function (item) {

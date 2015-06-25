@@ -7,9 +7,7 @@ angular.module('BackendApp')
     function ($scope, $location, $timeout, $http, Section) {
       var hash = null,
         query = $location.search(),
-        defaultValues = {parent_id: null},
-        baseSectionId = false,
-        baseSort = 0;
+        defaultValues = {parent_id: null};
 
       $scope.data = {};
 
@@ -28,31 +26,6 @@ angular.module('BackendApp')
       $scope.$watch('data.title', function (val) {
         if (typeof val !== 'undefined' && $scope.isNewSection) {
           $scope.data.slug = getSlug(val);
-        }
-      });
-
-      $scope.$watch('data.parent_id', function (val) {
-        if (typeof val === 'undefined') {
-          return;
-        }
-
-        function reloadSort() {
-          $http({
-            method: 'GET',
-            url: '/feed/section/rest/sort',
-            params: {
-              parent_section_id: val
-            }
-          })
-            .success(function (response) {
-              $scope.data.sort = parseInt(response) + 100;
-            });
-        }
-
-        if (!$scope.isNewSection && baseSectionId === val) {
-          $scope.data.sort = baseSort;
-        } else {
-          reloadSort();
         }
       });
 
@@ -76,9 +49,6 @@ angular.module('BackendApp')
           Section.detail({slug: $scope.getSection()}, function (section) {
             $scope.data = section;
             hash = section.hash;
-
-            baseSectionId = section.parent_id;
-            baseSort = section.sort;
 
             $scope.$broadcast('sectionDataReloaded', section);
           });
