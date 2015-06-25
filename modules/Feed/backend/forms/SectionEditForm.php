@@ -156,7 +156,8 @@ class SectionEditForm extends \yii\base\Model
         }
 
         if (empty($sections)) {
-            list($sections, $slugs) = \resources\Feed\Section::getTree();
+            $tree = \resources\Feed\Section::getTree();
+            $sections = $tree['sections'];
         }
 
         if (!empty($sections)) {
