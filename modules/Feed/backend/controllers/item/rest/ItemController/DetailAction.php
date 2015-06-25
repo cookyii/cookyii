@@ -22,7 +22,7 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \resources\Page $model */
+        /** @var \resources\Feed\Item $model */
         $model = $this->findModel($id);
 
         $result = $model->attributes;

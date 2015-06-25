@@ -37,7 +37,7 @@ class EditFormAction extends \yii\rest\Action
         }
 
         if (empty($Item)) {
-            $Item = new \resources\Page();
+            $Item = new \resources\Feed\Item();
         }
 
         $ItemEditForm = new Feed\backend\forms\ItemEditForm(['Item' => $Item]);
@@ -55,8 +55,9 @@ class EditFormAction extends \yii\rest\Action
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('feed', 'Page successfully saved'),
+                'message' => \Yii::t('feed', 'Item successfully saved'),
                 'item_id' => $Item->id,
+                'item_slug' => $Item->slug,
             ];
         }
 

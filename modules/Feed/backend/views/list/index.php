@@ -53,7 +53,7 @@ function sortLink($type, $label)
                 <hr>
 
                 <script type="text/ng-template" id="section.html">
-                    <?= Html::a('{{ sect.title }}', null, [
+                    <?= Html::a('{{ sections[sect.slug].title }}', null, [
                         'ng-click' => 'setSection(sect)',
                     ]) ?>
 
@@ -61,14 +61,14 @@ function sortLink($type, $label)
 
                     <ul class="sub" ng-if="sect.sections">
                         <li ng-repeat="sect in sect.sections track by sect.slug"
-                            ng-class="{'active': isOpenedSection(sect), 'deleted': sect.deleted}"
+                            ng-class="{'active': isOpenedSection(sect), 'deleted': sections[sect.slug].deleted === '1'}"
                             ng-include="'section.html'"></li>
                     </ul>
                 </script>
 
                 <ul class="sections opened">
                     <li ng-repeat="sect in sections_tree track by sect.slug"
-                        ng-class="{'active': isOpenedSection(sect), 'deleted': sect.deleted}"
+                        ng-class="{'active': isOpenedSection(sect), 'deleted': sections[sect.slug].deleted === '1'}"
                         ng-include="'section.html'"></li>
                 </ul>
             </div>

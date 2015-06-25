@@ -142,10 +142,11 @@ class SectionEditForm extends \yii\base\Model
      * @param array|null $items
      * @param array|null $options
      * @param array|null $sections
+     * @param array|null $models
      * @param integer $nested
      * @return array
      */
-    public function getParentValues($items = null, $options = null, $sections = null, $nested = 1)
+    public function getParentValues($items = null, $options = null, $sections = null, $models = null, $nested = 1)
     {
         if (empty($items)) {
             $items = [null => 'Root section'];
@@ -158,14 +159,16 @@ class SectionEditForm extends \yii\base\Model
         if (empty($sections)) {
             $tree = \resources\Feed\Section::getTree(false);
             $sections = $tree['sections'];
+            $models = $tree['models'];
         }
 
         if (!empty($sections)) {
             foreach ($sections as $section) {
-                $items[$section['id']] = sprintf('%s %s', str_repeat('....', $nested), $section['title']);
-                $options[(string)$section['id']] = ['ng-disabled' => sprintf('isSectionDisabled("%s")', $section['slug'])];
+                $attributes = $models[$section['slug']];
+                $items[$attributes['id']] = sprintf('%s %s', str_repeat('....', $nested), $attributes['title']);
+                $options[(string)$attributes['id']] = ['ng-disabled' => sprintf('isSectionDisabled("%s")', $attributes['slug'])];
                 if (!empty($section['sections'])) {
-                    list($items, $options) = $this->getParentValues($items, $options, $section['sections'], $nested + 1);
+                    list($items, $options) = $this->getParentValues($items, $options, $section['sections'], $models, $nested + 1);
                 }
             }
         }

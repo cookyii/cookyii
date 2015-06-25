@@ -55,7 +55,7 @@ class EditFormAction extends \yii\rest\Action
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('feed', 'Page successfully saved'),
+                'message' => \Yii::t('feed', 'Section successfully saved'),
                 'section_id' => $Section->id,
                 'section_slug' => $Section->slug,
             ];
