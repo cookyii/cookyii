@@ -6,6 +6,7 @@
  * @var yii\web\View $this
  */
 
+use components\helpers\Material;
 use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
@@ -219,21 +220,32 @@ function sortLink($type, $label)
 
     <md-fab-speed-dial md-open="fab.isOpen" md-direction="{{fab.selectedDirection}}" ng-class="fab.selectedMode">
         <md-fab-trigger>
-            <md-button aria-label="menu" class="md-fab md-warn">
-                <?= FA::icon('plus')->fixedWidth() ?>
-            </md-button>
+            <?php
+            echo Material::button(FA::icon('plus')->fixedWidth(), [
+                'class' => 'md-fab md-warn',
+                'aria-label' => 'menu',
+            ]);
+            ?>
         </md-fab-trigger>
         <md-fab-actions>
             <?php
 
-            echo Html::tag('md-button', FA::icon('folder-o')->fixedWidth(), [
+            $tooltip = Material::tooltip(Yii::t('feed', 'Create new section'), [
+                'md-direction' => 'left',
+            ]);
+
+            echo Material::button($tooltip . FA::icon('folder-o')->fixedWidth(), [
                 'class' => 'md-fab md-raised md-mini',
                 'title' => Yii::t('feed', 'Create new section'),
                 'ng-click' => 'addSection()',
                 'aria-label' => 'Add section',
             ]);
 
-            echo Html::tag('md-button', FA::icon('file-o')->fixedWidth(), [
+            $tooltip = Material::tooltip(Yii::t('feed', 'Create new item'), [
+                'md-direction' => 'left',
+            ]);
+
+            echo Material::button($tooltip . FA::icon('file-o')->fixedWidth(), [
                 'class' => 'md-fab md-raised md-mini',
                 'title' => Yii::t('feed', 'Create new item'),
                 'ng-click' => 'addItem()',

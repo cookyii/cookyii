@@ -56,6 +56,10 @@ angular.module('BackendApp')
         }
       });
 
+      if ($scope.isNewSection && typeof query.parent !== 'undefined') {
+        defaultValues.parent_id = query.parent;
+      }
+
       $scope.isSectionDisabled = function (section) {
         return $scope.getSection() === section;
       };

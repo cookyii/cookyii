@@ -68,11 +68,12 @@ class Section extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param bool $with_deleted
      * @param static[]|null $Sections
      * @param integer|null $parent
      * @return array
      */
-    public static function getTree($Sections = null, $parent = null)
+    public static function getTree($with_deleted = false, $Sections = null, $parent = null)
     {
         $result = [
             'sections' => [],
@@ -81,8 +82,15 @@ class Section extends \yii\db\ActiveRecord
         ];
 
         if (empty($Sections) && empty($parent)) {
+            /** @var \resources\Feed\queries\SectionQuery $SectionsQuery */
+            $SectionsQuery = \resources\Feed\Section::find();
+
+            if ($with_deleted === false) {
+                $SectionsQuery->withoutDeleted();
+            }
+
             /** @var static[] $Sections */
-            $Sections = static::find()
+            $Sections = $SectionsQuery
                 ->orderBy(['id' => SORT_ASC])
                 ->all();
         }
@@ -90,7 +98,7 @@ class Section extends \yii\db\ActiveRecord
         if (!empty($Sections)) {
             foreach ($Sections as $Section) {
                 if ($Section->parent_id === $parent) {
-                    $work = static::getTree($Sections, $Section->id);
+                    $work = static::getTree($with_deleted, $Sections, $Section->id);
 
                     array_push($work['contain'], $Section->slug);
 

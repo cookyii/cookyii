@@ -124,7 +124,7 @@ angular.module('BackendApp')
       };
 
       $scope.addSection = function () {
-        location.href = '/feed/section/edit';
+        location.href = '/feed/section/edit#?parent=' + $scope.sections[$scope.section].id;
       };
 
       $scope.editSection = function (section) {
@@ -132,7 +132,7 @@ angular.module('BackendApp')
       };
 
       $scope.addItem = function () {
-        location.href = '/feed/item/edit';
+        location.href = '/feed/item/edit#?section=' + $scope.section;
       };
 
       $scope.editItem = function (item) {

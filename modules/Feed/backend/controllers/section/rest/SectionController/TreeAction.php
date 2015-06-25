@@ -25,17 +25,6 @@ class TreeAction extends \yii\rest\Action
 
         $with_deleted = Request()->get('deleted', 'false') === 'true';
 
-        /** @var \resources\Feed\queries\SectionQuery $SectionsQuery */
-        $SectionsQuery = \resources\Feed\Section::find();
-
-        if ($with_deleted === false) {
-            $SectionsQuery->withoutDeleted();
-        }
-
-        $Sections = $SectionsQuery
-            ->orderBy(['id' => SORT_ASC])
-            ->all();
-
-        return $modelClass::getTree($Sections);
+        return $modelClass::getTree($with_deleted);
     }
 }
