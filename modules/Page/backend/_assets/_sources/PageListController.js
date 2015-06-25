@@ -155,7 +155,7 @@ angular.module('BackendApp')
           search: $scope.search,
           sort: $scope.sort,
           page: loaded ? $scope.pagination.currentPage : page
-        }, function (pages, headers) {
+        }, function (response, headers) {
           var _headers = headers();
 
           $scope.pagination = {
@@ -165,7 +165,7 @@ angular.module('BackendApp')
             perPage: _headers['x-pagination-per-page']
           };
 
-          $scope.pages = pages;
+          $scope.pages = response;
 
           if (setTimeout) {
             $timeout(reloadPageList, refreshInterval);

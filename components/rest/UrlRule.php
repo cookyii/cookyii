@@ -16,6 +16,13 @@ class UrlRule extends \yii\rest\UrlRule
     /**
      * @inheritdoc
      */
+    public $tokens = [
+        '{id}' => '<id:[a-zA-Z0-9\-]+>',
+    ];
+
+    /**
+     * @inheritdoc
+     */
     public $patterns = [
         'DELETE {id}' => 'delete',
         'PATCH {id}' => 'restore',

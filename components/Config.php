@@ -77,4 +77,35 @@ class Config
             throw new \RuntimeException('Unable to locate a file `globals.php`');
         }
     }
+
+    /**
+     * Setting timezone from cookies or session
+     */
+    public static function loadTimeZone()
+    {
+        $gmt = 0;
+
+        if (isset($_COOKIE['timezone'])) {
+            $gmt = (int)$_COOKIE['timezone'];
+        }
+
+        if (Session()->has('timezone')) {
+            $gmt = (int)Session()->get('timezone', 0);
+        }
+
+        $gmt = $gmt < -14 || $gmt > 12 // GMT-14 && GMT+12
+            ? 0
+            : $gmt;
+
+        if ($gmt <= 0) {
+            $char = '-';
+        } else {
+            $char = '+';
+        }
+
+        $timezone = sprintf('Etc/GMT%s%d', $char, abs($gmt));
+
+        \Yii::$app->formatter->timeZone = $timezone;
+        \Yii::$app->timeZone = $timezone;
+    }
 }

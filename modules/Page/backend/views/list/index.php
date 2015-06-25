@@ -44,8 +44,9 @@ function sortLink($type, $label)
                 <hr>
 
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('page', 'Removed pages'), [
+                    'class' => 'checker',
                     'ng-click' => 'toggleDeleted()',
-                    'ng-class' => Json::encode(['selected' => new \yii\web\JsExpression('deleted === true')]),
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('deleted === true')]),
                 ]) ?>
             </div>
         </div>

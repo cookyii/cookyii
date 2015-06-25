@@ -21,6 +21,12 @@ angular.module('BackendApp')
         $scope.reload();
       });
 
+      $scope.$watch('data.title', function (val) {
+        if (typeof val !== 'undefined') {
+          $scope.data.slug = getSlug(val);
+        }
+      });
+
       $scope.reload = function () {
         $scope.isNewPage = $scope.getPageId() === null;
 

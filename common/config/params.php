@@ -124,7 +124,7 @@ return [
     'component.formatter' => [
         'class' => components\i18n\Formatter::className(),
         'locale' => 'en',
-        'timeZone' => 'Etc/GMT-0',
+        'timeZone' => 'Etc/GMT',
         'dateFormat' => 'dd MMMM y',
         'timeFormat' => 'HH:mm',
         'datetimeFormat' => 'dd MMMM y HH:mm',

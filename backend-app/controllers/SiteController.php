@@ -24,7 +24,7 @@ class SiteController extends \backend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['index', 'error', 'captcha'],
+                'actions' => ['index', 'error', 'captcha', 'tz'],
                 'roles' => ['?', '@'],
             ],
         ];
@@ -42,6 +42,9 @@ class SiteController extends \backend\components\Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_DEBUG ? 'random' : null,
+            ],
+            'tz' => [ // setting timezone
+                'class' => 'components\web\actions\TimeZoneAction',
             ],
         ];
     }

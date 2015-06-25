@@ -2,9 +2,11 @@
   "use strict";
 
   ng.module('BackendApp', [
-    'ngSanitize', 'ngResource', 'ngMaterial',
+    'ngCookies', 'ngSanitize', 'ngResource', 'ngMaterial',
     'ui.bootstrap',
-    'angular-loading-bar', 'truncate', 'monospaced.elastic', 'angular-redactor'
+    'directives', 'truncate',
+    'monospaced.elastic',
+    'angular-loading-bar', 'angular-redactor'
   ])
 
     .config([
@@ -29,6 +31,15 @@
           .accentPalette('deep-purple-theme', {
             'default': '400'
           });
+      }
+    ])
+
+    .run([
+      '$cookies',
+      function ($cookies) {
+        if (typeof $cookies.get('timezone') === 'undefined') {
+          $cookies.put('timezone', new Date().getTimezoneOffset() / 60);
+        }
       }
     ])
 

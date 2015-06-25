@@ -25,6 +25,7 @@ class AppAsset extends \yii\web\AssetBundle
         'js/app.js',
         'js/functions.js',
         'js/scripts.js',
+        'js/directives.js',
         'js/BackendApp.js',
     ];
 
@@ -44,7 +45,10 @@ class AppAsset extends \yii\web\AssetBundle
         'rmrevin\yii\imperavi\plugins\FullScreenPluginAssetBundle',
         'common\_assets\AnimateCssAssetBundle',
         'common\_assets\SweetAlertAssetBundle',
+        'common\_assets\SpeakingurlAssetBundle',
+        'common\_assets\MomentAssetBundle',
         'common\_assets\angular\AngularAssetBundle',
+        'common\_assets\jquery\DateTimePickerAssetBundle',
         'common\_assets\jquery\cdn\FormAssetBundle',
         'common\_assets\jquery\cdn\ScrollToAssetBundle',
         'common\_assets\jquery\cdn\JScrollPaneAssetBundle',

@@ -15,7 +15,7 @@
     "angular-loader": "1.4.*",
     "angular-sanitize": "1.4.*",
     "angular-aria": "1.4.*",
-    "angular-material": "0.9.*",
+    "angular-material": "0.10.*",
     "angular-redactor": "1.1.*",
     "angular-scroll-pane": "1.0.*",
     "angular-elastic": "2.4.*",
@@ -24,9 +24,12 @@
     "angular-bootstrap": "0.13.*",
     "angular-loading-bar": "0.7.*",
     "admin-lte": "2.1.*",
+    "smalot-bootstrap-datetimepicker": "2.3.*",
     "jScrollPane": "2.0.*",
     "jquery-form": "3.45.*",
     "jquery.scrollTo": "2.1.*",
-    "sweetalert": "0.5.*"
+    "sweetalert": "0.5.*",
+    "speakingurl": "5.0.*",
+    "moment": "2.10.*"
   }
 }
