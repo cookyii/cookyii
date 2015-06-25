@@ -44,8 +44,8 @@ trait SoftDeleteTrait
 
     /**
      * @param bool $permanently если true, то запись будет безусловно удалена, восстановить (@see restore) её будет нельзя
-     * @return integer|false количество удаленных строк, или false если призошла ошибка.
-     * Помните, может быть удалено 0 (ноль) строк, и это считается успешным завершением метода.
+     * integer|boolean the number of rows affected, or false if validation fails
+     * or [[beforeSave()]] stops the updating process.
      * @throws \yii\base\InvalidConfigException
      */
     public function delete($permanently = false)
@@ -57,8 +57,6 @@ trait SoftDeleteTrait
         if (true === $permanently || $this->isDeleted()) {
             // permanently delete
             $result = parent::delete();
-
-
         } else {
             // soft delete
             $this->deleted = 1;
@@ -67,15 +65,15 @@ trait SoftDeleteTrait
                 $this->activated = 0;
             }
 
-            $result = $this->update(true, ['activated', 'deleted']);
+            $result = $this->update();
         }
 
         return $result;
     }
 
     /**
-     * @return integer|false количество удаленных строк, или false если призошла ошибка.
-     * Помните, может быть удалено 0 (ноль) строк, и это считается успешным завершением метода.
+     * integer|boolean the number of rows affected, or false if validation fails
+     * or [[beforeSave()]] stops the updating process.
      * @throws \yii\base\InvalidConfigException
      */
     public function restore()
@@ -90,6 +88,6 @@ trait SoftDeleteTrait
             $this->activated = 1;
         }
 
-        return $this->update(true, ['activated', 'deleted']);
+        return $this->update();
     }
 }

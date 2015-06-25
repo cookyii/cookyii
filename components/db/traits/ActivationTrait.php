@@ -36,7 +36,8 @@ trait ActivationTrait
     }
 
     /**
-     * @return bool
+     * integer|boolean the number of rows affected, or false if validation fails
+     * or [[beforeSave()]] stops the updating process.
      * @throws \yii\base\InvalidConfigException
      */
     public function activate()
@@ -47,11 +48,12 @@ trait ActivationTrait
 
         $this->activated = 1;
 
-        return $this->update(false, ['activated']) === 1;
+        return $this->update();
     }
 
     /**
-     * @return bool
+     * integer|boolean the number of rows affected, or false if validation fails
+     * or [[beforeSave()]] stops the updating process.
      * @throws \yii\base\InvalidConfigException
      */
     public function deactivate()
@@ -62,6 +64,6 @@ trait ActivationTrait
 
         $this->activated = 0;
 
-        return $this->update(false, ['activated']) === 1;
+        return $this->update();
     }
 }
