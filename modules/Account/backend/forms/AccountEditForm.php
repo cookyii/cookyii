@@ -6,8 +6,6 @@
 
 namespace cookyii\modules\Account\backend\forms;
 
-use yii\helpers\ArrayHelper;
-
 /**
  * Class AccountEditForm
  * @package cookyii\modules\Account\backend\forms
@@ -117,25 +115,9 @@ class AccountEditForm extends \yii\base\Model
     /**
      * @return array
      */
-    public static function getRoleValues()
-    {
-        return ArrayHelper::map(AuthManager()->getRoles(), 'name', 'description');
-    }
-
-    /**
-     * @return array
-     */
-    public static function getPermissionValues()
-    {
-        return ArrayHelper::map(AuthManager()->getPermissions(), 'name', 'description');
-    }
-
-    /**
-     * @return array
-     */
     public static function getGroupedPermissionValues()
     {
-        $permissions = static::getPermissionValues();
+        $permissions = \resources\Account::getAllPermissions();
 
         $result = [
             'items' => [],

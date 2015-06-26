@@ -6,6 +6,8 @@
 
 namespace resources;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * Class Account
  * @package resources
@@ -309,12 +311,15 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function getAllRoles()
     {
-        return [
-            \common\Roles::ADMIN => \Yii::t('account', 'Administrator'),
-            \common\Roles::MANAGER => \Yii::t('account', 'Manager'),
-            \common\Roles::CLIENT => \Yii::t('account', 'Client'),
-            \common\Roles::USER => \Yii::t('account', 'User'),
-        ];
+        return ArrayHelper::map(AuthManager()->getRoles(), 'name', 'description');;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllPermissions()
+    {
+        return ArrayHelper::map(AuthManager()->getPermissions(), 'name', 'description');
     }
 
     /**
