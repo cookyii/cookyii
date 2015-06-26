@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets\cdn;
+namespace components\assets\cdn;
 
 /**
  * Class SweetAlertAssetBundle
- * @package common\_assets\cdn
+ * @package components\assets\cdn
  */
 class SweetAlertAssetBundle extends \yii\web\AssetBundle
 {

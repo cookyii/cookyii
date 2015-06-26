@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets;
+namespace components\assets;
 
 /**
  * Class AnimateCssAssetBundle
- * @package common\_assets
+ * @package components\assets
  */
 class AnimateCssAssetBundle extends \yii\web\AssetBundle
 {

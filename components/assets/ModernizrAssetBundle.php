@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets;
+namespace components\assets;
 
 /**
  * Class ModernizrAssetBundle
- * @package common\_assets
+ * @package components\assets
  */
 class ModernizrAssetBundle extends \yii\web\AssetBundle
 {

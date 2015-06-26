@@ -28,20 +28,20 @@ class AppAsset extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'common\_assets\Html5shivAssetBundle',
-        'common\_assets\RespondAssetBundle',
-        'common\_assets\ModernizrAssetBundle',
+        'components\assets\Html5shivAssetBundle',
+        'components\assets\RespondAssetBundle',
+        'components\assets\ModernizrAssetBundle',
 
         'yii\web\YiiAsset',
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'rmrevin\yii\fontawesome\CDNAssetBundle',
-        'common\_assets\AnimateCssAssetBundle',
-        'common\_assets\SweetAlertAssetBundle',
-        'common\_assets\angular\AngularAssetBundle',
-        'common\_assets\jquery\FormAssetBundle',
-        'common\_assets\jquery\ScrollToAssetBundle',
-        'common\_assets\jquery\JScrollPaneAssetBundle',
+        'components\assets\AnimateCssAssetBundle',
+        'components\assets\SweetAlertAssetBundle',
+        'components\assets\angular\AngularAssetBundle',
+        'components\assets\jquery\FormAssetBundle',
+        'components\assets\jquery\ScrollToAssetBundle',
+        'components\assets\jquery\JScrollPaneAssetBundle',
     ];
 }

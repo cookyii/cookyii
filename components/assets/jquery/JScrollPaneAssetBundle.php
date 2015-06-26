@@ -5,18 +5,20 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets\jquery\cdn;
+namespace components\assets\jquery;
 
 /**
  * Class JScrollPaneAssetBundle
- * @package common\_assets\jquery\cdn
+ * @package components\assets\jquery
  */
 class JScrollPaneAssetBundle extends \yii\web\AssetBundle
 {
 
+    public $sourcePath = '@bower';
+
     public $js = [
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.12/jquery.mousewheel.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/jScrollPane/2.0.14/jquery.jscrollpane.min.js',
+        'jscrollpane/script/jquery.mousewheel.js',
+        'jscrollpane/script/jquery.jscrollpane.min.js',
     ];
 
     public $depends = [

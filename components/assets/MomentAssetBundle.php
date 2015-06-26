@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets;
+namespace components\assets;
 
 /**
  * Class MomentAssetBundle
- * @package common\_assets
+ * @package components\assets
  */
 class MomentAssetBundle extends \yii\web\AssetBundle
 {

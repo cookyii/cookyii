@@ -30,9 +30,9 @@ class AppAsset extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'common\_assets\Html5shivAssetBundle',
-        'common\_assets\RespondAssetBundle',
-        'common\_assets\ModernizrAssetBundle',
+        'components\assets\Html5shivAssetBundle',
+        'components\assets\RespondAssetBundle',
+        'components\assets\ModernizrAssetBundle',
 
         'yii\web\YiiAsset',
         'yii\web\JqueryAsset',
@@ -43,14 +43,14 @@ class AppAsset extends \yii\web\AssetBundle
         'rmrevin\yii\imperavi\plugins\FileManagerPluginAssetBundle',
         'rmrevin\yii\imperavi\plugins\ImageManagerPluginAssetBundle',
         'rmrevin\yii\imperavi\plugins\FullScreenPluginAssetBundle',
-        'common\_assets\AnimateCssAssetBundle',
-        'common\_assets\SweetAlertAssetBundle',
-        'common\_assets\SpeakingurlAssetBundle',
-        'common\_assets\MomentAssetBundle',
-        'common\_assets\angular\AngularAssetBundle',
-        'common\_assets\jquery\DateTimePickerAssetBundle',
-        'common\_assets\jquery\cdn\FormAssetBundle',
-        'common\_assets\jquery\cdn\ScrollToAssetBundle',
-        'common\_assets\jquery\cdn\JScrollPaneAssetBundle',
+        'components\assets\AnimateCssAssetBundle',
+        'components\assets\SweetAlertAssetBundle',
+        'components\assets\SpeakingurlAssetBundle',
+        'components\assets\MomentAssetBundle',
+        'components\assets\angular\AngularAssetBundle',
+        'components\assets\jquery\DateTimePickerAssetBundle',
+        'components\assets\jquery\cdn\FormAssetBundle',
+        'components\assets\jquery\cdn\ScrollToAssetBundle',
+        'components\assets\jquery\cdn\JScrollPaneAssetBundle',
     ];
 }

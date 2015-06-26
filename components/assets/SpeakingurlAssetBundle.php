@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets;
+namespace components\assets;
 
 /**
  * Class SpeakingurlAssetBundle
- * @package common\_assets
+ * @package components\assets
  */
 class SpeakingUrlAssetBundle extends \yii\web\AssetBundle
 {

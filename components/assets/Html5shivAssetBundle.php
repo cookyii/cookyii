@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets;
+namespace components\assets;
 
 /**
  * Class Html5shivAssetBundle
- * @package common\_assets
+ * @package components\assets
  */
 class Html5shivAssetBundle extends \yii\web\AssetBundle
 {

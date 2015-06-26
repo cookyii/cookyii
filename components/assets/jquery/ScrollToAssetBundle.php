@@ -5,17 +5,19 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets\jquery\cdn;
+namespace components\assets\jquery;
 
 /**
  * Class ScrollToAssetBundle
- * @package common\_assets\jquery\cdn
+ * @package components\assets\jquery
  */
 class ScrollToAssetBundle extends \yii\web\AssetBundle
 {
 
+    public $sourcePath = '@bower';
+
     public $js = [
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js',
+        'jquery.scrollTo/jquery.scrollTo.min.js',
     ];
 
     public $depends = [

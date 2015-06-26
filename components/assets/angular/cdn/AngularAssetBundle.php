@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace common\_assets\angular\cdn;
+namespace components\assets\angular\cdn;
 
 /**
  * Class AngularAssetBundle
- * @package common\_assets\angular\cdn
+ * @package components\assets\angular\cdn
  */
 class AngularAssetBundle extends \yii\web\AssetBundle
 {
