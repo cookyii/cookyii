@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('SignInController', [
-    '$scope', '$element', '$http', '$mdToast',
-    function ($scope, $modal, $http, $mdToast) {
+    '$scope', '$http', '$mdToast',
+    function ($scope, $http, $mdToast) {
       var _config = {},
         defaultValues = {
           email: null,

@@ -55,7 +55,14 @@ Account\backend\_assets\SignInAssetBundle::register($this);
                 ?>
             </div>
             <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                <?php
+                $icon = FA::icon('cog', ['ng-show' => 'in_progress', 'class' => 'wo-animate'])->spin();
+
+                echo Html::submitButton($icon . ' ' . Yii::t('account', 'Sign In'), [
+                    'class' => 'btn btn-primary btn-block btn-flat',
+                    'ng-disabled' => 'in_progress',
+                ]);
+                ?>
             </div>
         </div>
         <?php
