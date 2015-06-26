@@ -22,7 +22,7 @@ angular.module('BackendApp')
       });
 
       $scope.$watch('data.title', function (val) {
-        if (typeof val !== 'undefined') {
+        if (typeof val !== 'undefined' && $scope.isNewItem) {
           $scope.data.slug = getSlug(val);
         }
       });
