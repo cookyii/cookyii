@@ -14,7 +14,7 @@ use yii\helpers\Json;
 
 $this->title = Yii::t('postman', 'Message templates management');
 
-Postman\backend\_assets\TemplateListAssetBundle::register($this);
+Postman\backend\assets\TemplateListAssetBundle::register($this);
 
 /**
  * @param string $type

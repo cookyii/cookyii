@@ -14,7 +14,7 @@ use yii\helpers\Json;
 
 $this->title = Yii::t('feed', 'Sections management');
 
-Feed\backend\_assets\ListAssetBundle::register($this);
+Feed\backend\assets\ListAssetBundle::register($this);
 
 /**
  * @param string $type

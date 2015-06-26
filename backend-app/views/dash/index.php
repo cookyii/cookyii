@@ -11,7 +11,7 @@ use rmrevin\yii\fontawesome\FA;
 
 $this->title = 'Welcome to Cookyii Backend!';
 
-\backend\views\_assets\DashAssetBundle::register($this);
+\backend\views\assets\DashAssetBundle::register($this);
 
 ?>
 

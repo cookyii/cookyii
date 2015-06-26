@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Account\backend\_assets;
+namespace cookyii\modules\Account\backend\assets;
 
 /**
  * Class SignInAssetBundle
- * @package cookyii\modules\Account\backend\_assets
+ * @package cookyii\modules\Account\backend\assets
  */
 class SignInAssetBundle extends \yii\web\AssetBundle
 {
@@ -24,7 +24,7 @@ class SignInAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'backend\_assets\AppAsset',
+        'backend\assets\AppAsset',
     ];
 
     public function init()

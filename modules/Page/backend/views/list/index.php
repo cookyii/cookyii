@@ -13,7 +13,7 @@ use yii\helpers\Json;
 
 $this->title = Yii::t('page', 'Pages management');
 
-Page\backend\_assets\ListAssetBundle::register($this);
+Page\backend\assets\ListAssetBundle::register($this);
 
 /**
  * @param string $type

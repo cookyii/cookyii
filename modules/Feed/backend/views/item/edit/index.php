@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('feed', 'Edit item');
 
-Feed\backend\_assets\EditItemAssetBundle::register($this);
+Feed\backend\assets\EditItemAssetBundle::register($this);
 
 ?>
 

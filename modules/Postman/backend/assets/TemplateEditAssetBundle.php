@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Postman\backend\_assets;
+namespace cookyii\modules\Postman\backend\assets;
 
 /**
  * Class TemplateEditAssetBundle
- * @package cookyii\modules\Postman\backend\_assets
+ * @package cookyii\modules\Postman\backend\assets
  */
 class TemplateEditAssetBundle extends \yii\web\AssetBundle
 {
@@ -26,7 +26,7 @@ class TemplateEditAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'backend\_assets\AppAsset',
+        'backend\assets\AppAsset',
     ];
 
     public function init()

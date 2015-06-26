@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('page', 'Edit page');
 
-Page\backend\_assets\EditAssetBundle::register($this);
+Page\backend\assets\EditAssetBundle::register($this);
 
 ?>
 

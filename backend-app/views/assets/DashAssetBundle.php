@@ -5,16 +5,16 @@
  * @link https://rmrevin.ru
  */
 
-namespace backend\views\_assets;
+namespace backend\views\assets;
 
 /**
  * Class DashAssetBundle
- * @package backend\views\site\_assets
+ * @package backend\views\site\assets
  */
 class DashAssetBundle extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@backend/views/_assets/_sources';
+    public $sourcePath = '@backend/views/assets/_sources';
 
     public $css = [
         'dash.css',
@@ -25,6 +25,6 @@ class DashAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'backend\_assets\AppAsset',
+        'backend\assets\AppAsset',
     ];
 }

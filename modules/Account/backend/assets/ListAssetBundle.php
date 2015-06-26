@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace cookyii\modules\Page\backend\_assets;
+namespace cookyii\modules\Account\backend\assets;
 
 /**
  * Class ListAssetBundle
- * @package cookyii\modules\Page\backend\_assets
+ * @package cookyii\modules\Account\backend\assets
  */
 class ListAssetBundle extends \yii\web\AssetBundle
 {
@@ -20,12 +20,12 @@ class ListAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $js = [
-        'PageResource.js',
-        'PageListController.js',
+        'AccountResource.js',
+        'AccountListController.js',
     ];
 
     public $depends = [
-        'backend\_assets\AppAsset',
+        'backend\assets\AppAsset',
     ];
 
     public function init()

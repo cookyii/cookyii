@@ -13,7 +13,7 @@ use yii\helpers\Json;
 
 $this->title = Yii::t('account', 'Accounts management');
 
-Account\backend\_assets\ListAssetBundle::register($this);
+Account\backend\assets\ListAssetBundle::register($this);
 
 /**
  * @param string $type

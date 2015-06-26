@@ -13,7 +13,7 @@
 use yii\helpers\Html;
 use yii\web\HttpException;
 
-frontend\_assets\AppAsset::register($this);
+frontend\assets\AppAsset::register($this);
 
 /** @var \frontend\controllers\SiteController $controller */
 $controller = $this->context;

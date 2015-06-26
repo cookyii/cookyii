@@ -5,16 +5,16 @@
  * @link https://rmrevin.ru
  */
 
-namespace frontend\_assets;
+namespace backend\assets;
 
 /**
  * Class AppAsset
- * @package frontend\assets
+ * @package backend\assets
  */
 class AppAsset extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@frontend/_assets/_sources';
+    public $sourcePath = '@backend/assets/_sources';
 
     public $css = [
         'css/angular-material.css',
@@ -22,9 +22,11 @@ class AppAsset extends \yii\web\AssetBundle
     ];
 
     public $js = [
+        'js/app.js',
         'js/functions.js',
         'js/scripts.js',
-        'js/FrontendApp.js',
+        'js/directives.js',
+        'js/BackendApp.js',
     ];
 
     public $depends = [
@@ -36,12 +38,16 @@ class AppAsset extends \yii\web\AssetBundle
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'rmrevin\yii\fontawesome\CDNAssetBundle',
+        'rmrevin\yii\fontawesome\cdn\AssetBundle',
+        'backend\assets\ImperaviAssetBundle',
         'components\assets\AnimateCssAssetBundle',
         'components\assets\SweetAlertAssetBundle',
+        'components\assets\SpeakingurlAssetBundle',
+        'components\assets\MomentAssetBundle',
         'components\assets\angular\AngularAssetBundle',
-        'components\assets\jquery\FormAssetBundle',
-        'components\assets\jquery\ScrollToAssetBundle',
-        'components\assets\jquery\JScrollPaneAssetBundle',
+        'components\assets\jquery\DateTimePickerAssetBundle',
+        'components\assets\jquery\cdn\FormAssetBundle',
+        'components\assets\jquery\cdn\ScrollToAssetBundle',
+        'components\assets\jquery\cdn\JScrollPaneAssetBundle',
     ];
 }

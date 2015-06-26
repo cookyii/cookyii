@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('account', 'Edit account');
 
-Account\backend\_assets\EditAssetBundle::register($this);
+Account\backend\assets\EditAssetBundle::register($this);
 
 ?>
 

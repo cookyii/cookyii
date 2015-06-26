@@ -12,7 +12,7 @@ use yii\helpers\Html;
 
 $this->beginPage();
 
-frontend\_assets\AppAsset::register($this);
+frontend\assets\AppAsset::register($this);
 
 $title = empty($this->title)
     ? APP_NAME

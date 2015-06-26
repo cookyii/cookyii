@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('postman', 'Edit template');
 
-Postman\backend\_assets\TemplateEditAssetBundle::register($this);
+Postman\backend\assets\TemplateEditAssetBundle::register($this);
 
 ?>
 

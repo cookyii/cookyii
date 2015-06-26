@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 $this->title = \Yii::t('account', 'Sing in');
 
-Account\backend\_assets\SignInAssetBundle::register($this);
+Account\backend\assets\SignInAssetBundle::register($this);
 
 ?>
 
