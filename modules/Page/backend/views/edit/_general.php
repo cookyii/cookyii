@@ -27,38 +27,57 @@ $form = \components\widgets\angular\ActiveForm::begin([
 
         <div class="box-body">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4 left-chunk">
                     <?php
                     echo $form->field($PageEditForm, 'title')
-                        ->textInput();
+                        ->textInput([
+                            'placeholder' => Yii::t('feed', 'Some title...'),
+                        ]);
 
                     echo $form->field($PageEditForm, 'slug')
-                        ->textInput();
-
-                    ?>
-                    <a ng-click="moreFields = true" ng-hide="moreFields">Show meta tags</a>
-
-                    <div class="meta" ng-show="moreFields">
-                        <?php
-
-                        echo $form->field($PageEditForm, 'meta_title')
-                            ->textInput();
-
-                        echo $form->field($PageEditForm, 'meta_keywords')
-                            ->textInput();
-
-                        echo $form->field($PageEditForm, 'meta_description')
-                            ->textarea(['msd-elastic' => true]);
-                        ?>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-9">
-                    <?php
-                    echo $form->field($PageEditForm, 'content')
-                        ->textarea([
-                            'msd-elastic' => true,
-                            'redactor' => true,
+                        ->textInput([
+                            'placeholder' => Yii::t('feed', 'some-title'),
                         ]);
+                    ?>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                    <tabset>
+                        <tab heading="Content" active="tabs.content" select="selectTab('content')">
+                            <?php
+                            echo $form->field($PageEditForm, 'content')
+                                ->textarea([
+                                    'msd-elastic' => true,
+                                    'redactor' => true,
+                                ]);
+                            ?>
+                        </tab>
+                        <tab heading="Meta" active="tabs.meta" select="selectTab('meta')">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                                    <?php
+
+                                    echo $form->field($PageEditForm, 'meta_title')
+                                        ->textInput([
+                                            'placeholder' => Yii::t('feed', 'Marketing title'),
+                                        ]);
+
+                                    echo $form->field($PageEditForm, 'meta_keywords')
+                                        ->textInput([
+                                            'placeholder' => Yii::t('feed', 'keyword, password, handball'),
+                                        ]);
+
+                                    echo $form->field($PageEditForm, 'meta_description')
+                                        ->textarea([
+                                            'msd-elastic' => true,
+                                            'placeholder' => Yii::t('feed', 'A colorful description section'),
+                                        ]);
+                                    ?>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
+                    <?php
+
                     ?>
                 </div>
             </div>

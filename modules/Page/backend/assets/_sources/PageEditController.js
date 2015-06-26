@@ -21,8 +21,26 @@ angular.module('BackendApp')
   .controller('PageEditController', [
     '$scope', '$http', '$location', '$timeout', '$mdToast',
     function ($scope, $http, $location, $timeout, $mdToast) {
+      var query = $location.search();
 
       $scope.inProgress = false;
+
+      var selectedTab = typeof query.tab === 'undefined'
+        ? 'content'
+        : query.tab;
+
+      $scope.tabs = {
+        content: selectedTab === 'content',
+        meta: selectedTab === 'meta'
+      };
+
+      $scope.selectTab = function (tab) {
+        $location.search('tab', tab);
+
+        $timeout(function () {
+          jQuery(window).trigger('resize');
+        });
+      };
 
       $scope.submit = function (PageEditForm, e) {
         var $form = angular.element('#PageEditForm');
