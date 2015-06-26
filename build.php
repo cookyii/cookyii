@@ -198,7 +198,7 @@ function appendMigrateTask(array &$config, $task_name, $app)
         '.description' => 'Compile all less styles for `board` application',
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
-            'commandline' => cmd($app, './{a} migrate'),
+            'commandline' => cmd($app, './{a} migrate --interactive=0'),
         ],
     ];
 }
