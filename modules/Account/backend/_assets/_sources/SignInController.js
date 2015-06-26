@@ -22,7 +22,7 @@ angular.module('BackendApp')
       resetData();
       resetErrors();
 
-      $scope.submit = function (e) {
+      $scope.submit = function (SignInForm, e) {
         var $form = angular.element(e.target);
 
         $scope.in_progress = true;
