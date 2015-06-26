@@ -71,6 +71,10 @@
   },
   "autoload": {
     "psr-4": {
+      "frontend\\": "./frontend-app",
+      "frontend\\modules\\": "./frontend-modules",
+      "backend\\": "./backend-app",
+      "backend\\modules\\": "./backend-modules",
       "cookyii\\modules\\Feed\\": "./modules/Feed",
       "cookyii\\modules\\Account\\": "./modules/Account",
       "cookyii\\modules\\Page\\": "./modules/Page",
