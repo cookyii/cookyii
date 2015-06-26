@@ -31,12 +31,12 @@ $form = \components\widgets\angular\ActiveForm::begin([
                     <?php
                     echo $form->field($PageEditForm, 'title')
                         ->textInput([
-                            'placeholder' => Yii::t('feed', 'Some title...'),
+                            'placeholder' => Yii::t('page', 'Some title...'),
                         ]);
 
                     echo $form->field($PageEditForm, 'slug')
                         ->textInput([
-                            'placeholder' => Yii::t('feed', 'some-title'),
+                            'placeholder' => Yii::t('page', 'some-title'),
                         ]);
                     ?>
                 </div>
@@ -58,18 +58,18 @@ $form = \components\widgets\angular\ActiveForm::begin([
 
                                     echo $form->field($PageEditForm, 'meta_title')
                                         ->textInput([
-                                            'placeholder' => Yii::t('feed', 'Marketing title'),
+                                            'placeholder' => Yii::t('page', 'Marketing title'),
                                         ]);
 
                                     echo $form->field($PageEditForm, 'meta_keywords')
                                         ->textInput([
-                                            'placeholder' => Yii::t('feed', 'keyword, password, handball'),
+                                            'placeholder' => Yii::t('page', 'keyword, password, handball'),
                                         ]);
 
                                     echo $form->field($PageEditForm, 'meta_description')
                                         ->textarea([
                                             'msd-elastic' => true,
-                                            'placeholder' => Yii::t('feed', 'A colorful description section'),
+                                            'placeholder' => Yii::t('page', 'A colorful description section'),
                                         ]);
                                     ?>
                                 </div>
