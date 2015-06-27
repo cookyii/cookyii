@@ -16,7 +16,7 @@ abstract class Controller extends \components\web\Controller
 
     public $hideLoader = false;
 
-    public $layout = 'main';
+    public $layout = '/main';
 
     /**
      * @inheritdoc

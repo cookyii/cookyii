@@ -13,5 +13,4 @@ namespace cookyii\modules\Page\frontend\components;
 abstract class Controller extends \frontend\components\Controller
 {
 
-    public $layout = '@frontend/views/layouts/main';
 }
