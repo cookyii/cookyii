@@ -6,8 +6,6 @@
 
 namespace cookyii\modules\Page\backend\controllers\rest\PageController;
 
-use yii\helpers\Json;
-
 /**
  * Class DetailAction
  * @package cookyii\modules\Page\backend\controllers\rest\PageController
@@ -27,9 +25,13 @@ class DetailAction extends \yii\rest\Action
 
         $result = $model->attributes;
 
-        $meta = Json::decode($model->meta);
-
-        $result = array_merge($result, $meta);
+        $meta = $model->meta();
+        if (!empty($meta)) {
+            foreach ($meta as $k => $v) {
+                $key = sprintf('meta_%s', $k);
+                $result[$key] = $v;
+            }
+        }
 
         $result['hash'] = sha1(serialize($result));
 

@@ -7,7 +7,6 @@
 namespace cookyii\modules\Feed\backend\controllers\item\rest\ItemController;
 
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
 
 /**
  * Class DetailAction
@@ -34,10 +33,12 @@ class DetailAction extends \yii\rest\Action
 
         $result['sections'] = ArrayHelper::getColumn($item_sections, 'section_id');
 
-        if (!empty($model->meta)) {
-            $meta = Json::decode($model->meta);
-
-            $result = array_merge($result, $meta);
+        $meta = $model->meta();
+        if (!empty($meta)) {
+            foreach ($meta as $k => $v) {
+                $key = sprintf('meta_%s', $k);
+                $result[$key] = $v;
+            }
         }
 
         $result['published_at'] = empty($result['published_at'])

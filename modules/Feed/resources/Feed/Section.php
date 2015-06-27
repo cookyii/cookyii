@@ -8,6 +8,7 @@
 namespace resources\Feed;
 
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * Class Section
@@ -65,6 +66,17 @@ class Section extends \yii\db\ActiveRecord
             [['activated'], 'default', 'value' => static::NOT_ACTIVATED],
             [['deleted'], 'default', 'value' => static::NOT_DELETED],
         ];
+    }
+
+    /**
+     * @param mixed $defaultValues
+     * @return mixed
+     */
+    public function meta($defaultValues = [])
+    {
+        return empty($this->meta) || $this->meta === '[]'
+            ? $defaultValues
+            : Json::decode($this->meta);
     }
 
     /**

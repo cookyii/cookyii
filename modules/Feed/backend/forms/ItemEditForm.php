@@ -120,10 +120,10 @@ class ItemEditForm extends \yii\base\Model
         $Item->published_at = empty($this->published_at) ? time() : strtotime($this->published_at);
         $Item->archived_at = empty($this->archived_at) ? null : strtotime($this->archived_at);
         $Item->meta = Json::encode([
-            'meta_title' => $this->meta_title,
-            'meta_keywords' => $this->meta_keywords,
-            'meta_description' => $this->meta_description,
-            'meta_image' => $this->meta_image,
+            'title' => $this->meta_title,
+            'keywords' => $this->meta_keywords,
+            'description' => $this->meta_description,
+            'image' => $this->meta_image,
         ]);
 
         if ($Item->isNewRecord) {

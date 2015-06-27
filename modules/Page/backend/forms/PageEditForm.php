@@ -95,10 +95,10 @@ class PageEditForm extends \yii\base\Model
         $Page->slug = $this->slug;
         $Page->content = $this->content;
         $Page->meta = Json::encode([
-            'meta_title' => $this->meta_title,
-            'meta_keywords' => $this->meta_keywords,
-            'meta_description' => $this->meta_description,
-            'meta_image' => $this->meta_image,
+            'title' => $this->meta_title,
+            'keywords' => $this->meta_keywords,
+            'description' => $this->meta_description,
+            'image' => $this->meta_image,
         ]);
 
         if ($Page->isNewRecord) {

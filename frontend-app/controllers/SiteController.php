@@ -22,7 +22,7 @@ class SiteController extends \frontend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['index'],
+                'actions' => ['index', 'error', 'captcha'],
                 'roles' => ['?', '@'],
             ],
         ];
