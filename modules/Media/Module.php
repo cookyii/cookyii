@@ -19,28 +19,16 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
     public $moduleName = 'media';
 
     /** @var string */
-    public $uploadAlias = '@app/web/upload';
+    public $uploadPath = '@app/web/upload';
 
     /** @var string */
-    public $uploadPath = null;
+    public $uploadWebPath = '/upload';
 
     /** @var string */
-    public $uploadWebAlias = '/upload';
+    public $storagePath = '@app/web/storage';
 
     /** @var string */
-    public $uploadWebPath = null;
-
-    /** @var string */
-    public $storageAlias = '@app/web/storage';
-
-    /** @var string */
-    public $storagePath = null;
-
-    /** @var string */
-    public $storageWebAlias = '/storage';
-
-    /** @var string */
-    public $storageWebPath = null;
+    public $storageWebPath = '/storage';
 
     /** @var int */
     public $maxUploadFileSize = 10; // megabytes
@@ -95,10 +83,10 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
 
     public function initAliases()
     {
-        $this->storagePath = \Yii::getAlias($this->storageAlias);
-        $this->storageWebPath = \Yii::getAlias($this->storageWebAlias);
-        $this->uploadWebPath = \Yii::getAlias($this->uploadWebAlias);
-        $this->uploadPath = \Yii::getAlias($this->uploadAlias);
+        $this->storageWebPath = \Yii::getAlias($this->storageWebPath);
+        $this->storagePath = \Yii::getAlias($this->storagePath);
+        $this->uploadWebPath = \Yii::getAlias($this->uploadWebPath);
+        $this->uploadPath = \Yii::getAlias($this->uploadPath);
     }
 
     /**
