@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountRolesController', [
-    '$scope', '$http', '$timeout', '$mdToast',
-    function ($scope, $http, $timeout, $mdToast) {
+    '$scope', '$http', 'ToastScope',
+    function ($scope, $http, ToastScope) {
       $scope.saveRoles = function () {
         $http({
           method: 'PUT',
@@ -18,7 +18,7 @@ angular.module('BackendApp')
             $scope.$emit('reloadAccountData');
           })
           .error(function (response, status) {
-            toast($mdToast, 'error', {
+            ToastScope.send('error', {
               message: response.message
             });
           });

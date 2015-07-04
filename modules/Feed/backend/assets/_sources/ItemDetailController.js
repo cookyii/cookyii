@@ -3,18 +3,14 @@
 angular.module('BackendApp')
 
   .controller('ItemDetailController', [
-    '$scope', '$location', '$timeout', '$http', 'ItemResource',
-    function ($scope, $location, $timeout, $http, Item) {
-      var hash = null,
-        query = $location.search(),
-        defaultValues = {sections: []};
+    '$scope', '$timeout', 'QueryScope', 'ItemResource',
+    function ($scope, $timeout, QueryScope, Item) {
+      var defaultValues = {sections: []};
 
       $scope.data = {};
 
       $scope.getItem = function () {
-        return typeof query.id === 'undefined'
-          ? null
-          : query.id;
+        return QueryScope.get('id');
       };
 
       $scope.isNewItem = $scope.getItem() === null;
@@ -29,8 +25,8 @@ angular.module('BackendApp')
         }
       });
 
-      if ($scope.isNewItem && typeof query.section !== 'undefined') {
-        defaultValues.sections = [query.section];
+      if ($scope.isNewItem && QueryScope.get('section') !== null) {
+        defaultValues.sections = [parseInt(QueryScope.get('section'))];
       }
 
       $scope.isItemDisabled = function (item) {
@@ -40,7 +36,7 @@ angular.module('BackendApp')
       $scope.reload = function () {
         $scope.isNewItem = $scope.getItem() === null;
 
-        $scope.itemUpdatedWarning = false;
+        $scope.updatedWarning = false;
         $scope.editedProperty = null;
 
         if ($scope.getItem() === null) {
@@ -48,7 +44,6 @@ angular.module('BackendApp')
         } else {
           Item.detail({id: $scope.getItem()}, function (response) {
             $scope.data = response;
-            hash = response.hash;
 
             $scope.$broadcast('itemDataReloaded', response);
           });
@@ -58,13 +53,13 @@ angular.module('BackendApp')
       $timeout($scope.reload);
       $timeout(checkItemUpdate, 5000);
 
-      $scope.itemUpdatedWarning = false;
+      $scope.updatedWarning = false;
 
       function checkItemUpdate() {
         if ($scope.getItem() !== null) {
           Item.detail({id: $scope.getItem()}, function (item) {
-            if (hash !== item.hash) {
-              $scope.itemUpdatedWarning = true;
+            if ($scope.data.hash !== item.hash) {
+              $scope.updatedWarning = true;
             }
           });
 

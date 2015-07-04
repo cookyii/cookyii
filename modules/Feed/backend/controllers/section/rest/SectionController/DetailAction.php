@@ -36,7 +36,7 @@ class DetailAction extends \yii\rest\Action
 
         $result = $model->attributes;
 
-        $result['parent_id'] = (string)$result['parent_id'];
+//        $result['parent_id'] = (string)$result['parent_id'];
 
         $meta = $model->meta();
         if (!empty($meta)) {

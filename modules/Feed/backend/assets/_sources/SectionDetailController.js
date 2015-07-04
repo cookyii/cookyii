@@ -3,18 +3,14 @@
 angular.module('BackendApp')
 
   .controller('SectionDetailController', [
-    '$scope', '$location', '$timeout', '$http', 'SectionResource',
-    function ($scope, $location, $timeout, $http, Section) {
-      var hash = null,
-        query = $location.search(),
-        defaultValues = {parent_id: null};
+    '$scope', '$timeout', 'QueryScope', 'SectionResource',
+    function ($scope, $timeout, QueryScope, Section) {
+      var defaultValues = {parent_id: QueryScope.get('parent')};
 
       $scope.data = {};
 
       $scope.getSection = function () {
-        return typeof query.section === 'undefined'
-          ? null
-          : query.section;
+        return QueryScope.get('section');
       };
 
       $scope.isNewSection = $scope.getSection() === null;
@@ -29,10 +25,6 @@ angular.module('BackendApp')
         }
       });
 
-      if ($scope.isNewSection && typeof query.parent !== 'undefined') {
-        defaultValues.parent_id = query.parent;
-      }
-
       $scope.isSectionDisabled = function (section) {
         return $scope.getSection() === section;
       };
@@ -40,7 +32,7 @@ angular.module('BackendApp')
       $scope.reload = function () {
         $scope.isNewSection = $scope.getSection() === null;
 
-        $scope.sectionUpdatedWarning = false;
+        $scope.updatedWarning = false;
         $scope.editedProperty = null;
 
         if ($scope.getSection() === null) {
@@ -48,7 +40,6 @@ angular.module('BackendApp')
         } else {
           Section.detail({slug: $scope.getSection()}, function (section) {
             $scope.data = section;
-            hash = section.hash;
 
             $scope.$broadcast('sectionDataReloaded', section);
           });
@@ -58,13 +49,13 @@ angular.module('BackendApp')
       $timeout($scope.reload);
       $timeout(checkSectionUpdate, 5000);
 
-      $scope.sectionUpdatedWarning = false;
+      $scope.updatedWarning = false;
 
       function checkSectionUpdate() {
         if ($scope.getSection() !== null) {
           Section.detail({slug: $scope.getSection()}, function (section) {
-            if (hash !== section.hash) {
-              $scope.sectionUpdatedWarning = true;
+            if ($scope.data.hash !== section.hash) {
+              $scope.updatedWarning = true;
             }
           });
 

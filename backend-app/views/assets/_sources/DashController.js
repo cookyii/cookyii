@@ -1,27 +1,28 @@
 angular
   .module('BackendApp')
 
-  .controller('DashController', function ($scope, $timeout, $mdToast, $mdSidenav, $mdUtil, $log) {
-    $scope.toggleSidePanel = buildToggler('side-panel');
-    /**
-     * Build handler to open/close a SideNav; when animation finishes
-     * report completion in console
-     */
-    function buildToggler(navID) {
-      return $mdUtil.debounce(function () {
-        $mdSidenav(navID).toggle();
-      }, 300);
-    }
+  .controller('DashController', [
+    '$scope', '$timeout', 'ToastScope', '$mdSidenav', '$mdUtil',
+    function ($scope, $timeout, ToastScope, $mdSidenav, $mdUtil) {
+      $scope.toggleSidePanel = buildToggler('side-panel');
 
-    $scope.t = function () {
-      toast($mdToast, 'success', {
-        message: 'Click'
-      });
-    };
-  })
+      function buildToggler(navID) {
+        return $mdUtil.debounce(function () {
+          $mdSidenav(navID).toggle();
+        }, 300);
+      }
 
-  .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-      $mdSidenav('side-panel').close();
-    };
-  });
+      $scope.t = function () {
+        ToastScope.send('success', {
+          message: 'Click'
+        });
+      };
+    }])
+
+  .controller('RightCtrl', [
+    '$scope', '$timeout', '$mdSidenav',
+    function ($scope, $timeout, $mdSidenav) {
+      $scope.close = function () {
+        $mdSidenav('side-panel').close();
+      };
+    }]);

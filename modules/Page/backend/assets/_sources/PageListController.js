@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('PageListController', [
-    '$scope', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'PageResource',
-    function ($scope, $http, $timeout, $mdToast, $mdDialog, $location, Page) {
+    '$scope', '$http', '$timeout', 'ToastScope', '$mdDialog', '$location', 'PageResource',
+    function ($scope, $http, $timeout, ToastScope, $mdDialog, $location, Page) {
       var query = $location.search(),
         loaded = false,
         refreshInterval = 5000;
@@ -111,13 +111,13 @@ angular.module('BackendApp')
 
         $mdDialog.show(confirm).then(function () {
           page.$remove(function () {
-            toast($mdToast, 'success', {
+            ToastScope.send('success', {
               message: 'Page successfully removed'
             });
 
             _refresh();
           }, function () {
-            toast($mdToast, 'error', {
+            ToastScope.send('error', {
               message: 'Error removing page'
             });
           });
@@ -126,13 +126,13 @@ angular.module('BackendApp')
 
       $scope.restore = function (page) {
         page.$restore(function () {
-          toast($mdToast, 'success', {
+          ToastScope.send('success', {
             message: 'Page successfully restored'
           });
 
           _refresh();
         }, function () {
-          toast($mdToast, 'error', {
+          ToastScope.send('error', {
             message: 'Error restoring page'
           });
         });

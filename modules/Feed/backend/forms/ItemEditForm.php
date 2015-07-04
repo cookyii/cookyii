@@ -152,42 +152,4 @@ class ItemEditForm extends \yii\base\Model
 
         return $result;
     }
-
-    /**
-     * @param array|null $items
-     * @param array|null $options
-     * @param array|null $sections
-     * @param array|null $models
-     * @param integer $nested
-     * @return array
-     */
-    public function getSectionValues($items = null, $options = null, $sections = null, $models = null, $nested = 1)
-    {
-        if (empty($items)) {
-            $items = [null => 'Root section'];
-        }
-
-        if (empty($options)) {
-            $options = [];
-        }
-
-        if (empty($sections)) {
-            $tree = \resources\Feed\Section::getTree(false);
-            $sections = $tree['sections'];
-            $models = $tree['models'];
-        }
-
-        if (!empty($sections)) {
-            foreach ($sections as $section) {
-                $attributes = $models[$section['slug']];
-                $items[$attributes['id']] = sprintf('%s %s', str_repeat('....', $nested), $attributes['title']);
-                $options[(string)$attributes['id']] = ['ng-disabled' => sprintf('isSectionDisabled("%s")', $attributes['slug'])];
-                if (!empty($section['sections'])) {
-                    list($items, $options) = $this->getSectionValues($items, $options, $section['sections'], $models, $nested + 1);
-                }
-            }
-        }
-
-        return [$items, $options];
-    }
 }

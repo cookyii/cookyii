@@ -22,7 +22,7 @@ Feed\backend\assets\EditSectionAssetBundle::register($this);
     'ng-controller' => 'SectionDetailController',
 ]) ?>>
 
-    <div class="row" ng-show="sectionUpdatedWarning">
+    <div class="row" ng-show="updatedWarning">
         <div class="col-xs-12 col-lg-6">
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><?= FA::icon('warning') ?></span>

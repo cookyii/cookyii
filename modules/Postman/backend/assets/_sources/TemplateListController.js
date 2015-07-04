@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('TemplateListController', [
-    '$scope', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'TemplateResource',
-    function ($scope, $http, $timeout, $mdToast, $mdDialog, $location, Template) {
+    '$scope', '$http', '$timeout', 'ToastScope', '$mdDialog', '$location', 'TemplateResource',
+    function ($scope, $http, $timeout, ToastScope, $mdDialog, $location, Template) {
       var query = $location.search(),
         loaded = false,
         refreshInterval = 5000;
@@ -101,13 +101,13 @@ angular.module('BackendApp')
 
         $mdDialog.show(confirm).then(function () {
           template.$remove(function () {
-            toast($mdToast, 'success', {
+            ToastScope.send('success', {
               message: 'Template successfully removed'
             });
 
             _refresh();
           }, function () {
-            toast($mdToast, 'error', {
+            ToastScope.send('error', {
               message: 'Error removing template'
             });
           });
@@ -116,13 +116,13 @@ angular.module('BackendApp')
 
       $scope.restore = function (template) {
         template.$restore(function () {
-          toast($mdToast, 'success', {
+          ToastScope.send('success', {
             message: 'Template successfully restored'
           });
 
           _refresh();
         }, function () {
-          toast($mdToast, 'error', {
+          ToastScope.send('error', {
             message: 'Error restoring template'
           });
         });

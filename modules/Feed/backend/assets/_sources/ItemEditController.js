@@ -3,15 +3,11 @@
 angular.module('BackendApp')
 
   .controller('ItemEditController', [
-    '$scope', '$http', '$location', '$timeout', '$mdToast',
-    function ($scope, $http, $location, $timeout, $mdToast) {
-      var query = $location.search();
-
+    '$scope', '$http', '$timeout', 'QueryScope', 'ToastScope', 'SectionDropdownScope',
+    function ($scope, $http, $timeout, QueryScope, ToastScope, SectionDropdownScope) {
       $scope.inProgress = false;
 
-      var selectedTab = typeof query.tab === 'undefined'
-        ? 'content'
-        : query.tab;
+      var selectedTab = QueryScope.get('tab', 'content');
 
       $scope.tabs = {
         content: selectedTab === 'content',
@@ -21,12 +17,18 @@ angular.module('BackendApp')
       };
 
       $scope.selectTab = function (tab) {
-        $location.search('tab', tab);
+        QueryScope.set('tab', tab);
 
         $timeout(function () {
           jQuery(window).trigger('resize');
         });
       };
+
+      $scope.sections = SectionDropdownScope;
+
+      $timeout(function () {
+        $scope.sections.reload(false);
+      });
 
       $scope.submit = function (ItemEditForm, e) {
         var $form = angular.element('#ItemEditForm');
@@ -50,16 +52,16 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                toast($mdToast, 'error', {
+                ToastScope.send('error', {
                   message: 'Save error'
                 });
               }
             } else {
-              toast($mdToast, 'success', {
+              ToastScope.send('success', {
                 message: 'Item successfully saved'
               });
 
-              $location.search('id', response.item_id);
+              QueryScope.set('id', response.item_id);
 
               $scope.reload();
             }
@@ -70,7 +72,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              toast($mdToast, 'error', {
+              ToastScope.send('error', {
                 message: 'Error updating item'
               });
             }

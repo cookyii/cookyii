@@ -3,15 +3,11 @@
 angular.module('BackendApp')
 
   .controller('SectionEditController', [
-    '$scope', '$http', '$location', '$timeout', '$mdToast',
-    function ($scope, $http, $location, $timeout, $mdToast) {
-      var query = $location.search();
-
+    '$scope', '$http', '$timeout', 'QueryScope', 'ToastScope', 'SectionDropdownScope',
+    function ($scope, $http, $timeout, QueryScope, ToastScope, SectionDropdownScope) {
       $scope.inProgress = false;
 
-      var selectedTab = typeof query.tab === 'undefined'
-        ? 'parent'
-        : query.tab;
+      var selectedTab = QueryScope.get('tab', 'parent');
 
       $scope.tabs = {
         parent: selectedTab === 'parent',
@@ -20,12 +16,22 @@ angular.module('BackendApp')
       };
 
       $scope.selectTab = function (tab) {
-        $location.search('tab', tab);
+        QueryScope.set('tab', tab);
 
         $timeout(function () {
           jQuery(window).trigger('resize');
         });
       };
+
+      $scope.sections = SectionDropdownScope;
+
+      $timeout(function () {
+        $scope.sections.reload(true, function () {
+          if ($scope.$parent.getSection() !== null) {
+            $scope.sections.checkCurrentSection($scope.$parent.getSection());
+          }
+        });
+      });
 
       $scope.submit = function (SectionEditForm, e) {
         var $form = angular.element('#SectionEditForm');
@@ -49,18 +55,22 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                toast($mdToast, 'error', {
+                ToastScope.send('error', {
                   message: 'Save error'
                 });
               }
             } else {
-              toast($mdToast, 'success', {
+              ToastScope.send('success', {
                 message: 'Section successfully saved'
               });
 
-              $location.search('section', response.section_slug);
+              QueryScope.set('section', response.section_slug);
 
-              $scope.reload();
+
+              $timeout(function () {
+                reloadParentValues();
+                $scope.$parent.reload();
+              });
             }
           })
           .error(function (response) {
@@ -69,7 +79,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              toast($mdToast, 'error', {
+              ToastScope.send('error', {
                 message: 'Error updating section'
               });
             }

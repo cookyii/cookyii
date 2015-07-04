@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountPropertiesController', [
-    '$scope', '$window', '$location', '$http', '$timeout', '$mdToast', '$mdDialog',
-    function ($scope, $window, $location, $http, $timeout, $mdToast, $mdDialog) {
+    '$scope', '$window', '$location', '$http', '$timeout', 'ToastScope', '$mdDialog',
+    function ($scope, $window, $location, $http, $timeout, ToastScope, $mdDialog) {
       var query = $location.search();
 
       $scope.limit = 5;
@@ -74,12 +74,12 @@ angular.module('BackendApp')
             if (response.result === false) {
               if (typeof response.errors !== 'undefined') {
                 angular.forEach(response.errors, function (error) {
-                  toast($mdToast, 'error', {
+                  ToastScope.send('error', {
                     message: error
                   });
                 });
               } else {
-                toast($mdToast, 'error', {
+                ToastScope.send('error', {
                   message: response.message
                 });
               }
@@ -90,13 +90,13 @@ angular.module('BackendApp')
 
               $scope.$emit('reloadAccountData');
 
-              toast($mdToast, 'success', {
+              ToastScope.send('success', {
                 message: response.message
               });
             }
           })
           .error(function (response, status) {
-            toast($mdToast, 'error', {
+            ToastScope.send('error', {
               message: response.message
             });
           });
@@ -121,7 +121,7 @@ angular.module('BackendApp')
           })
             .success(function (response) {
               if (response.result === false) {
-                toast($mdToast, 'error', {
+                ToastScope.send('error', {
                   message: response.message
                 });
               } else {
@@ -129,7 +129,7 @@ angular.module('BackendApp')
 
                 $location.search('prop', null);
 
-                toast($mdToast, 'success', {
+                ToastScope.send('success', {
                   message: response.message
                 });
 
@@ -137,7 +137,7 @@ angular.module('BackendApp')
               }
             })
             .error(function (response, status) {
-              toast($mdToast, 'error', {
+              ToastScope.send('error', {
                 message: response.message
               });
             });

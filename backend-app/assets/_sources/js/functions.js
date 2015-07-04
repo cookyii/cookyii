@@ -6,17 +6,15 @@ function defaultHttpErrorHandler(error, status) {
   }
 }
 
-function toast($mdToast, type, scope) {
-  $mdToast.show({
-    templateUrl: 'toast-' + type + '.html',
-    controller: ['$scope', function ($scope) {
-      $scope.action = 'ОК';
-      $scope.resolve = function () { $mdToast.hide(); }
+function str_repeat(input, multiplier) {
+  // Repeat a string
+  // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
 
-      $scope = angular.extend($scope, scope);
-    }],
-    hideDelay: 15000,
-    position: 'bottom right',
-    bindToController: true
-  });
+  var buf = '';
+
+  for (var i = 0; i < multiplier; i++) {
+    buf += input;
+  }
+
+  return buf;
 }

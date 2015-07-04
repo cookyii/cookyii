@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountListController', [
-    '$scope', '$http', '$timeout', '$mdToast', '$mdDialog', '$location', 'AccountResource',
-    function ($scope, $http, $timeout, $mdToast, $mdDialog, $location, Account) {
+    '$scope', '$http', '$timeout', 'ToastScope', '$mdDialog', '$location', 'AccountResource',
+    function ($scope, $http, $timeout, ToastScope, $mdDialog, $location, Account) {
       var query = $location.search(),
         loaded = false,
         refreshInterval = 5000;
@@ -111,13 +111,13 @@ angular.module('BackendApp')
 
         $mdDialog.show(confirm).then(function () {
           account.$remove(function () {
-            toast($mdToast, 'success', {
+            ToastScope.send('success', {
               message: 'Account successfully removed'
             });
 
             _refresh();
           }, function () {
-            toast($mdToast, 'error', {
+            ToastScope.send('error', {
               message: 'Error removing account'
             });
           });
@@ -126,13 +126,13 @@ angular.module('BackendApp')
 
       $scope.restore = function (account) {
         account.$restore(function () {
-          toast($mdToast, 'success', {
+          ToastScope.send('success', {
             message: 'Account successfully restored'
           });
 
           _refresh();
         }, function () {
-          toast($mdToast, 'error', {
+          ToastScope.send('error', {
             message: 'Error restoring account'
           });
         });

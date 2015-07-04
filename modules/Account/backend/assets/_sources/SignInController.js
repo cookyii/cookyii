@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('SignInController', [
-    '$scope', '$http', '$mdToast',
-    function ($scope, $http, $mdToast) {
+    '$scope', '$http', 'ToastScope',
+    function ($scope, $http, ToastScope) {
       var _config = {},
         defaultValues = {
           email: null,
@@ -46,7 +46,7 @@ angular.module('BackendApp')
               if (typeof response.errors !== 'undefined') {
                 $scope.error = response.errors;
               } else {
-                toast($mdToast, 'danger', {
+                ToastScope.send('danger', {
                   message: response.message
                 });
               }

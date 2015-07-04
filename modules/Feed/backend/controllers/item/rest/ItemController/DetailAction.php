@@ -32,6 +32,7 @@ class DetailAction extends \yii\rest\Action
             ->all();
 
         $result['sections'] = ArrayHelper::getColumn($item_sections, 'section_id');
+        $result['sections'] = array_map('intval', $result['sections']);
 
         $meta = $model->meta();
         if (!empty($meta)) {

@@ -40,5 +40,6 @@ class AngularAssetBundle extends \yii\web\AssetBundle
 
     public $depends = [
         'yii\web\JqueryAsset',
+        'components\assets\jquery\JScrollPaneAssetBundle',
     ];
 }

@@ -46,29 +46,29 @@ function sortLink($type, $label)
 
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('feed', 'Removed items'), [
                     'class' => 'checker',
-                    'ng-click' => 'toggleDeleted()',
-                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('deleted === true')]),
+                    'ng-click' => 'filter.toggleDeleted()',
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('filter.deleted === true')]),
                 ]) ?>
 
                 <hr>
 
                 <script type="text/ng-template" id="section.html">
-                    <?= Html::a('{{ sections[sect.slug].title }}', null, [
-                        'ng-click' => 'setSection(sect)',
+                    <?= Html::a('{{ section.get(sect.slug).title }}', null, [
+                        'ng-click' => 'section.select(sect)',
                     ]) ?>
 
                     <span class="dash">&ndash;</span>
 
                     <ul class="sub" ng-if="sect.sections">
                         <li ng-repeat="sect in sect.sections track by sect.slug"
-                            ng-class="{'active': isOpenedSection(sect), 'deleted': sections[sect.slug].deleted === '1'}"
+                            ng-class="{'active': section.isActive(sect), 'deleted': section.get(sect.slug).deleted === '1'}"
                             ng-include="'section.html'"></li>
                     </ul>
                 </script>
 
                 <ul class="sections opened">
-                    <li ng-repeat="sect in sections_tree track by sect.slug"
-                        ng-class="{'active': isOpenedSection(sect), 'deleted': sections[sect.slug].deleted === '1'}"
+                    <li ng-repeat="sect in section.tree track by sect.slug"
+                        ng-class="{'active': section.isActive(sect), 'deleted': section.get(sect.slug).deleted === '1'}"
                         ng-include="'section.html'"></li>
                 </ul>
             </div>
@@ -78,10 +78,10 @@ function sortLink($type, $label)
                 <div class="box-header">
                     <h3 class="box-title"><?= Yii::t('feed', 'Items list') ?></h3>
 
-                    <div class="box-section" ng-if="section">
+                    <div class="box-section" ng-if="section.selected">
                         Edit section:
-                        <?= Html::a('{{ sections[section].title }}', null, [
-                            'ng-click' => 'editSection(section)',
+                        <?= Html::a('{{ section.getSelected().title }}', null, [
+                            'ng-click' => 'section.edit(section.selected)',
                             'title' => Yii::t('feed', 'Edit section')
                         ]) ?>
 
@@ -89,14 +89,14 @@ function sortLink($type, $label)
                         echo Html::tag('a', FA::icon('times'), [
                             'class' => 'text-red',
                             'title' => Yii::t('feed', 'Remove section'),
-                            'ng-click' => 'removeSection(section, $event)',
-                            'ng-show' => 'sections[section].deleted === "0"',
+                            'ng-click' => 'section.remove(section.selected, $event)',
+                            'ng-show' => 'section.getSelected().deleted === "0"',
                         ]);
                         echo Html::tag('a', FA::icon('undo'), [
                             'class' => 'text-light-blue',
                             'title' => Yii::t('feed', 'Restore section'),
-                            'ng-click' => 'restoreSection(section)',
-                            'ng-show' => 'sections[section].deleted === "1"',
+                            'ng-click' => 'section.restore(section.selected)',
+                            'ng-show' => 'section.getSelected().deleted === "1"',
                         ]);
                         ?>
                     </div>
@@ -113,22 +113,23 @@ function sortLink($type, $label)
                             'next-text' => '›',
                         ]) ?>
 
-                        <form ng-submit="doSearch()" class="pull-right">
-                            <div class="input-group search" ng-class="{'wide':search.length>0||searchFocus}">
+                        <form ng-submit="filter.search.do()" class="pull-right">
+                            <div class="input-group search"
+                                 ng-class="{'wide':filter.search.query.length>0||filter.search.focus}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
                                     'placeholder' => Yii::t('feed', 'Search'),
                                     'maxlength' => 100,
-                                    'ng-model' => 'search',
-                                    'ng-focus' => 'toggleSearchFocus()',
-                                    'ng-blur' => 'doSearch()',
+                                    'ng-model' => 'filter.search.query',
+                                    'ng-blur' => 'filter.search.do()',
+                                    'ng-keydown' => 'filter.search.do()',
                                 ]) ?>
-                                <a ng-click="clearSearch()" ng-show="search" class="clear-search">
+                                <a ng-click="filter.search.clear()" ng-show="filter.search.query" class="clear-search">
                                     <?= FA::icon('times') ?>
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="doSearch()">
+                                    <button class="btn btn-sm btn-default" ng-click="filter.search.do()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -145,21 +146,21 @@ function sortLink($type, $label)
                         'ng-class' => '{deactivated:page.activated===0,deleted:page.deleted}',
                     ];
                     ?>
-                    <div class="text-center text-italic text-light" ng-show="items.length === 0">
+                    <div class="text-center text-italic text-light" ng-show="items.list.length === 0">
                         <?= Yii::t('feed', 'Items not found') ?>
                     </div>
-                    <div ng-repeat="item in items track by item.id"
+                    <div ng-repeat="item in items.list track by item.id"
                         <?= Html::renderTagAttributes($options) ?>>
                         <div class="row">
                             <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-                                <div class="preview-picture clickable" ng-click="editItem(item)">
+                                <div class="preview-picture clickable" ng-click="items.edit(item)">
                                     Preview<br>picture
                                 </div>
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 activated">
                                 <md-switch ng-model="item.activated"
                                            ng-true-value="1" ng-false-value="0"
-                                           ng-change="toggleActivated(item)"
+                                           ng-change="items.toggleActivation(item)"
                                            title="Item {{ item.activated === 1 ? 'activated' : 'deactivated' }}"
                                            aria-label="Item {{ item.activated === 1 ? 'activated' : 'deactivated' }}">
                                 </md-switch>
@@ -172,7 +173,7 @@ function sortLink($type, $label)
                                 ]) ?>
                             </div>
                             <div class="col-xs-8 col-sm-4 col-md-7 col-lg-7 contain">
-                                <h3 class="clickable" ng-click="editItem(item)">
+                                <h3 class="clickable" ng-click="items.edit(item)">
                                     {{ item.title }}
                                     <br>
                                     <small>{{ item.slug }}</small>
@@ -180,20 +181,21 @@ function sortLink($type, $label)
 
                                 <small>{{ item.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}</small>
 
-                                <p ng-bind-html="item.content_preview" class="clickable" ng-click="editItem(item)"></p>
+                                <p ng-bind-html="item.content_preview" class="clickable"
+                                   ng-click="items.edit(item)"></p>
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 actions">
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
                                     'title' => Yii::t('feed', 'Remove item'),
-                                    'ng-click' => 'removeItem(item, $event)',
+                                    'ng-click' => 'items.remove(item, $event)',
                                     'ng-show' => '!item.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
                                     'title' => Yii::t('feed', 'Restore item'),
-                                    'ng-click' => 'restoreItem(item)',
+                                    'ng-click' => 'items.restore(item)',
                                     'ng-show' => 'item.deleted',
                                 ]);
                                 ?>
@@ -205,10 +207,10 @@ function sortLink($type, $label)
                 <div class="box-footer clearfix">
                     <?= Html::tag('pagination', null, [
                         'class' => 'pagination pagination-sm no-margin pull-right',
-                        'ng-model' => 'pagination.currentPage',
-                        'total-items' => 'pagination.totalCount',
-                        'items-per-page' => 'pagination.perPage',
-                        'ng-change' => 'doPageChanged()',
+                        'ng-model' => 'items.pagination.currentPage',
+                        'total-items' => 'items.pagination.totalCount',
+                        'items-per-page' => 'items.pagination.perPage',
+                        'ng-change' => 'items.doPageChanged()',
                         'max-size' => '10',
                         'previous-text' => '‹',
                         'next-text' => '›',
@@ -237,7 +239,7 @@ function sortLink($type, $label)
             echo Material::button($tooltip . FA::icon('folder-o')->fixedWidth(), [
                 'class' => 'md-fab md-raised md-mini',
                 'title' => Yii::t('feed', 'Create new section'),
-                'ng-click' => 'addSection()',
+                'ng-click' => 'section.add()',
                 'aria-label' => 'Add section',
             ]);
 
@@ -248,7 +250,7 @@ function sortLink($type, $label)
             echo Material::button($tooltip . FA::icon('file-o')->fixedWidth(), [
                 'class' => 'md-fab md-raised md-mini',
                 'title' => Yii::t('feed', 'Create new item'),
-                'ng-click' => 'addItem()',
+                'ng-click' => 'items.add()',
                 'aria-label' => 'Add item',
             ]);
 

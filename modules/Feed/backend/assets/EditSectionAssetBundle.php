@@ -20,6 +20,7 @@ class EditSectionAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $js = [
+        'factories.js',
         'SectionResource.js',
         'SectionDetailController.js',
         'SectionEditController.js',

@@ -117,6 +117,8 @@ class Section extends \yii\db\ActiveRecord
                     $result['contain'] = array_merge($result['contain'], $work['contain']);
 
                     $result['sections'][$Section->id] = [
+                        'id' => $Section->id,
+                        'title' => $Section->title,
                         'slug' => $Section->slug,
                         'sort' => $Section->sort,
                         'contain' => $work['contain'],

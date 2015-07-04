@@ -4,15 +4,14 @@
  * @author Revin Roman
  *
  * @var yii\web\View $this
- * @var Feed\backend\forms\SectionEditForm $SectionEditForm
+ * @var cookyii\modules\Feed\backend\forms\SectionEditForm $SectionEditForm
  */
 
-use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \components\widgets\angular\ActiveForm $form */
-$form = \components\widgets\angular\ActiveForm::begin([
+/** @var \components\widgets\angular\ActiveForm $ActiveForm */
+$ActiveForm = \components\widgets\angular\ActiveForm::begin([
     'name' => 'SectionEditForm',
     'action' => $SectionEditForm->formAction(),
     'controller' => 'SectionEditController',
@@ -29,69 +28,36 @@ $form = \components\widgets\angular\ActiveForm::begin([
             <div class="row">
                 <div class="col-xs-12 col-sm-6 left-chunk">
                     <?php
-                    echo $form->field($SectionEditForm, 'title')
-                        ->textInput([
-                            'placeholder' => Yii::t('feed', 'Some title...'),
-                        ]);
-
-                    echo $form->field($SectionEditForm, 'slug')
-                        ->textInput([
-                            'placeholder' => Yii::t('feed', 'some-title'),
-                        ]);
-
-                    echo $form->field($SectionEditForm, 'sort')
-                        ->textInput([
-                            'placeholder' => '100',
-                        ]);
+                    echo $this->render('_general_base', [
+                        'ActiveForm' => $ActiveForm,
+                        'SectionEditForm' => $SectionEditForm,
+                    ]);
                     ?>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <tabset>
                         <tab heading="Parent section" active="tabs.parent" select="selectTab('parent')">
                             <?php
-                            list($items, $options) = $SectionEditForm->getParentValues();
-
-                            echo $form->field($SectionEditForm, 'parent_id')
-                                ->dropdownList($items, [
-                                    'size' => 11,
-                                    'options' => $options,
-                                ]);
+                            echo $this->render('_general_parent', [
+                                'ActiveForm' => $ActiveForm,
+                                'SectionEditForm' => $SectionEditForm,
+                            ]);
                             ?>
                         </tab>
                         <tab heading="Publishing" active="tabs.publishing" select="selectTab('publishing')">
                             <?php
-                            echo $form->field($SectionEditForm, 'published_at')
-                                ->textInput([
-                                    'ng-datetime-picker' => true,
-                                    'placeholder' => Formatter()->asDatetime(time(), 'dd.MM.yyyy HH:mm'),
-                                ]);
-
-                            echo $form->field($SectionEditForm, 'archived_at')
-                                ->textInput([
-                                    'ng-date-picker' => true,
-                                    'ng-date-start' => 'data.published_at',
-                                    'placeholder' => Formatter()->asDate(time() + (86400 * 180), 'dd.MM.yyyy'),
-                                ]);
+                            echo $this->render('_general_publishing', [
+                                'ActiveForm' => $ActiveForm,
+                                'SectionEditForm' => $SectionEditForm,
+                            ]);
                             ?>
                         </tab>
                         <tab heading="Meta" active="tabs.meta" select="selectTab('meta')">
                             <?php
-
-                            echo $form->field($SectionEditForm, 'meta_title')
-                                ->textInput([
-                                    'placeholder' => Yii::t('feed', 'Marketing title'),
-                                ]);
-
-                            echo $form->field($SectionEditForm, 'meta_keywords')
-                                ->textInput([
-                                    'placeholder' => Yii::t('feed', 'keyword, password, handball'),
-                                ]);
-
-                            echo $form->field($SectionEditForm, 'meta_description')
-                                ->textarea([
-                                    'msd-elastic' => true,
-                                    'placeholder' => Yii::t('feed', 'A colorful description section'),
-                                ]);
+                            echo $this->render('_general_meta', [
+                                'ActiveForm' => $ActiveForm,
+                                'SectionEditForm' => $SectionEditForm,
+                            ]);
                             ?>
                         </tab>
                     </tabset>
