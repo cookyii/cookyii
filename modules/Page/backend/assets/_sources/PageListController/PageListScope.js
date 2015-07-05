@@ -2,14 +2,14 @@
 
 angular.module('BackendApp')
 
-  .factory('ItemScope', [
-    '$rootScope', '$timeout', '$mdDialog', 'QueryScope', 'SectionScope', 'FilterScope', 'ItemResource',
-    function ($rootScope, $timeout, $mdDialog, QueryScope, SectionScope, FilterScope, Item) {
+  .factory('PageListScope', [
+    '$rootScope', '$timeout', '$mdDialog', 'QueryScope', 'FilterScope', 'ToastScope', 'PageResource',
+    function ($rootScope, $timeout, $mdDialog, QueryScope, FilterScope, ToastScope, Page) {
       var $scope = $rootScope.$new(),
         page = QueryScope.get('page', 1),
         loaded = false;
 
-      $scope.lsit = [];
+      $scope.list = [];
 
       $scope.sort = QueryScope.get('sort', '-id');
 
@@ -37,7 +37,7 @@ angular.module('BackendApp')
         _refresh();
       };
 
-      $scope.toggleActivation = function (page) {
+      $scope.toggleActivated = function (page) {
         $timeout(function () {
           if (page.activated === 1) {
             page.$activate(_refresh, _refresh);
@@ -48,49 +48,46 @@ angular.module('BackendApp')
       };
 
       $scope.add = function () {
-        var section = SectionScope.getSelected(),
-          section_id = section === null ? null : section.id;
-
-        location.href = '/feed/item/edit#?section=' + section_id;
+        location.href = '/page/edit';
       };
 
-      $scope.edit = function (item) {
-        location.href = '/feed/item/edit#?id=' + item.id;
+      $scope.edit = function (page) {
+        location.href = '/page/edit#?id=' + page.id;
       };
 
-      $scope.remove = function (item, e) {
+      $scope.remove = function (page, e) {
         var confirm = $mdDialog.confirm()
           .parent(angular.element(document.body))
-          .title('Would you like to delete this item?')
+          .title('Would you like to delete this page?')
           .ok('Please do it!')
           .cancel('Cancel')
           .targetEvent(e);
 
         $mdDialog.show(confirm).then(function () {
-          item.$remove(function () {
+          page.$remove(function () {
             ToastScope.send('success', {
-              message: 'Item successfully removed'
+              message: 'Page successfully removed'
             });
 
             _refresh();
           }, function () {
             ToastScope.send('error', {
-              message: 'Error removing item'
+              message: 'Error removing page'
             });
           });
         });
       };
 
-      $scope.restore = function (item) {
-        item.$restore(function () {
+      $scope.restore = function (page) {
+        page.$restore(function () {
           ToastScope.send('success', {
-            message: 'Item successfully restored'
+            message: 'Page successfully restored'
           });
 
           _refresh();
         }, function () {
           ToastScope.send('error', {
-            message: 'Error restoring item'
+            message: 'Error restoring page'
           });
         });
       };
@@ -98,17 +95,10 @@ angular.module('BackendApp')
       var reloadTimeout;
 
       $scope.reload = function () {
-        if (SectionScope.selected === null) {
-          $scope.items = [];
-
-          return;
-        }
-
-        Item.query({
-          deactivated: $scope.deactivated,
+        Page.query({
+          deactivated: FilterScope.deactivated,
           deleted: FilterScope.deleted,
           search: FilterScope.search.query,
-          section: SectionScope.selected,
           sort: $scope.sort,
           page: loaded ? $scope.pagination.currentPage : page
         }, function (response, headers) {

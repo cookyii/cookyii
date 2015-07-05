@@ -14,13 +14,5 @@ md-switch { margin: 0 10px; }
 .table-pages td.actions > a { opacity: 0.1; }
 .table-pages tr:hover .actions > a,
 .table-pages tr:focus .actions > a { opacity: 0.9; }
-.table-pages tr.deactivated { }
-.table-pages tr.deactivated .id,
-.table-pages tr.deactivated .name,
-.table-pages tr.deactivated .email,
-.table-pages tr.deactivated .updated { color: #b8b8b8; }
-.table-pages tr.deleted { }
-.table-pages tr.deleted .id,
-.table-pages tr.deleted .name,
-.table-pages tr.deleted .email,
-.table-pages tr.deleted .updated { text-decoration: line-through; }
+.table-pages tr.deactivated td { color: #b8b8b8; }
+.table-pages tr.deleted td { text-decoration: line-through; }

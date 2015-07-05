@@ -22,7 +22,7 @@ Page\backend\assets\EditAssetBundle::register($this);
     'ng-controller' => 'PageDetailController',
 ]) ?>>
 
-    <div class="row" ng-show="pageUpdatedWarning">
+    <div class="row" ng-show="updatedWarning">
         <div class="col-xs-12 col-lg-6">
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><?= FA::icon('warning') ?></span>

@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('SectionScope', [
+  .factory('SectionListScope', [
     '$rootScope', '$timeout', '$mdDialog', 'QueryScope', 'FilterScope', 'SectionResource',
     function ($rootScope, $timeout, $mdDialog, QueryScope, FilterScope, Section) {
       var $scope = $rootScope.$new();

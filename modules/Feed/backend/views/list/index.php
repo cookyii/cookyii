@@ -114,8 +114,7 @@ function sortLink($type, $label)
                         ]) ?>
 
                         <form ng-submit="filter.search.do()" class="pull-right">
-                            <div class="input-group search"
-                                 ng-class="{'wide':filter.search.query.length>0||filter.search.focus}">
+                            <div class="input-group search" ng-class="{'wide':filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
                                     'placeholder' => Yii::t('feed', 'Search'),
@@ -139,16 +138,16 @@ function sortLink($type, $label)
                 </div>
 
                 <div class="box-body no-padding">
+                    <div class="text-center text-italic text-light" ng-show="items.list.length === 0">
+                        <?= Yii::t('feed', 'Items not found') ?>
+                    </div>
                     <?php
                     $options = [
                         'title' => Yii::t('feed', 'Edit item'),
                         'class' => 'box-item',
-                        'ng-class' => '{deactivated:page.activated===0,deleted:page.deleted}',
+                        'ng-class' => '{deactivated:item.activated===0,deleted:item.deleted}',
                     ];
                     ?>
-                    <div class="text-center text-italic text-light" ng-show="items.list.length === 0">
-                        <?= Yii::t('feed', 'Items not found') ?>
-                    </div>
                     <div ng-repeat="item in items.list track by item.id"
                         <?= Html::renderTagAttributes($options) ?>>
                         <div class="row">

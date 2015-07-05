@@ -22,6 +22,8 @@ class ListAssetBundle extends \yii\web\AssetBundle
     public $js = [
         'PageResource.js',
         'PageListController.js',
+        'PageListController/FilterScope.js',
+        'PageListController/PageListScope.js',
     ];
 
     public $depends = [

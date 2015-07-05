@@ -24,8 +24,8 @@ class ListAssetBundle extends \yii\web\AssetBundle
         'ItemResource.js',
         'ListController.js',
         'ListController/FilterScope.js',
-        'ListController/ItemScope.js',
-        'ListController/SectionScope.js',
+        'ListController/ItemListScope.js',
+        'ListController/SectionListScope.js',
     ];
 
     public $depends = [

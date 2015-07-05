@@ -3,16 +3,13 @@
 angular.module('BackendApp')
 
   .controller('PageDetailController', [
-    '$scope', '$location', '$timeout', 'PageResource',
-    function ($scope, $location, $timeout, Page) {
+    '$scope', '$timeout', 'QueryScope', 'PageResource',
+    function ($scope, $timeout, QueryScope, Page) {
       var hash = null,
-        query = $location.search(),
         defaultValues = {roles: []};
 
       $scope.getPageId = function () {
-        return typeof query.id === 'undefined'
-          ? null
-          : parseInt(query.id);
+        return QueryScope.get('id');
       };
 
       $scope.isNewPage = $scope.getPageId() === null;
@@ -30,7 +27,7 @@ angular.module('BackendApp')
       $scope.reload = function () {
         $scope.isNewPage = $scope.getPageId() === null;
 
-        $scope.pageUpdatedWarning = false;
+        $scope.updatedWarning = false;
         $scope.editedProperty = null;
 
         if ($scope.getPageId() === null) {
@@ -48,13 +45,13 @@ angular.module('BackendApp')
       $timeout($scope.reload);
       $timeout(checkPageUpdate, 5000);
 
-      $scope.pageUpdatedWarning = false;
+      $scope.updatedWarning = false;
 
       function checkPageUpdate() {
         if ($scope.getPageId() !== null) {
           Page.detail({id: $scope.getPageId()}, function (page) {
             if (hash !== page.hash) {
-              $scope.pageUpdatedWarning = true;
+              $scope.updatedWarning = true;
             }
           });
 

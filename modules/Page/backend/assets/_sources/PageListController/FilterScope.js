@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('FilterScope', [
+  .service('FilterScope', [
     '$rootScope', 'QueryScope', 'FilterSearchScope',
     function ($rootScope, QueryScope, FilterSearchScope) {
       var $scope = $rootScope.$new();

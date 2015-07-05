@@ -11,8 +11,8 @@ use cookyii\modules\Page;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \components\widgets\angular\ActiveForm $form */
-$form = \components\widgets\angular\ActiveForm::begin([
+/** @var \components\widgets\angular\ActiveForm $ActiveForm */
+$ActiveForm = \components\widgets\angular\ActiveForm::begin([
     'name' => 'PageEditForm',
     'action' => $PageEditForm->formAction(),
     'controller' => 'PageEditController',
@@ -29,51 +29,29 @@ $form = \components\widgets\angular\ActiveForm::begin([
             <div class="row">
                 <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4 left-chunk">
                     <?php
-                    echo $form->field($PageEditForm, 'title')
-                        ->textInput([
-                            'placeholder' => Yii::t('page', 'Some title...'),
-                        ]);
-
-                    echo $form->field($PageEditForm, 'slug')
-                        ->textInput([
-                            'placeholder' => Yii::t('page', 'some-title'),
-                        ]);
+                    echo $this->render('_general_base', [
+                        'ActiveForm' => $ActiveForm,
+                        'PageEditForm' => $PageEditForm,
+                    ]);
                     ?>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
                     <tabset>
                         <tab heading="Content" active="tabs.content" select="selectTab('content')">
                             <?php
-                            echo $form->field($PageEditForm, 'content')
-                                ->textarea([
-                                    'msd-elastic' => true,
-                                    'redactor' => true,
-                                ]);
+                            echo $this->render('_general_content', [
+                                'ActiveForm' => $ActiveForm,
+                                'PageEditForm' => $PageEditForm,
+                            ]);
                             ?>
                         </tab>
                         <tab heading="Meta" active="tabs.meta" select="selectTab('meta')">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                                    <?php
-
-                                    echo $form->field($PageEditForm, 'meta_title')
-                                        ->textInput([
-                                            'placeholder' => Yii::t('page', 'Marketing title'),
-                                        ]);
-
-                                    echo $form->field($PageEditForm, 'meta_keywords')
-                                        ->textInput([
-                                            'placeholder' => Yii::t('page', 'keyword, password, handball'),
-                                        ]);
-
-                                    echo $form->field($PageEditForm, 'meta_description')
-                                        ->textarea([
-                                            'msd-elastic' => true,
-                                            'placeholder' => Yii::t('page', 'A colorful description section'),
-                                        ]);
-                                    ?>
-                                </div>
-                            </div>
+                            <?php
+                            echo $this->render('_general_meta', [
+                                'ActiveForm' => $ActiveForm,
+                                'PageEditForm' => $PageEditForm,
+                            ]);
+                            ?>
                         </tab>
                     </tabset>
                     <?php

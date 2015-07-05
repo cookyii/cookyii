@@ -3,12 +3,12 @@
 angular.module('BackendApp')
 
   .controller('ListController', [
-    '$scope', '$timeout', 'FilterScope', 'SectionScope', 'ItemScope',
-    function ($scope, $timeout, FilterScope, SectionScope, ItemScope) {
+    '$scope', '$timeout', 'FilterScope', 'SectionListScope', 'ItemListScope',
+    function ($scope, $timeout, FilterScope, SectionListScope, ItemListScope) {
 
       $scope.filter = FilterScope;
-      $scope.section = SectionScope;
-      $scope.items = ItemScope;
+      $scope.section = SectionListScope;
+      $scope.items = ItemListScope;
 
       $scope.fab = {
         isOpen: false,
@@ -16,14 +16,13 @@ angular.module('BackendApp')
         selectedDirection: 'left'
       };
 
-      $scope.$on('refresh', _refresh);
-
       function _refresh() {
         $scope.section.reload();
         $scope.items.reload();
       }
 
-      $timeout($scope.section.reload);
-      $timeout($scope.items.reload);
+      $scope.$on('refresh', _refresh);
+
+      $timeout(_refresh);
     }
   ]);

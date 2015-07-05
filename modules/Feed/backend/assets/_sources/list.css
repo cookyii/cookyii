@@ -39,3 +39,5 @@ md-fab-speed-dial {
 .box-item .actions > a { opacity: 0.1; }
 .box-item:hover .actions > a,
 .box-item:focus .actions > a { opacity: 0.9; }
+.box-item.deleted * { text-decoration: line-through; }
+.box-item.deactivated * { color: #b8b8b8; }
