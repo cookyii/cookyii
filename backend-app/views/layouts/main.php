@@ -70,7 +70,7 @@ $menu_items = include(__DIR__ . '/_menu.php');
 
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+        <section class="sidebar scroll-visible" ng-scroll-pane scroll-timeout>
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">

@@ -1,27 +1,36 @@
 /*
- * Skin: Purple
+ * Skin: Cookyi (fork purple)
  * ------------
  */
 
-.skin-purple {
+.skin-cookyii {
+
+  .main-footer { background: #222d32; color: #b8c7ce; border: 0; padding: 10px 15px; }
+  .navbar-nav > .user-menu > .dropdown-menu { padding: 0; border: 0; box-shadow: 0 8px 18px -11px #000000 !important; }
+
+  .login-logo, .register-logo {
+    text-shadow: 0 0 11px #3f5d8c;
+    color: rgb(24, 24, 24);
+  }
+
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@purple; #fff);
+      .navbar-variant(@purple; #ffffff);
       .sidebar-toggle {
-        color: #fff;
+        color: #ffffff;
         &:hover {
           background-color: darken(@purple, 5%);
         }
       }
-      @media(max-width: @screen-header-collapse) {
+      @media (max-width: @screen-header-collapse) {
         .dropdown-menu {
           li {
             &.divider {
-              background-color: rgba(255,255,255,0.1);
+              background-color: rgba(255, 255, 255, 0.1);
             }
             a {
-              color: #fff;
+              color: #ffffff;
               &:hover {
                 background: darken(@purple, 5%);
               }
@@ -40,11 +49,67 @@
     }
   }
 
+  .sidebar { height: auto; }
+
   //Content Header
   .content-header {
     background: transparent;
   }
 
+  .content-wrapper, .right-side {
+    background-color: #ecf0f5;
+  }
+
+  .content-wrapper {
+    padding-bottom: 70px;
+  }
+
   //Create the sidebar skin
   .skin-dark-sidebar(@purple);
+
+  .box {
+    .box-body {
+      hr {
+        margin: 20px -10px;
+      }
+    }
+    .overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .fa {
+        position: static;
+        color: #555299;
+        font-size: 6em;
+      }
+    }
+  }
+
+  .box-filter {
+    text-align: right;
+    hr { margin: 5px 0; border-color: #dddddd; }
+    h3 { font-size: 18px; margin: 12px 0 0; }
+    > a.checker {
+      display: block;
+      i { visibility: hidden; }
+      &.checked {
+        i { visibility: visible; }
+      }
+    }
+    > ul {
+      list-style: none; margin: 0; padding: 0;
+      > li {
+        > a {
+          display: block;
+        }
+        &.pad { padding: 3px 0; }
+        &.selected {
+          > a {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
 }

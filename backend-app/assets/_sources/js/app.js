@@ -38,13 +38,13 @@ $.AdminLTE.options = {
   //Add slimscroll to navbar menus
   //This requires you to load the slimscroll plugin
   //in every page before app.js
-  navbarMenuSlimscroll: true,
+  navbarMenuSlimscroll: false,
   navbarMenuSlimscrollWidth: "3px", //The width of the scroll bar
   navbarMenuHeight: "200px", //The height of the inner menu
   //General animation speed for JS animated elements such as box collapse/expand and 
   //sidebar treeview slide up/down. This options accepts an integer as milliseconds,
   //'fast', 'normal', or 'slow'
-  animationSpeed: 500,
+  animationSpeed: 200,
   //Sidebar push menu toggle button selector
   sidebarToggleSelector: "[data-toggle='offcanvas']",
   //Activate sidebar push menu
@@ -143,8 +143,8 @@ $(function () {
   //Extend options if external options exist
   if (typeof AdminLTEOptions !== "undefined") {
     $.extend(true,
-            $.AdminLTE.options,
-            AdminLTEOptions);
+      $.AdminLTE.options,
+      AdminLTEOptions);
   }
 
   //Easy access to options
@@ -255,7 +255,7 @@ function _init() {
         $(".content-wrapper, .right-side").css('height', window_height - $('.main-footer').outerHeight());
       } else {
         var postSetWidth;
-        if (window_height >= sidebar_height) {
+        if ((window_height - neg) >= sidebar_height) {
           $(".content-wrapper, .right-side").css('height', window_height - neg);
           postSetWidth = window_height - neg;
         } else {
@@ -279,7 +279,7 @@ function _init() {
           $(".sidebar").slimScroll({destroy: true}).height("auto");
         }
         return;
-      } else if (typeof $.fn.slimScroll == 'undefined' && console) {
+      } else if (typeof $.fn.slimScroll == 'undefined' && $.AdminLTE.options.navbarMenuSlimscroll && console) {
         console.error("Error: the fixed layout requires the slimscroll plugin!");
       }
       //Enable slimscroll for fixed layout
@@ -338,8 +338,8 @@ function _init() {
 
       //Enable expand on hover for sidebar mini
       if ($.AdminLTE.options.sidebarExpandOnHover
-              || ($('body').hasClass('fixed')
-                      && $('body').hasClass('sidebar-mini'))) {
+        || ($('body').hasClass('fixed')
+        && $('body').hasClass('sidebar-mini'))) {
         this.expandOnHover();
       }
 
@@ -350,14 +350,14 @@ function _init() {
       //Expand sidebar on hover
       $('.main-sidebar').hover(function () {
         if ($('body').hasClass('sidebar-mini')
-                && $("body").hasClass('sidebar-collapse')
-                && $(window).width() > screenWidth) {
+          && $("body").hasClass('sidebar-collapse')
+          && $(window).width() > screenWidth) {
           _this.expand();
         }
       }, function () {
         if ($('body').hasClass('sidebar-mini')
-                && $('body').hasClass('sidebar-expanded-on-hover')
-                && $(window).width() > screenWidth) {
+          && $('body').hasClass('sidebar-expanded-on-hover')
+          && $(window).width() > screenWidth) {
           _this.collapse();
         }
       });
@@ -396,6 +396,7 @@ function _init() {
           checkElement.removeClass('menu-open');
           //Fix the layout in case the sidebar stretches over the height of the window
           //_this.layout.fix();
+          jQuery(window).trigger('resize');
         });
         checkElement.parent("li").removeClass("active");
       }
@@ -418,6 +419,7 @@ function _init() {
           parent_li.addClass('active');
           //Fix the layout in case the sidebar stretches over the height of the window
           _this.layout.fix();
+          jQuery(window).trigger('resize');
         });
       }
       //if this isn't a link, prevent the page from being redirected
@@ -451,7 +453,7 @@ function _init() {
         e.preventDefault();
         //If the sidebar is not open
         if (!sidebar.hasClass('control-sidebar-open')
-                && !$('body').hasClass('control-sidebar-open')) {
+          && !$('body').hasClass('control-sidebar-open')) {
           //Open the sidebar
           _this.open(sidebar, o.slide);
         } else {
@@ -533,10 +535,10 @@ function _init() {
   $.AdminLTE.boxWidget = {
     selectors: $.AdminLTE.options.boxWidgetOptions.boxWidgetSelectors,
     icons: $.AdminLTE.options.boxWidgetOptions.boxWidgetIcons,
-    animationSpeed: $.AdminLTE.options.animationSpeed,    
+    animationSpeed: $.AdminLTE.options.animationSpeed,
     activate: function (_box) {
       var _this = this;
-      if (! _box) {
+      if (!_box) {
         _box = document; // activate all boxes per default
       }
       //Listen for collapse event triggers
@@ -560,8 +562,8 @@ function _init() {
       if (!box.hasClass("collapsed-box")) {
         //Convert minus into plus
         element.children(":first")
-                .removeClass(_this.icons.collapse)
-                .addClass(_this.icons.open);
+          .removeClass(_this.icons.collapse)
+          .addClass(_this.icons.open);
         //Hide the content
         box_content.slideUp(_this.animationSpeed, function () {
           box.addClass("collapsed-box");
@@ -569,15 +571,15 @@ function _init() {
       } else {
         //Convert plus into minus
         element.children(":first")
-                .removeClass(_this.icons.open)
-                .addClass(_this.icons.collapse);
+          .removeClass(_this.icons.open)
+          .addClass(_this.icons.collapse);
         //Show the content
         box_content.slideDown(_this.animationSpeed, function () {
           box.removeClass("collapsed-box");
         });
       }
     },
-    remove: function (element) {     
+    remove: function (element) {
       //Find the box parent
       var box = element.parents(".box").first();
       box.slideUp(this.animationSpeed);
@@ -681,49 +683,3 @@ function _init() {
   };
 
 })(jQuery);
-
-/*
- * TODO LIST CUSTOM PLUGIN
- * -----------------------
- * This plugin depends on iCheck plugin for checkbox and radio inputs
- *
- * @type plugin
- * @usage $("#todo-widget").todolist( options );
- */
-(function ($) {
-
-  $.fn.todolist = function (options) {
-    // Render options
-    var settings = $.extend({
-      //When the user checks the input
-      onCheck: function (ele) {
-      },
-      //When the user unchecks the input
-      onUncheck: function (ele) {
-      }
-    }, options);
-
-    return this.each(function () {
-
-      if (typeof $.fn.iCheck != 'undefined') {
-        $('input', this).on('ifChecked', function (event) {
-          var ele = $(this).parents("li").first();
-          ele.toggleClass("done");
-          settings.onCheck.call(ele);
-        });
-
-        $('input', this).on('ifUnchecked', function (event) {
-          var ele = $(this).parents("li").first();
-          ele.toggleClass("done");
-          settings.onUncheck.call(ele);
-        });
-      } else {
-        $('input', this).on('change', function (event) {
-          var ele = $(this).parents("li").first();
-          ele.toggleClass("done");
-          settings.onCheck.call(ele);
-        });
-      }
-    });
-  };
-}(jQuery));

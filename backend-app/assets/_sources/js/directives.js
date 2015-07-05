@@ -64,15 +64,21 @@ function ScrollPane($window, $timeout) {
     replace: true,
     template: '<div class="scroll-pane"><div ng-transclude></div></div>',
     link: function ($scope, $elem, $attrs) {
-      var config = {};
+      var config = {
+        mouseWheelSpeed: 80,
+        horizontalGutter: 0,
+        verticalGutter: 0
+      };
+
+      var $$window = angular.element($window);
 
       if (typeof $attrs.id === 'undefined') {
-        $attrs.id = 'scroll-pane-' + (Math.random() * 100000);
+        $attrs.id = 'scroll-pane-' + parseInt(Math.random() * 10000000);
         $attrs.$$element.attr('id', $attrs.id);
       }
 
-      if (typeof $attrs.scrollConfig !== 'undefined') {
-        config = $scope.$eval($attrs.scrollConfig);
+      if (typeof $attrs.ngScrollPane !== 'undefined') {
+        config = angular.extend({}, config, $scope.$eval($attrs.ngScrollPane));
       }
 
       var fn = function () {
@@ -86,10 +92,12 @@ function ScrollPane($window, $timeout) {
 
         $pane.jScrollPane(config);
 
-        return $scope.pane = $pane.data('jsp');
+        $scope.pane = $pane.data('jsp');
+
+        $$window.trigger('resize');
       };
 
-      if ($attrs.scrollTimeout) {
+      if (typeof $attrs.scrollTimeout === 'string') {
         $timeout(fn, $scope.$eval($attrs.scrollTimeout));
       } else {
         fn();
@@ -118,6 +126,23 @@ function ScrollPane($window, $timeout) {
 
             return fn();
           });
+        }
+      });
+
+      $$window.on('resize', function () {
+        if ($scope.pane) {
+          var $pane = angular.element('#' + $attrs.id),
+            $content = $pane.find('.jspPane'),
+            content_height = $content.height(),
+            window_height = $$window.height() - angular.element('.main-header').height();
+
+          if (content_height > window_height) {
+            $pane.height(window_height);
+          } else {
+            $pane.height(content_height);
+          }
+
+          $scope.pane.reinitialise();
         }
       });
 

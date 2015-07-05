@@ -13,7 +13,7 @@ angular.module('BackendApp')
       $scope.fab = {
         isOpen: false,
         selectedMode: 'md-fling',
-        selectedDirection: 'up'
+        selectedDirection: 'left'
       };
 
       $scope.$on('refresh', _refresh);

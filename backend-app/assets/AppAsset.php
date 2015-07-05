@@ -29,6 +29,7 @@ class AppAsset extends \yii\web\AssetBundle
         'js/BackendApp.js',
         'js/scopes/QueryScope.js',
         'js/scopes/ToastScope.js',
+        'js/scopes/FilterSearchScope.js',
     ];
 
     public $depends = [

@@ -64,7 +64,7 @@ $this->beginPage();
 
     ?>
 </head>
-<body class="sidebar-mini skin-purple">
+<body class="sidebar-mini skin-cookyii fixed">
 <?php
 
 $this->beginBody();

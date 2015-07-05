@@ -233,7 +233,7 @@ function sortLink($type, $label)
             <?php
 
             $tooltip = Material::tooltip(Yii::t('feed', 'Create new section'), [
-                'md-direction' => 'left',
+                'md-direction' => 'top',
             ]);
 
             echo Material::button($tooltip . FA::icon('folder-o')->fixedWidth(), [
@@ -244,7 +244,7 @@ function sortLink($type, $label)
             ]);
 
             $tooltip = Material::tooltip(Yii::t('feed', 'Create new item'), [
-                'md-direction' => 'left',
+                'md-direction' => 'top',
             ]);
 
             echo Material::button($tooltip . FA::icon('file-o')->fixedWidth(), [
