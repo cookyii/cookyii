@@ -22,11 +22,11 @@ Page\backend\assets\ListAssetBundle::register($this);
  */
 function sortLink($type, $label)
 {
-    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'sort === "-' . $type . '"']);
-    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'sort === "' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'pages.sort.order === "-' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'pages.sort.order === "' . $type . '"']);
 
     return Html::a($label, null, [
-        'ng-click' => 'setSort("' . $type . '")',
+        'ng-click' => 'pages.sort.setOrder("' . $type . '")',
     ]);
 }
 
@@ -34,7 +34,7 @@ function sortLink($type, $label)
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'PageListController',
+    'ng-controller' => 'ListController',
 ]) ?>>
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
@@ -45,8 +45,8 @@ function sortLink($type, $label)
 
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('page', 'Removed pages'), [
                     'class' => 'checker',
-                    'ng-click' => 'filter.toggleDeleted()',
-                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('filter.deleted === true')]),
+                    'ng-click' => 'pages.filter.toggleDeleted()',
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('pages.filter.deleted === true')]),
                 ]) ?>
             </div>
         </div>
@@ -67,22 +67,23 @@ function sortLink($type, $label)
                             'next-text' => '›',
                         ]) ?>
 
-                        <form ng-submit="filter.search.do()" class="pull-right">
-                            <div class="input-group search" ng-class="{'wide':filter.search.query.length>0}">
+                        <form ng-submit="pages.filter.search.do()" class="pull-right">
+                            <div class="input-group search" ng-class="{'wide':pages.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
                                     'placeholder' => Yii::t('page', 'Search'),
                                     'maxlength' => 100,
-                                    'ng-model' => 'filter.search.query',
-                                    'ng-blur' => 'filter.search.do()',
-                                    'ng-keydown' => 'filter.search.do()',
+                                    'ng-model' => 'pages.filter.search.query',
+                                    'ng-blur' => 'pages.filter.search.do()',
+                                    'ng-keydown' => 'pages.filter.search.do()',
                                 ]) ?>
-                                <a ng-click="filter.search.clear()" ng-show="filter.search.query" class="clear-search">
+                                <a ng-click="pages.filter.search.clear()" ng-show="pages.filter.search.query"
+                                   class="clear-search">
                                     <?= FA::icon('times') ?>
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="filter.search.do()">
+                                    <button class="btn btn-sm btn-default" ng-click="pages.filter.search.do()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>

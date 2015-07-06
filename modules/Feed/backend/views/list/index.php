@@ -23,11 +23,11 @@ Feed\backend\assets\ListAssetBundle::register($this);
  */
 function sortLink($type, $label)
 {
-    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'sort === "-' . $type . '"']);
-    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'sort === "' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'items.sort.order === "-' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'items.sort.order === "' . $type . '"']);
 
     return Html::a($label, null, [
-        'ng-click' => 'setSort("' . $type . '")',
+        'ng-click' => 'items.sort.setOrder("' . $type . '")',
     ]);
 }
 
@@ -116,8 +116,8 @@ function sortLink($type, $label)
                             'next-text' => '›',
                         ]) ?>
 
-                        <form ng-submit="filter.search.do()" class="pull-right">
-                            <div class="input-group search" ng-class="{'wide':filter.search.query.length>0}">
+                        <form ng-submit="items.filter.search.do()" class="pull-right">
+                            <div class="input-group search" ng-class="{'wide':items.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
                                     'placeholder' => Yii::t('feed', 'Search'),
@@ -126,12 +126,13 @@ function sortLink($type, $label)
                                     'ng-blur' => 'filter.search.do()',
                                     'ng-keydown' => 'filter.search.do()',
                                 ]) ?>
-                                <a ng-click="filter.search.clear()" ng-show="filter.search.query" class="clear-search">
+                                <a ng-click="items.filter.search.clear()" ng-show="items.filter.search.query"
+                                   class="clear-search">
                                     <?= FA::icon('times') ?>
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="filter.search.do()">
+                                    <button class="btn btn-sm btn-default" ng-click="items.filter.search.do()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
