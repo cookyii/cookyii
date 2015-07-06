@@ -122,9 +122,9 @@ function sortLink($type, $label)
                                     'class' => 'form-control input-sm pull-right',
                                     'placeholder' => Yii::t('feed', 'Search'),
                                     'maxlength' => 100,
-                                    'ng-model' => 'filter.search.query',
-                                    'ng-blur' => 'filter.search.do()',
-                                    'ng-keydown' => 'filter.search.do()',
+                                    'ng-model' => 'items.filter.search.query',
+                                    'ng-blur' => 'items.filter.search.do()',
+                                    'ng-keydown' => 'items.filter.search.do()',
                                 ]) ?>
                                 <a ng-click="items.filter.search.clear()" ng-show="items.filter.search.query"
                                    class="clear-search">
