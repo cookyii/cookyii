@@ -10,8 +10,8 @@ angular.module('BackendApp')
           page = QueryScope.get('page', 1),
           loaded = false;
 
-        $scope.filter = FilterScope($scope);
         $scope.sort = SortScope($scope);
+        $scope.filter = FilterScope($scope);
 
         $scope.list = [];
 
@@ -111,7 +111,7 @@ angular.module('BackendApp')
         };
 
         function _refresh() {
-          $parentScope.$broadcast('refresh');
+          $parentScope.$emit('refresh');
         }
 
         return $scope;

@@ -3,26 +3,30 @@
 angular.module('BackendApp')
 
   .factory('FilterScope', [
-    '$rootScope', 'QueryScope', 'FilterSearchScope',
-    function ($rootScope, QueryScope, FilterSearchScope) {
-      var $scope = $rootScope.$new();
+    'QueryScope', 'FilterSearchScope', 'FilterSectionScope',
+    function (QueryScope, FilterSearchScope, FilterSectionScope) {
+      return function ($parentScope) {
+        var $scope = $parentScope.$new();
 
-      $scope.search = FilterSearchScope;
+        $scope.section = FilterSectionScope($scope);
 
-      $scope.deleted = QueryScope.get('deleted', false);
+        $scope.search = FilterSearchScope;
 
-      $scope.toggleDeleted = function () {
-        $scope.deleted = !$scope.deleted;
+        $scope.deleted = QueryScope.get('deleted', false);
 
-        QueryScope.set('deleted', $scope.deleted === true ? 'true' : 'false');
+        $scope.toggleDeleted = function () {
+          $scope.deleted = !$scope.deleted;
 
-        _refresh();
-      };
+          QueryScope.set('deleted', $scope.deleted === true ? 'true' : 'false');
 
-      function _refresh() {
-        $rootScope.$broadcast('refresh');
+          _refresh();
+        };
+
+        function _refresh() {
+          $parentScope.$emit('refresh');
+        }
+
+        return $scope;
       }
-
-      return $scope;
     }
   ]);

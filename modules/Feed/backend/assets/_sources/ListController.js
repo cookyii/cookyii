@@ -3,12 +3,10 @@
 angular.module('BackendApp')
 
   .controller('ListController', [
-    '$scope', '$timeout', 'FilterScope', 'SectionListScope', 'ItemListScope',
-    function ($scope, $timeout, FilterScope, SectionListScope, ItemListScope) {
+    '$scope', '$timeout', 'ItemListScope',
+    function ($scope, $timeout, ItemListScope) {
 
-      $scope.filter = FilterScope;
-      $scope.section = SectionListScope;
-      $scope.items = ItemListScope;
+      $scope.items = ItemListScope($scope);
 
       $scope.fab = {
         isOpen: false,
@@ -17,7 +15,7 @@ angular.module('BackendApp')
       };
 
       function _refresh() {
-        $scope.section.reload();
+        $scope.items.filter.section.reload();
         $scope.items.reload();
       }
 

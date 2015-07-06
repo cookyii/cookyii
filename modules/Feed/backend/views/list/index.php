@@ -46,29 +46,32 @@ function sortLink($type, $label)
 
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('feed', 'Removed items'), [
                     'class' => 'checker',
-                    'ng-click' => 'filter.toggleDeleted()',
-                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('filter.deleted === true')]),
+                    'ng-click' => 'items.filter.toggleDeleted()',
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('items.filter.deleted === true')]),
                 ]) ?>
 
                 <hr>
 
                 <script type="text/ng-template" id="section.html">
-                    <?= Html::a('{{ section.get(sect.slug).title }}', null, [
-                        'ng-click' => 'section.select(sect)',
+                    <?= Html::a('{{ items.filter.section.get(sect.slug).title }}', null, [
+                        'ng-click' => 'items.filter.section.select(sect)',
                     ]) ?>
 
                     <span class="dash">&ndash;</span>
 
                     <ul class="sub" ng-if="sect.sections">
                         <li ng-repeat="sect in sect.sections track by sect.slug"
-                            ng-class="{'active': section.isActive(sect), 'deleted': section.get(sect.slug).deleted === '1'}"
+                            ng-class="{'active': items.filter.section.isActive(sect), 'deleted': items.filter.section.get(sect.slug).deleted === '1'}"
                             ng-include="'section.html'"></li>
                     </ul>
                 </script>
 
                 <ul class="sections opened">
-                    <li ng-repeat="sect in section.tree track by sect.slug"
-                        ng-class="{'active': section.isActive(sect), 'deleted': section.get(sect.slug).deleted === '1'}"
+                    <li ng-repeat="sect in items.filter.section.tree track by sect.slug"
+                        ng-class="{
+                        'active': items.filter.section.isActive(sect),
+                        'deleted': items.filter.section.get(sect.slug).deleted === '1'
+                        }"
                         ng-include="'section.html'"></li>
                 </ul>
             </div>
@@ -78,10 +81,10 @@ function sortLink($type, $label)
                 <div class="box-header">
                     <h3 class="box-title"><?= Yii::t('feed', 'Items list') ?></h3>
 
-                    <div class="box-section" ng-if="section.selected">
+                    <div class="box-section" ng-if="items.filter.section.selected">
                         Edit section:
-                        <?= Html::a('{{ section.getSelected().title }}', null, [
-                            'ng-click' => 'section.edit(section.selected)',
+                        <?= Html::a('{{ items.filter.section.getSelected().title }}', null, [
+                            'ng-click' => 'items.filter.section.edit(items.filter.section.selected)',
                             'title' => Yii::t('feed', 'Edit section')
                         ]) ?>
 
@@ -89,14 +92,14 @@ function sortLink($type, $label)
                         echo Html::tag('a', FA::icon('times'), [
                             'class' => 'text-red',
                             'title' => Yii::t('feed', 'Remove section'),
-                            'ng-click' => 'section.remove(section.selected, $event)',
-                            'ng-show' => 'section.getSelected().deleted === "0"',
+                            'ng-click' => 'items.filter.section.remove(items.filter.section.selected, $event)',
+                            'ng-show' => 'items.filter.section.getSelected().deleted === "0"',
                         ]);
                         echo Html::tag('a', FA::icon('undo'), [
                             'class' => 'text-light-blue',
                             'title' => Yii::t('feed', 'Restore section'),
-                            'ng-click' => 'section.restore(section.selected)',
-                            'ng-show' => 'section.getSelected().deleted === "1"',
+                            'ng-click' => 'items.filter.section.restore(items.filter.section.selected)',
+                            'ng-show' => 'items.filter.section.getSelected().deleted === "1"',
                         ]);
                         ?>
                     </div>
