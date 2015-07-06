@@ -31,7 +31,7 @@ angular.module('BackendApp')
 
       $scope.doPageChanged = function () {
         if (loaded === true) {
-          $location.search('page', $scope.pagination.currentPage);
+          QueryScope.set('page', $scope.pagination.currentPage);
         }
 
         _refresh();

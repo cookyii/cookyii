@@ -22,11 +22,11 @@ Account\backend\assets\ListAssetBundle::register($this);
  */
 function sortLink($type, $label)
 {
-    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'sort === "-' . $type . '"']);
-    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'sort === "' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'accounts.sort.order === "-' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'accounts.sort.order === "' . $type . '"']);
 
     return Html::a($label, null, [
-        'ng-click' => 'setSort("' . $type . '")',
+        'ng-click' => 'accounts.sort.setOrder("' . $type . '")',
     ]);
 }
 
@@ -34,7 +34,7 @@ function sortLink($type, $label)
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'AccountListController',
+    'ng-controller' => 'ListController',
 ]) ?>>
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
@@ -45,8 +45,8 @@ function sortLink($type, $label)
 
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('account', 'Removed accounts'), [
                     'class' => 'checker',
-                    'ng-click' => 'toggleDeleted()',
-                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('deleted === true')]),
+                    'ng-click' => 'accounts.filter.toggleDeleted()',
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('accounts.filter.deleted === true')]),
                 ]) ?>
             </div>
         </div>
@@ -58,31 +58,32 @@ function sortLink($type, $label)
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
                             'class' => 'pagination pagination-sm no-margin pull-right',
-                            'ng-model' => 'pagination.currentPage',
-                            'total-items' => 'pagination.totalCount',
-                            'items-per-page' => 'pagination.perPage',
-                            'ng-change' => 'doPageChanged()',
+                            'ng-model' => 'accounts.pagination.currentPage',
+                            'total-items' => 'accounts.pagination.totalCount',
+                            'items-per-page' => 'accounts.pagination.perPage',
+                            'ng-change' => 'accounts.doPageChanged()',
                             'max-size' => '10',
                             'previous-text' => '‹',
                             'next-text' => '›',
                         ]) ?>
 
-                        <form ng-submit="doSearch()" class="pull-right">
-                            <div class="input-group search" ng-class="{'wide':search.length>0||searchFocus}">
+                        <form ng-submit="accounts.filter.search.do()" class="pull-right">
+                            <div class="input-group search" ng-class="{'wide':accounts.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
                                     'placeholder' => Yii::t('account', 'Search'),
                                     'maxlength' => 100,
-                                    'ng-model' => 'search',
-                                    'ng-focus' => 'toggleSearchFocus()',
-                                    'ng-blur' => 'doSearch()',
+                                    'ng-model' => 'accounts.filter.search.query',
+                                    'ng-blur' => 'accounts.filter.search.do()',
+                                    'ng-keydown' => 'accounts.filter.search.do()',
                                 ]) ?>
-                                <a ng-click="clearSearch()" ng-show="search" class="clear-search">
+                                <a ng-click="accounts.filter.search.clear()" ng-show="accounts.filter.search.query"
+                                   class="clear-search">
                                     <?= FA::icon('times') ?>
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="doSearch()">
+                                    <button class="btn btn-sm btn-default" ng-click="accounts.filter.search.do()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -104,18 +105,18 @@ function sortLink($type, $label)
                         </tr>
                         </thead>
                         <tbody>
+                        <tr ng-show="accounts.length === 0">
+                            <td colspan="6" class="text-center text-italic text-light">
+                                <?= Yii::t('account', 'Accounts not found') ?>
+                            </td>
+                        </tr>
                         <?php
                         $options = [
                             'title' => Yii::t('account', 'Edit account'),
                             'ng-class' => '{deactivated:account.activated===0,deleted:account.deleted}',
                         ];
                         ?>
-                        <tr ng-show="accounts.length === 0">
-                            <td colspan="6" class="text-center text-italic text-light">
-                                <?= Yii::t('account', 'Accounts not found') ?>
-                            </td>
-                        </tr>
-                        <tr ng-repeat="account in accounts track by account.id" <?= Html::renderTagAttributes($options) ?>>
+                        <tr ng-repeat="account in accounts.list track by account.id" <?= Html::renderTagAttributes($options) ?>>
                             <td class="activated clickable">
                                 <md-switch ng-model="account.activated"
                                            ng-true-value="1" ng-false-value="0"
@@ -124,10 +125,10 @@ function sortLink($type, $label)
                                            aria-label="Account {{ account.activated === 1 ? 'activated' : 'deactivated' }}">
                                 </md-switch>
                             </td>
-                            <td class="id clickable" ng-click="edit(account)">{{ account.id }}</td>
-                            <td class="name clickable" ng-click="edit(account)">{{ account.name }}</td>
-                            <td class="email clickable" ng-click="edit(account)">{{ account.email }}</td>
-                            <td class="updated clickable" ng-click="edit(account)">
+                            <td class="id clickable" ng-click="accounts.edit(account)">{{ account.id }}</td>
+                            <td class="name clickable" ng-click="accounts.edit(account)">{{ account.name }}</td>
+                            <td class="email clickable" ng-click="accounts.edit(account)">{{ account.email }}</td>
+                            <td class="updated clickable" ng-click="accounts.edit(account)">
                                 {{ account.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
                             </td>
                             <td class="actions">
@@ -135,13 +136,13 @@ function sortLink($type, $label)
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
                                     'title' => Yii::t('account', 'Remove account'),
-                                    'ng-click' => 'remove(account, $event)',
+                                    'ng-click' => 'accounts.remove(account, $event)',
                                     'ng-show' => '!account.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
                                     'title' => Yii::t('account', 'Restore account'),
-                                    'ng-click' => 'restore(account)',
+                                    'ng-click' => 'accounts.restore(account)',
                                     'ng-show' => 'account.deleted',
                                 ]);
                                 ?>
@@ -154,10 +155,10 @@ function sortLink($type, $label)
                 <div class="box-footer clearfix">
                     <?= Html::tag('pagination', null, [
                         'class' => 'pagination pagination-sm no-margin pull-right',
-                        'ng-model' => 'pagination.currentPage',
-                        'total-items' => 'pagination.totalCount',
-                        'items-per-page' => 'pagination.perPage',
-                        'ng-change' => 'doPageChanged()',
+                        'ng-model' => 'accounts.pagination.currentPage',
+                        'total-items' => 'accounts.pagination.totalCount',
+                        'items-per-page' => 'accounts.pagination.perPage',
+                        'ng-change' => 'accounts.doPageChanged()',
                         'max-size' => '10',
                         'previous-text' => '‹',
                         'next-text' => '›',
@@ -171,7 +172,7 @@ function sortLink($type, $label)
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
         'title' => Yii::t('account', 'Create new account'),
-        'ng-click' => 'addAccount()',
+        'ng-click' => 'accounts.add()',
         'aria-label' => 'Add account',
     ]);
     ?>
