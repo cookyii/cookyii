@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .controller('ListController', [
+  .controller('AccountListController', [
     '$scope', '$timeout', 'AccountListScope',
     function ($scope, $timeout, AccountListScope) {
 

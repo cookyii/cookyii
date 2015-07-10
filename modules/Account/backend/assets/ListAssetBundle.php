@@ -21,9 +21,9 @@ class ListAssetBundle extends \yii\web\AssetBundle
 
     public $js = [
         'AccountResource.js',
-        'ListController.js',
-        'ListController/FilterScope.js',
-        'ListController/AccountListScope.js',
+        'AccountListController.js',
+        'AccountListController/FilterScope.js',
+        'AccountListController/AccountListScope.js',
     ];
 
     public $depends = [

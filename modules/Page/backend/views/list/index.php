@@ -34,7 +34,7 @@ function sortLink($type, $label)
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'ListController',
+    'ng-controller' => 'PageListController',
 ]) ?>>
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">

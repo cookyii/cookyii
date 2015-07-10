@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .controller('ListController', [
+  .controller('PageListController', [
     '$scope', '$timeout', 'PageListScope',
     function ($scope, $timeout, PageListScope) {
 
