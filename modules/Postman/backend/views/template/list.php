@@ -23,11 +23,11 @@ Postman\backend\assets\TemplateListAssetBundle::register($this);
  */
 function sortLink($type, $label)
 {
-    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'sort === "-' . $type . '"']);
-    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'sort === "' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-desc', ['ng-show' => 'templates.sort.order === "-' . $type . '"']);
+    $label .= ' ' . FA::icon('sort-numeric-asc', ['ng-show' => 'templates.sort.order === "' . $type . '"']);
 
     return Html::a($label, null, [
-        'ng-click' => 'setSort("' . $type . '")',
+        'ng-click' => 'templates.sort.setOrder("' . $type . '")',
     ]);
 }
 
@@ -45,8 +45,9 @@ function sortLink($type, $label)
                 <hr>
 
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('postman', 'Removed templates'), [
-                    'ng-click' => 'toggleDeleted()',
-                    'ng-class' => Json::encode(['selected' => new \yii\web\JsExpression('deleted === true')]),
+                    'class' => 'checker',
+                    'ng-click' => 'templates.filter.toggleDeleted()',
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('templates.filter.deleted === true')]),
                 ]) ?>
             </div>
         </div>
@@ -58,31 +59,32 @@ function sortLink($type, $label)
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
                             'class' => 'pagination pagination-sm no-margin pull-right',
-                            'ng-model' => 'pagination.currentPage',
-                            'total-items' => 'pagination.totalCount',
-                            'items-per-page' => 'pagination.perPage',
-                            'ng-change' => 'doPageChanged()',
+                            'ng-model' => 'templates.pagination.currentPage',
+                            'total-items' => 'templates.pagination.totalCount',
+                            'items-per-page' => 'templates.pagination.perPage',
+                            'ng-change' => 'templates.doPageChanged()',
                             'max-size' => '10',
                             'previous-text' => '‹',
                             'next-text' => '›',
                         ]) ?>
 
-                        <form ng-submit="doSearch()" class="pull-right">
-                            <div class="input-group search" ng-class="{'wide':search.length>0||searchFocus}">
+                        <form ng-submit="templates.filter.search.do()" class="pull-right">
+                            <div class="input-group search" ng-class="{'wide':templates.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
-                                    'placeholder' => Yii::t('postman', 'Search'),
+                                    'placeholder' => Yii::t('account', 'Search'),
                                     'maxlength' => 100,
-                                    'ng-model' => 'search',
-                                    'ng-focus' => 'toggleSearchFocus()',
-                                    'ng-blur' => 'doSearch()',
+                                    'ng-model' => 'templates.filter.search.query',
+                                    'ng-blur' => 'templates.filter.search.do()',
+                                    'ng-keydown' => 'templates.filter.search.do()',
                                 ]) ?>
-                                <a ng-click="clearSearch()" ng-show="search" class="clear-search">
+                                <a ng-click="templates.filter.search.clear()" ng-show="templates.filter.search.query"
+                                   class="clear-search">
                                     <?= FA::icon('times') ?>
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="doSearch()">
+                                    <button class="btn btn-sm btn-default" ng-click="templates.filter.search.do()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -114,11 +116,12 @@ function sortLink($type, $label)
                                 <?= Yii::t('postman', 'Templates not found') ?>
                             </td>
                         </tr>
-                        <tr ng-repeat="template in templates track by template.id" <?= Html::renderTagAttributes($options) ?>>
-                            <td class="id clickable" ng-click="edit(template)">{{ template.id }}</td>
-                            <td class="code clickable" ng-click="edit(template)">{{ template.code }}</td>
-                            <td class="subject clickable" ng-click="edit(template)">{{ template.subject }}</td>
-                            <td class="updated clickable" ng-click="edit(template)">
+                        <tr ng-repeat="template in templates.list track by template.id" <?= Html::renderTagAttributes($options) ?>>
+                            <td class="id clickable" ng-click="templates.edit(template)">{{ template.id }}</td>
+                            <td class="code clickable" ng-click="templates.edit(template)">{{ template.code }}</td>
+                            <td class="subject clickable" ng-click="templates.edit(template)">{{ template.subject }}
+                            </td>
+                            <td class="updated clickable" ng-click="templates.edit(template)">
                                 {{ template.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
                             </td>
                             <td class="actions">
@@ -126,13 +129,13 @@ function sortLink($type, $label)
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
                                     'title' => Yii::t('postman', 'Remove template'),
-                                    'ng-click' => 'remove(template, $event)',
+                                    'ng-click' => 'templates.remove(template, $event)',
                                     'ng-show' => '!template.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
                                     'title' => Yii::t('postman', 'Restore template'),
-                                    'ng-click' => 'restore(template)',
+                                    'ng-click' => 'templates.restore(template)',
                                     'ng-show' => 'template.deleted',
                                 ]);
                                 ?>
@@ -145,10 +148,10 @@ function sortLink($type, $label)
                 <div class="box-footer clearfix">
                     <?= Html::tag('pagination', null, [
                         'class' => 'pagination pagination-sm no-margin pull-right',
-                        'ng-model' => 'pagination.currentPage',
-                        'total-items' => 'pagination.totalCount',
-                        'items-per-page' => 'pagination.perPage',
-                        'ng-change' => 'doPageChanged()',
+                        'ng-model' => 'templates.pagination.currentPage',
+                        'total-items' => 'templates.pagination.totalCount',
+                        'items-per-page' => 'templates.pagination.perPage',
+                        'ng-change' => 'templates.doPageChanged()',
                         'max-size' => '10',
                         'previous-text' => '‹',
                         'next-text' => '›',
@@ -162,7 +165,7 @@ function sortLink($type, $label)
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
         'title' => Yii::t('postman', 'Create new template'),
-        'ng-click' => 'addTemplate()',
+        'ng-click' => 'templates.add()',
         'aria-label' => 'Add template',
     ]);
     ?>

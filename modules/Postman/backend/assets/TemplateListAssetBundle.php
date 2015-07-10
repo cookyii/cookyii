@@ -22,6 +22,8 @@ class TemplateListAssetBundle extends \yii\web\AssetBundle
     public $js = [
         'TemplateResource.js',
         'TemplateListController.js',
+        'TemplateListController/FilterScope.js',
+        'TemplateListController/TemplateListScope.js',
     ];
 
     public $depends = [
