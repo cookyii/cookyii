@@ -42,7 +42,7 @@
     "cookyii/module-postman": "dev-master",
     "cookyii/module-media": "dev-master",
 
-    "yiisoft/yii2": "2.0.4",
+    "yiisoft/yii2": "2.0.5",
     "yiisoft/yii2-composer": "2.0.*",
     "yiisoft/yii2-bootstrap": "2.0.*",
     "yiisoft/yii2-imagine": "2.0.*",
@@ -58,6 +58,7 @@
     "rmrevin/yii2-rollbar": "~1.1",
     "rmrevin/yii2-favicon-widget": "~1.0",
 
+    "samdark/sitemap": "2.0.*",
     "vlucas/phpdotenv": "2.0.*"
   },
   "require-dev": {
