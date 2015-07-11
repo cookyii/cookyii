@@ -32,7 +32,10 @@
   "require": {
     "php": ">=5.4.0",
 
-    "cookyii/base": "dev-master"
+    "cookyii/base": "dev-master",
+
+    "yiisoft/yii2": "2.0.*",
+    "yiisoft/yii2-imagine": "2.0.*"
   },
   "autoload": {
     "psr-4": {
