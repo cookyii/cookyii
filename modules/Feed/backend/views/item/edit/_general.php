@@ -11,8 +11,8 @@ use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \components\widgets\angular\ActiveForm $ActiveForm */
-$ActiveForm = \components\widgets\angular\ActiveForm::begin([
+/** @var \cookyii\widgets\angular\ActiveForm $ActiveForm */
+$ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
     'name' => 'ItemEditForm',
     'action' => $ItemEditForm->formAction(),
     'controller' => 'ItemEditController',
@@ -107,4 +107,4 @@ $ActiveForm = \components\widgets\angular\ActiveForm::begin([
 
 <?php
 
-\components\widgets\angular\ActiveForm::end();
+\cookyii\widgets\angular\ActiveForm::end();

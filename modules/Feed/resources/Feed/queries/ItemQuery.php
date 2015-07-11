@@ -16,8 +16,8 @@ use yii\helpers\ArrayHelper;
 class ItemQuery extends \yii\db\ActiveQuery
 {
 
-    use \components\db\traits\query\ActivatedQueryTrait,
-        \components\db\traits\query\DeletedQueryTrait;
+    use \cookyii\db\traits\query\ActivatedQueryTrait,
+        \cookyii\db\traits\query\DeletedQueryTrait;
 
     /**
      * @param integer|array $id

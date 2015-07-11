@@ -10,8 +10,8 @@
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \components\widgets\angular\ActiveForm $ActiveForm */
-$ActiveForm = \components\widgets\angular\ActiveForm::begin([
+/** @var \cookyii\widgets\angular\ActiveForm $ActiveForm */
+$ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
     'name' => 'SectionEditForm',
     'action' => $SectionEditForm->formAction(),
     'controller' => 'SectionEditController',
@@ -86,4 +86,4 @@ $ActiveForm = \components\widgets\angular\ActiveForm::begin([
 
 <?php
 
-\components\widgets\angular\ActiveForm::end();
+\cookyii\widgets\angular\ActiveForm::end();

@@ -13,5 +13,5 @@ return [
     'POST account/rest/property' => 'account/rest/property/push',
     'DELETE account/rest/property' => 'account/rest/property/delete',
 
-    ['class' => components\rest\UrlRule::className(), 'controller' => 'account/rest/account']
+    ['class' => cookyii\rest\UrlRule::className(), 'controller' => 'account/rest/account']
 ];

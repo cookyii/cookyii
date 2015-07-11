@@ -11,6 +11,6 @@ return [
     'POST feed/section/rest/edit' => 'feed/section/rest/section/edit',
     'POST feed/item/rest/edit' => 'feed/item/rest/item/edit',
 
-    ['class' => components\rest\UrlRule::className(), 'controller' => 'feed/section/rest/section'],
-    ['class' => components\rest\UrlRule::className(), 'controller' => 'feed/item/rest/item'],
+    ['class' => cookyii\rest\UrlRule::className(), 'controller' => 'feed/section/rest/section'],
+    ['class' => cookyii\rest\UrlRule::className(), 'controller' => 'feed/item/rest/item'],
 ];

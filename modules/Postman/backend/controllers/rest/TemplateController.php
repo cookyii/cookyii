@@ -54,13 +54,13 @@ class TemplateController extends \yii\rest\ActiveController
         ];
 
         $actions['delete'] = [
-            'class' => \components\rest\actions\DeleteAction::className(),
+            'class' => \cookyii\rest\actions\DeleteAction::className(),
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['restore'] = [
-            'class' => \components\rest\actions\RestoreAction::className(),
+            'class' => \cookyii\rest\actions\RestoreAction::className(),
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
@@ -98,7 +98,7 @@ class TemplateController extends \yii\rest\ActiveController
             $Query->withoutDeleted();
         }
 
-        return new \components\data\CallableActiveDataProvider([
+        return new \cookyii\data\CallableActiveDataProvider([
             'query' => $Query,
             'pagination' => ['pageSize' => 15],
             'mapFunction' => function ($data) {

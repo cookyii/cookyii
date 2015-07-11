@@ -36,8 +36,8 @@ use yii\helpers\Json;
 class Item extends \yii\db\ActiveRecord
 {
 
-    use \components\db\traits\ActivationTrait,
-        \components\db\traits\SoftDeleteTrait;
+    use \cookyii\db\traits\ActivationTrait,
+        \cookyii\db\traits\SoftDeleteTrait;
 
     /**
      * @inheritdoc

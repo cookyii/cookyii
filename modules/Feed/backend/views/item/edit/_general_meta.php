@@ -5,7 +5,7 @@
  * @link https://rmrevin.ru
  *
  * @var yii\web\View $this
- * @var components\widgets\angular\ActiveForm $ActiveForm
+ * @var cookyii\widgets\angular\ActiveForm $ActiveForm
  * @var cookyii\modules\Feed\backend\forms\ItemEditForm $ItemEditForm
  */
 

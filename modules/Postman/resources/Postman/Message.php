@@ -27,7 +27,7 @@ use yii\helpers\Json;
 class Message extends \yii\db\ActiveRecord
 {
 
-    use \components\db\traits\SoftDeleteTrait;
+    use \cookyii\db\traits\SoftDeleteTrait;
 
     const FROM_NAME = 'Postman';
 

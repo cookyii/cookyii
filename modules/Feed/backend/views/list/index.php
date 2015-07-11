@@ -6,7 +6,7 @@
  * @var yii\web\View $this
  */
 
-use components\helpers\Material;
+use cookyii\helpers\Material;
 use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;

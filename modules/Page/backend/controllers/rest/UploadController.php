@@ -12,7 +12,7 @@ use cookyii\modules\Media;
  * Class UploadController
  * @package cookyii\modules\Page\backend\controllers\rest
  */
-class UploadController extends \components\rest\controllers\ImperaviUploadController
+class UploadController extends \cookyii\rest\controllers\ImperaviUploadController
 {
 
 }

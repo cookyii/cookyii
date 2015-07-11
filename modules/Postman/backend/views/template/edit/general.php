@@ -12,8 +12,8 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-/** @var \components\widgets\angular\ActiveForm $form */
-$form = \components\widgets\angular\ActiveForm::begin([
+/** @var \cookyii\widgets\angular\ActiveForm $form */
+$form = \cookyii\widgets\angular\ActiveForm::begin([
     'name' => 'TemplateEditForm',
     'action' => $TemplateEditForm->formAction(),
     'controller' => 'TemplateEditController',
@@ -52,7 +52,7 @@ $form = \components\widgets\angular\ActiveForm::begin([
                         ->textarea(['msd-elastic' => true]);
 
                     echo $form->field($TemplateEditForm, 'use_layout', [
-                        'class' => \components\widgets\angular\material\ActiveField::className(),
+                        'class' => \cookyii\widgets\angular\material\ActiveField::className(),
                     ])
                         ->label(false)
                         ->checkbox([
@@ -222,4 +222,4 @@ $form = \components\widgets\angular\ActiveForm::begin([
 
 <?php
 
-\components\widgets\angular\ActiveForm::end();
+\cookyii\widgets\angular\ActiveForm::end();

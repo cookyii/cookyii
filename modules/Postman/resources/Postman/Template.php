@@ -28,7 +28,7 @@ namespace resources\Postman;
 class Template extends \yii\db\ActiveRecord
 {
 
-    use \components\db\traits\SoftDeleteTrait;
+    use \cookyii\db\traits\SoftDeleteTrait;
 
     /**
      * @inheritdoc

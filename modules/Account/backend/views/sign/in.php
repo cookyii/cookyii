@@ -25,8 +25,8 @@ Account\backend\assets\SignInAssetBundle::register($this);
 
     <div class="login-box-body">
         <?php
-        /** @var \components\widgets\angular\ActiveForm $form */
-        $form = \components\widgets\angular\ActiveForm::begin([
+        /** @var \cookyii\widgets\angular\ActiveForm $form */
+        $form = \cookyii\widgets\angular\ActiveForm::begin([
             'name' => 'SignInForm',
             'action' => $SignInForm->formAction(),
         ]);
@@ -49,7 +49,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
         <div class="row">
             <div class="col-xs-8">
                 <?php
-                echo $form->field($SignInForm, 'remember', ['class' => 'components\widgets\angular\material\ActiveField'])
+                echo $form->field($SignInForm, 'remember', ['class' => 'cookyii\widgets\angular\material\ActiveField'])
                     ->label(false)
                     ->checkbox();
                 ?>
@@ -66,7 +66,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
             </div>
         </div>
         <?php
-        \components\widgets\angular\ActiveForm::end();
+        \cookyii\widgets\angular\ActiveForm::end();
 
         $authAuthChoice = \yii\authclient\widgets\AuthChoice::begin([
             'baseAuthUrl' => ['/account/sign/auth'],

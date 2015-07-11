@@ -3,7 +3,7 @@
 use yii\db\mysql\Schema;
 use yii\helpers\Json;
 
-class m150619_164200_postman_template extends \components\db\Migration
+class m150619_164200_postman_template extends \cookyii\db\Migration
 {
 
     public function up()

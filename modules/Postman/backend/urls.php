@@ -9,5 +9,5 @@ return [
 
     'POST postman/rest/template/edit' => 'postman/rest/template/edit',
 
-    ['class' => components\rest\UrlRule::className(), 'controller' => 'postman/rest/template']
+    ['class' => cookyii\rest\UrlRule::className(), 'controller' => 'postman/rest/template']
 ];

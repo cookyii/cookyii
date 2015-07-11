@@ -1,6 +1,6 @@
 <?php
 
-class m150711_110823_page_demo_data extends \components\db\Migration
+class m150711_110823_page_demo_data extends \cookyii\db\Migration
 {
 
     public function up()

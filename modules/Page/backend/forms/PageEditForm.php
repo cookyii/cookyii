@@ -15,7 +15,7 @@ use yii\helpers\Json;
 class PageEditForm extends \yii\base\Model
 {
 
-    use \components\db\traits\PopulateErrorsTrait;
+    use \cookyii\db\traits\PopulateErrorsTrait;
 
     /** @var \resources\Page */
     public $Page;

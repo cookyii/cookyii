@@ -2,7 +2,7 @@
 
 use yii\db\mysql\Schema;
 
-class m150623_121259_feed_section extends \components\db\Migration
+class m150623_121259_feed_section extends \cookyii\db\Migration
 {
 
     public function up()

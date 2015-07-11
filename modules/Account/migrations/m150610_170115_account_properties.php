@@ -2,7 +2,7 @@
 
 use yii\db\mysql\Schema;
 
-class m150610_170115_account_properties extends \components\db\Migration
+class m150610_170115_account_properties extends \cookyii\db\Migration
 {
 
     public function up()

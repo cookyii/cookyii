@@ -15,7 +15,7 @@ use yii\helpers\Json;
 class SectionEditForm extends \yii\base\Model
 {
 
-    use \components\db\traits\PopulateErrorsTrait;
+    use \cookyii\db\traits\PopulateErrorsTrait;
 
     /** @var \resources\Feed\Section */
     public $Section;

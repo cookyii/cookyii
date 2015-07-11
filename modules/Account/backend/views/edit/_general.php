@@ -11,8 +11,8 @@ use cookyii\modules\Account;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \components\widgets\angular\ActiveForm $form */
-$form = \components\widgets\angular\ActiveForm::begin([
+/** @var \cookyii\widgets\angular\ActiveForm $form */
+$form = \cookyii\widgets\angular\ActiveForm::begin([
     'name' => 'AccountEditForm',
     'action' => $AccountEditForm->formAction(),
     'controller' => 'AccountEditController',
@@ -64,4 +64,4 @@ $form = \components\widgets\angular\ActiveForm::begin([
 
 <?php
 
-\components\widgets\angular\ActiveForm::end();
+\cookyii\widgets\angular\ActiveForm::end();
