@@ -13,8 +13,7 @@ namespace resources\queries;
 class AccountQuery extends \yii\db\ActiveQuery
 {
 
-    use
-        \components\db\traits\query\ActivatedQueryTrait,
+    use \components\db\traits\query\ActivatedQueryTrait,
         \components\db\traits\query\DeletedQueryTrait;
 
     /**
