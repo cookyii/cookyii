@@ -146,8 +146,8 @@ class SectionController extends \yii\rest\ActiveController
             'query' => $Query,
             'pagination' => ['pageSize' => 10000],
             'mapFunction' => function ($data) {
-                $data['activated'] = !empty($data['activated_at']);
                 $data['deleted'] = !empty($data['deleted_at']);
+                $data['activated'] = !$data['deleted'] && !empty($data['activated_at']);
 
                 return $data;
             }

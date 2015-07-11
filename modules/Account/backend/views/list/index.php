@@ -120,6 +120,7 @@ function sortLink($type, $label)
                             <td class="activated clickable">
                                 <md-switch ng-model="account.activated"
                                            ng-change="accounts.toggleActivated(account)"
+                                           ng-disabled="account.deleted"
                                            title="Account {{ account.activated ? 'activated' : 'deactivated' }}"
                                            aria-label="Account {{ account.activated ? 'activated' : 'deactivated' }}">
                                 </md-switch>

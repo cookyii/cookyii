@@ -32,8 +32,6 @@ class DeleteAction extends \yii\rest\Action
 
         if ($model->delete() === false) {
             throw new \yii\web\ServerErrorHttpException('Failed to restore the object for unknown reason.');
-        } elseif (method_exists($model, 'deactivate')) {
-            $model->deactivate();
         }
 
         \Yii::$app->getResponse()->setStatusCode(204);

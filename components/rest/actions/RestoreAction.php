@@ -32,8 +32,6 @@ class RestoreAction extends \yii\rest\Action
 
         if ($model->restore() === false) {
             throw new \yii\web\ServerErrorHttpException('Failed to restore the object for unknown reason.');
-        } elseif (method_exists($model, 'activate')) {
-            $model->activate();
         }
 
         \Yii::$app->getResponse()->setStatusCode(204);

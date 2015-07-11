@@ -112,13 +112,14 @@ function sortLink($type, $label)
                         <?php
                         $options = [
                             'title' => Yii::t('page', 'Edit page'),
-                            'ng-class' => '{deactivated:page.activated_at===null,deleted:page.deleted_at!==null}',
+                            'ng-class' => '{deactivated:!page.activated,deleted:page.deleted}',
                         ];
                         ?>
                         <tr ng-repeat="page in pages.list track by page.id" <?= Html::renderTagAttributes($options) ?>>
                             <td class="activated clickable">
                                 <md-switch ng-model="page.activated"
                                            ng-change="pages.toggleActivated(page)"
+                                           ng-disabled="page.deleted"
                                            title="Page {{ page.activated ? 'activated' : 'deactivated' }}"
                                            aria-label="Page {{ page.activated ? 'activated' : 'deactivated' }}">
                                 </md-switch>
