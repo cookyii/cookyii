@@ -32,6 +32,26 @@ return [
 ];
 ```
 
+In `frontend` `app` config
+in section `modules` add `cookyii\modules\Page\frontend\Module`
+and in section `bootstrap` add `page`:
+```php
+// ./backend-app/config/app.php
+
+return [
+    // ...
+    'bootstrap' => [
+        // some components ...
+        'page'
+    ],
+    'modules' => [
+        // some modules ...
+        'page' => 'cookyii\modules\Page\frontend\Module',
+    ],
+    // ...
+];
+```
+
 ### 2. Dependencies
 Also, you need to configure the following modules (they are already downloaded):
 
@@ -53,6 +73,24 @@ return [
         'account' => 'cookyii\modules\Account\backend\Module',
         'page' => 'cookyii\modules\Page\backend\Module',
         'postman' => 'cookyii\modules\Postman\backend\Module',
+        'media' => 'cookyii\modules\Media\backend\Module',
+    ],
+    // ...
+];
+```
+
+```php
+// ./frontend-app/config/app.php
+
+return [
+    // ...
+    'bootstrap' => [
+        // some components ...
+        'page', 'media',
+    ],
+    'modules' => [
+        // some modules ...
+        'page' => 'cookyii\modules\Page\frontend\Module',
         'media' => 'cookyii\modules\Media\backend\Module',
     ],
     // ...
