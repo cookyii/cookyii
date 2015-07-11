@@ -10,9 +10,7 @@ namespace components\db\traits;
  * Trait CompletionTrait
  * @package components\db\traits
  *
- * @property boolean $completed
- *
- * @method update
+ * @property boolean $completed_at
  */
 trait CompletionTrait
 {
@@ -22,7 +20,7 @@ trait CompletionTrait
      */
     public function isCompleted()
     {
-        return $this->completed === 1;
+        return !empty($this->completed_at);
     }
 
     /**
@@ -30,26 +28,38 @@ trait CompletionTrait
      */
     public function isNotCompleted()
     {
-        return $this->completed === 0;
+        return !$this->isCompleted();
     }
 
     /**
-     * @return bool
+     * @return integer|boolean the number of rows affected, or false if validation fails
+     * or [[beforeSave()]] stops the updating process.
+     * @throws \yii\base\InvalidConfigException
      */
     public function complete()
     {
-        $this->completed = 1;
+        if (!$this->hasAttribute('completed_at') && !$this->hasProperty('completed_at')) {
+            throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'completed_at'));
+        }
+        
+        $this->completed_at = time();
 
-        return $this->update(false, ['completed']) === 1;
+        return $this->update();
     }
 
     /**
-     * @return bool
+     * @return integer|boolean the number of rows affected, or false if validation fails
+     * or [[beforeSave()]] stops the updating process.
+     * @throws \yii\base\InvalidConfigException
      */
     public function incomplete()
     {
-        $this->completed = 0;
+        if (!$this->hasAttribute('completed_at') && !$this->hasProperty('completed_at')) {
+            throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'completed_at'));
+        }
+        
+        $this->completed_at = null;
 
-        return $this->update(false, ['completed']) === 1;
+        return $this->update();
     }
 }

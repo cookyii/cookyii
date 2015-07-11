@@ -14,9 +14,13 @@ namespace resources\Feed\queries;
 class SectionQuery extends \yii\db\ActiveQuery
 {
 
+    use
+        \components\db\traits\query\ActivatedQueryTrait,
+        \components\db\traits\query\DeletedQueryTrait;
+
     /**
      * @param integer|array $id
-     * @return self
+     * @return static
      */
     public function byId($id)
     {
@@ -27,7 +31,7 @@ class SectionQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $parent_id
-     * @return self
+     * @return static
      */
     public function byParentId($parent_id)
     {
@@ -38,7 +42,7 @@ class SectionQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $slug
-     * @return self
+     * @return static
      */
     public function bySlug($slug)
     {
@@ -48,7 +52,7 @@ class SectionQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return self
+     * @return static
      */
     public function onlyPublished()
     {
@@ -62,38 +66,8 @@ class SectionQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return self
-     */
-    public function onlyActivated()
-    {
-        $this->andWhere(['activated' => \resources\Feed\Section::ACTIVATED]);
-
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    public function onlyDeactivated()
-    {
-        $this->andWhere(['activated' => \resources\Feed\Section::NOT_ACTIVATED]);
-
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutDeleted()
-    {
-        $this->andWhere(['deleted' => \resources\Feed\Section::NOT_DELETED]);
-
-        return $this;
-    }
-
-    /**
      * @param string $query
-     * @return self
+     * @return static
      */
     public function search($query)
     {

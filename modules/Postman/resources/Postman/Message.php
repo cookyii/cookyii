@@ -19,11 +19,15 @@ use yii\helpers\Json;
  * @property string $content_html
  * @property string $address
  * @property integer $status
+ * @property string $code
  * @property integer $created_at
  * @property integer $sent_at
+ * @property integer $deleted_at
  */
 class Message extends \yii\db\ActiveRecord
 {
+
+    use \components\db\traits\SoftDeleteTrait;
 
     const FROM_NAME = 'Postman';
 
@@ -39,7 +43,30 @@ class Message extends \yii\db\ActiveRecord
                 'class' => \yii\behaviors\TimestampBehavior::className(),
                 'updatedAtAttribute' => false,
             ],
+            [
+                'class' => \yii\behaviors\AttributeBehavior::className(),
+                'attributes' => [
+                    static::EVENT_BEFORE_INSERT => 'code',
+                ],
+                'value' => function ($event) {
+                    return Security()->generateRandomString(32);
+                },
+            ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['deleted'] = 'deleted';
+
+        unset($fields['code']);
+
+        return $fields;
     }
 
     /**
@@ -49,8 +76,8 @@ class Message extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['subject', 'content_text', 'content_html', 'address'], 'string'],
-            [['status', 'created_at', 'sent_at'], 'integer'],
+            [['subject', 'content_text', 'content_html', 'address', 'code'], 'string'],
+            [['status', 'created_at', 'sent_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['subject'], 'required'],
@@ -66,7 +93,7 @@ class Message extends \yii\db\ActiveRecord
      * @param integer $type
      * @param string $email
      * @param string|null $name
-     * @return self
+     * @return static
      */
     protected function addAddress($type, $email, $name = null)
     {
@@ -86,7 +113,7 @@ class Message extends \yii\db\ActiveRecord
     /**
      * @param string $email
      * @param string|null $name
-     * @return self
+     * @return static
      */
     public function addTo($email, $name = null)
     {
@@ -96,7 +123,7 @@ class Message extends \yii\db\ActiveRecord
     /**
      * @param string $email
      * @param string|null $name
-     * @return self
+     * @return static
      */
     public function addCc($email, $name = null)
     {
@@ -106,7 +133,7 @@ class Message extends \yii\db\ActiveRecord
     /**
      * @param string $email
      * @param string|null $name
-     * @return self
+     * @return static
      */
     public function addBcc($email, $name = null)
     {
@@ -183,7 +210,7 @@ class Message extends \yii\db\ActiveRecord
 
             if ($result === true) {
                 $this->sent_at = time();
-                $this->update(true, ['sent_at']);
+                $this->update();
             }
         }
 
@@ -227,7 +254,7 @@ class Message extends \yii\db\ActiveRecord
      * @param string $content_html
      * @param string $styles
      * @param bool $use_layout
-     * @return self
+     * @return static
      */
     public static function compose($subject, $content_text, $content_html, $styles = '', $use_layout = true)
     {

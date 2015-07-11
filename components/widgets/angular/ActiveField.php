@@ -53,7 +53,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
     /**
      * @param string $icon
-     * @return self
+     * @return static
      */
     public function icon($icon)
     {

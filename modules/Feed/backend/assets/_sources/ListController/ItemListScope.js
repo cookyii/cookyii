@@ -29,7 +29,7 @@ angular.module('BackendApp')
 
         $scope.toggleActivation = function (item) {
           $timeout(function () {
-            if (item.activated === 1) {
+            if (item.activated === true) {
               item.$activate(_refresh, _refresh);
             } else {
               item.$deactivate(_refresh, _refresh);

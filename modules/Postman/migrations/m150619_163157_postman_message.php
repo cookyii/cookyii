@@ -14,8 +14,10 @@ class m150619_163157_postman_message extends \components\db\Migration
             'content_html' => Schema::TYPE_TEXT,
             'address' => Schema::TYPE_TEXT,
             'status' => Schema::TYPE_SMALLINT,
+            'code' => Schema::TYPE_STRING . '(32)',
             'created_at' => Schema::TYPE_INTEGER,
             'sent_at' => Schema::TYPE_INTEGER,
+            'deleted_at' => Schema::TYPE_INTEGER,
         ]);
 
         $this->createTable('{{%postman_message_attach}}', [

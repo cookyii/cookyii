@@ -10,21 +10,19 @@ namespace components\db\traits;
  * Trait ActivationTrait
  * @package components\db\traits
  *
- * @property bool $activated
- *
- * @method hasAttribute
- * @method hasProperty
- * @method update
+ * @property bool $activated_at
  */
 trait ActivationTrait
 {
+
+    public $activated;
 
     /**
      * @return bool
      */
     public function isActivated()
     {
-        return $this->activated === 1;
+        return !empty($this->activated_at);
     }
 
     /**
@@ -32,37 +30,37 @@ trait ActivationTrait
      */
     public function isNotActivated()
     {
-        return $this->activated === 0;
+        return !$this->isActivated();
     }
 
     /**
-     * integer|boolean the number of rows affected, or false if validation fails
+     * @return integer|boolean the number of rows affected, or false if validation fails
      * or [[beforeSave()]] stops the updating process.
      * @throws \yii\base\InvalidConfigException
      */
     public function activate()
     {
-        if (!$this->hasAttribute('activated') && !$this->hasProperty('activated')) {
-            throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'activated'));
+        if (!$this->hasAttribute('activated_at') && !$this->hasProperty('activated_at')) {
+            throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'activated_at'));
         }
 
-        $this->activated = 1;
+        $this->activated_at = time();
 
         return $this->update();
     }
 
     /**
-     * integer|boolean the number of rows affected, or false if validation fails
+     * @return integer|boolean the number of rows affected, or false if validation fails
      * or [[beforeSave()]] stops the updating process.
      * @throws \yii\base\InvalidConfigException
      */
     public function deactivate()
     {
-        if (!$this->hasAttribute('activated') && !$this->hasProperty('activated')) {
-            throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'activated'));
+        if (!$this->hasAttribute('activated_at') && !$this->hasProperty('activated_at')) {
+            throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'activated_at'));
         }
 
-        $this->activated = 0;
+        $this->activated_at = null;
 
         return $this->update();
     }

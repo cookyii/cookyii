@@ -27,8 +27,8 @@ use yii\helpers\Json;
  * @property integer $updated_at
  * @property integer $published_at
  * @property integer $archived_at
- * @property integer $activated
- * @property integer $deleted
+ * @property integer $deleted_at
+ * @property integer $activated_at
  *
  * @property ItemSection[] $itemSections
  * @property Section[] $sections
@@ -36,8 +36,8 @@ use yii\helpers\Json;
 class Item extends \yii\db\ActiveRecord
 {
 
-    use \components\db\traits\ActivationTrait;
-    use \components\db\traits\SoftDeleteTrait;
+    use \components\db\traits\ActivationTrait,
+        \components\db\traits\SoftDeleteTrait;
 
     /**
      * @inheritdoc
@@ -53,13 +53,30 @@ class Item extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['deleted'] = 'deleted';
+        $fields['activated'] = 'activated';
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             /** type validators */
             [['slug', 'title', 'content_preview', 'content_detail', 'meta'], 'string'],
-            [['picture_media_id', 'sort', 'created_by', 'updated_by', 'created_at', 'updated_at', 'published_at', 'archived_at'], 'integer'],
-            [['activated', 'deleted'], 'boolean'],
+            [
+                [
+                    'picture_media_id', 'sort', 'created_by', 'updated_by',
+                    'created_at', 'updated_at', 'published_at', 'archived_at', 'activated_at', 'deleted_at',
+                ], 'integer'
+            ],
 
             /** semantic validators */
             [['slug', 'title'], 'required'],
@@ -68,8 +85,6 @@ class Item extends \yii\db\ActiveRecord
             [['content_preview', 'content_detail'], 'filter', 'filter' => 'str_pretty'],
 
             /** default values */
-            [['activated'], 'default', 'value' => static::NOT_ACTIVATED],
-            [['deleted'], 'default', 'value' => static::NOT_DELETED],
         ];
     }
 
@@ -116,10 +131,4 @@ class Item extends \yii\db\ActiveRecord
     {
         return '{{%feed_item}}';
     }
-
-    const NOT_ACTIVATED = 0;
-    const ACTIVATED = 1;
-
-    const NOT_DELETED = 0;
-    const DELETED = 1;
 }

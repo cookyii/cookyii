@@ -34,7 +34,7 @@ class ImageWrapper extends \yii\base\Object
 
     /**
      * @param \resources\Media $Media
-     * @return self
+     * @return static
      */
     public static function load($Media)
     {
@@ -72,7 +72,7 @@ class ImageWrapper extends \yii\base\Object
      * @param integer $width
      * @param integer $height
      * @param string $filter
-     * @return self
+     * @return static
      */
     public function resize($width, $height, $filter = ImageInterface::FILTER_UNDEFINED)
     {
@@ -89,7 +89,7 @@ class ImageWrapper extends \yii\base\Object
     /**
      * @param integer $width
      * @param string $filter
-     * @return self
+     * @return static
      */
     public function resizeByWidth($width, $filter = ImageInterface::FILTER_UNDEFINED)
     {
@@ -107,7 +107,7 @@ class ImageWrapper extends \yii\base\Object
     /**
      * @param integer $height
      * @param string $filter
-     * @return self
+     * @return static
      */
     public function resizeByHeight($height, $filter = ImageInterface::FILTER_UNDEFINED)
     {
@@ -125,7 +125,7 @@ class ImageWrapper extends \yii\base\Object
      * @param integer $width
      * @param integer $height
      * @param array $start
-     * @return self
+     * @return static
      */
     public function crop($width, $height, array $start = [0, 0])
     {
@@ -143,7 +143,7 @@ class ImageWrapper extends \yii\base\Object
      * @param integer $width
      * @param integer $height
      * @param string $mode
-     * @return self
+     * @return static
      */
     public function thumbnail($width, $height, $mode = ManipulatorInterface::THUMBNAIL_OUTBOUND)
     {
@@ -160,7 +160,7 @@ class ImageWrapper extends \yii\base\Object
     /**
      * @param string $watermarkFilename
      * @param array $start
-     * @return self
+     * @return static
      */
     public function watermark($watermarkFilename, array $start = [0, 0])
     {
@@ -179,7 +179,7 @@ class ImageWrapper extends \yii\base\Object
      * @param string $fontFile
      * @param array $start
      * @param array $fontOptions
-     * @return self
+     * @return static
      */
     public function text($text, $fontFile, array $start = [0, 0], array $fontOptions = [])
     {
@@ -197,7 +197,7 @@ class ImageWrapper extends \yii\base\Object
      * @param int $margin
      * @param string $color
      * @param int $alpha
-     * @return self
+     * @return static
      */
     public function frame($margin = 20, $color = '666', $alpha = 100)
     {

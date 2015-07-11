@@ -126,11 +126,6 @@ class ItemEditForm extends \yii\base\Model
             'image' => $this->meta_image,
         ]);
 
-        if ($Item->isNewRecord) {
-            $Item->activated = \resources\Feed\Item::NOT_ACTIVATED;
-            $Item->deleted = \resources\Feed\Item::NOT_DELETED;
-        }
-
         $result = $Item->validate() && $Item->save();
 
         if ($Item->hasErrors()) {

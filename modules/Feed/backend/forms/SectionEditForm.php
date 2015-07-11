@@ -112,11 +112,6 @@ class SectionEditForm extends \yii\base\Model
             'image' => $this->meta_image,
         ]);
 
-        if ($Section->isNewRecord) {
-            $Section->activated = \resources\Feed\Section::NOT_ACTIVATED;
-            $Section->deleted = \resources\Feed\Section::NOT_DELETED;
-        }
-
         $result = $Section->validate() && $Section->save();
 
         if ($Section->hasErrors()) {

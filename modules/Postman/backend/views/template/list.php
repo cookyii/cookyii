@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php
+ * list.php
  * @author Revin Roman
  * @link https://rmrevin.ru
  *
@@ -47,7 +47,7 @@ function sortLink($type, $label)
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('postman', 'Removed templates'), [
                     'class' => 'checker',
                     'ng-click' => 'templates.filter.toggleDeleted()',
-                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('templates.filter.deleted === true')]),
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('templates.filter.deleted')]),
                 ]) ?>
             </div>
         </div>
@@ -105,17 +105,17 @@ function sortLink($type, $label)
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        $options = [
-                            'title' => Yii::t('postman', 'Edit template'),
-                            'ng-class' => '{deactivated:template.activated===0,deleted:template.deleted}',
-                        ];
-                        ?>
                         <tr ng-show="templates.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
                                 <?= Yii::t('postman', 'Templates not found') ?>
                             </td>
                         </tr>
+                        <?php
+                        $options = [
+                            'title' => Yii::t('postman', 'Edit template'),
+                            'ng-class' => '{deleted:template.deleted}',
+                        ];
+                        ?>
                         <tr ng-repeat="template in templates.list track by template.id" <?= Html::renderTagAttributes($options) ?>>
                             <td class="id clickable" ng-click="templates.edit(template)">{{ template.id }}</td>
                             <td class="code clickable" ng-click="templates.edit(template)">{{ template.code }}</td>

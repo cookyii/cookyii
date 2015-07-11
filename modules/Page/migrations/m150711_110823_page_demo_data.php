@@ -14,8 +14,7 @@ class m150711_110823_page_demo_data extends \components\db\Migration
             'updated_by' => null,
             'created_at' => time(),
             'updated_at' => time(),
-            'activated' => 1,
-            'deleted' => 0,
+            'activated_at' => time(),
         ]);
 
         $this->insert('{{%page}}', [
@@ -27,8 +26,7 @@ class m150711_110823_page_demo_data extends \components\db\Migration
             'updated_by' => null,
             'created_at' => time(),
             'updated_at' => time(),
-            'activated' => 1,
-            'deleted' => 0,
+            'activated_at' => time(),
         ]);
 
         $this->insert('{{%page}}', [
@@ -40,8 +38,7 @@ class m150711_110823_page_demo_data extends \components\db\Migration
             'updated_by' => null,
             'created_at' => time(),
             'updated_at' => time(),
-            'activated' => 1,
-            'deleted' => 0,
+            'activated_at' => time(),
         ]);
 
         $this->insert('{{%page}}', [
@@ -53,8 +50,7 @@ class m150711_110823_page_demo_data extends \components\db\Migration
             'updated_by' => null,
             'created_at' => time(),
             'updated_at' => time(),
-            'activated' => 1,
-            'deleted' => 0,
+            'activated_at' => time(),
         ]);
 
         $this->insert('{{%page}}', [
@@ -66,8 +62,7 @@ class m150711_110823_page_demo_data extends \components\db\Migration
             'updated_by' => null,
             'created_at' => time(),
             'updated_at' => time(),
-            'activated' => 1,
-            'deleted' => 0,
+            'activated_at' => time(),
         ]);
     }
 

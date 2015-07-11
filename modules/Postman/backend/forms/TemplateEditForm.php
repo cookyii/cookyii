@@ -130,10 +130,6 @@ class TemplateEditForm extends \yii\base\Model
         $Template->description = $this->description;
         $Template->use_layout = $this->use_layout;
 
-        if ($Template->isNewRecord) {
-            $Template->deleted = \resources\Postman\Template::NOT_DELETED;
-        }
-
         $result = $Template->validate() && $Template->save();
 
         if ($Template->hasErrors()) {

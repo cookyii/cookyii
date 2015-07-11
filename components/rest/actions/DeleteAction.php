@@ -1,16 +1,16 @@
 <?php
 /**
- * RestoreAction.php
+ * DeleteAction.php
  * @author Revin Roman
  */
 
 namespace components\rest\actions;
 
 /**
- * Class RestoreAction
+ * Class DeleteAction
  * @package components\rest\actions
  */
-class RestoreAction extends \yii\rest\Action
+class DeleteAction extends \yii\rest\Action
 {
 
     /**
@@ -26,14 +26,14 @@ class RestoreAction extends \yii\rest\Action
             call_user_func($this->checkAccess, $this->id, $model);
         }
 
-        if (!method_exists($model, 'restore')) {
-            throw new \yii\web\ServerErrorHttpException('Failed to restore the object because the model is no method `restore`.');
+        if (!method_exists($model, 'delete')) {
+            throw new \yii\web\ServerErrorHttpException('Failed to restore the object because the model is no method `delete`.');
         }
 
-        if ($model->restore() === false) {
+        if ($model->delete() === false) {
             throw new \yii\web\ServerErrorHttpException('Failed to restore the object for unknown reason.');
-        } elseif (method_exists($model, 'activate')) {
-            $model->activate();
+        } elseif (method_exists($model, 'deactivate')) {
+            $model->deactivate();
         }
 
         \Yii::$app->getResponse()->setStatusCode(204);

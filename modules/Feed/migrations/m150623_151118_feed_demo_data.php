@@ -250,7 +250,7 @@ class m150623_151118_feed_demo_data extends \components\db\Migration
                 'created_at' => time(),
                 'updated_at' => time(),
                 'published_at' => time(),
-                'activated' => 1,
+                'activated_at' => time(),
             ], $attributes);
 
             $this->insert($tableName, $attributes);

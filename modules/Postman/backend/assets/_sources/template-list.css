@@ -20,7 +20,4 @@ md-switch { margin: 0 10px; }
 .table-templates tr.deactivated .email,
 .table-templates tr.deactivated .updated { color: #b8b8b8; }
 .table-templates tr.deleted { }
-.table-templates tr.deleted .id,
-.table-templates tr.deleted .name,
-.table-templates tr.deleted .email,
-.table-templates tr.deleted .updated { text-decoration: line-through; }
+.table-templates tr.deleted td { color: #b8b8b8; text-decoration: line-through; }

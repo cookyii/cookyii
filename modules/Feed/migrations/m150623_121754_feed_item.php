@@ -18,12 +18,12 @@ class m150623_121754_feed_item extends \components\db\Migration
             'sort' => Schema::TYPE_INTEGER,
             'created_by' => Schema::TYPE_INTEGER,
             'updated_by' => Schema::TYPE_INTEGER,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
             'published_at' => Schema::TYPE_INTEGER,
             'archived_at' => Schema::TYPE_INTEGER,
-            'activated' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
-            'deleted' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
+            'created_at' => Schema::TYPE_INTEGER,
+            'updated_at' => Schema::TYPE_INTEGER,
+            'deleted_at' => Schema::TYPE_INTEGER,
+            'activated_at' => Schema::TYPE_INTEGER,
             'FOREIGN KEY (picture_media_id) REFERENCES {{%media}} (id) ON DELETE SET NULL ON UPDATE CASCADE',
         ]);
 
@@ -31,9 +31,9 @@ class m150623_121754_feed_item extends \components\db\Migration
         $this->createIndex('idx_sort', '{{%feed_item}}', ['sort']);
         $this->createIndex('idx_published_at', '{{%feed_item}}', ['published_at']);
         $this->createIndex('idx_archived_at', '{{%feed_item}}', ['archived_at']);
-        $this->createIndex('idx_activated', '{{%feed_item}}', ['activated']);
-        $this->createIndex('idx_deleted', '{{%feed_item}}', ['deleted']);
-        $this->createIndex('idx_published', '{{%feed_item}}', ['published_at', 'archived_at', 'activated', 'deleted']);
+        $this->createIndex('idx_activated_at', '{{%feed_item}}', ['activated_at']);
+        $this->createIndex('idx_deleted_at', '{{%feed_item}}', ['deleted_at']);
+        $this->createIndex('idx_published', '{{%feed_item}}', ['published_at', 'archived_at', 'activated_at', 'deleted_at']);
 
         $this->createTable('{{%feed_item_section}}', [
             'item_id' => Schema::TYPE_INTEGER,

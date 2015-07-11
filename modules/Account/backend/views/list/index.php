@@ -46,7 +46,7 @@ function sortLink($type, $label)
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('account', 'Removed accounts'), [
                     'class' => 'checker',
                     'ng-click' => 'accounts.filter.toggleDeleted()',
-                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('accounts.filter.deleted === true')]),
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('accounts.filter.deleted')]),
                 ]) ?>
             </div>
         </div>
@@ -113,16 +113,15 @@ function sortLink($type, $label)
                         <?php
                         $options = [
                             'title' => Yii::t('account', 'Edit account'),
-                            'ng-class' => '{deactivated:account.activated===0,deleted:account.deleted}',
+                            'ng-class' => '{deactivated:!account.activated,deleted:account.deleted}',
                         ];
                         ?>
                         <tr ng-repeat="account in accounts.list track by account.id" <?= Html::renderTagAttributes($options) ?>>
                             <td class="activated clickable">
                                 <md-switch ng-model="account.activated"
-                                           ng-true-value="1" ng-false-value="0"
-                                           ng-change="toggleActivated(account)"
-                                           title="Account {{ account.activated === 1 ? 'activated' : 'deactivated' }}"
-                                           aria-label="Account {{ account.activated === 1 ? 'activated' : 'deactivated' }}">
+                                           ng-change="accounts.toggleActivated(account)"
+                                           title="Account {{ account.activated ? 'activated' : 'deactivated' }}"
+                                           aria-label="Account {{ account.activated ? 'activated' : 'deactivated' }}">
                                 </md-switch>
                             </td>
                             <td class="id clickable" ng-click="accounts.edit(account)">{{ account.id }}</td>

@@ -16,7 +16,7 @@ class TemplateAttachQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $letter_template_id
-     * @return self
+     * @return static
      */
     public function byLetterTemplateId($letter_template_id)
     {

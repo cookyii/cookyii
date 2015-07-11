@@ -14,9 +14,11 @@ namespace resources\Postman\queries;
 class TemplateQuery extends \yii\db\ActiveQuery
 {
 
+    use \components\db\traits\query\DeletedQueryTrait;
+
     /**
      * @param integer|array $id
-     * @return self
+     * @return static
      */
     public function byId($id)
     {
@@ -27,7 +29,7 @@ class TemplateQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $code
-     * @return self
+     * @return static
      */
     public function byCode($code)
     {
@@ -37,18 +39,8 @@ class TemplateQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return self
-     */
-    public function withoutDeleted()
-    {
-        $this->andWhere(['deleted' => \resources\Postman\Template::NOT_DELETED]);
-
-        return $this;
-    }
-
-    /**
      * @param string $query
-     * @return self
+     * @return static
      */
     public function search($query)
     {

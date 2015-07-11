@@ -23,10 +23,34 @@ namespace resources\Postman;
  * @property integer $use_layout
  * @property integer $created_at
  * @property integer $updated_at
- * @property integer $deleted
+ * @property integer $deleted_at
  */
 class Template extends \yii\db\ActiveRecord
 {
+
+    use \components\db\traits\SoftDeleteTrait;
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['deleted'] = 'deleted';
+
+        return $fields;
+    }
 
     /**
      * @inheritdoc
@@ -36,8 +60,8 @@ class Template extends \yii\db\ActiveRecord
         return [
             /** type validators */
             [['code', 'subject', 'content_text', 'content_html', 'styles', 'address', 'params', 'description'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
-            [['use_layout', 'deleted'], 'boolean'],
+            [['created_at', 'updated_at', 'deleted_at'], 'integer'],
+            [['use_layout'], 'boolean'],
 
             /** semantic validators */
             [['code', 'subject'], 'required'],
@@ -47,7 +71,6 @@ class Template extends \yii\db\ActiveRecord
 
             /** default values */
             [['use_layout'], 'default', 'value' => static::USE_LAYOUT],
-            [['deleted'], 'default', 'value' => static::NOT_DELETED],
         ];
     }
 
@@ -69,7 +92,4 @@ class Template extends \yii\db\ActiveRecord
 
     const NOT_USE_LAYOUT = 0;
     const USE_LAYOUT = 1;
-
-    const NOT_DELETED = 0;
-    const DELETED = 1;
 }

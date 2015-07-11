@@ -16,7 +16,7 @@ class ItemSectionQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $item_id
-     * @return self
+     * @return static
      */
     public function byItemId($item_id)
     {
@@ -27,7 +27,7 @@ class ItemSectionQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $section_id
-     * @return self
+     * @return static
      */
     public function bySectionId($section_id)
     {

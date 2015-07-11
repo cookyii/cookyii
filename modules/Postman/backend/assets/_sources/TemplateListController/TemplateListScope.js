@@ -27,12 +27,12 @@ angular.module('BackendApp')
           _refresh();
         };
 
-        $scope.toggleActivated = function (account) {
+        $scope.toggleActivated = function (template) {
           $timeout(function () {
-            if (account.activated === 1) {
-              account.$activate(_refresh, _refresh);
+            if (template.activated === true) {
+              template.$activate(_refresh, _refresh);
             } else {
-              account.$deactivate(_refresh, _refresh);
+              template.$deactivate(_refresh, _refresh);
             }
           }, 400);
         };

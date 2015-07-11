@@ -21,7 +21,7 @@ class m150619_164200_postman_template extends \components\db\Migration
             'use_layout' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 1',
             'created_at' => Schema::TYPE_INTEGER,
             'updated_at' => Schema::TYPE_INTEGER,
-            'deleted' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
+            'deleted_at' => Schema::TYPE_INTEGER,
         ]);
 
         $this->createIndex('idx_code', '{{%postman_template}}', ['code'], true);
@@ -82,7 +82,6 @@ class m150619_164200_postman_template extends \components\db\Migration
             'use_layout' => 0,
             'created_at' => $time,
             'updated_at' => $time,
-            'deleted' => 0,
         ]);
 
         $params = [
@@ -131,7 +130,6 @@ class m150619_164200_postman_template extends \components\db\Migration
             'use_layout' => 1,
             'created_at' => $time,
             'updated_at' => $time,
-            'deleted' => 0,
         ]);
     }
 

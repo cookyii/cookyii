@@ -13,9 +13,11 @@ namespace resources\Postman\queries;
 class MessageQuery extends \yii\db\ActiveQuery
 {
 
+    use \components\db\traits\query\DeletedQueryTrait;
+
     /**
      * @param integer|array $id
-     * @return self
+     * @return static
      */
     public function byId($id)
     {
@@ -26,7 +28,7 @@ class MessageQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $status
-     * @return self
+     * @return static
      */
     public function byStatus($status)
     {
@@ -36,7 +38,7 @@ class MessageQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return self
+     * @return static
      */
     public function onlyNew()
     {
@@ -44,8 +46,18 @@ class MessageQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     * @return static
+     */
+    public function onlyNotSent()
+    {
+        $this->andWhere(['sent_at' => null]);
+
+        return $this;
+    }
+
+    /**
      * @param string $query
-     * @return self
+     * @return static
      */
     public function search($query)
     {

@@ -19,15 +19,15 @@ class m150610_170045_account extends \components\db\Migration
                 'auth_key' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'created_at' => Schema::TYPE_INTEGER,
                 'updated_at' => Schema::TYPE_INTEGER,
-                'activated' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
-                'deleted' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
+                'deleted_at' => Schema::TYPE_INTEGER,
+                'activated_at' => Schema::TYPE_INTEGER,
             ]
         );
 
         $this->createIndex('idx_email', '{{%account}}', ['email']);
         $this->createIndex('idx_token', '{{%account}}', ['token']);
         $this->createIndex('idx_auth_key', '{{%account}}', ['auth_key']);
-        $this->createIndex('idx_working', '{{%account}}', ['activated', 'deleted']);
+        $this->createIndex('idx_working', '{{%account}}', ['activated_at', 'deleted_at']);
     }
 
     public function down()

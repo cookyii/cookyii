@@ -23,6 +23,8 @@ use rmrevin\yii\rbac\RbacFactory as F;
 class RbacCommand extends \rmrevin\yii\rbac\Command
 {
 
+    public $defaultAction = 'update';
+
     /** @var string|null */
     public $forceAssign = 'user';
 

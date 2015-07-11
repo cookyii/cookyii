@@ -15,7 +15,7 @@ abstract class AbstractSocialQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $account_id
-     * @return self
+     * @return static
      */
     public function byAccountId($account_id)
     {
@@ -26,7 +26,7 @@ abstract class AbstractSocialQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $social_id
-     * @return self
+     * @return static
      */
     public function bySocialId($social_id)
     {

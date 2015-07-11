@@ -13,9 +13,12 @@ namespace resources\queries;
 class PageQuery extends \yii\db\ActiveQuery
 {
 
+    use \components\db\traits\query\ActivatedQueryTrait,
+        \components\db\traits\query\DeletedQueryTrait;
+
     /**
      * @param mixed $id
-     * @return self
+     * @return static
      */
     public function byId($id)
     {
@@ -26,7 +29,7 @@ class PageQuery extends \yii\db\ActiveQuery
 
     /**
      * @param mixed $slug
-     * @return self
+     * @return static
      */
     public function bySlug($slug)
     {
@@ -36,38 +39,8 @@ class PageQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return self
-     */
-    public function onlyDeleted()
-    {
-        $this->andWhere(['deleted' => \resources\Page::DELETED]);
-
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutDeleted()
-    {
-        $this->andWhere(['deleted' => \resources\Page::NOT_DELETED]);
-
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutDeactivated()
-    {
-        $this->andWhere(['activated' => \resources\Page::ACTIVATED]);
-
-        return $this;
-    }
-
-    /**
      * @param string $query
-     * @return self
+     * @return static
      */
     public function search($query)
     {

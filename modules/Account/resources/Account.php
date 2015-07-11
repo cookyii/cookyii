@@ -21,8 +21,8 @@ use yii\helpers\ArrayHelper;
  * @property string $auth_key
  * @property integer $created_at
  * @property integer $updated_at
- * @property boolean $activated
- * @property boolean $deleted
+ * @property integer $deleted_at
+ * @property integer $activated_at
  *
  * @property \resources\Account\Property[] $properties
  *
@@ -34,9 +34,9 @@ use yii\helpers\ArrayHelper;
 class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
-    use \resources\Account\traits\UserSocialTrait;
-    use \components\db\traits\ActivationTrait;
-    use \components\db\traits\SoftDeleteTrait;
+    use \resources\Account\traits\UserSocialTrait,
+        \components\db\traits\ActivationTrait,
+        \components\db\traits\SoftDeleteTrait;
 
     public $password;
 
@@ -66,6 +66,10 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function fields()
     {
         $fields = parent::fields();
+
+        $fields['deleted'] = 'deleted';
+        $fields['activated'] = 'activated';
+
         unset($fields['password_hash'], $fields['token'], $fields['auth_key']);
 
         return $fields;
@@ -79,20 +83,15 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             /** type validators */
             [['name', 'avatar', 'password', 'password_hash'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
-            [['activated', 'deleted'], 'boolean'],
+            [['created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['email'], 'email'],
             [['email'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['email'], 'required'],
             [['name', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
-            [['activated'], 'in', 'range' => [static::NOT_ACTIVATED, static::ACTIVATED]],
-            [['deleted'], 'in', 'range' => [static::NOT_DELETED, static::DELETED]],
 
             /** default values */
-            [['activated'], 'default', 'value' => static::NOT_ACTIVATED],
-            [['deleted'], 'default', 'value' => static::NOT_DELETED],
         ];
     }
 
@@ -103,22 +102,10 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $result = true;
 
-        switch ($this->activated) {
-            default:
-            case static::NOT_ACTIVATED:
-                $result = 'not-activated';
-                break;
-            case static::ACTIVATED:
-                break;
-        }
-
-        switch ($this->deleted) {
-            default:
-            case static::DELETED:
-                $result = 'deleted';
-                break;
-            case static::NOT_DELETED:
-                break;
+        if (empty($this->activated_at)) {
+            $result = 'not-activated';
+        } elseif (!empty($this->deleted_at)) {
+            $result = 'deleted';
         }
 
         return $result;
@@ -311,7 +298,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function getAllRoles()
     {
-        return ArrayHelper::map(AuthManager()->getRoles(), 'name', 'description');;
+        return ArrayHelper::map(AuthManager()->getRoles(), 'name', 'description');
     }
 
     /**
@@ -349,10 +336,4 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             }
         );
     }
-
-    const NOT_DELETED = 0;
-    const DELETED = 1;
-
-    const NOT_ACTIVATED = 0;
-    const ACTIVATED = 1;
 }

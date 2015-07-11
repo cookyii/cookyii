@@ -45,8 +45,7 @@ class UserCommand extends \yii\console\Controller
             'name' => $name,
             'email' => $email,
             'password' => $pass,
-            'activated' => \resources\Account::ACTIVATED,
-            'deleted' => \resources\Account::NOT_DELETED,
+            'activated_at' => time(),
         ]);
 
         $User->save();

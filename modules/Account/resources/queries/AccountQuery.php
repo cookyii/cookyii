@@ -13,9 +13,13 @@ namespace resources\queries;
 class AccountQuery extends \yii\db\ActiveQuery
 {
 
+    use
+        \components\db\traits\query\ActivatedQueryTrait,
+        \components\db\traits\query\DeletedQueryTrait;
+
     /**
      * @param integer|array $id
-     * @return self
+     * @return static
      */
     public function byId($id)
     {
@@ -50,7 +54,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Facebook_id
-     * @return self
+     * @return static
      */
     public function byFacebookId($Facebook_id)
     {
@@ -59,7 +63,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Github_id
-     * @return self
+     * @return static
      */
     public function byGithubId($Github_id)
     {
@@ -68,7 +72,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Google_id
-     * @return self
+     * @return static
      */
     public function byGoogleId($Google_id)
     {
@@ -77,7 +81,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Linkedin_id
-     * @return self
+     * @return static
      */
     public function byLinkedinId($Linkedin_id)
     {
@@ -86,7 +90,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Live_id
-     * @return self
+     * @return static
      */
     public function byLiveId($Live_id)
     {
@@ -95,7 +99,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Twitter_id
-     * @return self
+     * @return static
      */
     public function byTwitterId($Twitter_id)
     {
@@ -105,7 +109,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Vkontakte_id
-     * @return self
+     * @return static
      */
     public function byVkontakteId($Vkontakte_id)
     {
@@ -114,7 +118,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $Yandex_id
-     * @return self
+     * @return static
      */
     public function byYandexId($Yandex_id)
     {
@@ -123,7 +127,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $token
-     * @return self
+     * @return static
      */
     public function byToken($token)
     {
@@ -134,7 +138,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $name
-     * @return self
+     * @return static
      */
     public function byName($name)
     {
@@ -145,7 +149,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $email
-     * @return self
+     * @return static
      */
     public function byEmail($email)
     {
@@ -156,7 +160,7 @@ class AccountQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $login
-     * @return self
+     * @return static
      */
     public function byLogin($login)
     {
@@ -166,38 +170,8 @@ class AccountQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return self
-     */
-    public function onlyDeleted()
-    {
-        $this->andWhere(['deleted' => \resources\Account::DELETED]);
-
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutDeleted()
-    {
-        $this->andWhere(['deleted' => \resources\Account::NOT_DELETED]);
-
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutDeactivated()
-    {
-        $this->andWhere(['activated' => \resources\Account::ACTIVATED]);
-
-        return $this;
-    }
-
-    /**
      * @param string $query
-     * @return self
+     * @return static
      */
     public function search($query)
     {

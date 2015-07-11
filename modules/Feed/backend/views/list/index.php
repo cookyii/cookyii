@@ -47,7 +47,7 @@ function sortLink($type, $label)
                 <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('feed', 'Removed items'), [
                     'class' => 'checker',
                     'ng-click' => 'items.filter.toggleDeleted()',
-                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('items.filter.deleted === true')]),
+                    'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('items.filter.deleted')]),
                 ]) ?>
 
                 <hr>
@@ -61,7 +61,10 @@ function sortLink($type, $label)
 
                     <ul class="sub" ng-if="sect.sections">
                         <li ng-repeat="sect in sect.sections track by sect.slug"
-                            ng-class="{'active': items.filter.section.isActive(sect), 'deleted': items.filter.section.get(sect.slug).deleted === '1'}"
+                            ng-class="{
+                            'active': items.filter.section.isActive(sect),
+                            'deleted': items.filter.section.get(sect.slug).deleted
+                            }"
                             ng-include="'section.html'"></li>
                     </ul>
                 </script>
@@ -70,7 +73,7 @@ function sortLink($type, $label)
                     <li ng-repeat="sect in items.filter.section.tree track by sect.slug"
                         ng-class="{
                         'active': items.filter.section.isActive(sect),
-                        'deleted': items.filter.section.get(sect.slug).deleted === '1'
+                        'deleted': items.filter.section.get(sect.slug).deleted
                         }"
                         ng-include="'section.html'"></li>
                 </ul>
@@ -149,7 +152,7 @@ function sortLink($type, $label)
                     $options = [
                         'title' => Yii::t('feed', 'Edit item'),
                         'class' => 'box-item',
-                        'ng-class' => '{deactivated:item.activated===0,deleted:item.deleted}',
+                        'ng-class' => '{deactivated:!item.activated,deleted:item.deleted}',
                     ];
                     ?>
                     <div ng-repeat="item in items.list track by item.id"
@@ -162,10 +165,9 @@ function sortLink($type, $label)
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 activated">
                                 <md-switch ng-model="item.activated"
-                                           ng-true-value="1" ng-false-value="0"
                                            ng-change="items.toggleActivation(item)"
-                                           title="Item {{ item.activated === 1 ? 'activated' : 'deactivated' }}"
-                                           aria-label="Item {{ item.activated === 1 ? 'activated' : 'deactivated' }}">
+                                           title="Item {{ item.activated ? 'activated' : 'deactivated' }}"
+                                           aria-label="Item {{ item.activated ? 'activated' : 'deactivated' }}">
                                 </md-switch>
 
                                 <br>

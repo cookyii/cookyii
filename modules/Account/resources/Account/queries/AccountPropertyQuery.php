@@ -15,7 +15,7 @@ class AccountPropertyQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $account_id
-     * @return self
+     * @return static
      */
     public function byAccountId($account_id)
     {
@@ -26,7 +26,7 @@ class AccountPropertyQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $key
-     * @return self
+     * @return static
      */
     public function byKey($key)
     {
@@ -37,7 +37,7 @@ class AccountPropertyQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string $value
-     * @return self
+     * @return static
      */
     public function byValue($value)
     {

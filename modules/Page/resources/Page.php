@@ -21,14 +21,14 @@ use yii\helpers\Json;
  * @property integer $updated_by
  * @property integer $created_at
  * @property integer $updated_at
- * @property integer $activated
- * @property integer $deleted
+ * @property integer $deleted_at
+ * @property integer $activated_at
  */
 class Page extends \yii\db\ActiveRecord
 {
 
-    use \components\db\traits\ActivationTrait;
-    use \components\db\traits\SoftDeleteTrait;
+    use \components\db\traits\ActivationTrait,
+        \components\db\traits\SoftDeleteTrait;
 
     /**
      * @inheritdoc
@@ -44,24 +44,32 @@ class Page extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['deleted'] = 'deleted';
+        $fields['activated'] = 'activated';
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             /** type validators */
             [['slug', 'title', 'content', 'meta'], 'string'],
-            [['created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
-            [['activated', 'deleted'], 'boolean'],
+            [['created_by', 'updated_by', 'created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['slug'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['slug', 'title'], 'required'],
             [['slug', 'title'], 'filter', 'filter' => 'str_clean'],
-            [['activated'], 'in', 'range' => [static::NOT_ACTIVATED, static::ACTIVATED]],
-            [['deleted'], 'in', 'range' => [static::NOT_DELETED, static::DELETED]],
 
             /** default values */
-            [['activated'], 'default', 'value' => static::NOT_ACTIVATED],
-            [['deleted'], 'default', 'value' => static::NOT_DELETED],
         ];
     }
 
@@ -91,10 +99,4 @@ class Page extends \yii\db\ActiveRecord
     {
         return '{{%page}}';
     }
-
-    const NOT_DELETED = 0;
-    const DELETED = 1;
-
-    const NOT_ACTIVATED = 0;
-    const ACTIVATED = 1;
 }

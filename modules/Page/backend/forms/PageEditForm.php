@@ -101,11 +101,6 @@ class PageEditForm extends \yii\base\Model
             'image' => $this->meta_image,
         ]);
 
-        if ($Page->isNewRecord) {
-            $Page->activated = \resources\Page::NOT_ACTIVATED;
-            $Page->deleted = \resources\Page::NOT_DELETED;
-        }
-
         $result = $Page->validate() && $Page->save();
 
         if ($Page->hasErrors()) {

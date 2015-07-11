@@ -67,6 +67,12 @@ class ItemController extends \yii\rest\ActiveController
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
+        $actions['delete'] = [
+            'class' => \components\rest\actions\DeleteAction::className(),
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
+
         $actions['restore'] = [
             'class' => \components\rest\actions\RestoreAction::className(),
             'modelClass' => $this->modelClass,
@@ -105,9 +111,15 @@ class ItemController extends \yii\rest\ActiveController
 
         $Query->orderBy(['sort' => SORT_DESC]);
 
-        return new \yii\data\ActiveDataProvider([
+        return new \components\data\CallableActiveDataProvider([
             'query' => $Query,
             'pagination' => ['pageSize' => 10],
+            'mapFunction' => function ($data) {
+                $data['activated'] = !empty($data['activated_at']);
+                $data['deleted'] = !empty($data['deleted_at']);
+
+                return $data;
+            }
         ]);
     }
 }

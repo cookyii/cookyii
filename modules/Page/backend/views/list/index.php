@@ -112,16 +112,15 @@ function sortLink($type, $label)
                         <?php
                         $options = [
                             'title' => Yii::t('page', 'Edit page'),
-                            'ng-class' => '{deactivated:page.activated===0,deleted:page.deleted}',
+                            'ng-class' => '{deactivated:page.activated_at===null,deleted:page.deleted_at!==null}',
                         ];
                         ?>
                         <tr ng-repeat="page in pages.list track by page.id" <?= Html::renderTagAttributes($options) ?>>
                             <td class="activated clickable">
                                 <md-switch ng-model="page.activated"
-                                           ng-true-value="1" ng-false-value="0"
                                            ng-change="pages.toggleActivated(page)"
-                                           title="Page {{ page.activated === 1 ? 'activated' : 'deactivated' }}"
-                                           aria-label="Page {{ page.activated === 1 ? 'activated' : 'deactivated' }}">
+                                           title="Page {{ page.activated ? 'activated' : 'deactivated' }}"
+                                           aria-label="Page {{ page.activated ? 'activated' : 'deactivated' }}">
                                 </md-switch>
                             </td>
                             <td class="id clickable" ng-click="pages.edit(page)">{{ page.id }}</td>
@@ -135,13 +134,13 @@ function sortLink($type, $label)
                                     'class' => 'text-red',
                                     'title' => Yii::t('page', 'Remove page'),
                                     'ng-click' => 'pages.remove(page, $event)',
-                                    'ng-show' => '!page.deleted',
+                                    'ng-show' => 'page.deleted_at === null',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
                                     'title' => Yii::t('page', 'Restore page'),
                                     'ng-click' => 'pages.restore(page)',
-                                    'ng-show' => 'page.deleted',
+                                    'ng-show' => 'page.deleted_at !== null',
                                 ]);
                                 ?>
                             </td>

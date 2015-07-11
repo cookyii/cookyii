@@ -17,8 +17,8 @@ class m150618_163354_page extends \components\db\Migration
             'updated_by' => Schema::TYPE_INTEGER,
             'created_at' => Schema::TYPE_INTEGER,
             'updated_at' => Schema::TYPE_INTEGER,
-            'activated' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
-            'deleted' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 0',
+            'deleted_at' => Schema::TYPE_INTEGER,
+            'activated_at' => Schema::TYPE_INTEGER,
         ]);
     }
 

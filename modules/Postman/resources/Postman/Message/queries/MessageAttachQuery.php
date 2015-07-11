@@ -16,7 +16,7 @@ class MessageAttachQuery extends \yii\db\ActiveQuery
 
     /**
      * @param integer|array $letter_id
-     * @return self
+     * @return static
      */
     public function byLetterId($letter_id)
     {
