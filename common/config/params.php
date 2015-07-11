@@ -122,7 +122,7 @@ return [
         ],
     ],
     'component.formatter' => [
-        'class' => components\i18n\Formatter::className(),
+        'class' => cookyii\i18n\Formatter::className(),
         'locale' => 'en',
         'timeZone' => 'Etc/GMT',
         'dateFormat' => 'dd MMMM y',

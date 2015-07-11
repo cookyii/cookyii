@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\rest;
+namespace cookyii\rest;
 
 /**
  * Class UrlRule
- * @package components\rest
+ * @package cookyii\rest
  */
 class UrlRule extends \yii\rest\UrlRule
 {

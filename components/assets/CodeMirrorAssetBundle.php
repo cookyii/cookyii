@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets;
+namespace cookyii\assets;
 
 /**
  * Class CodeMirrorAssetBundle
- * @package components\assets
+ * @package cookyii\assets
  */
 class CodeMirrorAssetBundle extends \yii\web\AssetBundle
 {

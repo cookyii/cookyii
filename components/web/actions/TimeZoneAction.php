@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\web\actions;
+namespace cookyii\web\actions;
 
 /**
  * Class TimeZoneAction
- * @package components\web\actions
+ * @package cookyii\web\actions
  */
 class TimeZoneAction extends \yii\base\Action
 {

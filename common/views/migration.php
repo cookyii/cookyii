@@ -14,7 +14,7 @@ echo "<?php\n";
 
 use yii\db\mysql\Schema;
 
-class <?= $className ?> extends \components\db\Migration
+class <?= $className ?> extends \cookyii\db\Migration
 {
 
     public function up()

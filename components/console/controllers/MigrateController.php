@@ -5,11 +5,11 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace components\console\controllers;
+namespace cookyii\console\controllers;
 
 /**
  * Class MigrateController
- * @package components\console\controllers
+ * @package cookyii\console\controllers
  */
 class MigrateController extends \yii\console\controllers\MigrateController
 {

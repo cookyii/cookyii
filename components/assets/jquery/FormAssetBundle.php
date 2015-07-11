@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets\jquery;
+namespace cookyii\assets\jquery;
 
 /**
  * Class FormAssetBundle
- * @package components\assets\jquery
+ * @package cookyii\assets\jquery
  */
 class FormAssetBundle extends \yii\web\AssetBundle
 {

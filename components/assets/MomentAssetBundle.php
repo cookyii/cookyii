@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets;
+namespace cookyii\assets;
 
 /**
  * Class MomentAssetBundle
- * @package components\assets
+ * @package cookyii\assets
  */
 class MomentAssetBundle extends \yii\web\AssetBundle
 {

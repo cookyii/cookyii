@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\rest;
+namespace cookyii\rest;
 
 /**
  * Class Controller
- * @package components\rest
+ * @package cookyii\rest
  */
 abstract class Controller extends \yii\rest\Controller
 {

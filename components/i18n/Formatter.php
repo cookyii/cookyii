@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\i18n;
+namespace cookyii\i18n;
 
 /**
  * Class Formatter
- * @package components\i18n
+ * @package cookyii\i18n
  */
 class Formatter extends \yii\i18n\Formatter
 {

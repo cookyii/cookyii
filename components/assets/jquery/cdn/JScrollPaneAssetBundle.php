@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets\jquery\cdn;
+namespace cookyii\assets\jquery\cdn;
 
 /**
  * Class JScrollPaneAssetBundle
- * @package components\assets\jquery\cdn
+ * @package cookyii\assets\jquery\cdn
  */
 class JScrollPaneAssetBundle extends \yii\web\AssetBundle
 {

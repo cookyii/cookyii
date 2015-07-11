@@ -15,7 +15,7 @@ require($baseDir . '/vendor/autoload.php');
 require($baseDir . '/backend-app/credentials.php');
 require($baseDir . '/env.php');
 
-components\Config::requireGlobals($baseDir);
+cookyii\Config::requireGlobals($baseDir);
 
 // fcgi doesn't have STDIN and STDOUT defined by default
 defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
@@ -24,7 +24,7 @@ defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
 require($baseDir . '/vendor/yiisoft/yii2/Yii.php');
 require($baseDir . '/common/config/aliases.php');
 
-components\Config::init('backend', 'console');
+cookyii\Config::init('backend', 'console');
 
-exit((new yii\console\Application(components\Config::$config))
+exit((new yii\console\Application(cookyii\Config::$config))
     ->run());

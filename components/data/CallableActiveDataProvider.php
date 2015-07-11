@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\data;
+namespace cookyii\data;
 
 /**
  * Class CallableActiveDataProvider
- * @package components\data
+ * @package cookyii\data
  */
 class CallableActiveDataProvider extends \yii\data\ActiveDataProvider
 {

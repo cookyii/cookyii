@@ -4,14 +4,14 @@
  * @author Revin Roman
  */
 
-namespace components\widgets\angular;
+namespace cookyii\widgets\angular;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
  * Class ActiveField
- * @package components\widgets\angular
+ * @package cookyii\widgets\angular
  */
 class ActiveField extends \yii\widgets\ActiveField
 {

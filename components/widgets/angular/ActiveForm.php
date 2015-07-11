@@ -4,13 +4,13 @@
  * @author Revin Roman
  */
 
-namespace components\widgets\angular;
+namespace cookyii\widgets\angular;
 
 use yii\helpers\Html;
 
 /**
  * Class ActiveForm
- * @package components\widgets\angular
+ * @package cookyii\widgets\angular
  */
 class ActiveForm extends \yii\widgets\ActiveForm
 {
@@ -22,7 +22,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
     public $controller;
 
     /** @inheritdoc */
-    public $fieldClass = 'components\widgets\angular\ActiveField';
+    public $fieldClass = 'cookyii\widgets\angular\ActiveField';
 
     /** @inheritdoc */
     public $enableClientScript = false;
@@ -58,7 +58,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
      * @param string $attribute the attribute name or expression. See [[Html::getAttributeName()]] for the format
      * about attribute expression.
      * @param array $options the additional configurations for the field object
-     * @return \components\widgets\angular\ActiveField the created ActiveField object
+     * @return \cookyii\widgets\angular\ActiveField the created ActiveField object
      * @see fieldConfig
      */
     public function field($model, $attribute, $options = [])

@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets;
+namespace cookyii\assets;
 
 /**
  * Class AnimateCssAssetBundle
- * @package components\assets
+ * @package cookyii\assets
  */
 class AnimateCssAssetBundle extends \yii\web\AssetBundle
 {

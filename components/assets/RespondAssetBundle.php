@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets;
+namespace cookyii\assets;
 
 /**
  * Class RespondAssetBundle
- * @package components\assets
+ * @package cookyii\assets
  */
 class RespondAssetBundle extends \yii\web\AssetBundle
 {

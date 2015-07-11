@@ -4,16 +4,16 @@
  * @author Revin Roman
  */
 
-namespace components\widgets\angular\material;
+namespace cookyii\widgets\angular\material;
 
 /**
  * Class ActiveForm
- * @package components\widgets\angular\material
+ * @package cookyii\widgets\angular\material
  */
-class ActiveForm extends \components\widgets\angular\ActiveForm
+class ActiveForm extends \cookyii\widgets\angular\ActiveForm
 {
 
-    public $fieldClass = 'components\widgets\angular\material\ActiveField';
+    public $fieldClass = 'cookyii\widgets\angular\material\ActiveField';
 
     /**
      * Generates a form field.
@@ -23,7 +23,7 @@ class ActiveForm extends \components\widgets\angular\ActiveForm
      * @param string $attribute the attribute name or expression. See [[Html::getAttributeName()]] for the format
      * about attribute expression.
      * @param array $options the additional configurations for the field object
-     * @return \components\widgets\angular\material\ActiveField the created ActiveField object
+     * @return \cookyii\widgets\angular\material\ActiveField the created ActiveField object
      * @see fieldConfig
      */
     public function field($model, $attribute, $options = [])

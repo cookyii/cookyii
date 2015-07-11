@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\db\traits\query;
+namespace cookyii\db\traits\query;
 
 /**
  * Trait ActivatedQueryTrait
- * @package components\db\traits\query
+ * @package cookyii\db\traits\query
  */
 trait ActivatedQueryTrait
 {

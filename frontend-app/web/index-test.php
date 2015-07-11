@@ -14,7 +14,7 @@ require($baseDir . '/vendor/autoload.php');
 require($baseDir . '/frontend-app/credentials.php');
 require($baseDir . '/env.php');
 
-components\Config::requireGlobals($baseDir);
+cookyii\Config::requireGlobals($baseDir);
 
 require($baseDir . '/vendor/yiisoft/yii2/Yii.php');
 require($baseDir . '/common/config/aliases.php');

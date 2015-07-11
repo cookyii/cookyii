@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components;
+namespace cookyii;
 
 /**
  * Class Config
- * @package components
+ * @package cookyii
  */
 class Config
 {

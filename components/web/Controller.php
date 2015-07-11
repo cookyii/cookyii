@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\web;
+namespace cookyii\web;
 
 /**
  * Class Controller
- * @package components\web
+ * @package cookyii\web
  */
 class Controller extends \yii\web\Controller
 {

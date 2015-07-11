@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets\jquery;
+namespace cookyii\assets\jquery;
 
 /**
  * Class DateTimePickerAssetBundle
- * @package components\assets\jquery
+ * @package cookyii\assets\jquery
  */
 class DateTimePickerAssetBundle extends \yii\web\AssetBundle
 {

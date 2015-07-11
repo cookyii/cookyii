@@ -44,7 +44,7 @@ class SiteController extends \backend\components\Controller
                 'fixedVerifyCode' => YII_DEBUG ? 'random' : null,
             ],
             'tz' => [ // setting timezone
-                'class' => 'components\web\actions\TimeZoneAction',
+                'class' => 'cookyii\web\actions\TimeZoneAction',
             ],
         ];
     }

@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\helpers;
+namespace cookyii\helpers;
 
 /**
  * Class Material
- * @package components\helpers
+ * @package cookyii\helpers
  */
 class Material extends \yii\helpers\Html
 {

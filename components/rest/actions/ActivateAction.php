@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\rest\actions;
+namespace cookyii\rest\actions;
 
 /**
  * Class ActivateAction
- * @package components\rest\actions
+ * @package cookyii\rest\actions
  */
 class ActivateAction extends \yii\rest\Action
 {

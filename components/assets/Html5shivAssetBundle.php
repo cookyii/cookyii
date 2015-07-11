@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets;
+namespace cookyii\assets;
 
 /**
  * Class Html5shivAssetBundle
- * @package components\assets
+ * @package cookyii\assets
  */
 class Html5shivAssetBundle extends \yii\web\AssetBundle
 {

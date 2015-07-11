@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\db\traits;
+namespace cookyii\db\traits;
 
 /**
  * Trait SoftDeleteTrait
- * @package components\db\traits
+ * @package cookyii\db\traits
  *
  * Трейт переопределяет метод delete в ActiveRecord классе.
  * Теперь, при первом вызове метода delete, запись не будет физически удалена из базы данных,

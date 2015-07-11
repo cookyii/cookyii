@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\db;
+namespace cookyii\db;
 
 /**
  * Class Migration
- * @package components\db
+ * @package cookyii\db
  */
 class Migration extends \yii\db\Migration
 {

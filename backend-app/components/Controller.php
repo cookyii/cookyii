@@ -11,7 +11,7 @@ namespace backend\components;
  * Class Controller
  * @package backend\components
  */
-abstract class Controller extends \components\web\Controller
+abstract class Controller extends \cookyii\web\Controller
 {
 
     public $loader = true;

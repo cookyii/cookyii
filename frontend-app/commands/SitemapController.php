@@ -11,7 +11,7 @@ namespace frontend\commands;
  * Class SitemapController
  * @package frontend\commands
  */
-class SitemapController extends \components\console\controllers\SitemapController
+class SitemapController extends \cookyii\console\controllers\SitemapController
 {
 
     protected $domain = 'https://sitename.ru';

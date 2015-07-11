@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets\jquery;
+namespace cookyii\assets\jquery;
 
 /**
  * Class ScrollToAssetBundle
- * @package components\assets\jquery
+ * @package cookyii\assets\jquery
  */
 class ScrollToAssetBundle extends \yii\web\AssetBundle
 {

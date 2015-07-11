@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\db\traits;
+namespace cookyii\db\traits;
 
 /**
  * Trait CompletionTrait
- * @package components\db\traits
+ * @package cookyii\db\traits
  *
  * @property boolean $completed_at
  */

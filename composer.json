@@ -81,7 +81,7 @@
       "cookyii\\modules\\Page\\": "./modules/Page",
       "cookyii\\modules\\Postman\\": "./modules/Postman",
       "cookyii\\modules\\Media\\": "./modules/Media",
-      "components\\": "./components",
+      "cookyii\\": "./components",
       "resources\\": [
         "./resources",
         "./modules/Feed/resources",

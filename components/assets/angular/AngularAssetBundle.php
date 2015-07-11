@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\assets\angular;
+namespace cookyii\assets\angular;
 
 /**
  * Class AngularAssetBundle
- * @package components\assets\angular
+ * @package cookyii\assets\angular
  */
 class AngularAssetBundle extends \yii\web\AssetBundle
 {
@@ -40,6 +40,6 @@ class AngularAssetBundle extends \yii\web\AssetBundle
 
     public $depends = [
         'yii\web\JqueryAsset',
-        'components\assets\jquery\JScrollPaneAssetBundle',
+        'cookyii\assets\jquery\JScrollPaneAssetBundle',
     ];
 }

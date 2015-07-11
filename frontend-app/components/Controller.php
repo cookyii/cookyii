@@ -11,7 +11,7 @@ namespace frontend\components;
  * Class Controller
  * @package frontend\components
  */
-abstract class Controller extends \components\web\Controller
+abstract class Controller extends \cookyii\web\Controller
 {
 
     public $hideLoader = false;

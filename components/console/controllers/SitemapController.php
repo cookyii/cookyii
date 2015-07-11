@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace components\console\controllers;
+namespace cookyii\console\controllers;
 
 /**
  * Class SitemapController
- * @package components\console\controllers
+ * @package cookyii\console\controllers
  */
 abstract class SitemapController extends \yii\console\Controller
 {

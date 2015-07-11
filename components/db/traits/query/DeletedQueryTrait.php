@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\db\traits\query;
+namespace cookyii\db\traits\query;
 
 /**
  * Trait DeletedQueryTrait
- * @package components\db\traits\query
+ * @package cookyii\db\traits\query
  */
 trait DeletedQueryTrait
 {

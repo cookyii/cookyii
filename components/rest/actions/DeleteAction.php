@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace components\rest\actions;
+namespace cookyii\rest\actions;
 
 /**
  * Class DeleteAction
- * @package components\rest\actions
+ * @package cookyii\rest\actions
  */
 class DeleteAction extends \yii\rest\Action
 {
