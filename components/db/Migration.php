@@ -25,4 +25,26 @@ class Migration extends \yii\db\Migration
 
         parent::createTable($table, $columns, $options);
     }
+
+    /**
+     * @param integer $count
+     * @param integer|array $maxNbChars
+     * @return string
+     */
+    protected function getFakerTextBlock($count = 1, $maxNbChars = 200)
+    {
+        $result = '';
+
+        $faker = \Faker\Factory::create();
+
+        $maxNbChars = is_array($maxNbChars)
+            ? rand($maxNbChars[0], $maxNbChars[1])
+            : $maxNbChars;
+
+        for ($i = 0; $i < $count; $i++) {
+            $result .= sprintf('<p>%s</p>', $faker->realText($maxNbChars));
+        }
+
+        return $result;
+    }
 }

@@ -5,34 +5,13 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
 
     public function up()
     {
-        $lorem = [
-            'preview' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nisl erat, vulputate '
-                . 'sed laoreet id, dictum non nisl. Donec id diam ligula. Sed nec est eget odio elementum rhoncus. '
-                . 'Proin luctus, odio non maximus egestas, ante dui vehicula lorem, a porta ante turpis non elit. '
-                . 'Morbi non vestibulum ante.</p>',
-            'detail' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nisl erat, vulputate sed '
-                . 'laoreet id, dictum non nisl. Donec id diam ligula. Sed nec est eget odio elementum rhoncus. '
-                . 'Proin luctus, odio non maximus egestas, ante dui vehicula lorem, a porta ante turpis non elit. '
-                . 'Morbi non vestibulum ante. Praesent erat enim, commodo id vestibulum eu, ultricies a neque. '
-                . 'Cras egestas orci eu mauris pellentesque, vel malesuada sem porta. In tempus ornare neque. '
-                . 'Cras arcu orci, tempus quis eros eget, consectetur cursus justo. Praesent non dui in est porttitor '
-                . 'blandit. Phasellus id placerat libero, a porttitor ipsum.</p>' . PHP_EOL
-                . '<p>Cras in imperdiet lectus, in pharetra odio. Mauris eget sapien laoreet, euismod ex et, varius '
-                . 'urna. Fusce sit amet mi eros. Nam imperdiet lorem quis massa accumsan sagittis et vitae lacus. '
-                . 'Sed ultrices urna ac elit pretium, ut venenatis magna dignissim. Pellentesque ultrices, libero '
-                . 'at vestibulum imperdiet, augue massa vehicula nisi, a fermentum eros mauris sit amet dolor. '
-                . 'Nulla ipsum arcu, interdum at dolor viverra, finibus pretium risus. Nam eget hendrerit ante, '
-                . 'in imperdiet ligula.</p>' . PHP_EOL
-                . '<p>Fusce nunc metus, ornare sed turpis nec, laoreet pellentesque mauris. Proin ultrices ligula ex, '
-                . 'id accumsan libero accumsan vel. Nunc id velit id felis auctor pretium ac ut magna. Nam mattis magna '
-                . 'nulla, sed porta dui mollis in. Nullam purus nisl, maximus sed dignissim at, tincidunt vel orci. '
-                . 'Vivamus scelerisque ut eros sit amet pulvinar. Integer vel lacinia neque. Nunc sit amet posuere nisi. '
-                . 'Curabitur pharetra, quam sed eleifend tincidunt, ante tortor vestibulum ante, sed luctus magna leo '
-                . 'nec est. In et faucibus metus, id pellentesque urna. Suspendisse non ante nibh. Maecenas eu rhoncus '
-                . 'massa. Phasellus fringilla risus eget massa malesuada elementum. Praesent in felis varius, finibus '
-                . 'dui et, dignissim ligula. Nulla vitae mauris ut quam facilisis dictum sit amet id erat. Sed ipsum '
-                . 'nunc, feugiat eget iaculis at, euismod eu enim.</p>',
-        ];
+        if (!YII_DEMO_DATA) {
+            echo 'm150623_151118_feed_demo_data skipped.' . PHP_EOL;
+
+            return true;
+        }
+
+        $faker = \Faker\Factory::create();
 
         $section_id = $this->insertSection([
             'parent_id' => null,
@@ -44,8 +23,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'first-news',
             'title' => 'First news',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 100,
         ]);
 
@@ -54,8 +33,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'second-news',
             'title' => 'Second news',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 200,
         ]);
 
@@ -64,8 +43,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'third-news',
             'title' => 'Third news',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 300,
         ]);
 
@@ -81,8 +60,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'other-article',
             'title' => 'Other article',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 100,
         ]);
 
@@ -98,8 +77,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'article-about-it',
             'title' => 'Article about it',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 100,
         ]);
 
@@ -108,8 +87,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'other-article-about-it',
             'title' => 'Other article about it',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 200,
         ]);
 
@@ -125,8 +104,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'article-about-photo',
             'title' => 'Article about photo',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 100,
         ]);
 
@@ -142,8 +121,8 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
         $item_id = $this->insertItem([
             'slug' => 'article-about-law',
             'title' => 'Article about law',
-            'content_preview' => $lorem['preview'],
-            'content_detail' => $lorem['detail'],
+            'content_preview' => $this->getFakerTextBlock(1, [100, 200]),
+            'content_detail' => $this->getFakerTextBlock(3, [400, 600]),
             'sort' => 100,
         ]);
 
@@ -189,7 +168,7 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
 
     public function down()
     {
-        echo "m150623_151118_feed_demo_data cannot be reverted.\n";
+        echo "m150623_151118_feed_demo_data reverted.\n";
 
         return true;
     }

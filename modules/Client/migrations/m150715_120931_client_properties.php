@@ -23,6 +23,6 @@ class m150715_120931_client_properties extends \cookyii\db\Migration
 
     public function down()
     {
-        $this->dropTable('{{%account_property}}');
+        $this->dropTable('{{%client_property}}');
     }
 }

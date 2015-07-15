@@ -5,10 +5,16 @@ class m150711_110823_page_demo_data extends \cookyii\db\Migration
 
     public function up()
     {
+        if (!YII_DEMO_DATA) {
+            echo 'm150715_122414_postman_template_demo_data skipped.' . PHP_EOL;
+
+            return true;
+        }
+
         $this->insert('{{%page}}', [
             'slug' => 'about',
             'title' => 'About',
-            'content' => '<p>This is `about` page</p>',
+            'content' => $this->getFakerTextBlock(5, [300, 500]),
             'meta' => null,
             'created_by' => null,
             'updated_by' => null,
@@ -20,7 +26,7 @@ class m150711_110823_page_demo_data extends \cookyii\db\Migration
         $this->insert('{{%page}}', [
             'slug' => 'privacy',
             'title' => 'Privacy policy',
-            'content' => '<p>This is `privacy` page</p>',
+            'content' => $this->getFakerTextBlock(12, [300, 800]),
             'meta' => null,
             'created_by' => null,
             'updated_by' => null,
@@ -32,7 +38,7 @@ class m150711_110823_page_demo_data extends \cookyii\db\Migration
         $this->insert('{{%page}}', [
             'slug' => 'terms',
             'title' => 'Terms of use',
-            'content' => '<p>This is `terms` page</p>',
+            'content' => $this->getFakerTextBlock(8, [400, 800]),
             'meta' => null,
             'created_by' => null,
             'updated_by' => null,
@@ -44,7 +50,7 @@ class m150711_110823_page_demo_data extends \cookyii\db\Migration
         $this->insert('{{%page}}', [
             'slug' => 'contacts',
             'title' => 'Contacts',
-            'content' => '<p>This is `contacts` page</p>',
+            'content' => $this->getFakerTextBlock(2, [100, 200]),
             'meta' => null,
             'created_by' => null,
             'updated_by' => null,
@@ -56,7 +62,7 @@ class m150711_110823_page_demo_data extends \cookyii\db\Migration
         $this->insert('{{%page}}', [
             'slug' => 'maintain',
             'title' => 'Maintain',
-            'content' => '<p>This is `maintain` page</p>',
+            'content' => $this->getFakerTextBlock(7, [400, 800]),
             'meta' => null,
             'created_by' => null,
             'updated_by' => null,

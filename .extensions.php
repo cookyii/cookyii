@@ -16,6 +16,11 @@ return [
         'version' => '0.0.0.0',
         'alias' => ['@cookyii/module-account' => __DIR__ . '/modules/Account'],
     ],
+    'cookyii/module-client' => [
+        'name' => 'cookyii/module-client',
+        'version' => '0.0.0.0',
+        'alias' => ['@cookyii/module-client' => __DIR__ . '/modules/Client'],
+    ],
     'cookyii/module-page' => [
         'name' => 'cookyii/module-page',
         'version' => '0.0.0.0',
