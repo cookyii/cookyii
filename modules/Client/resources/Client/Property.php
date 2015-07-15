@@ -4,13 +4,13 @@
  * @author Revin Roman
  */
 
-namespace resources\Account;
+namespace resources\Client;
 
 /**
  * Class Property
- * @package resources\Account
+ * @package resources\Client
  *
- * @property integer $account_id
+ * @property integer $client_id
  * @property string $key
  * @property string $value
  * @property integer $created_at
@@ -37,10 +37,10 @@ class Property extends \yii\db\ActiveRecord
         return [
             /** type validators */
             [['key', 'value'], 'string'],
-            [['account_id', 'created_at', 'updated_at'], 'integer'],
+            [['client_id', 'created_at', 'updated_at'], 'integer'],
 
             /** semantic validators */
-            [['account_id', 'key'], 'required'],
+            [['client_id', 'key'], 'required'],
             [['key', 'value'], 'filter', 'filter' => 'str_clean'],
 
             /** default values */
@@ -53,26 +53,26 @@ class Property extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'account_id' => \Yii::t('account', 'User'),
-            'key' => \Yii::t('account', 'Key'),
-            'value' => \Yii::t('account', 'Value'),
-            'created_at' => \Yii::t('account', 'Created at'),
-            'updated_at' => \Yii::t('account', 'Updated at'),
+            'client_id' => \Yii::t('client', 'Client'),
+            'key' => \Yii::t('client', 'Key'),
+            'value' => \Yii::t('client', 'Value'),
+            'created_at' => \Yii::t('client', 'Created at'),
+            'updated_at' => \Yii::t('client', 'Updated at'),
         ];
     }
 
     /**
-     * @param integer $account_id
+     * @param integer $client_id
      * @param string $key
      * @param mixed $value
      * @return static
      * @throw \InvalidArgumentException
      */
-    public static function push($account_id, $key, $value)
+    public static function push($client_id, $key, $value)
     {
         /** @var static $Property */
         $Property = static::find()
-            ->byAccountId($account_id)
+            ->byAccountId($client_id)
             ->byKey($key)
             ->one();
 
@@ -81,7 +81,7 @@ class Property extends \yii\db\ActiveRecord
         }
 
         $Property->setAttributes([
-            'account_id' => $account_id,
+            'client_id' => $client_id,
             'key' => $key,
             'value' => (string)$value,
         ]);
@@ -96,7 +96,7 @@ class Property extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \resources\Account\queries\AccountPropertyQuery(get_called_class());
+        return new \resources\Client\queries\ClientPropertyQuery(get_called_class());
     }
 
     /**
@@ -104,6 +104,6 @@ class Property extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%account_property}}';
+        return '{{%client_property}}';
     }
 }

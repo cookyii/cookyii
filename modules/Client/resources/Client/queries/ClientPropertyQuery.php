@@ -1,25 +1,25 @@
 <?php
 /**
- * AccountPropertyQuery.php
+ * ClientPropertyQuery.php
  * @author Revin Roman
  */
 
-namespace resources\Account\queries;
+namespace resources\Client\queries;
 
 /**
- * Class AccountPropertyQuery
- * @package resources\Account\queries
+ * Class ClientPropertyQuery
+ * @package resources\Client\queries
  */
-class AccountPropertyQuery extends \yii\db\ActiveQuery
+class ClientPropertyQuery extends \yii\db\ActiveQuery
 {
 
     /**
-     * @param integer|array $account_id
+     * @param integer|array $client_id
      * @return static
      */
-    public function byAccountId($account_id)
+    public function byClientId($client_id)
     {
-        $this->andWhere(['account_id' => $account_id]);
+        $this->andWhere(['client_id' => $client_id]);
 
         return $this;
     }

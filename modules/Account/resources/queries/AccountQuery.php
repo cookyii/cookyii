@@ -105,7 +105,6 @@ class AccountQuery extends \yii\db\ActiveQuery
         return $this->bySocialId('resources\Account\Auth\Twitter', $Twitter_id);
     }
 
-
     /**
      * @param integer|array $Vkontakte_id
      * @return static

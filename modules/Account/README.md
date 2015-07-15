@@ -36,7 +36,6 @@ return [
 Also, you need to configure the following modules (they are already downloaded):
 
 * [`cookyii/module-postman`](https://github.com/cookyii/module-postman)
-* [`cookyii/module-media`](https://github.com/cookyii/module-media).
 
 ```php
 // ./backend-app/config/app.php
@@ -45,12 +44,11 @@ return [
     // ...
     'bootstrap' => [
         // some components ...
-        'account', 'media', 'postman',
+        'account', 'postman',
     ],
     'modules' => [
         // some modules ...
         'account' => 'cookyii\modules\Account\backend\Module',
-        'media' => 'cookyii\modules\Media\backend\Module',
         'postman' => 'cookyii\modules\Postman\backend\Module',
     ],
     // ...
