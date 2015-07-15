@@ -23,16 +23,8 @@
           //      @todo конфликт с http auth сервера
         }
 
-        var deepPurpleTheme = $mdThemingProvider.extendPalette('deep-purple', {
-          '400': '555299'
-        });
-
-        $mdThemingProvider.definePalette('deep-purple-theme', deepPurpleTheme);
-
         $mdThemingProvider.theme('default')
-          .accentPalette('deep-purple-theme', {
-            'default': '400'
-          });
+          .accentPalette('red');
       }
     ])
 
