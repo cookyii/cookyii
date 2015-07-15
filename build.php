@@ -144,7 +144,7 @@ function getPath($app, $key = null)
  */
 function appendClearTask(array &$config, $task_name, $app)
 {
-    appendTask($config, $task_name);
+    appendEmptyTask($config, $task_name);
 
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
@@ -168,7 +168,7 @@ function appendClearTask(array &$config, $task_name, $app)
  */
 function appendLessTask(array &$config, $task_name, $app)
 {
-    appendTask($config, $task_name);
+    appendEmptyTask($config, $task_name);
 
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
@@ -191,7 +191,7 @@ function appendLessTask(array &$config, $task_name, $app)
  */
 function appendMigrateTask(array &$config, $task_name, $app)
 {
-    appendTask($config, $task_name);
+    appendEmptyTask($config, $task_name);
 
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
@@ -207,7 +207,7 @@ function appendMigrateTask(array &$config, $task_name, $app)
  * @param array $config
  * @param string $task_name
  */
-function appendTask(array &$config, $task_name)
+function appendEmptyTask(array &$config, $task_name)
 {
     if (!isset($config[$task_name])) {
         $config[$task_name] = [];
