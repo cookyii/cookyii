@@ -1,5 +1,5 @@
 /*
- * Skin: Cookyi (fork purple)
+ * Skin: Cookyi
  * ------------
  */
 
@@ -13,48 +13,7 @@
     color: rgb(24, 24, 24);
   }
 
-  //Navbar
-  .main-header {
-    .navbar {
-      .navbar-variant(@purple; #ffffff);
-      .sidebar-toggle {
-        color: #ffffff;
-        &:hover {
-          background-color: darken(@purple, 5%);
-        }
-      }
-      @media (max-width: @screen-header-collapse) {
-        .dropdown-menu {
-          li {
-            &.divider {
-              background-color: rgba(255, 255, 255, 0.1);
-            }
-            a {
-              color: #ffffff;
-              &:hover {
-                background: darken(@purple, 5%);
-              }
-            }
-          }
-        }
-      }
-    }
-    //Logo
-    .logo {
-      .logo-variant(darken(@purple, 5%));
-    }
-
-    li.user-header {
-      background-color: @purple;
-    }
-  }
-
   .sidebar { height: auto; }
-
-  //Content Header
-  .content-header {
-    background: transparent;
-  }
 
   .content-wrapper, .right-side {
     background-color: #ecf0f5;
@@ -63,9 +22,6 @@
   .content-wrapper {
     padding-bottom: 70px;
   }
-
-  //Create the sidebar skin
-  .skin-dark-sidebar(@purple);
 
   .box {
     .box-body {
@@ -117,5 +73,4 @@
       }
     }
   }
-
 }
