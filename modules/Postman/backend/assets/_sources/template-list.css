@@ -10,7 +10,7 @@ md-switch { margin: 0 10px; }
 .table-templates td.id { width: 70px; }
 .table-templates td.title { }
 .table-templates td.updated { }
-.table-templates td.actions { width: 70px; text-align: center; font-size: 1.45em; padding: 4px; }
+.table-templates td.actions { width: 80px; text-align: center; font-size: 1.88em; padding: 0; }
 .table-templates td.actions > a { opacity: 0.1; }
 .table-templates tr:hover .actions > a,
 .table-templates tr:focus .actions > a { opacity: 0.9; }

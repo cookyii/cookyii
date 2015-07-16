@@ -11,17 +11,11 @@ md-switch { margin: 0 10px; }
 .table-accounts td.name { text-align: right; }
 .table-accounts td.email { width: 200px; }
 .table-accounts td.updated { }
-.table-accounts td.actions { width: 70px; text-align: center; font-size: 1.45em; padding: 4px; }
+.table-accounts td.actions { width: 80px; text-align: center; font-size: 1.88em; padding: 0; }
 .table-accounts td.actions > a { opacity: 0.1; }
 .table-accounts tr:hover .actions > a,
 .table-accounts tr:focus .actions > a { opacity: 0.9; }
 .table-accounts tr.deactivated { }
-.table-accounts tr.deactivated .id,
-.table-accounts tr.deactivated .name,
-.table-accounts tr.deactivated .email,
-.table-accounts tr.deactivated .updated { color: #B8B8B8; }
+.table-accounts tr.deactivated td { color: #b8b8b8; }
 .table-accounts tr.deleted { }
-.table-accounts tr.deleted .id,
-.table-accounts tr.deleted .name,
-.table-accounts tr.deleted .email,
-.table-accounts tr.deleted .updated { text-decoration: line-through; }
+.table-accounts tr.deleted td { text-decoration: line-through; }

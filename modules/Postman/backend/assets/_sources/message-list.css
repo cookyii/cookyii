@@ -11,9 +11,12 @@ md-switch { margin: 0 10px; }
 .table-messages td.address { }
 .table-messages td.created { }
 .table-messages td.sent { }
-.table-messages td.actions { width: 80px; text-align: center; font-size: 1.87em; padding: 4px; }
-.table-messages td.actions > a { opacity: 0.1; margin-left: 10px; }
+.table-messages td.sent > a { opacity: 0.1; font-size: 1.42em; margin-right: 10px; }
+.table-messages td.actions { width: 80px; text-align: center; font-size: 1.88em; padding: 0; }
+.table-messages td.actions > a { opacity: 0.1; }
 .table-messages tr:hover .actions > a,
-.table-messages tr:focus .actions > a { opacity: 0.9; }
+.table-messages tr:focus .actions > a,
+.table-messages tr:hover .sent > a,
+.table-messages tr:focus .sent > a { opacity: 0.9; }
 .table-messages tr.deleted { }
 .table-messages tr.deleted td { color: #b8b8b8; text-decoration: line-through; }

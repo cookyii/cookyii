@@ -121,7 +121,9 @@ function sortLink($type, $label)
                             <td class="id clickable" ng-click="messages.edit(message)">{{ message.id }}</td>
                             <td class="subject clickable" ng-click="messages.edit(message)">{{ message.subject }}</td>
                             <td class="address clickable" ng-click="messages.edit(message)">
-                                <div class="empty-address text-italic text-light" ng-show="message.address.length <= 0">No address</div>
+                                <div class="empty-address text-italic text-light" ng-show="message.address.length <= 0">
+                                    No address
+                                </div>
 
                                 <div class="address" ng-repeat="address in message.address">
                                     <span class="label label-default" ng-if="address.type === 1">reply to:</span>
@@ -135,17 +137,27 @@ function sortLink($type, $label)
                                 {{ message.created_at * 1000 | date:'dd MMM yyyy HH:mm' }}
                             </td>
                             <td class="sent clickable" ng-click="messages.edit(message)">
-                                <span class="not-sent text-italic text-light" ng-hide="message.sent_at">in queue</span>
-                                <span class="datetime" ng-show="message.sent_at">{{ message.sent_at * 1000 | date:'dd MMM yyyy HH:mm' }}</span>
-                            </td>
-                            <td class="actions">
                                 <?php
                                 echo Html::tag('a', FA::icon('paper-plane'), [
                                     'class' => 'text-info',
                                     'title' => Yii::t('postman', 'Resent message'),
                                     'ng-click' => 'messages.resent(message, $event)',
-                                    'ng-show' => '!message.deleted',
+                                    'ng-class' => '{invisible: message.deleted}',
                                 ]);
+
+                                echo Html::tag('span', 'in queue', [
+                                    'class' => 'not-sent text-italic text-light',
+                                    'ng-hide' => 'message.sent_at',
+                                ]);
+
+                                echo Html::tag('span', '{{ message.sent_at * 1000 | date:\'dd MMM yyyy HH:mm\' }}', [
+                                    'class' => 'datetime',
+                                    'ng-show' => 'message.sent_at',
+                                ]);
+                                ?>
+                            </td>
+                            <td class="actions">
+                                <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
                                     'title' => Yii::t('postman', 'Remove message'),

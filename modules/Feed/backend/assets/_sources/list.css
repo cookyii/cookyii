@@ -35,7 +35,7 @@ md-fab-speed-dial {
 .box-item .activated md-switch { margin: 2px 0; display: inline-block; vertical-align: top; }
 .box-item .activated md-switch .md-container { margin-right: 0; }
 .box-item h3 { margin: 0; }
-.box-item .actions { text-align: center; font-size: 1.45em; }
+.box-item .actions { text-align: center; font-size: 1.88em; }
 .box-item .actions > a { opacity: 0.1; }
 .box-item:hover .actions > a,
 .box-item:focus .actions > a { opacity: 0.9; }
