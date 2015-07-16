@@ -141,22 +141,15 @@ class Message extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param bool $save
-     * @return bool
+     * @return bool|array
      */
-    public function send($save = true)
+    public function send()
     {
-        $result = false;
+        $this->validate() && $this->save();
 
-        $errors = false;
-
-        if ($save) {
-            $this->validate() && $this->save();
-
-            $errors = $this->hasErrors();
-        }
-
-        if (!$errors) {
+        if ($this->hasErrors()) {
+            $result = $this->getErrors();
+        } else {
             $address = empty($this->address) ? [] : Json::decode($this->address);
 
             $reply_to = [];
@@ -218,6 +211,7 @@ class Message extends \yii\db\ActiveRecord
     }
 
     /**
+     * Create message from template
      * @param string $template_code
      * @param string|null $subject
      * @param string $styles
@@ -249,6 +243,7 @@ class Message extends \yii\db\ActiveRecord
     }
 
     /**
+     * Compose message from string values
      * @param string $subject
      * @param string $content_text
      * @param string $content_html

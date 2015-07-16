@@ -15,9 +15,6 @@ md-switch { margin: 0 10px; }
 .table-templates tr:hover .actions > a,
 .table-templates tr:focus .actions > a { opacity: 0.9; }
 .table-templates tr.deactivated { }
-.table-templates tr.deactivated .id,
-.table-templates tr.deactivated .name,
-.table-templates tr.deactivated .email,
-.table-templates tr.deactivated .updated { color: #b8b8b8; }
+.table-templates tr.deactivated td { color: #b8b8b8; }
 .table-templates tr.deleted { }
 .table-templates tr.deleted td { color: #b8b8b8; text-decoration: line-through; }

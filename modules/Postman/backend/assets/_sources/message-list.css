@@ -1,0 +1,19 @@
+/*********************************** Other *****************/
+.content-wrapper { padding-bottom: 35px; }
+md-switch { margin: 0 10px; }
+/*********************************** Search ****************/
+.search { width: 150px; margin-right: 100px; transition: width .4s ease-out; }
+.search.wide { width: 300px; }
+/*********************************** Table *****************/
+.table-messages { }
+.table-messages td.id { width: 70px; }
+.table-messages td.subject { }
+.table-messages td.address { }
+.table-messages td.created { }
+.table-messages td.sent { }
+.table-messages td.actions { width: 70px; text-align: center; font-size: 1.45em; padding: 4px; }
+.table-messages td.actions > a { opacity: 0.1; }
+.table-messages tr:hover .actions > a,
+.table-messages tr:focus .actions > a { opacity: 0.9; }
+.table-messages tr.deleted { }
+.table-messages tr.deleted td { color: #b8b8b8; text-decoration: line-through; }

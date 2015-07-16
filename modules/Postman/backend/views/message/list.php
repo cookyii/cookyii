@@ -98,31 +98,43 @@ function sortLink($type, $label)
                         <thead>
                         <tr>
                             <td class="id"><?= sortLink('id', Yii::t('postman', 'ID')) ?></td>
-                            <td class="code"><?= sortLink('code', Yii::t('postman', 'Code')) ?></td>
                             <td class="subject"><?= sortLink('subject', Yii::t('postman', 'Subject')) ?></td>
-                            <td class="updated"><?= sortLink('updated_at', Yii::t('postman', 'Updated at')) ?></td>
+                            <td class="address"><?= Yii::t('postman', 'Address') ?></td>
+                            <td class="created"><?= sortLink('created_at', Yii::t('postman', 'Created at')) ?></td>
+                            <td class="sent"><?= sortLink('sent_at', Yii::t('postman', 'Sent at')) ?></td>
                             <td class="actions">&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
+                        <tr ng-show="messages.list.length === 0">
+                            <td colspan="6" class="text-center text-italic text-light">
+                                <?= Yii::t('postman', 'Messages not found') ?>
+                            </td>
+                        </tr>
                         <?php
                         $options = [
                             'title' => Yii::t('postman', 'Edit message'),
                             'ng-class' => '{deactivated:message.activated===0,deleted:message.deleted}',
                         ];
                         ?>
-                        <tr ng-show="messages.length === 0">
-                            <td colspan="6" class="text-center text-italic text-light">
-                                <?= Yii::t('postman', 'Templates not found') ?>
-                            </td>
-                        </tr>
                         <tr ng-repeat="message in messages.list track by message.id" <?= Html::renderTagAttributes($options) ?>>
                             <td class="id clickable" ng-click="messages.edit(message)">{{ message.id }}</td>
-                            <td class="code clickable" ng-click="messages.edit(message)">{{ message.code }}</td>
-                            <td class="subject clickable" ng-click="messages.edit(message)">{{ message.subject }}
+                            <td class="subject clickable" ng-click="messages.edit(message)">{{ message.subject }}</td>
+                            <td class="address clickable" ng-click="messages.edit(message)">
+                                <div class="address" ng-repeat="address in message.address">
+                                    <span class="label label-default" ng-if="address.type === 1">reply to:</span>
+                                    <span class="label label-success" ng-if="address.type === 2">to:</span>
+                                    <span class="label label-default" ng-if="address.type === 3">cc:</span>
+                                    <span class="label label-default" ng-if="address.type === 4">bcc:</span>
+                                    {{ address.email }}
+                                </div>
                             </td>
-                            <td class="updated clickable" ng-click="messages.edit(message)">
-                                {{ message.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
+                            <td class="created clickable" ng-click="messages.edit(message)">
+                                {{ message.created_at * 1000 | date:'dd MMM yyyy HH:mm' }}
+                            </td>
+                            <td class="sent clickable" ng-click="messages.edit(message)">
+                                <span class="not-sent text-italic text-light" ng-hide="message.sent_at">in queue</span>
+                                <span class="datetime" ng-show="message.sent_at">{{ message.sent_at * 1000 | date:'dd MMM yyyy HH:mm' }}</span>
                             </td>
                             <td class="actions">
                                 <?php
