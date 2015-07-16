@@ -11,8 +11,6 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
             return true;
         }
 
-        $faker = \Faker\Factory::create();
-
         $section_id = $this->insertSection([
             'parent_id' => null,
             'slug' => 'news',
