@@ -140,6 +140,12 @@ function sortLink($type, $label)
                             </td>
                             <td class="actions">
                                 <?php
+                                echo Html::tag('a', FA::icon('paper-plane'), [
+                                    'class' => 'text-info',
+                                    'title' => Yii::t('postman', 'Resent message'),
+                                    'ng-click' => 'messages.resent(message, $event)',
+                                    'ng-show' => '!message.deleted',
+                                ]);
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
                                     'title' => Yii::t('postman', 'Remove message'),

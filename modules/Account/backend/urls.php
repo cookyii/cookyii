@@ -9,7 +9,6 @@ return [
     'accounts' => 'account/list/index',
 
     'PUT account/rest/roles' => 'account/rest/account/roles',
-    'POST account/rest/edit' => 'account/rest/account/edit',
     'POST account/rest/property' => 'account/rest/property/push',
     'DELETE account/rest/property' => 'account/rest/property/delete',
 

@@ -8,8 +8,7 @@ return [
     'postman/templates' => 'postman/template/list',
     'postman/messages' => 'postman/message/list',
 
-    'POST postman/rest/template/edit' => 'postman/rest/template/edit',
-    'POST postman/rest/message/edit' => 'postman/rest/message/edit',
+    'PUT postman/rest/messages/resent/<id:\d+>' => 'postman/rest/message/resent',
 
     ['class' => cookyii\rest\UrlRule::className(), 'controller' => 'postman/rest/template'],
     ['class' => cookyii\rest\UrlRule::className(), 'controller' => 'postman/rest/message'],

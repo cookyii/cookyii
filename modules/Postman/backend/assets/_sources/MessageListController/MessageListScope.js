@@ -45,6 +45,29 @@ angular.module('BackendApp')
           location.href = '/postman/message/edit#?id=' + message.id;
         };
 
+        $scope.resent = function(message, e){
+          var confirm = $mdDialog.confirm()
+            .parent(angular.element(document.body))
+            .title('Would you like to resent this message?')
+            .ok('Please resent it!')
+            .cancel('Cancel')
+            .targetEvent(e);
+
+          $mdDialog.show(confirm).then(function () {
+            message.$resent(function () {
+              ToastScope.send('success', {
+                message: 'Message successfully resent'
+              });
+
+              _refresh();
+            }, function () {
+              ToastScope.send('error', {
+                message: 'Error resenting message'
+              });
+            });
+          });
+        };
+
         $scope.remove = function (message, e) {
           var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))

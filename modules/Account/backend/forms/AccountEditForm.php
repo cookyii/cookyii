@@ -67,7 +67,7 @@ class AccountEditForm extends \yii\base\Model
      */
     public function formAction()
     {
-        return ['/account/rest/edit'];
+        return ['/account/rest/account/edit'];
     }
 
     /**

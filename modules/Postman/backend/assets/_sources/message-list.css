@@ -11,8 +11,8 @@ md-switch { margin: 0 10px; }
 .table-messages td.address { }
 .table-messages td.created { }
 .table-messages td.sent { }
-.table-messages td.actions { width: 70px; text-align: center; font-size: 1.45em; padding: 4px; }
-.table-messages td.actions > a { opacity: 0.1; }
+.table-messages td.actions { width: 80px; text-align: center; font-size: 1.87em; padding: 4px; }
+.table-messages td.actions > a { opacity: 0.1; margin-left: 10px; }
 .table-messages tr:hover .actions > a,
 .table-messages tr:focus .actions > a { opacity: 0.9; }
 .table-messages tr.deleted { }

@@ -81,7 +81,7 @@ class SectionEditForm extends \yii\base\Model
      */
     public function formAction()
     {
-        return ['/feed/section/rest/edit'];
+        return ['/feed/section/rest/section/edit'];
     }
 
     /**

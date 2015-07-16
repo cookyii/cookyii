@@ -26,6 +26,7 @@ class UrlRule extends \yii\rest\UrlRule
     public $patterns = [
         'DELETE {id}' => 'delete',
         'PATCH {id}' => 'restore',
+        'POST edit' => 'edit',
         'POST activate/{id}' => 'activate',
         'POST deactivate/{id}' => 'deactivate',
         'PUT {id}' => 'update',

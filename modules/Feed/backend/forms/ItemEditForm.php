@@ -94,7 +94,7 @@ class ItemEditForm extends \yii\base\Model
      */
     public function formAction()
     {
-        return ['/feed/item/rest/edit'];
+        return ['/feed/item/rest/item/edit'];
     }
 
     /**

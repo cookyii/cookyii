@@ -73,7 +73,7 @@ class PageEditForm extends \yii\base\Model
      */
     public function formAction()
     {
-        return ['/page/rest/edit'];
+        return ['/page/rest/page/edit'];
     }
 
     /**

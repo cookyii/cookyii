@@ -29,6 +29,7 @@ class MessageController extends \yii\rest\ActiveController
         $verbs['edit'] = ['POST'];
         $verbs['detail'] = ['GET'];
         $verbs['update'] = ['PUT'];
+        $verbs['resent'] = ['PUT'];
         $verbs['restore'] = ['PATCH'];
 
         return $verbs;
@@ -51,6 +52,12 @@ class MessageController extends \yii\rest\ActiveController
 
         $actions['detail'] = [
             'class' => Postman\backend\controllers\rest\MessageController\DetailAction::className(),
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
+
+        $actions['resent'] = [
+            'class' => Postman\backend\controllers\rest\MessageController\ResentAction::className(),
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];

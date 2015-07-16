@@ -9,6 +9,7 @@ angular.module('BackendApp')
         id: '@id'
       }, {
         'detail': {method: 'GET', 'params': {action: 'detail/'}},
+        'resent': {method: 'PUT', 'params': {action: 'resent/'}},
         'update': {method: 'PUT'},
         'restore': {method: 'PATCH'}
       });
