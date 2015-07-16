@@ -18,9 +18,10 @@ use yii\helpers\Json;
  * @property string $content_text
  * @property string $content_html
  * @property string $address
- * @property integer $status
  * @property string $code
+ * @property string $error
  * @property integer $created_at
+ * @property integer $scheduled_at
  * @property integer $sent_at
  * @property integer $deleted_at
  */
@@ -29,9 +30,9 @@ class Message extends \yii\db\ActiveRecord
 
     use \cookyii\db\traits\SoftDeleteTrait;
 
-    const FROM_NAME = 'Postman';
-
     const LAYOUT_CODE = '.layout';
+
+    protected $from = 'Postman';
 
     /**
      * @inheritdoc
@@ -76,16 +77,15 @@ class Message extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['subject', 'content_text', 'content_html', 'address', 'code'], 'string'],
-            [['status', 'created_at', 'sent_at', 'deleted_at'], 'integer'],
+            [['subject', 'content_text', 'content_html', 'address', 'code', 'error'], 'string'],
+            [['created_at', 'scheduled_at', 'sent_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['subject'], 'required'],
-            [['subject', 'content_text'], 'filter', 'filter' => 'str_clean'],
-            [['status'], 'in', 'range' => array_keys(static::getAllStatuses())],
+            [['subject'], 'filter', 'filter' => 'str_clean'],
+            [['content_text', 'content_html', 'error'], 'filter', 'filter' => 'str_pretty'],
 
             /** default values */
-            [['status'], 'default', 'value' => static::STATUS_NEW],
         ];
     }
 
@@ -178,7 +178,7 @@ class Message extends \yii\db\ActiveRecord
 
             $Message = \Yii::$app->mailer->compose()
                 ->setCharset('UTF-8')
-                ->setFrom([getenv('SMTP_USER') => static::FROM_NAME])
+                ->setFrom([getenv('SMTP_USER') => $this->from])
                 ->setSubject($this->subject)
                 ->setTextBody($this->content_text)
                 ->setHtmlBody($this->content_html);
@@ -312,19 +312,6 @@ class Message extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return array
-     */
-    public static function getAllStatuses()
-    {
-        return [
-            static::STATUS_NEW => \Yii::t('postman', 'New letters'),
-            static::STATUS_SENT => \Yii::t('postman', 'Sent letters'),
-            static::STATUS_ERROR => \Yii::t('postman', 'Error sent'),
-            static::STATUS_CANCELED => \Yii::t('postman', 'Canceled'),
-        ];
-    }
-
-    /**
      * @return \resources\Postman\queries\MessageQuery
      */
     public static function find()
@@ -344,9 +331,4 @@ class Message extends \yii\db\ActiveRecord
     const ADDRESS_TYPE_TO = 2;
     const ADDRESS_TYPE_CC = 3;
     const ADDRESS_TYPE_BCC = 4;
-
-    const STATUS_NEW = 0;
-    const STATUS_SENT = 100;
-    const STATUS_ERROR = 200;
-    const STATUS_CANCELED = 300;
 }

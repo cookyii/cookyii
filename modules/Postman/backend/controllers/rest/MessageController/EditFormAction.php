@@ -56,7 +56,7 @@ class EditFormAction extends \yii\rest\Action
             $result = [
                 'result' => true,
                 'message' => \Yii::t('postman', 'Message successfully saved'),
-                'template_id' => $Message->id,
+                'message_id' => $MessageEditForm->Message->id,
             ];
         }
 

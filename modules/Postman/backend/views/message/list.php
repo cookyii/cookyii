@@ -121,6 +121,8 @@ function sortLink($type, $label)
                             <td class="id clickable" ng-click="messages.edit(message)">{{ message.id }}</td>
                             <td class="subject clickable" ng-click="messages.edit(message)">{{ message.subject }}</td>
                             <td class="address clickable" ng-click="messages.edit(message)">
+                                <div class="empty-address text-italic text-light" ng-show="message.address.length <= 0">No address</div>
+
                                 <div class="address" ng-repeat="address in message.address">
                                     <span class="label label-default" ng-if="address.type === 1">reply to:</span>
                                     <span class="label label-success" ng-if="address.type === 2">to:</span>
