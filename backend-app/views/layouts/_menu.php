@@ -20,53 +20,8 @@ $menu = [
         'icon' => FA::icon('home'),
         'visible' => true,
         'selected' => $Controller->id === 'dash',
+        'sort' => 0,
     ],
-    /*[
-        'label' => Yii::t('app', 'Dropdown'),
-        'url' => ['/'],
-        'icon' => FA::icon('user'),
-        'visible' => true,
-        'selected' => false,
-        'items' => [
-            [
-                'label' => Yii::t('app', 'Action'),
-                'url' => ['/'],
-                'icon' => FA::icon('circle-o', ['class' => 'text-red']),
-                'badge' => 'hot!',
-                'visible' => true,
-                'selected' => false,
-            ],
-            [
-                'label' => Yii::t('app', 'Another action'),
-                'url' => ['/'],
-                'icon' => FA::icon('circle-o', ['class' => 'text-yellow']),
-                'badge' => ['text' => 4, 'class' => 'bg-yellow'],
-                'visible' => true,
-                'selected' => false,
-            ],
-            [
-                'label' => Yii::t('app', 'Something else here'),
-                'url' => ['/'],
-                'icon' => FA::icon('circle-o'),
-                'visible' => true,
-                'selected' => false,
-            ],
-            [
-                'label' => Yii::t('app', 'Separated link'),
-                'url' => ['/'],
-                'icon' => FA::icon('circle-o'),
-                'visible' => true,
-                'selected' => false,
-            ],
-            [
-                'label' => Yii::t('app', 'One more separated link'),
-                'url' => ['/'],
-                'icon' => FA::icon('circle-o'),
-                'visible' => true,
-                'selected' => false,
-            ],
-        ],
-    ],*/
 ];
 
 foreach (\Yii::$app->modules as $module => $conf) {
@@ -84,6 +39,22 @@ foreach (\Yii::$app->modules as $module => $conf) {
         $menu = array_merge($menu, $Module->menu($this->context));
     }
 }
+
+usort($menu, function ($a, $b) {
+    if (!isset($a['sort'])) {
+        $a['sort'] = 9999999999;
+    }
+
+    if (!isset($b['sort'])) {
+        $b['sort'] = 9999999999;
+    }
+
+    if ($a['sort'] === $b['sort']) {
+        return 0;
+    }
+
+    return ($a['sort'] < $b['sort']) ? -1 : 1;
+});
 
 /**
  * @param array|string $item
