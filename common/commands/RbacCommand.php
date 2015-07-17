@@ -36,7 +36,8 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
     public $backendMerge = [
         'cookyii\modules\Feed\backend\Permissions',
         'cookyii\modules\Account\backend\Permissions',
-        'cookyii\modules\Client\backend\Permissions',
+        'cookyii\modules\Account\crm\Permissions',
+        'cookyii\modules\Client\crm\Permissions',
         'cookyii\modules\Page\backend\Permissions',
         'cookyii\modules\Postman\backend\Permissions',
     ];
@@ -129,7 +130,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
             ],
             Roles::MANAGER => [
                 backend\Permissions::ACCESS,
-                Client\backend\Permissions::ACCESS,
+                Client\crm\Permissions::ACCESS,
                 Page\backend\Permissions::ACCESS,
                 Postman\backend\Permissions::ACCESS,
                 Feed\backend\Permissions::ACCESS,

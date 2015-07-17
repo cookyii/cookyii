@@ -5,7 +5,7 @@
  */
 
 /** @var array $apps list of existing applications */
-$apps = ['frontend', 'backend'];
+$apps = ['frontend', 'backend', 'crm'];
 
 /** Automatic detection applications */
 automaticDetectionApplications($apps);

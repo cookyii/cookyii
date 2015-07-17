@@ -31,7 +31,7 @@ return array_merge($config, [
     'components' => [
         'db' => $params['component.db'],
         'mailer' => $params['component.mailer'],
-        'request' => $params['component.request.frontend'],
+        'request' => $params['component.request'],
         'security' => $params['component.security'],
         'session' => $params['component.session'],
         'user' => $params['component.user'],
@@ -42,6 +42,7 @@ return array_merge($config, [
         'assetManager' => $params['component.assetManager'],
         'urlManager' => $params['component.urlManager.frontend'],
         'urlManager.backend' => $params['component.urlManager.backend'],
+        'urlManager.crm' => $params['component.urlManager.crm'],
         'authManager' => $params['component.authManager'],
         'i18n' => $params['component.i18n'],
         'formatter' => $params['component.formatter'],

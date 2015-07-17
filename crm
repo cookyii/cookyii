@@ -1,0 +1,2 @@
+#!/bin/bash
+./crm-app/yii $*

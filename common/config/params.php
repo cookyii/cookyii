@@ -107,12 +107,17 @@ return [
         'cache' => false,
         'rules' => require(\Yii::getAlias('@backend/config/urls.php')),
     ],
-    'component.request.frontend' => [
-        'cookieValidationKey' => getenv('FRONTEND_COOKIE_VALIDATION_KEY'),
-        'parsers' => ['application/json' => 'yii\web\JsonParser'],
+    'component.urlManager.crm' => [
+        'class' => yii\web\UrlManager::className(),
+        'baseUrl' => '/',
+        'hostInfo' => sprintf('http://%s', getenv('CRM_DOMAIN')),
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+        'cache' => false,
+        'rules' => require(\Yii::getAlias('@crm/config/urls.php')),
     ],
-    'component.request.backend' => [
-        'cookieValidationKey' => getenv('BACKEND_COOKIE_VALIDATION_KEY'),
+    'component.request' => [
+        'cookieValidationKey' => getenv('COOKIE_VALIDATION_KEY'),
         'parsers' => ['application/json' => 'yii\web\JsonParser'],
     ],
     'component.i18n' => [
