@@ -32,6 +32,7 @@ class AngularAssetBundle extends \yii\web\AssetBundle
         // plugins
         'angular-bootstrap/ui-bootstrap-tpls.min.js',
         'angular-ui-utils/ui-utils.min.js',
+        'angular-websocket/angular-websocket.min.js',
         'angular-loading-bar/build/loading-bar.min.js',
         'angular-elastic/elastic.js',
         'angular-truncate/src/truncate.js',

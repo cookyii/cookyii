@@ -3,12 +3,14 @@
 angular.module('BackendApp')
 
   .factory('AccountListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastScope', 'SortScope', 'FilterScope', 'AccountResource',
-    function ($timeout, $mdDialog, QueryScope, ToastScope, SortScope, FilterScope, Account) {
+    '$timeout', '$mdDialog', 'QueryScope', 'ToastScope', 'SortScope', 'FilterScope', 'UdpWebSocket', 'AccountResource',
+    function ($timeout, $mdDialog, QueryScope, ToastScope, SortScope, FilterScope, UdpWebSocket, Account) {
       return function ($parentScope) {
         var $scope = $parentScope.$new(),
           page = QueryScope.get('page', 1),
           loaded = false;
+
+        UdpWebSocket.send('hello');
 
         $scope.sort = SortScope($scope);
         $scope.filter = FilterScope($scope);
@@ -34,6 +36,8 @@ angular.module('BackendApp')
             } else {
               account.$deactivate(_refresh, _refresh);
             }
+
+            UdpWebSocket.send('reload-account-' + account.id);
           }, 400);
         };
 
@@ -59,6 +63,8 @@ angular.module('BackendApp')
                 message: 'Account successfully removed'
               });
 
+              UdpWebSocket.send('reload-account-' + account.id);
+
               _refresh();
             }, function () {
               ToastScope.send('error', {
@@ -74,6 +80,8 @@ angular.module('BackendApp')
               message: 'Account successfully restored'
             });
 
+            UdpWebSocket.send('reload-account-' + account.id);
+
             _refresh();
           }, function () {
             ToastScope.send('error', {
@@ -81,8 +89,6 @@ angular.module('BackendApp')
             });
           });
         };
-
-        var reloadTimeout;
 
         $scope.reload = function () {
           Account.query({
@@ -103,12 +109,11 @@ angular.module('BackendApp')
 
             $scope.list = accounts;
 
-            $timeout.cancel(reloadTimeout);
-            reloadTimeout = $timeout($scope.reload, 5000);
-
             loaded = true;
           });
         };
+
+        UdpWebSocket.on(/reload-account-\d+/, $scope.reload);
 
         function _refresh() {
           $parentScope.$emit('refresh');

@@ -1,6 +1,6 @@
 <?php
 /**
- * UserCommand.php
+ * AccountCommand.php
  * @author Revin Roman
  */
 
@@ -9,10 +9,10 @@ namespace cookyii\modules\Account\commands;
 use rmrevin\yii\rbac\RbacFactory;
 
 /**
- * Class UserCommand
+ * Class AccountCommand
  * @package cookyii\modules\Account\commands
  */
-class UserCommand extends \yii\console\Controller
+class AccountCommand extends \yii\console\Controller
 {
 
     /**
