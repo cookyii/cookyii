@@ -21,12 +21,13 @@ return array_merge($config, [
     'extensions' => array_merge($config['extensions'], include __DIR__ . '/../../.extensions.php'),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
-        'feed', 'account', 'page', 'postman', 'media',
+        'feed', 'client', 'account', 'page', 'postman', 'media',
         'log', 'rollbar',
     ],
     'modules' => [
         'feed' => cookyii\modules\Feed\backend\Module::className(),
         'page' => cookyii\modules\Page\backend\Module::className(),
+        'client' => cookyii\modules\Client\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
         'postman' => cookyii\modules\Postman\backend\Module::className(),
         'media' => cookyii\modules\Media\Module::className(),

@@ -92,7 +92,7 @@ class Property extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Account\queries\AccountPropertyQuery
+     * @return \resources\Client\queries\ClientPropertyQuery
      */
     public static function find()
     {

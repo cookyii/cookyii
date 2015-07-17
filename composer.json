@@ -78,6 +78,7 @@
       "backend\\modules\\": "./backend-modules",
       "cookyii\\modules\\Feed\\": "./modules/Feed",
       "cookyii\\modules\\Account\\": "./modules/Account",
+      "cookyii\\modules\\Client\\": "./modules/Client",
       "cookyii\\modules\\Page\\": "./modules/Page",
       "cookyii\\modules\\Postman\\": "./modules/Postman",
       "cookyii\\modules\\Media\\": "./modules/Media",
@@ -86,6 +87,7 @@
         "./resources",
         "./modules/Feed/resources",
         "./modules/Account/resources",
+        "./modules/Client/resources",
         "./modules/Page/resources",
         "./modules/Postman/resources",
         "./modules/Media/resources"

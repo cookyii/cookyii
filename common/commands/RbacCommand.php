@@ -10,6 +10,7 @@ namespace common\commands;
 use backend;
 use common\Roles;
 use cookyii\modules\Account;
+use cookyii\modules\Client;
 use cookyii\modules\Feed;
 use cookyii\modules\Page;
 use cookyii\modules\Postman;
@@ -33,10 +34,11 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
 
     /** @var array */
     public $backendMerge = [
+        'cookyii\modules\Feed\backend\Permissions',
         'cookyii\modules\Account\backend\Permissions',
+        'cookyii\modules\Client\backend\Permissions',
         'cookyii\modules\Page\backend\Permissions',
         'cookyii\modules\Postman\backend\Permissions',
-        'cookyii\modules\Feed\backend\Permissions',
     ];
 
     /**
@@ -127,6 +129,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
             ],
             Roles::MANAGER => [
                 backend\Permissions::ACCESS,
+                Client\backend\Permissions::ACCESS,
                 Page\backend\Permissions::ACCESS,
                 Postman\backend\Permissions::ACCESS,
                 Feed\backend\Permissions::ACCESS,

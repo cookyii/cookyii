@@ -105,7 +105,7 @@ function sortLink($type, $label)
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-show="accounts.length === 0">
+                        <tr ng-show="accounts.list.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
                                 <?= Yii::t('account', 'Accounts not found') ?>
                             </td>
