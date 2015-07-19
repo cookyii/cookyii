@@ -1,6 +1,6 @@
 <?php
 /**
- * UdpComponent.php
+ * Controller.php
  * @author Revin Roman
  * @link https://rmrevin.ru
  */
@@ -10,10 +10,10 @@ namespace cookyii\socket;
 use yii\helpers\Json;
 
 /**
- * Class UdpComponent
+ * Class Controller
  * @package cookyii\socket
  */
-class UdpComponent implements \Ratchet\MessageComponentInterface
+abstract class Controller implements \Ratchet\MessageComponentInterface
 {
 
     /** @var \Ratchet\ConnectionInterface[] */
@@ -25,6 +25,30 @@ class UdpComponent implements \Ratchet\MessageComponentInterface
     public function __construct()
     {
         $this->clients = new \SplObjectStorage;
+    }
+
+    /**
+     * @param \Ratchet\ConnectionInterface $from
+     * @param string $message
+     */
+    abstract public function run(\Ratchet\ConnectionInterface $from, $message);
+
+    /**
+     * @param mixed $data
+     * @return string
+     */
+    protected function serialize($data)
+    {
+        return Json::encode($data);
+    }
+
+    /**
+     * @param string $data
+     * @return mixed
+     */
+    protected function unserialize($data)
+    {
+        return Json::decode($data);
     }
 
     /**
@@ -40,17 +64,13 @@ class UdpComponent implements \Ratchet\MessageComponentInterface
      */
     public function onMessage(\Ratchet\ConnectionInterface $from, $message)
     {
-        $message = Json::decode($message);
+        $message = $this->unserialize($message);
 
         if ($message === 'hello') {
             return;
         }
 
-        foreach ($this->clients as $client) {
-            if ($from != $client) {
-                $client->send(Json::encode($message));
-            }
-        }
+        $this->run($from, $message);
     }
 
     /**

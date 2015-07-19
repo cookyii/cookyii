@@ -24,7 +24,7 @@ class SiteController extends \backend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['index', 'error', 'captcha', 'tz'],
+                'actions' => ['index', 'error', 'captcha', 'tz', 'websocket'],
                 'roles' => ['?', '@'],
             ],
         ];
@@ -55,5 +55,12 @@ class SiteController extends \backend\components\Controller
     public function actionIndex()
     {
         return $this->redirect(['/dash']);
+    }
+
+    public function actionWebsocket()
+    {
+        $path = \Yii::getAlias('@base');
+
+        system(sprintf('%s/backend socket/run', $path));
     }
 }

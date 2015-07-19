@@ -24,19 +24,22 @@ $menu = [
     ],
 ];
 
-foreach (\Yii::$app->modules as $module => $conf) {
-    $Module = null;
+$modules = \Yii::$app->modules;
+if (!empty($modules)) {
+    foreach ($modules as $module => $conf) {
+        $Module = null;
 
-    if (is_string($conf)) {
-        $Module = new $conf($module);
-    }
+        if (is_string($conf)) {
+            $Module = new $conf($module);
+        }
 
-    if (is_object($conf)) {
-        $Module = $conf;
-    }
+        if (is_object($conf)) {
+            $Module = $conf;
+        }
 
-    if ($Module instanceof \backend\interfaces\BackendModuleInterface) {
-        $menu = array_merge($menu, $Module->menu($this->context));
+        if ($Module instanceof \backend\interfaces\BackendModuleInterface) {
+            $menu = array_merge($menu, $Module->menu($this->context));
+        }
     }
 }
 
