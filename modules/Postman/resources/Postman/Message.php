@@ -276,26 +276,21 @@ class Message extends \yii\db\ActiveRecord
         $Message = new static;
         $Message->subject = $subject;
 
-        $replace_text = array_merge([
+        $replace = array_merge([
             '{subject}' => $subject,
             '{content}' => $content_text,
             '{domain}' => Request()->hostInfo,
         ], $placeholders);
 
         $Message->content_text = str_replace(
-            array_keys($replace_text),
-            array_values($replace_text),
+            array_keys($replace),
+            array_values($replace),
             $layout_text
         );
 
-        $replace_html = [
-            '{subject}' => $subject,
-            '{content}' => $content_html,
-        ];
-
         $Message->content_html = str_replace(
-            array_keys($replace_html),
-            array_values($replace_html),
+            array_keys($replace),
+            array_values($replace),
             $layout_html
         );
 
