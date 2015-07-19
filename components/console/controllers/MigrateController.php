@@ -40,6 +40,21 @@ class MigrateController extends \yii\console\controllers\MigrateController
             }
         }
 
+        if (!empty($this->migrationsPath)) {
+            foreach ($this->migrationsPath as $path) {
+                $path = \Yii::getAlias($path, false);
+                if (!empty($path)) {
+                    $file = $path . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . $class . '.php';
+
+                    if (file_exists($file)) {
+                        require_once($file);
+
+                        return new $class();
+                    }
+                }
+            }
+        }
+
         $file = $this->migrationPath . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($file)) {
             require_once($file);
