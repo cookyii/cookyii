@@ -277,9 +277,10 @@ class Message extends \yii\db\ActiveRecord
         $Message->subject = $subject;
 
         $replace_text = array_merge([
+            '{host}' => Request()->hostInfo,
+            '{sitename}' => APP_NAME,
             '{subject}' => $subject,
             '{content}' => $content_text,
-            '{domain}' => Request()->hostInfo,
         ], $placeholders);
 
         $Message->content_text = str_replace(
@@ -289,9 +290,10 @@ class Message extends \yii\db\ActiveRecord
         );
 
         $replace_html = array_merge([
+            '{host}' => Request()->hostInfo,
+            '{sitename}' => APP_NAME,
             '{subject}' => $subject,
             '{content}' => $content_html,
-            '{domain}' => Request()->hostInfo,
         ], $placeholders);
 
         $Message->content_html = str_replace(
