@@ -213,12 +213,13 @@ class Message extends \yii\db\ActiveRecord
     /**
      * Create message from template
      * @param string $template_code
+     * @param array $placeholders
      * @param string|null $subject
      * @param string $styles
      * @return \resources\Postman\Message
      * @throws \yii\web\ServerErrorHttpException
      */
-    public static function create($template_code, $subject = null, $styles = '')
+    public static function create($template_code, $placeholders = [], $subject = null, $styles = '')
     {
         /** @var Template $Template */
         $Template = Template::find()
@@ -247,11 +248,12 @@ class Message extends \yii\db\ActiveRecord
      * @param string $subject
      * @param string $content_text
      * @param string $content_html
+     * @param array $placeholders
      * @param string $styles
      * @param bool $use_layout
      * @return static
      */
-    public static function compose($subject, $content_text, $content_html, $styles = '', $use_layout = true)
+    public static function compose($subject, $content_text, $content_html, $placeholders = [], $styles = '', $use_layout = true)
     {
         $layout_text = '{content}';
         $layout_html = '{content}';
@@ -274,10 +276,11 @@ class Message extends \yii\db\ActiveRecord
         $Message = new static;
         $Message->subject = $subject;
 
-        $replace_text = [
+        $replace_text = array_merge([
             '{subject}' => $subject,
             '{content}' => $content_text,
-        ];
+            '{domain}' => Request()->hostInfo,
+        ], $placeholders);
 
         $Message->content_text = str_replace(
             array_keys($replace_text),
