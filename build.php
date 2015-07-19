@@ -108,23 +108,10 @@ $config = [
     'extract' => [
         '.description' => 'Extract codebase to split repos',
         '.depends' => [
-            'extract/files',
+            'clear',
         ],
-        'files' => [
-            '.description' => 'Extract files to split repos',
-            '.task' => [
-                'class' => '\cookyii\build\tasks\CommandTask',
-                'commandline' => [
-                    'rsync -rtv ./components/ ../base/',
-                    'rsync -rtv ./modules/Account/ ../module-account/',
-                    'rsync -rtv ./modules/Client/ ../module-client/',
-                    'rsync -rtv ./modules/Feed/ ../module-feed/',
-                    'rsync -rtv ./modules/Media/ ../module-media/',
-                    'rsync -rtv ./modules/Order/ ../module-order/',
-                    'rsync -rtv ./modules/Page/ ../module-page/',
-                    'rsync -rtv ./modules/Postman/ ../module-postman/',
-                ],
-            ],
+        '.task' => [
+            'class' => 'dev\build\ExtractTask',
         ],
     ],
 ];
@@ -169,6 +156,9 @@ function appendClearTask(array &$config, $task_name, $app)
 {
     appendEmptyTask($config, $task_name);
 
+    $base_path = __DIR__;
+    $app_path = $base_path . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
+
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
         '.description' => 'Remove all temp files',
@@ -176,9 +166,9 @@ function appendClearTask(array &$config, $task_name, $app)
             'class' => 'cookyii\build\tasks\DeleteTask',
             'deleteDir' => false,
             'fileSets' => [
-                ['dir' => 'crm-app/runtime', 'exclude' => ['.gitignore']],
-                ['dir' => 'crm-app/web/assets', 'exclude' => ['.gitignore']],
-                ['dir' => 'crm-app/web/minify', 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/runtime', $app_path), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/assets', $app_path), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/minify', $app_path), 'exclude' => ['.gitignore']],
             ],
         ],
     ];

@@ -36,6 +36,7 @@
   "require": {
     "php": ">=5.4.0",
 
+    "cookyii/build": "dev-master",
     "cookyii/base": "dev-master",
     "cookyii/module-feed": "dev-master",
     "cookyii/module-account": "dev-master",
@@ -75,6 +76,7 @@
   },
   "autoload": {
     "psr-4": {
+      "dev\\": "./dev",
       "frontend\\": "./frontend-app",
       "frontend\\modules\\": "./frontend-modules",
       "backend\\": "./backend-app",

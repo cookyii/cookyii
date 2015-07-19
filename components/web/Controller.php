@@ -7,6 +7,8 @@
 
 namespace cookyii\web;
 
+use yii\helpers\HtmlPurifier;
+
 /**
  * Class Controller
  * @package cookyii\web
@@ -27,5 +29,6 @@ class Controller extends \yii\web\Controller
             Cache('schema')->flush();
             Cache('query')->flush();
         }
+
     }
 }
