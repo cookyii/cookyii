@@ -278,7 +278,7 @@ class Message extends \yii\db\ActiveRecord
 
         $replace_text = array_merge([
             '{host}' => Request()->hostInfo,
-            '{sitename}' => APP_NAME,
+            '{appname}' => APP_NAME,
             '{subject}' => $subject,
             '{content}' => $content_text,
         ], $placeholders);
@@ -291,7 +291,7 @@ class Message extends \yii\db\ActiveRecord
 
         $replace_html = array_merge([
             '{host}' => Request()->hostInfo,
-            '{sitename}' => APP_NAME,
+            '{appname}' => APP_NAME,
             '{subject}' => $subject,
             '{content}' => $content_html,
         ], $placeholders);
