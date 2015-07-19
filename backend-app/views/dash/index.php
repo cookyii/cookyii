@@ -12,7 +12,7 @@ use rmrevin\yii\fontawesome\FA;
 $this->title = 'Welcome to Cookyii Backend!';
 
 \backend\views\assets\DashAssetBundle::register($this);
-dump(Yii::$aliases);
+
 ?>
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="side-panel">
