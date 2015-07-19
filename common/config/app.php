@@ -5,9 +5,23 @@
  * @link https://rmrevin.ru
  */
 
-$vendor_dir = realpath(__DIR__ . '/../../vendor');
+$base_dir = realpath(__DIR__ . '/../..');
+$vendor_dir = realpath($base_dir . '/vendor');
+
+$path_list = [
+    $vendor_dir . '/yiisoft/extensions.php',
+    $base_dir . '/.extensions.php',
+];
+
+$extensions = [];
+
+foreach ($path_list as $path) {
+    if (file_exists($path)) {
+        $extensions = array_merge($extensions, require_once $path);
+    }
+}
 
 return [
     'vendorPath' => $vendor_dir,
-    'extensions' => require($vendor_dir . '/yiisoft/extensions.php'),
+    'extensions' => $extensions,
 ];

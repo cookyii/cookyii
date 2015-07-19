@@ -8,6 +8,20 @@
 $ROLLBAR_ACCESS_TOKEN = getenv('ROLLBAR_ACCESS_TOKEN');
 
 return [
+    'command.migrate' => [
+        'class' => cookyii\console\controllers\MigrateController::className(),
+        'templateFile' => '@common/views/migration.php',
+        'migrationPath' => '@common/migrations',
+        'migrationsPath' => [
+            '@cookyii/module-account/migrations',
+            '@cookyii/module-client/migrations',
+            '@cookyii/module-feed/migrations',
+            '@cookyii/module-media/migrations',
+            '@cookyii/module-page/migrations',
+            '@cookyii/module-postman/migrations',
+        ],
+    ],
+
     'component.db' => [
         'class' => yii\db\Connection::className(),
         'charset' => 'utf8',

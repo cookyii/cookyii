@@ -6,6 +6,8 @@
  */
 
 return [
+
+
     'component.user' => [
         'class' => 'yii\web\User',
         'identityClass' => 'resources\Account',

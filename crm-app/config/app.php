@@ -18,7 +18,6 @@ return array_merge($config, [
     'id' => 'crm-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
-    'extensions' => array_merge($config['extensions'], include __DIR__ . '/../../.extensions.php'),
     'controllerNamespace' => 'crm\controllers',
     'bootstrap' => [
         'account', 'client',

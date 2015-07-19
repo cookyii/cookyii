@@ -18,7 +18,6 @@ return array_merge($config, [
     'id' => 'frontend-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
-    'extensions' => array_merge($config['extensions'], include __DIR__ . '/../../.extensions.php'),
     'controllerNamespace' => 'frontend\controllers',
     'bootstrap' => [
         'page', 'media',

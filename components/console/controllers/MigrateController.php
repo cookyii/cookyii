@@ -14,6 +14,8 @@ namespace cookyii\console\controllers;
 class MigrateController extends \yii\console\controllers\MigrateController
 {
 
+    public $migrationsPath = [];
+
     /**
      * Creates a new migration instance.
      * @param string $class the migration class name
@@ -74,6 +76,16 @@ class MigrateController extends \yii\console\controllers\MigrateController
             }
         }
 
+        if (!empty($this->migrationsPath)) {
+            foreach ($this->migrationsPath as $path) {
+                $path = \Yii::getAlias($path, false);
+
+                if (!empty($path)) {
+                    $this->scanDirectory($path, $applied, $migrations);
+                }
+            }
+        }
+
         $this->scanDirectory($this->migrationPath, $applied, $migrations);
 
         sort($migrations);
@@ -98,8 +110,15 @@ class MigrateController extends \yii\console\controllers\MigrateController
             if ($file === '.' || $file === '..') {
                 continue;
             }
-            if (preg_match('/^(m(\d{6}_\d{6})_.*?)\.php$/', $file, $matches) && !isset($applied[$matches[2]]) && is_file($path . DIRECTORY_SEPARATOR . $file)) {
-                $migrations[] = $matches[1];
+
+            if (preg_match('/^(m(\d{6}_\d{6})_.*?)\.php$/', $file, $matches)) {
+                $a = !isset($applied[$matches[2]]);
+                $b = is_file($path . DIRECTORY_SEPARATOR . $file);
+                $c = !in_array($matches[1], $migrations, true);
+
+                if ($a && $b && $c) {
+                    $migrations[] = $matches[1];
+                }
             }
         }
 
