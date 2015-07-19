@@ -118,6 +118,9 @@
 
     ],
     "executable": [
+      "build",
+      "codecept",
+      "generate_self_signed_ssl_key",
       "frontend",
       "backend",
       "crm"
