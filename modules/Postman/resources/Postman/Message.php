@@ -236,7 +236,7 @@ class Message extends \yii\db\ActiveRecord
 
         $styles = trim($Template->styles . PHP_EOL . $styles);
 
-        $Message = static::compose($subject, $Template->content_text, $Template->content_html, $styles, $Template->use_layout);
+        $Message = static::compose($subject, $Template->content_text, $Template->content_html, $placeholders, $styles, $Template->use_layout);
 
         $Message->address = $Template->address;
 
