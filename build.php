@@ -104,6 +104,29 @@ $config = [
             'commandline' => './frontend rbac/update',
         ],
     ],
+
+    'extract' => [
+        '.description' => 'Extract codebase to split repos',
+        '.depends' => [
+            'extract/files',
+        ],
+        'files' => [
+            '.description' => 'Extract files to split repos',
+            '.task' => [
+                'class' => '\cookyii\build\tasks\CommandTask',
+                'commandline' => [
+                    'rsync -rtv ./components/ ../base/',
+                    'rsync -rtv ./modules/Account/ ../module-account/',
+                    'rsync -rtv ./modules/Client/ ../module-client/',
+                    'rsync -rtv ./modules/Feed/ ../module-feed/',
+                    'rsync -rtv ./modules/Media/ ../module-media/',
+                    'rsync -rtv ./modules/Order/ ../module-order/',
+                    'rsync -rtv ./modules/Page/ ../module-page/',
+                    'rsync -rtv ./modules/Postman/ ../module-postman/',
+                ],
+            ],
+        ],
+    ],
 ];
 
 // create applications tasks
