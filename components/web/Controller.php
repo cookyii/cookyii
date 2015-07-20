@@ -11,7 +11,7 @@ namespace cookyii\web;
  * Class Controller
  * @package cookyii\web
  */
-class Controller extends \yii\web\Controller
+abstract class Controller extends \yii\web\Controller
 {
 
     /**
@@ -28,4 +28,22 @@ class Controller extends \yii\web\Controller
             Cache('query')->flush();
         }
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => $this->accessRules(),
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    abstract protected function accessRules();
 }

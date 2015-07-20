@@ -17,22 +17,4 @@ abstract class Controller extends \cookyii\web\Controller
     public $hideLoader = false;
 
     public $layout = '//main';
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => 'yii\filters\AccessControl',
-                'rules' => $this->accessRules(),
-            ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    abstract protected function accessRules();
 }
