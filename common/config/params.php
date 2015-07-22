@@ -66,6 +66,7 @@ return [
     'component.view' => [
         'class' => rmrevin\yii\minify\View::className(),
         'enableMinify' => !YII_DEBUG,
+        'compress_output' => !YII_DEBUG,
     ],
     'component.user' => [
         'class' => yii\web\User::className(),
