@@ -87,6 +87,16 @@ $config = [
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => 'npm install',
         ],
+        'update' => [
+            '.description' => 'Update all npm and bower dependencies',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\CommandTask',
+                'commandline' => [
+                    'npm update',
+                    './node_modules/.bin/bower update',
+                ],
+            ],
+        ],
     ],
 
     'less' => [

@@ -64,7 +64,8 @@ return [
         'targets' => [],
     ],
     'component.view' => [
-        'class' => yii\web\View::className(),
+        'class' => rmrevin\yii\minify\View::className(),
+        'enableMinify' => !YII_DEBUG,
     ],
     'component.user' => [
         'class' => yii\web\User::className(),
