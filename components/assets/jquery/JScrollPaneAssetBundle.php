@@ -17,11 +17,11 @@ class JScrollPaneAssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@bower';
 
     public $js = [
-        'jscrollpane/script/jquery.mousewheel.js',
         'jscrollpane/script/jquery.jscrollpane.min.js',
     ];
 
     public $depends = [
         'yii\web\JqueryAsset',
+        'cookyii\assets\jquery\MouseWheelAssetBundle',
     ];
 }
