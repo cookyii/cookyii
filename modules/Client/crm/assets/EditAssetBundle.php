@@ -23,7 +23,6 @@ class EditAssetBundle extends \yii\web\AssetBundle
         'ClientResource.js',
         'ClientDetailController.js',
         'ClientEditController.js',
-        'ClientRolesController.js',
         'ClientPropertiesController.js',
     ];
 

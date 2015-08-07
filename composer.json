@@ -45,7 +45,7 @@
     "cookyii/module-postman": "dev-master",
     "cookyii/module-media": "dev-master",
 
-    "yiisoft/yii2": "2.0.5",
+    "yiisoft/yii2": "2.0.6",
     "yiisoft/yii2-composer": "2.0.*",
     "yiisoft/yii2-bootstrap": "2.0.*",
     "yiisoft/yii2-imagine": "2.0.*",

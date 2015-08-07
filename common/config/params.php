@@ -7,6 +7,22 @@
 
 $ROLLBAR_ACCESS_TOKEN = getenv('ROLLBAR_ACCESS_TOKEN');
 
+$frontend = parse_url(getenv('FRONTEND_URL'));
+$backend = parse_url(getenv('BACKEND_URL'));
+$crm = parse_url(getenv('CRM_URL'));
+
+if (empty($frontend)) {
+    throw new \yii\base\InvalidConfigException('You must specify the url for the frontend application (FRONTEND_URL).');
+}
+
+if (empty($backend)) {
+    throw new \yii\base\InvalidConfigException('You must specify the url for the backend application (BACKEND_URL).');
+}
+
+if (empty($crm)) {
+    throw new \yii\base\InvalidConfigException('You must specify the url for the crm application (CRM_URL).');
+}
+
 return [
     'command.migrate' => [
         'class' => cookyii\console\controllers\MigrateController::className(),
@@ -107,8 +123,8 @@ return [
     ],
     'component.urlManager.frontend' => [
         'class' => yii\web\UrlManager::className(),
-        'baseUrl' => '/',
-        'hostInfo' => sprintf('http://%s', getenv('FRONTEND_DOMAIN')),
+        'baseUrl' => isset($frontend['path']) ? $frontend['path'] : '/',
+        'hostInfo' => $frontend['host'],
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'cache' => false,
@@ -116,8 +132,8 @@ return [
     ],
     'component.urlManager.backend' => [
         'class' => yii\web\UrlManager::className(),
-        'baseUrl' => '/',
-        'hostInfo' => sprintf('http://%s', getenv('BACKEND_DOMAIN')),
+        'baseUrl' => isset($backend['path']) ? $backend['path'] : '/',
+        'hostInfo' => $backend['host'],
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'cache' => false,
@@ -125,8 +141,8 @@ return [
     ],
     'component.urlManager.crm' => [
         'class' => yii\web\UrlManager::className(),
-        'baseUrl' => '/',
-        'hostInfo' => sprintf('http://%s', getenv('CRM_DOMAIN')),
+        'baseUrl' => isset($crm['path']) ? $crm['path'] : '/',
+        'hostInfo' => $crm['host'],
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'cache' => false,
