@@ -41,7 +41,7 @@ class SiteController extends \crm\components\Controller
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_DEBUG ? 'random' : null,
+                'fixedVerifyCode' => YII_DEBUG ? 'cookyii' : null,
             ],
             'tz' => [ // setting timezone
                 'class' => 'cookyii\web\actions\TimeZoneAction',

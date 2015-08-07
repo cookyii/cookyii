@@ -39,7 +39,7 @@ class SiteController extends \frontend\components\Controller
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_DEBUG ? 'random' : null,
+                'fixedVerifyCode' => YII_DEBUG ? 'cookyii' : null,
             ],
         ];
     }
