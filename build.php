@@ -22,6 +22,14 @@ $config = [
         '.task' => 'cookyii\build\tasks\MapTask',
     ],
 
+    'self' => [
+        '.description' => 'Internal tasks',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\SelfTask',
+            'composer' => '../composer.phar',
+        ],
+    ],
+
     'set' => [
         'prod' => [
             '.description' => 'Build project with production environment',
