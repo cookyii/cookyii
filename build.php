@@ -34,6 +34,7 @@ $config = [
         'prod' => [
             '.description' => 'Build project with production environment',
             '.depends' => [
+                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install',
@@ -44,6 +45,7 @@ $config = [
         'demo' => [
             '.description' => 'Build project with demo environment',
             '.depends' => [
+                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install-dev',
@@ -54,6 +56,7 @@ $config = [
         'dev' => [
             '.description' => 'Build project with developer environment',
             '.depends' => [
+                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install-dev',
