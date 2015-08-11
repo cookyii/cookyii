@@ -56,7 +56,6 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
 
     public $projectFiles = [
         '.bowerrc',
-        '.env',
         '.env.dist',
         '.gitignore',
         'backend',
