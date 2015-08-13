@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('BackendApp')
+angular.module('CrmApp')
 
   .controller('ClientEditController', [
     '$scope', '$http', '$location', '$timeout', 'ToastScope',

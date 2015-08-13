@@ -32,7 +32,12 @@ class Message extends \yii\db\ActiveRecord
 
     const LAYOUT_CODE = '.layout';
 
-    protected $from = 'Postman';
+    /**
+     * @var string ID of postman component
+     */
+    public static $postman = 'postman';
+
+    public $from = 'Postman';
 
     /**
      * @inheritdoc
@@ -87,6 +92,14 @@ class Message extends \yii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @return null|\cookyii\modules\Postman\AbstractModule
+     */
+    public static function getPostman()
+    {
+        return \Yii::$app->getModule(static::$postman);
     }
 
     /**
@@ -258,6 +271,8 @@ class Message extends \yii\db\ActiveRecord
         $layout_text = '{content}';
         $layout_html = '{content}';
 
+        $Account = User()->identity;
+
         if ($use_layout) {
             /** @var Template $LayoutTemplate */
             $LayoutTemplate = Template::find()
@@ -273,33 +288,38 @@ class Message extends \yii\db\ActiveRecord
 
         $styles = trim($styles);
 
-        $Message = new static;
-        $Message->subject = $subject;
+        $Postman = static::getPostman();
 
-        $replace_text = array_merge([
+        $Message = new static;
+        $Message->subject = trim(sprintf('%s %s %s', $Postman->subjectPrefix, $subject, $Postman->subjectSuffix));
+
+        $base_placeholders = [
             '{host}' => Request()->hostInfo,
             '{appname}' => APP_NAME,
             '{subject}' => $subject,
-            '{content}' => $content_text,
-        ], $placeholders);
+            '{user_id}' => null,
+            '{username}' => null,
+        ];
 
+        if ($Account instanceof \cookyii\interfaces\AccountInterface) {
+            $base_placeholders['{user_id}'] = $Account->getId();
+            $base_placeholders['{username}'] = $Account->getName();
+        }
+
+        $placeholders = array_merge([], $base_placeholders, $placeholders);
+
+        $Message->content_text = str_replace('{content}', $content_text, $layout_text);
         $Message->content_text = str_replace(
-            array_keys($replace_text),
-            array_values($replace_text),
-            $layout_text
+            array_keys($placeholders),
+            array_values($placeholders),
+            $Message->content_text
         );
 
-        $replace_html = array_merge([
-            '{host}' => Request()->hostInfo,
-            '{appname}' => APP_NAME,
-            '{subject}' => $subject,
-            '{content}' => $content_html,
-        ], $placeholders);
-
+        $Message->content_html = str_replace('{content}', $content_html, $layout_html);
         $Message->content_html = str_replace(
-            array_keys($replace_html),
-            array_values($replace_html),
-            $layout_html
+            array_keys($placeholders),
+            array_values($placeholders),
+            $Message->content_html
         );
 
         $styles = empty($styles)

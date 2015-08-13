@@ -26,11 +26,11 @@ class AppAsset extends \yii\web\AssetBundle
         'js/functions.js',
         'js/scripts.js',
         'js/directives.js',
-        'js/BackendApp.js',
-        'js/scopes/QueryScope.js',
-        'js/scopes/ToastScope.js',
-        'js/scopes/FilterSearchScope.js',
-        'js/scopes/SortScope.js',
+        'js/CrmApp.js',
+        'js/CrmApp/QueryScope.js',
+        'js/CrmApp/ToastScope.js',
+        'js/CrmApp/FilterSearchScope.js',
+        'js/CrmApp/SortScope.js',
     ];
 
     public $depends = [

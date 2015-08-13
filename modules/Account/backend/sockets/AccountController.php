@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace cookyii\modules\Account\backend\controllers;
+namespace cookyii\modules\Account\backend\sockets;
 
 /**
  * Class AccountController
- * @package cookyii\modules\Account\backend\controllers
+ * @package cookyii\modules\Account\backend\sockets
  */
 class AccountController extends \cookyii\socket\Controller
 {

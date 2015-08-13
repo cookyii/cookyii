@@ -32,6 +32,7 @@ class SignInForm extends \yii\base\Model
             /** semantic validators */
             [['email', 'password'], 'required',],
             [['email'], 'filter', 'filter' => 'str_clean'],
+            [['email'], 'exist', 'targetClass' => \resources\Account::className(), 'targetAttribute' => 'email'],
             [['password'], 'validatePassword'],
         ];
     }

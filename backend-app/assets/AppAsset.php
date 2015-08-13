@@ -27,10 +27,10 @@ class AppAsset extends \yii\web\AssetBundle
         'js/scripts.js',
         'js/directives.js',
         'js/BackendApp.js',
-        'js/scopes/QueryScope.js',
-        'js/scopes/ToastScope.js',
-        'js/scopes/FilterSearchScope.js',
-        'js/scopes/SortScope.js',
+        'js/BackendApp/QueryScope.js',
+        'js/BackendApp/ToastScope.js',
+        'js/BackendApp/FilterSearchScope.js',
+        'js/BackendApp/SortScope.js',
         'js/websockets/UdpWebSocket.js',
     ];
 

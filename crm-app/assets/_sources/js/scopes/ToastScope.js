@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('BackendApp')
+angular.module('CrmApp')
 
   .factory('ToastScope', [
     '$rootScope', '$mdToast',

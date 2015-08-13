@@ -40,7 +40,7 @@
 
     .filter('nl2br', function () {
       return function (input) {
-        if (input !== void 0) {
+        if (typeof input === 'string') {
           return input.replace(/\n/g, '<br>');
         }
       };

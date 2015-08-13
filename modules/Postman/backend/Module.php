@@ -12,10 +12,8 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Postman\backend
  */
-class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface, \yii\base\BootstrapInterface
+class Module extends \cookyii\modules\Postman\AbstractModule implements \backend\interfaces\BackendModuleInterface, \yii\base\BootstrapInterface
 {
-
-    public $defaultRoute = 'sign/in';
 
     /**
      * @inheritdoc
@@ -53,9 +51,6 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
      */
     public function bootstrap($app)
     {
-        $app->getUrlManager()
-            ->addRules(include(__DIR__ . '/urls.php'));
-
         $app->getI18n()
             ->translations['postman'] = [
             'class' => 'yii\i18n\PhpMessageSource',

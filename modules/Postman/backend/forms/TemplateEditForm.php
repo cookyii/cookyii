@@ -112,7 +112,7 @@ class TemplateEditForm extends \yii\base\Model
         $params = [];
         if (!empty($this->params) && is_array($this->params)) {
             foreach ($this->params as $param) {
-                if ($param === null || empty($param['key'])) {
+                if ($param === null || empty($param['key']) || isset($param['default'])) {
                     continue;
                 }
 

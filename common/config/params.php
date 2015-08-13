@@ -124,7 +124,7 @@ return [
     'component.urlManager.frontend' => [
         'class' => yii\web\UrlManager::className(),
         'baseUrl' => isset($frontend['path']) ? $frontend['path'] : '/',
-        'hostInfo' => $frontend['host'],
+        'hostInfo' => sprintf('%s://%s', $frontend['scheme'], $frontend['host']),
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'cache' => false,
@@ -133,7 +133,7 @@ return [
     'component.urlManager.backend' => [
         'class' => yii\web\UrlManager::className(),
         'baseUrl' => isset($backend['path']) ? $backend['path'] : '/',
-        'hostInfo' => $backend['host'],
+        'hostInfo' => sprintf('%s://%s', $backend['scheme'], $backend['host']),
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'cache' => false,
@@ -142,7 +142,7 @@ return [
     'component.urlManager.crm' => [
         'class' => yii\web\UrlManager::className(),
         'baseUrl' => isset($crm['path']) ? $crm['path'] : '/',
-        'hostInfo' => $crm['host'],
+        'hostInfo' => sprintf('%s://%s', $crm['scheme'], $crm['host']),
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'cache' => false,

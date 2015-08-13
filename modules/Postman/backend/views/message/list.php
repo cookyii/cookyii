@@ -139,7 +139,7 @@ function sortLink($type, $label)
                             <td class="sent clickable" ng-click="messages.edit(message)">
                                 <?php
                                 echo Html::tag('a', FA::icon('paper-plane'), [
-                                    'class' => 'text-info',
+                                    'class' => 'text-info resent',
                                     'title' => Yii::t('postman', 'Resent message'),
                                     'ng-click' => 'messages.resent(message, $event)',
                                     'ng-class' => '{invisible: message.deleted}',

@@ -20,15 +20,18 @@ return array_merge($config, [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
-        'feed', 'account', 'page', 'postman', 'media',
+        'feed', 'account', 'page', 'media', 'postman',
         'log', 'rollbar',
     ],
     'modules' => [
         'feed' => cookyii\modules\Feed\backend\Module::className(),
         'page' => cookyii\modules\Page\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
-        'postman' => cookyii\modules\Postman\backend\Module::className(),
         'media' => cookyii\modules\Media\Module::className(),
+        'postman' => [
+            'class' => cookyii\modules\Postman\backend\Module::className(),
+            'subjectPrefix' => 'Cookyii Backend // ',
+        ],
     ],
     'components' => [
         'db' => $params['component.db'],
@@ -42,8 +45,9 @@ return array_merge($config, [
         'cache.schema' => $params['component.cache.schema'],
         'cache.query' => $params['component.cache.query'],
         'assetManager' => $params['component.assetManager'],
-        'urlManager.frontend' => $params['component.urlManager.frontend'],
         'urlManager' => $params['component.urlManager.backend'],
+        'urlManager.frontend' => $params['component.urlManager.frontend'],
+        'urlManager.backend' => $params['component.urlManager.backend'],
         'urlManager.crm' => $params['component.urlManager.crm'],
         'authManager' => $params['component.authManager'],
         'authClientCollection' => $params['component.authClientCollection'],

@@ -31,7 +31,7 @@ use yii\helpers\ArrayHelper;
  * @method \resources\queries\AccountQuery hasMany($class, $link)
  * @method \resources\queries\AccountQuery hasOne($class, $link)
  */
-class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \cookyii\interfaces\AccountInterface
 {
 
     use \resources\Account\traits\UserSocialTrait,
@@ -133,6 +133,14 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $access;
     }
 
+    /**
+     * @return string
+     */
+    public function getEncryptKey()
+    {
+        return sha1($this->created_at . $this->auth_key . $this->email);
+    }
+
     private $present = null;
 
     /**
@@ -177,6 +185,14 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function getId()
     {
         return $this->getPrimaryKey();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**

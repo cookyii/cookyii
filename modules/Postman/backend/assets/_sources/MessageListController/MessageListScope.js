@@ -45,7 +45,7 @@ angular.module('BackendApp')
           location.href = '/postman/message/edit#?id=' + message.id;
         };
 
-        $scope.resent = function(message, e){
+        $scope.resent = function (message, e) {
           var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
             .title('Would you like to resent this message?')
@@ -66,6 +66,8 @@ angular.module('BackendApp')
               });
             });
           });
+
+          e.stopPropagation();
         };
 
         $scope.remove = function (message, e) {

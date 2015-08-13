@@ -6,12 +6,13 @@ md-switch { margin: 0 10px; }
 .search.wide { width: 300px; }
 /*********************************** Table *****************/
 .table-messages { }
+.table-messages td { vertical-align: middle !important; }
 .table-messages td.id { width: 70px; }
 .table-messages td.subject { }
 .table-messages td.address { }
 .table-messages td.created { }
 .table-messages td.sent { }
-.table-messages td.sent > a { opacity: 0.1; font-size: 1.42em; margin-right: 10px; }
+.table-messages td.sent > a.resent { opacity: 0.1; font-size: 1.42em; margin-right: 10px; }
 .table-messages td.actions { width: 80px; text-align: center; font-size: 1.88em; padding: 0; }
 .table-messages td.actions > a { opacity: 0.1; }
 .table-messages tr:hover .actions > a,

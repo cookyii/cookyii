@@ -6,5 +6,7 @@
  */
 
 return [
+    ['class' => \cookyii\modules\Account\crm\UrlRules::className()],
+    ['class' => \cookyii\modules\Client\crm\UrlRules::className()],
     '/dash' => 'dash/index'
 ];

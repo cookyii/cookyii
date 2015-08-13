@@ -35,13 +35,20 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
             'FOREIGN KEY (media_id) REFERENCES {{%media}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
         ]);
 
+        $this->insertLayoutMessage();
+    }
+
+    public function down()
+    {
+        $this->dropTable('{{%postman_template_attach}}');
+        $this->dropTable('{{%postman_template}}');
+    }
+
+    protected function insertLayoutMessage()
+    {
         $time = time();
 
         $params = [
-            [
-                'key' => 'subject',
-                'description' => 'Message subject',
-            ],
             [
                 'key' => 'content',
                 'description' => 'Message content',
@@ -49,7 +56,7 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
         ];
 
         $content = [
-            'text' => 'Hello username,' . PHP_EOL
+            'text' => 'Hello {username},' . PHP_EOL
                 . '---------------' . PHP_EOL
                 . '{content}' . PHP_EOL
                 . PHP_EOL
@@ -59,23 +66,20 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
                 . '    <title>{subject}</title>' . PHP_EOL
                 . '</head>' . PHP_EOL
                 . '<body>' . PHP_EOL
-                . '    <div class="header">Hello username,</div>' . PHP_EOL
-                . '    <div class="content">{content}</div>' . PHP_EOL
+                . '    <div style="font-weight: bold;">Hello {username},</div>' . PHP_EOL
+                . '    <div>{content}</div>' . PHP_EOL
                 . '    <br>' . PHP_EOL
-                . '     <div class="footer">Good bye!</div>' . PHP_EOL
+                . '    <div style="font-size: 0.9em; color: #919191;">Good bye!</div>' . PHP_EOL
                 . '</body>' . PHP_EOL
                 . '</html>',
         ];
-
-        $styles = 'div.header { color: #333; font-weight: bold; }' . PHP_EOL
-            . 'div.footer { font-size: 12px; color: #919191; }';
 
         $this->insert('{{%postman_template}}', [
             'code' => '.layout',
             'subject' => 'Base layout for message',
             'content_text' => $content['text'],
             'content_html' => $content['html'],
-            'styles' => $styles,
+            'styles' => null,
             'description' => 'This is a special template that is a wrapper for all letters.',
             'params' => Json::encode($params),
             'address' => null,
@@ -83,11 +87,5 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
             'created_at' => $time,
             'updated_at' => $time,
         ]);
-    }
-
-    public function down()
-    {
-        $this->dropTable('{{%postman_template_attach}}');
-        $this->dropTable('{{%postman_template}}');
     }
 }

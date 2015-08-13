@@ -13,6 +13,8 @@ namespace cookyii\rest;
 class UrlRule extends \yii\rest\UrlRule
 {
 
+    public $name = 'cookyii\rest\UrlRule';
+
     /**
      * @inheritdoc
      */

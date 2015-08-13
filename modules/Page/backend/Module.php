@@ -38,9 +38,6 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
      */
     public function bootstrap($app)
     {
-        $app->getUrlManager()
-            ->addRules(include(__DIR__ . '/urls.php'));
-
         $app->getI18n()
             ->translations['page'] = [
             'class' => 'yii\i18n\PhpMessageSource',

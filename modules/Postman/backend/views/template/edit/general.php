@@ -82,10 +82,10 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 20px;">
                                 <dl>
-                                    <dt ng-repeat-start="param in data.params track by param.key">
+                                    <dt ng-repeat-start="param in data.params track by $index" ng-show="param.key">
                                         {<span ng-bind="param.key"></span>}
                                     </dt>
-                                    <dd ng-repeat-end ng-bind-html="param.description | nl2br"></dd>
+                                    <dd ng-repeat-end ng-bind-html="param.description | nl2br" ng-show="param.key"></dd>
                                 </dl>
                             </div>
                         </tab>
@@ -152,8 +152,8 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
                             </div>
                         </tab>
                         <tab heading="Parameters" active="tabs.params" select="selectTab('params')">
-                            <div class="param" ng-repeat="param in data.params"
-                                 ng-if="param !== undefined">
+                            <div class="param" ng-repeat="param in data.params track by $index"
+                                 ng-if="param !== undefined && !param.default">
                                 <label>&nbsp;</label>
 
                                 <div class="row">

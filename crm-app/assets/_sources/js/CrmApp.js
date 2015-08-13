@@ -1,7 +1,7 @@
 (function (ng, $) {
   "use strict";
 
-  ng.module('BackendApp', [
+  ng.module('CrmApp', [
     'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate', 'ngMaterial',
     'ui.bootstrap',
     'directives', 'truncate',
@@ -39,7 +39,7 @@
 
     .filter('nl2br', function () {
       return function (input) {
-        if (input !== void 0) {
+        if (typeof input === 'string') {
           return input.replace(/\n/g, '<br>');
         }
       };

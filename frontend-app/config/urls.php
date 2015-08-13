@@ -5,4 +5,7 @@
  * @link https://rmrevin.ru
  */
 
-return [];
+return [
+    ['class' => \cookyii\modules\Account\frontend\UrlRules::className()],
+    ['class' => \cookyii\modules\Page\frontend\UrlRules::className()],
+];
