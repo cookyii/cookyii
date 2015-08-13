@@ -160,6 +160,21 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
+     * @param bool $save
+     * @return string
+     */
+    public function refreshToken($save = true)
+    {
+        $token = Security()->generateRandomString();
+
+        $this->token = $token;
+
+        $this->validate() && ($save && $this->save());
+
+        return $token;
+    }
+
+    /**
      * @inheritdoc
      */
     public static function findIdentity($id)

@@ -15,6 +15,8 @@ use yii\helpers\Json;
 class ForgotPasswordForm extends \yii\base\Model
 {
 
+    use \cookyii\db\traits\PopulateErrorsTrait;
+
     public $email;
 
     public $hash;
@@ -70,7 +72,7 @@ class ForgotPasswordForm extends \yii\base\Model
 
         $data = $this->decryptData($Account);
 
-        if (empty($data) || !isset($data['t']) || !isset($data['i']) || !isset($data['e'])) {
+        if (empty($data) || !isset($data['t']) || !isset($data['i']) || !isset($data['e']) || !isset($data['s'])) {
             $this->addError('hash', 'Invalid hash.');
         }
 
@@ -84,7 +86,52 @@ class ForgotPasswordForm extends \yii\base\Model
             $this->addError('hash', 'Invalid hash.');
         }
 
+        if ($Account->token !== $data['s']) {
+            $this->addError('hash', 'Invalid hash.');
+        }
+
         return !$this->hasErrors();
+    }
+
+    /**
+     * @return array|bool
+     * @throws \yii\web\ServerErrorHttpException
+     */
+    public function sendNotification()
+    {
+        if ($this->validate()) {
+            $Account = $this->getAccount();
+
+            if (true === ($reason = $Account->isAvailable())) {
+                $hash = $this->encryptData($Account);
+
+                $url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
+                $short_url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
+
+                $Message = \resources\Postman\Message::create('account.frontend.forgot-password.request', [
+                    '{user_id}' => $Account->id,
+                    '{username}' => $Account->name,
+                    '{hash}' => $hash,
+                    '{url}' => $url,
+                    '{short_url}' => $short_url,
+                ]);
+
+                $Message->addTo($Account->email, $Account->name);
+
+                return $Message->send();
+            } else {
+                switch ($reason) {
+                    case 'deleted':
+                        $this->addError('email', \Yii::t('account', 'Account removed.'));
+                        break;
+                    case 'not-activated':
+                        $this->addError('email', \Yii::t('account', 'Account is not activated.'));
+                        break;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -101,9 +148,7 @@ class ForgotPasswordForm extends \yii\base\Model
 
         $Account->validate() && $Account->save();
 
-        if ($Account->hasErrors()) {
-            $this->addError('email', array_shift($Account->getFirstErrors()));
-        } else {
+        if (!$Account->hasErrors()) {
             $Message = \resources\Postman\Message::create('account.frontend.forgot-password.new-password', [
                 '{user_id}' => $Account->id,
                 '{username}' => $Account->name,
@@ -115,12 +160,34 @@ class ForgotPasswordForm extends \yii\base\Model
 
             $Message->send();
 
+            $Account->refreshToken();
+
             if ($this->loginAfterReset) {
                 User()->login($Account, SignInForm::REMEMBER_TIME);
             }
         }
 
+        if ($Account->hasErrors()) {
+            $this->populateErrors($Account, 'email');
+        }
+
         return !$Account->hasErrors();
+    }
+
+    private $_Account = null;
+
+    /**
+     * @return \resources\Account
+     */
+    private function getAccount()
+    {
+        if ($this->_Account === null) {
+            $this->_Account = \resources\Account::find()
+                ->byEmail($this->email)
+                ->one();
+        }
+
+        return $this->_Account;
     }
 
     /**
@@ -133,6 +200,7 @@ class ForgotPasswordForm extends \yii\base\Model
             't' => time(),
             'i' => $Account->id,
             'e' => $Account->email,
+            's' => $Account->token,
         ]);
 
         return base64_encode(Security()->encryptByKey($data, $Account->getEncryptKey()));
@@ -155,60 +223,5 @@ class ForgotPasswordForm extends \yii\base\Model
         }
 
         return Json::decode($data);
-    }
-
-    /**
-     * @return array|bool
-     * @throws \yii\web\ServerErrorHttpException
-     */
-    public function sendNotification()
-    {
-        if ($this->validate()) {
-            $Account = $this->getAccount();
-
-            if (true === ($reason = $Account->isAvailable())) {
-                $hash = $this->encryptData($Account);
-
-                $url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
-
-                $Message = \resources\Postman\Message::create('account.frontend.forgot-password.request', [
-                    '{user_id}' => $Account->id,
-                    '{username}' => $Account->name,
-                    '{hash}' => $hash,
-                    '{url}' => $url,
-                ]);
-
-                $Message->addTo($Account->email, $Account->name);
-
-                return $Message->send();
-            } else {
-                switch ($reason) {
-                    case 'deleted':
-                        $this->addError('email', \Yii::t('account', 'Account removed.'));
-                        break;
-                    case 'not-activated':
-                        $this->addError('email', \Yii::t('account', 'Account is not activated.'));
-                        break;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private $_Account = null;
-
-    /**
-     * @return \resources\Account
-     */
-    private function getAccount()
-    {
-        if ($this->_Account === null) {
-            $this->_Account = \resources\Account::find()
-                ->byEmail($this->email)
-                ->one();
-        }
-
-        return $this->_Account;
     }
 }

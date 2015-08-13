@@ -82,7 +82,10 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 'description' => 'Secret code for url',
             ], [
                 'key' => 'url',
-                'description' => 'Link to reset password',
+                'description' => 'Url to reset password',
+            ], [
+                'key' => 'short_url',
+                'description' => 'Short url to reset password',
             ],
         ];
 
@@ -92,7 +95,9 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '{url}' . PHP_EOL,
             'html' => '<p>You requested password recovery on <a href="{host}">{host}</a>.</p>' . PHP_EOL
                 . '<p>To recover your password, click here:</p>'
-                . '<p><a href="{url}">{url}</a>.</p>',
+                . '<p><a href="{url}">{short_url}</a>.</p>'
+                . '<p>Or copy paste this url in your browser.</p>'
+                . '<p><textarea style="width:100%;min-height:100px">{url}</textarea></p>',
         ];
 
         $this->insert('{{%postman_template}}', [

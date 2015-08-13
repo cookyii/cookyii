@@ -76,7 +76,9 @@ class SignUpForm extends \yii\base\Model
             'activated_at' => time(),
         ]);
 
-        if ($Account->validate() && $Account->save()) {
+        $Account->validate() && $Account->save();
+
+        if (!$Account->hasErrors()) {
             $Message = \resources\Postman\Message::create('account.frontend.sign-up', [
                 '{user_id}' => $Account->id,
                 '{username}' => $Account->name,
@@ -100,21 +102,5 @@ class SignUpForm extends \yii\base\Model
         }
 
         return !$Account->hasErrors();
-    }
-
-    private $_Account = null;
-
-    /**
-     * @return \resources\Account
-     */
-    private function getAccount()
-    {
-        if ($this->_Account === null) {
-            $this->_Account = \resources\Account::find()
-                ->byEmail($this->email)
-                ->one();
-        }
-
-        return $this->_Account;
     }
 }
