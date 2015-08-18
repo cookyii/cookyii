@@ -32,12 +32,14 @@ class Message extends \yii\db\ActiveRecord
 
     const LAYOUT_CODE = '.layout';
 
-    /**
-     * @var string ID of postman component
-     */
+    /** @var string ID of postman component */
     public static $postman = 'postman';
 
+    /** @var string ID of url manager component */
+    public static $urlManager = 'urlmanager';
+
     public $from = 'Postman';
+
 
     /**
      * @inheritdoc
@@ -294,7 +296,7 @@ class Message extends \yii\db\ActiveRecord
         $Message->subject = trim(sprintf('%s %s %s', $Postman->subjectPrefix, $subject, $Postman->subjectSuffix));
 
         $base_placeholders = [
-            '{host}' => Request()->hostInfo,
+            '{host}' => \Yii::$app->get(static::$urlManager)->hostInfo,
             '{appname}' => APP_NAME,
             '{subject}' => $subject,
             '{user_id}' => null,
