@@ -273,8 +273,6 @@ class Message extends \yii\db\ActiveRecord
         $layout_text = '{content}';
         $layout_html = '{content}';
 
-        $Account = User()->identity;
-
         if ($use_layout) {
             /** @var Template $LayoutTemplate */
             $LayoutTemplate = Template::find()
@@ -303,9 +301,12 @@ class Message extends \yii\db\ActiveRecord
             '{username}' => null,
         ];
 
-        if ($Account instanceof \cookyii\interfaces\AccountInterface) {
-            $base_placeholders['{user_id}'] = $Account->getId();
-            $base_placeholders['{username}'] = $Account->getName();
+        if (Request() instanceof \yii\web\Request) {
+            $Account = User()->identity;
+            if ($Account instanceof \cookyii\interfaces\AccountInterface) {
+                $base_placeholders['{user_id}'] = $Account->getId();
+                $base_placeholders['{username}'] = $Account->getName();
+            }
         }
 
         $placeholders = array_merge([], $base_placeholders, $placeholders);
