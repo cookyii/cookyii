@@ -36,7 +36,7 @@ class Message extends \yii\db\ActiveRecord
     public static $postman = 'postman';
 
     /** @var string ID of url manager component */
-    public static $urlManager = 'urlmanager';
+    public static $urlManager = 'urlManager';
 
     public $from = 'Postman';
 
