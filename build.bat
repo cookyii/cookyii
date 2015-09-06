@@ -1,1 +1,1 @@
-@build %*
+@vendor/bin/build.bat %*
