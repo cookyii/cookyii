@@ -206,7 +206,7 @@ function appendLessTask(array &$config, $task_name, $app)
 
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
-        '.description' => 'Compile all less styles for `board` application',
+        '.description' => sprintf('Compile all less styles for `%s` application', $app),
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => [
@@ -229,7 +229,7 @@ function appendMigrateTask(array &$config, $task_name, $app)
 
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
-        '.description' => 'Compile all less styles for `board` application',
+        '.description' => sprintf('Compile all less styles for `%s` application', $app),
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => cmd($app, './{a} migrate --interactive=0'),
