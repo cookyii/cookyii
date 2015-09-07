@@ -3,7 +3,6 @@
 
   ng.module('BackendApp', [
     'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate', 'ngMaterial',
-    'ngWebSocket',
     'ui.bootstrap',
     'directives', 'truncate',
     'monospaced.elastic',
