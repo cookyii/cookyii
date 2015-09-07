@@ -71,11 +71,11 @@ $config = [
             '.description' => 'Check file exists `.environment.php`',
             '.task' => [
                 'class' => 'cookyii\build\tasks\FileExistsTask',
-                'filename' => '.env',
+                'filename' => '.env.php',
                 'message' => 'Warning!' . "\n"
                     . 'Need fill environment file' . "\n"
                     . '%s' . "\n"
-                    . 'Template is .env.dist',
+                    . 'Template is .env.dist.php',
             ],
         ],
     ],
