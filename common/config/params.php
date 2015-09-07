@@ -5,8 +5,6 @@
  * @link https://rmrevin.ru
  */
 
-$ROLLBAR_ACCESS_TOKEN = ROLLBAR_ACCESS_TOKEN;
-
 $frontend = parse_url(FRONTEND_URL);
 $backend = parse_url(BACKEND_URL);
 $crm = parse_url(CRM_URL);

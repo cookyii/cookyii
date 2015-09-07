@@ -14,7 +14,6 @@ use rmrevin\yii\fontawesome\FA;
  * @package cookyii\modules\Account\backend
  */
 class Module extends \yii\base\Module implements
-    \cookyii\socket\interfaces\SocketListInterface,
     \backend\interfaces\BackendModuleInterface,
     \yii\base\BootstrapInterface
 {
@@ -48,19 +47,6 @@ class Module extends \yii\base\Module implements
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en-US',
             'basePath' => '@app/messages',
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getSockets()
-    {
-        return [
-            [
-                'path' => '/udp',
-                'controller' => new \cookyii\modules\Account\backend\sockets\AccountController,
-            ],
         ];
     }
 }

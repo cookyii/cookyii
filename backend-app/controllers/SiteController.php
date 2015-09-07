@@ -56,11 +56,4 @@ class SiteController extends \backend\components\Controller
     {
         return $this->redirect(['/dash']);
     }
-
-    public function actionWebsocket()
-    {
-        $path = \Yii::getAlias('@base');
-
-        system(sprintf('%s/backend socket/run', $path));
-    }
 }

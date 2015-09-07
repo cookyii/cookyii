@@ -61,7 +61,6 @@
     "rmrevin/yii2-rollbar": "~1.1",
     "rmrevin/yii2-favicon-widget": "~1.0",
 
-    "cboden/ratchet": "0.3.*",
     "samdark/sitemap": "2.0.*"
   },
   "require-dev": {
