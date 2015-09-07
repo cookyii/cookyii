@@ -23,7 +23,6 @@ return array_merge($config, [
     'controllerMap' => [
         'account' => cookyii\modules\Account\commands\AccountCommand::className(),
         'rbac' => common\commands\RbacCommand::className(),
-        'socket' => backend\commands\SocketCommand::className(),
         'migrate' => $params['command.migrate'],
     ],
     'modules' => [],
