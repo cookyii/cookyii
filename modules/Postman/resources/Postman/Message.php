@@ -193,7 +193,7 @@ class Message extends \yii\db\ActiveRecord
 
             $Message = \Yii::$app->mailer->compose()
                 ->setCharset('UTF-8')
-                ->setFrom([getenv('SMTP_USER') => $this->from])
+                ->setFrom([SMTP_USER => $this->from])
                 ->setSubject($this->subject)
                 ->setTextBody($this->content_text)
                 ->setHtmlBody($this->content_html);

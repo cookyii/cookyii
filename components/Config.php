@@ -45,7 +45,7 @@ class Config
         $filename = sprintf('%s.php', $type);
 
         $config_alias = sprintf('@%s/config/%s', $app, $filename);
-        $local_config_alias = sprintf('@%s/config/%s/%s', $app, getenv('YII_ENV'), $filename);
+        $local_config_alias = sprintf('@%s/config/%s/%s', $app, YII_ENV, $filename);
 
         $config = \Yii::getAlias($config_alias);
         $local_config = \Yii::getAlias($local_config_alias);

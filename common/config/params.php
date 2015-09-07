@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-$ROLLBAR_ACCESS_TOKEN = getenv('ROLLBAR_ACCESS_TOKEN');
+$ROLLBAR_ACCESS_TOKEN = ROLLBAR_ACCESS_TOKEN;
 
-$frontend = parse_url(getenv('FRONTEND_URL'));
-$backend = parse_url(getenv('BACKEND_URL'));
-$crm = parse_url(getenv('CRM_URL'));
+$frontend = parse_url(FRONTEND_URL);
+$backend = parse_url(BACKEND_URL);
+$crm = parse_url(CRM_URL);
 
 if (empty($frontend)) {
     throw new \yii\base\InvalidConfigException('You must specify the url for the frontend application (FRONTEND_URL).');
@@ -45,26 +45,26 @@ return [
         'schemaCache' => 'cache.schema',
         'enableQueryCache' => false,
         'queryCache' => 'cache.query',
-        'dsn' => getenv('DB_DSN'),
-        'username' => getenv('DB_USER'),
-        'password' => getenv('DB_PASS'),
+        'dsn' => DB_DSN,
+        'username' => DB_USER,
+        'password' => DB_PASS,
         'tablePrefix' => 'yii_'
     ],
     'component.mailer' => [
         'class' => yii\swiftmailer\Mailer::className(),
         'transport' => [
             'class' => 'Swift_SmtpTransport',
-            'host' => getenv('SMTP_HOST'),
-            'username' => getenv('SMTP_USER'),
-            'password' => getenv('SMTP_PASS'),
-            'port' => getenv('SMTP_PORT'),
-            'encryption' => getenv('SMTP_ENC'),
+            'host' => SMTP_HOST,
+            'username' => SMTP_USER,
+            'password' => SMTP_PASS,
+            'port' => SMTP_PORT,
+            'encryption' => SMTP_ENC,
         ],
     ],
     'component.rollbar' => [
         'class' => rmrevin\yii\rollbar\Component::className(),
-        'accessToken' => $ROLLBAR_ACCESS_TOKEN,
-        'enabled' => !empty($ROLLBAR_ACCESS_TOKEN) && $ROLLBAR_ACCESS_TOKEN !== 'null',
+        'accessToken' => defined('ROLLBAR_ACCESS_TOKEN') ? ROLLBAR_ACCESS_TOKEN : null,
+        'enabled' => defined('ROLLBAR_ACCESS_TOKEN'),
         'useLogger' => YII_DEBUG,
         'environment' => YII_ENV,
         'reportSuppressed' => true,
@@ -149,7 +149,7 @@ return [
         'rules' => require(\Yii::getAlias('@crm/config/urls.php')),
     ],
     'component.request' => [
-        'cookieValidationKey' => getenv('COOKIE_VALIDATION_KEY'),
+        'cookieValidationKey' => COOKIE_VALIDATION_KEY,
         'parsers' => ['application/json' => 'yii\web\JsonParser'],
     ],
     'component.i18n' => [

@@ -1,7 +1,7 @@
 /.idea
 /.c9
 /.vagrant
-/.env
+/.env.php
 /composer.phar
 /htpasswd
 /node_modules

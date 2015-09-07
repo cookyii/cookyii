@@ -74,24 +74,24 @@
 
 ```bash
 composer global require "fxp/composer-asset-plugin:~1.0.0"
-composer global require "cookyii/build:dev-master"
 composer create-project --prefer-dist --stability=dev cookyii/project new-project
 ```
 
 Далее Вам следует настроить виртуальные хосты Вашего Web сервера на следующие директории:
 
 ```
-www.new-project.com      ->  .../frontend-app/web
-backend.new-project.com  ->  .../backend-app/web
+www.new-project.com     ->  .../frontend-app/web
+backend.new-project.com ->  .../backend-app/web
+crm.new-project.com     ->  .../crm-app/web
 ```
 
 
 Развертывание Вашего проекта (deploy)
 -------------------------------------
 
-1. Скопировать файл `.env.dist` в `.env` (в базовой директории), заполнить необходимые данные.
-2. Скопировать файлы `.credentials.dist` в `.credentials` (в директориях приложений), заполнить необходимые данные.
-3. Установить `composer` зависимости `./build composer install-dev`. (для продакшена `./build composer install`)
+1. Скопировать файл `.env.dist.php` в `.env.php` (в базовой директории), заполнить необходимые данные.
+2. Скопировать файлы `.credentials.dist.php` в `.credentials.php` (в директориях приложений), заполнить необходимые данные.
+3. Установить `composer` зависимости `./build composer install`. (для продакшена `./build composer install-prod`)
 4. Установить `frontend` зависимости через npm `./build npm`.
 5. Скомпилировать `less` стили `./build less`.
 6. Развернуть миграции `./build migrate`.

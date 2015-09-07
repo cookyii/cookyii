@@ -2,11 +2,11 @@
 /**
  * env.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
-$Env = new \Dotenv\Dotenv(__DIR__);
-$Env->load();
-
-defined('YII_DEMO_DATA') or define('YII_DEMO_DATA', getenv('YII_DEMO_DATA') === 'true');
-defined('YII_DEBUG') or define('YII_DEBUG', getenv('YII_DEBUG') === 'true');
-defined('YII_ENV') or define('YII_ENV', getenv('YII_ENV') ?: 'prod');
+if (!file_exists(__DIR__ . DIRECTORY_SEPARATOR . '.env.php')) {
+    throw new \Exception('Environment file `.env.php` not found.');
+} else {
+    require_once __DIR__ . DIRECTORY_SEPARATOR . '.env.php';
+}

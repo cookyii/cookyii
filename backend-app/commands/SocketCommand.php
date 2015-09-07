@@ -33,6 +33,6 @@ class SocketCommand extends \cookyii\socket\commands\SocketCommand
 
     public function actionRun()
     {
-        $this->runSocket(getenv('BACKEND_DOMAIN'));
+        $this->runSocket(BACKEND_DOMAIN);
     }
 }

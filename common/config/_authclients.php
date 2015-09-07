@@ -54,8 +54,8 @@ foreach ($authClients as $name => $conf) {
     if (isset($_ENV[$conf['app_id']]) && !empty($_ENV[$conf['app_id']]) && !in_array($_ENV[$conf['app_id']], ['null', 'false'], true)) {
         $result[$name] = [
             'class' => $conf['class'],
-            'clientId' => getenv($conf['app_id']),
-            'clientSecret' => getenv($conf['app_secret']),
+            'clientId' => constant($conf['app_id']),
+            'clientSecret' => constant($conf['app_secret']),
         ];
     }
 }
