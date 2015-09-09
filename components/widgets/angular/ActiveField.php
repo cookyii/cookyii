@@ -8,6 +8,8 @@ namespace cookyii\widgets\angular;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\web\JsExpression;
 
 /**
  * Class ActiveField
@@ -21,6 +23,20 @@ class ActiveField extends \yii\widgets\ActiveField
     public $options = ['class' => 'form-group has-feedback'];
 
     public $errorOptions = ['class' => 'error-balloon'];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (!isset($this->options['ng-class'])) {
+            $this->options['ng-class'] = Json::encode([
+                'has-error' => new JsExpression(sprintf('error.%s', $this->attribute))
+            ]);
+        }
+    }
 
     /**
      * @inheritdoc
