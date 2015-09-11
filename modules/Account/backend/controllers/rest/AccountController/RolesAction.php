@@ -34,8 +34,8 @@ class RolesAction extends \yii\rest\Action
             throw new \yii\web\BadRequestHttpException('Empty account id');
         }
 
-        /** @var \resources\Account $Account */
-        $Account = \resources\Account::find()
+        /** @var \cookyii\modules\Account\resources\Account $Account */
+        $Account = \cookyii\modules\Account\resources\Account::find()
             ->byId($account_id)
             ->one();
 

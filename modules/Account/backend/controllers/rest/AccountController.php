@@ -15,7 +15,7 @@ use cookyii\modules\Account;
 class AccountController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'resources\Account';
+    public $modelClass = 'cookyii\modules\Account\resources\Account';
 
     /**
      * @inheritdoc

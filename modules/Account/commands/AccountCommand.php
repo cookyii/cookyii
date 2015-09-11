@@ -41,7 +41,7 @@ class AccountCommand extends \yii\console\Controller
             ]);
         }
 
-        $User = new \resources\Account([
+        $User = new \cookyii\modules\Account\resources\Account([
             'name' => $name,
             'email' => $email,
             'password' => $pass,

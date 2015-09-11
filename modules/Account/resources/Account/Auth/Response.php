@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class AuthResponse
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  *
  * @property integer $id
  * @property integer $received_at
@@ -40,11 +40,11 @@ class Response extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Account\Auth\queries\AccountAuthResponseQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountAuthResponseQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountAuthResponseQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountAuthResponseQuery(get_called_class());
     }
 
     /**

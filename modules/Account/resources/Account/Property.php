@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Account;
+namespace cookyii\modules\Account\resources\Account;
 
 /**
  * Class Property
- * @package resources\Account
+ * @package cookyii\modules\Account\resources\Account
  *
  * @property integer $account_id
  * @property string $key
@@ -92,11 +92,11 @@ class Property extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Account\queries\AccountPropertyQuery
+     * @return \cookyii\modules\Account\resources\Account\queries\AccountPropertyQuery
      */
     public static function find()
     {
-        return new \resources\Account\queries\AccountPropertyQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\queries\AccountPropertyQuery(get_called_class());
     }
 
     /**

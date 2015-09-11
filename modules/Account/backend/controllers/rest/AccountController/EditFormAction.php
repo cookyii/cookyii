@@ -27,17 +27,17 @@ class EditFormAction extends \yii\rest\Action
 
         $account_id = (int)Request()->post('account_id');
 
-        /** @var \resources\Account|null $Account */
+        /** @var \cookyii\modules\Account\resources\Account|null $Account */
         $Account = null;
 
         if ($account_id > 0) {
-            $Account = \resources\Account::find()
+            $Account = \cookyii\modules\Account\resources\Account::find()
                 ->byId($account_id)
                 ->one();
         }
 
         if (empty($Account)) {
-            $Account = new \resources\Account();
+            $Account = new \cookyii\modules\Account\resources\Account();
         }
 
         $AccountEditForm = new Account\backend\forms\AccountEditForm(['Account' => $Account]);

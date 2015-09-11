@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\queries;
+namespace cookyii\modules\Account\resources\Account\queries;
 
 /**
  * Class AccountPropertyQuery
- * @package resources\Account\queries
+ * @package cookyii\modules\Account\resources\Account\queries
  */
 class AccountPropertyQuery extends \yii\db\ActiveQuery
 {

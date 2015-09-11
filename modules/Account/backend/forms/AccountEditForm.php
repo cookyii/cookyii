@@ -15,7 +15,7 @@ class AccountEditForm extends \yii\base\Model
 
     use \cookyii\db\traits\PopulateErrorsTrait;
 
-    /** @var \resources\Account */
+    /** @var \cookyii\modules\Account\resources\Account */
     public $Account;
 
     public $name;
@@ -25,7 +25,7 @@ class AccountEditForm extends \yii\base\Model
 
     public function init()
     {
-        if (!($this->Account instanceof \resources\Account)) {
+        if (!($this->Account instanceof \cookyii\modules\Account\resources\Account)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('account', 'Not specified user to edit.'));
         }
     }
@@ -112,7 +112,7 @@ class AccountEditForm extends \yii\base\Model
      */
     public static function getGroupedPermissionValues()
     {
-        $permissions = \resources\Account::getAllPermissions();
+        $permissions = \cookyii\modules\Account\resources\Account::getAllPermissions();
 
         $result = [
             'items' => [],

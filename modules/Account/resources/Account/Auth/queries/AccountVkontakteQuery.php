@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth\queries;
+namespace cookyii\modules\Account\resources\Account\Auth\queries;
 
 /**
  * Class AccountVkontakteQuery
- * @package resources\Account\Auth\queries
+ * @package cookyii\modules\Account\resources\Account\Auth\queries
  */
 class AccountVkontakteQuery extends AbstractSocialQuery
 {

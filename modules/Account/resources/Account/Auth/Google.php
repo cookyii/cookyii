@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Google
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Google extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountGoogleQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountGoogleQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountGoogleQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountGoogleQuery(get_called_class());
     }
 
     /**

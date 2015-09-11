@@ -85,13 +85,13 @@ class SignController extends Account\backend\components\Controller
      */
     public function authSuccessCallback(\yii\authclient\ClientInterface $Client)
     {
-        $AuthResponse = new \resources\Account\Auth\Response;
+        $AuthResponse = new \cookyii\modules\Account\resources\Account\Auth\Response;
         $AuthResponse->client = $Client->getId();
 
         $attributes = $Client->getUserAttributes();
         $AuthResponse->response = Json::encode($attributes);
 
-        $AccountQuery = \resources\Account::find();
+        $AccountQuery = \cookyii\modules\Account\resources\Account::find();
 
         switch ($Client->getId()) {
             case 'facebook':
@@ -120,10 +120,10 @@ class SignController extends Account\backend\components\Controller
                 break;
         }
 
-        /** @var \resources\Account $Account */
+        /** @var \cookyii\modules\Account\resources\Account $Account */
         $Account = $AccountQuery->one();
 
-        if ($Account instanceof \resources\Account) {
+        if ($Account instanceof \cookyii\modules\Account\resources\Account) {
             if (true !== ($reason = $Account->isAvailable())) {
                 switch ($reason) {
                     default:
@@ -142,7 +142,7 @@ class SignController extends Account\backend\components\Controller
                 $AuthResponse->result = Json::encode($Account->id);
             }
         } else {
-            $Account = new \resources\Account();
+            $Account = new \cookyii\modules\Account\resources\Account();
             $Account->appendClientAttributes($Client);
 
             if ($Account->save()) {
@@ -158,7 +158,7 @@ class SignController extends Account\backend\components\Controller
 
         $AuthResponse->save();
 
-        if ($Account instanceof \resources\Account && !$Account->isNewRecord && !$Account->hasErrors()) {
+        if ($Account instanceof \cookyii\modules\Account\resources\Account && !$Account->isNewRecord && !$Account->hasErrors()) {
             $Account->save();
 
             User()->login($Account, 86400);

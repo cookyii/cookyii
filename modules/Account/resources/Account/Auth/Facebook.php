@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Facebook
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Facebook extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountFacebookQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountFacebookQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountFacebookQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountFacebookQuery(get_called_class());
     }
 
     /**

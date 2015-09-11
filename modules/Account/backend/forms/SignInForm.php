@@ -32,7 +32,7 @@ class SignInForm extends \yii\base\Model
             /** semantic validators */
             [['email', 'password'], 'required',],
             [['email'], 'filter', 'filter' => 'str_clean'],
-            [['email'], 'exist', 'targetClass' => \resources\Account::className(), 'targetAttribute' => 'email'],
+            [['email'], 'exist', 'targetClass' => \cookyii\modules\Account\resources\Account::className(), 'targetAttribute' => 'email'],
             [['password'], 'validatePassword'],
         ];
     }
@@ -101,12 +101,12 @@ class SignInForm extends \yii\base\Model
     private $_Account = null;
 
     /**
-     * @return \resources\Account
+     * @return \cookyii\modules\Account\resources\Account
      */
     private function getAccount()
     {
         if ($this->_Account === null) {
-            $this->_Account = \resources\Account::find()
+            $this->_Account = \cookyii\modules\Account\resources\Account::find()
                 ->byEmail($this->email)
                 ->one();
         }

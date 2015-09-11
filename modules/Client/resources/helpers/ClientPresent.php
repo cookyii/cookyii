@@ -17,7 +17,7 @@ namespace resources\helpers;
 class ClientPresent extends \cookyii\Presenter
 {
 
-    /** @var \resources\Account */
+    /** @var \cookyii\modules\Account\resources\Account */
     public $Model;
 
     /**

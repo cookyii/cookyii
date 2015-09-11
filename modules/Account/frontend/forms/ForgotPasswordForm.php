@@ -38,7 +38,7 @@ class ForgotPasswordForm extends \yii\base\Model
             [
                 ['email'],
                 'exist',
-                'targetClass' => \resources\Account::className(),
+                'targetClass' => \cookyii\modules\Account\resources\Account::className(),
                 'targetAttribute' => 'email',
                 'message' => \Yii::t('account', '{attribute} not found.'),
             ],
@@ -177,12 +177,12 @@ class ForgotPasswordForm extends \yii\base\Model
     private $_Account = null;
 
     /**
-     * @return \resources\Account
+     * @return \cookyii\modules\Account\resources\Account
      */
     private function getAccount()
     {
         if ($this->_Account === null) {
-            $this->_Account = \resources\Account::find()
+            $this->_Account = \cookyii\modules\Account\resources\Account::find()
                 ->byEmail($this->email)
                 ->one();
         }
@@ -191,7 +191,7 @@ class ForgotPasswordForm extends \yii\base\Model
     }
 
     /**
-     * @param \resources\Account $Account
+     * @param \cookyii\modules\Account\resources\Account $Account
      * @return string
      */
     private function encryptData($Account)
@@ -207,7 +207,7 @@ class ForgotPasswordForm extends \yii\base\Model
     }
 
     /**
-     * @param \resources\Account $Account
+     * @param \cookyii\modules\Account\resources\Account $Account
      * @return array
      */
     private function decryptData($Account)

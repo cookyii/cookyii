@@ -4,7 +4,7 @@
  * @author Revin Roman
  */
 
-namespace resources;
+namespace cookyii\modules\Account\resources;
 
 use yii\helpers\ArrayHelper;
 
@@ -24,7 +24,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $deleted_at
  * @property integer $activated_at
  *
- * @property \resources\Account\Property[] $properties
+ * @property \cookyii\modules\Account\resources\Account\Property[] $properties
  *
  * @property \resources\helpers\AccountPresent $present
  *
@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
 class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \cookyii\interfaces\AccountInterface
 {
 
-    use \resources\Account\traits\UserSocialTrait,
+    use \cookyii\modules\Account\resources\Account\traits\UserSocialTrait,
         \cookyii\db\traits\ActivationTrait,
         \cookyii\db\traits\SoftDeleteTrait;
 
@@ -305,7 +305,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getProperties()
     {
-        return $this->hasMany(\resources\Account\Property::className(), ['account_id' => 'id']);
+        return $this->hasMany(\cookyii\modules\Account\resources\Account\Property::className(), ['account_id' => 'id']);
     }
 
     /**

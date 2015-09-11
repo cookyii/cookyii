@@ -35,8 +35,7 @@
   },
   "autoload": {
     "psr-4": {
-      "cookyii\\modules\\Account\\": "",
-      "resources\\": "./resources"
+      "cookyii\\modules\\Account\\": ""
     }
   }
 }

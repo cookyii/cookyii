@@ -34,10 +34,10 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function bySocialId($class, $social_id)
     {
-        /** @var \resources\Account\Auth\queries\AbstractSocialQuery $SocialQuery */
+        /** @var \cookyii\modules\Account\resources\Account\Auth\queries\AbstractSocialQuery $SocialQuery */
         $SocialQuery = $class::find();
 
-        /** @var \resources\Account\Auth\AbstractSocial $Social */
+        /** @var \cookyii\modules\Account\resources\Account\Auth\AbstractSocial $Social */
         $Social = $SocialQuery
             ->bySocialId($social_id)
             ->one();
@@ -57,7 +57,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byFacebookId($Facebook_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Facebook', $Facebook_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Facebook', $Facebook_id);
     }
 
     /**
@@ -66,7 +66,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byGithubId($Github_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Github', $Github_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Github', $Github_id);
     }
 
     /**
@@ -75,7 +75,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byGoogleId($Google_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Google', $Google_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Google', $Google_id);
     }
 
     /**
@@ -84,7 +84,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byLinkedinId($Linkedin_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Linkedin', $Linkedin_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Linkedin', $Linkedin_id);
     }
 
     /**
@@ -93,7 +93,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byLiveId($Live_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Live', $Live_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Live', $Live_id);
     }
 
     /**
@@ -102,7 +102,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byTwitterId($Twitter_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Twitter', $Twitter_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Twitter', $Twitter_id);
     }
 
     /**
@@ -111,7 +111,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byVkontakteId($Vkontakte_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Vkontakte', $Vkontakte_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Vkontakte', $Vkontakte_id);
     }
 
     /**
@@ -120,7 +120,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byYandexId($Yandex_id)
     {
-        return $this->bySocialId('resources\Account\Auth\Yandex', $Yandex_id);
+        return $this->bySocialId('cookyii\modules\Account\resources\Account\Auth\Yandex', $Yandex_id);
     }
 
     /**

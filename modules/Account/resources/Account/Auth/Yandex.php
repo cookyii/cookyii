@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Yandex
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Yandex extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountYandexQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountYandexQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountYandexQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountYandexQuery(get_called_class());
     }
 
     /**

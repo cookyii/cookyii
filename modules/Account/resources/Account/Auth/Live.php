@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Live
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Live extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountLiveQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountLiveQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountLiveQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountLiveQuery(get_called_class());
     }
 
     /**

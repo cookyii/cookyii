@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Twitter
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Twitter extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountTwitterQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountTwitterQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountTwitterQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountTwitterQuery(get_called_class());
     }
 
     /**

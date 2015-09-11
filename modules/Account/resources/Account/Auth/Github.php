@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Github
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Github extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountGithubQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountGithubQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountGithubQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountGithubQuery(get_called_class());
     }
 
     /**

@@ -8,7 +8,7 @@
 return [
     'component.user' => [
         'class' => 'yii\web\User',
-        'identityClass' => 'resources\Account',
+        'identityClass' => 'cookyii\modules\Account\resources\Account',
         'enableAutoLogin' => true,
         'loginUrl' => ['/'],
     ],

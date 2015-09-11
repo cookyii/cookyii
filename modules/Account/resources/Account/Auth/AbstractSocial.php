@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class AbstractSocial
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  *
  * @property integer $account_id
  * @property string $social_id

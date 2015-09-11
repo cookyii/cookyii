@@ -35,7 +35,7 @@ class EditController extends Account\backend\components\Controller
     public function actionIndex()
     {
         $AccountEditForm = new Account\backend\forms\AccountEditForm([
-            'Account' => new \resources\Account(),
+            'Account' => new \cookyii\modules\Account\resources\Account(),
         ]);
 
         return $this->render('index', [

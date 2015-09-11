@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Linkedin
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Linkedin extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountLinkedinQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountLinkedinQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountLinkedinQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountLinkedinQuery(get_called_class());
     }
 
     /**

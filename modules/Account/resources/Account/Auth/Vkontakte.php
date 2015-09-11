@@ -4,21 +4,21 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\Auth;
+namespace cookyii\modules\Account\resources\Account\Auth;
 
 /**
  * Class Vkontakte
- * @package resources\Account\Auth
+ * @package cookyii\modules\Account\resources\Account\Auth
  */
 class Vkontakte extends AbstractSocial
 {
 
     /**
-     * @return \resources\Account\Auth\queries\AccountVkontakteQuery
+     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountVkontakteQuery
      */
     public static function find()
     {
-        return new \resources\Account\Auth\queries\AccountVkontakteQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountVkontakteQuery(get_called_class());
     }
 
     /**

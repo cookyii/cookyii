@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Account\traits;
+namespace cookyii\modules\Account\resources\Account\traits;
 
 /**
  * Trait UserSocialTrait
- * @package resources\Account\traits
+ * @package cookyii\modules\Account\resources\Account\traits
  *
  * @property integer $id
  */
@@ -30,28 +30,28 @@ trait UserSocialTrait
                 $Auth = null;
                 break;
             case 'facebook':
-                $Auth = new \resources\Account\Auth\Facebook($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Facebook($credentials);
                 break;
             case 'github':
-                $Auth = new \resources\Account\Auth\Github($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Github($credentials);
                 break;
             case 'google':
-                $Auth = new \resources\Account\Auth\Google($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Google($credentials);
                 break;
             case 'linkedin':
-                $Auth = new \resources\Account\Auth\Linkedin($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Linkedin($credentials);
                 break;
             case 'live':
-                $Auth = new \resources\Account\Auth\Live($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Live($credentials);
                 break;
             case 'twitter':
-                $Auth = new \resources\Account\Auth\Twitter($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Twitter($credentials);
                 break;
             case 'vkontakte':
-                $Auth = new \resources\Account\Auth\Vkontakte($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Vkontakte($credentials);
                 break;
             case 'yandex':
-                $Auth = new \resources\Account\Auth\Yandex($credentials);
+                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Yandex($credentials);
                 break;
         }
 
