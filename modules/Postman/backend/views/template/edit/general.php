@@ -56,7 +56,7 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
                     ])
                         ->label(false)
                         ->checkbox([
-                            'ng-if' => sprintf('data.code !== "%s"', \resources\Postman\Message::LAYOUT_CODE),
+                            'ng-if' => sprintf('data.code !== "%s"', \cookyii\modules\Postman\resources\Postman\Message::LAYOUT_CODE),
                         ]);
                     ?>
                 </div>

@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Postman\Message\queries;
+namespace cookyii\modules\Postman\resources\Postman\Message\queries;
 
 /**
  * Class MessageAttachQuery
- * @package resources\Postman\Message\queries
+ * @package cookyii\modules\Postman\resources\Postman\Message\queries
  */
 class MessageAttachQuery extends \yii\db\ActiveQuery
 {

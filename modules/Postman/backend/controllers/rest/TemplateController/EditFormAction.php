@@ -27,17 +27,17 @@ class EditFormAction extends \yii\rest\Action
 
         $template_id = (int)Request()->post('template_id');
 
-        /** @var \resources\Postman\Template|null $Template */
+        /** @var \cookyii\modules\Postman\resources\Postman\Template|null $Template */
         $Template = null;
 
         if ($template_id > 0) {
-            $Template = \resources\Postman\Template::find()
+            $Template = \cookyii\modules\Postman\resources\Postman\Template::find()
                 ->byId($template_id)
                 ->one();
         }
 
         if (empty($Template)) {
-            $Template = new \resources\Postman\Template();
+            $Template = new \cookyii\modules\Postman\resources\Postman\Template();
         }
 
         $TemplateEditForm = new Postman\backend\forms\TemplateEditForm(['Template' => $Template]);

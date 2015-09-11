@@ -17,7 +17,7 @@ use yii\helpers\Json;
 class MessageController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'resources\Postman\Message';
+    public $modelClass = 'cookyii\modules\Postman\resources\Postman\Message';
 
     /**
      * @inheritdoc

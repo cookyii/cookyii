@@ -22,7 +22,7 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \resources\Postman\Message $model */
+        /** @var \cookyii\modules\Postman\resources\Postman\Message $model */
         $model = $this->findModel($id);
 
         $result = $model->attributes;

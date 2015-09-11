@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Postman;
+namespace cookyii\modules\Postman\resources\Postman;
 
 /**
  * Class Template
- * @package resources\Postman
+ * @package cookyii\modules\Postman\resources\Postman
  *
  * @property integer $id
  * @property string $code
@@ -75,11 +75,11 @@ class Template extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Postman\queries\TemplateQuery
+     * @return \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery
      */
     public static function find()
     {
-        return new \resources\Postman\queries\TemplateQuery(get_called_class());
+        return new \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery(get_called_class());
     }
 
     /**

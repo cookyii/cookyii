@@ -4,14 +4,14 @@
  * @author Revin Roman http://phptime.ru
  */
 
-namespace resources\Postman;
+namespace cookyii\modules\Postman\resources\Postman;
 
 use yii\helpers\Html;
 use yii\helpers\Json;
 
 /**
  * Class Message
- * @package resources\Postman
+ * @package cookyii\modules\Postman\resources\Postman
  *
  * @property integer $id
  * @property string $subject
@@ -231,7 +231,7 @@ class Message extends \yii\db\ActiveRecord
      * @param array $placeholders
      * @param string|null $subject
      * @param string $styles
-     * @return \resources\Postman\Message
+     * @return \cookyii\modules\Postman\resources\Postman\Message
      * @throws \yii\web\ServerErrorHttpException
      */
     public static function create($template_code, $placeholders = [], $subject = null, $styles = '')
@@ -341,11 +341,11 @@ class Message extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Postman\queries\MessageQuery
+     * @return \cookyii\modules\Postman\resources\Postman\queries\MessageQuery
      */
     public static function find()
     {
-        return new \resources\Postman\queries\MessageQuery(get_called_class());
+        return new \cookyii\modules\Postman\resources\Postman\queries\MessageQuery(get_called_class());
     }
 
     /**

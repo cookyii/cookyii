@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Postman\Message;
+namespace cookyii\modules\Postman\resources\Postman\Message;
 
 /**
  * Class Attach
- * @package resources\Postman\Message
+ * @package cookyii\modules\Postman\resources\Postman\Message
  *
  * @property integer $letter_id
  * @property integer $media_id
@@ -37,11 +37,11 @@ class Attach extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Postman\Message\queries\MessageAttachQuery
+     * @return \cookyii\modules\Postman\resources\Postman\Message\queries\MessageAttachQuery
      */
     public static function find()
     {
-        return new \resources\Postman\Message\queries\MessageAttachQuery(get_called_class());
+        return new \cookyii\modules\Postman\resources\Postman\Message\queries\MessageAttachQuery(get_called_class());
     }
 
     /**

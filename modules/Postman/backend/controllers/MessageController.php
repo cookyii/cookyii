@@ -45,7 +45,7 @@ class MessageController extends Postman\backend\components\Controller
     public function actionEdit()
     {
         $MessageEditForm = new Postman\backend\forms\MessageEditForm([
-            'Message' => new \resources\Postman\Message(),
+            'Message' => new \cookyii\modules\Postman\resources\Postman\Message(),
         ]);
 
         return $this->render('edit', [
@@ -69,12 +69,12 @@ class MessageController extends Postman\backend\components\Controller
         switch ($type) {
             default:
             case 'text':
-                $Message = \resources\Postman\Message::compose($subject, $content, null, [], null, $use_layout);
+                $Message = \cookyii\modules\Postman\resources\Postman\Message::compose($subject, $content, null, [], null, $use_layout);
 
                 $result = Html::tag('pre', Html::encode($Message->content_text));
                 break;
             case 'html':
-                $Message = \resources\Postman\Message::compose($subject, null, $content, [], null, $use_layout);
+                $Message = \cookyii\modules\Postman\resources\Postman\Message::compose($subject, null, $content, [], null, $use_layout);
 
                 $result = $Message->content_html;
                 break;

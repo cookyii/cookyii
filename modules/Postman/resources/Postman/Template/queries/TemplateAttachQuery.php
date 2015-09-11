@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Postman\Template\queries;
+namespace cookyii\modules\Postman\resources\Postman\Template\queries;
 
 /**
  * Class TemplateAttachQuery
- * @package resources\Postman\Template\queries
+ * @package cookyii\modules\Postman\resources\Postman\Template\queries
  */
 class TemplateAttachQuery extends \yii\db\ActiveQuery
 {

@@ -27,17 +27,17 @@ class EditFormAction extends \yii\rest\Action
 
         $message_id = (int)Request()->post('message_id');
 
-        /** @var \resources\Postman\Message|null $Message */
+        /** @var \cookyii\modules\Postman\resources\Postman\Message|null $Message */
         $Message = null;
 
         if ($message_id > 0) {
-            $Message = \resources\Postman\Message::find()
+            $Message = \cookyii\modules\Postman\resources\Postman\Message::find()
                 ->byId($message_id)
                 ->one();
         }
 
         if (empty($Message)) {
-            $Message = new \resources\Postman\Message();
+            $Message = new \cookyii\modules\Postman\resources\Postman\Message();
         }
 
         $MessageEditForm = new Postman\backend\forms\MessageEditForm(['Message' => $Message]);

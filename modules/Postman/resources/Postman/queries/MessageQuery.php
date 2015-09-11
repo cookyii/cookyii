@@ -4,11 +4,11 @@
  * @author Revin Roman http://phptime.ru
  */
 
-namespace resources\Postman\queries;
+namespace cookyii\modules\Postman\resources\Postman\queries;
 
 /**
  * Class MessageQuery
- * @package resources\Postman\queries
+ * @package cookyii\modules\Postman\resources\Postman\queries
  */
 class MessageQuery extends \yii\db\ActiveQuery
 {
@@ -42,7 +42,7 @@ class MessageQuery extends \yii\db\ActiveQuery
      */
     public function onlyNew()
     {
-        return $this->byStatus([\resources\Postman\Message::STATUS_NEW]);
+        return $this->byStatus([\cookyii\modules\Postman\resources\Postman\Message::STATUS_NEW]);
     }
 
     /**

@@ -17,7 +17,7 @@ class TemplateEditForm extends \yii\base\Model
 
     use \cookyii\db\traits\PopulateErrorsTrait;
 
-    /** @var \resources\Postman\Template */
+    /** @var \cookyii\modules\Postman\resources\Postman\Template */
     public $Template;
 
     public $code;
@@ -32,7 +32,7 @@ class TemplateEditForm extends \yii\base\Model
 
     public function init()
     {
-        if (!($this->Template instanceof \resources\Postman\Template)) {
+        if (!($this->Template instanceof \cookyii\modules\Postman\resources\Postman\Template)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('postman', 'Not specified template to edit.'));
         }
     }
@@ -54,7 +54,7 @@ class TemplateEditForm extends \yii\base\Model
             [['address', 'params'], 'safe'],
 
             /** default values */
-            [['use_layout'], 'default', 'value' => \resources\Postman\Template::USE_LAYOUT],
+            [['use_layout'], 'default', 'value' => \cookyii\modules\Postman\resources\Postman\Template::USE_LAYOUT],
         ];
     }
 

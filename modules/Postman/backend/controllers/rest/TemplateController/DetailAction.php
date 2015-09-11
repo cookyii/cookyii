@@ -22,12 +22,12 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \resources\Postman\Template $model */
+        /** @var \cookyii\modules\Postman\resources\Postman\Template $model */
         $model = $this->findModel($id);
 
         $result = $model->attributes;
 
-        $result['use_layout'] = $result['use_layout'] === \resources\Postman\Template::USE_LAYOUT;
+        $result['use_layout'] = $result['use_layout'] === \cookyii\modules\Postman\resources\Postman\Template::USE_LAYOUT;
 
         $result['address'] = empty($result['address'])
             ? null

@@ -178,7 +178,7 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
 
         $this->insert('{{%postman_template}}', [
             'code' => $code,
-            'subject' => 'Your account is banned',
+            'subject' => 'Your account is blocked',
             'content_text' => $content['text'],
             'content_html' => $content['html'],
             'styles' => null,
@@ -209,7 +209,7 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
 
         $this->insert('{{%postman_template}}', [
             'code' => $code,
-            'subject' => 'Your account is unbanned',
+            'subject' => 'Your account is unblocked',
             'content_text' => $content['text'],
             'content_html' => $content['html'],
             'styles' => null,

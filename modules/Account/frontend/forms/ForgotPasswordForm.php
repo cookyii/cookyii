@@ -108,7 +108,7 @@ class ForgotPasswordForm extends \yii\base\Model
                 $url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
                 $short_url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
 
-                $Message = \resources\Postman\Message::create('account.frontend.forgot-password.request', [
+                $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.forgot-password.request', [
                     '{user_id}' => $Account->id,
                     '{username}' => $Account->name,
                     '{hash}' => $hash,
@@ -149,7 +149,7 @@ class ForgotPasswordForm extends \yii\base\Model
         $Account->validate() && $Account->save();
 
         if (!$Account->hasErrors()) {
-            $Message = \resources\Postman\Message::create('account.frontend.forgot-password.new-password', [
+            $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.forgot-password.new-password', [
                 '{user_id}' => $Account->id,
                 '{username}' => $Account->name,
                 '{email}' => $Account->email,

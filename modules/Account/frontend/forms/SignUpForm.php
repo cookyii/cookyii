@@ -79,7 +79,7 @@ class SignUpForm extends \yii\base\Model
         $Account->validate() && $Account->save();
 
         if (!$Account->hasErrors()) {
-            $Message = \resources\Postman\Message::create('account.frontend.sign-up', [
+            $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.sign-up', [
                 '{user_id}' => $Account->id,
                 '{username}' => $Account->name,
                 '{email}' => $Account->email,

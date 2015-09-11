@@ -36,8 +36,7 @@
   },
   "autoload": {
     "psr-4": {
-      "cookyii\\modules\\Postman\\": "",
-      "resources\\": "./resources"
+      "cookyii\\modules\\Postman\\": ""
     }
   }
 }

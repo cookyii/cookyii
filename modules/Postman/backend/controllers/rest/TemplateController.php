@@ -15,7 +15,7 @@ use cookyii\modules\Postman;
 class TemplateController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'resources\Postman\Template';
+    public $modelClass = 'cookyii\modules\Postman\resources\Postman\Template';
 
     /**
      * @inheritdoc
