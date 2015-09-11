@@ -5,7 +5,7 @@
   "license": "BSD-3-Clause",
   "private": true,
   "resolutions": {
-    "angular": "1.4.3"
+    "angular": "~1.4"
   },
   "dependencies": {
     "angular": "1.4.*",

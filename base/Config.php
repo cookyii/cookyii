@@ -69,8 +69,8 @@ class Config
     {
         if (file_exists($baseDir . '/globals.php')) {
             require($baseDir . '/globals.php');
-        } elseif (file_exists($baseDir . '/components/globals.php')) {
-            require($baseDir . '/components/globals.php');
+        } elseif (file_exists($baseDir . '/base/globals.php')) {
+            require($baseDir . '/base/globals.php');
         } elseif (file_exists($baseDir . '/vendor/cookyii/base/globals.php')) {
             require($baseDir . '/vendor/cookyii/base/globals.php');
         } else {
