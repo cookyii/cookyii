@@ -36,7 +36,7 @@ $this->beginPage();
 ?><!DOCTYPE html>
 <html <?= Html::renderTagAttributes([
     'lang' => Yii::$app->language,
-    'ng-app' => 'BackendApp',
+    'ng-app' => 'CrmApp',
 ]) ?>>
 <head>
     <!--[if IE]>

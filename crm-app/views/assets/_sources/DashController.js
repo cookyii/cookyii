@@ -1,5 +1,5 @@
 angular
-  .module('BackendApp')
+  .module('CrmApp')
 
   .controller('DashController', [
     '$scope', '$timeout', 'ToastScope', '$mdSidenav', '$mdUtil',
