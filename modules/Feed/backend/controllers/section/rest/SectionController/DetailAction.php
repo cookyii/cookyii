@@ -23,7 +23,7 @@ class DetailAction extends \yii\rest\Action
         /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
         $modelClass = $this->modelClass;
 
-        /** @var \resources\Feed\queries\SectionQuery $Query */
+        /** @var \cookyii\modules\Feed\resources\Feed\queries\SectionQuery $Query */
         $Query = $modelClass::find();
 
         /** @var \cookyii\modules\Feed\resources\Feed\Section $model */

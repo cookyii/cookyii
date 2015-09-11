@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastScope', 'UdpWebSocket',
-    function ($scope, $http, $location, $timeout, ToastScope, UdpWebSocket) {
+    '$scope', '$http', '$location', '$timeout', 'ToastScope',
+    function ($scope, $http, $location, $timeout, ToastScope) {
 
       $scope.inProgress = false;
 
@@ -42,8 +42,6 @@ angular.module('BackendApp')
               if ($scope.$parent.isNewAccount) {
                 $location.search('id', response.account_id);
               }
-
-              UdpWebSocket.send('reload-account-' + response.account_id);
 
               $scope.reload();
             }

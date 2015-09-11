@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountRolesController', [
-    '$scope', '$http', 'ToastScope', 'UdpWebSocket',
-    function ($scope, $http, ToastScope, UdpWebSocket) {
+    '$scope', '$http', 'ToastScope',
+    function ($scope, $http, ToastScope) {
       $scope.saveRoles = function () {
         $http({
           method: 'PUT',
@@ -15,7 +15,7 @@ angular.module('BackendApp')
           }
         })
           .success(function (response) {
-            UdpWebSocket.send('reload-account-' + $scope.$parent.getAccountId());
+            //UdpWebSocket.send('reload-account-' + $scope.$parent.getAccountId());
 
             $scope.$emit('reloadAccountData');
           })

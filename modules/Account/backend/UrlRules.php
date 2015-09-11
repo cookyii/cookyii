@@ -23,9 +23,19 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
             'account/auth/<authclient>' => 'account/sign/auth',
             'accounts' => 'account/list/index',
 
-            'PUT account/rest/roles' => 'account/rest/account/roles',
-            'POST account/rest/property' => 'account/rest/property/push',
-            'DELETE account/rest/property' => 'account/rest/property/delete',
+            [
+                'pattern' => 'account/rest/roles',
+                'route' => 'account/rest/account/roles',
+                'verb' => 'PUT',
+            ], [
+                'pattern' => 'account/rest/property',
+                'route' => 'account/rest/property/push',
+                'verb' => 'POST',
+            ], [
+                'pattern' => 'account/rest/property',
+                'route' => 'account/rest/property/delete',
+                'verb' => 'DELETE',
+            ],
 
             [
                 'class' => \cookyii\rest\UrlRule::className(),

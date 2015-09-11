@@ -129,7 +129,7 @@ class SectionController extends \yii\rest\ActiveController
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $action->modelClass;
 
-        /** @var \resources\Feed\queries\SectionQuery $Query */
+        /** @var \cookyii\modules\Feed\resources\Feed\queries\SectionQuery $Query */
         $Query = $modelClass::find();
 
         $search = str_clean(Request()->get('search'));

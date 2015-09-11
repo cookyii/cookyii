@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .controller('AccountPropertiesController', [
-    '$scope', '$window', '$location', '$http', '$timeout', 'ToastScope', 'UdpWebSocket', '$mdDialog',
-    function ($scope, $window, $location, $http, $timeout, ToastScope, UdpWebSocket, $mdDialog) {
+    '$scope', '$window', '$location', '$http', '$timeout', 'ToastScope', '$mdDialog',
+    function ($scope, $window, $location, $http, $timeout, ToastScope, $mdDialog) {
       var query = $location.search();
 
       $scope.limit = 5;
@@ -88,8 +88,6 @@ angular.module('BackendApp')
                 $location.search('prop', $scope.editedProperty.key);
               }
 
-              UdpWebSocket.send('reload-account-' + $scope.$parent.getAccountId());
-
               $scope.$emit('reloadAccountData');
 
               ToastScope.send('success', {
@@ -127,8 +125,6 @@ angular.module('BackendApp')
                   message: response.message
                 });
               } else {
-                UdpWebSocket.send('reload-account-' + $scope.$parent.getAccountId());
-
                 $scope.$emit('reloadAccountData');
 
                 $location.search('prop', null);
