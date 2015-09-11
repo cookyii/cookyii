@@ -5,13 +5,13 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Feed\queries;
+namespace cookyii\modules\Feed\resources\Feed\queries;
 
 use yii\helpers\ArrayHelper;
 
 /**
  * Class ItemQuery
- * @package resources\Feed\queries
+ * @package cookyii\modules\Feed\resources\Feed\queries
  */
 class ItemQuery extends \yii\db\ActiveQuery
 {

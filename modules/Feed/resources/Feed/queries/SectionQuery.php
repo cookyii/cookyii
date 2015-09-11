@@ -5,11 +5,11 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Feed\queries;
+namespace cookyii\modules\Feed\resources\Feed\queries;
 
 /**
  * Class SectionQuery
- * @package resources\Feed\queries
+ * @package cookyii\modules\Feed\resources\Feed\queries
  */
 class SectionQuery extends \yii\db\ActiveQuery
 {

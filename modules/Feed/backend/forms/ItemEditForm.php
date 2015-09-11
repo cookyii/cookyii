@@ -6,7 +6,7 @@
 
 namespace cookyii\modules\Feed\backend\forms;
 
-use cookyii\modules\Feed\cookyii\modules\Feed\resources\Feed\ItemSection;
+use cookyii\modules\Feed\resources\Feed\ItemSection;
 use yii\helpers\Json;
 
 /**

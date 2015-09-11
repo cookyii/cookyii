@@ -12,7 +12,7 @@ use yii\helpers\Json;
 
 /**
  * Class Section
- * @package resources\Feed
+ * @package cookyii\modules\Feed\resources\Feed
  *
  * @property integer $id
  * @property integer $parent_id
@@ -109,7 +109,7 @@ class Section extends \yii\db\ActiveRecord
         ];
 
         if (empty($Sections) && empty($parent)) {
-            /** @var \resources\Feed\queries\SectionQuery $SectionsQuery */
+            /** @var \cookyii\modules\Feed\resources\Feed\queries\SectionQuery $SectionsQuery */
             $SectionsQuery = \cookyii\modules\Feed\resources\Feed\Section::find();
 
             if ($with_deleted === false) {
@@ -164,11 +164,11 @@ class Section extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Feed\queries\SectionQuery
+     * @return \cookyii\modules\Feed\resources\Feed\queries\SectionQuery
      */
     public static function find()
     {
-        return new \resources\Feed\queries\SectionQuery(get_called_class());
+        return new \cookyii\modules\Feed\resources\Feed\queries\SectionQuery(get_called_class());
     }
 
     /**

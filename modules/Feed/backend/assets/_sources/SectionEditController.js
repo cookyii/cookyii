@@ -25,13 +25,15 @@ angular.module('BackendApp')
 
       $scope.sections = SectionDropdownScope;
 
-      $timeout(function () {
+      function reloadSectionList(){
         $scope.sections.reload(true, function () {
           if ($scope.$parent.getSection() !== null) {
             $scope.sections.checkCurrentSection($scope.$parent.getSection());
           }
         });
-      });
+      }
+
+      $timeout(reloadSectionList);
 
       $scope.submit = function (SectionEditForm, e) {
         var $form = angular.element('#SectionEditForm');
@@ -66,9 +68,8 @@ angular.module('BackendApp')
 
               QueryScope.set('section', response.section_slug);
 
-
               $timeout(function () {
-                reloadParentValues();
+                reloadSectionList();
                 $scope.$parent.reload();
               });
             }

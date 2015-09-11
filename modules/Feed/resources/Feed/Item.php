@@ -11,7 +11,7 @@ use yii\helpers\Json;
 
 /**
  * Class Item
- * @package resources\Feed
+ * @package cookyii\modules\Feed\resources\Feed
  *
  * @property integer $id
  * @property string $slug
@@ -100,7 +100,7 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Feed\queries\ItemSectionQuery
+     * @return \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery
      */
     public function getItemSections()
     {
@@ -108,7 +108,7 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Feed\queries\SectionQuery
+     * @return \cookyii\modules\Feed\resources\Feed\queries\SectionQuery
      */
     public function getSections()
     {
@@ -117,11 +117,11 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Feed\queries\ItemQuery
+     * @return \cookyii\modules\Feed\resources\Feed\queries\ItemQuery
      */
     public static function find()
     {
-        return new \resources\Feed\queries\ItemQuery(get_called_class());
+        return new \cookyii\modules\Feed\resources\Feed\queries\ItemQuery(get_called_class());
     }
 
     /**

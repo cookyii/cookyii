@@ -9,7 +9,7 @@ namespace cookyii\modules\Feed\resources\Feed;
 
 /**
  * Class ItemSection
- * @package resources\Feed
+ * @package cookyii\modules\Feed\resources\Feed
  *
  * @property integer $item_id
  * @property integer $section_id
@@ -34,11 +34,11 @@ class ItemSection extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Feed\queries\ItemSectionQuery
+     * @return \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery
      */
     public static function find()
     {
-        return new \resources\Feed\queries\ItemSectionQuery(get_called_class());
+        return new \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery(get_called_class());
     }
 
     /**
