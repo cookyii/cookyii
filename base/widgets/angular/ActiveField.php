@@ -33,7 +33,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
         if (!isset($this->options['ng-class'])) {
             $this->options['ng-class'] = Json::encode([
-                'has-error' => new JsExpression(sprintf('error.%s', $this->attribute))
+                'has-error' => new JsExpression(sprintf('error.%s', str_replace('[]', '', $this->attribute)))
             ]);
         }
     }
