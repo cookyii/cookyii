@@ -4,11 +4,11 @@
  * @author Revin Roman http://phptime.ru
  */
 
-namespace resources\queries;
+namespace cookyii\modules\Page\resources\queries;
 
 /**
  * Class PageQuery
- * @package resources\queries
+ * @package cookyii\modules\Page\resources\queries
  */
 class PageQuery extends \yii\db\ActiveQuery
 {

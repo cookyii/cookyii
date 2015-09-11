@@ -15,7 +15,7 @@ use cookyii\modules\Page;
 class PageController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'resources\Page';
+    public $modelClass = 'cookyii\modules\Page\resources\Page';
 
     /**
      * @inheritdoc
@@ -91,7 +91,7 @@ class PageController extends \yii\rest\ActiveController
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $action->modelClass;
 
-        /** @var \resources\queries\PageQuery $Query */
+        /** @var \cookyii\modules\Page\resources\queries\PageQuery $Query */
         $Query = $modelClass::find();
 
         $search = str_clean(Request()->get('search'));

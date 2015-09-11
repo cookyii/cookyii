@@ -4,13 +4,13 @@
  * @author Revin Roman http://phptime.ru
  */
 
-namespace resources;
+namespace cookyii\modules\Page\resources;
 
 use yii\helpers\Json;
 
 /**
  * Class Page
- * @package resources
+ * @package cookyii\modules\Page\resources
  *
  * @property integer $id
  * @property string $slug
@@ -85,11 +85,11 @@ class Page extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\queries\PageQuery
+     * @return \cookyii\modules\Page\resources\queries\PageQuery
      */
     public static function find()
     {
-        return new \resources\queries\PageQuery(get_called_class());
+        return new \cookyii\modules\Page\resources\queries\PageQuery(get_called_class());
     }
 
     /**

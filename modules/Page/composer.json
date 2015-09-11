@@ -36,8 +36,7 @@
   },
   "autoload": {
     "psr-4": {
-      "cookyii\\modules\\Page\\": "",
-      "resources\\": "./resources"
+      "cookyii\\modules\\Page\\": ""
     }
   }
 }

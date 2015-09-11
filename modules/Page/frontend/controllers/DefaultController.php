@@ -36,13 +36,13 @@ class DefaultController extends Page\frontend\components\Controller
      */
     public function actionIndex($slug)
     {
-        $Page = \resources\Page::find()
+        $Page = \cookyii\modules\Page\resources\Page::find()
             ->bySlug($slug)
             ->withoutDeactivated()
             ->withoutDeleted()
             ->one();
 
-        if (!($Page instanceof \resources\Page)) {
+        if (!($Page instanceof \cookyii\modules\Page\resources\Page)) {
             throw new \yii\web\NotFoundHttpException(\Yii::t('page', 'Страница не найдена'));
         }
 

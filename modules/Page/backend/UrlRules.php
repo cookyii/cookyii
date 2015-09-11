@@ -22,7 +22,10 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
         return [
             'pages' => 'page/list/index',
 
-            ['class' => \cookyii\rest\UrlRule::className(), 'controller' => 'page/rest/page'],
+            [
+                'class' => \cookyii\rest\UrlRule::className(),
+                'controller' => 'page/rest/page',
+            ],
         ];
     }
 }

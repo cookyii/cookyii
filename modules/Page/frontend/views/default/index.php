@@ -4,7 +4,7 @@
  * @author Revin Roman
  *
  * @var yii\web\View $this
- * @var resources\Page $Page
+ * @var cookyii\modules\Page\resources\Page $Page
  */
 
 use yii\helpers\Html;

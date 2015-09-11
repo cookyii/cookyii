@@ -27,17 +27,17 @@ class EditFormAction extends \yii\rest\Action
 
         $page_id = (int)Request()->post('page_id');
 
-        /** @var \resources\Page|null $Page */
+        /** @var \cookyii\modules\Page\resources\Page|null $Page */
         $Page = null;
 
         if ($page_id > 0) {
-            $Page = \resources\Page::find()
+            $Page = \cookyii\modules\Page\resources\Page::find()
                 ->byId($page_id)
                 ->one();
         }
 
         if (empty($Page)) {
-            $Page = new \resources\Page();
+            $Page = new \cookyii\modules\Page\resources\Page();
         }
 
         $PageEditForm = new Page\backend\forms\PageEditForm(['Page' => $Page]);

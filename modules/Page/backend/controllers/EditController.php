@@ -35,7 +35,7 @@ class EditController extends Page\backend\components\Controller
     public function actionIndex()
     {
         $PageEditForm = new Page\backend\forms\PageEditForm([
-            'Page' => new \resources\Page(),
+            'Page' => new \cookyii\modules\Page\resources\Page(),
         ]);
 
         return $this->render('index', [

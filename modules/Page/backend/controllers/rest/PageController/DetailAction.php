@@ -20,7 +20,7 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \resources\Page $model */
+        /** @var \cookyii\modules\Page\resources\Page $model */
         $model = $this->findModel($id);
 
         $result = $model->attributes;

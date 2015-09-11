@@ -17,7 +17,7 @@ class PageEditForm extends \yii\base\Model
 
     use \cookyii\db\traits\PopulateErrorsTrait;
 
-    /** @var \resources\Page */
+    /** @var \cookyii\modules\Page\resources\Page */
     public $Page;
 
     public $title;
@@ -31,7 +31,7 @@ class PageEditForm extends \yii\base\Model
 
     public function init()
     {
-        if (!($this->Page instanceof \resources\Page)) {
+        if (!($this->Page instanceof \cookyii\modules\Page\resources\Page)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('page', 'Not specified user to edit.'));
         }
     }
