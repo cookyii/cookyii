@@ -4,7 +4,7 @@
  * @author Revin Roman
  */
 
-namespace resources\helpers;
+namespace cookyii\modules\Account\resources\helpers;
 
 /**
  * Class AccountPresent

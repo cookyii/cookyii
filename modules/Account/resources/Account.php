@@ -26,10 +26,10 @@ use yii\helpers\ArrayHelper;
  *
  * @property \cookyii\modules\Account\resources\Account\Property[] $properties
  *
- * @property \resources\helpers\AccountPresent $present
+ * @property \cookyii\modules\Account\resources\helpers\AccountPresent $present
  *
- * @method \resources\queries\AccountQuery hasMany($class, $link)
- * @method \resources\queries\AccountQuery hasOne($class, $link)
+ * @method \cookyii\modules\Account\resources\queries\AccountQuery hasMany($class, $link)
+ * @method \cookyii\modules\Account\resources\queries\AccountQuery hasOne($class, $link)
  */
 class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \cookyii\interfaces\AccountInterface
 {
@@ -144,14 +144,14 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     private $present = null;
 
     /**
-     * @return \resources\helpers\AccountPresent
+     * @return \cookyii\modules\Account\resources\helpers\AccountPresent
      * @throws \yii\base\InvalidConfigException
      */
     public function getPresent()
     {
         if ($this->present === null) {
             $this->present = \Yii::createObject([
-                'class' => \resources\helpers\AccountPresent::className(),
+                'class' => \cookyii\modules\Account\resources\helpers\AccountPresent::className(),
                 'Model' => $this,
             ]);
         }
@@ -301,7 +301,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
-     * @return \resources\queries\AccountQuery
+     * @return \cookyii\modules\Account\resources\queries\AccountQuery
      */
     public function getProperties()
     {
@@ -309,11 +309,11 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
-     * @return \resources\queries\AccountQuery
+     * @return \cookyii\modules\Account\resources\queries\AccountQuery
      */
     public static function find()
     {
-        return new \resources\queries\AccountQuery(get_called_class());
+        return new \cookyii\modules\Account\resources\queries\AccountQuery(get_called_class());
     }
 
     /**

@@ -94,7 +94,7 @@ class MessageController extends \yii\rest\ActiveController
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $action->modelClass;
 
-        /** @var \resources\queries\AccountQuery $Query */
+        /** @var \cookyii\modules\Account\resources\queries\AccountQuery $Query */
         $Query = $modelClass::find();
 
         $search = str_clean(Request()->get('search'));

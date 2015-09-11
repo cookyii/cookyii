@@ -4,7 +4,7 @@
  * @author Revin Roman
  */
 
-namespace resources\queries;
+namespace cookyii\modules\Account\resources\queries;
 
 /**
  * Class AccountQuery

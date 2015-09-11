@@ -139,7 +139,7 @@ class Client extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\queries\AccountQuery
+     * @return \cookyii\modules\Account\resources\queries\AccountQuery
      */
     public function getProperties()
     {
