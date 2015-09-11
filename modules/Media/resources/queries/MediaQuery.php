@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\queries;
+namespace cookyii\modules\Media\resources\queries;
 
 /**
  * Class MediaQuery
- * @package resources\queries
+ * @package cookyii\modules\Media\resources\queries
  */
 class MediaQuery extends \yii\db\ActiveQuery
 {

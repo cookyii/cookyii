@@ -23,7 +23,7 @@ class ImageWrapper extends \yii\base\Object
     /** @var string */
     public static $mediaModule = 'media';
 
-    /** @var \resources\Media */
+    /** @var \cookyii\modules\Media\resources\Media */
     public $Media = null;
 
     /** @var array */
@@ -33,7 +33,7 @@ class ImageWrapper extends \yii\base\Object
     private $mark = [];
 
     /**
-     * @param \resources\Media $Media
+     * @param \cookyii\modules\Media\resources\Media $Media
      * @return static
      */
     public static function load($Media)
@@ -222,8 +222,8 @@ class ImageWrapper extends \yii\base\Object
         $p = DIRECTORY_SEPARATOR . $p1 . DIRECTORY_SEPARATOR . $p2;
 
         return [
-            \resources\Media::getMediaModule()->storagePath . $p,
-            \resources\Media::getMediaModule()->storageWebPath . $p
+            \cookyii\modules\Media\resources\Media::getMediaModule()->storagePath . $p,
+            \cookyii\modules\Media\resources\Media::getMediaModule()->storageWebPath . $p
         ];
     }
 

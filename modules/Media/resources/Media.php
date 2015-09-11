@@ -4,14 +4,14 @@
  * @author Revin Roman
  */
 
-namespace resources;
+namespace cookyii\modules\Media\resources;
 
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
 
 /**
  * Class Media
- * @package resources
+ * @package cookyii\modules\Media\resources
  *
  * @property integer $id
  * @property string $mime
@@ -215,11 +215,11 @@ class Media extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\queries\MediaQuery
+     * @return \cookyii\modules\Media\resources\queries\MediaQuery
      */
     public static function find()
     {
-        return new \resources\queries\MediaQuery(get_called_class());
+        return new \cookyii\modules\Media\resources\queries\MediaQuery(get_called_class());
     }
 
     /**
