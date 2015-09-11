@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\helpers;
+namespace cookyii\modules\Client\resources\helpers;
 
 /**
  * Class ClientPresent
- * @package resources\helpers
+ * @package cookyii\modules\Client\resources\helpers
  *
  * @property string $avatar
  * @property string $created_at

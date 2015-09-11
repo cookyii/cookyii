@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\queries;
+namespace cookyii\modules\Client\resources\queries;
 
 /**
  * Class ClientQuery
- * @package resources\queries
+ * @package cookyii\modules\Client\resources\queries
  */
 class ClientQuery extends \yii\db\ActiveQuery
 {

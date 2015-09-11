@@ -100,7 +100,7 @@ class ClientController extends \yii\rest\ActiveController
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $action->modelClass;
 
-        /** @var \resources\queries\ClientQuery $Query */
+        /** @var \cookyii\modules\Client\resources\queries\ClientQuery $Query */
         $Query = $modelClass::find();
 
         $search = str_clean(Request()->get('search'));
