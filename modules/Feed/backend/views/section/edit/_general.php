@@ -2,6 +2,7 @@
 /**
  * _general.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  *
  * @var yii\web\View $this
  * @var cookyii\modules\Feed\backend\forms\SectionEditForm $SectionEditForm

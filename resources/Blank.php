@@ -1,7 +1,8 @@
 <?php
 /**
  * Blank.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace resources;

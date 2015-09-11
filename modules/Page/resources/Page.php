@@ -1,7 +1,8 @@
 <?php
 /**
  * Page.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Page\resources;

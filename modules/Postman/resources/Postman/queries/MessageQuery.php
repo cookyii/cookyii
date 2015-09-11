@@ -1,7 +1,8 @@
 <?php
 /**
  * MessageQuery.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Postman\resources\Postman\queries;

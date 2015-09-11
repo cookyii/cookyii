@@ -2,6 +2,7 @@
 /**
  * _properties.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  *
  * @var yii\web\View $this
  */

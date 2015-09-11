@@ -1,6 +1,6 @@
 <?php
 
-use yii\db\mysql\Schema;
+use yii\db\Schema;
 
 class m150715_120825_client extends \cookyii\db\Migration
 {

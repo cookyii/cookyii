@@ -7,11 +7,14 @@
 
 namespace cookyii\modules\Client\resources;
 
+use cookyii\modules\Account;
+
 /**
  * Class Client
  * @package resources
  *
  * @property integer $id
+ * @property integer $account_id
  * @property string $name
  * @property string $email
  * @property string $phone
@@ -136,6 +139,44 @@ class Client extends \yii\db\ActiveRecord
         }
 
         return $result;
+    }
+
+    /**
+     * @param null|string $name
+     * @param null|string $email
+     * @return \cookyii\modules\Account\resources\Account
+     * @throws \yii\base\Exception
+     */
+    public function createAccount($name = null, $email = null)
+    {
+        if ($this->isNewRecord) {
+            throw new \yii\base\Exception(\Yii::t('client', 'You can not create an account from unsaved client.'));
+        }
+
+        $name = empty($name) ? $this->name : $name;
+        $email = empty($email) ? $this->email : $email;
+
+        /** @var Account\resources\Account $Account */
+        $Account = Account\resources\Account::find()
+            ->byEmail($email)
+            ->one();
+
+        if (empty($Account)) {
+            $Account = new Account\resources\Account;
+            $Account->setAttributes([
+                'name' => $name,
+                'email' => $email,
+            ]);
+
+            $Account->validate() && $Account->save();
+
+            if (!$Account->hasErrors() && !$Account->isNewRecord) {
+                $this->account_id = $Account->id;
+                $this->validate() && $this->save();
+            }
+        }
+
+        return $Account;
     }
 
     /**

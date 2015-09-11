@@ -2,6 +2,7 @@
 /**
  * build.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 /** @var array $apps list of existing applications */

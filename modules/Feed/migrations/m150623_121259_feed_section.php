@@ -1,6 +1,6 @@
 <?php
 
-use yii\db\mysql\Schema;
+use yii\db\Schema;
 
 class m150623_121259_feed_section extends \cookyii\db\Migration
 {

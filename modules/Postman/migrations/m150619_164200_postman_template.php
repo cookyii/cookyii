@@ -1,6 +1,6 @@
 <?php
 
-use yii\db\mysql\Schema;
+use yii\db\Schema;
 use yii\helpers\Json;
 
 class m150619_164200_postman_template extends \cookyii\db\Migration

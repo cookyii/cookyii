@@ -34,6 +34,7 @@
     "php": ">=5.4.0",
 
     "cookyii/base": "dev-master",
+    "cookyii/module-account": "dev-master",
 
     "rmrevin/yii2-fontawesome": "~2.10"
   },

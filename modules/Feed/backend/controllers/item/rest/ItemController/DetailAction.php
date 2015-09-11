@@ -2,6 +2,7 @@
 /**
  * DetailAction.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Feed\backend\controllers\item\rest\ItemController;

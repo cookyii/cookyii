@@ -2,6 +2,7 @@
 /**
  * ClientPropertyQuery.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Client\resources\Client\queries;

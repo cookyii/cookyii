@@ -1,6 +1,6 @@
 <?php
 
-use yii\db\mysql\Schema;
+use yii\db\Schema;
 
 class m150610_170100_account_auth extends \cookyii\db\Migration
 {

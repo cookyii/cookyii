@@ -12,7 +12,7 @@
 echo "<?php\n";
 ?>
 
-use yii\db\mysql\Schema;
+use yii\db\Schema;
 
 class <?= $className ?> extends \cookyii\db\Migration
 {

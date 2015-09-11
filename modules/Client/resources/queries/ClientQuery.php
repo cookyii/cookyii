@@ -2,6 +2,7 @@
 /**
  * ClientQuery.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Client\resources\queries;
@@ -22,6 +23,17 @@ class ClientQuery extends \yii\db\ActiveQuery
     public function byId($id)
     {
         $this->andWhere(['id' => $id]);
+
+        return $this;
+    }
+
+    /**
+     * @param integer|array $account_id
+     * @return static
+     */
+    public function byAccountId($account_id)
+    {
+        $this->andWhere(['account_id' => $account_id]);
 
         return $this;
     }

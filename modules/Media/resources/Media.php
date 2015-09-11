@@ -2,6 +2,7 @@
 /**
  * Media.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Media\resources;

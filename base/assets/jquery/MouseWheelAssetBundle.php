@@ -1,7 +1,8 @@
 <?php
 /**
  * MouseWheelAssetBundle.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\assets\jquery;

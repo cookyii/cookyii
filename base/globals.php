@@ -2,6 +2,7 @@
 /**
  * globals.php
  * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 @umask(0002);

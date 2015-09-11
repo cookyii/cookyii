@@ -1,6 +1,6 @@
 <?php
 
-use yii\db\mysql\Schema;
+use yii\db\Schema;
 
 class m150610_170030_rbac extends \cookyii\db\Migration
 {

@@ -1,6 +1,6 @@
 <?php
 
-use yii\db\mysql\Schema;
+use yii\db\Schema;
 
 class m150716_193542_postman_message_update extends \cookyii\db\Migration
 {
