@@ -20,7 +20,7 @@ class TreeAction extends \yii\rest\Action
      */
     public function run()
     {
-        /* @var $modelClass \resources\Feed\Section */
+        /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
         $modelClass = $this->modelClass;
 
         $with_deleted = Request()->get('deleted', 'false') === 'true';

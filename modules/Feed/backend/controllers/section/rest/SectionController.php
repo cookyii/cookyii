@@ -15,7 +15,7 @@ use cookyii\modules\Feed;
 class SectionController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'resources\Feed\Section';
+    public $modelClass = 'cookyii\modules\Feed\resources\Feed\Section';
 
     /**
      * @inheritdoc
@@ -101,12 +101,12 @@ class SectionController extends \yii\rest\ActiveController
      * The order of the primary key values should follow that returned by the `primaryKey()` method
      * of the model.
      * @param $action
-     * @return \resources\Feed\Section the model found
+     * @return \cookyii\modules\Feed\resources\Feed\Section the model found
      * @throws \yii\web\NotFoundHttpException if the model cannot be found
      */
     public function findModel($id, $action)
     {
-        /* @var $modelClass \resources\Feed\Section */
+        /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
         $modelClass = $this->modelClass;
 
         $model = $modelClass::find()

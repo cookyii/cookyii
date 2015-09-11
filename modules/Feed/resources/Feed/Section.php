@@ -5,7 +5,7 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Feed;
+namespace cookyii\modules\Feed\resources\Feed;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -110,7 +110,7 @@ class Section extends \yii\db\ActiveRecord
 
         if (empty($Sections) && empty($parent)) {
             /** @var \resources\Feed\queries\SectionQuery $SectionsQuery */
-            $SectionsQuery = \resources\Feed\Section::find();
+            $SectionsQuery = \cookyii\modules\Feed\resources\Feed\Section::find();
 
             if ($with_deleted === false) {
                 $SectionsQuery->withoutDeleted();

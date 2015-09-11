@@ -15,7 +15,7 @@ use cookyii\modules\Feed;
 class ItemController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'resources\Feed\Item';
+    public $modelClass = 'cookyii\modules\Feed\resources\Feed\Item';
 
     /**
      * @inheritdoc

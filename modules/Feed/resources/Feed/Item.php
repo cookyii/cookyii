@@ -5,7 +5,7 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources\Feed;
+namespace cookyii\modules\Feed\resources\Feed;
 
 use yii\helpers\Json;
 

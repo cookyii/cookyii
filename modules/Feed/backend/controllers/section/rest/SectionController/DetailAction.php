@@ -20,13 +20,13 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($slug)
     {
-        /* @var $modelClass \resources\Feed\Section */
+        /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
         $modelClass = $this->modelClass;
 
         /** @var \resources\Feed\queries\SectionQuery $Query */
         $Query = $modelClass::find();
 
-        /** @var \resources\Feed\Section $model */
+        /** @var \cookyii\modules\Feed\resources\Feed\Section $model */
         $model = $Query->bySlug($slug)
             ->one();
 

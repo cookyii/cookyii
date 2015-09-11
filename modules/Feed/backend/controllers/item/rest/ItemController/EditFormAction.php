@@ -27,17 +27,17 @@ class EditFormAction extends \yii\rest\Action
 
         $item_id = (int)Request()->post('item_id');
 
-        /** @var \resources\Feed\Item|null $Item */
+        /** @var \cookyii\modules\Feed\resources\Feed\Item|null $Item */
         $Item = null;
 
         if ($item_id > 0) {
-            $Item = \resources\Feed\Item::find()
+            $Item = \cookyii\modules\Feed\resources\Feed\Item::find()
                 ->byId($item_id)
                 ->one();
         }
 
         if (empty($Item)) {
-            $Item = new \resources\Feed\Item();
+            $Item = new \cookyii\modules\Feed\resources\Feed\Item();
         }
 
         $ItemEditForm = new Feed\backend\forms\ItemEditForm(['Item' => $Item]);

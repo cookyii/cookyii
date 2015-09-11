@@ -6,7 +6,7 @@
 
 namespace cookyii\modules\Feed\backend\forms;
 
-use resources\Feed\ItemSection;
+use cookyii\modules\Feed\cookyii\modules\Feed\resources\Feed\ItemSection;
 use yii\helpers\Json;
 
 /**
@@ -18,7 +18,7 @@ class ItemEditForm extends \yii\base\Model
 
     use \cookyii\db\traits\PopulateErrorsTrait;
 
-    /** @var \resources\Feed\Item */
+    /** @var \cookyii\modules\Feed\resources\Feed\Item */
     public $Item;
 
     public $slug;
@@ -40,7 +40,7 @@ class ItemEditForm extends \yii\base\Model
 
     public function init()
     {
-        if (!($this->Item instanceof \resources\Feed\Item)) {
+        if (!($this->Item instanceof \cookyii\modules\Feed\resources\Feed\Item)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('feed', 'Not specified section to edit.'));
         }
     }

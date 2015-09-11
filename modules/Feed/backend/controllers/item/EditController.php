@@ -35,7 +35,7 @@ class EditController extends Feed\backend\components\Controller
     public function actionIndex()
     {
         $ItemEditForm = new Feed\backend\forms\ItemEditForm([
-            'Item' => new \resources\Feed\Item(),
+            'Item' => new \cookyii\modules\Feed\resources\Feed\Item(),
         ]);
 
         return $this->render('index', [

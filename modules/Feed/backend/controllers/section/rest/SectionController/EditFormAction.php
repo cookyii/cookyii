@@ -27,17 +27,17 @@ class EditFormAction extends \yii\rest\Action
 
         $section_slug = str_clean(Request()->post('section_slug'));
 
-        /** @var \resources\Feed\Section|null $Section */
+        /** @var \cookyii\modules\Feed\resources\Feed\Section|null $Section */
         $Section = null;
 
         if (!empty($section_slug)) {
-            $Section = \resources\Feed\Section::find()
+            $Section = \cookyii\modules\Feed\resources\Feed\Section::find()
                 ->bySlug($section_slug)
                 ->one();
         }
 
         if (empty($Section)) {
-            $Section = new \resources\Feed\Section();
+            $Section = new \cookyii\modules\Feed\resources\Feed\Section();
         }
 
         $SectionEditForm = new Feed\backend\forms\SectionEditForm(['Section' => $Section]);
