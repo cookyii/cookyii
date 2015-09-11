@@ -20,7 +20,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
 
         $this->commandline = [
             // base
-            'rsync -rt ./components/ ../base/',
+            'rsync -rt ./base/ ../base/',
             // modules
             'rsync -rt ./modules/Account/ ../module-account/',
             'rsync -rt ./modules/Client/ ../module-client/',
