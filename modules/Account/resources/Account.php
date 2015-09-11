@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Class Account
- * @package resources
+ * @package cookyii\modules\Account\resources
  *
  * @property integer $id
  * @property string $name

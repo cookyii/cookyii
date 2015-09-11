@@ -8,7 +8,7 @@ namespace cookyii\modules\Account\resources\queries;
 
 /**
  * Class AccountQuery
- * @package resources\queries
+ * @package cookyii\modules\Account\resources\queries
  */
 class AccountQuery extends \yii\db\ActiveQuery
 {
