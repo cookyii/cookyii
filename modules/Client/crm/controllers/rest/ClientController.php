@@ -15,7 +15,7 @@ use cookyii\modules\Client;
 class ClientController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'resources\Client';
+    public $modelClass = 'cookyii\modules\Client\resources\Client';
 
     /**
      * @inheritdoc

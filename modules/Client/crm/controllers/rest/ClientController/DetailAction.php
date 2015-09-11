@@ -40,11 +40,11 @@ class DetailAction extends \yii\rest\Action
 
     /**
      * @inheritdoc
-     * @return \resources\Client
+     * @return \cookyii\modules\Client\resources\Client
      */
     public function findModel($id)
     {
-        /* @var $modelClass \resources\Client */
+        /* @var $modelClass \cookyii\modules\Client\resources\Client */
         $modelClass = $this->modelClass;
 
         $model = $modelClass::find()

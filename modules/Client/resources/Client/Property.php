@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Client;
+namespace cookyii\modules\Client\resources\Client;
 
 /**
  * Class Property
- * @package resources\Client
+ * @package cookyii\modules\Client\resources\Client
  *
  * @property integer $client_id
  * @property string $key
@@ -92,11 +92,11 @@ class Property extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \resources\Client\queries\ClientPropertyQuery
+     * @return \cookyii\modules\Client\resources\Client\queries\ClientPropertyQuery
      */
     public static function find()
     {
-        return new \resources\Client\queries\ClientPropertyQuery(get_called_class());
+        return new \cookyii\modules\Client\resources\Client\queries\ClientPropertyQuery(get_called_class());
     }
 
     /**

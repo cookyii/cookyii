@@ -35,7 +35,7 @@ class EditController extends Client\crm\components\Controller
     public function actionIndex()
     {
         $ClientEditForm = new Client\crm\forms\ClientEditForm([
-            'Client' => new \resources\Client(),
+            'Client' => new \cookyii\modules\Client\resources\Client(),
         ]);
 
         return $this->render('index', [

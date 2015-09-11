@@ -41,18 +41,18 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty property key');
         }
 
-        /** @var \resources\Client\Property|null $Property */
+        /** @var \cookyii\modules\Client\resources\Client\Property|null $Property */
         $Property = null;
 
         if (!empty($key) && $key !== '__new') {
-            $Property = \resources\Client\Property::find()
+            $Property = \cookyii\modules\Client\resources\Client\Property::find()
                 ->byClientId($client_id)
                 ->byKey($key)
                 ->one();
         }
 
         if ($key !== $property_key) {
-            $exists = \resources\Client\Property::find()
+            $exists = \cookyii\modules\Client\resources\Client\Property::find()
                 ->byClientId($client_id)
                 ->byKey($property_key)
                 ->exists();
@@ -63,7 +63,7 @@ class PropertyController extends \yii\rest\Controller
         }
 
         if (empty($Property)) {
-            $Property = new \resources\Client\Property;
+            $Property = new \cookyii\modules\Client\resources\Client\Property;
             $Property->client_id = $client_id;
         }
 
@@ -108,8 +108,8 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty client id');
         }
 
-        /** @var \resources\Client\Property $Property */
-        $Property = \resources\Client\Property::find()
+        /** @var \cookyii\modules\Client\resources\Client\Property $Property */
+        $Property = \cookyii\modules\Client\resources\Client\Property::find()
             ->byClientId($client_id)
             ->byKey($key)
             ->one();

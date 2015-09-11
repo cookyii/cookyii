@@ -15,7 +15,7 @@ class ClientEditForm extends \yii\base\Model
 
     use \cookyii\db\traits\PopulateErrorsTrait;
 
-    /** @var \resources\Client */
+    /** @var \cookyii\modules\Client\resources\Client */
     public $Client;
 
     public $name;
@@ -24,7 +24,7 @@ class ClientEditForm extends \yii\base\Model
 
     public function init()
     {
-        if (!($this->Client instanceof \resources\Client)) {
+        if (!($this->Client instanceof \cookyii\modules\Client\resources\Client)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('client', 'Not specified user to edit.'));
         }
     }

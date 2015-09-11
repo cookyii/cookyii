@@ -5,7 +5,7 @@
  * @link https://rmrevin.ru
  */
 
-namespace resources;
+namespace cookyii\modules\Client\resources;
 
 /**
  * Class Client
@@ -19,7 +19,7 @@ namespace resources;
  * @property integer $updated_at
  * @property integer $deleted_at
  *
- * @property \resources\Client\Property[] $properties
+ * @property \cookyii\modules\Client\resources\Client\Property[] $properties
  *
  * @property \resources\helpers\ClientPresent $present
  *
@@ -143,7 +143,7 @@ class Client extends \yii\db\ActiveRecord
      */
     public function getProperties()
     {
-        return $this->hasMany(\resources\Client\Property::className(), ['client_id' => 'id']);
+        return $this->hasMany(\cookyii\modules\Client\resources\Client\Property::className(), ['client_id' => 'id']);
     }
 
     /**

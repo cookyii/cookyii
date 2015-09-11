@@ -27,17 +27,17 @@ class EditFormAction extends \yii\rest\Action
 
         $client_id = (int)Request()->post('client_id');
 
-        /** @var \resources\Client|null $Client */
+        /** @var \cookyii\modules\Client\resources\Client|null $Client */
         $Client = null;
 
         if ($client_id > 0) {
-            $Client = \resources\Client::find()
+            $Client = \cookyii\modules\Client\resources\Client::find()
                 ->byId($client_id)
                 ->one();
         }
 
         if (empty($Client)) {
-            $Client = new \resources\Client();
+            $Client = new \cookyii\modules\Client\resources\Client();
         }
 
         $ClientEditForm = new Client\crm\forms\ClientEditForm(['Client' => $Client]);

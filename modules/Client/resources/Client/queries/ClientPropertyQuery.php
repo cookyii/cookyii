@@ -4,11 +4,11 @@
  * @author Revin Roman
  */
 
-namespace resources\Client\queries;
+namespace cookyii\modules\Client\resources\Client\queries;
 
 /**
  * Class ClientPropertyQuery
- * @package resources\Client\queries
+ * @package cookyii\modules\Client\resources\Client\queries
  */
 class ClientPropertyQuery extends \yii\db\ActiveQuery
 {
