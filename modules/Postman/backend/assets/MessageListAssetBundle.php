@@ -2,7 +2,7 @@
 /**
  * MessageListAssetBundle.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Postman\backend\assets;

@@ -1,7 +1,7 @@
 The Cookyii Content Management Framework is free software.
 It is released under the terms of the following BSD License.
 
-Copyright © 2015 by Revin Roman (https://rmrevin.ru)
+Copyright © 2015 by Revin Roman (https://rmrevin.com)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

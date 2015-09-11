@@ -2,7 +2,7 @@
 /**
  * app.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  */
 
 $config = include __DIR__ . '/../app.php';

@@ -2,7 +2,7 @@
 /**
  * _general_content.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  *
  * @var yii\web\View $this
  * @var cookyii\widgets\angular\ActiveForm $ActiveForm

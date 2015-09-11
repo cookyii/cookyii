@@ -2,7 +2,7 @@
 /**
  * app.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  */
 
 $base_dir = realpath(__DIR__ . '/../..');

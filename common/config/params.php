@@ -2,7 +2,7 @@
 /**
  * params.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  */
 
 $frontend = parse_url(FRONTEND_URL);

@@ -350,8 +350,8 @@
             "authors": [
                 {
                     "name": "Revin Roman",
-                    "email": "roman@rmrevin.ru",
-                    "homepage": "https://rmrevin.ru",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com",
                     "role": "Founder and project lead"
                 }
             ],
@@ -542,7 +542,7 @@
                 {
                     "name": "Roman Revin",
                     "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/"
+                    "homepage": "http://rmrevin.com/"
                 }
             ],
             "description": "Asset Bundle for Yii2 with Font Awesome",
@@ -592,7 +592,7 @@
                 {
                     "name": "Roman Revin",
                     "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/"
+                    "homepage": "http://rmrevin.com/"
                 }
             ],
             "description": "Asset Bundle for Yii2 with Font Awesome",
@@ -637,7 +637,7 @@
                 {
                     "name": "Roman Revin",
                     "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/"
+                    "homepage": "http://rmrevin.com/"
                 }
             ],
             "description": "Yii 2 Asset bundle with Imperavi WYSIWYG redactor",
@@ -727,7 +727,7 @@
                 {
                     "name": "Revin Roman",
                     "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/",
+                    "homepage": "http://rmrevin.com/",
                     "role": "Founder and project lead"
                 }
             ],
@@ -771,7 +771,7 @@
                 {
                     "name": "Roman Revin",
                     "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/"
+                    "homepage": "http://rmrevin.com/"
                 }
             ],
             "description": "Extension for RBAC rules update for Yii2",
@@ -821,7 +821,7 @@
                 {
                     "name": "Roman Revin",
                     "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/"
+                    "homepage": "http://rmrevin.com/"
                 }
             ],
             "description": "Yii2 error handler rollbar",
@@ -865,7 +865,7 @@
                 {
                     "name": "Roman Revin",
                     "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/"
+                    "homepage": "http://rmrevin.com/"
                 }
             ],
             "description": "Asset Bundle for Yii2 with Socicon",

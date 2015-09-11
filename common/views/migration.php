@@ -2,7 +2,7 @@
 /**
  * migration.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  *
  * This view is used by yii\console\controllers\MigrateController
  * The following variables are available in this view:

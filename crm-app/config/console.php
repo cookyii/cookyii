@@ -2,7 +2,7 @@
 /**
  * console.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  */
 
 defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App CRM');

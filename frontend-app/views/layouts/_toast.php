@@ -2,7 +2,7 @@
 /**
  * _toast.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  */
 
 use rmrevin\yii\fontawesome\FA;

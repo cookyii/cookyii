@@ -2,7 +2,7 @@
 /**
  * MessageAttachQuery.php
  * @author Revin Roman
- * @link https://rmrevin.ru
+ * @link https://rmrevin.com
  */
 
 namespace cookyii\modules\Postman\resources\Postman\Message\queries;
