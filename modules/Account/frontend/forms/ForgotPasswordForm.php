@@ -106,20 +106,8 @@ class ForgotPasswordForm extends \yii\base\Model
             if (true === ($reason = $Account->isAvailable())) {
                 $hash = $this->encryptData($Account);
 
-                $url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
-                $short_url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
-
-                $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.forgot-password.request', [
-                    '{user_id}' => $Account->id,
-                    '{username}' => $Account->name,
-                    '{hash}' => $hash,
-                    '{url}' => $url,
-                    '{short_url}' => $short_url,
-                ]);
-
-                $Message->addTo($Account->email, $Account->name);
-
-                return $Message->send();
+                return $Account->notification
+                    ->sendNewPasswordRequestEmail($hash);
             } else {
                 switch ($reason) {
                     case 'deleted':
@@ -150,16 +138,8 @@ class ForgotPasswordForm extends \yii\base\Model
         $Account->validate() && $Account->save();
 
         if (!$Account->hasErrors()) {
-            $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.forgot-password.new-password', [
-                '{user_id}' => $Account->id,
-                '{username}' => $Account->name,
-                '{email}' => $Account->email,
-                '{password}' => $new_password,
-            ]);
-
-            $Message->addTo($Account->email, $Account->name);
-
-            $Message->send();
+            $Account->notification
+                ->sendNewPasswordEmail($new_password);
 
             $Account->refreshToken();
 

@@ -3,10 +3,13 @@
 angular.module('CrmApp')
 
   .controller('ClientEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastScope',
-    function ($scope, $http, $location, $timeout, ToastScope) {
+    '$scope', '$http', '$location', '$timeout', 'ToastScope', 'ClientAccountScope',
+    function ($scope, $http, $location, $timeout, ToastScope, ClientAccountScope) {
 
       $scope.inProgress = false;
+
+      $scope.error = {};
+      $scope.account = ClientAccountScope($scope);
 
       $scope.submit = function (ClientEditForm, e) {
         var $form = angular.element('#ClientEditForm');

@@ -7,8 +7,6 @@
 
 namespace cookyii\modules\Client\resources;
 
-use cookyii\modules\Account;
-
 /**
  * Class Client
  * @package resources
@@ -22,9 +20,11 @@ use cookyii\modules\Account;
  * @property integer $updated_at
  * @property integer $deleted_at
  *
+ * @property \cookyii\modules\Account\resources\Account $account
  * @property \cookyii\modules\Client\resources\Client\Property[] $properties
  *
- * @property \cookyii\modules\Client\resources\helpers\ClientPresent $present
+ * @property \cookyii\modules\Client\resources\helpers\ClientPresent $presentHelper
+ * @property \cookyii\modules\Client\resources\helpers\ClientAccount $accountHelper
  *
  * @method \cookyii\modules\Client\resources\queries\ClientQuery hasMany($class, $link)
  * @method \cookyii\modules\Client\resources\queries\ClientQuery hasOne($class, $link)
@@ -51,9 +51,8 @@ class Client extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
+        $fields['account'] = 'account';
         $fields['deleted'] = 'deleted';
-
-        unset($fields['password_hash'], $fields['token'], $fields['auth_key']);
 
         return $fields;
     }
@@ -77,22 +76,40 @@ class Client extends \yii\db\ActiveRecord
         ];
     }
 
-    private $present = null;
+    private $presentHelper = null;
 
     /**
      * @return \cookyii\modules\Client\resources\helpers\ClientPresent
      * @throws \yii\base\InvalidConfigException
      */
-    public function getPresent()
+    public function getPresentHelper()
     {
-        if ($this->present === null) {
-            $this->present = \Yii::createObject([
+        if ($this->presentHelper === null) {
+            $this->presentHelper = \Yii::createObject([
                 'class' => \cookyii\modules\Client\resources\helpers\ClientPresent::className(),
                 'Model' => $this,
             ]);
         }
 
-        return $this->present;
+        return $this->presentHelper;
+    }
+
+    private $accountHelper = null;
+
+    /**
+     * @return \cookyii\modules\Client\resources\helpers\ClientAccount
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getAccountHelper()
+    {
+        if ($this->accountHelper === null) {
+            $this->accountHelper = \Yii::createObject([
+                'class' => \cookyii\modules\Client\resources\helpers\ClientAccount::className(),
+                'Model' => $this,
+            ]);
+        }
+
+        return $this->accountHelper;
     }
 
     private $_properties = null;
@@ -142,45 +159,15 @@ class Client extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param null|string $name
-     * @param null|string $email
-     * @return \cookyii\modules\Account\resources\Account
-     * @throws \yii\base\Exception
+     * @return \cookyii\modules\Client\resources\queries\ClientQuery
      */
-    public function createAccount($name = null, $email = null)
+    public function getAccount()
     {
-        if ($this->isNewRecord) {
-            throw new \yii\base\Exception(\Yii::t('client', 'You can not create an account from unsaved client.'));
-        }
-
-        $name = empty($name) ? $this->name : $name;
-        $email = empty($email) ? $this->email : $email;
-
-        /** @var Account\resources\Account $Account */
-        $Account = Account\resources\Account::find()
-            ->byEmail($email)
-            ->one();
-
-        if (empty($Account)) {
-            $Account = new Account\resources\Account;
-            $Account->setAttributes([
-                'name' => $name,
-                'email' => $email,
-            ]);
-
-            $Account->validate() && $Account->save();
-
-            if (!$Account->hasErrors() && !$Account->isNewRecord) {
-                $this->account_id = $Account->id;
-                $this->validate() && $this->save();
-            }
-        }
-
-        return $Account;
+        return $this->hasOne(\cookyii\modules\Account\resources\Account::className(), ['id' => 'account_id']);
     }
 
     /**
-     * @return \cookyii\modules\Account\resources\queries\AccountQuery
+     * @return \cookyii\modules\Client\resources\queries\ClientQuery
      */
     public function getProperties()
     {

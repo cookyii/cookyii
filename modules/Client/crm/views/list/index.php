@@ -100,6 +100,7 @@ function sortLink($type, $label)
                             <td class="id"><?= sortLink('id', Yii::t('client', 'ID')) ?></td>
                             <td class="name"><?= sortLink('name', Yii::t('client', 'Name')) ?></td>
                             <td class="email"><?= sortLink('email', Yii::t('client', 'Email')) ?></td>
+                            <td class="account"><?= Yii::t('client', 'Account') ?></td>
                             <td class="updated"><?= sortLink('updated_at', Yii::t('client', 'Updated at')) ?></td>
                             <td class="actions">&nbsp;</td>
                         </tr>
@@ -120,6 +121,10 @@ function sortLink($type, $label)
                             <td class="id clickable" ng-click="clients.edit(client)">{{ client.id }}</td>
                             <td class="name clickable" ng-click="clients.edit(client)">{{ client.name }}</td>
                             <td class="email clickable" ng-click="clients.edit(client)">{{ client.email }}</td>
+                            <td class="account clickable" ng-click="clients.edit(client)">
+                                <span ng-hide="client.account_id" class="empty">Not set</span>
+                                <span ng-show="client.account_id">#{{ client.account.id }} {{ client.account.name }}</span>
+                            </td>
                             <td class="updated clickable" ng-click="clients.edit(client)">
                                 {{ client.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
                             </td>

@@ -80,18 +80,10 @@ class SignUpForm extends \yii\base\Model
         $Account->validate() && $Account->save();
 
         if (!$Account->hasErrors()) {
-            $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.sign-up', [
-                '{user_id}' => $Account->id,
-                '{username}' => $Account->name,
-                '{email}' => $Account->email,
-                '{password}' => $this->password
-            ]);
+            $Account->notification
+                ->sendSignUpEmail();
 
             AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
-
-            $Message->addTo($Account->email, $Account->name);
-
-            $Message->send();
 
             if ($this->loginAfterRegister) {
                 User()->login($Account, SignInForm::REMEMBER_TIME);

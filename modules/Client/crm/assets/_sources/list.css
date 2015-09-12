@@ -7,6 +7,7 @@ md-switch { margin: 0 10px; }
 /*********************************** Table *****************/
 .table-clients { }
 .table-clients td.id { width: 70px; }
+.table-clients td.account { width: 170px; }
 .table-clients td.name { text-align: right; }
 .table-clients td.email { width: 200px; }
 .table-clients td.updated { }

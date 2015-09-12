@@ -23,6 +23,14 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
             'clients' => 'client/list/index',
 
             [
+                'pattern' => 'client/rest/create-account',
+                'route' => 'client/rest/client/create-account',
+                'verb' => 'POST',
+            ],[
+                'pattern' => 'client/rest/unlink-account',
+                'route' => 'client/rest/client/unlink-account',
+                'verb' => 'POST',
+            ], [
                 'pattern' => 'client/rest/property',
                 'route' => 'client/rest/property/push',
                 'verb' => 'POST',

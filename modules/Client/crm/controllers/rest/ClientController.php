@@ -32,6 +32,8 @@ class ClientController extends \yii\rest\ActiveController
         $verbs['deactivate'] = ['POST'];
         $verbs['update'] = ['PUT'];
         $verbs['restore'] = ['PATCH'];
+        $verbs['create-account'] = ['POST'];
+        $verbs['unlink-account'] = ['POST'];
 
         return $verbs;
     }
@@ -44,6 +46,18 @@ class ClientController extends \yii\rest\ActiveController
         $actions = parent::actions();
 
         $actions['index']['prepareDataProvider'] = [$this, 'prepareListDataProvider'];
+
+        $actions['create-account'] = [
+            'class' => Client\crm\controllers\rest\ClientController\CreateAccountAction::className(),
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
+
+        $actions['unlink-account'] = [
+            'class' => Client\crm\controllers\rest\ClientController\UnlinkAccountAction::className(),
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+        ];
 
         $actions['edit'] = [
             'class' => Client\crm\controllers\rest\ClientController\EditFormAction::className(),
@@ -102,7 +116,8 @@ class ClientController extends \yii\rest\ActiveController
         $modelClass = $action->modelClass;
 
         /** @var \cookyii\modules\Client\resources\queries\ClientQuery $Query */
-        $Query = $modelClass::find();
+        $Query = $modelClass::find()
+            ->with(['account']);
 
         $search = str_clean(Request()->get('search'));
         if (!empty($search)) {
@@ -117,10 +132,10 @@ class ClientController extends \yii\rest\ActiveController
         return new \cookyii\data\CallableActiveDataProvider([
             'query' => $Query,
             'pagination' => ['pageSize' => 15],
-            'mapFunction' => function ($data) {
-                $data['deleted'] = !empty($data['deleted_at']);
+            'mapFunction' => function (\cookyii\modules\Client\resources\Client $Model) {
+                $Model['deleted'] = $Model->isDeleted();
 
-                return $data;
+                return $Model;
             }
         ]);
     }

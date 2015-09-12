@@ -25,6 +25,7 @@ class DetailAction extends \yii\rest\Action
 
         $result = $model->attributes;
 
+        $result['account'] = $model->account->attributes;
         $result['properties'] = [];
 
         $properties = $model->properties();
