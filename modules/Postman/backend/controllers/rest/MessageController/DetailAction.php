@@ -23,10 +23,10 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Postman\resources\Postman\Message $model */
-        $model = $this->findModel($id);
+        /** @var \cookyii\modules\Postman\resources\Postman\Message $Model */
+        $Model = $this->findModel($id);
 
-        $result = $model->attributes;
+        $result = $Model->attributes;
 
         $result['address'] = empty($result['address'])
             ? null

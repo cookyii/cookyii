@@ -21,12 +21,12 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Page\resources\Page $model */
-        $model = $this->findModel($id);
+        /** @var \cookyii\modules\Page\resources\Page $Model */
+        $Model = $this->findModel($id);
 
-        $result = $model->attributes;
+        $result = $Model->attributes;
 
-        $meta = $model->meta();
+        $meta = $Model->meta();
         if (!empty($meta)) {
             foreach ($meta as $k => $v) {
                 $key = sprintf('meta_%s', $k);

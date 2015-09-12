@@ -23,10 +23,10 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Postman\resources\Postman\Template $model */
-        $model = $this->findModel($id);
+        /** @var \cookyii\modules\Postman\resources\Postman\Template $Model */
+        $Model = $this->findModel($id);
 
-        $result = $model->attributes;
+        $result = $Model->attributes;
 
         $result['use_layout'] = $result['use_layout'] === \cookyii\modules\Postman\resources\Postman\Template::USE_LAYOUT;
 

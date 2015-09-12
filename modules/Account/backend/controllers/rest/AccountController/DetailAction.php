@@ -21,27 +21,27 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        $model = $this->findModel($id);
+        $Model = $this->findModel($id);
 
-        $result = $model->attributes;
+        $result = $Model->attributes;
         unset($result['password_hash'], $result['token'], $result['auth_key']);
 
         $result['roles'] = [];
         $result['permissions'] = [];
         $result['properties'] = [];
 
-        $roles = AuthManager()->getRolesByUser($model->id);
+        $roles = AuthManager()->getRolesByUser($Model->id);
         foreach ($roles as $role => $conf) {
             $result['roles'][$role] = true;
         }
         $result['roles'][\common\Roles::USER] = true;
 
-        $permissions = AuthManager()->getPermissionsByUser($model->id);
+        $permissions = AuthManager()->getPermissionsByUser($Model->id);
         foreach ($permissions as $permission => $conf) {
             $result['permissions'][$permission] = true;
         }
 
-        $properties = $model->properties();
+        $properties = $Model->properties();
         if (!empty($properties)) {
             foreach ($properties as $key => $values) {
                 $result['properties'][$key] = $values;
@@ -59,16 +59,16 @@ class DetailAction extends \yii\rest\Action
      */
     public function findModel($id)
     {
-        /* @var $modelClass \cookyii\modules\Account\resources\Account */
-        $modelClass = $this->modelClass;
+        /* @var $ModelClass \cookyii\modules\Account\resources\Account */
+        $ModelClass = $this->modelClass;
 
-        $model = $modelClass::find()
+        $Model = $ModelClass::find()
             ->byId($id)
             ->with(['properties'])
             ->one();
 
-        if (isset($model)) {
-            return $model;
+        if (isset($Model)) {
+            return $Model;
         } else {
             throw new \yii\web\NotFoundHttpException(sprintf('Object not found: %s', $id));
         }

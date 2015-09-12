@@ -21,25 +21,23 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($slug)
     {
-        /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
-        $modelClass = $this->modelClass;
+        /* @var string $ModelClass \cookyii\modules\Feed\resources\Feed\Section */
+        $ModelClass = $this->modelClass;
 
         /** @var \cookyii\modules\Feed\resources\Feed\queries\SectionQuery $Query */
-        $Query = $modelClass::find();
+        $Query = $ModelClass::find();
 
-        /** @var \cookyii\modules\Feed\resources\Feed\Section $model */
-        $model = $Query->bySlug($slug)
+        /** @var \cookyii\modules\Feed\resources\Feed\Section $Model */
+        $Model = $Query->bySlug($slug)
             ->one();
 
-        if (empty($model)) {
+        if (empty($Model)) {
             throw new \yii\web\NotFoundHttpException("Object not found: $slug");
         }
 
-        $result = $model->attributes;
+        $result = $Model->attributes;
 
-//        $result['parent_id'] = (string)$result['parent_id'];
-
-        $meta = $model->meta();
+        $meta = $Model->meta();
         if (!empty($meta)) {
             foreach ($meta as $k => $v) {
                 $key = sprintf('meta_%s', $k);

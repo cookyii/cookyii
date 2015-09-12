@@ -23,19 +23,19 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Feed\resources\Feed\Item $model */
-        $model = $this->findModel($id);
+        /** @var \cookyii\modules\Feed\resources\Feed\Item $Model */
+        $Model = $this->findModel($id);
 
-        $result = $model->attributes;
+        $result = $Model->attributes;
 
-        $item_sections = $model->getItemSections()
+        $item_sections = $Model->getItemSections()
             ->asArray()
             ->all();
 
         $result['sections'] = ArrayHelper::getColumn($item_sections, 'section_id');
         $result['sections'] = array_map('intval', $result['sections']);
 
-        $meta = $model->meta();
+        $meta = $Model->meta();
         if (!empty($meta)) {
             foreach ($meta as $k => $v) {
                 $key = sprintf('meta_%s', $k);
