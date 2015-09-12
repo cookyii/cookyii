@@ -167,7 +167,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      * @return \cookyii\modules\Account\resources\helpers\AccountNotification
      * @throws \yii\base\InvalidConfigException
      */
-    public function getNotification()
+    public function getNotificationHelper()
     {
         if ($this->notificationHelper === null) {
             $this->notificationHelper = \Yii::createObject([
