@@ -80,7 +80,7 @@ class SignUpForm extends \yii\base\Model
         $Account->validate() && $Account->save();
 
         if (!$Account->hasErrors()) {
-            $Account->notification
+            $Account->notificationHelper
                 ->sendSignUpEmail();
 
             AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);

@@ -41,12 +41,12 @@ $menu_items = include(__DIR__ . '/_menu.php');
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <?= Html::img($Account->present->getAvatar(25), ['alt' => 'User Image', 'class' => 'user-image']) ?>
+                            <?= Html::img($Account->presentHelper->getAvatar(25), ['alt' => 'User Image', 'class' => 'user-image']) ?>
                             <span class="hidden-xs"><?= $Account->name ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <?= Html::img($Account->present->getAvatar(90), ['alt' => 'User Image', 'class' => 'img-circle']) ?>
+                                <?= Html::img($Account->presentHelper->getAvatar(90), ['alt' => 'User Image', 'class' => 'img-circle']) ?>
 
                                 <p><?= $Account->name ?></p>
                             </li>
@@ -74,7 +74,7 @@ $menu_items = include(__DIR__ . '/_menu.php');
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <?= Html::img($Account->present->getAvatar(45), ['alt' => 'User Image', 'class' => 'img-circle']) ?>
+                    <?= Html::img($Account->presentHelper->getAvatar(45), ['alt' => 'User Image', 'class' => 'img-circle']) ?>
                 </div>
                 <div class="pull-left info">
                     <p><?= $Account->name ?></p>

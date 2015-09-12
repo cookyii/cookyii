@@ -106,7 +106,7 @@ class ForgotPasswordForm extends \yii\base\Model
             if (true === ($reason = $Account->isAvailable())) {
                 $hash = $this->encryptData($Account);
 
-                return $Account->notification
+                return $Account->notificationHelper
                     ->sendNewPasswordRequestEmail($hash);
             } else {
                 switch ($reason) {
@@ -138,7 +138,7 @@ class ForgotPasswordForm extends \yii\base\Model
         $Account->validate() && $Account->save();
 
         if (!$Account->hasErrors()) {
-            $Account->notification
+            $Account->notificationHelper
                 ->sendNewPasswordEmail($new_password);
 
             $Account->refreshToken();

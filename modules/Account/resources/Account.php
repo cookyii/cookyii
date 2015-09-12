@@ -27,8 +27,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property \cookyii\modules\Account\resources\Account\Property[] $properties
  *
- * @property \cookyii\modules\Account\resources\helpers\AccountPresent $present
- * @property \cookyii\modules\Account\resources\helpers\AccountNotification $notification
+ * @property \cookyii\modules\Account\resources\helpers\AccountPresent $presentHelper
+ * @property \cookyii\modules\Account\resources\helpers\AccountNotification $notificationHelper
  *
  * @method \cookyii\modules\Account\resources\queries\AccountQuery hasMany($class, $link)
  * @method \cookyii\modules\Account\resources\queries\AccountQuery hasOne($class, $link)
@@ -143,25 +143,25 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return sha1($this->created_at . $this->auth_key . $this->email);
     }
 
-    private $present = null;
+    private $presentHelper = null;
 
     /**
      * @return \cookyii\modules\Account\resources\helpers\AccountPresent
      * @throws \yii\base\InvalidConfigException
      */
-    public function getPresent()
+    public function getPresentHelper()
     {
-        if ($this->present === null) {
-            $this->present = \Yii::createObject([
+        if ($this->presentHelper === null) {
+            $this->presentHelper = \Yii::createObject([
                 'class' => \cookyii\modules\Account\resources\helpers\AccountPresent::className(),
                 'Model' => $this,
             ]);
         }
 
-        return $this->present;
+        return $this->presentHelper;
     }
 
-    private $notification = null;
+    private $notificationHelper = null;
 
     /**
      * @return \cookyii\modules\Account\resources\helpers\AccountNotification
@@ -169,14 +169,14 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getNotification()
     {
-        if ($this->notification === null) {
-            $this->notification = \Yii::createObject([
+        if ($this->notificationHelper === null) {
+            $this->notificationHelper = \Yii::createObject([
                 'class' => \cookyii\modules\Account\resources\helpers\AccountNotification::className(),
                 'Model' => $this,
             ]);
         }
 
-        return $this->notification;
+        return $this->notificationHelper;
     }
 
     /**
