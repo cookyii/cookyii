@@ -26,6 +26,7 @@ class AppAsset extends \yii\web\AssetBundle
         'js/functions.js',
         'js/scripts.js',
         'js/directives.js',
+        'js/filters.js',
         'js/BackendApp.js',
         'js/BackendApp/QueryScope.js',
         'js/BackendApp/ToastScope.js',

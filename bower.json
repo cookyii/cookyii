@@ -19,7 +19,6 @@
     "angular-redactor": "1.1.*",
     "angular-scroll-pane": "1.0.*",
     "angular-elastic": "2.4.*",
-    "angular-truncate": "*",
     "angular-ui-utils": "0.2.*",
     "angular-bootstrap": "0.13.*",
     "angular-loading-bar": "0.7.*",

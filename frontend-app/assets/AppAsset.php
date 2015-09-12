@@ -24,6 +24,7 @@ class AppAsset extends \yii\web\AssetBundle
     public $js = [
         'js/functions.js',
         'js/scripts.js',
+        'js/filters.js',
         'js/FrontendApp.js',
         'js/FrontendApp/QueryScope.js',
         'js/FrontendApp/ToastScope.js',

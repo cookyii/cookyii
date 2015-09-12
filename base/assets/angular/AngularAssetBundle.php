@@ -34,7 +34,6 @@ class AngularAssetBundle extends \yii\web\AssetBundle
         'angular-ui-utils/ui-utils.min.js',
         'angular-loading-bar/build/loading-bar.min.js',
         'angular-elastic/elastic.js',
-        'angular-truncate/src/truncate.js',
         'angular-redactor/angular-redactor.js',
     ];
 

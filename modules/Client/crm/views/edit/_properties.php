@@ -59,7 +59,7 @@ use yii\helpers\Html;
                             </div>
 
                             <div class="value" ng-show="editedProperty.value">
-                                {{ editedProperty.value | characters: 50 }}
+                                {{ editedProperty.value | truncateCharacters: 50 }}
                             </div>
                         </a>
                     </li>
@@ -70,7 +70,7 @@ use yii\helpers\Html;
                             <div class="key">{{ property.key }}</div>
 
                             <div class="value" ng-show="property.value">
-                                {{ property.value | characters: 50 }}
+                                {{ property.value | truncateCharacters: 50 }}
                             </div>
                         </a>
                     </li>

@@ -4,7 +4,7 @@
   ng.module('CrmApp', [
     'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate', 'ngMaterial',
     'ui.bootstrap',
-    'directives', 'truncate',
+    'directives', 'filters',
     'monospaced.elastic',
     'angular-loading-bar', 'angular-redactor'
   ])
@@ -16,12 +16,6 @@
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = yii.getCsrfToken();
 
         $animateProvider.classNameFilter(/^(?:(?!wo-animate).)*$/);
-
-        var $token = $('meta[name=token]');
-        if ($token.length > 0) {
-          //      $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + $token.prop('content');
-          //      @todo конфликт с http auth сервера
-        }
 
         $mdThemingProvider.theme('default')
           .accentPalette('deep-purple');
@@ -35,14 +29,6 @@
           $cookies.put('timezone', new Date().getTimezoneOffset() / 60);
         }
       }
-    ])
-
-    .filter('nl2br', function () {
-      return function (input) {
-        if (typeof input === 'string') {
-          return input.replace(/\n/g, '<br>');
-        }
-      };
-    });
+    ]);
 
 })(angular, jQuery);

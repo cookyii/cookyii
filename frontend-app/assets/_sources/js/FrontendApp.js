@@ -2,10 +2,11 @@
   "use strict";
 
   ng.module('FrontendApp', [
-    'ngSanitize',
+    'ngCookies', 'ngSanitize',
     'ngMaterial',
     'ui.bootstrap',
-    'angular-loading-bar'
+    'angular-loading-bar',
+    'filters'
   ])
 
     .config([
@@ -16,13 +17,16 @@
 
         $animateProvider.classNameFilter(/^(?:(?!wo-animate).)*$/);
 
-        var $token = $('meta[name=token]');
-        if ($token.length > 0) {
-          //      $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + $token.prop('content');
-          //      @todo конфликт с http auth сервера
-        }
-
         $mdThemingProvider.theme('default');
+      }
+    ])
+
+    .run([
+      '$cookies',
+      function ($cookies) {
+        if (typeof $cookies.get('timezone') === 'undefined') {
+          $cookies.put('timezone', new Date().getTimezoneOffset() / 60);
+        }
       }
     ]);
 
