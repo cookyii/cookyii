@@ -14,6 +14,9 @@ namespace cookyii\modules\Postman;
 abstract class AbstractModule extends \yii\base\Module
 {
 
+    /** @var string */
+    public $from = 'Postman';
+
     /** @var string|null */
     public $subjectPrefix;
 

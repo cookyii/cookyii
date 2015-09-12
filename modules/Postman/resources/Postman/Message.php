@@ -39,9 +39,6 @@ class Message extends \yii\db\ActiveRecord
     /** @var string ID of url manager component */
     public static $urlManager = 'urlManager';
 
-    public $from = 'Postman';
-
-
     /**
      * @inheritdoc
      */
@@ -163,6 +160,8 @@ class Message extends \yii\db\ActiveRecord
     {
         $this->validate() && $this->save();
 
+        $Postman = static::getPostman();
+
         if ($this->hasErrors()) {
             $result = $this->getErrors();
         } else {
@@ -192,9 +191,13 @@ class Message extends \yii\db\ActiveRecord
                 }
             }
 
+            $from = empty($Postman->from)
+                ? 'Postman'
+                : $Postman->from;
+
             $Message = \Yii::$app->mailer->compose()
                 ->setCharset('UTF-8')
-                ->setFrom([SMTP_USER => $this->from])
+                ->setFrom([SMTP_USER => $from])
                 ->setSubject($this->subject)
                 ->setTextBody($this->content_text)
                 ->setHtmlBody($this->content_html);
