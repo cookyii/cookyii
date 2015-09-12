@@ -40,8 +40,11 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         ];
 
         // project files
-        foreach ($this->projectFiles as $file) {
-            $this->commandline[] = sprintf('rsync -t ./%1$s ../project/%1$s', $file);
+        foreach ($this->projectFiles as $from => $to) {
+            if (!is_string($from)) {
+                $from = $to;
+            }
+            $this->commandline[] = sprintf('rsync -t ./%s ../project/%s', $from, $to);
         }
     }
 
@@ -66,7 +69,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         'build.php',
         'codecept',
         'codeception.yml',
-        'composer.json',
+        'composer.prod.json' => 'composer.json',
         'crm',
         'crm.bat',
         'env.php',
