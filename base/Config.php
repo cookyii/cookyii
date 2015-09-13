@@ -47,9 +47,11 @@ class Config
 
         $config_alias = sprintf('@%s/config/%s', $app, $filename);
         $local_config_alias = sprintf('@%s/config/%s/%s', $app, YII_ENV, $filename);
+        $local_bootstrap_alias = sprintf('@%s/config/%s/%s', $app, YII_ENV, 'bootstrap.php');
 
         $config = \Yii::getAlias($config_alias);
         $local_config = \Yii::getAlias($local_config_alias);
+        $local_bootstrap = \Yii::getAlias($local_bootstrap_alias);
 
         if (file_exists($local_config)) {
             $_config = $local_config;
@@ -59,7 +61,11 @@ class Config
             throw new \yii\base\Exception(sprintf('Application config not exists (%s).', $config_alias));
         }
 
-        static::$config = require($_config);
+        if (!empty($local_bootstrap) && file_exists($local_bootstrap)) {
+            require_once $local_bootstrap;
+        }
+
+        static::$config = require_once $_config;
     }
 
     /**
@@ -68,14 +74,16 @@ class Config
      */
     public static function requireGlobals($baseDir)
     {
-        if (file_exists($baseDir . '/globals.php')) {
-            require($baseDir . '/globals.php');
-        } elseif (file_exists($baseDir . '/base/globals.php')) {
-            require($baseDir . '/base/globals.php');
-        } elseif (file_exists($baseDir . '/vendor/cookyii/base/globals.php')) {
-            require($baseDir . '/vendor/cookyii/base/globals.php');
-        } else {
-            throw new \RuntimeException('Unable to locate a file `globals.php`');
+        $files = [
+            $baseDir . '/vendor/cookyii/base/globals.php',
+            $baseDir . '/base/globals.php',
+            $baseDir . '/globals.php',
+        ];
+
+        foreach ($files as $file) {
+            if (file_exists($file)) {
+                require_once $file;
+            }
         }
     }
 

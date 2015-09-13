@@ -9,15 +9,16 @@ defined('YII_ENV') or define('YII_ENV', 'test');
 
 $baseDir = realpath(__DIR__ . '/../..');
 
-require($baseDir . '/vendor/autoload.php');
-
 require($baseDir . '/backend-app/credentials.php');
 require($baseDir . '/env.php');
 
-cookyii\Config::requireGlobals($baseDir);
-
+require($baseDir . '/vendor/autoload.php');
 require($baseDir . '/vendor/yiisoft/yii2/Yii.php');
-require($baseDir . '/common/config/aliases.php');
+
+require($baseDir . '/common/config/bootstrap.php');
+require($baseDir . '/backend-app/config/bootstrap.php');
+
+\cookyii\Config::requireGlobals($baseDir);
 
 $config = require($baseDir . '/backend-app/tests/_config/acceptance.php');
 

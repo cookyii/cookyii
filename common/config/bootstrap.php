@@ -1,4 +1,9 @@
 <?php
+/**
+ * bootstrap.php
+ * @author Revin Roman
+ * @link https://rmrevin.com
+ */
 
 $base = realpath(__DIR__ . '/../..');
 

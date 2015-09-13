@@ -2,17 +2,17 @@
 
 $baseDir = realpath(__DIR__ . '/../..');
 
-require($baseDir . '/vendor/autoload.php');
-
 require($baseDir . '/crm-app/credentials.php');
 require($baseDir . '/env.php');
 
-cookyii\Config::requireGlobals($baseDir);
-
+require($baseDir . '/vendor/autoload.php');
 require($baseDir . '/vendor/yiisoft/yii2/Yii.php');
-require($baseDir . '/common/config/aliases.php');
 
-cookyii\Config::init('crm', 'app');
+require($baseDir . '/common/config/bootstrap.php');
+require($baseDir . '/crm-app/config/bootstrap.php');
 
-(new yii\web\Application(cookyii\Config::$config))
+\cookyii\Config::requireGlobals($baseDir);
+\cookyii\Config::init('crm', 'app');
+
+(new yii\web\Application(\cookyii\Config::$config))
     ->run();
