@@ -143,7 +143,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return sha1($this->created_at . $this->auth_key . $this->email);
     }
 
-    private $presentHelper = null;
+    protected $presentHelper = null;
 
     /**
      * @return \cookyii\modules\Account\resources\helpers\AccountPresent
@@ -161,7 +161,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->presentHelper;
     }
 
-    private $notificationHelper = null;
+    protected $notificationHelper = null;
 
     /**
      * @return \cookyii\modules\Account\resources\helpers\AccountNotification

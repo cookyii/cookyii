@@ -18,6 +18,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
     public $Model;
 
     /**
+     * @param null|string $password
      * @return array|bool
      * @throws \yii\web\ServerErrorHttpException
      */
@@ -48,8 +49,8 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
     {
         $Account = $this->Model;
 
-        $url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
-        $short_url = UrlManager('frontend')->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
+        $url = UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
+        $short_url = UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
 
         $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.forgot-password.request', [
             '{user_id}' => $Account->id,
