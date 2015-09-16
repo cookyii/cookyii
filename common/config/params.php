@@ -115,9 +115,6 @@ return [
         'basePath' => '@webroot/assets',
         'baseUrl' => '@web/assets',
         'linkAssets' => true,
-        'bundles' => [
-            yii\bootstrap\BootstrapAsset::className() => ['css' => []],
-        ],
     ],
     'component.urlManager.frontend' => [
         'class' => yii\web\UrlManager::className(),

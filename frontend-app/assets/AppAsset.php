@@ -39,12 +39,13 @@ class AppAsset extends \yii\web\AssetBundle
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+
         'rmrevin\yii\fontawesome\cdn\AssetBundle',
+
         'cookyii\assets\AnimateCssAssetBundle',
         'cookyii\assets\SweetAlertAssetBundle',
         'cookyii\assets\angular\AngularAssetBundle',
-        'cookyii\assets\jquery\FormAssetBundle',
+        'cookyii\assets\angular\AngularMaterialAssetBundle',
         'cookyii\assets\jquery\ScrollToAssetBundle',
-        'cookyii\assets\jquery\JScrollPaneAssetBundle',
     ];
 }

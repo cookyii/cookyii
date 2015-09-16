@@ -17,7 +17,6 @@ class AppAsset extends \yii\web\AssetBundle
     public $sourcePath = '@crm/assets/_sources';
 
     public $css = [
-        'css/angular-material.css',
         'css/styles.css',
     ];
 
@@ -43,16 +42,19 @@ class AppAsset extends \yii\web\AssetBundle
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+
         'rmrevin\yii\fontawesome\cdn\AssetBundle',
-        'crm\assets\ImperaviAssetBundle',
+
         'cookyii\assets\AnimateCssAssetBundle',
         'cookyii\assets\SweetAlertAssetBundle',
         'cookyii\assets\SpeakingurlAssetBundle',
         'cookyii\assets\MomentAssetBundle',
+        'cookyii\assets\AdminLteAssetBundle',
         'cookyii\assets\angular\AngularAssetBundle',
+        'cookyii\assets\angular\AngularMaterialAssetBundle',
         'cookyii\assets\jquery\DateTimePickerAssetBundle',
-        'cookyii\assets\jquery\cdn\FormAssetBundle',
         'cookyii\assets\jquery\cdn\ScrollToAssetBundle',
-        'cookyii\assets\jquery\cdn\JScrollPaneAssetBundle',
+
+        'crm\assets\ImperaviAssetBundle',
     ];
 }
