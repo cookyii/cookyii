@@ -79,7 +79,11 @@ class Template extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

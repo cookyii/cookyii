@@ -45,7 +45,11 @@ class Response extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountAuthResponseQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\Account\Auth\queries\AccountAuthResponseQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

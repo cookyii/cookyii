@@ -19,7 +19,11 @@ class Live extends AbstractSocial
      */
     public static function find()
     {
-        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountLiveQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\Account\Auth\queries\AccountLiveQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

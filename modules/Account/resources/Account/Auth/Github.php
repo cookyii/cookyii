@@ -19,7 +19,11 @@ class Github extends AbstractSocial
      */
     public static function find()
     {
-        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountGithubQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\Account\Auth\queries\AccountGithubQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

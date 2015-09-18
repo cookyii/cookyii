@@ -19,7 +19,11 @@ class Vkontakte extends AbstractSocial
      */
     public static function find()
     {
-        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountVkontakteQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\Account\Auth\queries\AccountVkontakteQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

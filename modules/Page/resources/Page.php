@@ -90,7 +90,11 @@ class Page extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Page\resources\queries\PageQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Page\resources\queries\PageQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

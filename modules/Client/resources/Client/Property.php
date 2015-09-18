@@ -97,7 +97,11 @@ class Property extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Client\resources\Client\queries\ClientPropertyQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Client\resources\Client\queries\ClientPropertyQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

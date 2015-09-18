@@ -19,7 +19,11 @@ class Google extends AbstractSocial
      */
     public static function find()
     {
-        return new \cookyii\modules\Account\resources\Account\Auth\queries\AccountGoogleQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\Account\Auth\queries\AccountGoogleQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

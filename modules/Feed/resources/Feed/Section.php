@@ -168,7 +168,11 @@ class Section extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Feed\resources\Feed\queries\SectionQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Feed\resources\Feed\queries\SectionQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

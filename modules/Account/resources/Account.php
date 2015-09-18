@@ -333,7 +333,11 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function find()
     {
-        return new \cookyii\modules\Account\resources\queries\AccountQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\queries\AccountQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

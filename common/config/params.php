@@ -85,7 +85,13 @@ return [
     'component.user' => [
         'class' => yii\web\User::className(),
         'enableAutoLogin' => true,
-        'loginUrl' => ['/'],
+        'identityClass' => 'cookyii\modules\Account\resources\Account',
+        'identityCookie' => [
+            'name' => '_identity',
+            'httpOnly' => true,
+            'domain' => sprintf('.%s', $frontend['host']),
+        ],
+        'loginUrl' => ['/account/sign/in'],
     ],
     'component.authManager' => [
         'class' => yii\rbac\DbManager::className(),

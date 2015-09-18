@@ -179,7 +179,11 @@ class Client extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Client\resources\queries\ClientQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Client\resources\queries\ClientQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

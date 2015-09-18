@@ -38,7 +38,11 @@ class ItemSection extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

@@ -184,7 +184,12 @@ class Media extends \yii\db\ActiveRecord
     {
         $image = \Yii::getAlias(static::getMediaModule()->placeholderAlias);
 
-        $Resource = new \cookyii\modules\Media\media\InternalResource($image);
+        /** @var \cookyii\modules\Media\media\InternalResource $Resource */
+        $Resource = \Yii::createObject(
+            \cookyii\modules\Media\media\InternalResource::className(), [
+                'source' => $image,
+            ]
+        );
 
         return static::push($Resource);
     }
@@ -216,14 +221,6 @@ class Media extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Media\resources\queries\MediaQuery
-     */
-    public static function find()
-    {
-        return new \cookyii\modules\Media\resources\queries\MediaQuery(get_called_class());
-    }
-
-    /**
      * @return \cookyii\modules\Media\Module
      */
     public static function getMediaModule()
@@ -236,6 +233,18 @@ class Media extends \yii\db\ActiveRecord
         }
 
         return $Module;
+    }
+
+    /**
+     * @return \cookyii\modules\Media\resources\queries\MediaQuery
+     */
+    public static function find()
+    {
+        return \Yii::createObject(
+            \cookyii\modules\Media\resources\queries\MediaQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

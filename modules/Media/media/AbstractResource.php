@@ -8,6 +8,7 @@
 namespace cookyii\modules\Media\media;
 
 use backend\modules\Media;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
 
@@ -15,18 +16,22 @@ use yii\helpers\StringHelper;
  * Class AbstractResource
  * @package cookyii\modules\Media\media
  */
-abstract class AbstractResource implements ResourceInterface
+abstract class AbstractResource extends \yii\base\Object implements ResourceInterface
 {
 
     /** @var string */
     public static $mediaModule = 'media';
 
     /**
-     * @param string|boolean $source
+     * @inheritdoc
      */
-    public function __construct($source)
+    public function __construct($config = [])
     {
-        $this->setSource($source);
+        $source = ArrayHelper::remove($source, 'source');
+
+        if (!empty($source)) {
+            $this->setSource($source);
+        }
     }
 
     /**

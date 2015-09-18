@@ -41,7 +41,11 @@ class Attach extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Postman\resources\Postman\Template\queries\TemplateAttachQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Postman\resources\Postman\Template\queries\TemplateAttachQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

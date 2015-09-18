@@ -22,7 +22,9 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
      */
     public function actionFile()
     {
-        $UploadedResource = new Media\media\UploadedResource(\yii\web\UploadedFile::getInstanceByName('file'));
+        $UploadedResource = new Media\media\UploadedResource([
+            'source' => \yii\web\UploadedFile::getInstanceByName('file'),
+        ]);
 
         $Media = \cookyii\modules\Media\resources\Media::push($UploadedResource);
 
@@ -42,7 +44,9 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
      */
     public function actionImage()
     {
-        $UploadedResource = new Media\media\UploadedResource(\yii\web\UploadedFile::getInstanceByName('file'));
+        $UploadedResource = new Media\media\UploadedResource([
+            'source' => \yii\web\UploadedFile::getInstanceByName('file'),
+        ]);
 
         $Media = \cookyii\modules\Media\resources\Media::push($UploadedResource);
 

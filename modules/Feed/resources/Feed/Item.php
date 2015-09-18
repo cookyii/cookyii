@@ -121,7 +121,11 @@ class Item extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Feed\resources\Feed\queries\ItemQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Feed\resources\Feed\queries\ItemQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**

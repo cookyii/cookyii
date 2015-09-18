@@ -349,7 +349,11 @@ class Message extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Postman\resources\Postman\queries\MessageQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Postman\resources\Postman\queries\MessageQuery::className(), [
+                get_called_class(),
+            ]
+        );
     }
 
     /**
