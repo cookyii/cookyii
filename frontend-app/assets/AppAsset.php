@@ -17,7 +17,6 @@ class AppAsset extends \yii\web\AssetBundle
     public $sourcePath = '@frontend/assets/_sources';
 
     public $css = [
-        'css/angular-material.css',
         'css/styles.css',
     ];
 

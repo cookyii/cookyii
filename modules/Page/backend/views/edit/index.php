@@ -8,6 +8,7 @@
  * @var Page\backend\forms\PageEditForm $PageEditForm
  */
 
+use cookyii\modules\Media\resources\Media;
 use cookyii\modules\Page;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
@@ -15,6 +16,9 @@ use yii\helpers\Html;
 $this->title = Yii::t('page', 'Edit page');
 
 Page\backend\assets\EditAssetBundle::register($this);
+
+$Media = Media::find()->one();
+//dump($Media);
 
 ?>
 

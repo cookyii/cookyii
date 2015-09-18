@@ -25,12 +25,6 @@ define('FRONTEND_URL', 'http://cookyii.lc');
 define('BACKEND_URL', 'http://backend.cookyii.lc');
 define('CRM_URL', 'http://crm.cookyii.lc');
 
-// Another urls style
-// ------------------
-//define('FRONTEND_URL', 'http://cookyii.lc');
-//define('BACKEND_URL', 'http://cookyii.lc/~backend');
-//define('CRM_URL', 'http://cookyii.lc/~crm');
-
 // SMTP
 // ----
 define('SMTP_HOST', null);

@@ -187,7 +187,7 @@ class Media extends \yii\db\ActiveRecord
         /** @var \cookyii\modules\Media\media\InternalResource $Resource */
         $Resource = \Yii::createObject(
             \cookyii\modules\Media\media\InternalResource::className(), [
-                'source' => $image,
+                ['source' => $image]
             ]
         );
 

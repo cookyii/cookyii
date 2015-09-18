@@ -66,6 +66,14 @@ abstract class AbstractResource extends \yii\base\Object implements ResourceInte
 
         chmod($file_path, 0664);
 
+        \Yii::warning(print_r([
+            'copy',
+            $this->getTemp(),
+            'to',
+            $file_path,
+            $result ? 'true' : 'false'
+        ], 1));
+
         return $result === true ? $file_path : false;
     }
 

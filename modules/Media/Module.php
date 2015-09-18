@@ -20,20 +20,21 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
     public $moduleName = 'media';
 
     /** @var string */
-    public $uploadPath = '@app/web/upload';
+    public $uploadPath = '@upload';
 
     /** @var string */
     public $uploadWebPath = '/upload';
 
     /** @var string */
-    public $storagePath = '@app/web/storage';
+    public $storagePath = '@upload/storage';
 
     /** @var string */
-    public $storageWebPath = '/storage';
+    public $storageWebPath = '/upload/storage';
 
     /** @var int */
     public $maxUploadFileSize = 10; // megabytes
 
+    /** @var string */
     public $placeholderAlias = '@common/assets/_sources/img/placeholder.png';
 
     /**
@@ -43,11 +44,24 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
     {
         parent::init();
 
-        $this->checkIniSizeParam('upload_max_filesize');
+        if ((int)ini_get('upload_max_filesize') < $this->maxUploadFileSize) {
+            \Yii::warning(
+                sprintf('The parameter `%s` in php.ini must be equal to`%s`', 'upload_max_filesize', $this->maxUploadFileSize . 'M'),
+                __METHOD__
+            );
+        }
 
-        $this->checkIniSizeParam('post_max_size');
+        if ((int)ini_get('post_max_size') < $this->maxUploadFileSize) {
+            \Yii::warning(
+                sprintf('The parameter `%s` in php.ini must be equal to`%s`', 'post_max_size', $this->maxUploadFileSize . 'M'),
+                __METHOD__
+            );
+        }
 
-        $this->initAliases();
+        $this->uploadWebPath = \Yii::getAlias($this->uploadWebPath);
+        $this->uploadPath = \Yii::getAlias($this->uploadPath);
+        $this->storageWebPath = \Yii::getAlias($this->storageWebPath);
+        $this->storagePath = \Yii::getAlias($this->storagePath);
 
         if (empty($this->uploadPath)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('media', 'Unable to determine the path to the upload directory (Media::$uploadPath).'));
@@ -66,28 +80,20 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
         }
 
         if (!is_readable($this->uploadPath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Upload directory not available for reading (FileService::$uploadPath).'));
+            throw new \RuntimeException(\Yii::t('media', 'Upload directory not available for reading (Media::$uploadPath).'));
         }
 
         if (!is_writable($this->uploadPath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Upload directory not available for writing (FileService::$uploadPath).'));
+            throw new \RuntimeException(\Yii::t('media', 'Upload directory not available for writing (Media::$uploadPath).'));
         }
 
         if (!is_readable($this->storagePath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Storage directory not available for reading (FileService::$storagePath).'));
+            throw new \RuntimeException(\Yii::t('media', 'Storage directory not available for reading (Media::$storagePath).'));
         }
 
         if (!is_writable($this->storagePath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Storage directory not available for writing (FileService::$storagePath).'));
+            throw new \RuntimeException(\Yii::t('media', 'Storage directory not available for writing (Media::$storagePath).'));
         }
-    }
-
-    public function initAliases()
-    {
-        $this->storageWebPath = \Yii::getAlias($this->storageWebPath);
-        $this->storagePath = \Yii::getAlias($this->storagePath);
-        $this->uploadWebPath = \Yii::getAlias($this->uploadWebPath);
-        $this->uploadPath = \Yii::getAlias($this->uploadPath);
     }
 
     /**
@@ -101,18 +107,5 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
             'sourceLanguage' => 'en-US',
             'basePath' => '@app/messages',
         ];
-    }
-
-    /**
-     * @param string $param
-     */
-    private function checkIniSizeParam($param)
-    {
-        if ((int)ini_get($param) < $this->maxUploadFileSize) {
-            \Yii::warning(
-                sprintf('The parameter `%s` in php.ini must be equal to`%s`', $param, $this->maxUploadFileSize . 'M'),
-                __METHOD__
-            );
-        }
     }
 }
