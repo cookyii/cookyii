@@ -28,18 +28,26 @@ class Image extends \yii\imagine\Image
      *
      * @param string $filename the image file path or path alias.
      * @param integer $width the resize width
+     * @param boolean $strict strict resize
      * @param string $filter
      * @return \Imagine\Image\ImageInterface
      */
-    public static function resizeByWidth($filename, $width, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
+    public static function resizeByWidth($filename, $width, $strict = false, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
     {
         $img = static::getImagine()
             ->open(\Yii::getAlias($filename));
 
-        $height = $img->getSize()->getHeight() / $img->getSize()->getWidth() * $width;
+        $size = $img->getSize();
 
-        return $img
-            ->copy()
+        if ($strict === false) {
+            if ($width > $size->getWidth()) {
+                $width = $size->getWidth();
+            }
+        }
+
+        $height = $size->getHeight() / $size->getWidth() * $width;
+
+        return $img->copy()
             ->resize(new Imagine\Image\Box($width, $height), $filter);
     }
 
@@ -55,18 +63,26 @@ class Image extends \yii\imagine\Image
      *
      * @param string $filename the image file path or path alias.
      * @param integer $height the resize height
+     * @param boolean $strict strict resize
      * @param string $filter
      * @return \Imagine\Image\ImageInterface
      */
-    public static function resizeByHeight($filename, $height, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
+    public static function resizeByHeight($filename, $height, $strict = false, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
     {
         $img = static::getImagine()
             ->open(\Yii::getAlias($filename));
 
-        $width = $img->getSize()->getWidth() / $img->getSize()->getHeight() * $height;
+        $size = $img->getSize();
 
-        return $img
-            ->copy()
+        if ($strict === false) {
+            if ($height > $size->getHeight()) {
+                $height = $size->getHeight();
+            }
+        }
+
+        $width = $size->getWidth() / $size->getHeight() * $height;
+
+        return $img->copy()
             ->resize(new Imagine\Image\Box($width, $height), $filter);
     }
 
@@ -83,14 +99,28 @@ class Image extends \yii\imagine\Image
      * @param string $filename the image file path or path alias.
      * @param integer $width the resize width
      * @param integer $height the resize height
+     * @param boolean $strict strict resize
      * @param string $filter
      * @return \Imagine\Image\ImageInterface
      */
-    public static function resize($filename, $width, $height, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
+    public static function resize($filename, $width, $height, $strict = false, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
     {
-        return static::getImagine()
-            ->open(\Yii::getAlias($filename))
-            ->copy()
+        $img = static::getImagine()
+            ->open(\Yii::getAlias($filename));
+
+        $size = $img->getSize();
+
+        if ($strict === false) {
+            if ($width > $size->getWidth()) {
+                $width = $size->getWidth();
+            }
+
+            if ($height > $size->getHeight()) {
+                $height = $size->getHeight();
+            }
+        }
+
+        return $img->copy()
             ->resize(new Imagine\Image\Box($width, $height), $filter);
     }
 }

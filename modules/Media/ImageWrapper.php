@@ -11,7 +11,6 @@ use cookyii\modules\Media\components\Image;
 use Imagine\Image\ImageInterface;
 use Imagine\Image\ManipulatorInterface;
 use yii\helpers\FileHelper;
-use yii\helpers\Json;
 use yii\helpers\StringHelper;
 
 /**
@@ -63,7 +62,7 @@ class ImageWrapper extends \yii\base\Object
             \Yii::trace(sprintf('create new file cache: ', $this->Media->id), __METHOD__);
             $this->createMarkedMedia($handler(), $mark);
         } else {
-            \Yii::trace(sprintf('file already cached: %s (%s)', $this->Media->id, Json::encode($this->mark)), __METHOD__);
+            \Yii::trace(sprintf('file already cached: %s (%s)', $this->Media->id, serialize($this->mark)), __METHOD__);
         }
 
         \Yii::endProfile(sprintf('manipulating with file `%s`', $this->Media->id), 'Media\Manipulation');
@@ -72,16 +71,17 @@ class ImageWrapper extends \yii\base\Object
     /**
      * @param integer $width
      * @param integer $height
+     * @param boolean $strict
      * @param string $filter
      * @return static
      */
-    public function resize($width, $height, $filter = ImageInterface::FILTER_UNDEFINED)
+    public function resize($width, $height, $strict = false, $filter = ImageInterface::FILTER_UNDEFINED)
     {
         \Yii::trace('resize file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->save(function () use ($width, $height, $filter) {
-            return Image::resize($this->Media->getAbsolutePath(), $width, $height, $filter);
+        $this->save(function () use ($width, $height, $strict, $filter) {
+            return Image::resize($this->Media->getAbsolutePath(), $width, $height, $strict, $filter);
         });
 
         return $this;
@@ -89,16 +89,17 @@ class ImageWrapper extends \yii\base\Object
 
     /**
      * @param integer $width
+     * @param boolean $strict
      * @param string $filter
      * @return static
      */
-    public function resizeByWidth($width, $filter = ImageInterface::FILTER_UNDEFINED)
+    public function resizeByWidth($width, $strict = false, $filter = ImageInterface::FILTER_UNDEFINED)
     {
         \Yii::trace('resizeByWidth file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->save(function () use ($width, $filter) {
-            return Image::resizeByWidth($this->Media->getAbsolutePath(), $width, $filter);
+        $this->save(function () use ($width, $strict, $filter) {
+            return Image::resizeByWidth($this->Media->getAbsolutePath(), $width, $strict, $filter);
         });
 
         return $this;
@@ -107,16 +108,17 @@ class ImageWrapper extends \yii\base\Object
 
     /**
      * @param integer $height
+     * @param boolean $strict
      * @param string $filter
      * @return static
      */
-    public function resizeByHeight($height, $filter = ImageInterface::FILTER_UNDEFINED)
+    public function resizeByHeight($height, $strict = false, $filter = ImageInterface::FILTER_UNDEFINED)
     {
         \Yii::trace('resizeByHeight file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->save(function () use ($height, $filter) {
-            return Image::resizeByHeight($this->Media->getAbsolutePath(), $height, $filter);
+        $this->save(function () use ($height, $strict, $filter) {
+            return Image::resizeByHeight($this->Media->getAbsolutePath(), $height, $strict, $filter);
         });
 
         return $this;
@@ -281,7 +283,7 @@ class ImageWrapper extends \yii\base\Object
      */
     private function calculateMark()
     {
-        return sha1(Json::encode($this->mark));
+        return sha1(serialize($this->mark));
     }
 
     /**
