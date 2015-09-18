@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Media\media;
 
-use backend\modules\Media;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
@@ -27,7 +26,9 @@ abstract class AbstractResource extends \yii\base\Object implements ResourceInte
      */
     public function __construct($config = [])
     {
-        $source = ArrayHelper::remove($source, 'source');
+        $source = ArrayHelper::remove($config, 'source');
+
+        parent::__construct($config);
 
         if (!empty($source)) {
             $this->setSource($source);
