@@ -31,6 +31,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
             'rsync -rt ./modules/Postman/ ../module-postman/',
             // project
             'rsync -rt ./common/ ../project/common/',
+            'rsync -rt ./conf.d/ ../project/conf.d/',
             'rsync -rt ./frontend-app/ ../project/frontend-app/ --exclude=runtime',
             'rsync -rt ./frontend-modules/ ../project/frontend-modules/',
             'rsync -rt ./backend-app/ ../project/backend-app/ --exclude=runtime',
