@@ -16,8 +16,6 @@ namespace cookyii\db\traits;
 trait ActivationTrait
 {
 
-    public $activated;
-
     /**
      * @return bool
      */
