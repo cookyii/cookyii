@@ -23,7 +23,13 @@ trait ActivationTrait
      */
     public function isActivated()
     {
-        return !empty($this->activated_at);
+        $result = !empty($this->activated_at);
+
+        if (array_key_exists('cookyii\db\traits\SoftDeleteTrait', class_uses($this))) {
+            $result = $result && !$this->isDeleted();
+        }
+
+        return $result;
     }
 
     /**

@@ -69,10 +69,31 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $fields = parent::fields();
 
-        $fields['deleted'] = 'deleted';
-        $fields['activated'] = 'activated';
-
         unset($fields['password_hash'], $fields['token'], $fields['auth_key']);
+
+        $fields['created_at_format'] = function (Account $Model) {
+            return Formatter()->asDatetime($Model->created_at);
+        };
+
+        $fields['updated_at_format'] = function (Account $Model) {
+            return Formatter()->asDatetime($Model->updated_at);
+        };
+
+        $fields['deleted_at_format'] = function (Account $Model) {
+            return Formatter()->asDatetime($Model->deleted_at);
+        };
+
+        $fields['activated_at_format'] = function (Account $Model) {
+            return Formatter()->asDatetime($Model->activated_at);
+        };
+
+        $fields['deleted'] = function (Account $Model) {
+            return $Model->isDeleted();
+        };
+
+        $fields['activated'] = function (Account $Model) {
+            return $Model->isActivated();
+        };
 
         return $fields;
     }

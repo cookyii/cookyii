@@ -17,13 +17,10 @@ namespace cookyii\db\traits;
  *
  * При повторном вызове метода delete, запись будет удалена полностью из базы
  *
- * @property bool $activated_at
  * @property bool $deleted_at
  */
 trait SoftDeleteTrait
 {
-
-    public $deleted;
 
     /**
      * @return bool

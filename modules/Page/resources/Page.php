@@ -49,8 +49,29 @@ class Page extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['deleted'] = 'deleted';
-        $fields['activated'] = 'activated';
+        $fields['created_at_format'] = function (Page $Model) {
+            return Formatter()->asDatetime($Model->created_at);
+        };
+
+        $fields['updated_at_format'] = function (Page $Model) {
+            return Formatter()->asDatetime($Model->updated_at);
+        };
+
+        $fields['deleted_at_format'] = function (Page $Model) {
+            return Formatter()->asDatetime($Model->deleted_at);
+        };
+
+        $fields['activated_at_format'] = function (Page $Model) {
+            return Formatter()->asDatetime($Model->deleted_at);
+        };
+
+        $fields['deleted'] = function (Page $Model) {
+            return $Model->isDeleted();
+        };
+
+        $fields['activated'] = function (Page $Model) {
+            return $Model->isActivated();
+        };
 
         return $fields;
     }

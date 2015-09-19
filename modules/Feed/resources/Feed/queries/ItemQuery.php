@@ -88,11 +88,53 @@ class ItemQuery extends \yii\db\ActiveQuery
      */
     public function onlyPublished()
     {
-        $this
-            ->onlyActivated()
-            ->withoutDeleted()
-            ->andWhere(['<=', 'published_at', time()])
-            ->andWhere(['or', ['>=', 'archived_at', time()], ['archived_at' => null]]);
+        $this->andWhere([
+            'or',
+            ['published_at' => null],
+            ['<=', 'published_at', time()],
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function onlyNotPublished()
+    {
+        $this->andWhere([
+            'and',
+            ['not', ['published_at' => null]],
+            ['>=', 'published_at', time()],
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function onlyArchived()
+    {
+        $this->andWhere([
+            'and',
+            ['not', ['archived_at' => null]],
+            ['<=', 'archived_at', time()],
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function onlyNotArchived()
+    {
+        $this->andWhere([
+            'or',
+            ['archived_at' => null],
+            ['>=', 'archived_at', time()],
+        ]);
 
         return $this;
     }

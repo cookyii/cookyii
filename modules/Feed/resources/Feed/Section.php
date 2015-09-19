@@ -53,8 +53,45 @@ class Section extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['deleted'] = 'deleted';
-        $fields['activated'] = 'activated';
+        $fields['created_at_format'] = function (Item $Model) {
+            return Formatter()->asDatetime($Model->created_at);
+        };
+
+        $fields['updated_at_format'] = function (Item $Model) {
+            return Formatter()->asDatetime($Model->updated_at);
+        };
+
+        $fields['published_at_format'] = function (Item $Model) {
+            return Formatter()->asDatetime($Model->published_at);
+        };
+
+        $fields['archived_at_format'] = function (Item $Model) {
+            return Formatter()->asDatetime($Model->archived_at);
+        };
+
+        $fields['deleted_at_format'] = function (Item $Model) {
+            return Formatter()->asDatetime($Model->deleted_at);
+        };
+
+        $fields['activated_at_format'] = function (Item $Model) {
+            return Formatter()->asDatetime($Model->activated_at);
+        };
+
+        $fields['published'] = function (Item $Model) {
+            return $Model->isPublished();
+        };
+
+        $fields['archived'] = function (Item $Model) {
+            return $Model->isArchived();
+        };
+
+        $fields['deleted'] = function (Item $Model) {
+            return $Model->isDeleted();
+        };
+
+        $fields['activated'] = function (Item $Model) {
+            return $Model->isActivated();
+        };
 
         return $fields;
     }
@@ -81,6 +118,22 @@ class Section extends \yii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return empty($this->published_at) || ($this->published_at <= time() && !$this->isArchived());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isArchived()
+    {
+        return !empty($this->archived_at) && $this->archived_at <= time();
     }
 
     /**

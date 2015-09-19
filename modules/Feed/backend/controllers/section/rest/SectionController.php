@@ -143,15 +143,9 @@ class SectionController extends \yii\rest\ActiveController
             $Query->withoutDeleted();
         }
 
-        return new \cookyii\data\CallableActiveDataProvider([
+        return new \yii\data\ActiveDataProvider([
             'query' => $Query,
             'pagination' => ['pageSize' => 10000],
-            'mapFunction' => function ($data) {
-                $data['deleted'] = !empty($data['deleted_at']);
-                $data['activated'] = !$data['deleted'] && !empty($data['activated_at']);
-
-                return $data;
-            }
         ]);
     }
 }

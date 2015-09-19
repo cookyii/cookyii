@@ -47,7 +47,21 @@ class Template extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['deleted'] = 'deleted';
+        $fields['created_at_format'] = function (Template $Model) {
+            return Formatter()->asDatetime($Model->created_at);
+        };
+
+        $fields['updated_at_format'] = function (Template $Model) {
+            return Formatter()->asDatetime($Model->updated_at);
+        };
+
+        $fields['deleted_at_format'] = function (Template $Model) {
+            return Formatter()->asDatetime($Model->deleted_at);
+        };
+
+        $fields['deleted'] = function (Template $Model) {
+            return $Model->isDeleted();
+        };
 
         return $fields;
     }

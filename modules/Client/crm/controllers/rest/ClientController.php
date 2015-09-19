@@ -129,14 +129,9 @@ class ClientController extends \yii\rest\ActiveController
             $Query->withoutDeleted();
         }
 
-        return new \cookyii\data\CallableActiveDataProvider([
+        return new \yii\data\ActiveDataProvider([
             'query' => $Query,
             'pagination' => ['pageSize' => 15],
-            'mapFunction' => function (\cookyii\modules\Client\resources\Client $Model) {
-                $Model['deleted'] = $Model->isDeleted();
-
-                return $Model;
-            }
         ]);
     }
 }

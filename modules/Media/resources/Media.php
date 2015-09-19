@@ -58,6 +58,24 @@ class Media extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['created_at_format'] = function (Media $Model) {
+            return Formatter()->asDatetime($Model->created_at);
+        };
+
+        $fields['updated_at_format'] = function (Media $Model) {
+            return Formatter()->asDatetime($Model->updated_at);
+        };
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

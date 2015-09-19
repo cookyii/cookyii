@@ -68,9 +68,27 @@ class Message extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['deleted'] = 'deleted';
-
         unset($fields['code']);
+
+        $fields['created_at_format'] = function (Message $Model) {
+            return Formatter()->asDatetime($Model->created_at);
+        };
+
+        $fields['scheduled_at_format'] = function (Message $Model) {
+            return Formatter()->asDatetime($Model->scheduled_at);
+        };
+
+        $fields['sent_at_format'] = function (Message $Model) {
+            return Formatter()->asDatetime($Model->sent_at);
+        };
+
+        $fields['deleted_at_format'] = function (Message $Model) {
+            return Formatter()->asDatetime($Model->deleted_at);
+        };
+
+        $fields['deleted'] = function (Message $Model) {
+            return $Model->isDeleted();
+        };
 
         return $fields;
     }
