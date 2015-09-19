@@ -42,6 +42,12 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public $password;
 
+    public static $gravatarParams = [
+        'r' => 'r',
+        's' => 128,
+        'd' => 'retro',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -95,6 +101,8 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             return $Model->isActivated();
         };
 
+        $fields['gravatar'] = 'gravatar';
+
         return $fields;
     }
 
@@ -132,6 +140,22 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGravatar()
+    {
+        $hash = md5(strtolower(trim($this->email)));
+
+        $params = array_merge([
+            'r' => 'r',
+            's' => 128,
+            'd' => 'retro',
+        ], static::$gravatarParams);
+
+        return sprintf('https://secure.gravatar.com/avatar/%s.png?%s', $hash, http_build_query($params));
     }
 
     /** @var array */
