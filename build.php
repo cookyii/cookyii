@@ -178,8 +178,7 @@ function appendClearTask(array &$config, $task_name, $app)
 {
     appendEmptyTask($config, $task_name);
 
-    $base_path = __DIR__;
-    $app_path = $base_path . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
+    $path_list = getPath($app);
 
     $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $config[$task_name][$app] = [
@@ -188,9 +187,9 @@ function appendClearTask(array &$config, $task_name, $app)
             'class' => 'cookyii\build\tasks\DeleteTask',
             'deleteDir' => false,
             'fileSets' => [
-                ['dir' => sprintf('%s/runtime', $app_path), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/assets', $app_path), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/minify', $app_path), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/runtime', $path_list['app']), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/assets', $path_list['app']), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/minify', $path_list['app']), 'exclude' => ['.gitignore']],
             ],
         ],
     ];
