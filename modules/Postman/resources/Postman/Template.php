@@ -59,9 +59,7 @@ class Template extends \yii\db\ActiveRecord
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
-        $fields['deleted'] = function (Template $Model) {
-            return $Model->isDeleted();
-        };
+        $fields['deleted'] = [$this, 'isDeleted'];
 
         return $fields;
     }

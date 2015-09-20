@@ -107,15 +107,9 @@ class MessageController extends \yii\rest\ActiveController
             $Query->withoutDeleted();
         }
 
-        return new \cookyii\data\CallableActiveDataProvider([
+        return new \yii\data\ActiveDataProvider([
             'query' => $Query,
             'pagination' => ['pageSize' => 15],
-            'mapFunction' => function ($data) {
-                $data['address'] = !empty($data['address']) ? Json::decode($data['address']) : [];
-                $data['deleted'] = !empty($data['deleted_at']);
-
-                return $data;
-            }
         ]);
     }
 }

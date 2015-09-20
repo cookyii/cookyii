@@ -77,21 +77,10 @@ class Section extends \yii\db\ActiveRecord
             return Formatter()->asDatetime($Model->activated_at);
         };
 
-        $fields['published'] = function (Item $Model) {
-            return $Model->isPublished();
-        };
-
-        $fields['archived'] = function (Item $Model) {
-            return $Model->isArchived();
-        };
-
-        $fields['deleted'] = function (Item $Model) {
-            return $Model->isDeleted();
-        };
-
-        $fields['activated'] = function (Item $Model) {
-            return $Model->isActivated();
-        };
+        $fields['published'] = [$this, 'isPublished'];
+        $fields['archived'] = [$this, 'isArchived'];
+        $fields['deleted'] = [$this, 'isDeleted'];
+        $fields['activated'] = [$this, 'isActivated'];
 
         return $fields;
     }

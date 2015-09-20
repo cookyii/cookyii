@@ -93,13 +93,8 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             return Formatter()->asDatetime($Model->activated_at);
         };
 
-        $fields['deleted'] = function (Account $Model) {
-            return $Model->isDeleted();
-        };
-
-        $fields['activated'] = function (Account $Model) {
-            return $Model->isActivated();
-        };
+        $fields['deleted'] = [$this, 'isDeleted'];
+        $fields['activated'] = [$this, 'isActivated'];
 
         $fields['gravatar'] = 'gravatar';
 

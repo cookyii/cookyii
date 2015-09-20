@@ -65,13 +65,8 @@ class Page extends \yii\db\ActiveRecord
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
-        $fields['deleted'] = function (Page $Model) {
-            return $Model->isDeleted();
-        };
-
-        $fields['activated'] = function (Page $Model) {
-            return $Model->isActivated();
-        };
+        $fields['deleted'] = [$this, 'isDeleted'];
+        $fields['activated'] = [$this, 'isActivated'];
 
         return $fields;
     }

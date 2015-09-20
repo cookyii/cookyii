@@ -86,9 +86,8 @@ class Message extends \yii\db\ActiveRecord
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
-        $fields['deleted'] = function (Message $Model) {
-            return $Model->isDeleted();
-        };
+        $fields['address'] = [$this, 'expandAddress'];
+        $fields['deleted'] = [$this, 'isDeleted'];
 
         return $fields;
     }
@@ -110,6 +109,14 @@ class Message extends \yii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function expandAddress()
+    {
+        return Json::decode($this->address);
     }
 
     /**
