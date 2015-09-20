@@ -35,7 +35,7 @@ class Module extends \yii\base\Module implements \crm\interfaces\CrmModuleInterf
         $app->getI18n()
             ->translations['account'] = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => 'en-US',
+            'sourceLanguage' => \Yii::$app->sourceLanguage,
             'basePath' => '@app/messages',
         ];
     }

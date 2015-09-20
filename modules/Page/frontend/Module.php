@@ -21,7 +21,7 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
         $app->getI18n()
             ->translations['page'] = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => 'en-US',
+            'sourceLanguage' => \Yii::$app->sourceLanguage,
             'basePath' => '@app/messages',
         ];
     }

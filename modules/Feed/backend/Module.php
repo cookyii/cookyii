@@ -42,7 +42,7 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
         $app->getI18n()
             ->translations['feed'] = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => 'en-US',
+            'sourceLanguage' => \Yii::$app->sourceLanguage,
             'basePath' => '@app/messages',
         ];
     }

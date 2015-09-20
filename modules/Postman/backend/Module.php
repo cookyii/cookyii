@@ -55,7 +55,7 @@ class Module extends \cookyii\modules\Postman\AbstractModule implements \backend
         $app->getI18n()
             ->translations['postman'] = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => 'en-US',
+            'sourceLanguage' => \Yii::$app->sourceLanguage,
             'basePath' => '@app/messages',
         ];
     }

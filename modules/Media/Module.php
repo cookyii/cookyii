@@ -104,7 +104,7 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
         $APP->getI18n()
             ->translations['media'] = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => 'en-US',
+            'sourceLanguage' => \Yii::$app->sourceLanguage,
             'basePath' => '@app/messages',
         ];
     }
