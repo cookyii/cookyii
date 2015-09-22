@@ -59,10 +59,10 @@ class DetailAction extends \yii\rest\Action
      */
     public function findModel($id)
     {
-        /* @var $ModelClass \cookyii\modules\Account\resources\Account */
-        $ModelClass = $this->modelClass;
+        /* @var $modelClass \cookyii\modules\Account\resources\Account */
+        $modelClass = $this->modelClass;
 
-        $Model = $ModelClass::find()
+        $Model = $modelClass::find()
             ->byId($id)
             ->with(['properties'])
             ->one();

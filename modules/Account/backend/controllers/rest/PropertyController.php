@@ -42,7 +42,6 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty property key');
         }
 
-        /** @var \cookyii\modules\Account\resources\Account\Property|null $Property */
         $Property = null;
 
         if (!empty($key) && $key !== '__new') {
@@ -109,7 +108,6 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty account id');
         }
 
-        /** @var \cookyii\modules\Account\resources\Account\Property $Property */
         $Property = \cookyii\modules\Account\resources\Account\Property::find()
             ->byAccountId($account_id)
             ->byKey($key)

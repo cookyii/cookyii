@@ -104,10 +104,9 @@ class AccountController extends \yii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \yii\db\BaseActiveRecord */
+        /* @var $modelClass \cookyii\modules\Account\resources\Account */
         $modelClass = $action->modelClass;
 
-        /** @var \cookyii\modules\Account\resources\queries\AccountQuery $Query */
         $Query = $modelClass::find();
 
         $search = str_clean(Request()->get('search'));

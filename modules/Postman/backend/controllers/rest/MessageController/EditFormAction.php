@@ -28,7 +28,6 @@ class EditFormAction extends \yii\rest\Action
 
         $message_id = (int)Request()->post('message_id');
 
-        /** @var \cookyii\modules\Postman\resources\Postman\Message|null $Message */
         $Message = null;
 
         if ($message_id > 0) {

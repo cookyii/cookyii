@@ -28,7 +28,6 @@ class EditFormAction extends \yii\rest\Action
 
         $item_id = (int)Request()->post('item_id');
 
-        /** @var \cookyii\modules\Feed\resources\Feed\Item|null $Item */
         $Item = null;
 
         if ($item_id > 0) {

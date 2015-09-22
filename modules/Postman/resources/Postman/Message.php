@@ -265,7 +265,6 @@ class Message extends \yii\db\ActiveRecord
      */
     public static function create($template_code, $placeholders = [], $subject = null, $styles = '')
     {
-        /** @var Template $Template */
         $Template = Template::find()
             ->byCode($template_code)
             ->one();
@@ -303,7 +302,6 @@ class Message extends \yii\db\ActiveRecord
         $layout_html = '{content}';
 
         if ($use_layout) {
-            /** @var Template $LayoutTemplate */
             $LayoutTemplate = Template::find()
                 ->byCode(static::LAYOUT_CODE)
                 ->one();

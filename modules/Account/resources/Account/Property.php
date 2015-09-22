@@ -71,7 +71,6 @@ class Property extends \yii\db\ActiveRecord
      */
     public static function push($account_id, $key, $value)
     {
-        /** @var static $Property */
         $Property = static::find()
             ->byAccountId($account_id)
             ->byKey($key)

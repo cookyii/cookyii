@@ -10,6 +10,9 @@ namespace cookyii\modules\Postman\resources\Postman\queries;
 /**
  * Class MessageQuery
  * @package cookyii\modules\Postman\resources\Postman\queries
+ *
+ * @method \cookyii\modules\Postman\resources\Postman\Message|array|null one($db = null)
+ * @method \cookyii\modules\Postman\resources\Postman\Message[]|array all($db = null)
  */
 class MessageQuery extends \yii\db\ActiveQuery
 {

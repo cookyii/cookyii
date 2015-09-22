@@ -28,7 +28,6 @@ class EditFormAction extends \yii\rest\Action
 
         $account_id = (int)Request()->post('account_id');
 
-        /** @var \cookyii\modules\Account\resources\Account|null $Account */
         $Account = null;
 
         if ($account_id > 0) {

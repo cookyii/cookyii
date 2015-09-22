@@ -12,6 +12,9 @@ use yii\helpers\ArrayHelper;
 /**
  * Class ItemQuery
  * @package cookyii\modules\Feed\resources\Feed\queries
+ *
+ * @method \cookyii\modules\Feed\resources\Feed\Item|array|null one($db = null)
+ * @method \cookyii\modules\Feed\resources\Feed\Item[]|array all($db = null)
  */
 class ItemQuery extends \yii\db\ActiveQuery
 {

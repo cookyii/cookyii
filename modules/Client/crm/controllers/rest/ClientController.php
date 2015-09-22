@@ -112,10 +112,9 @@ class ClientController extends \yii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \yii\db\BaseActiveRecord */
+        /* @var $modelClass \cookyii\modules\Client\resources\Client */
         $modelClass = $action->modelClass;
 
-        /** @var \cookyii\modules\Client\resources\queries\ClientQuery $Query */
         $Query = $modelClass::find()
             ->with(['account']);
 

@@ -10,6 +10,9 @@ namespace cookyii\modules\Account\resources\queries;
 /**
  * Class AccountQuery
  * @package cookyii\modules\Account\resources\queries
+ *
+ * @method \cookyii\modules\Account\resources\Account|array|null one($db = null)
+ * @method \cookyii\modules\Account\resources\Account[]|array all($db = null)
  */
 class AccountQuery extends \yii\db\ActiveQuery
 {

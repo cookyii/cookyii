@@ -42,7 +42,6 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty property key');
         }
 
-        /** @var \cookyii\modules\Client\resources\Client\Property|null $Property */
         $Property = null;
 
         if (!empty($key) && $key !== '__new') {
@@ -109,7 +108,6 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty client id');
         }
 
-        /** @var \cookyii\modules\Client\resources\Client\Property $Property */
         $Property = \cookyii\modules\Client\resources\Client\Property::find()
             ->byClientId($client_id)
             ->byKey($key)

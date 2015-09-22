@@ -28,7 +28,6 @@ class EditFormAction extends \yii\rest\Action
 
         $page_id = (int)Request()->post('page_id');
 
-        /** @var \cookyii\modules\Page\resources\Page|null $Page */
         $Page = null;
 
         if ($page_id > 0) {

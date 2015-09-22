@@ -26,7 +26,6 @@ class EditFormAction extends \yii\rest\Action
 
         $client_id = (int)Request()->post('client_id');
 
-        /** @var \cookyii\modules\Client\resources\Client|null $Client */
         $Client = null;
 
         if ($client_id > 0) {

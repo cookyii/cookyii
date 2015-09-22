@@ -10,6 +10,9 @@ namespace cookyii\modules\Page\resources\queries;
 /**
  * Class PageQuery
  * @package cookyii\modules\Page\resources\queries
+ *
+ * @method \cookyii\modules\Page\resources\Page|array|null one($db = null)
+ * @method \cookyii\modules\Page\resources\Page[]|array all($db = null)
  */
 class PageQuery extends \yii\db\ActiveQuery
 {

@@ -10,6 +10,9 @@ namespace cookyii\modules\Media\resources\queries;
 /**
  * Class MediaQuery
  * @package cookyii\modules\Media\resources\queries
+ *
+ * @method \cookyii\modules\Media\resources\Media|array|null one($db = null)
+ * @method \cookyii\modules\Media\resources\Media[]|array all($db = null)
  */
 class MediaQuery extends \yii\db\ActiveQuery
 {

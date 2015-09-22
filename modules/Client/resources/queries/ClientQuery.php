@@ -10,6 +10,9 @@ namespace cookyii\modules\Client\resources\queries;
 /**
  * Class ClientQuery
  * @package cookyii\modules\Client\resources\queries
+ *
+ * @method \cookyii\modules\Client\resources\Client|array|null one($db = null)
+ * @method \cookyii\modules\Client\resources\Client[]|array all($db = null)
  */
 class ClientQuery extends \yii\db\ActiveQuery
 {

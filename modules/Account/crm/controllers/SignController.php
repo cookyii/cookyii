@@ -121,7 +121,6 @@ class SignController extends Account\crm\components\Controller
                 break;
         }
 
-        /** @var \cookyii\modules\Account\resources\Account $Account */
         $Account = $AccountQuery->one();
 
         if ($Account instanceof \cookyii\modules\Account\resources\Account) {

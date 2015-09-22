@@ -28,7 +28,6 @@ class EditFormAction extends \yii\rest\Action
 
         $template_id = (int)Request()->post('template_id');
 
-        /** @var \cookyii\modules\Postman\resources\Postman\Template|null $Template */
         $Template = null;
 
         if ($template_id > 0) {

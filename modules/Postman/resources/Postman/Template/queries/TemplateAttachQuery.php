@@ -10,6 +10,9 @@ namespace cookyii\modules\Postman\resources\Postman\Template\queries;
 /**
  * Class TemplateAttachQuery
  * @package cookyii\modules\Postman\resources\Postman\Template\queries
+ *
+ * @method \cookyii\modules\Postman\resources\Postman\Template\Attach|array|null one($db = null)
+ * @method \cookyii\modules\Postman\resources\Postman\Template\Attach[]|array all($db = null)
  */
 class TemplateAttachQuery extends \yii\db\ActiveQuery
 {

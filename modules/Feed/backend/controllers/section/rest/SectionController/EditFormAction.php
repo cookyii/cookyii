@@ -28,7 +28,6 @@ class EditFormAction extends \yii\rest\Action
 
         $section_slug = str_clean(Request()->post('section_slug'));
 
-        /** @var \cookyii\modules\Feed\resources\Feed\Section|null $Section */
         $Section = null;
 
         if (!empty($section_slug)) {

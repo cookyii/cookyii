@@ -38,7 +38,6 @@ class ClientAccount extends \yii\base\Object
         $email = empty($email) ? $Client->email : $email;
         $password = empty($password) ? Security()->generateRandomString(10) : $password;
 
-        /** @var Account\resources\Account $Account */
         $Account = Account\resources\Account::find()
             ->byEmail($email)
             ->one();

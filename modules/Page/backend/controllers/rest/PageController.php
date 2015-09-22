@@ -89,10 +89,9 @@ class PageController extends \yii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \yii\db\BaseActiveRecord */
+        /* @var $modelClass \cookyii\modules\Page\resources\Page */
         $modelClass = $action->modelClass;
 
-        /** @var \cookyii\modules\Page\resources\queries\PageQuery $Query */
         $Query = $modelClass::find();
 
         $search = str_clean(Request()->get('search'));

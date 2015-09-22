@@ -10,6 +10,9 @@ namespace cookyii\modules\Feed\resources\Feed\queries;
 /**
  * Class SectionQuery
  * @package cookyii\modules\Feed\resources\Feed\queries
+ *
+ * @method \cookyii\modules\Feed\resources\Feed\Section|array|null one($db = null)
+ * @method \cookyii\modules\Feed\resources\Feed\Section[]|array all($db = null)
  */
 class SectionQuery extends \yii\db\ActiveQuery
 {

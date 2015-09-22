@@ -127,10 +127,9 @@ class SectionController extends \yii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \yii\db\BaseActiveRecord */
+        /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
         $modelClass = $action->modelClass;
 
-        /** @var \cookyii\modules\Feed\resources\Feed\queries\SectionQuery $Query */
         $Query = $modelClass::find();
 
         $search = str_clean(Request()->get('search'));

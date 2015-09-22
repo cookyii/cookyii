@@ -10,6 +10,9 @@ namespace cookyii\modules\Account\resources\Account\queries;
 /**
  * Class AccountPropertyQuery
  * @package cookyii\modules\Account\resources\Account\queries
+ *
+ * @method \cookyii\modules\Account\resources\Account\Property|array|null one($db = null)
+ * @method \cookyii\modules\Account\resources\Account\Property[]|array all($db = null)
  */
 class AccountPropertyQuery extends \yii\db\ActiveQuery
 {

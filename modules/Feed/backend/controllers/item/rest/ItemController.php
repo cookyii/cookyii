@@ -89,10 +89,9 @@ class ItemController extends \yii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \yii\db\BaseActiveRecord */
+        /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Item */
         $modelClass = $action->modelClass;
 
-        /** @var \cookyii\modules\Feed\resources\Feed\queries\ItemQuery $Query */
         $Query = $modelClass::find();
 
         $section = str_clean(Request()->get('section'));
