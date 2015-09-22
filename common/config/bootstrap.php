@@ -11,7 +11,7 @@ Yii::setAlias('base', $base);
 Yii::setAlias('common', '@base/common');
 Yii::setAlias('messages', '@base/messages');
 Yii::setAlias('node', '@base/node_modules');
-
+Yii::setAlias('resources', '@base/resources');
 Yii::setAlias('upload', '@base/upload');
 
 Yii::setAlias('frontend', '@base/frontend-app');
