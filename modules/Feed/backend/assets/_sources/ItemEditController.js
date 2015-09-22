@@ -2,6 +2,11 @@
 
 angular.module('BackendApp')
 
+  .config(function (redactorOptions) {
+    redactorOptions.fileUpload = '/feed/item/rest/upload/file';
+    redactorOptions.imageUpload = '/feed/item/rest/upload/image';
+  })
+
   .controller('ItemEditController', [
     '$scope', '$http', '$timeout', 'QueryScope', 'ToastScope', 'SectionDropdownScope',
     function ($scope, $http, $timeout, QueryScope, ToastScope, SectionDropdownScope) {

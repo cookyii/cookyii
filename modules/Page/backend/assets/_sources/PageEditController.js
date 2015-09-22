@@ -3,19 +3,8 @@
 angular.module('BackendApp')
 
   .config(function (redactorOptions) {
-    redactorOptions.plugins = ['filemanager', 'imagemanager', 'fullscreen'];
-    redactorOptions.minHeight = 200;
     redactorOptions.fileUpload = '/page/rest/upload/file';
     redactorOptions.imageUpload = '/page/rest/upload/image';
-    redactorOptions.buttons = [
-      'html', 'formatting',
-      'bold', 'italic', 'deleted',
-      'unorderedlist', 'orderedlist',
-      'outdent', 'indent',
-      'image', 'file', 'link',
-      'alignment',
-      'horizontalrule'
-    ];
   })
 
   .controller('PageEditController', [

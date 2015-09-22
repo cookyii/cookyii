@@ -10,14 +10,26 @@
   ])
 
     .config([
-      '$httpProvider', '$animateProvider', '$mdThemingProvider',
-      function ($httpProvider, $animateProvider, $mdThemingProvider) {
+      '$httpProvider', '$animateProvider', '$mdThemingProvider', 'redactorOptions',
+      function ($httpProvider, $animateProvider, $mdThemingProvider, redactorOptions) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = yii.getCsrfToken();
 
         $animateProvider.classNameFilter(/^(?:(?!wo-animate).)*$/);
 
         $mdThemingProvider.theme('default');
+
+        redactorOptions.plugins = ['filemanager', 'imagemanager', 'fullscreen'];
+        redactorOptions.minHeight = 200;
+        redactorOptions.buttons = [
+          'html', 'formatting',
+          'bold', 'italic', 'deleted',
+          'unorderedlist', 'orderedlist',
+          'outdent', 'indent',
+          'image', 'file', 'link',
+          'alignment',
+          'horizontalrule'
+        ];
       }
     ])
 
