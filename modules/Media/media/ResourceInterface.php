@@ -24,8 +24,14 @@ interface ResourceInterface
      */
     public function getName();
 
+    /**
+     * @return integer
+     */
     public function getSize();
 
+    /**
+     * @return string
+     */
     public function getMime();
 
     /**
