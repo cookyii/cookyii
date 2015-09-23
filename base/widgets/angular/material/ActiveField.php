@@ -14,7 +14,7 @@ use yii\helpers\Html;
  * Class ActiveField
  * @package cookyii\widgets\angular\material
  */
-class ActiveField extends \yii\widgets\ActiveField
+class ActiveField extends \cookyii\widgets\angular\ActiveField
 {
 
     /**
@@ -42,6 +42,9 @@ class ActiveField extends \yii\widgets\ActiveField
             if (!isset($this->parts['{error}'])) {
                 $this->parts['{error}'] = $this->_error($this->model, $this->attribute, $this->errorOptions);
             }
+            if (!isset($this->parts['{icon}'])) {
+                $this->parts['{icon}'] = '';
+            }
             if (!isset($this->parts['{hint}'])) {
                 $this->parts['{hint}'] = '';
             }
@@ -58,10 +61,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function input($type, $options = [])
     {
-        $this->options['tag'] = 'md-input-container';
-
-        $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['tag'] = 'md-input-container';
 
         return parent::input($type, $options);
     }
@@ -71,10 +71,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function textInput($options = [])
     {
-        $this->options['tag'] = 'md-input-container';
-
-        $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['tag'] = 'md-input-container';
 
         return parent::textInput($options);
     }
@@ -84,10 +81,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function passwordInput($options = [])
     {
-        $this->options['tag'] = 'md-input-container';
-
-        $options['title'] = $options['placeholder'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['tag'] = 'md-input-container';
 
         return parent::passwordInput($options);
     }
@@ -97,10 +91,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function textarea($options = [])
     {
-        $this->options['tag'] = 'md-input-container';
-
-        $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['tag'] = 'md-input-container';
 
         return parent::textarea($options);
     }
@@ -115,22 +106,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function emailInput($options = [])
     {
-        $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['tag'] = 'md-input-container';
 
-        return Html::tag('md-input-container', parent::input('email', $options));
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function dropdownList($items, $options = [])
-    {
-        Html::addCssClass($this->options, 'dropdownList');
-
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
-
-        return parent::dropDownList($items, $options);
+        return parent::emailInput($options);
     }
 
     /**
@@ -140,9 +118,11 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         Html::addCssClass($this->options, 'checkbox');
 
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
 
         $label = ArrayHelper::remove($options, 'label', $this->model->getAttributeLabel($this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
 
         $this->parts['{input}'] = Html::tag('md-checkbox', $label, $options);
 
@@ -154,21 +134,56 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function checkboxList($items, $options = [], $item_options = [])
     {
-        $options['item'] = function ($index, $label, $name, $checked, $value) use ($item_options) {
-            $options = [
-                'value' => $value,
-                'label' => $label,
-                'ng-model' => 'data.' . $this->attribute . '.' . $value,
-            ];
+        $options['item'] = ArrayHelper::remove(
+            $options,
+            'item',
+            function ($index, $label, $name, $checked, $value) use ($item_options) {
+                $options = [
+                    'value' => $value,
+                    'label' => $label,
+                    'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
+                ];
 
-            if (isset($item_options[$value])) {
-                $options = array_merge($options, $item_options[$value]);
+                if (isset($item_options[$value])) {
+                    $options = array_merge($options, $item_options[$value]);
+                }
+
+                return Html::tag('md-checkbox', $label, $options);
             }
+        );
 
-            return Html::tag('md-checkbox', $label, $options);
-        };
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::checkboxList($items, $options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function radioList($items, $options = [], $item_options = [])
+    {
+        $options['item'] = ArrayHelper::remove(
+            $options,
+            'item',
+            function ($index, $label, $name, $checked, $value) use ($item_options) {
+                $options = [
+                    'value' => $value,
+                    'label' => $label,
+                    'iCheck' => true,
+                    'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
+                ];
+
+                if (isset($item_options[$value])) {
+                    $options = array_merge($options, $item_options[$value]);
+                }
+
+                return Html::tag('md-radio-button', $label, $options);
+            }
+        );
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return parent::radioList($items, $options);
     }
 
     /**

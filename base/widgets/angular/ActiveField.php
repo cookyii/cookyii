@@ -25,6 +25,8 @@ class ActiveField extends \yii\widgets\ActiveField
 
     public $errorOptions = ['class' => 'error-balloon'];
 
+    const EVENT_BEFORE_RENDER_INPUT = 'beforeRenderInput';
+
     /**
      * @inheritdoc
      */
@@ -84,14 +86,46 @@ class ActiveField extends \yii\widgets\ActiveField
     }
 
     /**
+     * @param string $method
+     * @param null|array $options
+     */
+    public function beforeRenderInput($method, &$options = null)
+    {
+        $event = new \cookyii\base\RenderEvent([
+            'class' => get_called_class(),
+            'method' => $method,
+            'options' => $options,
+        ]);
+
+        $this->trigger(self::EVENT_BEFORE_RENDER_INPUT, $event);
+
+        $options = $event->options;
+    }
+
+    /**
      * @inheritdoc
      */
     public function input($type, $options = [])
     {
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::input($type, $options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hiddenInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return parent::hiddenInput($options);
     }
 
     /**
@@ -100,9 +134,24 @@ class ActiveField extends \yii\widgets\ActiveField
     public function textInput($options = [])
     {
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::textInput($options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fileInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return parent::fileInput($options);
     }
 
     /**
@@ -111,7 +160,9 @@ class ActiveField extends \yii\widgets\ActiveField
     public function passwordInput($options = [])
     {
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::passwordInput($options);
     }
@@ -122,7 +173,9 @@ class ActiveField extends \yii\widgets\ActiveField
     public function textarea($options = [])
     {
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::textarea($options);
     }
@@ -138,9 +191,227 @@ class ActiveField extends \yii\widgets\ActiveField
     public function emailInput($options = [])
     {
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return static::input('email', $options);
+    }
+
+    /**
+     * Renders a color input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function colorInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('color', $options);
+    }
+
+    /**
+     * Renders a date input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function dateInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('date', $options);
+    }
+
+    /**
+     * Renders a datetime input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function datetimeInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('datetime', $options);
+    }
+
+    /**
+     * Renders a time input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function timeInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('time', $options);
+    }
+
+    /**
+     * Renders a local datetime input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function datetimeLocalInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('datetime-local', $options);
+    }
+
+    /**
+     * Renders a month input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function monthInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('month', $options);
+    }
+
+    /**
+     * Renders a number input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function numberInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('number', $options);
+    }
+
+    /**
+     * Renders a range input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function rangeInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('range', $options);
+    }
+
+    /**
+     * Renders a search input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function searchInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('search', $options);
+    }
+
+    /**
+     * Renders a tel input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function telInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('tel', $options);
+    }
+
+    /**
+     * Renders a url input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function urlInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('url', $options);
+    }
+
+    /**
+     * Renders a week input.
+     * This method will generate the "name" and "value" tag attributes automatically for the model attribute
+     * unless they are explicitly specified in `$options`.
+     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
+     * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
+     * @return static the field object itself
+     */
+    public function weekInput($options = [])
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return static::input('week', $options);
     }
 
     /**
@@ -165,7 +436,9 @@ class ActiveField extends \yii\widgets\ActiveField
     public function dropdownList($items, $options = [])
     {
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::dropdownList($items, $options);
     }
@@ -173,17 +446,27 @@ class ActiveField extends \yii\widgets\ActiveField
     /**
      * @inheritdoc
      */
-    public function checkbox($options = [])
+    public function checkbox($options = [], $enclosedByLabel = true)
     {
-        Html::addCssClass($this->options, 'checkbox');
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
 
-        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', 'data.' . $this->attribute);
+        $this->beforeRenderInput(__METHOD__, $options);
 
-        $options['label'] = ArrayHelper::remove($options, 'label', $this->model->getAttributeLabel($this->attribute));
+        return parent::checkbox($options, $enclosedByLabel);
+    }
 
-        $this->parts['{input}'] = Html::activeCheckbox($this->model, $this->attribute, $options);
+    /**
+     * @inheritdoc
+     */
+    public function radio($options = [], $enclosedByLabel = true)
+    {
+        $options['title'] = $this->model->getAttributeLabel($this->attribute);
+        $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
 
-        return $this;
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return parent::radio($options, $enclosedByLabel);
     }
 
     /**
@@ -191,22 +474,57 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function checkboxList($items, $options = [], $item_options = [])
     {
-        $options['item'] = function ($index, $label, $name, $checked, $value) use ($item_options) {
-            $options = [
-                'value' => $value,
-                'label' => $label,
-                'iCheck' => true,
-                'ng-model' => 'data.' . $this->attribute . '.' . $value,
-            ];
+        $options['item'] = ArrayHelper::remove(
+            $options,
+            'item',
+            function ($index, $label, $name, $checked, $value) use ($item_options) {
+                $options = [
+                    'value' => $value,
+                    'label' => $label,
+                    'iCheck' => true,
+                    'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
+                ];
 
-            if (isset($item_options[$value])) {
-                $options = array_merge($options, $item_options[$value]);
+                if (isset($item_options[$value])) {
+                    $options = array_merge($options, $item_options[$value]);
+                }
+
+                return Html::checkbox($name, $checked, $options);
             }
+        );
 
-            return Html::checkbox($name, $checked, $options);
-        };
+        $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::checkboxList($items, $options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function radioList($items, $options = [], $item_options = [])
+    {
+        $options['item'] = ArrayHelper::remove(
+            $options,
+            'item',
+            function ($index, $label, $name, $checked, $value) use ($item_options) {
+                $options = [
+                    'value' => $value,
+                    'label' => $label,
+                    'iCheck' => true,
+                    'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
+                ];
+
+                if (isset($item_options[$value])) {
+                    $options = array_merge($options, $item_options[$value]);
+                }
+
+                return Html::checkbox($name, $checked, $options);
+            }
+        );
+
+        $this->beforeRenderInput(__METHOD__, $options);
+
+        return parent::radioList($items, $options);
     }
 
     /**

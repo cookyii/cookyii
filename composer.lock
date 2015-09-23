@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "4f6462d643fb39ac972114c1be65c1e9",
+    "content-hash": "39537c2346f73fbb959876328d64bc94",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -315,12 +316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cookyii/build.git",
-                "reference": "03fd68082043611daf1554e3ec0d76b8885ce7e1"
+                "reference": "6abc21b566063c1fa0d6b0be19862a3d557a7b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cookyii/build/zipball/03fd68082043611daf1554e3ec0d76b8885ce7e1",
-                "reference": "03fd68082043611daf1554e3ec0d76b8885ce7e1",
+                "url": "https://api.github.com/repos/cookyii/build/zipball/6abc21b566063c1fa0d6b0be19862a3d557a7b90",
+                "reference": "6abc21b566063c1fa0d6b0be19862a3d557a7b90",
                 "shasum": ""
             },
             "require": {
@@ -350,8 +351,8 @@
             "authors": [
                 {
                     "name": "Revin Roman",
-                    "email": "roman@rmrevin.com",
-                    "homepage": "https://rmrevin.com",
+                    "email": "roman@rmrevin.ru",
+                    "homepage": "https://rmrevin.ru",
                     "role": "Founder and project lead"
                 }
             ],
@@ -360,7 +361,7 @@
                 "build",
                 "tool"
             ],
-            "time": "2015-08-10 19:46:08"
+            "time": "2015-09-17 20:17:10"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -505,16 +506,16 @@
         },
         {
             "name": "rmrevin/yii2-favicon-widget",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-favicon-widget.git",
-                "reference": "257b5d0971611d297f38a42a1862b0afbdda2eb1"
+                "reference": "b7796a870253d7ae154af0eec41706ae7f62be68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-favicon-widget/zipball/257b5d0971611d297f38a42a1862b0afbdda2eb1",
-                "reference": "257b5d0971611d297f38a42a1862b0afbdda2eb1",
+                "url": "https://api.github.com/repos/rmrevin/yii2-favicon-widget/zipball/b7796a870253d7ae154af0eec41706ae7f62be68",
+                "reference": "b7796a870253d7ae154af0eec41706ae7f62be68",
                 "shasum": ""
             },
             "require": {
@@ -540,18 +541,18 @@
             ],
             "authors": [
                 {
-                    "name": "Roman Revin",
-                    "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.com/"
+                    "name": "Revin Roman",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
                 }
             ],
-            "description": "Asset Bundle for Yii2 with Font Awesome",
+            "description": "Favicon widget for Yii2",
             "keywords": [
                 "favicon",
                 "widget",
                 "yii"
             ],
-            "time": "2015-06-22 14:06:15"
+            "time": "2015-09-18 08:09:23"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -2324,16 +2325,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2d7c03c0e4e080901b8f33b2897b0577be18a13c"
+                "reference": "ef1ca6835468857944d5c3b48fa503d5554cff2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2d7c03c0e4e080901b8f33b2897b0577be18a13c",
-                "reference": "2d7c03c0e4e080901b8f33b2897b0577be18a13c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ef1ca6835468857944d5c3b48fa503d5554cff2f",
+                "reference": "ef1ca6835468857944d5c3b48fa503d5554cff2f",
                 "shasum": ""
             },
             "require": {
@@ -2382,7 +2383,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-04 03:42:39"
+            "time": "2015-09-14 06:51:16"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2515,16 +2516,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.6",
+            "version": "1.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b"
+                "reference": "3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
-                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da",
+                "reference": "3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da",
                 "shasum": ""
             },
             "require": {
@@ -2560,7 +2561,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-08-16 08:51:00"
+            "time": "2015-09-15 10:49:45"
         },
         {
             "name": "phpunit/phpunit",
