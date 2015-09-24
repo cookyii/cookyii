@@ -7,6 +7,7 @@
 
 namespace cookyii\widgets\angular;
 
+use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
 /**
@@ -73,5 +74,56 @@ class ActiveForm extends \yii\widgets\ActiveForm
     public function field($model, $attribute, $options = [])
     {
         return parent::field($model, $attribute, $options);
+    }
+
+    /**
+     * @param string $icon
+     * @return string
+     */
+    public static function submitIcon($icon)
+    {
+        $result = (string)FA::icon('circle-o-notch', ['ng-show' => 'inProgress', 'class' => 'wo-animate'])->fixedWidth()->spin();
+        $result .= (string)FA::icon($icon, ['ng-hide' => 'inProgress', 'class' => 'wo-animate'])->fixedWidth();
+
+        return $result;
+    }
+
+    /**
+     * @param string|null $icon
+     * @param string $label
+     * @param array $options
+     * @return string
+     */
+    public static function submitButton($icon, $label, $options = [])
+    {
+        $icon = empty($icon) ? null : static::submitIcon($icon);
+        $label = trim(sprintf('%s %s', $icon, $label));
+
+        $options['ng-disabled'] = 'inProgress';
+
+        if (!isset($options['class'])) {
+            $options['class'] = 'btn btn-success';
+        }
+
+        return Html::submitButton($label, $options);
+    }
+
+    /**
+     * @param null|string $label
+     * @param array $options
+     * @return string
+     */
+    public static function resetButton($label = null, $options = [])
+    {
+        $label = empty($label) ? \Yii::t('app', 'Отменить') : $label;
+
+        $options['ng-click'] = 'reset($event)';
+        $options['ng-disabled'] = 'inProgress';
+
+        if (!isset($options['class'])) {
+            $options['class'] = 'btn btn-link';
+        }
+
+        return Html::resetButton($label, $options);
     }
 }
