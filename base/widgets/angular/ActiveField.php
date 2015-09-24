@@ -480,7 +480,7 @@ class ActiveField extends \yii\widgets\ActiveField
             function ($index, $label, $name, $checked, $value) use ($item_options) {
                 $options = [
                     'value' => $value,
-                    'label' => $label,
+                    'label' => Html::tag('span', $label),
                     'iCheck' => true,
                     'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
                 ];
@@ -509,7 +509,7 @@ class ActiveField extends \yii\widgets\ActiveField
             function ($index, $label, $name, $checked, $value) use ($item_options) {
                 $options = [
                     'value' => $value,
-                    'label' => $label,
+                    'label' => Html::tag('span', $label),
                     'iCheck' => true,
                     'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
                 ];
@@ -518,7 +518,7 @@ class ActiveField extends \yii\widgets\ActiveField
                     $options = array_merge($options, $item_options[$value]);
                 }
 
-                return Html::checkbox($name, $checked, $options);
+                return Html::radio($name, $checked, $options);
             }
         );
 
