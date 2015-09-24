@@ -14,8 +14,7 @@ use yii\helpers\Html;
 
 /** @var \cookyii\widgets\angular\ActiveForm $ActiveForm */
 $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
-    'name' => 'PageEditForm',
-    'action' => $PageEditForm->formAction(),
+    'model' => $PageEditForm,
     'controller' => 'PageEditController',
 ]);
 

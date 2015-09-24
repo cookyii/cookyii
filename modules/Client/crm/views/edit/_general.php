@@ -14,8 +14,7 @@ use yii\helpers\Html;
 
 /** @var \cookyii\widgets\angular\ActiveForm $form */
 $form = \cookyii\widgets\angular\ActiveForm::begin([
-    'name' => 'ClientEditForm',
-    'action' => $ClientEditForm->formAction(),
+    'model' => $ClientEditForm,
     'controller' => 'ClientEditController',
 ]);
 
@@ -30,14 +29,18 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
             <div class="form-group" style="margin-bottom: -15px;">
                 <label class="control-label" for="clienteditform-email">Account</label>
 
-                <span ng-hide="data.account_id">Not created. <?= Html::tag('a', 'Create', [
+                <span ng-if="!data.account_id">
+                    Not created. <?= Html::tag('a', 'Create', [
                         'data-action' => UrlManager()->createUrl(['/client/rest/client/create-account']),
                         'ng-click' => 'account.create($event)',
-                    ]) ?></span>
-                <span ng-show="data.account_id">#{{ data.account.id }} {{ data.account.name }} <?= Html::tag('a', 'unlink', [
+                    ]) ?>
+                </span>
+                <span ng-if="data.account_id">
+                    #{{ data.account.id }} {{ data.account.name }} <?= Html::tag('a', 'unlink', [
                         'data-action' => UrlManager()->createUrl(['/client/rest/client/unlink-account']),
                         'ng-click' => 'account.unlink($event)',
-                    ]) ?></span>
+                    ]) ?>
+                </span>
             </div>
 
             <?php

@@ -13,7 +13,7 @@ use yii\helpers\Json;
  * Class PageEditForm
  * @package cookyii\modules\Page\backend\forms
  */
-class PageEditForm extends \yii\base\Model
+class PageEditForm extends \cookyii\base\FormModel
 {
 
     use \cookyii\db\traits\PopulateErrorsTrait;

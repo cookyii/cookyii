@@ -28,8 +28,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
         <?php
         /** @var \cookyii\widgets\angular\ActiveForm $form */
         $form = \cookyii\widgets\angular\ActiveForm::begin([
-            'name' => 'SignInForm',
-            'action' => $SignInForm->formAction(),
+            'model' => $SignInForm,
         ]);
 
         echo $form->field($SignInForm, 'email')
@@ -107,7 +106,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
                 }
                 ?>
             </div>
-        <?php
+            <?php
         }
         \yii\authclient\widgets\AuthChoice::end();
 

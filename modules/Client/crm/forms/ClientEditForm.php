@@ -11,7 +11,7 @@ namespace cookyii\modules\Client\crm\forms;
  * Class ClientEditForm
  * @package cookyii\modules\Client\crm\forms
  */
-class ClientEditForm extends \yii\base\Model
+class ClientEditForm extends \cookyii\base\FormModel
 {
 
     use \cookyii\db\traits\PopulateErrorsTrait;

@@ -27,8 +27,7 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
         <?php
         /** @var \cookyii\widgets\angular\ActiveForm $form */
         $form = \cookyii\widgets\angular\ActiveForm::begin([
-            'name' => 'SignUpForm',
-            'action' => $SignUpForm->formAction(),
+            'model' => $SignUpForm,
         ]);
 
         echo $form->field($SignUpForm, 'email')

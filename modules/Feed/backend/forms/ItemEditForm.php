@@ -14,7 +14,7 @@ use yii\helpers\Json;
  * Class ItemEditForm
  * @package cookyii\modules\Feed\backend\forms
  */
-class ItemEditForm extends \yii\base\Model
+class ItemEditForm extends \cookyii\base\FormModel
 {
 
     use \cookyii\db\traits\PopulateErrorsTrait;

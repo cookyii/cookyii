@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\backend\forms;
  * Class SignInForm
  * @package cookyii\modules\Account\backend\forms
  */
-class SignInForm extends \yii\base\Model
+class SignInForm extends \cookyii\base\FormModel
 {
 
     public $email;

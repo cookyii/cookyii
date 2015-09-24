@@ -13,7 +13,7 @@ use rmrevin\yii\rbac\RbacFactory;
  * Class SignUpForm
  * @package cookyii\modules\Account\frontend\forms
  */
-class SignUpForm extends \yii\base\Model
+class SignUpForm extends \cookyii\base\FormModel
 {
 
     use \cookyii\db\traits\PopulateErrorsTrait;

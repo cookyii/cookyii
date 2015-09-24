@@ -27,8 +27,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
         <?php
         /** @var \cookyii\widgets\angular\ActiveForm $form */
         $form = \cookyii\widgets\angular\ActiveForm::begin([
-            'name' => 'ForgotPasswordForm',
-            'action' => $ForgotPasswordForm->formAction(),
+            'model' => $ForgotPasswordForm,
         ]);
 
         echo $form->field($ForgotPasswordForm, 'email')

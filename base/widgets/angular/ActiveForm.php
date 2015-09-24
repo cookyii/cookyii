@@ -16,6 +16,9 @@ use yii\helpers\Html;
 class ActiveForm extends \yii\widgets\ActiveForm
 {
 
+    /** @var \cookyii\base\FormModel */
+    public $model;
+
     /** @var string */
     public $name;
 
@@ -33,6 +36,11 @@ class ActiveForm extends \yii\widgets\ActiveForm
      */
     public function init()
     {
+        if ($this->model instanceof \cookyii\base\FormModel) {
+            $this->name = empty($this->name) ? $this->model->getClass() : $this->name;
+            $this->action = empty($this->action) ? $this->model->formAction() : $this->action;
+        }
+
         if (!isset($this->options['id'])) {
             $this->options['id'] = $this->name;
         }

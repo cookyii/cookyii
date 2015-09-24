@@ -14,7 +14,7 @@ use yii\helpers\Json;
  * Class MessageEditForm
  * @package cookyii\modules\Postman\backend\forms
  */
-class MessageEditForm extends \yii\base\Model
+class MessageEditForm extends \cookyii\base\FormModel
 {
 
     use \cookyii\db\traits\PopulateErrorsTrait;

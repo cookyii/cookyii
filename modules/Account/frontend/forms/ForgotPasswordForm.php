@@ -13,7 +13,7 @@ use yii\helpers\Json;
  * Class ForgotPasswordForm
  * @package cookyii\modules\Account\frontend\forms
  */
-class ForgotPasswordForm extends \yii\base\Model
+class ForgotPasswordForm extends \cookyii\base\FormModel
 {
 
     use \cookyii\db\traits\PopulateErrorsTrait;

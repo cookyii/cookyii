@@ -15,8 +15,7 @@ use yii\helpers\Json;
 
 /** @var \cookyii\widgets\angular\ActiveForm $form */
 $form = \cookyii\widgets\angular\ActiveForm::begin([
-    'name' => 'MessageEditForm',
-    'action' => $MessageEditForm->formAction(),
+    'model' => $MessageEditForm,
     'controller' => 'MessageEditController',
 ]);
 
