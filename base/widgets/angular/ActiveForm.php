@@ -124,6 +124,6 @@ class ActiveForm extends \yii\widgets\ActiveForm
             $options['class'] = 'btn btn-link';
         }
 
-        return Html::resetButton($label, $options);
+        return Html::button($label, $options);
     }
 }
