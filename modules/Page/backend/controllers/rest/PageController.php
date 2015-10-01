@@ -13,10 +13,23 @@ use cookyii\modules\Page;
  * Class PageController
  * @package cookyii\modules\Page\backend\controllers\rest
  */
-class PageController extends \yii\rest\ActiveController
+class PageController extends \cookyii\rest\ActiveController
 {
 
     public $modelClass = 'cookyii\modules\Page\resources\Page';
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Page\backend\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

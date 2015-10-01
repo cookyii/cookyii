@@ -49,6 +49,8 @@ class Page extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
+        unset($fields['meta']);
+
         $fields['created_at_format'] = function (Page $Model) {
             return Formatter()->asDatetime($Model->created_at);
         };
@@ -67,6 +69,20 @@ class Page extends \yii\db\ActiveRecord
 
         $fields['deleted'] = [$this, 'isDeleted'];
         $fields['activated'] = [$this, 'isActivated'];
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields['meta'] = function (Page $Model) {
+            return $Model->meta();
+        };
 
         return $fields;
     }
@@ -107,9 +123,8 @@ class Page extends \yii\db\ActiveRecord
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Page\resources\queries\PageQuery::className(), [
-                get_called_class(),
-            ]
+            \cookyii\modules\Page\resources\queries\PageQuery::className(),
+            [get_called_class()]
         );
     }
 

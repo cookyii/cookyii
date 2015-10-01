@@ -13,7 +13,7 @@ use cookyii\modules\Page;
  * Class EditFormAction
  * @package cookyii\modules\Page\backend\controllers\rest\PageController
  */
-class EditFormAction extends \yii\rest\Action
+class EditFormAction extends \cookyii\rest\Action
 {
 
     /**
@@ -28,16 +28,19 @@ class EditFormAction extends \yii\rest\Action
 
         $page_id = (int)Request()->post('page_id');
 
+        /** @var $modelClass \cookyii\modules\Page\resources\Page */
+        $modelClass = $this->modelClass;
+
         $Page = null;
 
         if ($page_id > 0) {
-            $Page = \cookyii\modules\Page\resources\Page::find()
+            $Page = $modelClass::find()
                 ->byId($page_id)
                 ->one();
         }
 
         if (empty($Page)) {
-            $Page = new \cookyii\modules\Page\resources\Page();
+            $Page = new $modelClass;
         }
 
         $PageEditForm = new Page\backend\forms\PageEditForm(['Page' => $Page]);

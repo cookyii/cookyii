@@ -36,7 +36,10 @@ class DefaultController extends Page\frontend\components\Controller
      */
     public function actionIndex($slug)
     {
-        $Page = \cookyii\modules\Page\resources\Page::find()
+        /** @var \cookyii\modules\Page\resources\Page $PageModel */
+        $PageModel = \Yii::createObject(\cookyii\modules\Page\resources\Page::className());
+
+        $Page = $PageModel::find()
             ->bySlug($slug)
             ->withoutDeactivated()
             ->withoutDeleted()

@@ -11,7 +11,7 @@ namespace cookyii\modules\Page\backend\controllers\rest\PageController;
  * Class DetailAction
  * @package cookyii\modules\Page\backend\controllers\rest\PageController
  */
-class DetailAction extends \yii\rest\Action
+class DetailAction extends \cookyii\rest\Action
 {
 
     /**
@@ -24,15 +24,7 @@ class DetailAction extends \yii\rest\Action
         /** @var \cookyii\modules\Page\resources\Page $Model */
         $Model = $this->findModel($id);
 
-        $result = $Model->attributes;
-
-        $meta = $Model->meta();
-        if (!empty($meta)) {
-            foreach ($meta as $k => $v) {
-                $key = sprintf('meta_%s', $k);
-                $result[$key] = $v;
-            }
-        }
+        $result = $Model->toArray([], ['meta']);
 
         $result['hash'] = sha1(serialize($result));
 

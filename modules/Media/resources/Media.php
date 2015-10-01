@@ -259,9 +259,8 @@ class Media extends \yii\db\ActiveRecord
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Media\resources\queries\MediaQuery::className(), [
-                get_called_class(),
-            ]
+            \cookyii\modules\Media\resources\queries\MediaQuery::className(),
+            [get_called_class()]
         );
     }
 

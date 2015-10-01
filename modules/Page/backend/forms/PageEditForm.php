@@ -25,10 +25,7 @@ class PageEditForm extends \cookyii\base\FormModel
     public $slug;
     public $content;
 
-    public $meta_title;
-    public $meta_keywords;
-    public $meta_description;
-    public $meta_image;
+    public $meta;
 
     public function init()
     {
@@ -44,11 +41,12 @@ class PageEditForm extends \cookyii\base\FormModel
     {
         return [
             /** type validators */
-            [['title', 'slug', 'content', 'meta_title', 'meta_keywords', 'meta_description'], 'string'],
+            [['title', 'slug', 'content'], 'string'],
 
             /** semantic validators */
             [['title', 'slug'], 'required'],
-            [['title', 'slug', 'meta_title', 'meta_keywords', 'meta_description'], 'filter', 'filter' => 'str_clean'],
+            [['title', 'slug'], 'filter', 'filter' => 'str_clean'],
+            [['meta'], 'safe'],
 
             /** default values */
         ];
@@ -63,9 +61,9 @@ class PageEditForm extends \cookyii\base\FormModel
             'title' => \Yii::t('page', 'Title'),
             'slug' => \Yii::t('page', 'Slug'),
             'content' => \Yii::t('page', 'Content'),
-            'meta_title' => \Yii::t('page', 'Meta title'),
-            'meta_keywords' => \Yii::t('page', 'Meta keywords'),
-            'meta_description' => \Yii::t('page', 'Meta description'),
+            'meta["title"]' => \Yii::t('page', 'Meta title'),
+            'meta["keywords"]' => \Yii::t('page', 'Meta keywords'),
+            'meta["description"]' => \Yii::t('page', 'Meta description'),
         ];
     }
 
@@ -95,12 +93,7 @@ class PageEditForm extends \cookyii\base\FormModel
         $Page->title = $this->title;
         $Page->slug = $this->slug;
         $Page->content = $this->content;
-        $Page->meta = Json::encode([
-            'title' => $this->meta_title,
-            'keywords' => $this->meta_keywords,
-            'description' => $this->meta_description,
-            'image' => $this->meta_image,
-        ]);
+        $Page->meta = Json::encode($this->meta);
 
         $result = $Page->validate() && $Page->save();
 
