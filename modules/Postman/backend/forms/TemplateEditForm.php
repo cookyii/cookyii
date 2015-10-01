@@ -43,6 +43,9 @@ class TemplateEditForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
+        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+
         return [
             /** type validators */
             [['code', 'subject', 'description', 'content_text', 'content_html', 'styles'], 'string'],
@@ -55,7 +58,7 @@ class TemplateEditForm extends \cookyii\base\FormModel
             [['address', 'params'], 'safe'],
 
             /** default values */
-            [['use_layout'], 'default', 'value' => \cookyii\modules\Postman\resources\Postman\Template::USE_LAYOUT],
+            [['use_layout'], 'default', 'value' => $TemplateModel::USE_LAYOUT],
         ];
     }
 

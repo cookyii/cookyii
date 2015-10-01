@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Postman\resources\Postman;
 
+use yii\helpers\Json;
+
 /**
  * Class Template
  * @package cookyii\modules\Postman\resources\Postman
@@ -59,6 +61,8 @@ class Template extends \yii\db\ActiveRecord
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
+        $fields['address'] = [$this, 'expandAddress'];
+        $fields['params'] = [$this, 'expandParams'];
         $fields['deleted'] = [$this, 'isDeleted'];
 
         return $fields;
@@ -87,14 +91,29 @@ class Template extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function expandAddress()
+    {
+        return Json::decode($this->address);
+    }
+
+    /**
+     * @return array
+     */
+    public function expandParams()
+    {
+        return Json::decode($this->params);
+    }
+
+    /**
      * @return \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery::className(), [
-                get_called_class(),
-            ]
+            \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery::className(),
+            [get_called_class()]
         );
     }
 

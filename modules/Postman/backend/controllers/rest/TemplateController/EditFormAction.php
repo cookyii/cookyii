@@ -13,7 +13,7 @@ use cookyii\modules\Postman;
  * Class EditFormAction
  * @package cookyii\modules\Postman\backend\controllers\rest\TemplateController
  */
-class EditFormAction extends \yii\rest\Action
+class EditFormAction extends \cookyii\rest\Action
 {
 
     /**
@@ -28,16 +28,19 @@ class EditFormAction extends \yii\rest\Action
 
         $template_id = (int)Request()->post('template_id');
 
+        /** @var $modelClass \cookyii\modules\Postman\resources\Postman\Template */
+        $modelClass = $this->modelClass;
+
         $Template = null;
 
         if ($template_id > 0) {
-            $Template = \cookyii\modules\Postman\resources\Postman\Template::find()
+            $Template = $modelClass::find()
                 ->byId($template_id)
                 ->one();
         }
 
         if (empty($Template)) {
-            $Template = new \cookyii\modules\Postman\resources\Postman\Template();
+            $Template = new $modelClass;
         }
 
         $TemplateEditForm = new Postman\backend\forms\TemplateEditForm(['Template' => $Template]);

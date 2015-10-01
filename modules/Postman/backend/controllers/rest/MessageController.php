@@ -8,16 +8,28 @@
 namespace cookyii\modules\Postman\backend\controllers\rest;
 
 use cookyii\modules\Postman;
-use yii\helpers\Json;
 
 /**
  * Class MessageController
  * @package cookyii\modules\Postman\backend\controllers\rest
  */
-class MessageController extends \yii\rest\ActiveController
+class MessageController extends \cookyii\rest\ActiveController
 {
 
     public $modelClass = 'cookyii\modules\Postman\resources\Postman\Message';
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Postman\backend\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -75,14 +87,6 @@ class MessageController extends \yii\rest\ActiveController
         ];
 
         return $actions;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function serializeData($data)
-    {
-        return parent::serializeData($data);
     }
 
     /**

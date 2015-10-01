@@ -265,7 +265,10 @@ class Message extends \yii\db\ActiveRecord
      */
     public static function create($template_code, $placeholders = [], $subject = null, $styles = '')
     {
-        $Template = Template::find()
+        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+
+        $Template = $TemplateModel::find()
             ->byCode($template_code)
             ->one();
 
@@ -301,8 +304,11 @@ class Message extends \yii\db\ActiveRecord
         $layout_text = '{content}';
         $layout_html = '{content}';
 
+        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+
         if ($use_layout) {
-            $LayoutTemplate = Template::find()
+            $LayoutTemplate = $TemplateModel::find()
                 ->byCode(static::LAYOUT_CODE)
                 ->one();
 
@@ -373,9 +379,8 @@ class Message extends \yii\db\ActiveRecord
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Postman\resources\Postman\queries\MessageQuery::className(), [
-                get_called_class(),
-            ]
+            \cookyii\modules\Postman\resources\Postman\queries\MessageQuery::className(),
+            [get_called_class()]
         );
     }
 

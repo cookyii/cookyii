@@ -70,14 +70,6 @@ class TemplateController extends \yii\rest\ActiveController
     }
 
     /**
-     * @inheritdoc
-     */
-    protected function serializeData($data)
-    {
-        return parent::serializeData($data);
-    }
-
-    /**
      * @param \yii\rest\Action $action
      * @return \yii\data\ActiveDataProvider
      */

@@ -11,7 +11,7 @@ namespace cookyii\modules\Postman\backend\controllers\rest\MessageController;
  * Class ResentAction
  * @package cookyii\modules\Postman\backend\controllers\rest\MessageController
  */
-class ResentAction extends \yii\rest\Action
+class ResentAction extends \cookyii\rest\Action
 {
 
     /**

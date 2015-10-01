@@ -13,7 +13,7 @@ use cookyii\modules\Postman;
  * Class EditFormAction
  * @package cookyii\modules\Postman\backend\controllers\rest\MessageController
  */
-class EditFormAction extends \yii\rest\Action
+class EditFormAction extends \cookyii\rest\Action
 {
 
     /**
@@ -28,16 +28,19 @@ class EditFormAction extends \yii\rest\Action
 
         $message_id = (int)Request()->post('message_id');
 
+        /** @var $modelClass \cookyii\modules\Postman\resources\Postman\Message */
+        $modelClass = $this->modelClass;
+
         $Message = null;
 
         if ($message_id > 0) {
-            $Message = \cookyii\modules\Postman\resources\Postman\Message::find()
+            $Message = $modelClass::find()
                 ->byId($message_id)
                 ->one();
         }
 
         if (empty($Message)) {
-            $Message = new \cookyii\modules\Postman\resources\Postman\Message();
+            $Message = new $modelClass;
         }
 
         $MessageEditForm = new Postman\backend\forms\MessageEditForm(['Message' => $Message]);

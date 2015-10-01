@@ -7,13 +7,11 @@
 
 namespace cookyii\modules\Postman\backend\controllers\rest\TemplateController;
 
-use yii\helpers\Json;
-
 /**
  * Class DetailAction
  * @package cookyii\modules\Postman\backend\controllers\rest\TemplateController
  */
-class DetailAction extends \yii\rest\Action
+class DetailAction extends \cookyii\rest\Action
 {
 
     /**
@@ -26,17 +24,12 @@ class DetailAction extends \yii\rest\Action
         /** @var \cookyii\modules\Postman\resources\Postman\Template $Model */
         $Model = $this->findModel($id);
 
-        $result = $Model->attributes;
+        $result = $Model->toArray();
 
-        $result['use_layout'] = $result['use_layout'] === \cookyii\modules\Postman\resources\Postman\Template::USE_LAYOUT;
+        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
 
-        $result['address'] = empty($result['address'])
-            ? null
-            : Json::decode($result['address']);
-
-        $result['params'] = empty($result['params'])
-            ? null
-            : Json::decode($result['params']);
+        $result['use_layout'] = $result['use_layout'] === $TemplateModel::USE_LAYOUT;
 
         $result['params'][] = [
             'key' => 'host',

@@ -7,13 +7,11 @@
 
 namespace cookyii\modules\Postman\backend\controllers\rest\MessageController;
 
-use yii\helpers\Json;
-
 /**
  * Class DetailAction
  * @package cookyii\modules\Postman\backend\controllers\rest\MessageController
  */
-class DetailAction extends \yii\rest\Action
+class DetailAction extends \cookyii\rest\Action
 {
 
     /**
@@ -26,11 +24,7 @@ class DetailAction extends \yii\rest\Action
         /** @var \cookyii\modules\Postman\resources\Postman\Message $Model */
         $Model = $this->findModel($id);
 
-        $result = $Model->attributes;
-
-        $result['address'] = empty($result['address'])
-            ? null
-            : Json::decode($result['address']);
+        $result = $Model->toArray();
 
         $result['hash'] = sha1(serialize($result));
 

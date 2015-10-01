@@ -31,25 +31,6 @@ class MessageQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param integer|array $status
-     * @return static
-     */
-    public function byStatus($status)
-    {
-        $this->andWhere(['status' => $status]);
-
-        return $this;
-    }
-
-    /**
-     * @return static
-     */
-    public function onlyNew()
-    {
-        return $this->byStatus([\cookyii\modules\Postman\resources\Postman\Message::STATUS_NEW]);
-    }
-
-    /**
      * @return static
      */
     public function onlyNotSent()

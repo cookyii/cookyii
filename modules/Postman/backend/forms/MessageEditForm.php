@@ -115,8 +115,11 @@ class MessageEditForm extends \cookyii\base\FormModel
             }
         }
 
+        /** @var \cookyii\modules\Postman\resources\Postman\Message $MessageModel */
+        $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Message::className());
+
         if ($Message->isNewRecord) {
-            $Message = Message::compose($this->subject, $this->content_text, $this->content_html);
+            $Message = $MessageModel::compose($this->subject, $this->content_text, $this->content_html);
         } else {
             $Message->subject = $this->subject;
             $Message->content_text = $this->content_text;

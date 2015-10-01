@@ -19,6 +19,9 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
     'controller' => 'TemplateEditController',
 ]);
 
+/** @var \cookyii\modules\Postman\resources\Postman\Message $MessageModel */
+$MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Message::className());
+
 ?>
 
     <div class="box general">
@@ -56,7 +59,7 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
                     ])
                         ->label(false)
                         ->checkbox([
-                            'ng-if' => sprintf('data.code !== "%s"', \cookyii\modules\Postman\resources\Postman\Message::LAYOUT_CODE),
+                            'ng-if' => sprintf('data.code !== "%s"', $MessageModel::LAYOUT_CODE),
                         ]);
                     ?>
                 </div>

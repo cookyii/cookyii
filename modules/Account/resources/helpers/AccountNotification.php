@@ -18,17 +18,38 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
     public $Model;
 
     /**
+     * @param string $template_code
+     * @param array $placeholders
+     * @param null $subject
+     * @param string $styles
+     * @return \cookyii\modules\Postman\resources\Postman\Message
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\web\ServerErrorHttpException
+     */
+    protected function createMessage($template_code, $placeholders = [], $subject = null, $styles = '')
+    {
+        /** @var \cookyii\modules\Postman\resources\Postman\Message $MessageModel */
+        $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Message::className());
+
+        $Message = $MessageModel::create($template_code, $placeholders, $subject, $styles);
+
+        unset($MessageModel);
+
+        return $Message;
+    }
+
+    /**
      * @param null|string $password
      * @return array|bool
      * @throws \yii\web\ServerErrorHttpException
      */
-    public function sendSignUpEmail($password =null)
+    public function sendSignUpEmail($password = null)
     {
         $Account = $this->Model;
 
         $password = empty($password) ? $Account->password : $password;
 
-        $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.sign-up', [
+        $Message = $this->createMessage('account.frontend.sign-up', [
             '{user_id}' => $Account->id,
             '{username}' => $Account->name,
             '{email}' => $Account->email,
@@ -52,7 +73,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
         $url = UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
         $short_url = UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
 
-        $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.forgot-password.request', [
+        $Message = $this->createMessage('account.frontend.forgot-password.request', [
             '{user_id}' => $Account->id,
             '{username}' => $Account->name,
             '{hash}' => $hash,
@@ -74,7 +95,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
     {
         $Account = $this->Model;
 
-        $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.forgot-password.new-password', [
+        $Message = $this->createMessage('account.frontend.forgot-password.new-password', [
             '{user_id}' => $Account->id,
             '{username}' => $Account->name,
             '{email}' => $Account->email,
@@ -94,7 +115,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
     {
         $Account = $this->Model;
 
-        $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.ban', [
+        $Message = $this->createMessage('account.frontend.ban', [
             '{user_id}' => $Account->id,
             '{username}' => $Account->name,
             '{email}' => $Account->email,
@@ -113,7 +134,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
     {
         $Account = $this->Model;
 
-        $Message = \cookyii\modules\Postman\resources\Postman\Message::create('account.frontend.unban', [
+        $Message = $this->createMessage('account.frontend.unban', [
             '{user_id}' => $Account->id,
             '{username}' => $Account->name,
             '{email}' => $Account->email,
