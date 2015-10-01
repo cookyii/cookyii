@@ -38,12 +38,15 @@ class ClientAccount extends \yii\base\Object
         $email = empty($email) ? $Client->email : $email;
         $password = empty($password) ? Security()->generateRandomString(10) : $password;
 
-        $Account = Account\resources\Account::find()
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+        $Account = $AccountModel::find()
             ->byEmail($email)
             ->one();
 
         if (empty($Account)) {
-            $Account = new Account\resources\Account;
+            $Account = $AccountModel;
             $Account->setAttributes([
                 'name' => $name,
                 'email' => $email,

@@ -30,6 +30,9 @@ class SignUpForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
         return [
             /** type validators */
             [['email'], 'email'],
@@ -38,7 +41,7 @@ class SignUpForm extends \cookyii\base\FormModel
             /** semantic validators */
             [['name', 'email', 'password', 'password_app'], 'required'],
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
-            [['email'], 'unique', 'targetClass' => \cookyii\modules\Account\resources\Account::className(), 'targetAttribute' => 'email'],
+            [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
             [['password'], 'compare', 'compareAttribute' => 'password_app'],
         ];
     }
@@ -69,7 +72,8 @@ class SignUpForm extends \cookyii\base\FormModel
      */
     public function register()
     {
-        $Account = new \cookyii\modules\Account\resources\Account;
+        /** @var \cookyii\modules\Account\resources\Account $Account */
+        $Account = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
         $Account->setAttributes([
             'name' => $this->name,
             'email' => $this->email,

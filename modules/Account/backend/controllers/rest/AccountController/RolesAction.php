@@ -13,7 +13,7 @@ use rmrevin\yii\rbac\RbacFactory;
  * Class RolesAction
  * @package cookyii\modules\Account\backend\controllers\rest\AccountController
  */
-class RolesAction extends \yii\rest\Action
+class RolesAction extends \cookyii\rest\Action
 {
 
     /**
@@ -35,7 +35,10 @@ class RolesAction extends \yii\rest\Action
             throw new \yii\web\BadRequestHttpException('Empty account id');
         }
 
-        $Account = \cookyii\modules\Account\resources\Account::find()
+        /** @var $modelClass \cookyii\modules\Account\resources\Account */
+        $modelClass = $this->modelClass;
+
+        $Account = $modelClass::find()
             ->byId($account_id)
             ->one();
 

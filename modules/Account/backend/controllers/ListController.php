@@ -24,7 +24,6 @@ class ListController extends Account\backend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['index'],
                 'roles' => [Account\backend\Permissions::ACCESS],
             ],
         ];

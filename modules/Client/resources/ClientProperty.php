@@ -1,23 +1,23 @@
 <?php
 /**
- * Property.php
+ * ClientProperty.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\resources\Account;
+namespace cookyii\modules\Client\resources;
 
 /**
- * Class Property
- * @package cookyii\modules\Account\resources\Account
+ * Class ClientProperty
+ * @package cookyii\modules\Client\resources
  *
- * @property integer $account_id
+ * @property integer $client_id
  * @property string $key
  * @property string $value
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Property extends \yii\db\ActiveRecord
+class ClientProperty extends \yii\db\ActiveRecord
 {
 
     /**
@@ -38,10 +38,10 @@ class Property extends \yii\db\ActiveRecord
         return [
             /** type validators */
             [['key', 'value'], 'string'],
-            [['account_id', 'created_at', 'updated_at'], 'integer'],
+            [['client_id', 'created_at', 'updated_at'], 'integer'],
 
             /** semantic validators */
-            [['account_id', 'key'], 'required'],
+            [['client_id', 'key'], 'required'],
             [['key', 'value'], 'filter', 'filter' => 'str_clean'],
 
             /** default values */
@@ -54,25 +54,26 @@ class Property extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'account_id' => \Yii::t('account', 'User'),
-            'key' => \Yii::t('account', 'Key'),
-            'value' => \Yii::t('account', 'Value'),
-            'created_at' => \Yii::t('account', 'Created at'),
-            'updated_at' => \Yii::t('account', 'Updated at'),
+            'client_id' => \Yii::t('client', 'Client'),
+            'key' => \Yii::t('client', 'Key'),
+            'value' => \Yii::t('client', 'Value'),
+            'created_at' => \Yii::t('client', 'Created at'),
+            'updated_at' => \Yii::t('client', 'Updated at'),
         ];
     }
 
     /**
-     * @param integer $account_id
+     * @param integer $client_id
      * @param string $key
      * @param mixed $value
      * @return static
      * @throw \InvalidArgumentException
      */
-    public static function push($account_id, $key, $value)
+    public static function push($client_id, $key, $value)
     {
+        /** @var static $Property */
         $Property = static::find()
-            ->byAccountId($account_id)
+            ->byAccountId($client_id)
             ->byKey($key)
             ->one();
 
@@ -81,7 +82,7 @@ class Property extends \yii\db\ActiveRecord
         }
 
         $Property->setAttributes([
-            'account_id' => $account_id,
+            'client_id' => $client_id,
             'key' => $key,
             'value' => (string)$value,
         ]);
@@ -92,12 +93,12 @@ class Property extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Account\resources\Account\queries\AccountPropertyQuery
+     * @return \cookyii\modules\Client\resources\queries\ClientPropertyQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Account\resources\Account\queries\AccountPropertyQuery::className(), [
+            \cookyii\modules\Client\resources\queries\ClientPropertyQuery::className(), [
                 get_called_class(),
             ]
         );
@@ -108,6 +109,6 @@ class Property extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%account_property}}';
+        return '{{%client_property}}';
     }
 }

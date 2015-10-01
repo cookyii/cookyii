@@ -11,7 +11,7 @@ namespace cookyii\modules\Client\crm\controllers\rest\ClientController;
  * Class EditFormAction
  * @package cookyii\modules\Client\crm\controllers\rest\ClientController
  */
-class EditFormAction extends \yii\rest\Action
+class EditFormAction extends \cookyii\rest\Action
 {
 
     /**
@@ -28,14 +28,17 @@ class EditFormAction extends \yii\rest\Action
 
         $Client = null;
 
+        /** @var \cookyii\modules\Client\resources\Client $ClientModel */
+        $ClientModel = \Yii::createObject(\cookyii\modules\Client\resources\Client::className());
+
         if ($client_id > 0) {
-            $Client = \cookyii\modules\Client\resources\Client::find()
+            $Client = $ClientModel::find()
                 ->byId($client_id)
                 ->one();
         }
 
         if (empty($Client)) {
-            $Client = new \cookyii\modules\Client\resources\Client();
+            $Client = $ClientModel;
         }
 
         $ClientEditForm = new \cookyii\modules\Client\crm\forms\ClientEditForm(['Client' => $Client]);

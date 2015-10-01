@@ -113,7 +113,10 @@ class AccountEditForm extends \cookyii\base\FormModel
      */
     public static function getGroupedPermissionValues()
     {
-        $permissions = \cookyii\modules\Account\resources\Account::getAllPermissions();
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+        $permissions = $AccountModel::getAllPermissions();
 
         $result = [
             'items' => [],

@@ -11,7 +11,7 @@ namespace cookyii\modules\Client\crm\controllers\rest\ClientController;
  * Class CreateAccountAction
  * @package cookyii\modules\Client\crm\controllers\rest\ClientController
  */
-class CreateAccountAction extends \yii\rest\Action
+class CreateAccountAction extends \cookyii\rest\Action
 {
 
     /**

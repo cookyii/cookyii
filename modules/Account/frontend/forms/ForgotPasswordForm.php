@@ -29,6 +29,9 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
         return [
             /** type validators */
             [['email'], 'email'],
@@ -39,7 +42,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             [
                 ['email'],
                 'exist',
-                'targetClass' => \cookyii\modules\Account\resources\Account::className(),
+                'targetClass' => $AccountModel::className(),
                 'targetAttribute' => 'email',
                 'message' => \Yii::t('account', '{attribute} not found.'),
             ],
@@ -163,7 +166,10 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     private function getAccount()
     {
         if ($this->_Account === null) {
-            $this->_Account = \cookyii\modules\Account\resources\Account::find()
+            /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+            $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+            $this->_Account = $AccountModel::find()
                 ->byEmail($this->email)
                 ->one();
         }

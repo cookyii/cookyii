@@ -92,7 +92,10 @@ class SignController extends Account\backend\components\Controller
         $attributes = $Client->getUserAttributes();
         $AuthResponse->response = Json::encode($attributes);
 
-        $AccountQuery = \cookyii\modules\Account\resources\Account::find();
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+        $AccountQuery = $AccountModel::find();
 
         switch ($Client->getId()) {
             case 'facebook':
@@ -142,7 +145,7 @@ class SignController extends Account\backend\components\Controller
                 $AuthResponse->result = Json::encode($Account->id);
             }
         } else {
-            $Account = new \cookyii\modules\Account\resources\Account();
+            $Account = $AccountModel;
             $Account->appendClientAttributes($Client);
 
             if ($Account->save()) {

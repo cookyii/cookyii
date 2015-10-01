@@ -13,10 +13,23 @@ use cookyii\modules\Client;
  * Class ClientController
  * @package cookyii\modules\Client\crm\controllers\rest
  */
-class ClientController extends \yii\rest\ActiveController
+class ClientController extends \cookyii\rest\ActiveController
 {
 
     public $modelClass = 'cookyii\modules\Client\resources\Client';
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Client\crm\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

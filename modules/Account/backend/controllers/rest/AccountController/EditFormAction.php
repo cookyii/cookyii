@@ -13,7 +13,7 @@ use cookyii\modules\Account;
  * Class EditFormAction
  * @package cookyii\modules\Account\backend\controllers\rest\AccountController
  */
-class EditFormAction extends \yii\rest\Action
+class EditFormAction extends \cookyii\rest\Action
 {
 
     /**
@@ -28,16 +28,19 @@ class EditFormAction extends \yii\rest\Action
 
         $account_id = (int)Request()->post('account_id');
 
+        /** @var $modelClass \cookyii\modules\Account\resources\Account */
+        $modelClass = $this->modelClass;
+
         $Account = null;
 
         if ($account_id > 0) {
-            $Account = \cookyii\modules\Account\resources\Account::find()
+            $Account = $modelClass::find()
                 ->byId($account_id)
                 ->one();
         }
 
         if (empty($Account)) {
-            $Account = new \cookyii\modules\Account\resources\Account();
+            $Account = new $modelClass;
         }
 
         $AccountEditForm = new Account\backend\forms\AccountEditForm(['Account' => $Account]);

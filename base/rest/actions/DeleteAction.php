@@ -28,11 +28,11 @@ class DeleteAction extends \yii\rest\Action
         }
 
         if (!method_exists($model, 'delete')) {
-            throw new \yii\web\ServerErrorHttpException('Failed to restore the object because the model is no method `delete`.');
+            throw new \yii\web\ServerErrorHttpException('Failed to delete the object because the model is no method `delete`.');
         }
 
         if ($model->delete() === false) {
-            throw new \yii\web\ServerErrorHttpException('Failed to restore the object for unknown reason.');
+            throw new \yii\web\ServerErrorHttpException('Failed to delete the object for unknown reason.');
         }
 
         \Yii::$app->getResponse()->setStatusCode(204);

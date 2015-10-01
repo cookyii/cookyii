@@ -11,7 +11,7 @@ namespace cookyii\modules\Client\crm\controllers\rest\ClientController;
  * Class DetailAction
  * @package cookyii\modules\Client\crm\controllers\rest\ClientController
  */
-class DetailAction extends \yii\rest\Action
+class DetailAction extends \cookyii\rest\Action
 {
 
     /**
@@ -21,44 +21,22 @@ class DetailAction extends \yii\rest\Action
      */
     public function run($id)
     {
-        $Model = $this->findModel($id);
-        $Account = $Model->account;
+        /** @var $modelClass \cookyii\modules\Client\resources\Client */
+        $modelClass = $this->modelClass;
 
-        $result = $Model->attributes;
+        $Client = $modelClass::find()
+            ->byId($id)
+            ->with(['account', 'properties'])
+            ->one();
 
-        $result['account'] = empty($Account) ? null : $Account->attributes;
-        $result['properties'] = [];
-
-        $properties = $Model->properties();
-        if (!empty($properties)) {
-            foreach ($properties as $key => $values) {
-                $result['properties'][$key] = $values;
-            }
+        if (empty($Client)) {
+            throw new \yii\web\NotFoundHttpException;
         }
+
+        $result = $Client->toArray([], ['account', 'properties']);
 
         $result['hash'] = sha1(serialize($result));
 
         return $result;
-    }
-
-    /**
-     * @inheritdoc
-     * @return \cookyii\modules\Client\resources\Client
-     */
-    public function findModel($id)
-    {
-        /* @var $modelClass \cookyii\modules\Client\resources\Client */
-        $modelClass = $this->modelClass;
-
-        $Model = $modelClass::find()
-            ->byId($id)
-            ->with(['properties'])
-            ->one();
-
-        if (isset($Model)) {
-            return $Model;
-        } else {
-            throw new \yii\web\NotFoundHttpException(sprintf('Object not found: %s', $id));
-        }
     }
 }

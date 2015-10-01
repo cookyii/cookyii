@@ -42,23 +42,25 @@ class AccountCommand extends \yii\console\Controller
             ]);
         }
 
-        $User = new \cookyii\modules\Account\resources\Account([
+        /** @var \cookyii\modules\Account\resources\Account $Account */
+        $Account = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        $Account->setAttributes([
             'name' => $name,
             'email' => $email,
             'password' => $pass,
             'activated_at' => time(),
         ]);
 
-        $User->save();
-        if (!$User->hasErrors()) {
-            AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $User->id);
-            AuthManager()->assign(RbacFactory::Role(\common\Roles::ADMIN), $User->id);
+        $Account->save();
+        if (!$Account->hasErrors()) {
+            AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
+            AuthManager()->assign(RbacFactory::Role(\common\Roles::ADMIN), $Account->id);
 
             $this->stdout("User have been successfully added\n", \yii\helpers\Console::FG_GREEN);
         } else {
             $this->stdout("ERROR creating user\n", \yii\helpers\Console::FG_RED);
 
-            $error = array_shift($User->getFirstErrors());
+            $error = array_shift($Account->getFirstErrors());
             if (!empty($error)) {
                 $this->stdout("\t> {$error}\n", \yii\helpers\Console::FG_RED);
             }

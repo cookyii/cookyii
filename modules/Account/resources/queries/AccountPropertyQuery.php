@@ -5,14 +5,14 @@
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\resources\Account\queries;
+namespace cookyii\modules\Account\resources\queries;
 
 /**
  * Class AccountPropertyQuery
- * @package cookyii\modules\Account\resources\Account\queries
+ * @package cookyii\modules\Account\resources\queries
  *
- * @method \cookyii\modules\Account\resources\Account\Property|array|null one($db = null)
- * @method \cookyii\modules\Account\resources\Account\Property[]|array all($db = null)
+ * @method \cookyii\modules\Account\resources\AccountProperty|array|null one($db = null)
+ * @method \cookyii\modules\Account\resources\AccountProperty[]|array all($db = null)
  */
 class AccountPropertyQuery extends \yii\db\ActiveQuery
 {

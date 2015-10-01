@@ -21,7 +21,7 @@ namespace cookyii\modules\Client\resources;
  * @property integer $deleted_at
  *
  * @property \cookyii\modules\Account\resources\Account $account
- * @property \cookyii\modules\Client\resources\Client\Property[] $properties
+ * @property \cookyii\modules\Client\resources\ClientProperty[] $properties
  *
  * @property \cookyii\modules\Client\resources\helpers\ClientPresent $presentHelper
  * @property \cookyii\modules\Client\resources\helpers\ClientAccount $accountHelper
@@ -64,6 +64,41 @@ class Client extends \yii\db\ActiveRecord
         };
 
         $fields['deleted'] = [$this, 'isDeleted'];
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields['account'] = function (Client $Model) {
+            $result = null;
+
+            $Account = $Model->account;
+            if (!empty($Account)) {
+                $result = $Account->toArray();
+            }
+
+            return $result;
+        };
+
+        $fields['properties'] = function (Client $Model) {
+            $result = [];
+
+            $properties = $Model->properties();
+
+            if (!empty($properties)) {
+                foreach ($properties as $key => $values) {
+                    $result[$key] = $values;
+                }
+            }
+
+            return $result;
+        };
 
         return $fields;
     }
@@ -174,7 +209,10 @@ class Client extends \yii\db\ActiveRecord
      */
     public function getAccount()
     {
-        return $this->hasOne(\cookyii\modules\Account\resources\Account::className(), ['id' => 'account_id']);
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+        return $this->hasOne($AccountModel::className(), ['id' => 'account_id']);
     }
 
     /**
@@ -182,7 +220,10 @@ class Client extends \yii\db\ActiveRecord
      */
     public function getProperties()
     {
-        return $this->hasMany(\cookyii\modules\Client\resources\Client\Property::className(), ['client_id' => 'id']);
+        /** @var \cookyii\modules\Client\resources\ClientProperty $ClientPropertyModel */
+        $ClientPropertyModel = \Yii::createObject(\cookyii\modules\Client\resources\ClientProperty::className());
+
+        return $this->hasMany($ClientPropertyModel::className(), ['client_id' => 'id']);
     }
 
     /**

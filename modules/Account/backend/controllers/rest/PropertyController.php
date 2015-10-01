@@ -7,12 +7,27 @@
 
 namespace cookyii\modules\Account\backend\controllers\rest;
 
+use cookyii\modules\Account;
+
 /**
  * Class PropertyController
  * @package cookyii\modules\Account\backend\controllers\rest
  */
-class PropertyController extends \yii\rest\Controller
+class PropertyController extends \cookyii\rest\Controller
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Account\backend\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @return array
@@ -42,17 +57,20 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty property key');
         }
 
+        /** @var \cookyii\modules\Account\resources\AccountProperty $AccountPropertyModel */
+        $AccountPropertyModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountProperty::className());
+
         $Property = null;
 
         if (!empty($key) && $key !== '__new') {
-            $Property = \cookyii\modules\Account\resources\Account\Property::find()
+            $Property = $AccountPropertyModel::find()
                 ->byAccountId($account_id)
                 ->byKey($key)
                 ->one();
         }
 
         if ($key !== $property_key) {
-            $exists = \cookyii\modules\Account\resources\Account\Property::find()
+            $exists = $AccountPropertyModel::find()
                 ->byAccountId($account_id)
                 ->byKey($property_key)
                 ->exists();
@@ -63,7 +81,7 @@ class PropertyController extends \yii\rest\Controller
         }
 
         if (empty($Property)) {
-            $Property = new \cookyii\modules\Account\resources\Account\Property;
+            $Property = $AccountPropertyModel;
             $Property->account_id = $account_id;
         }
 
@@ -108,7 +126,10 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty account id');
         }
 
-        $Property = \cookyii\modules\Account\resources\Account\Property::find()
+        /** @var \cookyii\modules\Account\resources\AccountProperty $AccountPropertyModel */
+        $AccountPropertyModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountProperty::className());
+
+        $Property = $AccountPropertyModel::find()
             ->byAccountId($account_id)
             ->byKey($key)
             ->one();

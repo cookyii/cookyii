@@ -13,10 +13,23 @@ use cookyii\modules\Account;
  * Class AccountController
  * @package cookyii\modules\Account\backend\controllers\rest
  */
-class AccountController extends \yii\rest\ActiveController
+class AccountController extends \cookyii\rest\ActiveController
 {
 
     public $modelClass = 'cookyii\modules\Account\resources\Account';
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Account\backend\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

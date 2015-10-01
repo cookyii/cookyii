@@ -7,12 +7,27 @@
 
 namespace cookyii\modules\Client\crm\controllers\rest;
 
+use cookyii\modules\Client;
+
 /**
  * Class PropertyController
  * @package cookyii\modules\Client\crm\controllers\rest
  */
-class PropertyController extends \yii\rest\Controller
+class PropertyController extends \cookyii\rest\Controller
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Client\crm\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @return array
@@ -42,17 +57,20 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty property key');
         }
 
+        /** @var \cookyii\modules\Client\resources\ClientProperty $ClientPropertyModel */
+        $ClientPropertyModel = \Yii::createObject(\cookyii\modules\Client\resources\ClientProperty::className());
+
         $Property = null;
 
         if (!empty($key) && $key !== '__new') {
-            $Property = \cookyii\modules\Client\resources\Client\Property::find()
+            $Property = $ClientPropertyModel::find()
                 ->byClientId($client_id)
                 ->byKey($key)
                 ->one();
         }
 
         if ($key !== $property_key) {
-            $exists = \cookyii\modules\Client\resources\Client\Property::find()
+            $exists = $ClientPropertyModel::find()
                 ->byClientId($client_id)
                 ->byKey($property_key)
                 ->exists();
@@ -63,7 +81,7 @@ class PropertyController extends \yii\rest\Controller
         }
 
         if (empty($Property)) {
-            $Property = new \cookyii\modules\Client\resources\Client\Property;
+            $Property = $ClientPropertyModel;
             $Property->client_id = $client_id;
         }
 
@@ -108,7 +126,10 @@ class PropertyController extends \yii\rest\Controller
             throw new \yii\web\BadRequestHttpException('Empty client id');
         }
 
-        $Property = \cookyii\modules\Client\resources\Client\Property::find()
+        /** @var \cookyii\modules\Client\resources\ClientProperty $ClientPropertyModel */
+        $ClientPropertyModel = \Yii::createObject(\cookyii\modules\Client\resources\ClientProperty::className());
+
+        $Property = $ClientPropertyModel::find()
             ->byClientId($client_id)
             ->byKey($key)
             ->one();

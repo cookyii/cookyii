@@ -9,6 +9,9 @@
 
 use yii\helpers\Html;
 
+/** @var \cookyii\modules\Account\resources\Account $AccountModel */
+$AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
 ?>
 
     <div class="box rbac" ng-controller="AccountRolesController">
@@ -17,8 +20,8 @@ use yii\helpers\Html;
         </div>
 
         <div class="box-body">
-            <?
-            foreach (\cookyii\modules\Account\resources\Account::getAllRoles() as $role => $label) {
+            <?php
+            foreach ($AccountModel::getAllRoles() as $role => $label) {
                 $options = [
                     'ng-change' => 'saveRoles()',
                     'ng-model' => sprintf('data.roles.%s', $role),

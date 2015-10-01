@@ -5,14 +5,14 @@
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Client\resources\Client\queries;
+namespace cookyii\modules\Client\resources\queries;
 
 /**
  * Class ClientPropertyQuery
- * @package cookyii\modules\Client\resources\Client\queries
+ * @package cookyii\modules\Client\resources\queries
  *
- * @method \cookyii\modules\Client\resources\Client\Property|array|null one($db = null)
- * @method \cookyii\modules\Client\resources\Client\Property[]|array all($db = null)
+ * @method \cookyii\modules\Client\resources\ClientProperty|array|null one($db = null)
+ * @method \cookyii\modules\Client\resources\ClientProperty[]|array all($db = null)
  */
 class ClientPropertyQuery extends \yii\db\ActiveQuery
 {

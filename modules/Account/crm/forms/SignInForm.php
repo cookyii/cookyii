@@ -25,6 +25,9 @@ class SignInForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
         return [
             /** type validators */
             [['email'], 'email'],
@@ -33,7 +36,7 @@ class SignInForm extends \cookyii\base\FormModel
             /** semantic validators */
             [['email', 'password'], 'required',],
             [['email'], 'filter', 'filter' => 'str_clean'],
-            [['email'], 'exist', 'targetClass' => \cookyii\modules\Account\resources\Account::className(), 'targetAttribute' => 'email'],
+            [['email'], 'exist', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
             [['password'], 'validatePassword'],
         ];
     }
@@ -107,7 +110,10 @@ class SignInForm extends \cookyii\base\FormModel
     private function getAccount()
     {
         if ($this->_Account === null) {
-            $this->_Account = \cookyii\modules\Account\resources\Account::find()
+            /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+            $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+            $this->_Account = $AccountModel::find()
                 ->byEmail($this->email)
                 ->one();
         }

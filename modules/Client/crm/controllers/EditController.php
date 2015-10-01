@@ -35,8 +35,11 @@ class EditController extends Client\crm\components\Controller
      */
     public function actionIndex()
     {
+        /** @var \cookyii\modules\Client\resources\Client $ClientModel */
+        $ClientModel = \Yii::createObject(\cookyii\modules\Client\resources\Client::className());
+
         $ClientEditForm = new Client\crm\forms\ClientEditForm([
-            'Client' => new \cookyii\modules\Client\resources\Client(),
+            'Client' => $ClientModel,
         ]);
 
         return $this->render('index', [

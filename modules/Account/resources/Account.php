@@ -25,7 +25,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $deleted_at
  * @property integer $activated_at
  *
- * @property \cookyii\modules\Account\resources\Account\Property[] $properties
+ * @property \cookyii\modules\Account\resources\AccountProperty[] $properties
  *
  * @property \cookyii\modules\Account\resources\helpers\AccountPresent $presentHelper
  * @property \cookyii\modules\Account\resources\helpers\AccountNotification $notificationHelper
@@ -97,6 +97,46 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $fields['activated'] = [$this, 'isActivated'];
 
         $fields['gravatar'] = 'gravatar';
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields['roles'] = function (Account $Model) {
+            $result = [];
+
+            $roles = AuthManager()->getRolesByUser($Model->id);
+
+            foreach ($roles as $role => $conf) {
+                $result[$role] = true;
+            }
+
+            $result[\common\Roles::USER] = true;
+
+            return $result;
+        };
+
+        $fields['permissions'] = function (Account $Model) {
+            $result = [];
+
+            $permissions = AuthManager()->getPermissionsByUser($Model->id);
+
+            foreach ($permissions as $permission => $conf) {
+                $result[$permission] = true;
+            }
+
+            return $result;
+        };
+
+        $fields['properties'] = function (Account $Model) {
+            return $Model->properties();
+        };
 
         return $fields;
     }
@@ -365,7 +405,10 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getProperties()
     {
-        return $this->hasMany(\cookyii\modules\Account\resources\Account\Property::className(), ['account_id' => 'id']);
+        /** @var \cookyii\modules\Account\resources\AccountProperty $AccountPropertyModel */
+        $AccountPropertyModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountProperty::className());
+
+        return $this->hasMany($AccountPropertyModel::className(), ['account_id' => 'id']);
     }
 
     /**
@@ -374,9 +417,8 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Account\resources\queries\AccountQuery::className(), [
-                get_called_class(),
-            ]
+            \cookyii\modules\Account\resources\queries\AccountQuery::className(),
+            [get_called_class()]
         );
     }
 

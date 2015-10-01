@@ -11,7 +11,7 @@ namespace cookyii\modules\Client\crm\controllers\rest\ClientController;
  * Class UnlinkAccountAction
  * @package cookyii\modules\Client\crm\controllers\rest\ClientController
  */
-class UnlinkAccountAction extends \yii\rest\Action
+class UnlinkAccountAction extends \cookyii\rest\Action
 {
 
     /**
