@@ -33,6 +33,16 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
             echo $form->field($AccountEditForm, 'email')
                 ->textInput();
 
+            echo Html::beginTag('md-radio-group', ['ng-model' => 'data.gender']);
+            foreach ($AccountEditForm::getGenderValues() as $gender => $label) {
+                $options = [
+                    'value' => $gender,
+                ];
+
+                echo Html::tag('md-radio-button', $label, $options);
+            }
+            echo Html::endTag('md-radio-group');
+
             echo '<hr>';
 
             echo $form->field($AccountEditForm, 'new_password')

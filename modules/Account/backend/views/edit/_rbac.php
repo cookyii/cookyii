@@ -5,12 +5,11 @@
  * @link https://rmrevin.com
  *
  * @var yii\web\View $this
+ * @var Account\backend\forms\AccountEditForm $AccountEditForm
  */
 
+use cookyii\modules\Account;
 use yii\helpers\Html;
-
-/** @var \cookyii\modules\Account\resources\Account $AccountModel */
-$AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
 
 ?>
 
@@ -21,7 +20,7 @@ $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::c
 
         <div class="box-body">
             <?php
-            foreach ($AccountModel::getAllRoles() as $role => $label) {
+            foreach ($AccountEditForm::getRoleValues() as $role => $label) {
                 $options = [
                     'ng-change' => 'saveRoles()',
                     'ng-model' => sprintf('data.roles.%s', $role),

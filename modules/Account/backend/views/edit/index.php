@@ -53,7 +53,7 @@ Account\backend\assets\EditAssetBundle::register($this);
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-if="!isNewAccount">
             <?php
-            echo $this->render('_rbac');
+            echo $this->render('_rbac', ['AccountEditForm' => $AccountEditForm]);
             ?>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5" ng-if="!isNewAccount">

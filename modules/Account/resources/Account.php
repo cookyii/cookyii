@@ -17,6 +17,7 @@ use yii\helpers\ArrayHelper;
  * @property string $name
  * @property string $email
  * @property string $avatar
+ * @property integer $gender
  * @property string $password_hash
  * @property string $token
  * @property string $auth_key
@@ -149,15 +150,17 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             /** type validators */
             [['name', 'avatar', 'password', 'password_hash'], 'string'],
-            [['created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
+            [['gender', 'created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['email'], 'email'],
             [['email'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['email'], 'required'],
             [['name', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
+            [['gender'], 'in', 'range' => [static::MALE, static::FEMALE]],
 
             /** default values */
+            [['gender'], 'default', 'value' => static::MALE],
         ];
     }
 
@@ -175,6 +178,22 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMale()
+    {
+        return $this->gender === static::MALE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFemale()
+    {
+        return $this->gender === static::FEMALE;
     }
 
     /**
@@ -447,6 +466,17 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getGenderValues()
+    {
+        return [
+            static::MALE => \Yii::t('account', 'Мужчина'),
+            static::FEMALE => \Yii::t('account', 'Женщина'),
+        ];
+    }
+
+    /**
      * Events
      */
     private function events()
@@ -473,4 +503,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             }
         );
     }
+
+    const MALE = 1;
+    const FEMALE = 0;
 }

@@ -21,6 +21,7 @@ class AccountEditForm extends \cookyii\base\FormModel
 
     public $name;
     public $email;
+    public $gender;
     public $new_password;
     public $new_password_app;
 
@@ -39,6 +40,7 @@ class AccountEditForm extends \cookyii\base\FormModel
         return [
             /** type validators */
             [['name', 'email', 'new_password', 'new_password_app'], 'string'],
+            [['gender'], 'integer'],
 
             /** semantic validators */
             [['name', 'email'], 'required'],
@@ -88,6 +90,7 @@ class AccountEditForm extends \cookyii\base\FormModel
 
         $Account->name = $this->name;
         $Account->email = $this->email;
+        $Account->gender = $this->gender;
 
         if (!empty($this->new_password)) {
             $Account->password = $this->new_password;
@@ -106,6 +109,28 @@ class AccountEditForm extends \cookyii\base\FormModel
         $this->Account = $Account;
 
         return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRoleValues()
+    {
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+        return $AccountModel::getAllRoles();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getGenderValues()
+    {
+        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
+        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+        return $AccountModel::getGenderValues();
     }
 
     /**
