@@ -26,7 +26,10 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
             'source' => \yii\web\UploadedFile::getInstanceByName('file'),
         ]);
 
-        $Media = \cookyii\modules\Media\resources\Media::push($UploadedResource);
+        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
+        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+
+        $Media = $MediaModel::push($UploadedResource);
 
         if (empty($Media)) {
             throw new \yii\web\ServerErrorHttpException;
@@ -48,7 +51,10 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
             'source' => \yii\web\UploadedFile::getInstanceByName('file'),
         ]);
 
-        $Media = \cookyii\modules\Media\resources\Media::push($UploadedResource);
+        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
+        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+
+        $Media = $MediaModel::push($UploadedResource);
 
         if (empty($Media)) {
             throw new \yii\web\ServerErrorHttpException;

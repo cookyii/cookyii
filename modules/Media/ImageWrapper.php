@@ -224,9 +224,12 @@ class ImageWrapper extends \yii\base\Object
         $p2 = StringHelper::byteSubstr($filename, 2, 2);
         $p = DIRECTORY_SEPARATOR . $p1 . DIRECTORY_SEPARATOR . $p2;
 
+        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
+        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+
         return [
-            \cookyii\modules\Media\resources\Media::getMediaModule()->storagePath . $p,
-            \cookyii\modules\Media\resources\Media::getMediaModule()->storageWebPath . $p
+            $MediaModel::getMediaModule()->storagePath . $p,
+            $MediaModel::getMediaModule()->storageWebPath . $p
         ];
     }
 
