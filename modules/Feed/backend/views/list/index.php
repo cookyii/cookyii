@@ -246,7 +246,7 @@ function sortLink($type, $label)
             echo Material::button($tooltip . FA::icon('folder-o')->fixedWidth(), [
                 'class' => 'md-fab md-raised md-mini',
                 'title' => Yii::t('feed', 'Create new section'),
-                'ng-click' => 'section.add()',
+                'ng-click' => 'items.filter.section.add()',
                 'aria-label' => 'Add section',
             ]);
 

@@ -50,8 +50,11 @@ class ItemQuery extends \yii\db\ActiveQuery
      */
     public function bySectionId($section_id)
     {
+        /** @var \cookyii\modules\Feed\resources\Feed\ItemSection $ItemSectionModel */
+        $ItemSectionModel = \Yii::createObject(\cookyii\modules\Feed\resources\Feed\ItemSection::className());
+
         /** @var array $item_sections */
-        $item_sections = \cookyii\modules\Feed\resources\Feed\ItemSection::find()
+        $item_sections = $ItemSectionModel::find()
             ->bySectionId($section_id)
             ->asArray()
             ->all();
@@ -71,8 +74,11 @@ class ItemQuery extends \yii\db\ActiveQuery
      */
     public function bySectionSlug($section_slug)
     {
+        /** @var \cookyii\modules\Feed\resources\Feed\Section $SectionModel */
+        $SectionModel = \Yii::createObject(\cookyii\modules\Feed\resources\Feed\Section::className());
+
         /** @var array $sections */
-        $sections = \cookyii\modules\Feed\resources\Feed\Section::find()
+        $sections = $SectionModel::find()
             ->bySlug($section_slug)
             ->asArray()
             ->all();

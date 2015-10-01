@@ -11,7 +11,7 @@ namespace cookyii\modules\Feed\backend\controllers\section\rest\SectionControlle
  * Class TreeAction
  * @package cookyii\modules\Feed\backend\controllers\section\rest\SectionController
  */
-class TreeAction extends \yii\rest\Action
+class TreeAction extends \cookyii\rest\Action
 {
 
     /**

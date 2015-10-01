@@ -29,10 +29,7 @@ class SectionEditForm extends \cookyii\base\FormModel
     public $published_at;
     public $archived_at;
 
-    public $meta_title;
-    public $meta_keywords;
-    public $meta_description;
-    public $meta_image;
+    public $meta;
 
     public function init()
     {
@@ -48,12 +45,13 @@ class SectionEditForm extends \cookyii\base\FormModel
     {
         return [
             /** type validators */
-            [['slug', 'title', 'meta_title', 'meta_keywords', 'meta_description', 'published_at', 'archived_at'], 'string'],
+            [['slug', 'title', 'published_at', 'archived_at'], 'string'],
             [['parent_id', 'sort'], 'integer'],
 
             /** semantic validators */
             [['slug', 'title'], 'required'],
-            [['slug', 'title', 'meta_title', 'meta_keywords', 'meta_description'], 'filter', 'filter' => 'str_clean'],
+            [['slug', 'title'], 'filter', 'filter' => 'str_clean'],
+            [['meta'], 'safe'],
 
             /** default values */
         ];
@@ -71,9 +69,9 @@ class SectionEditForm extends \cookyii\base\FormModel
             'sort' => \Yii::t('feed', 'Sort'),
             'published_at' => \Yii::t('feed', 'Start publishing at'),
             'archived_at' => \Yii::t('feed', 'End publishing at'),
-            'meta_title' => \Yii::t('feed', 'Meta title'),
-            'meta_keywords' => \Yii::t('feed', 'Meta keywords'),
-            'meta_description' => \Yii::t('feed', 'Meta description'),
+            'meta["title"]' => \Yii::t('feed', 'Meta title'),
+            'meta["keywords"]' => \Yii::t('feed', 'Meta keywords'),
+            'meta["description"]' => \Yii::t('feed', 'Meta description'),
         ];
     }
 
@@ -106,12 +104,7 @@ class SectionEditForm extends \cookyii\base\FormModel
         $Section->sort = $this->sort;
         $Section->published_at = empty($this->published_at) ? time() : strtotime($this->published_at);
         $Section->archived_at = empty($this->archived_at) ? null : strtotime($this->archived_at);
-        $Section->meta = Json::encode([
-            'title' => $this->meta_title,
-            'keywords' => $this->meta_keywords,
-            'description' => $this->meta_description,
-            'image' => $this->meta_image,
-        ]);
+        $Section->meta = Json::encode($this->meta);
 
         $result = $Section->validate() && $Section->save();
 

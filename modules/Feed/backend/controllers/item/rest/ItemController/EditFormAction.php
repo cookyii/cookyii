@@ -13,7 +13,7 @@ use cookyii\modules\Feed;
  * Class EditFormAction
  * @package cookyii\modules\Feed\backend\controllers\item\rest\ItemController
  */
-class EditFormAction extends \yii\rest\Action
+class EditFormAction extends \cookyii\rest\Action
 {
 
     /**
@@ -28,16 +28,19 @@ class EditFormAction extends \yii\rest\Action
 
         $item_id = (int)Request()->post('item_id');
 
+        /** @var $modelClass \cookyii\modules\Feed\resources\Feed\Item */
+        $modelClass = $this->modelClass;
+
         $Item = null;
 
         if ($item_id > 0) {
-            $Item = \cookyii\modules\Feed\resources\Feed\Item::find()
+            $Item = $modelClass::find()
                 ->byId($item_id)
                 ->one();
         }
 
         if (empty($Item)) {
-            $Item = new \cookyii\modules\Feed\resources\Feed\Item();
+            $Item = new $modelClass;
         }
 
         $ItemEditForm = new Feed\backend\forms\ItemEditForm(['Item' => $Item]);

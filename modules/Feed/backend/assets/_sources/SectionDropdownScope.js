@@ -43,7 +43,9 @@ angular.module('BackendApp')
             callback();
           }
 
-          $timeout($scope.reload, 30000);
+          $timeout(function () {
+            $scope.reload(addRoot, callback);
+          }, 30000);
         });
       };
 

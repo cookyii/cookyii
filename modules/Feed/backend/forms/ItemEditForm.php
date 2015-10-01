@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Feed\backend\forms;
 
-use cookyii\modules\Feed\resources\Feed\ItemSection;
+use cookyii\modules\Feed;
 use yii\helpers\Json;
 
 /**
@@ -34,10 +34,7 @@ class ItemEditForm extends \cookyii\base\FormModel
     public $published_at;
     public $archived_at;
 
-    public $meta_title;
-    public $meta_keywords;
-    public $meta_description;
-    public $meta_image;
+    public $meta;
 
     public function init()
     {
@@ -53,20 +50,15 @@ class ItemEditForm extends \cookyii\base\FormModel
     {
         return [
             /** type validators */
-            [
-                [
-                    'slug', 'title', 'content_preview', 'content_detail',
-                    'meta_title', 'meta_keywords', 'meta_description',
-                    'published_at', 'archived_at',
-                ], 'string'
-            ],
+            [['slug', 'title', 'content_preview', 'content_detail', 'published_at', 'archived_at'], 'string'],
             [['sort'], 'integer'],
             [['sections'], 'each', 'rule' => ['integer']],
 
             /** semantic validators */
             [['slug', 'title', 'sections'], 'required'],
-            [['slug', 'title', 'meta_title', 'meta_keywords', 'meta_description'], 'filter', 'filter' => 'str_clean'],
+            [['slug', 'title'], 'filter', 'filter' => 'str_clean'],
             [['content_preview', 'content_detail'], 'filter', 'filter' => 'str_pretty'],
+            [['meta'], 'safe'],
 
             /** default values */
         ];
@@ -84,9 +76,9 @@ class ItemEditForm extends \cookyii\base\FormModel
             'sections' => \Yii::t('feed', 'Sections'),
             'published_at' => \Yii::t('feed', 'Start publishing at'),
             'archived_at' => \Yii::t('feed', 'End publishing at'),
-            'meta_title' => \Yii::t('feed', 'Meta title'),
-            'meta_keywords' => \Yii::t('feed', 'Meta keywords'),
-            'meta_description' => \Yii::t('feed', 'Meta description'),
+            'meta["title"]' => \Yii::t('feed', 'Meta title'),
+            'meta["keywords"]' => \Yii::t('feed', 'Meta keywords'),
+            'meta["description"]' => \Yii::t('feed', 'Meta description'),
         ];
     }
 
@@ -120,23 +112,21 @@ class ItemEditForm extends \cookyii\base\FormModel
         $Item->content_detail = $this->content_detail;
         $Item->published_at = empty($this->published_at) ? time() : strtotime($this->published_at);
         $Item->archived_at = empty($this->archived_at) ? null : strtotime($this->archived_at);
-        $Item->meta = Json::encode([
-            'title' => $this->meta_title,
-            'keywords' => $this->meta_keywords,
-            'description' => $this->meta_description,
-            'image' => $this->meta_image,
-        ]);
+        $Item->meta = Json::encode($this->meta);
 
         $result = $Item->validate() && $Item->save();
 
         if ($Item->hasErrors()) {
             $this->populateErrors($Item, 'title');
         } else {
-            ItemSection::deleteAll(['item_id' => $Item->id]);
+            /** @var Feed\resources\Feed\ItemSection $ItemSectionModel */
+            $ItemSectionModel = \Yii::createObject(Feed\resources\Feed\ItemSection::className());
+
+            $ItemSectionModel::deleteAll(['item_id' => $Item->id]);
 
             if (!empty($this->sections)) {
                 foreach ($this->sections as $section) {
-                    $ItemSection = new ItemSection;
+                    $ItemSection = $ItemSectionModel;
                     $ItemSection->item_id = $Item->id;
                     $ItemSection->section_id = $section;
                     $ItemSection->validate() && $ItemSection->save();

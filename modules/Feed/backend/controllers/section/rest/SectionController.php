@@ -13,10 +13,23 @@ use cookyii\modules\Feed;
  * Class SectionController
  * @package cookyii\modules\Feed\backend\controllers\section\rest
  */
-class SectionController extends \yii\rest\ActiveController
+class SectionController extends \cookyii\rest\ActiveController
 {
 
     public $modelClass = 'cookyii\modules\Feed\resources\Feed\Section';
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Feed\backend\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

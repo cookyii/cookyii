@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Feed\resources\Feed;
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -57,6 +58,8 @@ class Item extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
+        unset($fields['meta']);
+
         $fields['created_at_format'] = function (Item $Model) {
             return Formatter()->asDatetime($Model->created_at);
         };
@@ -85,6 +88,35 @@ class Item extends \yii\db\ActiveRecord
         $fields['archived'] = [$this, 'isArchived'];
         $fields['deleted'] = [$this, 'isDeleted'];
         $fields['activated'] = [$this, 'isActivated'];
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields['sections'] = function (Item $Model) {
+            $result = [];
+
+            $item_sections = $Model->getItemSections()
+                ->asArray()
+                ->all();
+
+            if (!empty($item_sections)) {
+                $result = ArrayHelper::getColumn($item_sections, 'section_id');
+                $result = array_map('intval', $result);
+            }
+
+            return $result;
+        };
+
+        $fields['meta'] = function (Item $Model) {
+            return $Model->meta();
+        };
 
         return $fields;
     }
@@ -146,7 +178,10 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getItemSections()
     {
-        return $this->hasMany(ItemSection::className(), ['item_id' => 'id']);
+        /** @var ItemSection $ItemSectionModel */
+        $ItemSectionModel = \Yii::createObject(ItemSection::className());
+
+        return $this->hasMany($ItemSectionModel::className(), ['item_id' => 'id']);
     }
 
     /**
@@ -154,7 +189,10 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getSections()
     {
-        return $this->hasMany(Section::className(), ['id' => 'section_id'])
+        /** @var Section $SectionModel */
+        $SectionModel = \Yii::createObject(Section::className());
+
+        return $this->hasMany($SectionModel::className(), ['id' => 'section_id'])
             ->via('itemSections');
     }
 
@@ -164,9 +202,8 @@ class Item extends \yii\db\ActiveRecord
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Feed\resources\Feed\queries\ItemQuery::className(), [
-                get_called_class(),
-            ]
+            \cookyii\modules\Feed\resources\Feed\queries\ItemQuery::className(),
+            [get_called_class()]
         );
     }
 

@@ -13,7 +13,7 @@ use cookyii\modules\Feed;
  * Class EditFormAction
  * @package cookyii\modules\Feed\backend\controllers\section\rest\SectionController
  */
-class EditFormAction extends \yii\rest\Action
+class EditFormAction extends \cookyii\rest\Action
 {
 
     /**
@@ -28,16 +28,19 @@ class EditFormAction extends \yii\rest\Action
 
         $section_slug = str_clean(Request()->post('section_slug'));
 
+        /** @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
+        $modelClass = $this->modelClass;
+
         $Section = null;
 
         if (!empty($section_slug)) {
-            $Section = \cookyii\modules\Feed\resources\Feed\Section::find()
+            $Section = $modelClass::find()
                 ->bySlug($section_slug)
                 ->one();
         }
 
         if (empty($Section)) {
-            $Section = new \cookyii\modules\Feed\resources\Feed\Section();
+            $Section = new $modelClass;
         }
 
         $SectionEditForm = new Feed\backend\forms\SectionEditForm(['Section' => $Section]);

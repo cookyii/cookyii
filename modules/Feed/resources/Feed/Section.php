@@ -53,27 +53,27 @@ class Section extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['created_at_format'] = function (Item $Model) {
+        $fields['created_at_format'] = function (Section $Model) {
             return Formatter()->asDatetime($Model->created_at);
         };
 
-        $fields['updated_at_format'] = function (Item $Model) {
+        $fields['updated_at_format'] = function (Section $Model) {
             return Formatter()->asDatetime($Model->updated_at);
         };
 
-        $fields['published_at_format'] = function (Item $Model) {
+        $fields['published_at_format'] = function (Section $Model) {
             return Formatter()->asDatetime($Model->published_at);
         };
 
-        $fields['archived_at_format'] = function (Item $Model) {
+        $fields['archived_at_format'] = function (Section $Model) {
             return Formatter()->asDatetime($Model->archived_at);
         };
 
-        $fields['deleted_at_format'] = function (Item $Model) {
+        $fields['deleted_at_format'] = function (Section $Model) {
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
-        $fields['activated_at_format'] = function (Item $Model) {
+        $fields['activated_at_format'] = function (Section $Model) {
             return Formatter()->asDatetime($Model->activated_at);
         };
 
@@ -81,6 +81,20 @@ class Section extends \yii\db\ActiveRecord
         $fields['archived'] = [$this, 'isArchived'];
         $fields['deleted'] = [$this, 'isDeleted'];
         $fields['activated'] = [$this, 'isActivated'];
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields['meta'] = function (Section $Model) {
+            return $Model->meta();
+        };
 
         return $fields;
     }
@@ -150,9 +164,12 @@ class Section extends \yii\db\ActiveRecord
             'models' => [],
         ];
 
+        /** @var Section $SectionModel */
+        $SectionModel = \Yii::createObject(Section::className());
+
         if (empty($Sections) && empty($parent)) {
-            /** @var \cookyii\modules\Feed\resources\Feed\queries\SectionQuery $SectionsQuery */
-            $SectionsQuery = \cookyii\modules\Feed\resources\Feed\Section::find();
+            /** @var queries\SectionQuery $SectionsQuery */
+            $SectionsQuery = $SectionModel::find();
 
             if ($with_deleted === false) {
                 $SectionsQuery->withoutDeleted();
@@ -211,9 +228,8 @@ class Section extends \yii\db\ActiveRecord
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Feed\resources\Feed\queries\SectionQuery::className(), [
-                get_called_class(),
-            ]
+            \cookyii\modules\Feed\resources\Feed\queries\SectionQuery::className(),
+            [get_called_class()]
         );
     }
 

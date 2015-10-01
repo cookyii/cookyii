@@ -11,7 +11,7 @@ namespace cookyii\modules\Feed\backend\controllers\section\rest\SectionControlle
  * Class DetailAction
  * @package cookyii\modules\Feed\backend\controllers\section\rest\SectionController
  */
-class DetailAction extends \yii\rest\Action
+class DetailAction extends \cookyii\rest\Action
 {
 
     /**
@@ -33,15 +33,7 @@ class DetailAction extends \yii\rest\Action
             throw new \yii\web\NotFoundHttpException("Object not found: $slug");
         }
 
-        $result = $Model->attributes;
-
-        $meta = $Model->meta();
-        if (!empty($meta)) {
-            foreach ($meta as $k => $v) {
-                $key = sprintf('meta_%s', $k);
-                $result[$key] = $v;
-            }
-        }
+        $result = $Model->toArray([], ['meta']);
 
         $result['published_at'] = empty($result['published_at'])
             ? null

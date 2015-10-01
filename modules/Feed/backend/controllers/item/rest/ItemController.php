@@ -13,10 +13,23 @@ use cookyii\modules\Feed;
  * Class ItemController
  * @package cookyii\modules\Feed\backend\controllers\item\rest
  */
-class ItemController extends \yii\rest\ActiveController
+class ItemController extends \cookyii\rest\ActiveController
 {
 
     public $modelClass = 'cookyii\modules\Feed\resources\Feed\Item';
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow' => true,
+                'roles' => [Feed\backend\Permissions::ACCESS],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

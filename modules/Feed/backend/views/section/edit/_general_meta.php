@@ -9,17 +9,20 @@
  * @var cookyii\modules\Feed\backend\forms\SectionEditForm $SectionEditForm
  */
 
-echo $ActiveForm->field($SectionEditForm, 'meta_title')
+echo $ActiveForm->field($SectionEditForm, 'meta["title"]')
+    ->label($SectionEditForm->getAttributeLabel('meta["title"]'))
     ->textInput([
         'placeholder' => Yii::t('feed', 'Marketing title'),
     ]);
 
-echo $ActiveForm->field($SectionEditForm, 'meta_keywords')
+echo $ActiveForm->field($SectionEditForm, 'meta["keywords"]')
+    ->label($SectionEditForm->getAttributeLabel('meta["keywords"]'))
     ->textInput([
         'placeholder' => Yii::t('feed', 'keyword, password, handball'),
     ]);
 
-echo $ActiveForm->field($SectionEditForm, 'meta_description')
+echo $ActiveForm->field($SectionEditForm, 'meta["description"]')
+    ->label($SectionEditForm->getAttributeLabel('meta["description"]'))
     ->textarea([
         'msd-elastic' => true,
         'placeholder' => Yii::t('feed', 'A colorful description section'),
