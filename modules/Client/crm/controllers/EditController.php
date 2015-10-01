@@ -38,7 +38,8 @@ class EditController extends Client\crm\components\Controller
         /** @var \cookyii\modules\Client\resources\Client $ClientModel */
         $ClientModel = \Yii::createObject(\cookyii\modules\Client\resources\Client::className());
 
-        $ClientEditForm = new Client\crm\forms\ClientEditForm([
+        $ClientEditForm = \Yii::createObject([
+            'class' => Client\crm\forms\ClientEditForm::className(),
             'Client' => $ClientModel,
         ]);
 

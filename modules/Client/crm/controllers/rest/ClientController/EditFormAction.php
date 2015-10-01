@@ -41,7 +41,10 @@ class EditFormAction extends \cookyii\rest\Action
             $Client = $ClientModel;
         }
 
-        $ClientEditForm = new \cookyii\modules\Client\crm\forms\ClientEditForm(['Client' => $Client]);
+        $ClientEditForm = \Yii::createObject([
+            'class' => \cookyii\modules\Client\crm\forms\ClientEditForm::className(),
+            'Client' => $Client,
+        ]);
 
         $ClientEditForm->load(Request()->post())
         && $ClientEditForm->validate()

@@ -26,7 +26,7 @@ class ClientEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Client instanceof \cookyii\modules\Client\resources\Client)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('client', 'Not specified user to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('client', 'Not specified client to edit.'));
         }
     }
 

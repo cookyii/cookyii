@@ -63,7 +63,7 @@ class SignController extends Account\frontend\components\Controller
 
         $this->layout = '//wide';
 
-        $SignInForm = new Account\frontend\forms\SignInForm();
+        $SignInForm = \Yii::createObject(Account\frontend\forms\SignInForm::className());
 
         return $this->render('in', [
             'SignInForm' => $SignInForm,

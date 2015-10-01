@@ -38,7 +38,8 @@ class EditController extends Feed\backend\components\Controller
         /** @var \cookyii\modules\Feed\resources\Feed\Item $ItemModel */
         $ItemModel = \Yii::createObject(\cookyii\modules\Feed\resources\Feed\Item::className());
 
-        $ItemEditForm = new Feed\backend\forms\ItemEditForm([
+        $ItemEditForm = \Yii::createObject([
+            'class' => Feed\backend\forms\ItemEditForm::className(),
             'Item' => $ItemModel,
         ]);
 

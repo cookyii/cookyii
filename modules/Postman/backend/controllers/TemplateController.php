@@ -47,7 +47,8 @@ class TemplateController extends Postman\backend\components\Controller
         /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
         $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
 
-        $TemplateEditForm = new Postman\backend\forms\TemplateEditForm([
+        $TemplateEditForm = \Yii::createObject([
+            'class' => Postman\backend\forms\TemplateEditForm::className(),
             'Template' => $TemplateModel,
         ]);
 

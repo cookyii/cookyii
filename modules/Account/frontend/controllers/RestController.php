@@ -55,7 +55,7 @@ class RestController extends \cookyii\rest\Controller
             ]
         ];
 
-        $SignInForm = new Account\frontend\forms\SignInForm();
+        $SignInForm = \Yii::createObject(Account\frontend\forms\SignInForm::className());
 
         if ($SignInForm->load(Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
             $result = [
@@ -135,7 +135,7 @@ class RestController extends \cookyii\rest\Controller
             ]
         ];
 
-        $ForgotPasswordForm = new Account\frontend\forms\ForgotPasswordForm();
+        $ForgotPasswordForm = \Yii::createObject(Account\frontend\forms\ForgotPasswordForm::className());
 
         if ($ForgotPasswordForm->load(Request()->post()) && $ForgotPasswordForm->validate() && $ForgotPasswordForm->sendNotification()) {
             $result = [

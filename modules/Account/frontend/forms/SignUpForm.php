@@ -90,7 +90,9 @@ class SignUpForm extends \cookyii\base\FormModel
             AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
 
             if ($this->loginAfterRegister) {
-                User()->login($Account, SignInForm::REMEMBER_TIME);
+                $SignInFormModel = \Yii::createObject(SignInForm::className());
+
+                User()->login($Account, $SignInFormModel::REMEMBER_TIME);
             }
         }
 

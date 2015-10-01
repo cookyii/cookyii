@@ -147,7 +147,9 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             $Account->refreshToken();
 
             if ($this->loginAfterReset) {
-                User()->login($Account, SignInForm::REMEMBER_TIME);
+                $SignInFormModel = \Yii::createObject(SignInForm::className());
+
+                User()->login($Account, $SignInFormModel::REMEMBER_TIME);
             }
         }
 

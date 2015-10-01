@@ -37,7 +37,8 @@ class EditController extends Account\backend\components\Controller
         /** @var \cookyii\modules\Account\resources\Account $AccountModel */
         $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
 
-        $AccountEditForm = new Account\backend\forms\AccountEditForm([
+        $AccountEditForm = \Yii::createObject([
+            'class' => Account\backend\forms\AccountEditForm::className(),
             'Account' => $AccountModel,
         ]);
 

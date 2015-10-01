@@ -53,7 +53,7 @@ class RestController extends \cookyii\rest\Controller
             ]
         ];
 
-        $SignInForm = new Account\backend\forms\SignInForm();
+        $SignInForm = \Yii::createObject(Account\backend\forms\SignInForm::className());
 
         if ($SignInForm->load(Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
             $result = [

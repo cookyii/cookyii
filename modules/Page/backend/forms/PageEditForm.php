@@ -30,7 +30,7 @@ class PageEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Page instanceof \cookyii\modules\Page\resources\Page)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('page', 'Not specified user to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('page', 'Not specified page to edit.'));
         }
     }
 

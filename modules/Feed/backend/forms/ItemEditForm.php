@@ -39,7 +39,7 @@ class ItemEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Item instanceof \cookyii\modules\Feed\resources\Feed\Item)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('feed', 'Not specified section to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('feed', 'Not specified item to edit.'));
         }
     }
 

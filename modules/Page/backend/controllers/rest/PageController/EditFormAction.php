@@ -43,7 +43,10 @@ class EditFormAction extends \cookyii\rest\Action
             $Page = new $modelClass;
         }
 
-        $PageEditForm = new Page\backend\forms\PageEditForm(['Page' => $Page]);
+        $PageEditForm = \Yii::createObject([
+            'class' => Page\backend\forms\PageEditForm::className(),
+            'Page' => $Page,
+        ]);
 
         $PageEditForm->load(Request()->post())
         && $PageEditForm->validate()

@@ -38,7 +38,8 @@ class EditController extends Page\backend\components\Controller
         /** @var \cookyii\modules\Page\resources\Page $PageModel */
         $PageModel = \Yii::createObject(\cookyii\modules\Page\resources\Page::className());
 
-        $PageEditForm = new Page\backend\forms\PageEditForm([
+        $PageEditForm = \Yii::createObject([
+            'class' => Page\backend\forms\PageEditForm::className(),
             'Page' => $PageModel,
         ]);
 

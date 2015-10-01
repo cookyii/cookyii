@@ -43,7 +43,10 @@ class EditFormAction extends \cookyii\rest\Action
             $Item = new $modelClass;
         }
 
-        $ItemEditForm = new Feed\backend\forms\ItemEditForm(['Item' => $Item]);
+        $ItemEditForm = \Yii::createObject([
+            'class' => Feed\backend\forms\ItemEditForm::className(),
+            'Item' => $Item,
+        ]);
 
         $ItemEditForm->load(Request()->post())
         && $ItemEditForm->validate()

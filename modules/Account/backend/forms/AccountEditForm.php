@@ -27,7 +27,7 @@ class AccountEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Account instanceof \cookyii\modules\Account\resources\Account)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('account', 'Not specified user to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('account', 'Not specified account to edit.'));
         }
     }
 

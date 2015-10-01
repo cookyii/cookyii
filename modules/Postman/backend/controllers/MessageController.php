@@ -47,7 +47,8 @@ class MessageController extends Postman\backend\components\Controller
         /** @var \cookyii\modules\Postman\resources\Postman\Message $MessageModel */
         $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Message::className());
 
-        $MessageEditForm = new Postman\backend\forms\MessageEditForm([
+        $MessageEditForm = \Yii::createObject([
+            'class' => Postman\backend\forms\MessageEditForm::className(),
             'Message' => $MessageModel,
         ]);
 

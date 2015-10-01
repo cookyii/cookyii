@@ -43,7 +43,10 @@ class EditFormAction extends \cookyii\rest\Action
             $Message = new $modelClass;
         }
 
-        $MessageEditForm = new Postman\backend\forms\MessageEditForm(['Message' => $Message]);
+        $MessageEditForm = \Yii::createObject([
+            'class' => Postman\backend\forms\MessageEditForm::className(),
+            'Message' => $Message,
+        ]);
 
         $MessageEditForm->load(Request()->post())
         && $MessageEditForm->validate()
