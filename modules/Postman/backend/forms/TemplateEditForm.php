@@ -16,7 +16,7 @@ use yii\helpers\Json;
 class TemplateEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\db\traits\PopulateErrorsTrait;
+    use \cookyii\traits\PopulateErrorsTrait;
 
     /** @var \cookyii\modules\Postman\resources\Postman\Template */
     public $Template;

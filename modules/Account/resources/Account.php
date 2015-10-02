@@ -38,16 +38,11 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
     use \cookyii\modules\Account\resources\Account\traits\UserSocialTrait,
+        \cookyii\traits\GravatrTrait,
         \cookyii\db\traits\ActivationTrait,
         \cookyii\db\traits\SoftDeleteTrait;
 
     public $password;
-
-    public static $gravatarParams = [
-        'r' => 'r',
-        's' => 128,
-        'd' => 'retro',
-    ];
 
     /**
      * @inheritdoc
@@ -94,10 +89,10 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             return Formatter()->asDatetime($Model->activated_at);
         };
 
+        $fields['avatar'] = [$this, 'getAvatar'];
+
         $fields['deleted'] = [$this, 'isDeleted'];
         $fields['activated'] = [$this, 'isActivated'];
-
-        $fields['gravatar'] = 'gravatar';
 
         return $fields;
     }
@@ -198,18 +193,11 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     /**
      * @return string
+     * @throws \yii\base\Exception
      */
-    public function getGravatar()
+    public function getAvatar()
     {
-        $hash = md5(strtolower(trim($this->email)));
-
-        $params = array_merge([
-            'r' => 'r',
-            's' => 128,
-            'd' => 'retro',
-        ], static::$gravatarParams);
-
-        return sprintf('https://secure.gravatar.com/avatar/%s.png?%s', $hash, http_build_query($params));
+        return $this->getGravatar();
     }
 
     /** @var array */

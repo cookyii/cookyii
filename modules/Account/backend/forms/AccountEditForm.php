@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\backend\forms;
 class AccountEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\db\traits\PopulateErrorsTrait;
+    use \cookyii\traits\PopulateErrorsTrait;
 
     /** @var \cookyii\modules\Account\resources\Account */
     public $Account;

@@ -16,7 +16,7 @@ use rmrevin\yii\rbac\RbacFactory;
 class SignUpForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\db\traits\PopulateErrorsTrait;
+    use \cookyii\traits\PopulateErrorsTrait;
 
     public $name;
     public $email;

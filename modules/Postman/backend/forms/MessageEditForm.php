@@ -17,7 +17,7 @@ use yii\helpers\Json;
 class MessageEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\db\traits\PopulateErrorsTrait;
+    use \cookyii\traits\PopulateErrorsTrait;
 
     /** @var \cookyii\modules\Postman\resources\Postman\Message */
     public $Message;

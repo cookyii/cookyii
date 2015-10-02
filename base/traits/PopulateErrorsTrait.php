@@ -5,11 +5,11 @@
  * @link https://rmrevin.com
  */
 
-namespace cookyii\db\traits;
+namespace cookyii\traits;
 
 /**
  * Trait PopulateErrorsTrait
- * @package cookyii\db\traits
+ * @package cookyii\traits
  *
  * @method hasProperty
  * @method hasAttribute

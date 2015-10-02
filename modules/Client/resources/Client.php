@@ -32,7 +32,8 @@ namespace cookyii\modules\Client\resources;
 class Client extends \yii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\SoftDeleteTrait;
+    use \cookyii\traits\GravatrTrait,
+        \cookyii\db\traits\SoftDeleteTrait;
 
     /**
      * @inheritdoc
@@ -62,6 +63,8 @@ class Client extends \yii\db\ActiveRecord
         $fields['deleted_at_format'] = function (Client $Model) {
             return Formatter()->asDatetime($Model->deleted_at);
         };
+
+        $fields['avatar'] = [$this, 'getAvatar'];
 
         $fields['deleted'] = [$this, 'isDeleted'];
 
@@ -120,6 +123,15 @@ class Client extends \yii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    public function getAvatar()
+    {
+        return $this->getGravatar();
     }
 
     private $presentHelper = null;
