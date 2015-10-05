@@ -10,7 +10,8 @@ angular.module('FrontendApp')
           name: null,
           email: null,
           password: null,
-          password_app: null
+          password_app: null,
+          agree: false
         },
         defaultErrors = {};
 

@@ -22,7 +22,6 @@ class SiteController extends \frontend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['index', 'error', 'captcha'],
                 'roles' => ['?', '@'],
             ],
         ];
@@ -45,10 +44,18 @@ class SiteController extends \frontend\components\Controller
     }
 
     /**
-     * @throws \yii\web\NotFoundHttpException
+     * @return string
      */
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * @return string
+     */
+    public function actionTerms()
+    {
+        return $this->render('terms');
     }
 }

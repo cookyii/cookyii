@@ -48,10 +48,10 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         if ($content === null) {
             if (!isset($this->parts['{input}'])) {
-                $this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $this->inputOptions);
+                $this->textInput();
             }
             if (!isset($this->parts['{label}'])) {
-                $this->parts['{label}'] = Html::activeLabel($this->model, $this->attribute, $this->labelOptions);
+                $this->label();
             }
             if (!isset($this->parts['{error}'])) {
                 $this->parts['{error}'] = $this->_error($this->model, $this->attribute, $this->errorOptions);

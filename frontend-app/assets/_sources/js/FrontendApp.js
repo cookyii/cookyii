@@ -2,7 +2,7 @@
   "use strict";
 
   ng.module('FrontendApp', [
-    'ngCookies', 'ngSanitize',
+    'ngCookies', 'ngSanitize', 'ngMaterial',
     'ui.bootstrap',
     'angular-loading-bar',
     'filters'

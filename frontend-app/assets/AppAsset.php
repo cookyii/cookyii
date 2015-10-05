@@ -44,6 +44,7 @@ class AppAsset extends \yii\web\AssetBundle
         'cookyii\assets\AnimateCssAssetBundle',
         'cookyii\assets\SweetAlertAssetBundle',
         'cookyii\assets\angular\AngularAssetBundle',
+        'cookyii\assets\angular\AngularMaterialAssetBundle',
         'cookyii\assets\jquery\ScrollToAssetBundle',
     ];
 }

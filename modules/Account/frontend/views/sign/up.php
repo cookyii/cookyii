@@ -58,6 +58,14 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
                 'placeholder' => $SignUpForm->getAttributeLabel('password_app'),
             ]);
 
+        echo $form->field($SignUpForm, 'agree')
+            ->checkbox([
+                'value' => '1',
+                'label' => \Yii::t('account', 'I agree to the {terms} of use', [
+                    'terms' => Html::a(\Yii::t('account', 'terms'), ['/site/terms'])
+                ]),
+            ]);
+
         ?>
         <div class="row">
             <div class="col-xs-12 text-right">

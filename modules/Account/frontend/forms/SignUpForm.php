@@ -23,6 +23,8 @@ class SignUpForm extends \cookyii\base\FormModel
     public $password;
     public $password_app;
 
+    public $agree;
+
     public $loginAfterRegister = true;
 
     /**
@@ -37,12 +39,14 @@ class SignUpForm extends \cookyii\base\FormModel
             /** type validators */
             [['email'], 'email'],
             [['name', 'email', 'password', 'password'], 'string'],
+            [['agree'], 'boolean', 'trueValue' => 'true', 'falseValue' => 'false'],
 
             /** semantic validators */
             [['name', 'email', 'password', 'password_app'], 'required'],
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
             [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
             [['password'], 'compare', 'compareAttribute' => 'password_app'],
+            [['agree'], 'compare', 'compareValue' => 'true', 'operator' => '===', 'message' => \Yii::t('account', 'You must accept the terms')],
         ];
     }
 
@@ -56,6 +60,7 @@ class SignUpForm extends \cookyii\base\FormModel
             'email' => \Yii::t('account', 'Email'),
             'password' => \Yii::t('account', 'Password'),
             'password_app' => \Yii::t('account', 'Password approve'),
+            'agree' => \Yii::t('account', 'I agree to the terms of use'),
         ];
     }
 
