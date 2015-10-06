@@ -31,6 +31,7 @@ use yii\helpers\Json;
  * @property integer $deleted_at
  * @property integer $activated_at
  *
+ * @property \cookyii\modules\Media\resources\Media $pictureMedia
  * @property ItemSection[] $itemSections
  * @property Section[] $sections
  */
@@ -98,6 +99,17 @@ class Item extends \yii\db\ActiveRecord
     public function extraFields()
     {
         $fields = parent::extraFields();
+
+        $fields['picture_300'] = function (Item $Model) {
+            $result = null;
+
+            $Media = $Model->pictureMedia;
+            if (!empty($Media)) {
+                $result = (string)$Media->image()->resizeByWidth(300);
+            }
+
+            return $result;
+        };
 
         $fields['sections'] = function (Item $Model) {
             $result = [];
@@ -171,6 +183,17 @@ class Item extends \yii\db\ActiveRecord
         return empty($this->meta) || $this->meta === '[]'
             ? $defaultValues
             : Json::decode($this->meta);
+    }
+
+    /**
+     * @return \cookyii\modules\Media\resources\queries\MediaQuery
+     */
+    public function getPictureMedia()
+    {
+        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
+        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+
+        return $this->hasOne($MediaModel::className(), ['id' => 'picture_media_id']);
     }
 
     /**

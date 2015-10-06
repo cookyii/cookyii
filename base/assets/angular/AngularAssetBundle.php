@@ -29,6 +29,7 @@ class AngularAssetBundle extends \yii\web\AssetBundle
         // plugins
         'angular-bootstrap/ui-bootstrap-tpls.min.js',
         'angular-ui-utils/ui-utils.min.js',
+        'angular-ui-uploader/dist/uploader.min.js',
         'angular-loading-bar/build/loading-bar.min.js',
         'angular-elastic/elastic.js',
         'angular-redactor/angular-redactor.js',

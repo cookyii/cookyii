@@ -45,6 +45,14 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
                             ]);
                             ?>
                         </tab>
+                        <tab heading="Picture" active="tabs.picture" select="selectTab('picture')">
+                            <?php
+                            echo $this->render('_general_picture', [
+                                'ActiveForm' => $ActiveForm,
+                                'ItemEditForm' => $ItemEditForm,
+                            ]);
+                            ?>
+                        </tab>
                         <tab heading="Section" active="tabs.sections" select="selectTab('sections')">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">

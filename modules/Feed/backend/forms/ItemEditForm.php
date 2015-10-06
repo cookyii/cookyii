@@ -26,6 +26,8 @@ class ItemEditForm extends \cookyii\base\FormModel
     public $title;
     public $sort;
 
+    public $picture_media_id;
+
     public $content_preview;
     public $content_detail;
 
@@ -51,7 +53,7 @@ class ItemEditForm extends \cookyii\base\FormModel
         return [
             /** type validators */
             [['slug', 'title', 'content_preview', 'content_detail', 'published_at', 'archived_at'], 'string'],
-            [['sort'], 'integer'],
+            [['sort', 'picture_media_id'], 'integer'],
             [['sections'], 'each', 'rule' => ['integer']],
 
             /** semantic validators */
@@ -108,6 +110,7 @@ class ItemEditForm extends \cookyii\base\FormModel
         $Item->title = $this->title;
         $Item->slug = $this->slug;
         $Item->sort = $this->sort;
+        $Item->picture_media_id = $this->picture_media_id;
         $Item->content_preview = $this->content_preview;
         $Item->content_detail = $this->content_detail;
         $Item->published_at = empty($this->published_at) ? time() : strtotime($this->published_at);

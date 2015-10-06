@@ -161,7 +161,8 @@ function sortLink($type, $label)
                         <div class="row">
                             <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
                                 <div class="preview-picture clickable" ng-click="items.edit(item)">
-                                    Preview<br>picture
+                                    <div ng-if="item.picture_300"><img ng-src="{{ item.picture_300 }}"></div>
+                                    <div ng-if="!item.picture_300">Preview<br>picture</div>
                                 </div>
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 activated">

@@ -100,7 +100,8 @@ angular.module('BackendApp')
             search: $scope.filter.search.query,
             section: $scope.filter.section.selected,
             sort: $scope.sort.order,
-            page: loaded ? $scope.pagination.currentPage : page
+            page: loaded ? $scope.pagination.currentPage : page,
+            expand: 'picture_300'
           }, function (response, headers) {
             var _headers = headers();
 

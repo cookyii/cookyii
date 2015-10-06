@@ -30,7 +30,9 @@ md-fab-speed-dial {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
+.box-item .preview-picture img { width: 100%; }
 .box-item .activated { text-align: center; }
 .box-item .activated md-switch { margin: 2px 0; display: inline-block; vertical-align: top; }
 .box-item .activated md-switch .md-container { margin-right: 0; }

@@ -7,8 +7,6 @@
 
 namespace cookyii\modules\Feed\backend\controllers\item\rest\ItemController;
 
-use yii\helpers\ArrayHelper;
-
 /**
  * Class DetailAction
  * @package cookyii\modules\Feed\backend\controllers\item\rest\ItemController
@@ -26,7 +24,7 @@ class DetailAction extends \cookyii\rest\Action
         /** @var \cookyii\modules\Feed\resources\Feed\Item $Model */
         $Model = $this->findModel($id);
 
-        $result = $Model->toArray([], ['sections', 'meta']);
+        $result = $Model->toArray([], ['picture_300', 'sections', 'meta']);
 
         $result['published_at'] = empty($result['published_at'])
             ? null

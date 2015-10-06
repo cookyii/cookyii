@@ -8,14 +8,15 @@ angular.module('BackendApp')
   })
 
   .controller('ItemEditController', [
-    '$scope', '$http', '$timeout', 'QueryScope', 'ToastScope', 'SectionDropdownScope',
-    function ($scope, $http, $timeout, QueryScope, ToastScope, SectionDropdownScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'ToastScope', 'uiUploader', 'SectionDropdownScope',
+    function ($scope, $http, $timeout, QueryScope, ToastScope, uiUploader, SectionDropdownScope) {
       $scope.inProgress = false;
 
       var selectedTab = QueryScope.get('tab', 'content');
 
       $scope.tabs = {
         content: selectedTab === 'content',
+        picture: selectedTab === 'picture',
         sections: selectedTab === 'sections',
         publishing: selectedTab === 'publishing',
         meta: selectedTab === 'meta'
@@ -88,5 +89,44 @@ angular.module('BackendApp')
 
         e.preventDefault();
       };
+
+      $scope.previewInProgress = false;
+
+      jQuery('body').on('change', '#picture', function (e) {
+        var $uploadInput = jQuery(this);
+
+        uiUploader.addFiles(e.target.files);
+
+        $scope.previewInProgress = true;
+        $scope.$apply();
+
+        uiUploader.startUpload({
+          url: $uploadInput.data('action'),
+          concurrency: 1,
+          onProgress: function (file) {
+            //console.log('onProgress', arguments);
+          },
+          onCompleted: function (file, response, status) {
+            //console.log('onCompleted', arguments);
+            $uploadInput.val(null);
+
+            if (status === 200) {
+              response = jQuery.parseJSON(response);
+
+              $scope.data.picture_media_id = response.id;
+              $scope.data.picture_300 = response.url;
+            } else {
+              ToastScope.send('error', {message: 'Upload error'});
+            }
+
+            $scope.previewInProgress = false;
+
+            $scope.$apply();
+          },
+          onCompletedAll: function () {
+            //console.log('onCompletedAll', arguments);
+          }
+        });
+      });
     }
   ]);

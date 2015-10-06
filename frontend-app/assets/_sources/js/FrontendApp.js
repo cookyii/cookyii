@@ -3,7 +3,7 @@
 
   ng.module('FrontendApp', [
     'ngCookies', 'ngSanitize', 'ngMaterial',
-    'ui.bootstrap',
+    'ui.bootstrap', 'ui.uploader',
     'angular-loading-bar',
     'filters'
   ])
