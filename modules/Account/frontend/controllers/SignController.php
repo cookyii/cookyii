@@ -28,7 +28,7 @@ class SignController extends Account\frontend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['in', 'up', 'auth'],
+                'actions' => ['in', 'up', 'auth', 'fill'],
                 'roles' => ['?', '@'],
             ],
             [
@@ -81,7 +81,7 @@ class SignController extends Account\frontend\components\Controller
 
         $this->layout = '//wide';
 
-        $SignUpForm = new Account\frontend\forms\SignUpForm();
+        $SignUpForm = \Yii::createObject(Account\frontend\forms\SignUpForm::className());
 
         return $this->render('up', [
             'SignUpForm' => $SignUpForm,
@@ -96,6 +96,27 @@ class SignController extends Account\frontend\components\Controller
         User()->logout();
 
         return $this->goHome();
+    }
+
+    /**
+     * @return string
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function actionFill()
+    {
+        $Client = Session()->get('OAuthResponseClient');
+
+        if (empty($Client)) {
+            throw new \yii\web\BadRequestHttpException;
+        }
+
+        $this->layout = '//wide';
+
+        $FillAttributesForm = \Yii::createObject(Account\frontend\forms\FillAttributesForm::className());
+
+        return $this->render('fill', [
+            'FillAttributesForm' => $FillAttributesForm,
+        ]);
     }
 
     /**
@@ -166,12 +187,32 @@ class SignController extends Account\frontend\components\Controller
             $Account = $AccountModel;
             $Account->appendClientAttributes($Client);
 
+            if (!empty($Account->email)) {
+                $SearchAccount = $AccountModel::find()
+                    ->byEmail($Account->email)
+                    ->one();
+
+                if (!empty($SearchAccount)) {
+                    $Account = $SearchAccount;
+                    $Account->appendClientAttributes($Client);
+                }
+            } else {
+                Session()->set('OAuthResponseClient', $Client);
+
+                Response()->redirect(['/account/sign/fill'])
+                    ->send();
+
+                exit;
+            }
+
             if ($Account->save()) {
                 $Account->createSocialLink($Client);
 
                 $AuthResponse->result = Json::encode($Account->id);
 
-                AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
+                if (!$Account->can(\common\Roles::USER)) {
+                    AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
+                }
             } else {
                 $AuthResponse->result = Json::encode($Account->getErrors());
             }

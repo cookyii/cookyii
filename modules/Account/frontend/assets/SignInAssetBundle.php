@@ -17,7 +17,7 @@ class SignInAssetBundle extends \yii\web\AssetBundle
     public $sourcePath;
 
     public $css = [
-        'signin.css',
+        'styles.css',
     ];
 
     public $js = [

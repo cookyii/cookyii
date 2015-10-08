@@ -1,6 +1,6 @@
 <?php
 /**
- * SignUpAssetBundle.php
+ * FillAttributesAssetBundle.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -8,10 +8,10 @@
 namespace cookyii\modules\Account\frontend\assets;
 
 /**
- * Class SignUpAssetBundle
+ * Class FillAttributesAssetBundle
  * @package cookyii\modules\Account\frontend\assets
  */
-class SignUpAssetBundle extends \yii\web\AssetBundle
+class FillAttributesAssetBundle extends \yii\web\AssetBundle
 {
 
     public $sourcePath;
@@ -21,7 +21,7 @@ class SignUpAssetBundle extends \yii\web\AssetBundle
     ];
 
     public $js = [
-        'SignUpController.js',
+        'FillAttributesController.js',
     ];
 
     public $depends = [

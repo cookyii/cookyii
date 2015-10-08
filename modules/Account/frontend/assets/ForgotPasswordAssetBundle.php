@@ -17,7 +17,7 @@ class ForgotPasswordAssetBundle extends \yii\web\AssetBundle
     public $sourcePath;
 
     public $css = [
-        'forgot-password.css',
+        'styles.css',
     ];
 
     public $js = [
