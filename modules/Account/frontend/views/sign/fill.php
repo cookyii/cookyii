@@ -29,11 +29,8 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
         ]);
 
         echo $form->field($FillAttributesForm, 'email')
-            ->label(false)
             ->icon('envelope')
-            ->textInput([
-                'placeholder' => $FillAttributesForm->getAttributeLabel('email'),
-            ]);
+            ->textInput();
 
         ?>
         <div class="row">

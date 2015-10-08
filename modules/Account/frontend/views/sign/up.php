@@ -31,32 +31,20 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
         ]);
 
         echo $form->field($SignUpForm, 'email')
-            ->label(false)
             ->icon('envelope')
-            ->textInput([
-                'placeholder' => $SignUpForm->getAttributeLabel('email'),
-            ]);
+            ->textInput();
 
         echo $form->field($SignUpForm, 'name')
-            ->label(false)
             ->icon('user')
-            ->textInput([
-                'placeholder' => $SignUpForm->getAttributeLabel('name'),
-            ]);
+            ->textInput();
 
         echo $form->field($SignUpForm, 'password')
-            ->label(false)
             ->icon('lock')
-            ->passwordInput([
-                'placeholder' => $SignUpForm->getAttributeLabel('password'),
-            ]);
+            ->passwordInput();
 
         echo $form->field($SignUpForm, 'password_app')
-            ->label(false)
             ->icon('lock')
-            ->passwordInput([
-                'placeholder' => $SignUpForm->getAttributeLabel('password_app'),
-            ]);
+            ->passwordInput();
 
         echo $form->field($SignUpForm, 'agree')
             ->checkbox([

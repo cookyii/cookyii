@@ -19,11 +19,11 @@ use yii\web\JsExpression;
 class ActiveField extends \yii\widgets\ActiveField
 {
 
-    public $template = "{label}\n{input}\n{icon}\n{hint}\n{error}";
+    public $template = "{label}\n{error}\n{input}\n{icon}\n{hint}";
 
     public $options = ['class' => 'form-group has-feedback'];
 
-    public $errorOptions = ['class' => 'error-balloon'];
+    public $errorOptions = ['class' => 'error-balloon', 'tag' => 'span'];
 
     const EVENT_BEFORE_RENDER_INPUT = 'beforeRenderInput';
 
@@ -39,6 +39,13 @@ class ActiveField extends \yii\widgets\ActiveField
                 'has-error' => new JsExpression(sprintf('error.%s', str_replace('[]', '', $this->attribute)))
             ]);
         }
+    }
+
+    private function setInlineTemplate()
+    {
+        $this->template = "{label}\n{input}\n{icon}\n{hint}\n{error}";
+
+        $this->errorOptions['tag'] = 'div';
     }
 
     /**
@@ -448,6 +455,8 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function checkbox($options = [], $enclosedByLabel = true)
     {
+        $this->setInlineTemplate();
+
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
 
@@ -461,6 +470,8 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function radio($options = [], $enclosedByLabel = true)
     {
+        $this->setInlineTemplate();
+
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
 
@@ -474,6 +485,8 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function checkboxList($items, $options = [], $item_options = [])
     {
+        $this->setInlineTemplate();
+
         $options['item'] = ArrayHelper::remove(
             $options,
             'item',
@@ -503,6 +516,8 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function radioList($items, $options = [], $item_options = [])
     {
+        $this->setInlineTemplate();
+
         $options['item'] = ArrayHelper::remove(
             $options,
             'item',

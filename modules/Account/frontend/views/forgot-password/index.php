@@ -31,7 +31,6 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
         ]);
 
         echo $form->field($ForgotPasswordForm, 'email')
-            ->label(false)
             ->icon('envelope')
             ->textInput([
                 'placeholder' => $ForgotPasswordForm->getAttributeLabel('email'),

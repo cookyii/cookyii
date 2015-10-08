@@ -31,14 +31,12 @@ Account\frontend\assets\SignInAssetBundle::register($this);
         ]);
 
         echo $form->field($SignInForm, 'email')
-            ->label(false)
             ->icon('envelope')
             ->textInput([
                 'placeholder' => $SignInForm->getAttributeLabel('email'),
             ]);
 
         echo $form->field($SignInForm, 'password')
-            ->label(false)
             ->icon('lock')
             ->passwordInput([
                 'placeholder' => $SignInForm->getAttributeLabel('password'),
