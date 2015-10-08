@@ -34,7 +34,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
 
             /** semantic validators */
             [['email'], 'required'],
-            [['email'], 'email', 'message'=>'asfasf'],
+            [['email'], 'email'],
             [['email'], 'filter', 'filter' => 'str_clean'],
             [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
         ];
