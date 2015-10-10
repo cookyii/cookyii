@@ -493,5 +493,5 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     const MALE = 1;
-    const FEMALE = 0;
+    const FEMALE = 2;
 }
