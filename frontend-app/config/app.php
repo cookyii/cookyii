@@ -61,4 +61,7 @@ return array_merge($config, [
         ],
     ],
     'params' => $params,
+    'on beforeRequest' => function ($event) {
+        \cookyii\Config::loadTimeZone();
+    },
 ]);
