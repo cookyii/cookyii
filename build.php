@@ -39,7 +39,7 @@ $config = [
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install-prod',
-                'npm', 'less',
+                'npm/update', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
         ],
@@ -50,7 +50,7 @@ $config = [
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install',
-                'npm', 'less',
+                'npm/update', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
         ],
@@ -61,7 +61,7 @@ $config = [
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install',
-                'npm', 'less',
+                'npm/update', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
         ],
@@ -94,19 +94,31 @@ $config = [
     ],
 
     'npm' => [
-        '.description' => 'Install all npm and bower dependencies',
+        '.description' => 'Install all npm dependencies',
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => 'npm install',
         ],
         'update' => [
+            '.description' => 'Update all npm dependencies',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\CommandTask',
+                'commandline' => 'npm update',
+            ],
+        ],
+    ],
+
+    'bower' => [
+        '.description' => 'Install all bower dependencies',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\CommandTask',
+            'commandline' => './node_modules/.bin/bower install',
+        ],
+        'update' => [
             '.description' => 'Update all npm and bower dependencies',
             '.task' => [
                 'class' => 'cookyii\build\tasks\CommandTask',
-                'commandline' => [
-                    'npm update',
-                    './node_modules/.bin/bower update',
-                ],
+                'commandline' => './node_modules/.bin/bower update',
             ],
         ],
     ],

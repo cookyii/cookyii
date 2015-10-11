@@ -29,7 +29,7 @@
     "jScrollPane": "2.0.*",
     "jquery-form": "3.45.*",
     "jquery.scrollTo": "2.1.*",
-    "sweetalert": "0.5.*",
+    "sweetalert": "1.1.*",
     "speakingurl": "5.0.*",
     "moment": "2.10.*"
   }

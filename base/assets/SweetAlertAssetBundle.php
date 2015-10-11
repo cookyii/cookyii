@@ -17,6 +17,6 @@ class SweetAlertAssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@bower';
 
     public $js = [
-        'sweetalert/lib/sweet-alert.min.js',
+        'sweetalert/dist/sweetalert.min.js',
     ];
 }
