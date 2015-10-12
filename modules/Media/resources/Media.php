@@ -222,9 +222,15 @@ class Media extends \yii\db\ActiveRecord
 
         $result = null;
         if ($this->isImage()) {
-            $result = \cookyii\modules\Media\ImageWrapper::load($this);
+            $result = \Yii::createObject([
+                'class' => \cookyii\modules\Media\ImageWrapper::className(),
+                'Media' => $this,
+            ]);
         } else {
-            $result = \cookyii\modules\Media\ImageWrapper::load(static::getPlaceholder());
+            $result = \Yii::createObject([
+                'class' => \cookyii\modules\Media\ImageWrapper::className(),
+                'Media' => static::getPlaceholder(),
+            ]);
         }
 
         return $result;
