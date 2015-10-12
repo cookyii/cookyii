@@ -55,7 +55,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
      */
     public function formAction()
     {
-        return ['/account/rest/fill'];
+        return ['/account/api/fill'];
     }
 
     /**

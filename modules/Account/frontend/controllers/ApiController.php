@@ -1,6 +1,6 @@
 <?php
 /**
- * RestController.php
+ * ApiController.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -10,10 +10,10 @@ namespace cookyii\modules\Account\frontend\controllers;
 use cookyii\modules\Account;
 
 /**
- * Class RestController
+ * Class ApiController
  * @package cookyii\modules\Account\frontend\controllers
  */
-class RestController extends \cookyii\rest\Controller
+class ApiController extends \cookyii\rest\Controller
 {
 
     /**
@@ -24,7 +24,6 @@ class RestController extends \cookyii\rest\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['in', 'up', 'forgot-password', 'fill'],
                 'roles' => ['?', '@'],
             ],
         ];

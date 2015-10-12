@@ -1,6 +1,6 @@
 <?php
 /**
- * RestController.php
+ * ApiController.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -10,10 +10,10 @@ namespace cookyii\modules\Account\crm\controllers;
 use cookyii\modules\Account;
 
 /**
- * Class RestController
+ * Class ApiController
  * @package cookyii\modules\Account\crm\controllers
  */
-class RestController extends \cookyii\rest\Controller
+class ApiController extends \cookyii\rest\Controller
 {
 
     /**

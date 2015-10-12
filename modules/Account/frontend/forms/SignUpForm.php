@@ -69,7 +69,7 @@ class SignUpForm extends \cookyii\base\FormModel
      */
     public function formAction()
     {
-        return ['/account/rest/up'];
+        return ['/account/api/up'];
     }
 
     /**

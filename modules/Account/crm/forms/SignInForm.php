@@ -58,7 +58,7 @@ class SignInForm extends \cookyii\base\FormModel
      */
     public function formAction()
     {
-        return ['/account/rest/in'];
+        return ['/account/api/in'];
     }
 
     /**

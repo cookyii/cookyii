@@ -64,7 +64,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
      */
     public function formAction()
     {
-        return ['/account/rest/forgot-password'];
+        return ['/account/api/forgot-password'];
     }
 
     /**
