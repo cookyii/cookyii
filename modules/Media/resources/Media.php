@@ -213,6 +213,16 @@ class Media extends \yii\db\ActiveRecord
     }
 
     /**
+     * Manipulation with media image
+     * For example,
+     *
+     * ~~~
+     * $Media = Media::find();
+     * $src = $Media->image()->thumbnail(150, 150)->frame(5)->export();
+     *
+     * echo Html::img($src);
+     * ~~~
+     *
      * @return \cookyii\modules\Media\ImageWrapper
      * @throws \Exception
      */
