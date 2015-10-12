@@ -313,11 +313,14 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::beginProfile(sprintf('create cache file: %s', $this->Media->id), __METHOD__);
 
+        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
+        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+
         $mark_file_path = $this->getMarkedMediaPath($mark);
 
         $mark_dir = dirname($mark_file_path);
         if (!file_exists($mark_dir) || !is_dir($mark_dir)) {
-            FileHelper::createDirectory($mark_dir);
+            FileHelper::createDirectory($mark_dir, $MediaModel::getMediaModule()->pathChmod);
         }
 
         $Image = Image::getImagine()
@@ -333,7 +336,7 @@ class ImageWrapper extends \yii\base\Object
         }
 
         $Image->save($mark_file_path, ['quality' => 90]);
-        @chmod($mark_file_path, 0664);
+        @chmod($mark_file_path, $MediaModel::getMediaModule()->fileChmod);
 
         \Yii::endProfile(sprintf('create cache file: %s', $this->Media->id), __METHOD__);
     }

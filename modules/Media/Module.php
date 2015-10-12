@@ -37,6 +37,12 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
     /** @var string */
     public $placeholderAlias = '@common/assets/_sources/img/placeholder.png';
 
+    /** @var int */
+    public $pathChmod = 0775;
+
+    /** @var int */
+    public $fileChmod = 0664;
+
     /**
      * @inheritdoc
      */
