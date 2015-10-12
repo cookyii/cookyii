@@ -35,7 +35,7 @@ class UploadController extends \cookyii\rest\controllers\ImperaviUploadControlle
 
         return [
             'id' => $Media->id,
-            'url' => (string)$Media->image()->resizeByWidth(300),
+            'url' => $Media->image()->resizeByWidth(300)->export(),
         ];
     }
 }

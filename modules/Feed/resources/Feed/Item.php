@@ -105,7 +105,7 @@ class Item extends \yii\db\ActiveRecord
 
             $Media = $Model->pictureMedia;
             if (!empty($Media)) {
-                $result = (string)$Media->image()->resizeByWidth(300);
+                $result = $Media->image()->resizeByWidth(300)->export();
             }
 
             return $result;

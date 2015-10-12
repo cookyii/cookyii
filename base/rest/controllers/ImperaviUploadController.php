@@ -61,7 +61,7 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
         }
 
         return [
-            'filelink' => (string)$Media->image()->resizeByWidth(800),
+            'filelink' => $Media->image()->resizeByWidth(800)->export(),
         ];
     }
 }
