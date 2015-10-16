@@ -10,10 +10,6 @@ namespace cookyii\traits;
 /**
  * Trait PopulateErrorsTrait
  * @package cookyii\traits
- *
- * @method hasProperty
- * @method hasAttribute
- * @method addError($attribute, $error = '')
  */
 trait PopulateErrorsTrait
 {
@@ -21,12 +17,16 @@ trait PopulateErrorsTrait
     /**
      * @param \yii\db\ActiveRecord $Model
      * @param string $default_attribute
+     * @param array $attributes_map
      */
-    public function populateErrors(\yii\db\ActiveRecord $Model, $default_attribute)
+    public function populateErrors(\yii\db\ActiveRecord $Model, $default_attribute, $attributes_map = [])
     {
         $errors = $Model->getErrors();
-        foreach ($errors as $key => $messages) {
-            $attribute = $key;
+        foreach ($errors as $attribute => $messages) {
+            $attribute = isset($attributes_map[$attribute])
+                ? $attributes_map[$attribute]
+                : $attribute;
+
             if (false === $this->hasProperty($attribute)) {
                 if (!method_exists($this, 'hasAttribute')) {
                     $attribute = $default_attribute;
