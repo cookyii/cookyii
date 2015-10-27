@@ -35,6 +35,10 @@ angular.module('BackendApp')
         } else {
           Page.detail({id: $scope.getPageId()}, function (page) {
             $scope.data = page;
+            $scope.data.meta = $scope.data.meta.length === 0
+              ? {}
+              : $scope.data.meta;
+
             hash = page.hash;
 
             $scope.$broadcast('pageDataReloaded', page);

@@ -40,6 +40,9 @@ angular.module('BackendApp')
         } else {
           Section.detail({slug: $scope.getSection()}, function (section) {
             $scope.data = section;
+            $scope.data.meta = $scope.data.meta.length === 0
+              ? {}
+              : $scope.data.meta;
 
             $scope.$broadcast('sectionDataReloaded', section);
           });
