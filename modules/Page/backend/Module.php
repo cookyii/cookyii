@@ -24,7 +24,7 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
     {
         return [
             [
-                'label' => \Yii::t('account', 'Pages'),
+                'label' => \Yii::t('page', 'Pages'),
                 'url' => ['/page/list/index'],
                 'icon' => FA::icon('file'),
                 'visible' => User()->can(Page\backend\Permissions::ACCESS),
