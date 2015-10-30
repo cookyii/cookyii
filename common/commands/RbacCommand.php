@@ -14,6 +14,7 @@ use cookyii\modules\Client;
 use cookyii\modules\Feed;
 use cookyii\modules\Page;
 use cookyii\modules\Postman;
+use cookyii\modules\Translation;
 use frontend;
 use rmrevin\yii\rbac\RbacFactory as F;
 
@@ -39,6 +40,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
         'cookyii\modules\Account\crm\Permissions',
         'cookyii\modules\Client\crm\Permissions',
         'cookyii\modules\Page\backend\Permissions',
+        'cookyii\modules\Translation\backend\Permissions',
         'cookyii\modules\Postman\backend\Permissions',
     ];
 
@@ -132,6 +134,7 @@ class RbacCommand extends \rmrevin\yii\rbac\Command
                 backend\Permissions::ACCESS,
                 Client\crm\Permissions::ACCESS,
                 Page\backend\Permissions::ACCESS,
+                Translation\backend\Permissions::ACCESS,
                 Postman\backend\Permissions::ACCESS,
                 Feed\backend\Permissions::ACCESS,
             ],
