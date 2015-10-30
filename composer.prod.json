@@ -40,6 +40,7 @@
     "cookyii/module-account": "dev-master",
     "cookyii/module-client": "dev-master",
     "cookyii/module-page": "dev-master",
+    "cookyii/module-translation": "dev-master",
     "cookyii/module-postman": "dev-master",
     "cookyii/module-media": "dev-master",
 

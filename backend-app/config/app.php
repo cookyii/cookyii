@@ -20,13 +20,14 @@ return array_merge($config, [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
-        'feed', 'account', 'page', 'media', 'postman',
+        'feed', 'account', 'page', 'media', 'postman', 'translation',
         'log', 'rollbar',
     ],
     'modules' => [
         'feed' => cookyii\modules\Feed\backend\Module::className(),
         'page' => cookyii\modules\Page\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
+        'translation' => cookyii\modules\Translation\backend\Module::className(),
         'media' => cookyii\modules\Media\Module::className(),
         'postman' => [
             'class' => cookyii\modules\Postman\backend\Module::className(),

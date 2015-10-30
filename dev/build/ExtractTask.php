@@ -28,6 +28,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
             'rsync -rt ./modules/Media/ ../module-media/',
             'rsync -rt ./modules/Order/ ../module-order/',
             'rsync -rt ./modules/Page/ ../module-page/',
+            'rsync -rt ./modules/Translation/ ../module-translation/',
             'rsync -rt ./modules/Postman/ ../module-postman/',
             // project
             'rsync -rt ./common/ ../project/common/',

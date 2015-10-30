@@ -1,0 +1,16 @@
+/*********************************** Other *****************/
+.content-wrapper { padding-bottom: 35px; }
+md-switch { margin: 0 10px; }
+ul.categories { }
+ul.categories > li { }
+ul.categories > li > a { }
+ul.categories > li > a.active { font-weight: bold; }
+/*********************************** Search ****************/
+.search { width: 150px; margin-right: 100px; transition: width .4s ease-out; }
+.search.wide { width: 300px; }
+/*********************************** Table *****************/
+.table-phrases { }
+.table-phrases thead td { font-weight: 600; }
+.table-phrases td.category { min-width: 250px; }
+.table-phrases td.lang { width: 200px; text-align: center; }
+.table-phrases td.lang textarea { height: 34px; resize: vertical; }

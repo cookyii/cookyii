@@ -8,11 +8,11 @@
 return [
     'sourcePath' => __DIR__ . '/..',
     'messagePath' => __DIR__,
-    'languages' => ['en', 'ru'],
+    'languages' => ['en', 'ru', 'de'],
     'translator' => 'Yii::t',
     'sort' => false,
     'overwrite' => true,
-    'removeUnused' => true,
+    'removeUnused' => false,
     'except' => [
         '.svn',
         '.git',

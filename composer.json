@@ -30,6 +30,7 @@
     "cookyii/module-account": "self.version",
     "cookyii/module-client": "self.version",
     "cookyii/module-page": "self.version",
+    "cookyii/module-translation": "self.version",
     "cookyii/module-postman": "self.version",
     "cookyii/module-media": "self.version"
   },
@@ -49,6 +50,7 @@
     "cookyii/module-account": "dev-master",
     "cookyii/module-client": "dev-master",
     "cookyii/module-page": "dev-master",
+    "cookyii/module-translation": "dev-master",
     "cookyii/module-postman": "dev-master",
     "cookyii/module-media": "dev-master",
 
@@ -89,6 +91,7 @@
       "cookyii\\modules\\Client\\": "./modules/Client",
       "cookyii\\modules\\Order\\": "./modules/Order",
       "cookyii\\modules\\Page\\": "./modules/Page",
+      "cookyii\\modules\\Translation\\": "./modules/Translation",
       "cookyii\\modules\\Postman\\": "./modules/Postman",
       "cookyii\\modules\\Media\\": "./modules/Media"
     }
