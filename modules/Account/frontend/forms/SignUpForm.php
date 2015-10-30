@@ -45,7 +45,7 @@ class SignUpForm extends \cookyii\base\FormModel
             [['name', 'email', 'password', 'password_app'], 'required'],
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
             [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
-            [['password'], 'compare', 'compareAttribute' => 'password_app'],
+            [['password_app'], 'compare', 'compareAttribute' => 'password'],
             [['agree'], 'compare', 'compareValue' => 'true', 'operator' => '===', 'message' => \Yii::t('account', 'You must accept the terms')],
         ];
     }
