@@ -1,6 +1,6 @@
 {
-  "name": "cookyii/module-page",
-  "description": "Static pages management module for Cookyii CMF",
+  "name": "cookyii/module-translation",
+  "description": "Translation management module for Cookyii CMF",
   "keywords": [
     "yii2",
     "cookyii",
@@ -20,8 +20,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/cookyii/module-page/issues?state=open",
-    "source": "https://github.com/cookyii/module-page"
+    "issues": "https://github.com/cookyii/module-translation/issues?state=open",
+    "source": "https://github.com/cookyii/module-translation"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -34,7 +34,7 @@
   },
   "autoload": {
     "psr-4": {
-      "cookyii\\modules\\Page\\": ""
+      "cookyii\\modules\\Translation\\": ""
     }
   }
 }
