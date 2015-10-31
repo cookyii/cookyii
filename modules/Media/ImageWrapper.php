@@ -96,7 +96,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('resize file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($width, $height, $strict, $filter) {
+        $this->actions[] = function ($Image) use ($width, $height, $strict, $filter) {
             return Media\components\Image::resize($Image, $width, $height, $strict, $filter);
         };
 
@@ -114,7 +114,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('resizeByWidth file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($width, $strict, $filter) {
+        $this->actions[] = function ($Image) use ($width, $strict, $filter) {
             return Media\components\Image::resizeByWidth($Image, $width, $strict, $filter);
         };
 
@@ -133,7 +133,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('resizeByHeight file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($height, $strict, $filter) {
+        $this->actions[] = function ($Image) use ($height, $strict, $filter) {
             return Media\components\Image::resizeByHeight($Image, $height, $strict, $filter);
         };
 
@@ -151,7 +151,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('crop file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($width, $height, $start) {
+        $this->actions[] = function ($Image) use ($width, $height, $start) {
             return Media\components\Image::crop($Image, $width, $height, $start);
         };
 
@@ -169,7 +169,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('thumbnail file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($width, $height, $mode) {
+        $this->actions[] = function ($Image) use ($width, $height, $mode) {
             return Media\components\Image::thumbnail($Image, $width, $height, $mode);
         };
 
@@ -186,7 +186,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('watermark file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($watermarkFilename, $start) {
+        $this->actions[] = function ($Image) use ($watermarkFilename, $start) {
             return Media\components\Image::watermark($Image, $watermarkFilename, $start);
         };
 
@@ -205,7 +205,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('text file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($text, $fontFile, $start, $fontOptions) {
+        $this->actions[] = function ($Image) use ($text, $fontFile, $start, $fontOptions) {
             return Media\components\Image::text($Image, $text, $fontFile, $start, $fontOptions);
         };
 
@@ -223,7 +223,7 @@ class ImageWrapper extends \yii\base\Object
         \Yii::trace('frame file', __METHOD__);
 
         $this->mark(__METHOD__, func_get_args());
-        $this->actions[] = function (&$Image) use ($margin, $color, $alpha) {
+        $this->actions[] = function ($Image) use ($margin, $color, $alpha) {
             return Media\components\Image::frame($Image, $margin, $color, $alpha);
         };
 
@@ -324,7 +324,7 @@ class ImageWrapper extends \yii\base\Object
         if (!empty($this->actions)) {
             foreach ($this->actions as $handler) {
                 if (is_callable($handler)) {
-                    $handler($Image);
+                    $Image = $handler($Image);
                 }
             }
         }
