@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Account\resources\Account\traits;
 
+use yii\helpers\Json;
+
 /**
  * Trait UserSocialTrait
  * @package cookyii\modules\Account\resources\Account\traits
@@ -20,48 +22,59 @@ trait UserSocialTrait
      * @param \yii\authclient\ClientInterface $Client
      * @return bool
      */
-    public function createSocialLink(\yii\authclient\ClientInterface $Client)
+    public function pushSocialLink(\yii\authclient\ClientInterface $Client)
     {
+        switch ($Client->getId()) {
+            default:
+                $class = null;
+                break;
+            case 'facebook':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Facebook::className();
+                break;
+            case 'github':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Github::className();
+                break;
+            case 'google':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Google::className();
+                break;
+            case 'linkedin':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Linkedin::className();
+                break;
+            case 'live':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Live::className();
+                break;
+            case 'twitter':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Twitter::className();
+                break;
+            case 'vkontakte':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Vkontakte::className();
+                break;
+            case 'yandex':
+                $class = \cookyii\modules\Account\resources\Account\Auth\Yandex::className();
+                break;
+        }
+
         $attributes = $Client->getUserAttributes();
 
         $credentials = [
             'account_id' => $this->id,
             'social_id' => $attributes['id'],
-            'token' => null,
         ];
 
-        if ($Client instanceof \yii\authclient\BaseOAuth) {
-            $credentials['token'] = $Client->getAccessToken();
+        /** @var \cookyii\modules\Account\resources\Account\Auth\queries\AbstractSocialQuery $Query */
+        $Query = $class::find();
+        /** @var \cookyii\modules\Account\resources\Account\Auth\AbstractSocial $Auth */
+        $Auth = $Query
+            ->byAccountId($credentials['account_id'])
+            ->bySocialId($credentials['social_id'])
+            ->one();
+
+        if (empty($Auth)) {
+            $Auth = new $class($credentials);
         }
 
-        switch ($Client->getId()) {
-            default:
-                $Auth = null;
-                break;
-            case 'facebook':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Facebook($credentials);
-                break;
-            case 'github':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Github($credentials);
-                break;
-            case 'google':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Google($credentials);
-                break;
-            case 'linkedin':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Linkedin($credentials);
-                break;
-            case 'live':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Live($credentials);
-                break;
-            case 'twitter':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Twitter($credentials);
-                break;
-            case 'vkontakte':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Vkontakte($credentials);
-                break;
-            case 'yandex':
-                $Auth = new \cookyii\modules\Account\resources\Account\Auth\Yandex($credentials);
-                break;
+        if ($Client instanceof \yii\authclient\BaseOAuth) {
+            $Auth->token = Json::encode($Client->getAccessToken()->getParams());
         }
 
         if (!empty($Auth)) {

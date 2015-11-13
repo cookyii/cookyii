@@ -166,6 +166,8 @@ class SignController extends Account\frontend\components\Controller
         $Account = $AccountQuery->one();
 
         if ($Account instanceof \cookyii\modules\Account\resources\Account) {
+            $Account->pushSocialLink($Client);
+
             if (true !== ($reason = $Account->isAvailable())) {
                 switch ($reason) {
                     default:
@@ -206,7 +208,7 @@ class SignController extends Account\frontend\components\Controller
             }
 
             if ($Account->save()) {
-                $Account->createSocialLink($Client);
+                $Account->pushSocialLink($Client);
 
                 $AuthResponse->result = Json::encode($Account->id);
 
