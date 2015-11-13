@@ -33,6 +33,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
             // project
             'rsync -rt ./common/ ../project/common/',
             'rsync -rt ./conf.d/ ../project/conf.d/',
+            'rsync -rt ./console-app/ ../project/console-app/ --exclude=runtime',
             'rsync -rt ./frontend-app/ ../project/frontend-app/ --exclude=runtime',
             'rsync -rt ./frontend-assets/ ../project/frontend-assets/',
             'rsync -rt ./frontend-modules/ ../project/frontend-modules/',
@@ -66,8 +67,6 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         '.bowerrc',
         '.env.dist.php',
         '.gitignore',
-        'backend',
-        'backend.bat',
         'bower.json',
         'build',
         'build.bat',
@@ -75,11 +74,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         'codecept',
         'codeception.yml',
         'composer.prod.json' => 'composer.json',
-        'crm',
-        'crm.bat',
         'env.php',
-        'frontend',
-        'frontend.bat',
         'generate_self_signed_ssl_key',
         'getcomposer',
         'gulpfile.js',
@@ -87,5 +82,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         'package.json',
         'README.md',
         'requirements.php',
+        'yii',
+        'yii.bat',
     ];
 }
