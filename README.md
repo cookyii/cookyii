@@ -14,24 +14,32 @@
 Структура директорий
 --------------------
 
-    backend-app/            общий код приложения backend
-    backend-modules/        модули приложения backend
+На данный момент в шаблоне представлено три приложения - `frontend`, `backend` и `crm`.
+Это всего лишь пример набоа приложений.
+Можно смело удалять любые приложения, либо создавать свои собственные.
+
+    conf.d/                 файлы конфигурации для окружения (например nginx или rabbitmq)
     common/                 общие компоненты для всех приложений
     frontend-app/           общий код приложения frontend
+    frontend-assets/        assets для приложения frontend
     frontend-modules/       модули приложения frontend
+    backend-app/            общий код приложения backend
+    backend-assets/         assets для приложения backend
+    backend-modules/        модули приложения backend
+    crm-app/                общий код приложения crm
+    crm-assets/             assets для приложения crm
+    crm-modules/            модули приложения crm
     messages/               переводы приложений для всех приложений
     resources/              общие ресурсы (модели) для всех приложений
-    runtime/                общие временны данные для всех приложений
     vendor/                 пакеты сторонних разработчиков
 
 
 
 ### Структура директорий внутри проложения
 
-    backend-app/
+    frontend-assets/        исходники ресурсов, которые будут опубликованны в публичной части приложения
+    frontend-app/
         assets/             ресурсы для внешнего вида приложения
-            _sources/       исходники ресурсов, которые будут опубликованны в публичной части приложения
-        commands/           контроллеры команды для выполнения в терминале (cli)
         components/         общие компоненты приложения
         config/             конфигурация приложения
         controllers/        базовые контроллеры приложения
@@ -44,8 +52,9 @@
 
 ### Структура директорий внутри модуля
 
-    backend-modules/
+    frontend-modules/
         ModuleName/
+            assets/             ресурсы для внешнего вида модуля
             commands/           контроллеры команды для выполнения в терминале (cli)
             components/         компоненты модуля
             controllers/        контроллеры модуля
@@ -92,7 +101,7 @@ crm.new-project.com     ->  .../crm-app/web
 1. Скопировать файл `.env.dist.php` в `.env.php` (в базовой директории), заполнить необходимые данные.
 2. Скопировать файлы `.credentials.dist.php` в `.credentials.php` (в директориях приложений), заполнить необходимые данные.
 3. Установить `composer` зависимости `./build composer install`. (для продакшена `./build composer install-prod`)
-4. Установить `frontend` зависимости через npm `./build npm`.
+4. Установить `frontend` зависимости через npm `./build npm/install` и `./build bower/install`.
 5. Скомпилировать `less` стили `./build less`.
 6. Развернуть миграции `./build migrate`.
 7. Обновить `rbac` правила `./build rbac`.
@@ -101,7 +110,7 @@ crm.new-project.com     ->  .../crm-app/web
 Настройка
 ---------
 
-Вы можете изменять любые настройки в директориях `./common/config/`, `./frontend-app/config/`, `./backend-app/config/` и в конфигурации билда проекта.
+Вы можете изменять любые настройки в директориях `./common/config/`, `./frontend-app/config/`, `./backend-app/config/`, `./crm-app/config/` и в конфигурации билда проекта.
 
 
 Доступные команды `./build`
@@ -115,12 +124,16 @@ crm.new-project.com     ->  .../crm-app/web
 * `./build map` - показать список всех команд.
 * `./build clear` - удалить все временные файлы и логи во всех приложениях.
 * `./build clear/*` - удалить все временные файлы и логи в конкретном приложении.
-* `./build migrate` - выполнить все новые миграции для всех приложений.
-* `./build migrate/*` - выполнить все новые миграции для конкретного приложения.
-* `./build less` - скомпилировать less для всех приложений.
-* `./build less/*` - скомпилировать less для конкретного приложения.
 * `./build composer` - установить `composer` зависимости из `composer.lock`.
 * `./build composer/update` - скачать новые версии `composer` зависимостей и обновить `composer.lock`.
 * `./build composer/selfupdate` - обновить `composer`.
+* `./build npm/install` - установить зависимости `npm`.
+* `./build npm/update` - обновить зависимости `npm`.
+* `./build bower/install` - установить зависимости `bower`.
+* `./build bower/update` - обновить зависимости `bower`.
+* `./build migrate` - выполнить все новые миграции для всех приложений.
+* `./build migrate/*` - выполнить все новые миграции для конкретного приложения.
 * `./build rbac` - обновить правила `rbac` для всех приложений.
 * `./build rbac/*` - обновить правила `rbac` для конкретного приложения.
+* `./build less` - скомпилировать `less` для всех приложений.
+* `./build less/*` - скомпилировать `less` для конкретного приложения.
