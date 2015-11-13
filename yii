@@ -12,19 +12,19 @@
 defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
 defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
 
-$baseDir = realpath(__DIR__ . '/..');
+$baseDir = realpath(__DIR__);
 
-require($baseDir . '/backend-app/credentials.php');
+require($baseDir . '/console-app/credentials.php');
 require($baseDir . '/env.php');
 
 require($baseDir . '/vendor/autoload.php');
 require($baseDir . '/vendor/yiisoft/yii2/Yii.php');
 
 require($baseDir . '/common/config/bootstrap.php');
-require($baseDir . '/backend-app/config/bootstrap.php');
+require($baseDir . '/console-app/config/bootstrap.php');
 
 \cookyii\Config::requireGlobals($baseDir);
-\cookyii\Config::init('backend', 'console');
+\cookyii\Config::init('console', 'app');
 
 exit((new yii\console\Application(\cookyii\Config::$config))
     ->run());

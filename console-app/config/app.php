@@ -1,13 +1,13 @@
 <?php
 /**
- * console.php
+ * app.php
  * @author Revin Roman
- * @link https://rmrevin.com
+ * @link https://rmrevin.ru
  */
 
-defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App backend');
+defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App application');
 
-$config = require(__DIR__ . '/../../common/config/console.php');
+$config = require(__DIR__ . '/../../common/config/app.php');
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -15,17 +15,19 @@ $params = array_merge(
 );
 
 return array_merge($config, [
-    'id' => 'backend-console-app',
+    'id' => 'console-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
-    'aliases' => ['@tests' => '@backend/tests'],
-    'controllerNamespace' => 'backend\commands',
+    'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'account' => cookyii\modules\Account\commands\AccountCommand::className(),
-        'rbac' => common\commands\RbacCommand::className(),
-        'migrate' => $params['command.migrate'],
+        'migrate' => [
+            'class' => cookyii\console\controllers\MigrateController::className(),
+            'templateFile' => '@common/views/migration.php',
+            'migrationPath' => '@common/migrations',
+        ],
     ],
-    'modules' => [],
+    'bootstrap' => ['log', 'rollbar'],
     'components' => [
         'db' => $params['component.db'],
         'security' => $params['component.security'],
@@ -35,7 +37,7 @@ return array_merge($config, [
         'cache.schema' => $params['component.cache.schema'],
         'cache.query' => $params['component.cache.query'],
         'urlManager.frontend' => $params['component.urlManager.frontend'],
-        'urlManager' => $params['component.urlManager.backend'],
+        'urlManager.backend' => $params['component.urlManager.backend'],
         'urlManager.crm' => $params['component.urlManager.crm'],
         'authManager' => $params['component.authManager'],
         'i18n' => $params['component.i18n'],

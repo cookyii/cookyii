@@ -14,6 +14,8 @@ Yii::setAlias('node', '@base/node_modules');
 Yii::setAlias('resources', '@base/resources');
 Yii::setAlias('upload', '@base/upload');
 
+Yii::setAlias('console', '@base/console-app');
+
 Yii::setAlias('frontend', '@base/frontend-app');
 Yii::setAlias('frontend/modules', '@base/frontend-modules');
 

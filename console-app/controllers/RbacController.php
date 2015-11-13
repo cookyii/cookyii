@@ -1,11 +1,11 @@
 <?php
 /**
- * RbacCommand.php
+ * RbacController.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace common\commands;
+namespace console\controllers;
 
 use backend;
 use common\Roles;
@@ -19,10 +19,10 @@ use frontend;
 use rmrevin\yii\rbac\RbacFactory as F;
 
 /**
- * Class RbacCommand
- * @package common\commands
+ * Class RbacController
+ * @package console\controllers
  */
-class RbacCommand extends \rmrevin\yii\rbac\Command
+class RbacController extends \rmrevin\yii\rbac\Command
 {
 
     public $defaultAction = 'update';

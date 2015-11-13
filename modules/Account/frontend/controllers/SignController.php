@@ -23,6 +23,19 @@ class SignController extends Account\frontend\components\Controller
     /**
      * @inheritdoc
      */
+    public function actions()
+    {
+        return [
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'authSuccessCallback'],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function accessRules()
     {
         return [
@@ -35,19 +48,6 @@ class SignController extends Account\frontend\components\Controller
                 'allow' => true,
                 'actions' => ['out'],
                 'roles' => ['@'],
-            ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'auth' => [
-                'class' => 'yii\authclient\AuthAction',
-                'successCallback' => [$this, 'authSuccessCallback'],
             ],
         ];
     }

@@ -22,20 +22,6 @@ if (empty($crm)) {
 }
 
 return [
-    'command.migrate' => [
-        'class' => cookyii\console\controllers\MigrateController::className(),
-        'templateFile' => '@common/views/migration.php',
-        'migrationPath' => '@common/migrations',
-        'migrationsPath' => [
-            '@cookyii/module-account/migrations',
-            '@cookyii/module-client/migrations',
-            '@cookyii/module-feed/migrations',
-            '@cookyii/module-media/migrations',
-            '@cookyii/module-page/migrations',
-            '@cookyii/module-postman/migrations',
-        ],
-    ],
-
     'component.db' => [
         'class' => yii\db\Connection::className(),
         'charset' => 'utf8',
@@ -85,12 +71,7 @@ return [
     'component.user' => [
         'class' => yii\web\User::className(),
         'enableAutoLogin' => true,
-        'identityClass' => 'cookyii\modules\Account\resources\Account',
-        'identityCookie' => [
-            'name' => '_identity',
-            'httpOnly' => true,
-            'domain' => sprintf('.%s', $frontend['host']),
-        ],
+        'identityClass' => cookyii\modules\Account\resources\Account::className(),
         'loginUrl' => ['/account/sign/in'],
     ],
     'component.authManager' => [
@@ -166,9 +147,5 @@ return [
         'dateFormat' => 'dd MMMM y',
         'timeFormat' => 'HH:mm',
         'datetimeFormat' => 'dd MMMM y HH:mm',
-    ],
-    'component.authClientCollection' => [
-        'class' => yii\authclient\Collection::className(),
-        'clients' => include __DIR__ . '/_authclients.php',
     ],
 ];

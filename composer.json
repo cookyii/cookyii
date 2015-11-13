@@ -78,6 +78,7 @@
     "psr-4": {
       "common\\": "./common",
       "resources\\": "./resources",
+      "console\\": "./console-app",
       "frontend\\": "./frontend-app",
       "frontend\\modules\\": "./frontend-modules",
       "backend\\": "./backend-app",

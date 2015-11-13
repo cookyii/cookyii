@@ -6,10 +6,8 @@
  */
 
 return [
-    'component.user' => [
-        'class' => 'yii\web\User',
-        'identityClass' => 'cookyii\modules\Account\resources\Account',
-        'enableAutoLogin' => true,
-        'loginUrl' => ['/'],
+    'component.authClientCollection' => [
+        'class' => yii\authclient\Collection::className(),
+        'clients' => [],
     ],
 ];

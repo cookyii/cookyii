@@ -24,7 +24,15 @@ trait UserSocialTrait
     {
         $attributes = $Client->getUserAttributes();
 
-        $credentials = ['account_id' => $this->id, 'social_id' => $attributes['id']];
+        $credentials = [
+            'account_id' => $this->id,
+            'social_id' => $attributes['id'],
+            'token' => null,
+        ];
+
+        if ($Client instanceof \yii\authclient\BaseOAuth) {
+            $credentials['token'] = $Client->getAccessToken();
+        }
 
         switch ($Client->getId()) {
             default:
@@ -56,7 +64,9 @@ trait UserSocialTrait
                 break;
         }
 
-        $Auth->save();
+        if (!empty($Auth)) {
+            $Auth->save();
+        }
 
         return $Auth;
     }
