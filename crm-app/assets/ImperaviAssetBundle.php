@@ -14,7 +14,7 @@ namespace crm\assets;
 class ImperaviAssetBundle extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@crm/assets/_sources';
+    public $sourcePath = '@base/crm-assets';
 
     public $depends = [
         'rmrevin\yii\fontawesome\cdn\AssetBundle',

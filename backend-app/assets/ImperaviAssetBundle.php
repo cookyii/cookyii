@@ -14,7 +14,7 @@ namespace backend\assets;
 class ImperaviAssetBundle extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@backend/assets/_sources';
+    public $sourcePath = '@base/backend-assets';
 
     public $depends = [
         'rmrevin\yii\fontawesome\cdn\AssetBundle',

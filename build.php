@@ -35,33 +35,30 @@ $config = [
         'prod' => [
             '.description' => 'Build project with production environment',
             '.depends' => [
-                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install-prod',
-                'npm/update', 'bower/update', 'less',
+                'npm/install', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
         ],
         'demo' => [
             '.description' => 'Build project with demo environment',
             '.depends' => [
-                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install',
-                'npm/update', 'bower/update', 'less',
+                'npm/install', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
         ],
         'dev' => [
             '.description' => 'Build project with developer environment',
             '.depends' => [
-                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/install',
-                'npm/update', 'bower/update', 'less',
+                'npm/install', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
         ],
@@ -94,10 +91,13 @@ $config = [
     ],
 
     'npm' => [
-        '.description' => 'Install all npm dependencies',
-        '.task' => [
-            'class' => 'cookyii\build\tasks\CommandTask',
-            'commandline' => 'npm install',
+        '.description' => 'Tasks for npm',
+        'install' => [
+            '.description' => 'Install all npm dependencies',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\CommandTask',
+                'commandline' => 'npm install',
+            ],
         ],
         'update' => [
             '.description' => 'Update all npm dependencies',
@@ -109,13 +109,16 @@ $config = [
     ],
 
     'bower' => [
-        '.description' => 'Install all bower dependencies',
-        '.task' => [
-            'class' => 'cookyii\build\tasks\CommandTask',
-            'commandline' => './node_modules/.bin/bower install',
+        '.description' => 'Tasks for bower',
+        'install' => [
+            '.description' => 'Install all bower dependencies',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\CommandTask',
+                'commandline' => './node_modules/.bin/bower install',
+            ],
         ],
         'update' => [
-            '.description' => 'Update all npm and bower dependencies',
+            '.description' => 'Update all bower dependencies',
             '.task' => [
                 'class' => 'cookyii\build\tasks\CommandTask',
                 'commandline' => './node_modules/.bin/bower update',
@@ -222,9 +225,7 @@ function appendLessTask(array &$config, $task_name, $app)
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => [
-                cmd($app, '{node}/lessc --source-map-map-inline {assets}/less/styles.less > {assets}/css/styles-raw.css'),
-                cmd($app, '{node}/autoprefixer {assets}/css/styles-raw.css -o {assets}/css/styles.css'),
-                cmd($app, '{node}/csso -i {assets}/css/styles.css -o {assets}/css/styles-o.css'),
+                cmd($app, '{node}/gulp less --app {a}'),
             ],
         ],
     ];

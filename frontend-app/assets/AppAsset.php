@@ -14,7 +14,7 @@ namespace frontend\assets;
 class AppAsset extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@frontend/assets/_sources';
+    public $sourcePath = '@base/frontend-assets';
 
     public $css = [
         'css/styles.css',

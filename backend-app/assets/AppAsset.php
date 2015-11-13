@@ -14,7 +14,7 @@ namespace backend\assets;
 class AppAsset extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@backend/assets/_sources';
+    public $sourcePath = '@base/backend-assets';
 
     public $css = [
         'css/styles.css',

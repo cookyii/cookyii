@@ -14,7 +14,7 @@ namespace crm\assets;
 class AppAsset extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@crm/assets/_sources';
+    public $sourcePath = '@base/crm-assets';
 
     public $css = [
         'css/styles.css',

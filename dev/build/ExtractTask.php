@@ -34,10 +34,13 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
             'rsync -rt ./common/ ../project/common/',
             'rsync -rt ./conf.d/ ../project/conf.d/',
             'rsync -rt ./frontend-app/ ../project/frontend-app/ --exclude=runtime',
+            'rsync -rt ./frontend-assets/ ../project/frontend-assets/',
             'rsync -rt ./frontend-modules/ ../project/frontend-modules/',
             'rsync -rt ./backend-app/ ../project/backend-app/ --exclude=runtime',
+            'rsync -rt ./backend-assets/ ../project/backend-assets/',
             'rsync -rt ./backend-modules/ ../project/backend-modules/',
             'rsync -rt ./crm-app/ ../project/crm-app/ --exclude=runtime',
+            'rsync -rt ./crm-assets/ ../project/crm-assets/',
             'rsync -rt ./crm-modules/ ../project/crm-modules/',
         ];
 
@@ -79,6 +82,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         'frontend.bat',
         'generate_self_signed_ssl_key',
         'getcomposer',
+        'gulpfile.js',
         'LICENSE.md',
         'package.json',
         'README.md',
