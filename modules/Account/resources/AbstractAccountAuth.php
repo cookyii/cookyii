@@ -36,6 +36,18 @@ abstract class AbstractAccountAuth extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \cookyii\modules\Account\resources\queries\AccountAuthQuery
+     */
+    public static function find()
+    {
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\queries\AccountAuthQuery::className(), [
+                get_called_class(),
+            ]
+        );
+    }
+
+    /**
      * @param string|integer $account_id
      */
     public static function remove($account_id)

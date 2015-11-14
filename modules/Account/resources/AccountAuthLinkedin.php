@@ -15,18 +15,6 @@ class AccountAuthLinkedin extends AbstractAccountAuth
 {
 
     /**
-     * @return \cookyii\modules\Account\resources\queries\AccountLinkedinQuery
-     */
-    public static function find()
-    {
-        return \Yii::createObject(
-            \cookyii\modules\Account\resources\queries\AccountLinkedinQuery::className(), [
-                get_called_class(),
-            ]
-        );
-    }
-
-    /**
      * @inheritdoc
      */
     public static function tableName()

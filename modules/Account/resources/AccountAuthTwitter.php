@@ -15,18 +15,6 @@ class AccountAuthTwitter extends AbstractAccountAuth
 {
 
     /**
-     * @return \cookyii\modules\Account\resources\queries\AccountTwitterQuery
-     */
-    public static function find()
-    {
-        return \Yii::createObject(
-            \cookyii\modules\Account\resources\queries\AccountTwitterQuery::className(), [
-                get_called_class(),
-            ]
-        );
-    }
-
-    /**
      * @inheritdoc
      */
     public static function tableName()

@@ -15,18 +15,6 @@ class AccountAuthGithub extends AbstractAccountAuth
 {
 
     /**
-     * @return \cookyii\modules\Account\resources\queries\AccountGithubQuery
-     */
-    public static function find()
-    {
-        return \Yii::createObject(
-            \cookyii\modules\Account\resources\queries\AccountGithubQuery::className(), [
-                get_called_class(),
-            ]
-        );
-    }
-
-    /**
      * @inheritdoc
      */
     public static function tableName()

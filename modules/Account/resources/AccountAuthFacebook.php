@@ -15,18 +15,6 @@ class AccountAuthFacebook extends AbstractAccountAuth
 {
 
     /**
-     * @return \cookyii\modules\Account\resources\queries\AccountFacebookQuery
-     */
-    public static function find()
-    {
-        return \Yii::createObject(
-            \cookyii\modules\Account\resources\queries\AccountFacebookQuery::className(), [
-                get_called_class(),
-            ]
-        );
-    }
-
-    /**
      * @inheritdoc
      */
     public static function tableName()
