@@ -1,15 +1,15 @@
 <?php
 /**
- * AuthResponse.php
+ * AccountAuthResponse.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\resources\Account\Auth;
+namespace cookyii\modules\Account\resources;
 
 /**
- * Class AuthResponse
- * @package cookyii\modules\Account\resources\Account\Auth
+ * Class AccountAuthResponse
+ * @package cookyii\modules\Account\resources
  *
  * @property integer $id
  * @property integer $received_at
@@ -18,7 +18,7 @@ namespace cookyii\modules\Account\resources\Account\Auth;
  * @property string $result
  * @property string $user_ip
  */
-class Response extends \yii\db\ActiveRecord
+class AccountAuthResponse extends \yii\db\ActiveRecord
 {
 
     /**
@@ -41,12 +41,12 @@ class Response extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountAuthResponseQuery
+     * @return \cookyii\modules\Account\resources\queries\AccountAuthResponseQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Account\resources\Account\Auth\queries\AccountAuthResponseQuery::className(), [
+            \cookyii\modules\Account\resources\queries\AccountAuthResponseQuery::className(), [
                 get_called_class(),
             ]
         );

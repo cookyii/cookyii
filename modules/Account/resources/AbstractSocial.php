@@ -5,11 +5,11 @@
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\resources\Account\Auth;
+namespace cookyii\modules\Account\resources;
 
 /**
  * Class AbstractSocial
- * @package cookyii\modules\Account\resources\Account\Auth
+ * @package cookyii\modules\Account\resources
  *
  * @property integer $account_id
  * @property string $social_id

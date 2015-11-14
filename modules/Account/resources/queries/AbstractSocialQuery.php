@@ -5,11 +5,11 @@
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\resources\Account\Auth\queries;
+namespace cookyii\modules\Account\resources\queries;
 
 /**
  * Interface AbstractSocialQuery
- * @package cookyii\modules\Account\resources\Account\Auth\queries
+ * @package cookyii\modules\Account\resources\queries
  */
 abstract class AbstractSocialQuery extends \yii\db\ActiveQuery
 {

@@ -1,26 +1,26 @@
 <?php
 /**
- * Live.php
+ * AccountAuthLive.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\resources\Account\Auth;
+namespace cookyii\modules\Account\resources;
 
 /**
- * Class Live
- * @package cookyii\modules\Account\resources\Account\Auth
+ * Class AccountAuthLive
+ * @package cookyii\modules\Account\resources
  */
-class Live extends AbstractSocial
+class AccountAuthLive extends AbstractSocial
 {
 
     /**
-     * @return \cookyii\modules\Account\resources\Account\Auth\queries\AccountLiveQuery
+     * @return \cookyii\modules\Account\resources\queries\AccountLiveQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Account\resources\Account\Auth\queries\AccountLiveQuery::className(), [
+            \cookyii\modules\Account\resources\queries\AccountLiveQuery::className(), [
                 get_called_class(),
             ]
         );

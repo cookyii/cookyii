@@ -37,7 +37,7 @@ use yii\helpers\ArrayHelper;
 class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \cookyii\interfaces\AccountInterface
 {
 
-    use \cookyii\modules\Account\resources\Account\traits\UserSocialTrait,
+    use \cookyii\modules\Account\resources\traits\AccountSocialTrait,
         \cookyii\traits\GravatrTrait,
         \cookyii\db\traits\ActivationTrait,
         \cookyii\db\traits\SoftDeleteTrait;

@@ -1,21 +1,21 @@
 <?php
 /**
- * UserSocialTrait.php
+ * AccountSocialTrait.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\resources\Account\traits;
+namespace cookyii\modules\Account\resources\traits;
 
 use yii\helpers\Json;
 
 /**
- * Trait UserSocialTrait
- * @package cookyii\modules\Account\resources\Account\traits
+ * Trait AccountSocialTrait
+ * @package cookyii\modules\Account\resources\traits
  *
  * @property integer $id
  */
-trait UserSocialTrait
+trait AccountSocialTrait
 {
 
     /**
@@ -29,28 +29,28 @@ trait UserSocialTrait
                 $class = null;
                 break;
             case 'facebook':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Facebook::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthFacebook::className();
                 break;
             case 'github':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Github::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthGithub::className();
                 break;
             case 'google':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Google::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthGoogle::className();
                 break;
             case 'linkedin':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Linkedin::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthLinkedin::className();
                 break;
             case 'live':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Live::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthLive::className();
                 break;
             case 'twitter':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Twitter::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthTwitter::className();
                 break;
             case 'vkontakte':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Vkontakte::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthVkontakte::className();
                 break;
             case 'yandex':
-                $class = \cookyii\modules\Account\resources\Account\Auth\Yandex::className();
+                $class = \cookyii\modules\Account\resources\AccountAuthYandex::className();
                 break;
         }
 
@@ -61,9 +61,9 @@ trait UserSocialTrait
             'social_id' => $attributes['id'],
         ];
 
-        /** @var \cookyii\modules\Account\resources\Account\Auth\queries\AbstractSocialQuery $Query */
+        /** @var \cookyii\modules\Account\resources\queries\AbstractSocialQuery $Query */
         $Query = $class::find();
-        /** @var \cookyii\modules\Account\resources\Account\Auth\AbstractSocial $Auth */
+        /** @var \cookyii\modules\Account\resources\AbstractSocial $Auth */
         $Auth = $Query
             ->byAccountId($credentials['account_id'])
             ->bySocialId($credentials['social_id'])
