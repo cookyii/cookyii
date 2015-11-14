@@ -42,7 +42,7 @@ class SignController extends Account\frontend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['in', 'up', 'auth', 'fill'],
+                'actions' => ['in', 'up', 'auth', 'fill', 'fill-redirect'],
                 'roles' => ['?', '@'],
             ],
             [

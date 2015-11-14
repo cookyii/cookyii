@@ -194,7 +194,7 @@ class ApiController extends \cookyii\rest\Controller
                     'title' => \Yii::t('account', 'Fill attributes'),
                     'text' => \Yii::t('account', 'Welcome!'),
                 ],
-                'redirect' => UrlManager()->createUrl(['/sign/fill-redirect']),
+                'redirect' => UrlManager()->createUrl(['/account/sign/fill-redirect']),
             ];
         }
 
