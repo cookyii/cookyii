@@ -1,6 +1,6 @@
 <?php
 /**
- * AbstractSocialQuery.php
+ * AbstractAccountAuthQuery.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -8,10 +8,10 @@
 namespace cookyii\modules\Account\resources\queries;
 
 /**
- * Interface AbstractSocialQuery
+ * Interface AbstractAccountAuthQuery
  * @package cookyii\modules\Account\resources\queries
  */
-abstract class AbstractSocialQuery extends \yii\db\ActiveQuery
+abstract class AbstractAccountAuthQuery extends \yii\db\ActiveQuery
 {
 
     /**

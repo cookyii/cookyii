@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\resources;
  * Class AccountAuthFacebook
  * @package cookyii\modules\Account\resources
  */
-class AccountAuthFacebook extends AbstractSocial
+class AccountAuthFacebook extends AbstractAccountAuth
 {
 
     /**

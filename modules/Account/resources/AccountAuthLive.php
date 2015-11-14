@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\resources;
  * Class AccountAuthLive
  * @package cookyii\modules\Account\resources
  */
-class AccountAuthLive extends AbstractSocial
+class AccountAuthLive extends AbstractAccountAuth
 {
 
     /**

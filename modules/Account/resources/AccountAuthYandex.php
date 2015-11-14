@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\resources;
  * Class AccountAuthYandex
  * @package cookyii\modules\Account\resources
  */
-class AccountAuthYandex extends AbstractSocial
+class AccountAuthYandex extends AbstractAccountAuth
 {
 
     /**

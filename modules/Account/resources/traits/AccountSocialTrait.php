@@ -61,9 +61,9 @@ trait AccountSocialTrait
             'social_id' => $attributes['id'],
         ];
 
-        /** @var \cookyii\modules\Account\resources\queries\AbstractSocialQuery $Query */
+        /** @var \cookyii\modules\Account\resources\queries\AbstractAccountAuthQuery $Query */
         $Query = $class::find();
-        /** @var \cookyii\modules\Account\resources\AbstractSocial $Auth */
+        /** @var \cookyii\modules\Account\resources\AbstractAccountAuth $Auth */
         $Auth = $Query
             ->byAccountId($credentials['account_id'])
             ->bySocialId($credentials['social_id'])

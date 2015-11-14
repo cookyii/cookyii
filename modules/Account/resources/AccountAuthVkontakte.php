@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\resources;
  * Class AccountAuthVkontakte
  * @package cookyii\modules\Account\resources
  */
-class AccountAuthVkontakte extends AbstractSocial
+class AccountAuthVkontakte extends AbstractAccountAuth
 {
 
     /**

@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\resources\queries;
  * @method \cookyii\modules\Account\resources\AccountAuthGoogle|array|null one($db = null)
  * @method \cookyii\modules\Account\resources\AccountAuthGoogle[]|array all($db = null)
  */
-class AccountGoogleQuery extends AbstractSocialQuery
+class AccountGoogleQuery extends AbstractAccountAuthQuery
 {
 
 }

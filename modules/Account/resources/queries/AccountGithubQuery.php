@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\resources\queries;
  * @method \cookyii\modules\Account\resources\AccountAuthGithub|array|null one($db = null)
  * @method \cookyii\modules\Account\resources\AccountAuthGithub[]|array all($db = null)
  */
-class AccountGithubQuery extends AbstractSocialQuery
+class AccountGithubQuery extends AbstractAccountAuthQuery
 {
 
 }

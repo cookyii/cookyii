@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\resources\queries;
  * @method \cookyii\modules\Account\resources\AccountAuthFacebook|array|null one($db = null)
  * @method \cookyii\modules\Account\resources\AccountAuthFacebook[]|array all($db = null)
  */
-class AccountFacebookQuery extends AbstractSocialQuery
+class AccountFacebookQuery extends AbstractAccountAuthQuery
 {
 
 }

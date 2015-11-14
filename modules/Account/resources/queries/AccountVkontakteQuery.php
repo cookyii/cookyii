@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\resources\queries;
  * @method \cookyii\modules\Account\resources\AccountAuthVkontakte|array|null one($db = null)
  * @method \cookyii\modules\Account\resources\AccountAuthVkontakte[]|array all($db = null)
  */
-class AccountVkontakteQuery extends AbstractSocialQuery
+class AccountVkontakteQuery extends AbstractAccountAuthQuery
 {
 
 }

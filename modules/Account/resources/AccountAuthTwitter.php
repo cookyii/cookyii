@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\resources;
  * Class AccountAuthTwitter
  * @package cookyii\modules\Account\resources
  */
-class AccountAuthTwitter extends AbstractSocial
+class AccountAuthTwitter extends AbstractAccountAuth
 {
 
     /**

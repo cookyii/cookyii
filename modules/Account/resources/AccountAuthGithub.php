@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\resources;
  * Class AccountAuthGithub
  * @package cookyii\modules\Account\resources
  */
-class AccountAuthGithub extends AbstractSocial
+class AccountAuthGithub extends AbstractAccountAuth
 {
 
     /**

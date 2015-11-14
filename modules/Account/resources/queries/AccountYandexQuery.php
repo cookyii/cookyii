@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\resources\queries;
  * @method \cookyii\modules\Account\resources\AccountAuthYandex|array|null one($db = null)
  * @method \cookyii\modules\Account\resources\AccountAuthYandex[]|array all($db = null)
  */
-class AccountYandexQuery extends AbstractSocialQuery
+class AccountYandexQuery extends AbstractAccountAuthQuery
 {
 
 }

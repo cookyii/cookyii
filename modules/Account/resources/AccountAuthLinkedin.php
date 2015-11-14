@@ -11,7 +11,7 @@ namespace cookyii\modules\Account\resources;
  * Class AccountAuthLinkedin
  * @package cookyii\modules\Account\resources
  */
-class AccountAuthLinkedin extends AbstractSocial
+class AccountAuthLinkedin extends AbstractAccountAuth
 {
 
     /**

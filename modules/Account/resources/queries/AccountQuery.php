@@ -180,10 +180,10 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     protected function bySocialId($class, $social_id)
     {
-        /** @var \cookyii\modules\Account\resources\queries\AbstractSocialQuery $SocialQuery */
+        /** @var \cookyii\modules\Account\resources\queries\AbstractAccountAuthQuery $SocialQuery */
         $SocialQuery = $class::find();
 
-        /** @var \cookyii\modules\Account\resources\AbstractSocial $Social */
+        /** @var \cookyii\modules\Account\resources\AbstractAccountAuth $Social */
         $Social = $SocialQuery
             ->bySocialId($social_id)
             ->one();

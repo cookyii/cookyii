@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\resources\queries;
  * @method \cookyii\modules\Account\resources\AccountAuthLinkedin|array|null one($db = null)
  * @method \cookyii\modules\Account\resources\AccountAuthLinkedin[]|array all($db = null)
  */
-class AccountLinkedinQuery extends AbstractSocialQuery
+class AccountLinkedinQuery extends AbstractAccountAuthQuery
 {
 
 }

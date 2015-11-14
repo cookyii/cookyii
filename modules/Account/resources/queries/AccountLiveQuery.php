@@ -14,7 +14,7 @@ namespace cookyii\modules\Account\resources\queries;
  * @method \cookyii\modules\Account\resources\AccountAuthLive|array|null one($db = null)
  * @method \cookyii\modules\Account\resources\AccountAuthLive[]|array all($db = null)
  */
-class AccountLiveQuery extends AbstractSocialQuery
+class AccountLiveQuery extends AbstractAccountAuthQuery
 {
 
 }
