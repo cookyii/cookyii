@@ -42,11 +42,7 @@ trait AccountSocialTrait
         /** @var $class \cookyii\modules\Account\resources\AbstractAccountAuth */
         $class = $clients[$client];
 
-        /** @var \cookyii\modules\Account\resources\queries\AccountAuthQuery $Query */
-        $Query = $class::find();
-
-        /** @var \cookyii\modules\Account\resources\AbstractAccountAuth $Auth */
-        $Auth = $Query
+        $Auth = $class::find()
             ->byAccountId($credentials['account_id'])
             ->bySocialId($credentials['social_id'])
             ->one();
@@ -79,28 +75,28 @@ trait AccountSocialTrait
                 $attributes = null;
                 break;
             case 'facebook':
-                $attributes = $this->aggregateFacebookAttributes($attributes);
+                $attributes = $this->appendFacebookAttributes($attributes);
                 break;
             case 'github':
-                $attributes = $this->aggregateGithubAttributes($attributes);
+                $attributes = $this->appendGithubAttributes($attributes);
                 break;
             case 'google':
-                $attributes = $this->aggregateGoogleAttributes($attributes);
+                $attributes = $this->appendGoogleAttributes($attributes);
                 break;
             case 'linkedin':
-                $attributes = $this->aggregateLinkedinAttributes($attributes);
+                $attributes = $this->appendLinkedinAttributes($attributes);
                 break;
             case 'live':
-                $attributes = $this->aggregateLiveAttributes($attributes);
+                $attributes = $this->appendLiveAttributes($attributes);
                 break;
             case 'twitter':
-                $attributes = $this->aggregateTwitterAttributes($attributes);
+                $attributes = $this->appendTwitterAttributes($attributes);
                 break;
             case 'vkontakte':
-                $attributes = $this->aggregateVkontakteAttributes($attributes);
+                $attributes = $this->appendVkontakteAttributes($attributes);
                 break;
             case 'yandex':
-                $attributes = $this->aggregateYandexAttributes($attributes);
+                $attributes = $this->appendYandexAttributes($attributes);
                 break;
         }
 
@@ -113,7 +109,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateFacebookAttributes(array $attributes)
+    private function appendFacebookAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['name']) && !empty($attributes['name'])) {
@@ -136,7 +132,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateGithubAttributes(array $attributes)
+    private function appendGithubAttributes(array $attributes)
     {
         $name = $attributes['login'];
         if (isset($attributes['name']) && !empty($attributes['name'])) {
@@ -165,7 +161,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateGoogleAttributes(array $attributes)
+    private function appendGoogleAttributes(array $attributes)
     {
         $name = $attributes['displayName'];
         if (isset($attributes['name']['familyName']) && !empty($attributes['name']['familyName'])) {
@@ -197,7 +193,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateLinkedinAttributes(array $attributes)
+    private function appendLinkedinAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
@@ -223,7 +219,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateLiveAttributes(array $attributes)
+    private function appendLiveAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
@@ -257,7 +253,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateTwitterAttributes(array $attributes)
+    private function appendTwitterAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['name']) && !empty($attributes['name'])) {
@@ -283,7 +279,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateVkontakteAttributes(array $attributes)
+    private function appendVkontakteAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
@@ -309,7 +305,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function aggregateYandexAttributes(array $attributes)
+    private function appendYandexAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
