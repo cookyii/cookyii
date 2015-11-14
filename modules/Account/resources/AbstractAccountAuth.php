@@ -57,32 +57,40 @@ abstract class AbstractAccountAuth extends \yii\db\ActiveRecord
         ]);
     }
 
+    static $clients = [];
+
     /**
      * @return array
      */
     public static function getClientsList()
     {
-        $base = [
-            'facebook' => \cookyii\modules\Account\resources\AccountAuthFacebook::className(),
-            'github' => \cookyii\modules\Account\resources\AccountAuthGithub::className(),
-            'google' => \cookyii\modules\Account\resources\AccountAuthGoogle::className(),
-            'linkedin' => \cookyii\modules\Account\resources\AccountAuthLinkedin::className(),
-            'live' => \cookyii\modules\Account\resources\AccountAuthLive::className(),
-            'twitter' => \cookyii\modules\Account\resources\AccountAuthTwitter::className(),
-            'vkontakte' => \cookyii\modules\Account\resources\AccountAuthVkontakte::className(),
-            'yandex' => \cookyii\modules\Account\resources\AccountAuthYandex::className(),
-        ];
+        if (empty(static::$clients)) {
+            $base = [
+                'facebook' => \cookyii\modules\Account\resources\AccountAuthFacebook::className(),
+                'github' => \cookyii\modules\Account\resources\AccountAuthGithub::className(),
+                'google' => \cookyii\modules\Account\resources\AccountAuthGoogle::className(),
+                'linkedin' => \cookyii\modules\Account\resources\AccountAuthLinkedin::className(),
+                'live' => \cookyii\modules\Account\resources\AccountAuthLive::className(),
+                'twitter' => \cookyii\modules\Account\resources\AccountAuthTwitter::className(),
+                'vkontakte' => \cookyii\modules\Account\resources\AccountAuthVkontakte::className(),
+                'yandex' => \cookyii\modules\Account\resources\AccountAuthYandex::className(),
+            ];
 
-        $result = [];
+            $result = [];
 
-        // extract di
-        foreach ($base as $name => $class) {
-            /** @var \cookyii\modules\Account\resources\AbstractAccountAuth $Auth */
-            $Auth = \Yii::createObject($class);
+            // extract di
+            foreach ($base as $name => $class) {
+                /** @var \cookyii\modules\Account\resources\AbstractAccountAuth $Auth */
+                $Auth = \Yii::createObject($class);
 
-            $result[$name] = $Auth::className();
+                $result[$name] = $Auth::className();
+
+                unset($Auth);
+            }
+
+            static::$clients = $result;
         }
 
-        return $result;
+        return static::$clients;
     }
 }

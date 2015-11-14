@@ -21,37 +21,15 @@ trait AccountSocialTrait
     /**
      * @param \yii\authclient\ClientInterface $Client
      * @return bool
+     * @throws \yii\web\ServerErrorHttpException
      */
     public function pushSocialLink(\yii\authclient\ClientInterface $Client)
     {
-        switch ($Client->getId()) {
-            default:
-                $class = null;
-                break;
-            case 'facebook':
-                $class = \cookyii\modules\Account\resources\AccountAuthFacebook::className();
-                break;
-            case 'github':
-                $class = \cookyii\modules\Account\resources\AccountAuthGithub::className();
-                break;
-            case 'google':
-                $class = \cookyii\modules\Account\resources\AccountAuthGoogle::className();
-                break;
-            case 'linkedin':
-                $class = \cookyii\modules\Account\resources\AccountAuthLinkedin::className();
-                break;
-            case 'live':
-                $class = \cookyii\modules\Account\resources\AccountAuthLive::className();
-                break;
-            case 'twitter':
-                $class = \cookyii\modules\Account\resources\AccountAuthTwitter::className();
-                break;
-            case 'vkontakte':
-                $class = \cookyii\modules\Account\resources\AccountAuthVkontakte::className();
-                break;
-            case 'yandex':
-                $class = \cookyii\modules\Account\resources\AccountAuthYandex::className();
-                break;
+        $client = $Client->getId();
+        $clients = \cookyii\modules\Account\resources\AbstractAccountAuth::getClientsList();
+
+        if (!isset($clients[$client])) {
+            throw new \yii\web\ServerErrorHttpException(\Yii::t('account', ''));
         }
 
         $attributes = $Client->getUserAttributes();
@@ -61,8 +39,12 @@ trait AccountSocialTrait
             'social_id' => $attributes['id'],
         ];
 
-        /** @var \cookyii\modules\Account\resources\queries\AbstractAccountAuthQuery $Query */
+        /** @var $class \cookyii\modules\Account\resources\AbstractAccountAuth */
+        $class = $clients[$client];
+
+        /** @var \cookyii\modules\Account\resources\queries\AccountAuthQuery $Query */
         $Query = $class::find();
+
         /** @var \cookyii\modules\Account\resources\AbstractAccountAuth $Auth */
         $Auth = $Query
             ->byAccountId($credentials['account_id'])

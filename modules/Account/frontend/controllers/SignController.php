@@ -125,7 +125,7 @@ class SignController extends Account\frontend\components\Controller
      */
     public function authSuccessCallback(\yii\authclient\ClientInterface $Client)
     {
-        $AuthResponse =  \cookyii\modules\Account\resources\AccountAuthResponse::createLog($Client);
+        $AuthResponse = \cookyii\modules\Account\resources\AccountAuthResponse::createLog($Client);
 
         $attributes = $Client->getUserAttributes();
 
@@ -218,7 +218,7 @@ class SignController extends Account\frontend\components\Controller
             }
         }
 
-        $AuthResponse->save();
+        $AuthResponse->validate() && $AuthResponse->save();
 
         if ($Account instanceof \cookyii\modules\Account\resources\Account && !$Account->isNewRecord && !$Account->hasErrors()) {
             $Account->save();

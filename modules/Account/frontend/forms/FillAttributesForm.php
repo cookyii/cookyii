@@ -97,6 +97,8 @@ class FillAttributesForm extends \cookyii\base\FormModel
             User()->login($Account, $SignInFormModel::REMEMBER_TIME);
         }
 
+        $AuthResponse->validate() && $AuthResponse->save();
+
         if ($Account->hasErrors()) {
             $this->populateErrors($Account, 'name');
         }

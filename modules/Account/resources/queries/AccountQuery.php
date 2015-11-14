@@ -39,7 +39,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byFacebookId($Facebook_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthFacebook::className(), $Facebook_id);
+        return $this->bySocialId('facebook', $Facebook_id);
     }
 
     /**
@@ -48,7 +48,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byGithubId($Github_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthGithub::className(), $Github_id);
+        return $this->bySocialId('github', $Github_id);
     }
 
     /**
@@ -57,7 +57,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byGoogleId($Google_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthGoogle::className(), $Google_id);
+        return $this->bySocialId('google', $Google_id);
     }
 
     /**
@@ -66,7 +66,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byLinkedinId($Linkedin_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthLinkedin::className(), $Linkedin_id);
+        return $this->bySocialId('linkedin', $Linkedin_id);
     }
 
     /**
@@ -75,7 +75,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byLiveId($Live_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthLive::className(), $Live_id);
+        return $this->bySocialId('live', $Live_id);
     }
 
     /**
@@ -84,7 +84,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byTwitterId($Twitter_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthTwitter::className(), $Twitter_id);
+        return $this->bySocialId('twitter', $Twitter_id);
     }
 
     /**
@@ -93,7 +93,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byVkontakteId($Vkontakte_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthVkontakte::className(), $Vkontakte_id);
+        return $this->bySocialId('vkontakte', $Vkontakte_id);
     }
 
     /**
@@ -102,7 +102,7 @@ class AccountQuery extends \yii\db\ActiveQuery
      */
     public function byYandexId($Yandex_id)
     {
-        return $this->bySocialId(Account\resources\AccountAuthYandex::className(), $Yandex_id);
+        return $this->bySocialId('yandex', $Yandex_id);
     }
 
     /**
@@ -174,17 +174,18 @@ class AccountQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param string $class
+     * @param string $client
      * @param integer|array $social_id
      * @return $this|static
      */
-    protected function bySocialId($class, $social_id)
+    protected function bySocialId($client, $social_id)
     {
-        /** @var \cookyii\modules\Account\resources\queries\AbstractAccountAuthQuery $SocialQuery */
-        $SocialQuery = $class::find();
+        $clients = Account\resources\AbstractAccountAuth::getClientsList();
 
-        /** @var \cookyii\modules\Account\resources\AbstractAccountAuth $Social */
-        $Social = $SocialQuery
+        /** @var $class \cookyii\modules\Account\resources\AbstractAccountAuth */
+        $class = $clients[$client];
+
+        $Social = $class::find()
             ->bySocialId($social_id)
             ->one();
 
