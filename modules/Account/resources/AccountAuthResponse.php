@@ -6,6 +6,7 @@
  */
 
 namespace cookyii\modules\Account\resources;
+use yii\helpers\Json;
 
 /**
  * Class AccountAuthResponse
@@ -38,6 +39,21 @@ class AccountAuthResponse extends \yii\db\ActiveRecord
             [['received_at'], 'default', 'value' => time()],
             [['user_ip'], 'default', 'value' => ip2long(Request()->userIP)],
         ];
+    }
+
+    /**
+     * @param \yii\authclient\ClientInterface $Client
+     * @return static
+     */
+    public static function createLog(\yii\authclient\ClientInterface $Client)
+    {
+        $AuthResponse = new static;
+        $AuthResponse->client = $Client->getId();
+
+        $attributes = $Client->getUserAttributes();
+        $AuthResponse->response = Json::encode($attributes);
+
+        return $AuthResponse;
     }
 
     /**

@@ -8,6 +8,7 @@
 namespace cookyii\modules\Account\frontend\forms;
 
 use rmrevin\yii\rbac\RbacFactory;
+use yii\helpers\Json;
 
 /**
  * Class FillAttributesForm
@@ -77,7 +78,13 @@ class FillAttributesForm extends \cookyii\base\FormModel
 
         $Account->validate() && $Account->save();
 
-        if (!$Account->hasErrors()) {
+        $AuthResponse = \cookyii\modules\Account\resources\AccountAuthResponse::createLog($Client);
+
+        if ($Account->hasErrors()) {
+            $AuthResponse->result = Json::encode($Account->getErrors());
+        } else {
+            $AuthResponse->result = $Account->id;
+
             $Account->notificationHelper
                 ->sendSignUpEmail();
 
