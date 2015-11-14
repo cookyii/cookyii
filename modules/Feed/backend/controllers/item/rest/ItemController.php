@@ -16,7 +16,7 @@ use cookyii\modules\Feed;
 class ItemController extends \cookyii\rest\ActiveController
 {
 
-    public $modelClass = 'cookyii\modules\Feed\resources\Feed\Item';
+    public $modelClass = 'cookyii\modules\Feed\resources\FeedItem';
 
     /**
      * @inheritdoc
@@ -102,7 +102,7 @@ class ItemController extends \cookyii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Feed\resources\Feed\Item */
+        /* @var $modelClass \cookyii\modules\Feed\resources\FeedItem */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find();

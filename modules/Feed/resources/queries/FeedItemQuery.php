@@ -1,20 +1,22 @@
 <?php
 /**
- * SectionQuery.php
+ * FeedItemQuery.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Feed\resources\Feed\queries;
+namespace cookyii\modules\Feed\resources\queries;
+
+use yii\helpers\ArrayHelper;
 
 /**
- * Class SectionQuery
- * @package cookyii\modules\Feed\resources\Feed\queries
+ * Class FeedItemQuery
+ * @package cookyii\modules\Feed\resources\queries
  *
- * @method \cookyii\modules\Feed\resources\Feed\Section|array|null one($db = null)
- * @method \cookyii\modules\Feed\resources\Feed\Section[]|array all($db = null)
+ * @method \cookyii\modules\Feed\resources\FeedItem|array|null one($db = null)
+ * @method \cookyii\modules\Feed\resources\FeedItem[]|array all($db = null)
  */
-class SectionQuery extends \yii\db\ActiveQuery
+class FeedItemQuery extends \yii\db\ActiveQuery
 {
 
     use \cookyii\db\traits\query\ActivatedQueryTrait,
@@ -32,23 +34,60 @@ class SectionQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param integer|array $parent_id
-     * @return static
-     */
-    public function byParentId($parent_id)
-    {
-        $this->andWhere(['parent_id' => $parent_id]);
-
-        return $this;
-    }
-
-    /**
      * @param string|array $slug
      * @return static
      */
     public function bySlug($slug)
     {
         $this->andWhere(['slug' => $slug]);
+
+        return $this;
+    }
+
+    /**
+     * @param integer|array $section_id
+     * @return static
+     */
+    public function bySectionId($section_id)
+    {
+        /** @var \cookyii\modules\Feed\resources\FeedItemSection $ItemSectionModel */
+        $ItemSectionModel = \Yii::createObject(\cookyii\modules\Feed\resources\FeedItemSection::className());
+
+        /** @var array $item_sections */
+        $item_sections = $ItemSectionModel::find()
+            ->bySectionId($section_id)
+            ->asArray()
+            ->all();
+
+        if (empty($item_sections)) {
+            $this->andWhere('1=0');
+        } else {
+            $this->byId(ArrayHelper::getColumn($item_sections, ['item_id']));
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string|array $section_slug
+     * @return static
+     */
+    public function bySectionSlug($section_slug)
+    {
+        /** @var \cookyii\modules\Feed\resources\FeedSection $SectionModel */
+        $SectionModel = \Yii::createObject(\cookyii\modules\Feed\resources\FeedSection::className());
+
+        /** @var array $sections */
+        $sections = $SectionModel::find()
+            ->bySlug($section_slug)
+            ->asArray()
+            ->all();
+
+        if (empty($sections)) {
+            $this->andWhere('1=0');
+        } else {
+            $this->bySectionId(ArrayHelper::getColumn($sections, ['id']));
+        }
 
         return $this;
     }
@@ -122,6 +161,8 @@ class SectionQuery extends \yii\db\ActiveQuery
             array_merge(['or'], array_map(function ($value) { return ['like', 'id', $value]; }, $words)),
             array_merge(['or'], array_map(function ($value) { return ['like', 'slug', $value]; }, $words)),
             array_merge(['or'], array_map(function ($value) { return ['like', 'title', $value]; }, $words)),
+            array_merge(['or'], array_map(function ($value) { return ['like', 'content_preview', $value]; }, $words)),
+            array_merge(['or'], array_map(function ($value) { return ['like', 'content_detail', $value]; }, $words)),
             array_merge(['or'], array_map(function ($value) { return ['like', 'meta', $value]; }, $words)),
         ]);
 

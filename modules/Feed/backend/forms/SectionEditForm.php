@@ -18,7 +18,7 @@ class SectionEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Feed\resources\Feed\Section */
+    /** @var \cookyii\modules\Feed\resources\FeedSection */
     public $Section;
 
     public $parent_id;
@@ -33,7 +33,7 @@ class SectionEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Section instanceof \cookyii\modules\Feed\resources\Feed\Section)) {
+        if (!($this->Section instanceof \cookyii\modules\Feed\resources\FeedSection)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('feed', 'Not specified section to edit.'));
         }
     }

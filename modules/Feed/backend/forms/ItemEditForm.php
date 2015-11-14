@@ -19,7 +19,7 @@ class ItemEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Feed\resources\Feed\Item */
+    /** @var \cookyii\modules\Feed\resources\FeedItem */
     public $Item;
 
     public $slug;
@@ -40,7 +40,7 @@ class ItemEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Item instanceof \cookyii\modules\Feed\resources\Feed\Item)) {
+        if (!($this->Item instanceof \cookyii\modules\Feed\resources\FeedItem)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('feed', 'Not specified item to edit.'));
         }
     }
@@ -122,8 +122,8 @@ class ItemEditForm extends \cookyii\base\FormModel
         if ($Item->hasErrors()) {
             $this->populateErrors($Item, 'title');
         } else {
-            /** @var Feed\resources\Feed\ItemSection $ItemSectionModel */
-            $ItemSectionModel = \Yii::createObject(Feed\resources\Feed\ItemSection::className());
+            /** @var Feed\resources\FeedItemSection $ItemSectionModel */
+            $ItemSectionModel = \Yii::createObject(Feed\resources\FeedItemSection::className());
 
             $ItemSectionModel::deleteAll(['item_id' => $Item->id]);
 

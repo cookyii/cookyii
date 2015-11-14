@@ -21,7 +21,7 @@ class DetailAction extends \cookyii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Feed\resources\Feed\Item $Model */
+        /** @var \cookyii\modules\Feed\resources\FeedItem $Model */
         $Model = $this->findModel($id);
 
         $result = $Model->toArray([], ['picture_300', 'sections', 'meta']);

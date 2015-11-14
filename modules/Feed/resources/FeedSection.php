@@ -1,25 +1,23 @@
 <?php
 /**
- * Item.php
+ * FeedSection.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Feed\resources\Feed;
+namespace cookyii\modules\Feed\resources;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
- * Class Item
- * @package cookyii\modules\Feed\resources\Feed
+ * Class FeedSection
+ * @package cookyii\modules\Feed\resources
  *
  * @property integer $id
+ * @property integer $parent_id
  * @property string $slug
  * @property string $title
- * @property integer $picture_media_id
- * @property string $content_preview
- * @property string $content_detail
  * @property string $meta
  * @property integer $sort
  * @property integer $created_by
@@ -30,12 +28,8 @@ use yii\helpers\Json;
  * @property integer $archived_at
  * @property integer $deleted_at
  * @property integer $activated_at
- *
- * @property \cookyii\modules\Media\resources\Media $pictureMedia
- * @property ItemSection[] $itemSections
- * @property Section[] $sections
  */
-class Item extends \yii\db\ActiveRecord
+class FeedSection extends \yii\db\ActiveRecord
 {
 
     use \cookyii\db\traits\ActivationTrait,
@@ -59,29 +53,27 @@ class Item extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        unset($fields['meta']);
-
-        $fields['created_at_format'] = function (Item $Model) {
+        $fields['created_at_format'] = function (FeedSection $Model) {
             return Formatter()->asDatetime($Model->created_at);
         };
 
-        $fields['updated_at_format'] = function (Item $Model) {
+        $fields['updated_at_format'] = function (FeedSection $Model) {
             return Formatter()->asDatetime($Model->updated_at);
         };
 
-        $fields['published_at_format'] = function (Item $Model) {
+        $fields['published_at_format'] = function (FeedSection $Model) {
             return Formatter()->asDatetime($Model->published_at);
         };
 
-        $fields['archived_at_format'] = function (Item $Model) {
+        $fields['archived_at_format'] = function (FeedSection $Model) {
             return Formatter()->asDatetime($Model->archived_at);
         };
 
-        $fields['deleted_at_format'] = function (Item $Model) {
+        $fields['deleted_at_format'] = function (FeedSection $Model) {
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
-        $fields['activated_at_format'] = function (Item $Model) {
+        $fields['activated_at_format'] = function (FeedSection $Model) {
             return Formatter()->asDatetime($Model->activated_at);
         };
 
@@ -100,33 +92,7 @@ class Item extends \yii\db\ActiveRecord
     {
         $fields = parent::extraFields();
 
-        $fields['picture_300'] = function (Item $Model) {
-            $result = null;
-
-            $Media = $Model->pictureMedia;
-            if (!empty($Media)) {
-                $result = $Media->image()->resizeByWidth(300)->export();
-            }
-
-            return $result;
-        };
-
-        $fields['sections'] = function (Item $Model) {
-            $result = [];
-
-            $item_sections = $Model->getItemSections()
-                ->asArray()
-                ->all();
-
-            if (!empty($item_sections)) {
-                $result = ArrayHelper::getColumn($item_sections, 'section_id');
-                $result = array_map('intval', $result);
-            }
-
-            return $result;
-        };
-
-        $fields['meta'] = function (Item $Model) {
+        $fields['meta'] = function (FeedSection $Model) {
             return $Model->meta();
         };
 
@@ -140,10 +106,10 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['slug', 'title', 'content_preview', 'content_detail', 'meta'], 'string'],
+            [['slug', 'title', 'meta'], 'string'],
             [
                 [
-                    'picture_media_id', 'sort', 'created_by', 'updated_by',
+                    'parent_id', 'sort', 'created_by', 'updated_by',
                     'created_at', 'updated_at', 'published_at', 'archived_at', 'activated_at', 'deleted_at',
                 ], 'integer'
             ],
@@ -152,7 +118,6 @@ class Item extends \yii\db\ActiveRecord
             [['slug', 'title'], 'required'],
             [['slug'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['slug', 'title', 'meta'], 'filter', 'filter' => 'str_clean'],
-            [['content_preview', 'content_detail'], 'filter', 'filter' => 'str_pretty'],
 
             /** default values */
         ];
@@ -186,46 +151,84 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Media\resources\queries\MediaQuery
+     * @param bool $with_deleted
+     * @param static[]|null $Sections
+     * @param integer|null $parent
+     * @return array
      */
-    public function getPictureMedia()
+    public static function getTree($with_deleted = false, $Sections = null, $parent = null)
     {
-        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
-        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+        $result = [
+            'sections' => [],
+            'contain' => [],
+            'models' => [],
+        ];
 
-        return $this->hasOne($MediaModel::className(), ['id' => 'picture_media_id']);
+        /** @var FeedSection $SectionModel */
+        $SectionModel = \Yii::createObject(FeedSection::className());
+
+        if (empty($Sections) && empty($parent)) {
+            /** @var queries\FeedSectionQuery $SectionsQuery */
+            $SectionsQuery = $SectionModel::find();
+
+            if ($with_deleted === false) {
+                $SectionsQuery->withoutDeleted();
+            }
+
+            /** @var static[] $Sections */
+            $Sections = $SectionsQuery
+                ->orderBy(['id' => SORT_ASC])
+                ->all();
+        }
+
+        if (!empty($Sections)) {
+            foreach ($Sections as $Section) {
+                if ($Section->parent_id === $parent) {
+                    $work = static::getTree($with_deleted, $Sections, $Section->id);
+
+                    array_push($work['contain'], $Section->slug);
+
+                    $result['contain'] = array_merge($result['contain'], $work['contain']);
+
+                    $result['sections'][$Section->id] = [
+                        'id' => $Section->id,
+                        'title' => $Section->title,
+                        'slug' => $Section->slug,
+                        'sort' => $Section->sort,
+                        'contain' => $work['contain'],
+                        'sections' => $work['sections'],
+                    ];
+                }
+            }
+        }
+
+        usort($result['sections'], function ($a, $b) {
+            if ($a['sort'] == $b['sort']) {
+                return 0;
+            }
+
+            return ($a['sort'] < $b['sort']) ? -1 : 1;
+        });
+
+        $all_sections = static::find()
+            ->orderBy(['id' => SORT_ASC])
+            ->asArray()
+            ->all();
+
+        $result['models'] = ArrayHelper::index($all_sections, 'slug');
+
+        unset($Sections);
+
+        return $result;
     }
 
     /**
-     * @return \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery
-     */
-    public function getItemSections()
-    {
-        /** @var ItemSection $ItemSectionModel */
-        $ItemSectionModel = \Yii::createObject(ItemSection::className());
-
-        return $this->hasMany($ItemSectionModel::className(), ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \cookyii\modules\Feed\resources\Feed\queries\SectionQuery
-     */
-    public function getSections()
-    {
-        /** @var Section $SectionModel */
-        $SectionModel = \Yii::createObject(Section::className());
-
-        return $this->hasMany($SectionModel::className(), ['id' => 'section_id'])
-            ->via('itemSections');
-    }
-
-    /**
-     * @return \cookyii\modules\Feed\resources\Feed\queries\ItemQuery
+     * @return \cookyii\modules\Feed\resources\queries\FeedSectionQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Feed\resources\Feed\queries\ItemQuery::className(),
+            \cookyii\modules\Feed\resources\queries\FeedSectionQuery::className(),
             [get_called_class()]
         );
     }
@@ -235,6 +238,6 @@ class Item extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%feed_item}}';
+        return '{{%feed_section}}';
     }
 }

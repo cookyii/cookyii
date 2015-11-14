@@ -28,7 +28,7 @@ class EditFormAction extends \cookyii\rest\Action
 
         $section_slug = str_clean(Request()->post('section_slug'));
 
-        /** @var $modelClass \cookyii\modules\Feed\resources\Feed\Section */
+        /** @var $modelClass \cookyii\modules\Feed\resources\FeedSection */
         $modelClass = $this->modelClass;
 
         $Section = null;

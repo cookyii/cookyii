@@ -1,20 +1,20 @@
 <?php
 /**
- * ItemSection.php
+ * FeedItemSection.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Feed\resources\Feed;
+namespace cookyii\modules\Feed\resources;
 
 /**
- * Class ItemSection
- * @package cookyii\modules\Feed\resources\Feed
+ * Class FeedItemSection
+ * @package cookyii\modules\Feed\resources
  *
  * @property integer $item_id
  * @property integer $section_id
  */
-class ItemSection extends \yii\db\ActiveRecord
+class FeedItemSection extends \yii\db\ActiveRecord
 {
 
     /**
@@ -34,12 +34,12 @@ class ItemSection extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery
+     * @return \cookyii\modules\Feed\resources\queries\FeedItemSectionQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Feed\resources\Feed\queries\ItemSectionQuery::className(),
+            \cookyii\modules\Feed\resources\queries\FeedItemSectionQuery::className(),
             [get_called_class()]
         );
     }
