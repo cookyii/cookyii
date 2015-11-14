@@ -126,6 +126,8 @@ class SignController extends Account\frontend\components\Controller
      */
     public function actionFillRedirect()
     {
+        Session()->remove('OAuthResponseClient');
+
         return $this->renderFile('@vendor/yiisoft/yii2-authclient/views/redirect.php', [
             'url' => Url::to(['/']),
             'enforceRedirect' => true,

@@ -83,7 +83,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
         if ($Account->hasErrors()) {
             $AuthResponse->result = Json::encode($Account->getErrors());
         } else {
-            $AuthResponse->result = $Account->id;
+            $AuthResponse->result = (string)$Account->id;
 
             $Account->notificationHelper
                 ->sendSignUpEmail();

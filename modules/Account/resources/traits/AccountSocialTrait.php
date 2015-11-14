@@ -29,14 +29,16 @@ trait AccountSocialTrait
         $clients = \cookyii\modules\Account\resources\AbstractAccountAuth::getClientsList();
 
         if (!isset($clients[$client])) {
-            throw new \yii\web\ServerErrorHttpException(\Yii::t('account', ''));
+            throw new \yii\web\ServerErrorHttpException(\Yii::t('account', 'Provider for client `{client}` bot found.', [
+                'client' => $Client->getName()
+            ]));
         }
 
         $attributes = $Client->getUserAttributes();
 
         $credentials = [
-            'account_id' => $this->id,
-            'social_id' => $attributes['id'],
+            'account_id' => (integer)$this->id,
+            'social_id' => (string)$attributes['id'],
         ];
 
         /** @var $class \cookyii\modules\Account\resources\AbstractAccountAuth */
@@ -55,9 +57,7 @@ trait AccountSocialTrait
             $Auth->token = Json::encode($Client->getAccessToken()->getParams());
         }
 
-        if (!empty($Auth)) {
-            $Auth->save();
-        }
+        $Auth->validate() && $Auth->save();
 
         return $Auth;
     }
@@ -102,7 +102,7 @@ trait AccountSocialTrait
 
         if (!empty($attributes)) {
             foreach ($attributes as $key => $value) {
-                if (empty($this->$key)) {
+                if ($this->hasAttribute($key) && empty($this->$key)) {
                     $this->setAttribute($key, $value);
                 }
             }
