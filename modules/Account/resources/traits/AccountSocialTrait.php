@@ -101,7 +101,11 @@ trait AccountSocialTrait
         }
 
         if (!empty($attributes)) {
-            $this->setAttributes($attributes);
+            foreach ($attributes as $key => $value) {
+                if (empty($this->$key)) {
+                    $this->setAttribute($key, $value);
+                }
+            }
         }
     }
 

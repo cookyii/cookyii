@@ -188,13 +188,15 @@ class ApiController extends \cookyii\rest\Controller
         $FillAttributesForm = \Yii::createObject(Account\frontend\forms\FillAttributesForm::className());
 
         if ($FillAttributesForm->load(Request()->post()) && $FillAttributesForm->validate() && $FillAttributesForm->save($Client)) {
+            Session()->remove('OAuthResponseClient');
+
             $result = [
                 'result' => true,
                 'message' => [
                     'title' => \Yii::t('account', 'Fill attributes'),
                     'text' => \Yii::t('account', 'Welcome!'),
                 ],
-                'redirect' => UrlManager()->createUrl(['/']),
+                'redirect' => UrlManager()->createUrl(['/sign/fill-redirect']),
             ];
         }
 

@@ -10,6 +10,7 @@ namespace cookyii\modules\Account\frontend\controllers;
 use cookyii\modules\Account;
 use rmrevin\yii\rbac\RbacFactory;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 /**
  * Class SignController
@@ -116,6 +117,18 @@ class SignController extends Account\frontend\components\Controller
 
         return $this->render('fill', [
             'FillAttributesForm' => $FillAttributesForm,
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function actionFillRedirect()
+    {
+        return $this->renderFile('@vendor/yiisoft/yii2-authclient/views/redirect.php', [
+            'url' => Url::to(['/']),
+            'enforceRedirect' => true,
         ]);
     }
 
