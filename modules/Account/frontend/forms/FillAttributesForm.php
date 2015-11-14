@@ -81,6 +81,8 @@ class FillAttributesForm extends \cookyii\base\FormModel
             $Account->notificationHelper
                 ->sendSignUpEmail();
 
+            $Account->pushSocialLink($Client);
+
             AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
 
             $SignInFormModel = \Yii::createObject(SignInForm::className());
