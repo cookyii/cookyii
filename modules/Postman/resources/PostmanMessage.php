@@ -1,18 +1,18 @@
 <?php
 /**
- * Message.php
+ * PostmanMessage.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Postman\resources\Postman;
+namespace cookyii\modules\Postman\resources;
 
 use yii\helpers\Html;
 use yii\helpers\Json;
 
 /**
- * Class Message
- * @package cookyii\modules\Postman\resources\Postman
+ * Class PostmanMessage
+ * @package cookyii\modules\Postman\resources
  *
  * @property integer $id
  * @property string $subject
@@ -26,7 +26,7 @@ use yii\helpers\Json;
  * @property integer $sent_at
  * @property integer $deleted_at
  */
-class Message extends \yii\db\ActiveRecord
+class PostmanMessage extends \yii\db\ActiveRecord
 {
 
     use \cookyii\db\traits\SoftDeleteTrait;
@@ -70,19 +70,19 @@ class Message extends \yii\db\ActiveRecord
 
         unset($fields['code']);
 
-        $fields['created_at_format'] = function (Message $Model) {
+        $fields['created_at_format'] = function (PostmanMessage $Model) {
             return Formatter()->asDatetime($Model->created_at);
         };
 
-        $fields['scheduled_at_format'] = function (Message $Model) {
+        $fields['scheduled_at_format'] = function (PostmanMessage $Model) {
             return Formatter()->asDatetime($Model->scheduled_at);
         };
 
-        $fields['sent_at_format'] = function (Message $Model) {
+        $fields['sent_at_format'] = function (PostmanMessage $Model) {
             return Formatter()->asDatetime($Model->sent_at);
         };
 
-        $fields['deleted_at_format'] = function (Message $Model) {
+        $fields['deleted_at_format'] = function (PostmanMessage $Model) {
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
@@ -260,13 +260,13 @@ class Message extends \yii\db\ActiveRecord
      * @param array $placeholders
      * @param string|null $subject
      * @param string $styles
-     * @return \cookyii\modules\Postman\resources\Postman\Message
+     * @return \cookyii\modules\Postman\resources\PostmanMessage
      * @throws \yii\web\ServerErrorHttpException
      */
     public static function create($template_code, $placeholders = [], $subject = null, $styles = '')
     {
-        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
 
         $Template = $TemplateModel::find()
             ->byCode($template_code)
@@ -304,8 +304,8 @@ class Message extends \yii\db\ActiveRecord
         $layout_text = '{content}';
         $layout_html = '{content}';
 
-        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
 
         if ($use_layout) {
             $LayoutTemplate = $TemplateModel::find()
@@ -374,12 +374,12 @@ class Message extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Postman\resources\Postman\queries\MessageQuery
+     * @return \cookyii\modules\Postman\resources\queries\PostmanMessageQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Postman\resources\Postman\queries\MessageQuery::className(),
+            \cookyii\modules\Postman\resources\queries\PostmanMessageQuery::className(),
             [get_called_class()]
         );
     }

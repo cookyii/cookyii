@@ -21,7 +21,7 @@ class ResentAction extends \cookyii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Postman\resources\Postman\Message $model */
+        /** @var \cookyii\modules\Postman\resources\PostmanMessage $model */
         $model = $this->findModel($id);
 
         if ($model->send() !== true) {

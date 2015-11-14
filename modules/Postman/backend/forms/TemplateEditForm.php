@@ -18,7 +18,7 @@ class TemplateEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Postman\resources\Postman\Template */
+    /** @var \cookyii\modules\Postman\resources\PostmanTemplate */
     public $Template;
 
     public $code;
@@ -33,7 +33,7 @@ class TemplateEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Template instanceof \cookyii\modules\Postman\resources\Postman\Template)) {
+        if (!($this->Template instanceof \cookyii\modules\Postman\resources\PostmanTemplate)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('postman', 'Not specified template to edit.'));
         }
     }
@@ -43,8 +43,8 @@ class TemplateEditForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
-        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
 
         return [
             /** type validators */

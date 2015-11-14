@@ -19,8 +19,8 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
     'controller' => 'TemplateEditController',
 ]);
 
-/** @var \cookyii\modules\Postman\resources\Postman\Message $MessageModel */
-$MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Message::className());
+/** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
+$MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
 
 ?>
 

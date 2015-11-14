@@ -16,7 +16,7 @@ use cookyii\modules\Postman;
 class TemplateController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'cookyii\modules\Postman\resources\Postman\Template';
+    public $modelClass = 'cookyii\modules\Postman\resources\PostmanTemplate';
 
     /**
      * @inheritdoc
@@ -75,7 +75,7 @@ class TemplateController extends \yii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Postman\resources\Postman\Template */
+        /* @var $modelClass \cookyii\modules\Postman\resources\PostmanTemplate */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find();

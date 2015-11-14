@@ -1,21 +1,21 @@
 <?php
 /**
- * Attach.php
+ * PostmanTemplateAttach.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Postman\resources\Postman\Message;
+namespace cookyii\modules\Postman\resources;
 
 /**
  * Class Attach
- * @package cookyii\modules\Postman\resources\Postman\Message
+ * @package cookyii\modules\Postman\resources
  *
- * @property integer $letter_id
+ * @property integer $letter_template_id
  * @property integer $media_id
  * @property integer $embed
  */
-class Attach extends \yii\db\ActiveRecord
+class PostmanTemplateAttach extends \yii\db\ActiveRecord
 {
 
     /**
@@ -25,11 +25,11 @@ class Attach extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['letter_id', 'media_id'], 'integer'],
+            [['letter_template_id', 'media_id'], 'integer'],
             [['type'], 'boolean'],
 
             /** semantic validators */
-            [['letter_id', 'media_id'], 'required'],
+            [['letter_template_id', 'media_id'], 'required'],
 
             /** default values */
             [['embed'], 'default', 'value' => static::EMBED_NO],
@@ -37,12 +37,12 @@ class Attach extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Postman\resources\Postman\Message\queries\MessageAttachQuery
+     * @return \cookyii\modules\Postman\resources\queries\PostmanTemplateAttachQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Postman\resources\Postman\Message\queries\MessageAttachQuery::className(), [
+            \cookyii\modules\Postman\resources\queries\PostmanTemplateAttachQuery::className(), [
                 get_called_class(),
             ]
         );
@@ -53,7 +53,7 @@ class Attach extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%postman_message_attach}}';
+        return '{{%postman_template_attach}}';
     }
 
     const EMBED_NO = 0;

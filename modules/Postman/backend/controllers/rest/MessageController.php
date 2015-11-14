@@ -16,7 +16,7 @@ use cookyii\modules\Postman;
 class MessageController extends \cookyii\rest\ActiveController
 {
 
-    public $modelClass = 'cookyii\modules\Postman\resources\Postman\Message';
+    public $modelClass = 'cookyii\modules\Postman\resources\PostmanMessage';
 
     /**
      * @inheritdoc
@@ -95,7 +95,7 @@ class MessageController extends \cookyii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Postman\resources\Postman\Message */
+        /* @var $modelClass \cookyii\modules\Postman\resources\PostmanMessage */
         $modelClass = $action->modelClass;
 
         /** @var  $Query */

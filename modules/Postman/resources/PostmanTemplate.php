@@ -1,17 +1,17 @@
 <?php
 /**
- * Template.php
+ * PostmanTemplate.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Postman\resources\Postman;
+namespace cookyii\modules\Postman\resources;
 
 use yii\helpers\Json;
 
 /**
- * Class Template
- * @package cookyii\modules\Postman\resources\Postman
+ * Class PostmanTemplate
+ * @package cookyii\modules\Postman\resources
  *
  * @property integer $id
  * @property string $code
@@ -27,7 +27,7 @@ use yii\helpers\Json;
  * @property integer $updated_at
  * @property integer $deleted_at
  */
-class Template extends \yii\db\ActiveRecord
+class PostmanTemplate extends \yii\db\ActiveRecord
 {
 
     use \cookyii\db\traits\SoftDeleteTrait;
@@ -49,15 +49,15 @@ class Template extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['created_at_format'] = function (Template $Model) {
+        $fields['created_at_format'] = function (PostmanTemplate $Model) {
             return Formatter()->asDatetime($Model->created_at);
         };
 
-        $fields['updated_at_format'] = function (Template $Model) {
+        $fields['updated_at_format'] = function (PostmanTemplate $Model) {
             return Formatter()->asDatetime($Model->updated_at);
         };
 
-        $fields['deleted_at_format'] = function (Template $Model) {
+        $fields['deleted_at_format'] = function (PostmanTemplate $Model) {
             return Formatter()->asDatetime($Model->deleted_at);
         };
 
@@ -107,12 +107,12 @@ class Template extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery
+     * @return \cookyii\modules\Postman\resources\queries\PostmanTemplateQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Postman\resources\Postman\queries\TemplateQuery::className(),
+            \cookyii\modules\Postman\resources\queries\PostmanTemplateQuery::className(),
             [get_called_class()]
         );
     }

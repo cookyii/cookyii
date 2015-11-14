@@ -1,20 +1,20 @@
 <?php
 /**
- * TemplateQuery.php
+ * PostmanMessageQuery.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Postman\resources\Postman\queries;
+namespace cookyii\modules\Postman\resources\queries;
 
 /**
- * Class TemplateQuery
- * @package cookyii\modules\Postman\resources\Postman\queries
+ * Class PostmanMessageQuery
+ * @package cookyii\modules\Postman\resources\queries
  *
- * @method \cookyii\modules\Postman\resources\Postman\Template|array|null one($db = null)
- * @method \cookyii\modules\Postman\resources\Postman\Template[]|array all($db = null)
+ * @method \cookyii\modules\Postman\resources\PostmanMessage|array|null one($db = null)
+ * @method \cookyii\modules\Postman\resources\PostmanMessage[]|array all($db = null)
  */
-class TemplateQuery extends \yii\db\ActiveQuery
+class PostmanMessageQuery extends \yii\db\ActiveQuery
 {
 
     use \cookyii\db\traits\query\DeletedQueryTrait;
@@ -31,12 +31,11 @@ class TemplateQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param string|array $code
      * @return static
      */
-    public function byCode($code)
+    public function onlyNotSent()
     {
-        $this->andWhere(['code' => $code]);
+        $this->andWhere(['sent_at' => null]);
 
         return $this;
     }
@@ -52,12 +51,10 @@ class TemplateQuery extends \yii\db\ActiveQuery
         $this->andWhere([
             'or',
             array_merge(['or'], array_map(function ($value) { return ['like', 'id', $value]; }, $words)),
-            array_merge(['or'], array_map(function ($value) { return ['like', 'code', $value]; }, $words)),
             array_merge(['or'], array_map(function ($value) { return ['like', 'subject', $value]; }, $words)),
             array_merge(['or'], array_map(function ($value) { return ['like', 'content_text', $value]; }, $words)),
             array_merge(['or'], array_map(function ($value) { return ['like', 'content_html', $value]; }, $words)),
             array_merge(['or'], array_map(function ($value) { return ['like', 'address', $value]; }, $words)),
-            array_merge(['or'], array_map(function ($value) { return ['like', 'description', $value]; }, $words)),
         ]);
 
         return $this;

@@ -44,8 +44,8 @@ class TemplateController extends Postman\backend\components\Controller
      */
     public function actionEdit()
     {
-        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
 
         $TemplateEditForm = \Yii::createObject([
             'class' => Postman\backend\forms\TemplateEditForm::className(),
@@ -71,8 +71,8 @@ class TemplateController extends Postman\backend\components\Controller
 
         $use_layout = $use_layout === 'true';
 
-        /** @var \cookyii\modules\Postman\resources\Postman\Message $MessageModel */
-        $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Message::className());
+        /** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
+        $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
 
         switch ($type) {
             default:

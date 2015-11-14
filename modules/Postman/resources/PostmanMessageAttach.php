@@ -1,21 +1,21 @@
 <?php
 /**
- * Attach.php
+ * PostmanMessageAttach.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Postman\resources\Postman\Template;
+namespace cookyii\modules\Postman\resources;
 
 /**
- * Class Attach
- * @package cookyii\modules\Postman\resources\Postman\Template
+ * Class PostmanMessageAttach
+ * @package cookyii\modules\Postman\resources
  *
- * @property integer $letter_template_id
+ * @property integer $letter_id
  * @property integer $media_id
  * @property integer $embed
  */
-class Attach extends \yii\db\ActiveRecord
+class PostmanMessageAttach extends \yii\db\ActiveRecord
 {
 
     /**
@@ -25,11 +25,11 @@ class Attach extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['letter_template_id', 'media_id'], 'integer'],
+            [['letter_id', 'media_id'], 'integer'],
             [['type'], 'boolean'],
 
             /** semantic validators */
-            [['letter_template_id', 'media_id'], 'required'],
+            [['letter_id', 'media_id'], 'required'],
 
             /** default values */
             [['embed'], 'default', 'value' => static::EMBED_NO],
@@ -37,12 +37,12 @@ class Attach extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \cookyii\modules\Postman\resources\Postman\Template\queries\TemplateAttachQuery
+     * @return \cookyii\modules\Postman\resources\queries\PostmanMessageAttachQuery
      */
     public static function find()
     {
         return \Yii::createObject(
-            \cookyii\modules\Postman\resources\Postman\Template\queries\TemplateAttachQuery::className(), [
+            \cookyii\modules\Postman\resources\queries\PostmanMessageAttachQuery::className(), [
                 get_called_class(),
             ]
         );
@@ -53,7 +53,7 @@ class Attach extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%postman_template_attach}}';
+        return '{{%postman_message_attach}}';
     }
 
     const EMBED_NO = 0;

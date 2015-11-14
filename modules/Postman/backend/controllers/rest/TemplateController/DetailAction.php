@@ -21,13 +21,13 @@ class DetailAction extends \cookyii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Postman\resources\Postman\Template $Model */
+        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $Model */
         $Model = $this->findModel($id);
 
         $result = $Model->toArray();
 
-        /** @var \cookyii\modules\Postman\resources\Postman\Template $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\Postman\Template::className());
+        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
 
         $result['use_layout'] = $result['use_layout'] === $TemplateModel::USE_LAYOUT;
 
