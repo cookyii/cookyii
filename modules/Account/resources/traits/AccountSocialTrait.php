@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\resources\traits;
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -54,7 +55,11 @@ trait AccountSocialTrait
         }
 
         if ($Client instanceof \yii\authclient\BaseOAuth) {
-            $Auth->token = Json::encode($Client->getAccessToken()->getParams());
+            $Token = $Client->getAccessToken();
+            $token = ArrayHelper::toArray($Token);
+            $token['params'] = $Token->getParams();
+
+            $Auth->token = Json::encode($token);
         }
 
         $Auth->validate() && $Auth->save();
