@@ -72,7 +72,10 @@
 Установка
 ---------
 
-Для начала необходимо установить `nodejs` и `npm`. Установка описана на [GitHub](https://github.com/joyent/node/wiki/Installation).
+Для начала необходимо установить `nodejs`, `npm` и `gulp`.
+
+* [Установка ноды и `npm`](https://github.com/joyent/node/wiki/Installation).
+* [Установка `gulp`](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
 
 Если у Вас не установлен [Composer](http://getcomposer.org/), вы должны установить его.
 Информацию об этом Вы можете получить на сайте [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
