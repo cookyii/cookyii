@@ -98,8 +98,10 @@ class Config
             $gmt = (int)$_COOKIE['timezone'];
         }
 
-        if (Session()->has('timezone')) {
-            $gmt = (int)Session()->get('timezone', 0);
+        $Session = \Yii::$app->get('session', false);
+
+        if ($Session && $Session->has('timezone')) {
+            $gmt = (int)$Session->get('timezone', 0);
         }
 
         $gmt = $gmt < -14 || $gmt > 12 // GMT-14 && GMT+12
