@@ -15,7 +15,7 @@ automaticDetectionApplications($apps);
 $config = [
     'default' => [
         '.description' => 'Default build',
-        '.depends' => ['set/dev'],
+        '.depends' => ['env/dev'],
     ],
 
     'map' => [
@@ -31,13 +31,13 @@ $config = [
         ],
     ],
 
-    'set' => [
+    'env' => [
         'prod' => [
             '.description' => 'Build project with production environment',
             '.depends' => [
                 'environment/check',
                 'clear',
-                'composer/selfupdate', 'composer/install-prod',
+                'composer/selfupdate', 'composer/update-fxp', 'composer/install-prod',
                 'npm/install', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
@@ -47,7 +47,7 @@ $config = [
             '.depends' => [
                 'environment/check',
                 'clear',
-                'composer/selfupdate', 'composer/install',
+                'composer/selfupdate', 'composer/update-fxp', 'composer/install',
                 'npm/install', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
@@ -57,7 +57,7 @@ $config = [
             '.depends' => [
                 'environment/check',
                 'clear',
-                'composer/selfupdate', 'composer/install',
+                'composer/selfupdate', 'composer/update-fxp', 'composer/install',
                 'npm/install', 'bower/update', 'less',
                 'migrate', 'rbac',
             ],
@@ -87,6 +87,13 @@ $config = [
         '.task' => [
             'class' => 'cookyii\build\tasks\ComposerTask',
             'composer' => '../composer.phar',
+        ],
+        'update-fxp' => [
+            '.description' => 'Update `fxp/composer-asset-plugin`',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\CommandTask',
+                'commandline' => '../composer.phar global require "fxp/composer-asset-plugin:~1.1.0"',
+            ],
         ],
     ],
 
@@ -281,7 +288,9 @@ function cmd($app, $command)
     );
 
     return str_replace(
-        array_map(function ($val) { return sprintf('{%s}', $val); }, array_keys($path_list)),
+        array_map(function ($val) {
+            return sprintf('{%s}', $val);
+        }, array_keys($path_list)),
         array_values($path_list),
         $command
     );

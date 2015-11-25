@@ -85,7 +85,6 @@
 Установить этот шаблон проекта Вы можете выполнив следующую команду:
 
 ```bash
-composer global require "fxp/composer-asset-plugin:~1.0.0"
 composer create-project --prefer-dist --stability=dev cookyii/project new-project
 ```
 
@@ -98,16 +97,12 @@ crm.new-project.com     ->  .../crm-app/web
 ```
 
 
-Развертывание Вашего проекта (deploy)
+Развертывание нового проекта (deploy)
 -------------------------------------
 
 1. Скопировать файл `.env.dist.php` в `.env.php` (в базовой директории), заполнить необходимые данные.
 2. Скопировать файлы `.credentials.dist.php` в `.credentials.php` (в директориях приложений), заполнить необходимые данные.
-3. Установить `composer` зависимости `./build composer install`. (для продакшена `./build composer install-prod`)
-4. Установить `frontend` зависимости через npm `./build npm/install` и `./build bower/install`.
-5. Скомпилировать `less` стили `./build less`.
-6. Развернуть миграции `./build migrate`.
-7. Обновить `rbac` правила `./build rbac`.
+3. Собрать билд `./build` (для продакшена `./build env/prod`).
 
 
 Настройка
@@ -119,9 +114,9 @@ crm.new-project.com     ->  .../crm-app/web
 Доступные команды `./build`
 ---------------------------
 
-* `./build` или `./build set/dev` - собрать проект для dev площадки.
-* `./build set/demo` - собрать проект для demo площадки.
-* `./build set/production` - собрать проект для продакшена.
+* `./build` или `./build env/dev` - собрать проект для dev площадки.
+* `./build env/demo` - собрать проект для demo площадки.
+* `./build env/production` - собрать проект для продакшена.
 
 Дополнительно доступны следующие команды (они выполняются в рамках `set/*` команд, и сюда добавлены только для справки):
 * `./build map` - показать список всех команд.
@@ -129,7 +124,10 @@ crm.new-project.com     ->  .../crm-app/web
 * `./build clear/*` - удалить все временные файлы и логи в конкретном приложении.
 * `./build composer` - установить `composer` зависимости из `composer.lock`.
 * `./build composer/update` - скачать новые версии `composer` зависимостей и обновить `composer.lock`.
+* `./build composer/install` - скачать новые версии `composer` зафиксированные в `composer.lock`.
+* `./build composer/install-prod` - скачать новые версии `composer` зафиксированные в `composer.lock` без `require-dev`.
 * `./build composer/selfupdate` - обновить `composer`.
+* `./build composer/update-fxp` - обновить плагин `fxp/composer-asset-plugin`.
 * `./build npm/install` - установить зависимости `npm`.
 * `./build npm/update` - обновить зависимости `npm`.
 * `./build bower/install` - установить зависимости `bower`.
