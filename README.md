@@ -85,6 +85,7 @@
 Установить этот шаблон проекта Вы можете выполнив следующую команду:
 
 ```bash
+composer global require "fxp/composer-asset-plugin:~1.1.0"
 composer create-project --prefer-dist --stability=dev cookyii/project new-project
 ```
 
@@ -102,7 +103,7 @@ crm.new-project.com     ->  .../crm-app/web
 
 1. Скопировать файл `.env.dist.php` в `.env.php` (в базовой директории), заполнить необходимые данные.
 2. Скопировать файлы `.credentials.dist.php` в `.credentials.php` (в директориях приложений), заполнить необходимые данные.
-3. Собрать билд `./build` (для продакшена `./build env/prod`).
+3. Собрать билд с помощью команды `./build` (для продакшена `./build env/prod`).
 
 
 Настройка
