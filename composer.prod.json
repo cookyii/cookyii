@@ -34,7 +34,6 @@
     "yiisoft/yii2-authclient": "2.0.*",
     "yiisoft/yii2-swiftmailer": "2.0.*",
 
-    "cookyii/build": "dev-master",
     "cookyii/base": "dev-master",
     "cookyii/module-feed": "dev-master",
     "cookyii/module-account": "dev-master",

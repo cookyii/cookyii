@@ -71,6 +71,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         'build',
         'build.bat',
         'build.php',
+        'build.phar',
         'codecept',
         'codeception.yml',
         'composer.prod.json' => 'composer.json',

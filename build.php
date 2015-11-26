@@ -5,6 +5,8 @@
  * @link https://rmrevin.com
  */
 
+require __DIR__ . '/dev/build/ExtractTask.php';
+
 /** @var array $apps list of existing applications */
 $apps = ['frontend', 'backend', 'crm'];
 
