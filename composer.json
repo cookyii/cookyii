@@ -84,7 +84,6 @@
       "backend\\modules\\": "./backend-modules",
       "crm\\": "./crm-app",
       "crm\\modules\\": "./crm-modules",
-      "dev\\": "./dev",
       "cookyii\\": "./base",
       "cookyii\\modules\\Feed\\": "./modules/Feed",
       "cookyii\\modules\\Account\\": "./modules/Account",
