@@ -78,6 +78,7 @@
   },
   "extra": {
     "writable": [
+      "console-app/runtime",
       "frontend-app/runtime",
       "frontend-app/web/assets",
       "frontend-app/web/storage",
