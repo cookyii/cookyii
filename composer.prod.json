@@ -96,9 +96,7 @@
       "build",
       "codecept",
       "generate_self_signed_ssl_key",
-      "frontend",
-      "backend",
-      "crm"
+      "yii"
     ],
     "asset-installer-paths": {
       "npm-asset-library": "vendor/npm",
