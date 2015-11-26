@@ -139,13 +139,17 @@ $config = [
 
     'migrate' => [
         '.description' => 'Execute all migrations',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\CommandTask',
+            'commandline' => './yii migrate --interactive=0',
+        ]
     ],
 
     'rbac' => [
         '.description' => 'Update rbac rules',
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
-            'commandline' => './frontend rbac/update',
+            'commandline' => './yii rbac/update',
         ],
     ],
 
@@ -165,7 +169,6 @@ if (!empty($apps)) {
     foreach ($apps as $app) {
         appendClearTask($config, 'clear', $app);
         appendLessTask($config, 'less', $app);
-        appendMigrateTask($config, 'migrate', $app);
     }
 }
 
@@ -234,25 +237,6 @@ function appendLessTask(array &$config, $task_name, $app)
             'commandline' => [
                 cmd($app, '{node}/gulp less --app {a}'),
             ],
-        ],
-    ];
-}
-
-/**
- * @param array $config
- * @param string $task_name
- * @param string $app
- */
-function appendMigrateTask(array &$config, $task_name, $app)
-{
-    appendEmptyTask($config, $task_name);
-
-    $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
-    $config[$task_name][$app] = [
-        '.description' => sprintf('Compile all less styles for `%s` application', $app),
-        '.task' => [
-            'class' => 'cookyii\build\tasks\CommandTask',
-            'commandline' => cmd($app, './{a} migrate --interactive=0'),
         ],
     ];
 }
