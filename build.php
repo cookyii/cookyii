@@ -37,6 +37,7 @@ $config = [
         'prod' => [
             '.description' => 'Build project with production environment',
             '.depends' => [
+                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/update-fxp', 'composer/install-prod',
@@ -47,6 +48,7 @@ $config = [
         'demo' => [
             '.description' => 'Build project with demo environment',
             '.depends' => [
+                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/update-fxp', 'composer/install',
@@ -57,6 +59,7 @@ $config = [
         'dev' => [
             '.description' => 'Build project with developer environment',
             '.depends' => [
+                'self/update',
                 'environment/check',
                 'clear',
                 'composer/selfupdate', 'composer/update-fxp', 'composer/install',
