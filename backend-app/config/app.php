@@ -28,7 +28,10 @@ return array_merge($config, [
         'page' => cookyii\modules\Page\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
         'translation' => cookyii\modules\Translation\backend\Module::className(),
-        'media' => cookyii\modules\Media\Module::className(),
+        'media' => [
+            'class' => cookyii\modules\Media\Module::class,
+            'placeholderAlias' => '@backend/assets/images/placeholder.png',
+        ],
         'postman' => [
             'class' => cookyii\modules\Postman\backend\Module::className(),
             'subjectPrefix' => 'Cookyii Backend // ',

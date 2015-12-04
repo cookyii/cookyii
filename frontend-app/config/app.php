@@ -26,7 +26,10 @@ return array_merge($config, [
     'modules' => [
         'account' => cookyii\modules\Account\frontend\Module::className(),
         'page' => cookyii\modules\Page\frontend\Module::className(),
-        'media' => cookyii\modules\Media\Module::className(),
+        'media' => [
+            'class' => cookyii\modules\Media\Module::class,
+            'placeholderAlias' => '@frontend/assets/images/placeholder.png',
+        ],
         'postman' => [
             'class' => cookyii\modules\Postman\frontend\Module::className(),
             'subjectPrefix' => 'Cookyii //',

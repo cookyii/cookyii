@@ -26,7 +26,10 @@ return array_merge($config, [
     'modules' => [
         'account' => cookyii\modules\Account\crm\Module::className(),
         'client' => cookyii\modules\Client\crm\Module::className(),
-        'media' => cookyii\modules\Media\Module::className(),
+        'media' => [
+            'class' => cookyii\modules\Media\Module::class,
+            'placeholderAlias' => '@crm/assets/images/placeholder.png',
+        ],
         'postman' => [
             'class' => cookyii\modules\Postman\crm\Module::className(),
             'subjectPrefix' => 'Cookyii CRM // ',
