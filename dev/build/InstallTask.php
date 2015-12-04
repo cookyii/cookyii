@@ -44,7 +44,16 @@ class InstallTask extends CallableTask
     public $mysqlUserPassword;
 
     /** @var string */
+    public $mysqlUserPasswordConst = 'DB_PASS';
+
+    /** @var string */
     public $mysqlRootPassword;
+
+    /** @var string|null */
+    public $cookieValidationKey;
+
+    /** @var string */
+    public $cookieValidationKeyConst = 'COOKIE_VALIDATION_KEY';
 
     /** @var string */
     public $domain;
@@ -119,6 +128,16 @@ class InstallTask extends CallableTask
             if (!$res) {
                 $stop = true;
                 $this->log('<task-result> STOP </task-result> The installation process was interrupted.');
+            } else {
+                include $envFile;
+
+                if (defined($this->mysqlUserPasswordConst) && empty($this->mysqlUserPassword)) {
+                    $this->mysqlUserPassword = constant($this->mysqlUserPasswordConst);
+                }
+
+                if (defined($this->cookieValidationKeyConst) && empty($this->cookieValidationKey)) {
+                    $this->cookieValidationKey = constant($this->cookieValidationKeyConst);
+                }
             }
         }
 
@@ -157,9 +176,13 @@ class InstallTask extends CallableTask
     {
         $result = false;
 
+        $cookieValidationKey = empty($this->cookieValidationKey)
+            ? $this->generateRandomString()
+            : $this->cookieValidationKey;
+
         $replace = [
             '<domain>' => $this->domain,
-            '<cookoe-validation-key>' => $this->generateRandomString(),
+            '<cookoe-validation-key>' => $cookieValidationKey,
             '<mysql-user-host>' => $this->mysqlUserHost,
             '<mysql-user-name>' => $this->mysqlUserName,
             '<mysql-user-password>' => $this->mysqlUserPassword,
