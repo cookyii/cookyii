@@ -68,9 +68,10 @@
 Системные требования
 --------------------
 
-* PHP 5.4 или выше
-* [NodeJS и npm](https://github.com/joyent/node/wiki/Installation)
+* [PHP 5.4](http://php.net) или выше
+* [NodeJS 0.10](https://nodejs.org/en/) или выше
 * [Composer](http://getcomposer.org/)
+* [npm](https://docs.npmjs.com/getting-started/installing-node)
 
 
 Установка
