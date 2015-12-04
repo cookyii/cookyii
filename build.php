@@ -21,6 +21,11 @@ $config = [
         '.depends' => ['env/dev'],
     ],
 
+    'map' => [
+        '.description' => 'Show map of all tasks in current build config',
+        '.task' => 'cookyii\build\tasks\MapTask',
+    ],
+
     'install' => [
         '.task' => [
             'class' => 'dev\build\InstallTask',
@@ -29,11 +34,6 @@ $config = [
                 'main' => 'cookyii',
             ],
         ],
-    ],
-
-    'map' => [
-        '.description' => 'Show map of all tasks in current build config',
-        '.task' => 'cookyii\build\tasks\MapTask',
     ],
 
     'self' => [
