@@ -15,10 +15,10 @@ $apps = ['frontend', 'backend', 'crm'];
 automaticDetectionApplications($apps);
 
 /** @var array $config build configuration */
-$config = [
+$buildConfig = [
     'default' => [
         '.description' => 'Default build',
-        '.depends' => ['env/dev'],
+        '.depends' => ['dev'],
     ],
 
     'map' => [
@@ -44,39 +44,39 @@ $config = [
         ],
     ],
 
-    'env' => [
-        'prod' => [
-            '.description' => 'Build project with production environment',
-            '.depends' => [
-                'self/update',
-                'environment/check',
-                'clear',
-                'composer/selfupdate', 'composer/update-fxp', 'composer/install-prod',
-                'npm/install', 'bower/update', 'less',
-                'migrate', 'rbac',
-            ],
+    'prod' => [
+        '.description' => 'Build project with production environment',
+        '.depends' => [
+            'self/update',
+            'environment/check',
+            'clear',
+            'composer/selfupdate', 'composer/update-fxp', 'composer/install-prod',
+            'npm/install', 'bower/update', 'less',
+            'migrate', 'rbac',
         ],
-        'demo' => [
-            '.description' => 'Build project with demo environment',
-            '.depends' => [
-                'self/update',
-                'environment/check',
-                'clear',
-                'composer/selfupdate', 'composer/update-fxp', 'composer/install',
-                'npm/install', 'bower/update', 'less',
-                'migrate', 'rbac',
-            ],
+    ],
+
+    'demo' => [
+        '.description' => 'Build project with demo environment',
+        '.depends' => [
+            'self/update',
+            'environment/check',
+            'clear',
+            'composer/selfupdate', 'composer/update-fxp', 'composer/install',
+            'npm/install', 'bower/update', 'less',
+            'migrate', 'rbac',
         ],
-        'dev' => [
-            '.description' => 'Build project with developer environment',
-            '.depends' => [
-                'self/update',
-                'environment/check',
-                'clear',
-                'composer/selfupdate', 'composer/update-fxp', 'composer/install',
-                'npm/install', 'bower/update', 'less',
-                'migrate', 'rbac',
-            ],
+    ],
+
+    'dev' => [
+        '.description' => 'Build project with developer environment',
+        '.depends' => [
+            'self/update',
+            'environment/check',
+            'clear',
+            'composer/selfupdate', 'composer/update-fxp', 'composer/install',
+            'npm/install', 'bower/update', 'less',
+            'migrate', 'rbac',
         ],
     ],
 
@@ -183,8 +183,8 @@ $config = [
 // create applications tasks
 if (!empty($apps)) {
     foreach ($apps as $app) {
-        appendClearTask($config, 'clear', $app);
-        appendLessTask($config, 'less', $app);
+        appendClearTask($buildConfig, 'clear', $app);
+        appendLessTask($buildConfig, 'less', $app);
     }
 }
 
@@ -211,18 +211,18 @@ function getPath($app, $key = null)
 }
 
 /**
- * @param array $config
+ * @param array $buildConfig
  * @param string $task_name
  * @param string $app
  */
-function appendClearTask(array &$config, $task_name, $app)
+function appendClearTask(array &$buildConfig, $task_name, $app)
 {
-    prepareEmptyTask($config, $task_name);
+    prepareEmptyTask($buildConfig, $task_name);
 
     $path_list = getPath($app);
 
-    $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
-    $config[$task_name][$app] = [
+    $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
+    $buildConfig[$task_name][$app] = [
         '.description' => 'Remove all temp files',
         '.task' => [
             'class' => 'cookyii\build\tasks\DeleteTask',
@@ -237,16 +237,16 @@ function appendClearTask(array &$config, $task_name, $app)
 }
 
 /**
- * @param array $config
+ * @param array $buildConfig
  * @param string $task_name
  * @param string $app
  */
-function appendLessTask(array &$config, $task_name, $app)
+function appendLessTask(array &$buildConfig, $task_name, $app)
 {
-    prepareEmptyTask($config, $task_name);
+    prepareEmptyTask($buildConfig, $task_name);
 
-    $config[$task_name]['.depends'][] = sprintf('*/%s', $app);
-    $config[$task_name][$app] = [
+    $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
+    $buildConfig[$task_name][$app] = [
         '.description' => sprintf('Compile all less styles for `%s` application', $app),
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
@@ -258,17 +258,17 @@ function appendLessTask(array &$config, $task_name, $app)
 }
 
 /**
- * @param array $config
+ * @param array $buildConfig
  * @param string $task_name
  */
-function prepareEmptyTask(array &$config, $task_name)
+function prepareEmptyTask(array &$buildConfig, $task_name)
 {
-    if (!isset($config[$task_name])) {
-        $config[$task_name] = [];
+    if (!isset($buildConfig[$task_name])) {
+        $buildConfig[$task_name] = [];
     }
 
-    if (!isset($config[$task_name]['.depends'])) {
-        $config[$task_name]['.depends'] = [];
+    if (!isset($buildConfig[$task_name]['.depends'])) {
+        $buildConfig[$task_name]['.depends'] = [];
     }
 }
 
@@ -313,4 +313,4 @@ function automaticDetectionApplications(array &$apps)
     }
 }
 
-return $config;
+return $buildConfig;
