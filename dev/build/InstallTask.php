@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: revin
- * Date: 12/1/15
- * Time: 11:19 PM
+ * ExtractTask.php
+ * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace dev\build;
