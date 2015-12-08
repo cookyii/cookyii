@@ -5,7 +5,7 @@
  * @link https://rmrevin.com
  *
  * @var \yii\web\View $this
- * @var Account\frontend\forms\FillAttributesForm $FillAttributesForm
+ * @var Account\forms\FillAttributesForm $FillAttributesForm
  */
 
 use cookyii\modules\Account;

@@ -5,7 +5,7 @@
  * @link https://rmrevin.com
  *
  * @var \yii\web\View $this
- * @var Account\crm\forms\SignInForm $SignInForm
+ * @var Account\forms\SignInForm $SignInForm
  */
 
 use cookyii\modules\Account;

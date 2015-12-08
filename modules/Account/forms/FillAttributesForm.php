@@ -1,31 +1,25 @@
 <?php
 /**
- * SignUpForm.php
+ * FillAttributesForm.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\frontend\forms;
+namespace cookyii\modules\Account\forms;
 
 use rmrevin\yii\rbac\RbacFactory;
+use yii\helpers\Json;
 
 /**
- * Class SignUpForm
- * @package cookyii\modules\Account\frontend\forms
+ * Class FillAttributesForm
+ * @package cookyii\modules\Account\forms
  */
-class SignUpForm extends \cookyii\base\FormModel
+class FillAttributesForm extends \cookyii\base\FormModel
 {
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    public $name;
     public $email;
-    public $password;
-    public $password_app;
-
-    public $agree;
-
-    public $loginAfterRegister = true;
 
     /**
      * @inheritdoc
@@ -37,16 +31,13 @@ class SignUpForm extends \cookyii\base\FormModel
 
         return [
             /** type validators */
-            [['email'], 'email'],
-            [['name', 'email', 'password', 'password'], 'string'],
-            [['agree'], 'boolean', 'trueValue' => 'true', 'falseValue' => 'false'],
+            [['email'], 'string'],
 
             /** semantic validators */
-            [['name', 'email', 'password', 'password_app'], 'required'],
-            [['name', 'email'], 'filter', 'filter' => 'str_clean'],
+            [['email'], 'required'],
+            [['email'], 'email'],
+            [['email'], 'filter', 'filter' => 'str_clean'],
             [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
-            [['password_app'], 'compare', 'compareAttribute' => 'password'],
-            [['agree'], 'compare', 'compareValue' => 'true', 'operator' => '===', 'message' => \Yii::t('account', 'You must accept the terms')],
         ];
     }
 
@@ -56,11 +47,7 @@ class SignUpForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'name' => \Yii::t('account', 'Name'),
             'email' => \Yii::t('account', 'Email'),
-            'password' => \Yii::t('account', 'Password'),
-            'password_app' => \Yii::t('account', 'Password approve'),
-            'agree' => \Yii::t('account', 'I agree to the terms of use'),
         ];
     }
 
@@ -69,37 +56,48 @@ class SignUpForm extends \cookyii\base\FormModel
      */
     public function formAction()
     {
-        return ['/account/api/up'];
+        return ['/account/api/fill'];
     }
 
     /**
+     * @param \yii\authclient\ClientInterface $Client
      * @return bool
+     * @throws \yii\base\InvalidConfigException
      */
-    public function register()
+    public function save(\yii\authclient\ClientInterface $Client)
     {
         /** @var \cookyii\modules\Account\resources\Account $Account */
         $Account = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+
+        $Account->appendClientAttributes($Client);
+
         $Account->setAttributes([
-            'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password,
-            'activated_at' => time(),
+            'password' => Security()->generateRandomString(10),
         ]);
 
         $Account->validate() && $Account->save();
 
-        if (!$Account->hasErrors()) {
+        $AuthResponse = \cookyii\modules\Account\resources\AccountAuthResponse::createLog($Client);
+
+        if ($Account->hasErrors()) {
+            $AuthResponse->result = Json::encode($Account->getErrors());
+        } else {
+            $AuthResponse->result = (string)$Account->id;
+
             $Account->notificationHelper
                 ->sendSignUpEmail();
 
+            $Account->pushSocialLink($Client);
+
             AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
 
-            if ($this->loginAfterRegister) {
-                $SignInFormModel = \Yii::createObject(SignInForm::className());
+            $SignInFormModel = \Yii::createObject(SignInForm::className());
 
-                User()->login($Account, $SignInFormModel::REMEMBER_TIME);
-            }
+            User()->login($Account, $SignInFormModel::REMEMBER_TIME);
         }
+
+        $AuthResponse->validate() && $AuthResponse->save();
 
         if ($Account->hasErrors()) {
             $this->populateErrors($Account, 'name');

@@ -5,14 +5,14 @@
  * @link https://rmrevin.com
  *
  * @var \yii\web\View $this
- * @var Account\frontend\forms\ForgotPasswordForm $ForgotPasswordForm
+ * @var Account\forms\ForgotPasswordForm $ForgotPasswordForm
  */
 
 use cookyii\modules\Account;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = \Yii::t('account', 'Forgot password');
+$this->title = \Yii::t('cookyii.account', 'Forgot password');
 
 Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
 
@@ -20,7 +20,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
 
 <div class="box" ng-controller="ForgotPasswordController">
     <div class="box-logo">
-        <?= Html::a(Html::img('/img/cookyii.png') . ' <strong>COOKYII</strong>frontend', ['/']) ?>
+        <?= Html::a('<strong>COOKYII</strong>frontend', ['/']) ?>
     </div>
 
     <div class="box-body">
@@ -42,7 +42,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
                 <?php
                 $icon = FA::icon('cog', ['ng-show' => 'in_progress', 'class' => 'wo-animate'])->spin();
 
-                echo Html::submitButton($icon . ' ' . Yii::t('account', 'Reset password'), [
+                echo Html::submitButton($icon . ' ' . Yii::t('cookyii.account', 'Reset password'), [
                     'class' => 'btn btn-sm btn-primary btn-flat',
                     'ng-disabled' => 'in_progress',
                 ]);
@@ -53,7 +53,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
         \cookyii\widgets\angular\ActiveForm::end();
         ?>
 
-        <?= Html::a(Yii::t('account', 'Sign in'), ['/account/sign/in']) ?><br>
-        <?= Html::a(Yii::t('account', 'Sign up'), ['/account/sign/up']) ?>
+        <?= Html::a(Yii::t('cookyii.account', 'Sign in'), ['/account/sign/in']) ?><br>
+        <?= Html::a(Yii::t('cookyii.account', 'Sign up'), ['/account/sign/up']) ?>
     </div>
 </div>

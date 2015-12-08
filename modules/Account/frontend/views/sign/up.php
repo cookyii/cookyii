@@ -5,7 +5,7 @@
  * @link https://rmrevin.com
  *
  * @var \yii\web\View $this
- * @var Account\frontend\forms\SignUpForm $SignUpForm
+ * @var Account\forms\SignUpForm $SignUpForm
  */
 
 use cookyii\modules\Account;

@@ -5,11 +5,11 @@
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\frontend\forms;
+namespace cookyii\modules\Account\forms;
 
 /**
  * Class SignInForm
- * @package cookyii\modules\Account\frontend\forms
+ * @package cookyii\modules\Account\forms
  */
 class SignInForm extends \cookyii\base\FormModel
 {

@@ -6,15 +6,15 @@
  */
 
 return [
-    'cookyii/module-feed' => [
-        'name' => 'cookyii/module-feed',
-        'version' => '0.0.0.0',
-        'alias' => ['@cookyii/module-feed' => __DIR__ . '/modules/Feed'],
-    ],
     'cookyii/module-account' => [
         'name' => 'cookyii/module-account',
         'version' => '0.0.0.0',
         'alias' => ['@cookyii/module-account' => __DIR__ . '/modules/Account'],
+    ],
+    'cookyii/module-feed' => [
+        'name' => 'cookyii/module-feed',
+        'version' => '0.0.0.0',
+        'alias' => ['@cookyii/module-feed' => __DIR__ . '/modules/Feed'],
     ],
     'cookyii/module-client' => [
         'name' => 'cookyii/module-client',

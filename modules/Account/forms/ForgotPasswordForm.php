@@ -5,13 +5,13 @@
  * @link https://rmrevin.com
  */
 
-namespace cookyii\modules\Account\frontend\forms;
+namespace cookyii\modules\Account\forms;
 
 use yii\helpers\Json;
 
 /**
  * Class ForgotPasswordForm
- * @package cookyii\modules\Account\frontend\forms
+ * @package cookyii\modules\Account\forms
  */
 class ForgotPasswordForm extends \cookyii\base\FormModel
 {

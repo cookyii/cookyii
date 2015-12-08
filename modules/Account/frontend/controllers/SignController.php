@@ -64,7 +64,8 @@ class SignController extends Account\frontend\components\Controller
 
         $this->layout = '//wide';
 
-        $SignInForm = \Yii::createObject(Account\frontend\forms\SignInForm::className());
+        /** @var Account\forms\SignInForm $SignInForm */
+        $SignInForm = \Yii::createObject(Account\forms\SignInForm::className());
 
         return $this->render('in', [
             'SignInForm' => $SignInForm,
@@ -82,7 +83,8 @@ class SignController extends Account\frontend\components\Controller
 
         $this->layout = '//wide';
 
-        $SignUpForm = \Yii::createObject(Account\frontend\forms\SignUpForm::className());
+        /** @var Account\forms\SignUpForm $SignUpForm */
+        $SignUpForm = \Yii::createObject(Account\forms\SignUpForm::className());
 
         return $this->render('up', [
             'SignUpForm' => $SignUpForm,
@@ -113,7 +115,8 @@ class SignController extends Account\frontend\components\Controller
 
         $this->layout = '//wide';
 
-        $FillAttributesForm = \Yii::createObject(Account\frontend\forms\FillAttributesForm::className());
+        /** @var Account\forms\FillAttributesForm $FillAttributesForm */
+        $FillAttributesForm = \Yii::createObject(Account\forms\FillAttributesForm::className());
 
         return $this->render('fill', [
             'FillAttributesForm' => $FillAttributesForm,
