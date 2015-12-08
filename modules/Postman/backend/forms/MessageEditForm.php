@@ -60,11 +60,11 @@ class MessageEditForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'subject' => \Yii::t('cookyii.postman', 'Subject '),
+            'subject' => \Yii::t('cookyii.postman', 'Subject'),
             'content_text' => \Yii::t('cookyii.postman', 'Plain content'),
             'content_html' => \Yii::t('cookyii.postman', 'HTML content'),
             'address' => \Yii::t('cookyii.postman', 'Address'),
-            'error' => \Yii::t('cookyii.postman', 'Error'),
+            'error' => \Yii::t('cookyii.postman', 'Sending error'),
             'scheduled_at' => \Yii::t('cookyii.postman', 'Scheduled at'),
         ];
     }

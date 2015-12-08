@@ -48,7 +48,7 @@ class ApiController extends \cookyii\rest\Controller
             'result' => false,
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Sign in'),
-                'text' => \Yii::t('cookyii.account', 'Unknown error.'),
+                'text' => \Yii::t('cookyii', 'Unknown error'),
             ]
         ];
 

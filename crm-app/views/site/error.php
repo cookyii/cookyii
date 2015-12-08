@@ -55,8 +55,10 @@ $this->title = $title;
                 ?>
 
                 <p>
-                    We will work on fixing that right away.
-                    Meanwhile, you may <?= Html::a('return to dashboard', ['/']) ?>.
+                    <?= Yii::t('app', 'We will work on fixing that right away.') ?>
+                    <?= Yii::t('app', 'Meanwhile, you may {return to dashboard}.', [
+                        'return to dashboard' => Html::a(Yii::t('app', 'return to dashboard'), ['/']),
+                    ]) ?>
                 </p>
             </div>
         </div>

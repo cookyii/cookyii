@@ -23,7 +23,7 @@ class EditFormAction extends \cookyii\rest\Action
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('cookyii.account', 'Unknown error'),
+            'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
         $account_id = (int)Request()->post('account_id');
@@ -55,7 +55,7 @@ class EditFormAction extends \cookyii\rest\Action
         if ($AccountEditForm->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('cookyii.account', 'When executing a query the error occurred'),
+                'message' => \Yii::t('cookyii', 'When executing a query the error occurred'),
                 'errors' => $AccountEditForm->getFirstErrors(),
             ];
         } else {

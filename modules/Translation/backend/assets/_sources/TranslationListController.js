@@ -11,10 +11,18 @@ angular.module('BackendApp')
       $scope.languages = [];
       $scope.phrases = [];
 
-      $scope.isFullTranslated = function (variants) {
+      var focus = {};
+      $scope.focus = function (phrase) {
+        focus[phrase] = true;
+      };
+
+      $scope.isFullTranslatedPhrase = function (phrase, variants) {
         var result = true;
-        angular.forEach(variants, function (item) {
-          if (result && item === null) {
+        angular.forEach(variants, function (item, key) {
+          if (
+            ($scope.filter.isAllLanguagesSelected() || $scope.filter.isLanguageSelect(key))
+            && (result && item === null)
+            || typeof focus[phrase] !== 'undefined') {
             result = false;
           }
         });

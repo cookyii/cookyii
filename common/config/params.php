@@ -21,6 +21,8 @@ if (empty($crm)) {
     throw new \yii\base\InvalidConfigException('You must specify the url for the crm application (CRM_URL).');
 }
 
+$cookieDomain = str_replace('backend', '', parse_url(BACKEND_URL, PHP_URL_HOST));
+
 return [
     'module.media' => [
         'class' => cookyii\modules\Media\Module::className(),
@@ -63,6 +65,10 @@ return [
     ],
     'component.session' => [
         'class' => yii\web\DbSession::className(),
+        'cookieParams' => [
+            'httpOnly' => true,
+            'domain' => $cookieDomain,
+        ],
     ],
     'component.security' => [
         'class' => yii\base\Security::className(),
@@ -79,8 +85,13 @@ return [
     'component.user' => [
         'class' => yii\web\User::className(),
         'enableAutoLogin' => true,
-        'identityClass' => cookyii\modules\Account\resources\Account::className(),
         'loginUrl' => ['/account/sign/in'],
+        'identityClass' => cookyii\modules\Account\resources\Account::className(),
+        'identityCookie' => [
+            'name' => '_identity',
+            'httpOnly' => true,
+            'domain' => $cookieDomain,
+        ],
     ],
     'component.authManager' => [
         'class' => yii\rbac\DbManager::className(),

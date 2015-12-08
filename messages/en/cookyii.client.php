@@ -34,7 +34,6 @@ return [
     'Email' => '',
     'Failed to create account' => '',
     'Failed to unlink account' => '',
-    'Filter' => '',
     'General information' => '',
     'ID' => '',
     'Key' => '',
@@ -52,10 +51,8 @@ return [
     'Save and create new property' => '',
     'Save and edit property' => '',
     'Unable to remove a property' => '',
-    'Unknown error' => '',
     'Updated at' => '',
     'Username' => '',
     'Value' => '',
-    'When executing a query the error occurred' => '',
     'You can not create an account from unsaved client.' => '',
 ];

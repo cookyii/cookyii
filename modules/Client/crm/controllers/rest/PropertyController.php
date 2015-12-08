@@ -39,7 +39,7 @@ class PropertyController extends \cookyii\rest\Controller
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('cookyii.client', 'Unknown error'),
+            'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
         $client_id = (int)Request()->post('client_id');
@@ -93,7 +93,7 @@ class PropertyController extends \cookyii\rest\Controller
         if ($Property->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('cookyii.client', 'When executing a query the error occurred'),
+                'message' => \Yii::t('cookyii', 'When executing a query the error occurred'),
                 'errors' => $Property->getFirstErrors(),
             ];
         } else {
@@ -116,7 +116,7 @@ class PropertyController extends \cookyii\rest\Controller
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('cookyii.client', 'Unknown error'),
+            'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
         $client_id = (int)Request()->get('client_id');

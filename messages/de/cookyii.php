@@ -17,9 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Back to index' => '',
+    'Back to index' => '@@@@',
     'Cancel' => '',
     'Changes not saved yet' => '',
+    'Filter' => '',
     'Model must be `{class}`.' => '',
     'Model must contain an attribute `{attribute}`.' => '',
     'Recommended {refresh} the page.' => '',
@@ -27,5 +28,7 @@ return [
     'Save' => '',
     'Search' => '',
     'The data of this item has been changed.' => '',
+    'Unknown error' => '',
     'Warning' => '',
+    'When executing a query the error occurred' => '',
 ];

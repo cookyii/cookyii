@@ -120,7 +120,7 @@ class PostmanMessage extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return null|\cookyii\modules\Postman\AbstractModule
+     * @return null|\cookyii\modules\Postman\Module
      */
     public static function getPostman()
     {

@@ -21,7 +21,6 @@ return [
     'Content' => '',
     'Create new page' => '',
     'Edit page' => '',
-    'Filter' => '',
     'General information' => '',
     'ID' => '',
     'Marketing title' => '',
@@ -41,9 +40,7 @@ return [
     'Slug' => '',
     'Some title...' => '',
     'Title' => '',
-    'Unknown error' => '',
     'Updated at' => '',
-    'When executing a query the error occurred' => '',
     'keyword, password, handball' => '',
     'some-title' => '',
 ];

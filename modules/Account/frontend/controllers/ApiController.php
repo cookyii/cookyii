@@ -51,7 +51,7 @@ class ApiController extends \cookyii\rest\Controller
             'result' => false,
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Sign in'),
-                'text' => \Yii::t('cookyii.account', 'Unknown error.'),
+                'text' => \Yii::t('cookyii', 'Unknown error'),
             ]
         ];
 
@@ -92,7 +92,7 @@ class ApiController extends \cookyii\rest\Controller
             'result' => false,
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Sign up'),
-                'text' => \Yii::t('cookyii.account', 'Unknown error.'),
+                'text' => \Yii::t('cookyii', 'Unknown error'),
             ]
         ];
 
@@ -133,7 +133,7 @@ class ApiController extends \cookyii\rest\Controller
             'result' => false,
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Forgot password'),
-                'text' => \Yii::t('cookyii.account', 'Unknown error.'),
+                'text' => \Yii::t('cookyii', 'Unknown error'),
             ]
         ];
 
@@ -174,7 +174,7 @@ class ApiController extends \cookyii\rest\Controller
             'result' => false,
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Fill attributes'),
-                'text' => \Yii::t('cookyii.account', 'Unknown error.'),
+                'text' => \Yii::t('cookyii', 'Unknown error'),
             ]
         ];
 

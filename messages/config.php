@@ -10,7 +10,7 @@ return [
     'messagePath' => __DIR__,
     'languages' => ['en', 'ru', 'de'],
     'translator' => 'Yii::t',
-    'sort' => false,
+    'sort' => true,
     'overwrite' => true,
     'removeUnused' => false,
     'except' => [

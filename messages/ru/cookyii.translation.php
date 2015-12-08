@@ -17,11 +17,12 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Context' => '',
-    'Filter' => '',
-    'Phrases not found' => '',
-    'Translated' => '',
-    'Translation' => '',
-    'Translations' => '',
-    'Translations list' => '',
+    'All' => 'Все',
+    'Context' => 'Справочник',
+    'Languages' => 'Языки',
+    'Phrases' => 'Список фраз',
+    'Phrases not found' => 'Фраза не найдена',
+    'Translated' => 'Переведённые',
+    'Translation' => 'Перевод',
+    'Translations' => 'Переводы',
 ];

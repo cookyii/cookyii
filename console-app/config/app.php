@@ -23,8 +23,7 @@ return array_merge($config, [
         'account' => cookyii\modules\Account\commands\AccountCommand::className(),
         'migrate' => [
             'class' => cookyii\console\controllers\MigrateController::className(),
-            'templateFile' => '@common/views/migration.php',
-            'migrationPath' => '@common/migrations',
+            'templateFile' => '@console/views/migration.php',
         ],
     ],
     'bootstrap' => ['log', 'rollbar'],

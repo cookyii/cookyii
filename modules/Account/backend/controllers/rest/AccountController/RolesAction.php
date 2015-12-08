@@ -25,7 +25,7 @@ class RolesAction extends \cookyii\rest\Action
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('cookyii.account', 'Unknown error'),
+            'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
         $account_id = (int)Request()->post('account_id');

@@ -40,7 +40,7 @@ function sortLink($type, $label)
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
-                <h3><?= Yii::t('cookyii.client', 'Filter') ?></h3>
+                <h3><?= Yii::t('cookyii', 'Filter') ?></h3>
 
                 <hr>
 

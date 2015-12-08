@@ -69,7 +69,7 @@ class TemplateEditForm extends \cookyii\base\FormModel
     {
         return [
             'code' => \Yii::t('cookyii.postman', 'Code'),
-            'subject' => \Yii::t('cookyii.postman', 'Subject '),
+            'subject' => \Yii::t('cookyii.postman', 'Subject'),
             'content_text' => \Yii::t('cookyii.postman', 'Plain content'),
             'content_html' => \Yii::t('cookyii.postman', 'HTML content'),
             'address' => \Yii::t('cookyii.postman', 'Address'),

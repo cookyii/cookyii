@@ -24,7 +24,6 @@ return [
     'Edit section' => '',
     'End publishing at' => '',
     'Feeds' => '',
-    'Filter' => '',
     'General information' => '',
     'Item successfully saved' => '',
     'Items list' => '',
@@ -49,8 +48,6 @@ return [
     'Sort' => '',
     'Start publishing at' => '',
     'Title' => '',
-    'Unknown error' => '',
-    'When executing a query the error occurred' => '',
     'keyword, password, handball' => '',
     'some-title' => '',
 ];

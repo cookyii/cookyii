@@ -23,7 +23,7 @@ class EditFormAction extends \cookyii\rest\Action
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('cookyii.postman', 'Unknown error'),
+            'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
         $message_id = (int)Request()->post('message_id');
@@ -55,7 +55,7 @@ class EditFormAction extends \cookyii\rest\Action
         if ($MessageEditForm->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('cookyii.postman', 'When executing a query the error occurred'),
+                'message' => \Yii::t('cookyii', 'When executing a query the error occurred'),
                 'errors' => $MessageEditForm->getFirstErrors(),
             ];
         } else {

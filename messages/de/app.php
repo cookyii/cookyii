@@ -17,19 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Action' => '',
-    'Another action' => '',
+    'Back to index' => '',
     'Dashboard' => '',
-    'Dropdown' => '',
     'Error' => '',
     'Error {number}' => '',
-    'Link' => '',
-    'One more separated link' => '',
+    'Meanwhile, you may {return to dashboard}.' => '',
     'Profile' => '',
-    'Separated link' => '',
     'Sign in' => '',
     'Sign out' => '',
     'Sign up' => '',
-    'Something else here' => '',
     'Terms of use' => '',
+    'We will work on fixing that right away.' => '',
+    'return to dashboard' => '',
 ];

@@ -12,7 +12,7 @@ use cookyii\modules\Postman;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = Yii::t('cookyii.postman', 'Edit Message');
+$this->title = Yii::t('cookyii.postman', 'Edit message');
 
 Postman\backend\assets\MessageEditAssetBundle::register($this);
 

@@ -22,7 +22,6 @@ class DashController extends \backend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['index'],
                 'roles' => ['@'],
             ],
         ];
