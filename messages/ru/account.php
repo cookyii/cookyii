@@ -57,6 +57,7 @@ return [
     'Properties' => '',
     'Property successfully saved' => '',
     'Property was successfully removed' => '',
+    'Provider for client `{client}` bot found.' => '',
     'Remember me' => '',
     'Remove account' => '',
     'Removed accounts' => '',
