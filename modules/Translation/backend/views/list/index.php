@@ -51,6 +51,24 @@ function sortLink($type, $label)
 
                 <br>
 
+                <strong><?= Yii::t('cookyii.translation', 'Languages') ?>:</strong>
+                <ul class="languages">
+                    <li>
+                        <a class="checker"
+                           ng-click="filter.toggleLanguage()"
+                           ng-class="{checked: filter.isAllLanguagesSelected()}"
+                        ><?= FA::icon('check') ?> <?= Yii::t('cookyii.translate', 'All') ?></a>
+                    </li>
+                    <li ng-repeat="language in languages track by language">
+                        <a class="checker"
+                           ng-click="filter.toggleLanguage(language)"
+                           ng-class="{checked: filter.isLanguageSelect(language)}"
+                        ><?= FA::icon('check') ?> {{ language }}</a>
+                    </li>
+                </ul>
+
+                <br>
+
                 <strong><?= Yii::t('cookyii.translation', 'Context') ?>:</strong>
                 <ul class="categories">
                     <li ng-repeat="(category, list) in phrases track by category">
@@ -79,20 +97,24 @@ function sortLink($type, $label)
                             <thead>
                             <tr>
                                 <td ng-bind="category" class="category"></td>
-                                <td ng-repeat="lang in languages track by lang"
-                                    ng-bind="lang"
+                                <td ng-repeat="language in languages track by language"
+                                    ng-show="filter.isAllLanguagesSelected() || filter.isLanguageSelect(language)"
+                                    ng-bind="language"
                                     class="lang"></td>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="(phrase, variants) in list">
+                            <tr ng-repeat="(phrase, variants) in list"
+                                ng-hide="!filter.translated && isFullTranslated(variants)">
                                 <td>
                                     <p class="form-control-static" ng-bind="phrase"></p>
                                 </td>
-                                <td ng-repeat="lang in languages track by lang"
+                                <td ng-repeat="language in languages track by language"
+                                    ng-show="filter.isAllLanguagesSelected() || filter.isLanguageSelect(language)"
                                     class="lang">
-                                    <textarea ng-model="variants[lang]"
-                                              ng-blur="save(category, phrase, variants)"
+                                    <textarea ng-model="variants[language]"
+                                              ng-blur="save($event, category, phrase, variants, language)"
+                                              ng-class="saveResult(category, phrase, variants, language)"
                                               class="form-control"
                                               msd-elastic></textarea>
                                 </td>

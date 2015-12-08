@@ -13,4 +13,10 @@ ul.categories > li > a.active { font-weight: bold; }
 .table-phrases thead td { font-weight: 600; }
 .table-phrases td.category { min-width: 250px; }
 .table-phrases td.lang { width: 200px; text-align: center; }
-.table-phrases td.lang textarea { height: 34px; resize: vertical; }
+.table-phrases td.lang textarea {
+    height: 34px;
+    resize: vertical;
+    transition: background-color 0.2s ease-out;
+}
+.table-phrases td.lang textarea.success { background-color: #eaffdf; }
+.table-phrases td.lang textarea.danger { background-color: #ffdfdf; }

@@ -176,7 +176,7 @@ class ApiController extends \cookyii\rest\Controller
                 foreach ($variants as $lang => $variant) {
                     $fileName = $messagePath . '/' . $lang . '/' . $category . '.php';
                     $phrases = include $fileName;
-                    $phrases[$phrase] = $variant;
+                    $phrases[$phrase] = (string)$variant;
 
                     $array = VarDumper::export($phrases);
                     $content = <<<EOD
