@@ -20,7 +20,6 @@ Account\crm\assets\SignInAssetBundle::register($this);
 
 <div class="login-box" ng-controller="SignInController">
     <div class="login-logo">
-        <img src="/img/cookyii.png"/>
         <strong>COOKYII</strong>CRM
     </div>
 
@@ -32,18 +31,12 @@ Account\crm\assets\SignInAssetBundle::register($this);
         ]);
 
         echo $form->field($SignInForm, 'email')
-            ->label(false)
             ->icon('envelope')
-            ->textInput([
-                'placeholder' => $SignInForm->getAttributeLabel('email'),
-            ]);
+            ->textInput();
 
         echo $form->field($SignInForm, 'password')
-            ->label(false)
             ->icon('lock')
-            ->passwordInput([
-                'placeholder' => $SignInForm->getAttributeLabel('password'),
-            ]);
+            ->passwordInput();
 
         ?>
         <div class="row">
