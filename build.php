@@ -243,18 +243,22 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
  */
 function appendLessTask(array &$buildConfig, $task_name, $app)
 {
-    prepareEmptyTask($buildConfig, $task_name);
+    $less = __DIR__ . '/' . $app . '-assets/less/styles.less';
 
-    $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
-    $buildConfig[$task_name][$app] = [
-        '.description' => sprintf('Compile all less styles for `%s` application', $app),
-        '.task' => [
-            'class' => 'cookyii\build\tasks\CommandTask',
-            'commandline' => [
-                cmd($app, '{node}/gulp less --app {a}'),
+    if (file_exists($less)) {
+        prepareEmptyTask($buildConfig, $task_name);
+
+        $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
+        $buildConfig[$task_name][$app] = [
+            '.description' => sprintf('Compile all less styles for `%s` application', $app),
+            '.task' => [
+                'class' => 'cookyii\build\tasks\CommandTask',
+                'commandline' => [
+                    cmd($app, '{node}/gulp less --app {a}'),
+                ],
             ],
-        ],
-    ];
+        ];
+    }
 }
 
 /**
