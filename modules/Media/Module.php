@@ -35,7 +35,7 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
     public $maxUploadFileSize = 10; // megabytes
 
     /** @var string */
-    public $placeholderAlias = '@common/assets/_sources/img/placeholder.png';
+    public $placeholderAlias = '@app/web/img/placeholder.png';
 
     /** @var int */
     public $pathChmod = 0775;

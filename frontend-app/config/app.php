@@ -26,10 +26,7 @@ return array_merge($config, [
     'modules' => [
         'account' => cookyii\modules\Account\frontend\Module::className(),
         'page' => cookyii\modules\Page\frontend\Module::className(),
-        'media' => [
-            'class' => cookyii\modules\Media\Module::class,
-            'placeholderAlias' => '@frontend/assets/images/placeholder.png',
-        ],
+        'media' => cookyii\modules\Media\Module::className(),
         'postman' => [
             'class' => cookyii\modules\Postman\frontend\Module::className(),
             'subjectPrefix' => 'Cookyii //',
@@ -60,7 +57,7 @@ return array_merge($config, [
         'rollbar' => $params['component.rollbar'],
         'errorHandler' => [
             'class' => rmrevin\yii\rollbar\web\ErrorHandler::className(),
-            'errorAction' => 'site/error'
+            'errorAction' => 'site/error',
         ],
     ],
     'params' => $params,
