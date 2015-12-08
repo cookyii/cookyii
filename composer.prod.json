@@ -77,27 +77,6 @@
     }
   },
   "extra": {
-    "writable": [
-      "console-app/runtime",
-      "frontend-app/runtime",
-      "frontend-app/web/assets",
-      "frontend-app/web/storage",
-      "frontend-app/web/upload",
-      "backend-app/runtime",
-      "backend-app/web/assets",
-      "backend-app/web/storage",
-      "backend-app/web/upload",
-      "crm-app/runtime",
-      "crm-app/web/assets",
-      "crm-app/web/storage",
-      "crm-app/web/upload"
-    ],
-    "executable": [
-      "build",
-      "codecept",
-      "generate_self_signed_ssl_key",
-      "yii"
-    ],
     "asset-installer-paths": {
       "npm-asset-library": "vendor/npm",
       "bower-asset-library": "vendor/bower"
