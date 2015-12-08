@@ -195,14 +195,14 @@ if (!empty($apps)) {
  */
 function getPath($app, $key = null)
 {
-    $base_path = __DIR__;
-    $app_path = $base_path . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
+    $basePath = __DIR__;
+    $appPath = $basePath . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
 
     $list = [
-        'base' => $base_path,
-        'app' => $app_path,
-        'assets' => $app_path . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . '_sources',
-        'node' => $base_path . DIRECTORY_SEPARATOR . 'node_modules' . DIRECTORY_SEPARATOR . '.bin',
+        'base' => $basePath,
+        'app' => $appPath,
+        'assets' => $basePath . DIRECTORY_SEPARATOR . $app . '-assets',
+        'node' => $basePath . DIRECTORY_SEPARATOR . 'node_modules' . DIRECTORY_SEPARATOR . '.bin',
     ];
 
     return empty($key)
@@ -219,7 +219,7 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
 {
     prepareEmptyTask($buildConfig, $task_name);
 
-    $path_list = getPath($app);
+    $path = getPath($app);
 
     $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $buildConfig[$task_name][$app] = [
@@ -228,9 +228,9 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
             'class' => 'cookyii\build\tasks\DeleteTask',
             'deleteDir' => false,
             'fileSets' => [
-                ['dir' => sprintf('%s/runtime', $path_list['app']), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/assets', $path_list['app']), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/minify', $path_list['app']), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/runtime', $path['app']), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/assets', $path['app']), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/minify', $path['app']), 'exclude' => ['.gitignore']],
             ],
         ],
     ];
@@ -243,7 +243,9 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
  */
 function appendLessTask(array &$buildConfig, $task_name, $app)
 {
-    $less = __DIR__ . '/' . $app . '-assets/less/styles.less';
+    $path = getPath($app);
+
+    $less = $path['assets'] . '/less/styles.less';
 
     if (file_exists($less)) {
         prepareEmptyTask($buildConfig, $task_name);
@@ -283,7 +285,7 @@ function prepareEmptyTask(array &$buildConfig, $task_name)
  */
 function cmd($app, $command)
 {
-    $path_list = getPath($app);
+    $path = getPath($app);
 
     $command = str_replace(
         ['{a}'],
@@ -292,8 +294,8 @@ function cmd($app, $command)
     );
 
     return str_replace(
-        array_map(function ($val) { return sprintf('{%s}', $val); }, array_keys($path_list)),
-        array_values($path_list),
+        array_map(function ($val) { return sprintf('{%s}', $val); }, array_keys($path)),
+        array_values($path),
         $command
     );
 }
