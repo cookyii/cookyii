@@ -17,13 +17,12 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Failed to bring the resource directory of uploaded files.' => '',
-    'Media module not configured' => '',
-    'Media must be an instance of `\\cookyii\\modules\\Media\\resources\\Media`' => '',
-    'Storage directory not available for reading (Media::$storagePath).' => '',
-    'Storage directory not available for writing (Media::$storagePath).' => '',
-    'Unable to determine the path to the storage directory (Media::$storagePath).' => '',
-    'Unable to determine the path to the upload directory (Media::$uploadPath).' => '',
-    'Upload directory not available for reading (Media::$uploadPath).' => '',
-    'Upload directory not available for writing (Media::$uploadPath).' => '',
+    'Failed to bring the resource directory of uploaded files.' => 'Не удалось перенести загруженный ресурс в директорию upload',
+    'Media module not configured' => 'Модуль media не сконфигурирован',
+    'Storage directory not available for reading (Media::$storagePath).' => 'Директория с кэшем модифицированных файлов недоступна для чтения (Media::$storagePath).',
+    'Storage directory not available for writing (Media::$storagePath).' => 'Директория с кэшем модифицированных файлов недоступна для записи (Media::$storagePath).',
+    'Unable to determine the path to the storage directory (Media::$storagePath).' => 'Не удалось определить директория для кэша модифицированных файлов (Media::$storagePath).',
+    'Unable to determine the path to the upload directory (Media::$uploadPath).' => 'Не удалось определить директория для загруженных файлов (Media::$uploadPath).',
+    'Upload directory not available for reading (Media::$uploadPath).' => 'Директория upload недоступна для чтения (Media::$uploadPath).',
+    'Upload directory not available for writing (Media::$uploadPath).' => 'Директория upload недоступна для записи (Media::$uploadPath).',
 ];
