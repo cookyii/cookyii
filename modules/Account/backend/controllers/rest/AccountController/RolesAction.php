@@ -25,7 +25,7 @@ class RolesAction extends \cookyii\rest\Action
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('account', 'Unknown error'),
+            'message' => \Yii::t('cookyii.account', 'Unknown error'),
         ];
 
         $account_id = (int)Request()->post('account_id');
@@ -58,7 +58,7 @@ class RolesAction extends \cookyii\rest\Action
 
         return [
             'result' => true,
-            'message' => \Yii::t('account', 'Roles successfully saved.')
+            'message' => \Yii::t('cookyii.account', 'Roles successfully saved.')
         ];
     }
 }

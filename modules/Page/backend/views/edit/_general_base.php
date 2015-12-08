@@ -11,10 +11,10 @@
 
 echo $ActiveForm->field($PageEditForm, 'title')
     ->textInput([
-        'placeholder' => Yii::t('page', 'Some title...'),
+        'placeholder' => Yii::t('cookyii.page', 'Some title...'),
     ]);
 
 echo $ActiveForm->field($PageEditForm, 'slug')
     ->textInput([
-        'placeholder' => Yii::t('page', 'some-title'),
+        'placeholder' => Yii::t('cookyii.page', 'some-title'),
     ]);

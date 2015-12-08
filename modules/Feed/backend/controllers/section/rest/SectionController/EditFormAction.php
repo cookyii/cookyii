@@ -23,7 +23,7 @@ class EditFormAction extends \cookyii\rest\Action
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('feed', 'Unknown error'),
+            'message' => \Yii::t('cookyii.feed', 'Unknown error'),
         ];
 
         $section_slug = str_clean(Request()->post('section_slug'));
@@ -55,13 +55,13 @@ class EditFormAction extends \cookyii\rest\Action
         if ($SectionEditForm->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('feed', 'When executing a query the error occurred'),
+                'message' => \Yii::t('cookyii.feed', 'When executing a query the error occurred'),
                 'errors' => $SectionEditForm->getFirstErrors(),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('feed', 'Section successfully saved'),
+                'message' => \Yii::t('cookyii.feed', 'Section successfully saved'),
                 'section_id' => $Section->id,
                 'section_slug' => $Section->slug,
             ];

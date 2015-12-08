@@ -23,13 +23,13 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
 
     <div class="box general">
         <div class="box-header">
-            <h3 class="box-title"><?= Yii::t('postman', 'General information') ?></h3>
+            <h3 class="box-title"><?= Yii::t('cookyii.postman', 'General information') ?></h3>
         </div>
 
         <div class="box-notify">
             <?= Yii::t('cookyii', 'Changes not saved yet') ?>
             <?php
-            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('page', 'Save'), [
+            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                 'class' => 'btn btn-slim btn-success',
                 'ng-disabled' => 'in_progress',
             ]);
@@ -100,7 +100,7 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
                                             'name' => 'address[email][{{ $index }}]',
                                             'class' => 'form-control',
                                             'ng-model' => 'address.email',
-                                            'placeholder' => Yii::t('postman', 'Email'),
+                                            'placeholder' => Yii::t('cookyii.postman', 'Email'),
                                         ]) ?>
                                     </div>
                                     <div class="col-xs-11 col-sm-5 col-md-5 col-lg-3">
@@ -109,7 +109,7 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
                                             'name' => 'address.name[{{ $index }}]',
                                             'class' => 'form-control',
                                             'ng-model' => 'address.name',
-                                            'placeholder' => Yii::t('postman', 'Name'),
+                                            'placeholder' => Yii::t('cookyii.postman', 'Name'),
                                         ]) ?>
                                     </div>
                                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
@@ -121,7 +121,7 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
                             </div>
 
                             <div class="actions">
-                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('postman', 'New address'), null, [
+                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('cookyii.postman', 'New address'), null, [
                                     'ng-click' => 'addAddress()',
                                 ]) ?>
                             </div>
@@ -142,12 +142,12 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
 
         <div class="box-footer">
             <?php
-            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('page', 'Save'), [
+            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                 'class' => 'btn btn-success',
                 'ng-disabled' => 'in_progress',
             ]);
 
-            echo Html::button(Yii::t('page', 'Cancel'), [
+            echo Html::button(Yii::t('cookyii', 'Cancel'), [
                 'class' => 'btn btn-link',
                 'ng-click' => 'reload(MessageEditForm)',
             ]);

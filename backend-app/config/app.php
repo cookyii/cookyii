@@ -14,13 +14,14 @@ $params = array_merge(
     require(__DIR__ . '/params.php')
 );
 
+$params['module.postman']['class'] = cookyii\modules\Postman\backend\Module::className();
+
 return array_merge($config, [
     'id' => 'backend-app',
     'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
-        'feed', 'account', 'page', 'media', 'postman', 'translation',
         'log', 'rollbar',
     ],
     'modules' => [
@@ -28,11 +29,8 @@ return array_merge($config, [
         'page' => cookyii\modules\Page\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
         'translation' => cookyii\modules\Translation\backend\Module::className(),
-        'media' => cookyii\modules\Media\Module::className(),
-        'postman' => [
-            'class' => cookyii\modules\Postman\backend\Module::className(),
-            'subjectPrefix' => 'Cookyii Backend // ',
-        ],
+        'media' => $params['module.media'],
+        'postman' => $params['module.postman'],
     ],
     'components' => [
         'db' => $params['component.db'],
@@ -59,7 +57,7 @@ return array_merge($config, [
         'rollbar' => $params['component.rollbar'],
         'errorHandler' => [
             'class' => rmrevin\yii\rollbar\web\ErrorHandler::className(),
-            'errorAction' => 'site/error'
+            'errorAction' => 'site/error',
         ],
     ],
     'params' => $params,

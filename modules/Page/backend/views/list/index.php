@@ -12,7 +12,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-$this->title = Yii::t('page', 'Pages management');
+$this->title = Yii::t('cookyii.page', 'Pages management');
 
 Page\backend\assets\ListAssetBundle::register($this);
 
@@ -40,11 +40,11 @@ function sortLink($type, $label)
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
-                <h3><?= Yii::t('page', 'Filter') ?></h3>
+                <h3><?= Yii::t('cookyii.page', 'Filter') ?></h3>
 
                 <hr>
 
-                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('page', 'Removed pages'), [
+                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('cookyii.page', 'Removed pages'), [
                     'class' => 'checker',
                     'ng-click' => 'pages.filter.toggleDeleted()',
                     'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('pages.filter.deleted === true')]),
@@ -54,7 +54,7 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('page', 'Pages list') ?></h3>
+                    <h3 class="box-title"><?= Yii::t('cookyii.page', 'Pages list') ?></h3>
 
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
@@ -72,7 +72,7 @@ function sortLink($type, $label)
                             <div class="input-group search" ng-class="{'wide':pages.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
-                                    'placeholder' => Yii::t('page', 'Search'),
+                                    'placeholder' => Yii::t('cookyii', 'Search'),
                                     'maxlength' => 100,
                                     'ng-model' => 'pages.filter.search.query',
                                     'ng-blur' => 'pages.filter.search.do()',
@@ -98,21 +98,21 @@ function sortLink($type, $label)
                         <thead>
                         <tr>
                             <td class="activated">&nbsp;</td>
-                            <td class="id"><?= sortLink('id', Yii::t('page', 'ID')) ?></td>
-                            <td class="name"><?= sortLink('title', Yii::t('page', 'Title')) ?></td>
-                            <td class="updated"><?= sortLink('updated_at', Yii::t('page', 'Updated at')) ?></td>
+                            <td class="id"><?= sortLink('id', Yii::t('cookyii.page', 'ID')) ?></td>
+                            <td class="name"><?= sortLink('title', Yii::t('cookyii.page', 'Title')) ?></td>
+                            <td class="updated"><?= sortLink('updated_at', Yii::t('cookyii.page', 'Updated at')) ?></td>
                             <td class="actions">&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-show="pages.list.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
-                                <?= Yii::t('page', 'Pages not found') ?>
+                                <?= Yii::t('cookyii.page', 'Pages not found') ?>
                             </td>
                         </tr>
                         <?php
                         $options = [
-                            'title' => Yii::t('page', 'Edit page'),
+                            'title' => Yii::t('cookyii.page', 'Edit page'),
                             'ng-class' => '{deactivated:!page.activated,deleted:page.deleted}',
                         ];
                         ?>
@@ -134,13 +134,13 @@ function sortLink($type, $label)
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
-                                    'title' => Yii::t('page', 'Remove page'),
+                                    'title' => Yii::t('cookyii.page', 'Remove page'),
                                     'ng-click' => 'pages.remove(page, $event)',
                                     'ng-show' => 'page.deleted_at === null',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
-                                    'title' => Yii::t('page', 'Restore page'),
+                                    'title' => Yii::t('cookyii.page', 'Restore page'),
                                     'ng-click' => 'pages.restore(page)',
                                     'ng-show' => 'page.deleted_at !== null',
                                 ]);
@@ -170,7 +170,7 @@ function sortLink($type, $label)
     <?php
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
-        'title' => Yii::t('page', 'Create new page'),
+        'title' => Yii::t('cookyii.page', 'Create new page'),
         'ng-click' => 'pages.add()',
         'aria-label' => 'Add page',
     ]);

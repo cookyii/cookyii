@@ -13,7 +13,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-$this->title = Yii::t('feed', 'Sections management');
+$this->title = Yii::t('cookyii.feed', 'Sections management');
 
 Feed\backend\assets\ListAssetBundle::register($this);
 
@@ -41,11 +41,11 @@ function sortLink($type, $label)
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
-                <h3><?= Yii::t('feed', 'Filter') ?></h3>
+                <h3><?= Yii::t('cookyii.feed', 'Filter') ?></h3>
 
                 <hr>
 
-                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('feed', 'Removed items'), [
+                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('cookyii.feed', 'Removed items'), [
                     'class' => 'checker',
                     'ng-click' => 'items.filter.toggleDeleted()',
                     'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('items.filter.deleted')]),
@@ -83,25 +83,25 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('feed', 'Items list') ?></h3>
+                    <h3 class="box-title"><?= Yii::t('cookyii.feed', 'Items list') ?></h3>
 
                     <div class="box-section" ng-if="items.filter.section.selected">
                         Edit section:
                         <?= Html::a('{{ items.filter.section.getSelected().title }}', null, [
                             'ng-click' => 'items.filter.section.edit(items.filter.section.selected)',
-                            'title' => Yii::t('feed', 'Edit section')
+                            'title' => Yii::t('cookyii.feed', 'Edit section')
                         ]) ?>
 
                         <?php
                         echo Html::tag('a', FA::icon('times'), [
                             'class' => 'text-red',
-                            'title' => Yii::t('feed', 'Remove section'),
+                            'title' => Yii::t('cookyii.feed', 'Remove section'),
                             'ng-click' => 'items.filter.section.remove(items.filter.section.selected, $event)',
                             'ng-show' => 'items.filter.section.getSelected().deleted === "0"',
                         ]);
                         echo Html::tag('a', FA::icon('undo'), [
                             'class' => 'text-light-blue',
-                            'title' => Yii::t('feed', 'Restore section'),
+                            'title' => Yii::t('cookyii.feed', 'Restore section'),
                             'ng-click' => 'items.filter.section.restore(items.filter.section.selected)',
                             'ng-show' => 'items.filter.section.getSelected().deleted === "1"',
                         ]);
@@ -124,7 +124,7 @@ function sortLink($type, $label)
                             <div class="input-group search" ng-class="{'wide':items.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
-                                    'placeholder' => Yii::t('feed', 'Search'),
+                                    'placeholder' => Yii::t('cookyii', 'Search'),
                                     'maxlength' => 100,
                                     'ng-model' => 'items.filter.search.query',
                                     'ng-blur' => 'items.filter.search.do()',
@@ -147,11 +147,11 @@ function sortLink($type, $label)
 
                 <div class="box-body no-padding">
                     <div class="text-center text-italic text-light" ng-show="items.list.length === 0">
-                        <?= Yii::t('feed', 'Items not found') ?>
+                        <?= Yii::t('cookyii.feed', 'Items not found') ?>
                     </div>
                     <?php
                     $options = [
-                        'title' => Yii::t('feed', 'Edit item'),
+                        'title' => Yii::t('cookyii.feed', 'Edit item'),
                         'class' => 'box-item',
                         'ng-class' => '{deactivated:!item.activated,deleted:item.deleted}',
                     ];
@@ -177,7 +177,7 @@ function sortLink($type, $label)
 
                                 <?= Html::tag('div', '{{ item.sort }}', [
                                     'class' => 'sort',
-                                    'title' => Yii::t('feed', 'Sort'),
+                                    'title' => Yii::t('cookyii.feed', 'Sort'),
                                 ]) ?>
                             </div>
                             <div class="col-xs-8 col-sm-4 col-md-7 col-lg-7 contain">
@@ -196,13 +196,13 @@ function sortLink($type, $label)
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
-                                    'title' => Yii::t('feed', 'Remove item'),
+                                    'title' => Yii::t('cookyii.feed', 'Remove item'),
                                     'ng-click' => 'items.remove(item, $event)',
                                     'ng-show' => '!item.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
-                                    'title' => Yii::t('feed', 'Restore item'),
+                                    'title' => Yii::t('cookyii.feed', 'Restore item'),
                                     'ng-click' => 'items.restore(item)',
                                     'ng-show' => 'item.deleted',
                                 ]);
@@ -240,24 +240,24 @@ function sortLink($type, $label)
         <md-fab-actions>
             <?php
 
-            $tooltip = Material::tooltip(Yii::t('feed', 'Create new section'), [
+            $tooltip = Material::tooltip(Yii::t('cookyii.feed', 'Create new section'), [
                 'md-direction' => 'top',
             ]);
 
             echo Material::button($tooltip . FA::icon('folder-o')->fixedWidth(), [
                 'class' => 'md-fab md-raised md-mini',
-                'title' => Yii::t('feed', 'Create new section'),
+                'title' => Yii::t('cookyii.feed', 'Create new section'),
                 'ng-click' => 'items.filter.section.add()',
                 'aria-label' => 'Add section',
             ]);
 
-            $tooltip = Material::tooltip(Yii::t('feed', 'Create new item'), [
+            $tooltip = Material::tooltip(Yii::t('cookyii.feed', 'Create new item'), [
                 'md-direction' => 'top',
             ]);
 
             echo Material::button($tooltip . FA::icon('file-o')->fixedWidth(), [
                 'class' => 'md-fab md-raised md-mini',
-                'title' => Yii::t('feed', 'Create new item'),
+                'title' => Yii::t('cookyii.feed', 'Create new item'),
                 'ng-click' => 'items.add()',
                 'aria-label' => 'Add item',
             ]);

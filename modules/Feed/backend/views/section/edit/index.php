@@ -12,7 +12,7 @@ use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = Yii::t('feed', 'Edit section');
+$this->title = Yii::t('cookyii.feed', 'Edit section');
 
 Feed\backend\assets\EditSectionAssetBundle::register($this);
 
@@ -32,7 +32,7 @@ Feed\backend\assets\EditSectionAssetBundle::register($this);
                     <strong class="info-box-text"><?= Yii::t('cookyii', 'Warning') ?></strong>
 
                     <span class="progress-description">
-                        <?= Yii::t('cookyii', 'The data of this section has been changed.') ?><br>
+                        <?= Yii::t('cookyii', 'The data of this item has been changed.') ?><br>
                         <?= Yii::t('cookyii', 'Recommended {refresh} the page.', [
                             'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('cookyii', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',

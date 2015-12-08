@@ -30,7 +30,7 @@ trait AccountSocialTrait
         $clients = \cookyii\modules\Account\resources\AbstractAccountAuth::getClientsList();
 
         if (!isset($clients[$client])) {
-            throw new \yii\web\ServerErrorHttpException(\Yii::t('account', 'Provider for client `{client}` bot found.', [
+            throw new \yii\web\ServerErrorHttpException(\Yii::t('cookyii.account', 'Provider for client `{client}` bot found.', [
                 'client' => $Client->getName()
             ]));
         }

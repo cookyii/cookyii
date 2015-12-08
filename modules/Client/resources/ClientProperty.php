@@ -54,11 +54,11 @@ class ClientProperty extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'client_id' => \Yii::t('client', 'Client'),
-            'key' => \Yii::t('client', 'Key'),
-            'value' => \Yii::t('client', 'Value'),
-            'created_at' => \Yii::t('client', 'Created at'),
-            'updated_at' => \Yii::t('client', 'Updated at'),
+            'client_id' => \Yii::t('cookyii.client', 'Client'),
+            'key' => \Yii::t('cookyii.client', 'Key'),
+            'value' => \Yii::t('cookyii.client', 'Value'),
+            'created_at' => \Yii::t('cookyii.client', 'Created at'),
+            'updated_at' => \Yii::t('cookyii.client', 'Updated at'),
         ];
     }
 

@@ -459,8 +459,8 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function getGenderValues()
     {
         return [
-            static::MALE => \Yii::t('account', 'Мужчина'),
-            static::FEMALE => \Yii::t('account', 'Женщина'),
+            static::MALE => \Yii::t('cookyii.account', 'Male'),
+            static::FEMALE => \Yii::t('cookyii.account', 'Female'),
         ];
     }
 

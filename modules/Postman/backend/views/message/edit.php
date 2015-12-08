@@ -12,7 +12,7 @@ use cookyii\modules\Postman;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = Yii::t('postman', 'Edit Message');
+$this->title = Yii::t('cookyii.postman', 'Edit Message');
 
 Postman\backend\assets\MessageEditAssetBundle::register($this);
 
@@ -32,7 +32,7 @@ Postman\backend\assets\MessageEditAssetBundle::register($this);
                     <strong class="info-box-text"><?= Yii::t('cookyii', 'Warning') ?></strong>
 
                     <span class="progress-description">
-                        <?= Yii::t('cookyii', 'The data of this message has been changed.') ?><br>
+                        <?= Yii::t('cookyii', 'The data of this item has been changed.') ?><br>
                         <?= Yii::t('cookyii', 'Recommended {refresh} the page.', [
                             'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('cookyii', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',

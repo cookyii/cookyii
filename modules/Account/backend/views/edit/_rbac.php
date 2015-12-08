@@ -15,7 +15,7 @@ use yii\helpers\Html;
 
     <div class="box rbac" ng-controller="AccountRolesController">
         <div class="box-header">
-            <h3 class="box-title"><?= Yii::t('account', 'Roles') ?></h3>
+            <h3 class="box-title"><?= Yii::t('cookyii.account', 'Roles') ?></h3>
         </div>
 
         <div class="box-body">

@@ -31,7 +31,7 @@ class ClientAccount extends \yii\base\Object
         $Client = $this->Model;
 
         if ($Client->isNewRecord) {
-            throw new \yii\base\Exception(\Yii::t('client', 'You can not create an account from unsaved client.'));
+            throw new \yii\base\Exception(\Yii::t('cookyii.client', 'You can not create an account from unsaved client.'));
         }
 
         $name = empty($name) ? $Client->name : $name;
@@ -74,7 +74,7 @@ class ClientAccount extends \yii\base\Object
         $Client = $this->Model;
 
         if (empty($Client->account_id)) {
-            throw new \yii\base\Exception(\Yii::t('client', 'No bound Account'));
+            throw new \yii\base\Exception(\Yii::t('cookyii.client', 'No bound Account'));
         }
 
         $Client->account_id = null;

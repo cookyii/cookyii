@@ -18,7 +18,8 @@
  */
 return [
     'Failed to bring the resource directory of uploaded files.' => '',
-    'Media must be an instance of `cookyiimodulesMediaesourcesMedia`' => '',
+    'Media module not configured' => '',
+    'Media must be an instance of `\\cookyii\\modules\\Media\\resources\\Media`' => '',
     'Storage directory not available for reading (Media::$storagePath).' => '',
     'Storage directory not available for writing (Media::$storagePath).' => '',
     'Unable to determine the path to the storage directory (Media::$storagePath).' => '',

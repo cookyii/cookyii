@@ -54,11 +54,11 @@ class AccountProperty extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'account_id' => \Yii::t('account', 'User'),
-            'key' => \Yii::t('account', 'Key'),
-            'value' => \Yii::t('account', 'Value'),
-            'created_at' => \Yii::t('account', 'Created at'),
-            'updated_at' => \Yii::t('account', 'Updated at'),
+            'account_id' => \Yii::t('cookyii.account', 'User'),
+            'key' => \Yii::t('cookyii.account', 'Key'),
+            'value' => \Yii::t('cookyii.account', 'Value'),
+            'created_at' => \Yii::t('cookyii.account', 'Created at'),
+            'updated_at' => \Yii::t('cookyii.account', 'Updated at'),
         ];
     }
 

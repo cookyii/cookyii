@@ -10,6 +10,8 @@ namespace cookyii\traits;
 /**
  * Class GravatrTrait
  * @package cookyii\traits
+ *
+ * @property string $email
  */
 trait GravatrTrait
 {
@@ -27,13 +29,13 @@ trait GravatrTrait
     public function getGravatar()
     {
         if (!($this instanceof \yii\db\ActiveRecord)) {
-            throw new \yii\base\Exception(\Yii::t('app', 'Model must be `{class}`.', [
+            throw new \yii\base\Exception(\Yii::t('cookyii', 'Model must be `{class}`.', [
                 'attribute' => 'ActiveRecord',
             ]));
         }
 
         if (!$this->hasAttribute('email')) {
-            throw new \yii\base\Exception(\Yii::t('app', 'Model must contain an attribute `{attribute}`.', [
+            throw new \yii\base\Exception(\Yii::t('cookyii', 'Model must contain an attribute `{attribute}`.', [
                 'attribute' => 'email',
             ]));
         }

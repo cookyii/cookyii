@@ -12,7 +12,7 @@ use cookyii\modules\Account;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = \Yii::t('account', 'Sing in');
+$this->title = \Yii::t('cookyii.account', 'Sign in');
 
 Account\frontend\assets\SignInAssetBundle::register($this);
 
@@ -55,7 +55,7 @@ Account\frontend\assets\SignInAssetBundle::register($this);
                 <?php
                 $icon = FA::icon('cog', ['ng-show' => 'in_progress', 'class' => 'wo-animate'])->spin();
 
-                echo Html::submitButton($icon . ' ' . Yii::t('account', 'Sign In'), [
+                echo Html::submitButton($icon . ' ' . Yii::t('cookyii.account', 'Sign in'), [
                     'class' => 'btn btn-sm btn-primary btn-block btn-flat',
                     'ng-disabled' => 'in_progress',
                 ]);
@@ -109,7 +109,7 @@ Account\frontend\assets\SignInAssetBundle::register($this);
 
         ?>
 
-        <?= Html::a(Yii::t('account', 'Sign up'), ['/account/sign/up']) ?><br>
-        <?= Html::a(Yii::t('account', 'I forgot my password'), ['/account/forgot-password']) ?>
+        <?= Html::a(Yii::t('cookyii.account', 'Sign up'), ['/account/sign/up']) ?><br>
+        <?= Html::a(Yii::t('cookyii.account', 'I forgot my password'), ['/account/forgot-password']) ?>
     </div>
 </div>

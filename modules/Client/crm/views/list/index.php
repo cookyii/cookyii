@@ -12,7 +12,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-$this->title = Yii::t('client', 'Clients management');
+$this->title = Yii::t('cookyii.client', 'Clients management');
 
 Client\crm\assets\ListAssetBundle::register($this);
 
@@ -40,11 +40,11 @@ function sortLink($type, $label)
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
-                <h3><?= Yii::t('client', 'Filter') ?></h3>
+                <h3><?= Yii::t('cookyii.client', 'Filter') ?></h3>
 
                 <hr>
 
-                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('client', 'Removed clients'), [
+                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('cookyii.client', 'Removed clients'), [
                     'class' => 'checker',
                     'ng-click' => 'clients.filter.toggleDeleted()',
                     'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('clients.filter.deleted')]),
@@ -54,7 +54,7 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('client', 'Clients list') ?></h3>
+                    <h3 class="box-title"><?= Yii::t('cookyii.client', 'Clients list') ?></h3>
 
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
@@ -72,7 +72,7 @@ function sortLink($type, $label)
                             <div class="input-group search" ng-class="{'wide':clients.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
-                                    'placeholder' => Yii::t('client', 'Search'),
+                                    'placeholder' => Yii::t('cookyii', 'Search'),
                                     'maxlength' => 100,
                                     'ng-model' => 'clients.filter.search.query',
                                     'ng-blur' => 'clients.filter.search.do()',
@@ -97,23 +97,23 @@ function sortLink($type, $label)
                     <table class="table table-hover table-clients">
                         <thead>
                         <tr>
-                            <td class="id"><?= sortLink('id', Yii::t('client', 'ID')) ?></td>
-                            <td class="name"><?= sortLink('name', Yii::t('client', 'Name')) ?></td>
-                            <td class="email"><?= sortLink('email', Yii::t('client', 'Email')) ?></td>
-                            <td class="account"><?= Yii::t('client', 'Account') ?></td>
-                            <td class="updated"><?= sortLink('updated_at', Yii::t('client', 'Updated at')) ?></td>
+                            <td class="id"><?= sortLink('id', Yii::t('cookyii.client', 'ID')) ?></td>
+                            <td class="name"><?= sortLink('name', Yii::t('cookyii.client', 'Name')) ?></td>
+                            <td class="email"><?= sortLink('email', Yii::t('cookyii.client', 'Email')) ?></td>
+                            <td class="account"><?= Yii::t('cookyii.client', 'Account') ?></td>
+                            <td class="updated"><?= sortLink('updated_at', Yii::t('cookyii.client', 'Updated at')) ?></td>
                             <td class="actions">&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-show="clients.list.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
-                                <?= Yii::t('client', 'Clients not found') ?>
+                                <?= Yii::t('cookyii.client', 'Clients not found') ?>
                             </td>
                         </tr>
                         <?php
                         $options = [
-                            'title' => Yii::t('client', 'Edit client'),
+                            'title' => Yii::t('cookyii.client', 'Edit client'),
                             'ng-class' => '{deleted:client.deleted}',
                         ];
                         ?>
@@ -132,13 +132,13 @@ function sortLink($type, $label)
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
-                                    'title' => Yii::t('client', 'Remove client'),
+                                    'title' => Yii::t('cookyii.client', 'Remove client'),
                                     'ng-click' => 'clients.remove(client, $event)',
                                     'ng-show' => '!client.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
-                                    'title' => Yii::t('client', 'Restore client'),
+                                    'title' => Yii::t('cookyii.client', 'Restore client'),
                                     'ng-click' => 'clients.restore(client)',
                                     'ng-show' => 'client.deleted',
                                 ]);
@@ -168,7 +168,7 @@ function sortLink($type, $label)
     <?php
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
-        'title' => Yii::t('client', 'Create new client'),
+        'title' => Yii::t('cookyii.client', 'Create new client'),
         'ng-click' => 'clients.add()',
         'aria-label' => 'Add client',
     ]);

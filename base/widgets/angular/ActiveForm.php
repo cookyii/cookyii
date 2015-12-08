@@ -115,7 +115,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
      */
     public static function resetButton($label = null, $options = [])
     {
-        $label = empty($label) ? \Yii::t('app', 'Отменить') : $label;
+        $label = empty($label) ? \Yii::t('cookyii', 'Cancel') : $label;
 
         $options['ng-click'] = 'reset($event)';
         $options['ng-disabled'] = 'inProgress';

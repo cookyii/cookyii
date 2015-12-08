@@ -14,7 +14,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Feed\backend
  */
-class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface, \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface
 {
 
     /**
@@ -24,26 +24,13 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
     {
         return [
             [
-                'label' => \Yii::t('account', 'Feeds'),
+                'label' => \Yii::t('cookyii.feed', 'Feeds'),
                 'url' => ['/feed/list/index'],
                 'icon' => FA::icon('bars'),
                 'visible' => User()->can(Feed\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'feed',
                 'sort' => 1000,
             ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($app)
-    {
-        $app->getI18n()
-            ->translations['feed'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => \Yii::$app->sourceLanguage,
-            'basePath' => '@app/messages',
         ];
     }
 }

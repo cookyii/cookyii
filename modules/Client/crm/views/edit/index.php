@@ -12,7 +12,7 @@ use cookyii\modules\Client;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = Yii::t('client', 'Edit client');
+$this->title = Yii::t('cookyii.client', 'Edit client');
 
 Client\crm\assets\EditAssetBundle::register($this);
 
@@ -32,7 +32,7 @@ Client\crm\assets\EditAssetBundle::register($this);
                     <strong class="info-box-text"><?= Yii::t('cookyii', 'Warning') ?></strong>
 
                     <span class="progress-description">
-                        <?= Yii::t('cookyii', 'The data of this client has been changed.') ?><br>
+                        <?= Yii::t('cookyii', 'The data of this item has been changed.') ?><br>
                         <?= Yii::t('cookyii', 'Recommended {refresh} the page.', [
                             'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('cookyii', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',

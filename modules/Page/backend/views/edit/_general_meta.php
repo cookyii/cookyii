@@ -16,20 +16,20 @@
         echo $ActiveForm->field($PageEditForm, 'meta["title"]')
             ->label($PageEditForm->getAttributeLabel('meta["title"]'))
             ->textInput([
-                'placeholder' => Yii::t('page', 'Marketing title'),
+                'placeholder' => Yii::t('cookyii.page', 'Marketing title'),
             ]);
 
         echo $ActiveForm->field($PageEditForm, 'meta["keywords"]')
             ->label($PageEditForm->getAttributeLabel('meta["keywords"]'))
             ->textInput([
-                'placeholder' => Yii::t('page', 'keyword, password, handball'),
+                'placeholder' => Yii::t('cookyii.page', 'keyword, password, handball'),
             ]);
 
         echo $ActiveForm->field($PageEditForm, 'meta["description"]')
             ->label($PageEditForm->getAttributeLabel('meta["description"]'))
             ->textarea([
                 'msd-elastic' => true,
-                'placeholder' => Yii::t('page', 'A colorful description section'),
+                'placeholder' => Yii::t('cookyii.page', 'A colorful description section'),
             ]);
         ?>
     </div>

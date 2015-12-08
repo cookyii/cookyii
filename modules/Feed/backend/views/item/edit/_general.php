@@ -22,7 +22,7 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
 
     <div class="box general">
         <div class="box-header">
-            <h3 class="box-title"><?= Yii::t('feed', 'General information') ?></h3>
+            <h3 class="box-title"><?= Yii::t('cookyii.feed', 'General information') ?></h3>
         </div>
 
         <div class="box-body">
@@ -96,12 +96,12 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
 
         <div class="box-footer">
             <?php
-            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('feed', 'Save'), [
+            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                 'class' => 'btn btn-success',
                 'ng-disabled' => 'in_progress',
             ]);
 
-            echo Html::button(Yii::t('feed', 'Cancel'), [
+            echo Html::button(Yii::t('cookyii', 'Cancel'), [
                 'class' => 'btn btn-link',
                 'ng-click' => 'reload()',
             ]);

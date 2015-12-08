@@ -12,7 +12,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-$this->title = Yii::t('postman', 'Messages management');
+$this->title = Yii::t('cookyii.postman', 'Messages management');
 
 Postman\backend\assets\MessageListAssetBundle::register($this);
 
@@ -40,11 +40,11 @@ function sortLink($type, $label)
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
-                <h3><?= Yii::t('postman', 'Filter') ?></h3>
+                <h3><?= Yii::t('cookyii.postman', 'Filter') ?></h3>
 
                 <hr>
 
-                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('postman', 'Removed messages'), [
+                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('cookyii.postman', 'Removed messages'), [
                     'class' => 'checker',
                     'ng-click' => 'messages.filter.toggleDeleted()',
                     'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('messages.filter.deleted === true')]),
@@ -54,7 +54,7 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('postman', 'Templates list') ?></h3>
+                    <h3 class="box-title"><?= Yii::t('cookyii.postman', 'Templates list') ?></h3>
 
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
@@ -72,7 +72,7 @@ function sortLink($type, $label)
                             <div class="input-group search" ng-class="{'wide':messages.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
-                                    'placeholder' => Yii::t('account', 'Search'),
+                                    'placeholder' => Yii::t('cookyii', 'Search'),
                                     'maxlength' => 100,
                                     'ng-model' => 'messages.filter.search.query',
                                     'ng-blur' => 'messages.filter.search.do()',
@@ -97,23 +97,23 @@ function sortLink($type, $label)
                     <table class="table table-hover table-messages">
                         <thead>
                         <tr>
-                            <td class="id"><?= sortLink('id', Yii::t('postman', 'ID')) ?></td>
-                            <td class="subject"><?= sortLink('subject', Yii::t('postman', 'Subject')) ?></td>
-                            <td class="address"><?= Yii::t('postman', 'Address') ?></td>
-                            <td class="created"><?= sortLink('created_at', Yii::t('postman', 'Created at')) ?></td>
-                            <td class="sent"><?= sortLink('sent_at', Yii::t('postman', 'Sent at')) ?></td>
+                            <td class="id"><?= sortLink('id', Yii::t('cookyii.postman', 'ID')) ?></td>
+                            <td class="subject"><?= sortLink('subject', Yii::t('cookyii.postman', 'Subject')) ?></td>
+                            <td class="address"><?= Yii::t('cookyii.postman', 'Address') ?></td>
+                            <td class="created"><?= sortLink('created_at', Yii::t('cookyii.postman', 'Created at')) ?></td>
+                            <td class="sent"><?= sortLink('sent_at', Yii::t('cookyii.postman', 'Sent at')) ?></td>
                             <td class="actions">&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-show="messages.list.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
-                                <?= Yii::t('postman', 'Messages not found') ?>
+                                <?= Yii::t('cookyii.postman', 'Messages not found') ?>
                             </td>
                         </tr>
                         <?php
                         $options = [
-                            'title' => Yii::t('postman', 'Edit message'),
+                            'title' => Yii::t('cookyii.postman', 'Edit message'),
                             'ng-class' => '{deactivated:message.activated===0,deleted:message.deleted}',
                         ];
                         ?>
@@ -140,7 +140,7 @@ function sortLink($type, $label)
                                 <?php
                                 echo Html::tag('a', FA::icon('paper-plane'), [
                                     'class' => 'text-info resent',
-                                    'title' => Yii::t('postman', 'Resent message'),
+                                    'title' => Yii::t('cookyii.postman', 'Resent message'),
                                     'ng-click' => 'messages.resent(message, $event)',
                                     'ng-class' => '{invisible: message.deleted}',
                                 ]);
@@ -160,13 +160,13 @@ function sortLink($type, $label)
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
-                                    'title' => Yii::t('postman', 'Remove message'),
+                                    'title' => Yii::t('cookyii.postman', 'Remove message'),
                                     'ng-click' => 'messages.remove(message, $event)',
                                     'ng-show' => '!message.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
-                                    'title' => Yii::t('postman', 'Restore message'),
+                                    'title' => Yii::t('cookyii.postman', 'Restore message'),
                                     'ng-click' => 'messages.restore(message)',
                                     'ng-show' => 'message.deleted',
                                 ]);
@@ -196,7 +196,7 @@ function sortLink($type, $label)
     <?php
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
-        'title' => Yii::t('postman', 'Create new message'),
+        'title' => Yii::t('cookyii.postman', 'Create new message'),
         'ng-click' => 'messages.add()',
         'aria-label' => 'Add message',
     ]);

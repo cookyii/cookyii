@@ -14,7 +14,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Page\backend
  */
-class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface, \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface
 {
 
     /**
@@ -24,26 +24,13 @@ class Module extends \yii\base\Module implements \backend\interfaces\BackendModu
     {
         return [
             [
-                'label' => \Yii::t('page', 'Pages'),
+                'label' => \Yii::t('cookyii.page', 'Pages'),
                 'url' => ['/page/list/index'],
                 'icon' => FA::icon('file'),
                 'visible' => User()->can(Page\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'page',
                 'sort' => 8000,
             ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($app)
-    {
-        $app->getI18n()
-            ->translations['page'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => \Yii::$app->sourceLanguage,
-            'basePath' => '@app/messages',
         ];
     }
 }

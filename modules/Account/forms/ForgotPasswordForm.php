@@ -44,7 +44,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
                 'exist',
                 'targetClass' => $AccountModel::className(),
                 'targetAttribute' => 'email',
-                'message' => \Yii::t('account', '{attribute} not found.'),
+                'message' => \Yii::t('cookyii.account', '{attribute} not found.'),
             ],
         ];
     }
@@ -55,7 +55,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'email' => \Yii::t('account', 'Email'),
+            'email' => \Yii::t('cookyii.account', 'Email'),
         ];
     }
 
@@ -114,10 +114,10 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             } else {
                 switch ($reason) {
                     case 'deleted':
-                        $this->addError('email', \Yii::t('account', 'Account removed.'));
+                        $this->addError('email', \Yii::t('cookyii.account', 'Account removed.'));
                         break;
                     case 'not-activated':
-                        $this->addError('email', \Yii::t('account', 'Account is not activated.'));
+                        $this->addError('email', \Yii::t('cookyii.account', 'Account is not activated.'));
                         break;
                 }
             }

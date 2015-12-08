@@ -13,7 +13,7 @@ use yii\helpers\FileHelper;
  * Class Module
  * @package cookyii\modules\Media
  */
-class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
+class Module extends \yii\base\Module
 {
 
     /** @var string */
@@ -70,11 +70,11 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
         $this->storagePath = \Yii::getAlias($this->storagePath);
 
         if (empty($this->uploadPath)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('media', 'Unable to determine the path to the upload directory (Media::$uploadPath).'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.media', 'Unable to determine the path to the upload directory (Media::$uploadPath).'));
         }
 
         if (empty($this->storagePath)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('media', 'Unable to determine the path to the storage directory (Media::$storagePath).'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.media', 'Unable to determine the path to the storage directory (Media::$storagePath).'));
         }
 
         if (!file_exists($this->uploadPath) || !is_dir($this->uploadPath)) {
@@ -86,32 +86,19 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
         }
 
         if (!is_readable($this->uploadPath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Upload directory not available for reading (Media::$uploadPath).'));
+            throw new \RuntimeException(\Yii::t('cookyii.media', 'Upload directory not available for reading (Media::$uploadPath).'));
         }
 
         if (!is_writable($this->uploadPath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Upload directory not available for writing (Media::$uploadPath).'));
+            throw new \RuntimeException(\Yii::t('cookyii.media', 'Upload directory not available for writing (Media::$uploadPath).'));
         }
 
         if (!is_readable($this->storagePath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Storage directory not available for reading (Media::$storagePath).'));
+            throw new \RuntimeException(\Yii::t('cookyii.media', 'Storage directory not available for reading (Media::$storagePath).'));
         }
 
         if (!is_writable($this->storagePath)) {
-            throw new \RuntimeException(\Yii::t('media', 'Storage directory not available for writing (Media::$storagePath).'));
+            throw new \RuntimeException(\Yii::t('cookyii.media', 'Storage directory not available for writing (Media::$storagePath).'));
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($APP)
-    {
-        $APP->getI18n()
-            ->translations['media'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => \Yii::$app->sourceLanguage,
-            'basePath' => '@app/messages',
-        ];
     }
 }

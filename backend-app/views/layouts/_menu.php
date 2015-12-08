@@ -27,15 +27,7 @@ $menu = [
 $modules = \Yii::$app->modules;
 if (!empty($modules)) {
     foreach ($modules as $module => $conf) {
-        $Module = null;
-
-        if (is_string($conf)) {
-            $Module = new $conf($module);
-        }
-
-        if (is_object($conf)) {
-            $Module = $conf;
-        }
+        $Module = Yii::$app->getModule($module);
 
         if ($Module instanceof \backend\interfaces\BackendModuleInterface) {
             $menu = array_merge($menu, $Module->menu($this->context));

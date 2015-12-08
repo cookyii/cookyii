@@ -21,7 +21,7 @@ class EditFormAction extends \cookyii\rest\Action
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('client', 'Unknown error'),
+            'message' => \Yii::t('cookyii.client', 'Unknown error'),
         ];
 
         $client_id = (int)Request()->post('client_id');
@@ -53,13 +53,13 @@ class EditFormAction extends \cookyii\rest\Action
         if ($ClientEditForm->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('client', 'When executing a query the error occurred'),
+                'message' => \Yii::t('cookyii.client', 'When executing a query the error occurred'),
                 'errors' => $ClientEditForm->getFirstErrors(),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('client', 'Client successfully saved'),
+                'message' => \Yii::t('cookyii.client', 'Client successfully saved'),
                 'client_id' => $Client->id,
             ];
         }

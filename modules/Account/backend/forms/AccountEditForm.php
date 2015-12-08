@@ -28,7 +28,7 @@ class AccountEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Account instanceof \cookyii\modules\Account\resources\Account)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('account', 'Not specified account to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.account', 'Not specified account to edit.'));
         }
     }
 
@@ -58,10 +58,10 @@ class AccountEditForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'name' => \Yii::t('account', 'Username'),
-            'email' => \Yii::t('account', 'Email'),
-            'new_password' => \Yii::t('account', 'New password'),
-            'new_password_app' => \Yii::t('account', 'Approve new password'),
+            'name' => \Yii::t('cookyii.account', 'Username'),
+            'email' => \Yii::t('cookyii.account', 'Email'),
+            'new_password' => \Yii::t('cookyii.account', 'New password'),
+            'new_password_app' => \Yii::t('cookyii.account', 'Approve new password'),
         ];
     }
 

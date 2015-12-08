@@ -20,17 +20,13 @@ return array_merge($config, [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'crm\controllers',
     'bootstrap' => [
-        'account', 'client', 'postman',
         'log', 'rollbar',
     ],
     'modules' => [
         'account' => cookyii\modules\Account\crm\Module::className(),
         'client' => cookyii\modules\Client\crm\Module::className(),
-        'media' => cookyii\modules\Media\Module::className(),
-        'postman' => [
-            'class' => cookyii\modules\Postman\crm\Module::className(),
-            'subjectPrefix' => 'Cookyii CRM // ',
-        ],
+        'media' => $params['module.media'],
+        'postman' => $params['module.postman'],
     ],
     'components' => [
         'db' => $params['component.db'],

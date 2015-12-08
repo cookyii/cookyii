@@ -39,7 +39,7 @@ class PropertyController extends \cookyii\rest\Controller
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('account', 'Unknown error'),
+            'message' => \Yii::t('cookyii.account', 'Unknown error'),
         ];
 
         $account_id = (int)Request()->post('account_id');
@@ -93,13 +93,13 @@ class PropertyController extends \cookyii\rest\Controller
         if ($Property->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('account', 'When executing a query the error occurred'),
+                'message' => \Yii::t('cookyii.account', 'When executing a query the error occurred'),
                 'errors' => $Property->getFirstErrors(),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('account', 'Property successfully saved'),
+                'message' => \Yii::t('cookyii.account', 'Property successfully saved'),
             ];
         }
 
@@ -116,7 +116,7 @@ class PropertyController extends \cookyii\rest\Controller
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('account', 'Unknown error'),
+            'message' => \Yii::t('cookyii.account', 'Unknown error'),
         ];
 
         $account_id = (int)Request()->get('account_id');
@@ -141,12 +141,12 @@ class PropertyController extends \cookyii\rest\Controller
         if ($Property->delete() === false) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('account', 'Unable to remove a property'),
+                'message' => \Yii::t('cookyii.account', 'Unable to remove a property'),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('account', 'Property was successfully removed'),
+                'message' => \Yii::t('cookyii.account', 'Property was successfully removed'),
             ];
         }
 

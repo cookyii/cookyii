@@ -18,7 +18,6 @@
  */
 return [
     'A colorful description section' => '',
-    'Cancel' => '',
     'Content' => '',
     'Create new page' => '',
     'Edit page' => '',
@@ -30,16 +29,15 @@ return [
     'Meta keywords' => '',
     'Meta title' => '',
     'Not specified page to edit.' => '',
+    'Page not found' => '',
     'Page successfully saved' => '',
-    'Pages' => 'Страницы',
+    'Pages' => '',
     'Pages list' => '',
     'Pages management' => '',
     'Pages not found' => '',
     'Remove page' => '',
     'Removed pages' => '',
     'Restore page' => '',
-    'Save' => '',
-    'Search' => '',
     'Slug' => '',
     'Some title...' => '',
     'Title' => '',
@@ -48,5 +46,4 @@ return [
     'When executing a query the error occurred' => '',
     'keyword, password, handball' => '',
     'some-title' => '',
-    'Страница не найдена' => '',
 ];

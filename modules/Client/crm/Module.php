@@ -14,7 +14,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Client\crm
  */
-class Module extends \yii\base\Module implements \crm\interfaces\CrmModuleInterface, \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements \crm\interfaces\CrmModuleInterface
 {
 
     /**
@@ -24,26 +24,13 @@ class Module extends \yii\base\Module implements \crm\interfaces\CrmModuleInterf
     {
         return [
             [
-                'label' => \Yii::t('account', 'Clients'),
+                'label' => \Yii::t('cookyii.client', 'Clients'),
                 'url' => ['/client/list/index'],
                 'icon' => FA::icon('users'),
                 'visible' => User()->can(Client\crm\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'client',
                 'sort' => 2000,
             ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($app)
-    {
-        $app->getI18n()
-            ->translations['client'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => \Yii::$app->sourceLanguage,
-            'basePath' => '@app/messages',
         ];
     }
 }

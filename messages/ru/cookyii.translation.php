@@ -17,6 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Context' => '',
     'Filter' => '',
+    'Phrases not found' => '',
+    'Translated' => '',
+    'Translation' => '',
     'Translations' => '',
+    'Translations list' => '',
 ];

@@ -26,13 +26,13 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
 
     <div class="box general">
         <div class="box-header">
-            <h3 class="box-title"><?= Yii::t('postman', 'General information') ?></h3>
+            <h3 class="box-title"><?= Yii::t('cookyii.postman', 'General information') ?></h3>
         </div>
 
         <div class="box-notify">
             <?= Yii::t('cookyii', 'Changes not saved yet') ?>
             <?php
-            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('page', 'Save'), [
+            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                 'class' => 'btn btn-slim btn-success',
                 'ng-disabled' => 'in_progress',
             ]);
@@ -112,11 +112,11 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                         <?= Html::dropDownList('address.type[{{ $index }}]', null, [
-                                            'null' => Yii::t('postman', 'Select type'),
-                                            '1' => Yii::t('postman', 'Reply to'),
-                                            '2' => Yii::t('postman', 'To'),
-                                            '3' => Yii::t('postman', 'Cc'),
-                                            '4' => Yii::t('postman', 'Bcc'),
+                                            'null' => Yii::t('cookyii.postman', 'Select type'),
+                                            '1' => Yii::t('cookyii.postman', 'Reply to'),
+                                            '2' => Yii::t('cookyii.postman', 'To'),
+                                            '3' => Yii::t('cookyii.postman', 'Cc'),
+                                            '4' => Yii::t('cookyii.postman', 'Bcc'),
                                         ], [
                                             'class' => 'form-control',
                                             'ng-model' => 'address.type',
@@ -128,7 +128,7 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                             'name' => 'address[email][{{ $index }}]',
                                             'class' => 'form-control',
                                             'ng-model' => 'address.email',
-                                            'placeholder' => Yii::t('postman', 'Email'),
+                                            'placeholder' => Yii::t('cookyii.postman', 'Email'),
                                         ]) ?>
                                     </div>
                                     <div class="col-xs-11 col-sm-5 col-md-5 col-lg-3">
@@ -137,7 +137,7 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                             'name' => 'address.name[{{ $index }}]',
                                             'class' => 'form-control',
                                             'ng-model' => 'address.name',
-                                            'placeholder' => Yii::t('postman', 'Name'),
+                                            'placeholder' => Yii::t('cookyii.postman', 'Name'),
                                         ]) ?>
                                     </div>
                                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
@@ -149,7 +149,7 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                             </div>
 
                             <div class="actions">
-                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('postman', 'New address'), null, [
+                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('cookyii.postman', 'New address'), null, [
                                     'ng-click' => 'addAddress()',
                                 ]) ?>
                             </div>
@@ -165,14 +165,14 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                             'type' => 'text',
                                             'class' => 'form-control',
                                             'ng-model' => 'param.key',
-                                            'placeholder' => Yii::t('postman', 'Key'),
+                                            'placeholder' => Yii::t('cookyii.postman', 'Key'),
                                         ]) ?>
                                     </div>
                                     <div class="col-xs-11 col-sm-5 col-md-5 col-lg-5">
                                         <?= Html::tag('textarea', null, [
                                             'class' => 'form-control',
                                             'ng-model' => 'param.description',
-                                            'placeholder' => Yii::t('postman', 'Description'),
+                                            'placeholder' => Yii::t('cookyii.postman', 'Description'),
                                             'msd-elastic' => true,
                                         ]) ?>
                                     </div>
@@ -185,7 +185,7 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                             </div>
 
                             <div class="actions">
-                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('postman', 'New parameter'), null, [
+                                <?= Html::a(FA::icon('plus') . ' ' . Yii::t('cookyii.postman', 'New parameter'), null, [
                                     'ng-click' => 'addParameter()',
                                 ]) ?>
                             </div>
@@ -206,12 +206,12 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
 
         <div class="box-footer">
             <?php
-            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('page', 'Save'), [
+            echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                 'class' => 'btn btn-success',
                 'ng-disabled' => 'in_progress',
             ]);
 
-            echo Html::button(Yii::t('page', 'Cancel'), [
+            echo Html::button(Yii::t('cookyii', 'Cancel'), [
                 'class' => 'btn btn-link',
                 'ng-click' => 'reload(TemplateEditForm)',
             ]);

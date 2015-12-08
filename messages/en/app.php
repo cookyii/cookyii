@@ -17,16 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Action' => null,
+    'Action' => '',
     'Another action' => '',
     'Dashboard' => '',
     'Dropdown' => '',
     'Error' => '',
     'Error {number}' => '',
     'Link' => '',
-    'Media module not configured' => '',
-    'Model must be `{class}`.' => '',
-    'Model must contain an attribute `{attribute}`.' => '',
     'One more separated link' => '',
     'Profile' => '',
     'Separated link' => '',
@@ -35,6 +32,4 @@ return [
     'Sign up' => '',
     'Something else here' => '',
     'Terms of use' => '',
-    'Вернуться на главную' => '',
-    'Отменить' => '',
 ];

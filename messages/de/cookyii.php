@@ -17,15 +17,15 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Back to index' => '',
+    'Cancel' => '',
     'Changes not saved yet' => '',
+    'Model must be `{class}`.' => '',
+    'Model must contain an attribute `{attribute}`.' => '',
     'Recommended {refresh} the page.' => '',
     'Refresh' => '',
-    'The data of this account has been changed.' => '',
-    'The data of this client has been changed.' => '',
+    'Save' => '',
+    'Search' => '',
     'The data of this item has been changed.' => '',
-    'The data of this message has been changed.' => '',
-    'The data of this page has been changed.' => '',
-    'The data of this section has been changed.' => '',
-    'The data of this template has been changed.' => '',
     'Warning' => '',
 ];

@@ -61,6 +61,6 @@ $this->title = $title;
         ?>
         <br>
 
-        <?= Html::a(Yii::t('app', 'Вернуться на главную'), ['/'], ['class' => 'back']) ?>
+        <?= Html::a(Yii::t('cookyii', 'Back to index'), ['/'], ['class' => 'back']) ?>
     </div>
 </div>

@@ -12,7 +12,7 @@ use cookyii\modules\Account;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = \Yii::t('account', 'Sing up');
+$this->title = \Yii::t('cookyii.account', 'Sign up');
 
 Account\frontend\assets\SignUpAssetBundle::register($this);
 
@@ -49,8 +49,8 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
         echo $form->field($SignUpForm, 'agree')
             ->checkbox([
                 'value' => '1',
-                'label' => \Yii::t('account', 'I agree to the {terms} of use', [
-                    'terms' => Html::a(\Yii::t('account', 'terms'), ['/site/terms'])
+                'label' => \Yii::t('cookyii.account', 'I agree to the {terms} of use', [
+                    'terms' => Html::a(\Yii::t('cookyii.account', 'terms'), ['/site/terms'])
                 ]),
             ]);
 
@@ -60,7 +60,7 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
                 <?php
                 $icon = FA::icon('cog', ['ng-show' => 'in_progress', 'class' => 'wo-animate'])->spin();
 
-                echo Html::submitButton($icon . ' ' . Yii::t('account', 'Sign In'), [
+                echo Html::submitButton($icon . ' ' . Yii::t('cookyii.account', 'Sign in'), [
                     'class' => 'btn btn-sm btn-primary btn-flat',
                     'ng-disabled' => 'in_progress',
                 ]);
@@ -114,7 +114,7 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
 
         ?>
 
-        <?= Html::a(Yii::t('account', 'Sign in'), ['/account/sign/in']) ?><br>
-        <?= Html::a(Yii::t('account', 'I forgot my password'), ['/account/forgot-password']) ?>
+        <?= Html::a(Yii::t('cookyii.account', 'Sign in'), ['/account/sign/in']) ?><br>
+        <?= Html::a(Yii::t('cookyii.account', 'I forgot my password'), ['/account/forgot-password']) ?>
     </div>
 </div>

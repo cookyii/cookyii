@@ -47,7 +47,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'email' => \Yii::t('account', 'Email'),
+            'email' => \Yii::t('cookyii.account', 'Email'),
         ];
     }
 

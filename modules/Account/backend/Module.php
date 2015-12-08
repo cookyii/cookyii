@@ -14,9 +14,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Account\backend
  */
-class Module extends \yii\base\Module implements
-    \backend\interfaces\BackendModuleInterface,
-    \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface
 {
 
     public $defaultRoute = 'sign/in';
@@ -28,26 +26,13 @@ class Module extends \yii\base\Module implements
     {
         return [
             [
-                'label' => \Yii::t('account', 'Accounts'),
+                'label' => \Yii::t('cookyii.account', 'Accounts'),
                 'url' => ['/account/list/index'],
                 'icon' => FA::icon('user'),
                 'visible' => User()->can(Account\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'account',
                 'sort' => 10000,
             ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($app)
-    {
-        $app->getI18n()
-            ->translations['account'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => \Yii::$app->sourceLanguage,
-            'basePath' => '@app/messages',
         ];
     }
 }

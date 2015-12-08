@@ -36,13 +36,13 @@ class CreateAccountAction extends \cookyii\rest\Action
         if ($Account->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('client', 'Failed to create account'),
+                'message' => \Yii::t('cookyii.client', 'Failed to create account'),
                 'errors' => $Account->getFirstErrors(),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('client', 'Account created successfully'),
+                'message' => \Yii::t('cookyii.client', 'Account created successfully'),
                 'account_id' => $Account->id,
             ];
         }

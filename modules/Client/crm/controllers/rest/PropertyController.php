@@ -39,7 +39,7 @@ class PropertyController extends \cookyii\rest\Controller
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('client', 'Unknown error'),
+            'message' => \Yii::t('cookyii.client', 'Unknown error'),
         ];
 
         $client_id = (int)Request()->post('client_id');
@@ -93,13 +93,13 @@ class PropertyController extends \cookyii\rest\Controller
         if ($Property->hasErrors()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('client', 'When executing a query the error occurred'),
+                'message' => \Yii::t('cookyii.client', 'When executing a query the error occurred'),
                 'errors' => $Property->getFirstErrors(),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('client', 'Property successfully saved'),
+                'message' => \Yii::t('cookyii.client', 'Property successfully saved'),
             ];
         }
 
@@ -116,7 +116,7 @@ class PropertyController extends \cookyii\rest\Controller
     {
         $result = [
             'result' => false,
-            'message' => \Yii::t('client', 'Unknown error'),
+            'message' => \Yii::t('cookyii.client', 'Unknown error'),
         ];
 
         $client_id = (int)Request()->get('client_id');
@@ -141,12 +141,12 @@ class PropertyController extends \cookyii\rest\Controller
         if ($Property->delete() === false) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('client', 'Unable to remove a property'),
+                'message' => \Yii::t('cookyii.client', 'Unable to remove a property'),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('client', 'Property was successfully removed'),
+                'message' => \Yii::t('cookyii.client', 'Property was successfully removed'),
             ];
         }
 

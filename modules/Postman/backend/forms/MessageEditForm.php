@@ -31,7 +31,7 @@ class MessageEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Message instanceof \cookyii\modules\Postman\resources\PostmanMessage)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('postman', 'Not specified message to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.postman', 'Not specified message to edit.'));
         }
     }
 
@@ -60,12 +60,12 @@ class MessageEditForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'subject' => \Yii::t('postman', 'Subject '),
-            'content_text' => \Yii::t('postman', 'Plain content'),
-            'content_html' => \Yii::t('postman', 'HTML content'),
-            'address' => \Yii::t('postman', 'Address'),
-            'error' => \Yii::t('postman', 'Error'),
-            'scheduled_at' => \Yii::t('postman', 'Scheduled at'),
+            'subject' => \Yii::t('cookyii.postman', 'Subject '),
+            'content_text' => \Yii::t('cookyii.postman', 'Plain content'),
+            'content_html' => \Yii::t('cookyii.postman', 'HTML content'),
+            'address' => \Yii::t('cookyii.postman', 'Address'),
+            'error' => \Yii::t('cookyii.postman', 'Error'),
+            'scheduled_at' => \Yii::t('cookyii.postman', 'Scheduled at'),
         ];
     }
 

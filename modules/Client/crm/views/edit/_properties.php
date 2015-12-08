@@ -15,12 +15,12 @@ use yii\helpers\Html;
 <div class="box properties" ng-controller="ClientPropertiesController">
     <div class="box-header">
         <h3 class="box-title" style="padding-bottom: 0;">
-            <?= Yii::t('client', 'Properties') ?>
+            <?= Yii::t('cookyii.client', 'Properties') ?>
 
             <div class="input-group" style="display: inline-block; vertical-align: middle;">
                 <?= Html::textInput(null, null, [
                     'class' => 'form-control properties-search input-sm',
-                    'placeholder' => Yii::t('client', 'Search'),
+                    'placeholder' => Yii::t('cookyii', 'Search'),
                     'maxlength' => 100,
                     'ng-model' => 'search',
                 ]) ?>
@@ -38,7 +38,7 @@ use yii\helpers\Html;
             <?= Html::button(FA::icon('plus'), [
                 'class' => 'btn btn-slim btn-info pull-right',
                 'ng-click' => 'create()',
-                'title' => Yii::t('client', 'Create new property'),
+                'title' => Yii::t('cookyii.client', 'Create new property'),
             ]) ?>
         </div>
     </div>
@@ -84,7 +84,7 @@ use yii\helpers\Html;
                         <a ng-click="toggleAllProperties()"><?= FA::icon('chevron-up') ?> Collapse</a>
                     </li>
                     <li class="empty" ng-if="searchResults.length === 0">
-                        <?= Yii::t('client', 'No properties.') ?>
+                        <?= Yii::t('cookyii.client', 'No properties.') ?>
                     </li>
                 </ul>
             </div>
@@ -93,25 +93,25 @@ use yii\helpers\Html;
                      ng-show="editedProperty !== null">
 
                     <div class="actions text-right">
-                        <?= Html::button(Yii::t('client', 'Delete'), [
+                        <?= Html::button(Yii::t('cookyii.client', 'Delete'), [
                             'class' => 'btn btn-slim btn-link text-red',
                             'ng-click' => 'remove(editedProperty, $event)',
                             'ng-if' => '!isNewProperty',
                         ]) ?>
-                        <?= Html::button(Yii::t('client', 'Cancel'), [
+                        <?= Html::button(Yii::t('cookyii', 'Cancel'), [
                             'class' => 'btn btn-slim btn-link',
                             'ng-click' => 'cancel()',
                         ]) ?>
-                        <?= Html::button(FA::icon('check') . ' ' . Yii::t('client', 'Save'), [
+                        <?= Html::button(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                             'class' => 'btn btn-slim btn-success',
                             'ng-click' => 'save(editedProperty, false)',
-                            'title' => Yii::t('client', 'Save and edit property'),
+                            'title' => Yii::t('cookyii.client', 'Save and edit property'),
                         ]) ?>
                         <?= Html::button(FA::icon('check') . ' ' . FA::icon('plus'), [
                             'class' => 'btn btn-slim btn-success',
                             'ng-click' => 'save(editedProperty, true)',
                             'ng-if' => 'isNewProperty',
-                            'title' => Yii::t('client', 'Save and create new property'),
+                            'title' => Yii::t('cookyii.client', 'Save and create new property'),
                         ]) ?>
                     </div>
 

@@ -34,7 +34,7 @@ class TemplateEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Template instanceof \cookyii\modules\Postman\resources\PostmanTemplate)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('postman', 'Not specified template to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.postman', 'Not specified template to edit.'));
         }
     }
 
@@ -68,14 +68,14 @@ class TemplateEditForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'code' => \Yii::t('postman', 'Code'),
-            'subject' => \Yii::t('postman', 'Subject '),
-            'content_text' => \Yii::t('postman', 'Plain content'),
-            'content_html' => \Yii::t('postman', 'HTML content'),
-            'address' => \Yii::t('postman', 'Address'),
-            'params' => \Yii::t('postman', 'Parameters'),
-            'description' => \Yii::t('postman', 'Description'),
-            'use_layout' => \Yii::t('postman', 'Use layout'),
+            'code' => \Yii::t('cookyii.postman', 'Code'),
+            'subject' => \Yii::t('cookyii.postman', 'Subject '),
+            'content_text' => \Yii::t('cookyii.postman', 'Plain content'),
+            'content_html' => \Yii::t('cookyii.postman', 'HTML content'),
+            'address' => \Yii::t('cookyii.postman', 'Address'),
+            'params' => \Yii::t('cookyii.postman', 'Parameters'),
+            'description' => \Yii::t('cookyii.postman', 'Description'),
+            'use_layout' => \Yii::t('cookyii.postman', 'Use layout'),
         ];
     }
 

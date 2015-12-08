@@ -11,12 +11,12 @@
 
 echo $ActiveForm->field($ItemEditForm, 'title')
     ->textInput([
-        'placeholder' => Yii::t('feed', 'Some title...'),
+        'placeholder' => Yii::t('cookyii.feed', 'Some title...'),
     ]);
 
 echo $ActiveForm->field($ItemEditForm, 'slug')
     ->textInput([
-        'placeholder' => Yii::t('feed', 'some-title'),
+        'placeholder' => Yii::t('cookyii.feed', 'some-title'),
     ]);
 
 echo $ActiveForm->field($ItemEditForm, 'sort')

@@ -14,7 +14,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Account\crm
  */
-class Module extends \yii\base\Module implements \crm\interfaces\CrmModuleInterface, \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements \crm\interfaces\CrmModuleInterface
 {
 
     public $defaultRoute = 'sign/in';
@@ -25,18 +25,5 @@ class Module extends \yii\base\Module implements \crm\interfaces\CrmModuleInterf
     public function menu($Controller)
     {
         return [];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($app)
-    {
-        $app->getI18n()
-            ->translations['account'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => \Yii::$app->sourceLanguage,
-            'basePath' => '@app/messages',
-        ];
     }
 }

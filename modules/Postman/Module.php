@@ -1,6 +1,6 @@
 <?php
 /**
- * AbstractModule.php
+ * Module.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -8,10 +8,10 @@
 namespace cookyii\modules\Postman;
 
 /**
- * Class AbstractModule
+ * Class Module
  * @package cookyii\modules\Postman
  */
-abstract class AbstractModule extends \yii\base\Module
+class Module extends \yii\base\Module
 {
 
     /** @var string */

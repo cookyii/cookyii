@@ -12,7 +12,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-$this->title = Yii::t('postman', 'Message templates management');
+$this->title = Yii::t('cookyii.postman', 'Message templates management');
 
 Postman\backend\assets\TemplateListAssetBundle::register($this);
 
@@ -40,11 +40,11 @@ function sortLink($type, $label)
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
-                <h3><?= Yii::t('postman', 'Filter') ?></h3>
+                <h3><?= Yii::t('cookyii.postman', 'Filter') ?></h3>
 
                 <hr>
 
-                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('postman', 'Removed templates'), [
+                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('cookyii.postman', 'Removed templates'), [
                     'class' => 'checker',
                     'ng-click' => 'templates.filter.toggleDeleted()',
                     'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('templates.filter.deleted')]),
@@ -54,7 +54,7 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('postman', 'Templates list') ?></h3>
+                    <h3 class="box-title"><?= Yii::t('cookyii.postman', 'Templates list') ?></h3>
 
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
@@ -72,7 +72,7 @@ function sortLink($type, $label)
                             <div class="input-group search" ng-class="{'wide':templates.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
-                                    'placeholder' => Yii::t('account', 'Search'),
+                                    'placeholder' => Yii::t('cookyii', 'Search'),
                                     'maxlength' => 100,
                                     'ng-model' => 'templates.filter.search.query',
                                     'ng-blur' => 'templates.filter.search.do()',
@@ -97,22 +97,22 @@ function sortLink($type, $label)
                     <table class="table table-hover table-templates">
                         <thead>
                         <tr>
-                            <td class="id"><?= sortLink('id', Yii::t('postman', 'ID')) ?></td>
-                            <td class="code"><?= sortLink('code', Yii::t('postman', 'Code')) ?></td>
-                            <td class="subject"><?= sortLink('subject', Yii::t('postman', 'Subject')) ?></td>
-                            <td class="updated"><?= sortLink('updated_at', Yii::t('postman', 'Updated at')) ?></td>
+                            <td class="id"><?= sortLink('id', Yii::t('cookyii.postman', 'ID')) ?></td>
+                            <td class="code"><?= sortLink('code', Yii::t('cookyii.postman', 'Code')) ?></td>
+                            <td class="subject"><?= sortLink('subject', Yii::t('cookyii.postman', 'Subject')) ?></td>
+                            <td class="updated"><?= sortLink('updated_at', Yii::t('cookyii.postman', 'Updated at')) ?></td>
                             <td class="actions">&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-show="templates.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
-                                <?= Yii::t('postman', 'Templates not found') ?>
+                                <?= Yii::t('cookyii.postman', 'Templates not found') ?>
                             </td>
                         </tr>
                         <?php
                         $options = [
-                            'title' => Yii::t('postman', 'Edit template'),
+                            'title' => Yii::t('cookyii.postman', 'Edit template'),
                             'ng-class' => '{deleted:template.deleted}',
                         ];
                         ?>
@@ -128,13 +128,13 @@ function sortLink($type, $label)
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
-                                    'title' => Yii::t('postman', 'Remove template'),
+                                    'title' => Yii::t('cookyii.postman', 'Remove template'),
                                     'ng-click' => 'templates.remove(template, $event)',
                                     'ng-show' => '!template.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
-                                    'title' => Yii::t('postman', 'Restore template'),
+                                    'title' => Yii::t('cookyii.postman', 'Restore template'),
                                     'ng-click' => 'templates.restore(template)',
                                     'ng-show' => 'template.deleted',
                                 ]);
@@ -164,7 +164,7 @@ function sortLink($type, $label)
     <?php
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
-        'title' => Yii::t('postman', 'Create new template'),
+        'title' => Yii::t('cookyii.postman', 'Create new template'),
         'ng-click' => 'templates.add()',
         'aria-label' => 'Add template',
     ]);

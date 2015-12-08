@@ -47,9 +47,9 @@ class SignInForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'email' => \Yii::t('account', 'Email'),
-            'password' => \Yii::t('account', 'Password'),
-            'remember' => \Yii::t('account', 'Remember me'),
+            'email' => \Yii::t('cookyii.account', 'Email'),
+            'password' => \Yii::t('cookyii.account', 'Password'),
+            'remember' => \Yii::t('cookyii.account', 'Remember me'),
         ];
     }
 
@@ -68,7 +68,7 @@ class SignInForm extends \cookyii\base\FormModel
     {
         $Account = $this->getAccount();
         if (!$Account || !$Account->validatePassword($this->$attribute)) {
-            $this->addError($attribute, \Yii::t('account', 'Account not found.'));
+            $this->addError($attribute, \Yii::t('cookyii.account', 'Account not found.'));
         }
     }
 
@@ -89,10 +89,10 @@ class SignInForm extends \cookyii\base\FormModel
         } else {
             switch ($reason) {
                 case 'deleted':
-                    $this->addError('email', \Yii::t('account', 'Account removed.'));
+                    $this->addError('email', \Yii::t('cookyii.account', 'Account removed.'));
                     break;
                 case 'not-activated':
-                    $this->addError('email', \Yii::t('account', 'Account is not activated.'));
+                    $this->addError('email', \Yii::t('cookyii.account', 'Account is not activated.'));
                     break;
             }
         }

@@ -48,8 +48,8 @@ class ApiController extends \cookyii\rest\Controller
         $result = [
             'result' => false,
             'message' => [
-                'title' => \Yii::t('account', 'Sign In'),
-                'text' => \Yii::t('account', 'Unknown error.'),
+                'title' => \Yii::t('cookyii.account', 'Sign in'),
+                'text' => \Yii::t('cookyii.account', 'Unknown error.'),
             ]
         ];
 
@@ -60,8 +60,8 @@ class ApiController extends \cookyii\rest\Controller
             $result = [
                 'result' => true,
                 'message' => [
-                    'title' => \Yii::t('account', 'Sign In'),
-                    'text' => \Yii::t('account', 'Welcome!'),
+                    'title' => \Yii::t('cookyii.account', 'Sign in'),
+                    'text' => \Yii::t('cookyii.account', 'Welcome!'),
                 ],
                 'redirect' => UrlManager()->createUrl(['/']),
             ];
@@ -71,8 +71,8 @@ class ApiController extends \cookyii\rest\Controller
             $result = [
                 'result' => false,
                 'message' => [
-                    'title' => \Yii::t('account', 'Sign In'),
-                    'text' => \Yii::t('account', 'Form errors.'),
+                    'title' => \Yii::t('cookyii.account', 'Sign in'),
+                    'text' => \Yii::t('cookyii.account', 'Form errors.'),
                 ],
                 'errors' => $SignInForm->getFirstErrors(),
             ];

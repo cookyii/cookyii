@@ -13,7 +13,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Postman\backend
  */
-class Module extends \cookyii\modules\Postman\AbstractModule implements \backend\interfaces\BackendModuleInterface, \yii\base\BootstrapInterface
+class Module extends \cookyii\modules\Postman\Module implements \backend\interfaces\BackendModuleInterface
 {
 
     /**
@@ -23,7 +23,7 @@ class Module extends \cookyii\modules\Postman\AbstractModule implements \backend
     {
         return [
             [
-                'label' => \Yii::t('account', 'Postman'),
+                'label' => \Yii::t('cookyii.postman', 'Postman'),
                 'url' => ['/postman'],
                 'icon' => FA::icon('envelope'),
                 'visible' => User()->can(\cookyii\modules\Postman\backend\Permissions::ACCESS),
@@ -31,32 +31,19 @@ class Module extends \cookyii\modules\Postman\AbstractModule implements \backend
                 'sort' => 9000,
                 'items' => [
                     [
-                        'label' => \Yii::t('account', 'Messages'),
+                        'label' => \Yii::t('cookyii.postman', 'Messages'),
                         'url' => ['/postman/message/list'],
                         'icon' => FA::icon('send'),
                         'selected' => $Controller->module->id === 'postman' && $Controller->id === 'message',
                     ],
                     [
-                        'label' => \Yii::t('account', 'Templates'),
+                        'label' => \Yii::t('cookyii.postman', 'Templates'),
                         'url' => ['/postman/template/list'],
                         'icon' => FA::icon('table'),
                         'selected' => $Controller->module->id === 'postman' && $Controller->id === 'template',
                     ],
                 ],
             ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function bootstrap($app)
-    {
-        $app->getI18n()
-            ->translations['postman'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => \Yii::$app->sourceLanguage,
-            'basePath' => '@app/messages',
         ];
     }
 }

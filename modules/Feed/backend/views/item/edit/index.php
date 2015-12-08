@@ -12,7 +12,7 @@ use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-$this->title = Yii::t('feed', 'Edit item');
+$this->title = Yii::t('cookyii.feed', 'Edit item');
 
 Feed\backend\assets\EditItemAssetBundle::register($this);
 

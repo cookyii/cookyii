@@ -12,7 +12,7 @@ use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-$this->title = Yii::t('account', 'Accounts management');
+$this->title = Yii::t('cookyii.account', 'Accounts management');
 
 Account\backend\assets\ListAssetBundle::register($this);
 
@@ -40,11 +40,11 @@ function sortLink($type, $label)
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">
             <div class="box-filter">
-                <h3><?= Yii::t('account', 'Filter') ?></h3>
+                <h3><?= Yii::t('cookyii.account', 'Filter') ?></h3>
 
                 <hr>
 
-                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('account', 'Removed accounts'), [
+                <?= Html::tag('a', FA::icon('check') . ' ' . Yii::t('cookyii.account', 'Removed accounts'), [
                     'class' => 'checker',
                     'ng-click' => 'accounts.filter.toggleDeleted()',
                     'ng-class' => Json::encode(['checked' => new \yii\web\JsExpression('accounts.filter.deleted')]),
@@ -54,7 +54,7 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('account', 'Accounts list') ?></h3>
+                    <h3 class="box-title"><?= Yii::t('cookyii.account', 'Accounts list') ?></h3>
 
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
@@ -72,7 +72,7 @@ function sortLink($type, $label)
                             <div class="input-group search" ng-class="{'wide':accounts.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
                                     'class' => 'form-control input-sm pull-right',
-                                    'placeholder' => Yii::t('account', 'Search'),
+                                    'placeholder' => Yii::t('cookyii', 'Search'),
                                     'maxlength' => 100,
                                     'ng-model' => 'accounts.filter.search.query',
                                     'ng-blur' => 'accounts.filter.search.do()',
@@ -98,22 +98,22 @@ function sortLink($type, $label)
                         <thead>
                         <tr>
                             <td class="activated">&nbsp;</td>
-                            <td class="id"><?= sortLink('id', Yii::t('account', 'ID')) ?></td>
-                            <td class="name"><?= sortLink('name', Yii::t('account', 'Name')) ?></td>
-                            <td class="email"><?= sortLink('email', Yii::t('account', 'Email')) ?></td>
-                            <td class="updated"><?= sortLink('updated_at', Yii::t('account', 'Updated at')) ?></td>
+                            <td class="id"><?= sortLink('id', Yii::t('cookyii.account', 'ID')) ?></td>
+                            <td class="name"><?= sortLink('name', Yii::t('cookyii.account', 'Name')) ?></td>
+                            <td class="email"><?= sortLink('email', Yii::t('cookyii.account', 'Email')) ?></td>
+                            <td class="updated"><?= sortLink('updated_at', Yii::t('cookyii.account', 'Updated at')) ?></td>
                             <td class="actions">&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-show="accounts.list.length === 0">
                             <td colspan="6" class="text-center text-italic text-light">
-                                <?= Yii::t('account', 'Accounts not found') ?>
+                                <?= Yii::t('cookyii.account', 'Accounts not found') ?>
                             </td>
                         </tr>
                         <?php
                         $options = [
-                            'title' => Yii::t('account', 'Edit account'),
+                            'title' => Yii::t('cookyii.account', 'Edit account'),
                             'ng-class' => '{deactivated:!account.activated,deleted:account.deleted}',
                         ];
                         ?>
@@ -136,13 +136,13 @@ function sortLink($type, $label)
                                 <?php
                                 echo Html::tag('a', FA::icon('times'), [
                                     'class' => 'text-red',
-                                    'title' => Yii::t('account', 'Remove account'),
+                                    'title' => Yii::t('cookyii.account', 'Remove account'),
                                     'ng-click' => 'accounts.remove(account, $event)',
                                     'ng-show' => '!account.deleted',
                                 ]);
                                 echo Html::tag('a', FA::icon('undo'), [
                                     'class' => 'text-light-blue',
-                                    'title' => Yii::t('account', 'Restore account'),
+                                    'title' => Yii::t('cookyii.account', 'Restore account'),
                                     'ng-click' => 'accounts.restore(account)',
                                     'ng-show' => 'account.deleted',
                                 ]);
@@ -172,7 +172,7 @@ function sortLink($type, $label)
     <?php
     echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
         'class' => 'md-warn md-fab md-fab-bottom-right',
-        'title' => Yii::t('account', 'Create new account'),
+        'title' => Yii::t('cookyii.account', 'Create new account'),
         'ng-click' => 'accounts.add()',
         'aria-label' => 'Add account',
     ]);

@@ -22,6 +22,14 @@ if (empty($crm)) {
 }
 
 return [
+    'module.media' => [
+        'class' => cookyii\modules\Media\Module::className(),
+    ],
+    'module.postman' => [
+        'class' => cookyii\modules\Postman\Module::className(),
+        'subjectPrefix' => 'Cookyii //',
+    ],
+
     'component.db' => [
         'class' => yii\db\Connection::className(),
         'charset' => 'utf8',
@@ -32,7 +40,7 @@ return [
         'dsn' => DB_DSN,
         'username' => DB_USER,
         'password' => DB_PASS,
-        'tablePrefix' => 'yii_'
+        'tablePrefix' => 'yii_',
     ],
     'component.mailer' => [
         'class' => yii\swiftmailer\Mailer::className(),
@@ -137,7 +145,10 @@ return [
     'component.i18n' => [
         'class' => yii\i18n\I18N::className(),
         'translations' => [
-            'cookyii' => yii\i18n\PhpMessageSource::className(),
+            'cookyii*' => [
+                'class' => yii\i18n\PhpMessageSource::className(),
+                'basePath' => '@messages',
+            ],
         ],
     ],
     'component.formatter' => [

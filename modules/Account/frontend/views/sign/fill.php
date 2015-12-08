@@ -18,7 +18,7 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
 
 <div class="box" ng-controller="FillAttributesController">
     <div class="box-logo">
-        <?= Yii::t('account', 'To complete the registration you must specify your email') ?>
+        <?= Yii::t('cookyii.account', 'To complete the registration you must specify your email') ?>
     </div>
 
     <div class="box-body">
@@ -40,7 +40,7 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
                 <?php
                 $icon = FA::icon('cog', ['ng-show' => 'in_progress', 'class' => 'wo-animate'])->spin();
 
-                echo Html::submitButton($icon . ' ' . Yii::t('account', 'Sign In'), [
+                echo Html::submitButton($icon . ' ' . Yii::t('cookyii.account', 'Sign in'), [
                     'class' => 'btn btn-sm btn-primary btn-block btn-flat',
                     'ng-disabled' => 'in_progress',
                 ]);

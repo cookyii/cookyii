@@ -30,7 +30,7 @@ class PageEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Page instanceof \cookyii\modules\Page\resources\Page)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('page', 'Not specified page to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.page', 'Not specified page to edit.'));
         }
     }
 
@@ -58,12 +58,12 @@ class PageEditForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'title' => \Yii::t('page', 'Title'),
-            'slug' => \Yii::t('page', 'Slug'),
-            'content' => \Yii::t('page', 'Content'),
-            'meta["title"]' => \Yii::t('page', 'Meta title'),
-            'meta["keywords"]' => \Yii::t('page', 'Meta keywords'),
-            'meta["description"]' => \Yii::t('page', 'Meta description'),
+            'title' => \Yii::t('cookyii.page', 'Title'),
+            'slug' => \Yii::t('cookyii.page', 'Slug'),
+            'content' => \Yii::t('cookyii.page', 'Content'),
+            'meta["title"]' => \Yii::t('cookyii.page', 'Meta title'),
+            'meta["keywords"]' => \Yii::t('cookyii.page', 'Meta keywords'),
+            'meta["description"]' => \Yii::t('cookyii.page', 'Meta description'),
         ];
     }
 

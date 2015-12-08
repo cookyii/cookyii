@@ -46,7 +46,7 @@ class SignUpForm extends \cookyii\base\FormModel
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
             [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
             [['password_app'], 'compare', 'compareAttribute' => 'password'],
-            [['agree'], 'compare', 'compareValue' => 'true', 'operator' => '===', 'message' => \Yii::t('account', 'You must accept the terms')],
+            [['agree'], 'compare', 'compareValue' => 'true', 'operator' => '===', 'message' => \Yii::t('cookyii.account', 'You must accept the terms')],
         ];
     }
 
@@ -56,11 +56,11 @@ class SignUpForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'name' => \Yii::t('account', 'Name'),
-            'email' => \Yii::t('account', 'Email'),
-            'password' => \Yii::t('account', 'Password'),
-            'password_app' => \Yii::t('account', 'Password approve'),
-            'agree' => \Yii::t('account', 'I agree to the terms of use'),
+            'name' => \Yii::t('cookyii.account', 'Name'),
+            'email' => \Yii::t('cookyii.account', 'Email'),
+            'password' => \Yii::t('cookyii.account', 'Password'),
+            'password_app' => \Yii::t('cookyii.account', 'Password approve'),
+            'agree' => \Yii::t('cookyii.account', 'I agree to the terms of use'),
         ];
     }
 

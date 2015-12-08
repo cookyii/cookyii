@@ -26,7 +26,7 @@ class ClientEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Client instanceof \cookyii\modules\Client\resources\Client)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('client', 'Not specified client to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.client', 'Not specified client to edit.'));
         }
     }
 
@@ -54,9 +54,9 @@ class ClientEditForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'name' => \Yii::t('client', 'Username'),
-            'email' => \Yii::t('client', 'Email'),
-            'phone' => \Yii::t('client', 'Phone'),
+            'name' => \Yii::t('cookyii.client', 'Username'),
+            'email' => \Yii::t('cookyii.client', 'Email'),
+            'phone' => \Yii::t('cookyii.client', 'Phone'),
         ];
     }
 

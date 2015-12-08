@@ -34,12 +34,12 @@ class UnlinkAccountAction extends \cookyii\rest\Action
         if (!$Client->accountHelper->unlink()) {
             $result = [
                 'result' => false,
-                'message' => \Yii::t('client', 'Failed to unlink account'),
+                'message' => \Yii::t('cookyii.client', 'Failed to unlink account'),
             ];
         } else {
             $result = [
                 'result' => true,
-                'message' => \Yii::t('client', 'Account unlink successfully'),
+                'message' => \Yii::t('cookyii.client', 'Account unlink successfully'),
             ];
         }
 

@@ -134,10 +134,10 @@ class SignController extends Account\backend\components\Controller
                     case true:
                         break;
                     case 'not-activated':
-                        $Account->addError('activated', \Yii::t('account', 'Account is not activated.'));
+                        $Account->addError('activated', \Yii::t('cookyii.account', 'Account is not activated.'));
                         break;
                     case 'deleted':
-                        $Account->addError('deleted', \Yii::t('account', 'Account removed.'));
+                        $Account->addError('deleted', \Yii::t('cookyii.account', 'Account removed.'));
                         break;
                 }
 

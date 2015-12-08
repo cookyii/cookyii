@@ -186,7 +186,7 @@ class Media extends \yii\db\ActiveRecord
                 $NewModel->path = $result;
                 $NewModel->insert();
             } else {
-                throw new \RuntimeException(\Yii::t('media', 'Failed to bring the resource directory of uploaded files.'));
+                throw new \RuntimeException(\Yii::t('cookyii.media', 'Failed to bring the resource directory of uploaded files.'));
             }
         }
 
@@ -263,7 +263,7 @@ class Media extends \yii\db\ActiveRecord
         $Module = \Yii::$app->getModule(static::$mediaModule);
 
         if (!($Module instanceof \cookyii\modules\Media\Module)) {
-            throw new \RuntimeException(\Yii::t('app', 'Media module not configured'));
+            throw new \RuntimeException(\Yii::t('cookyii.media', 'Media module not configured'));
         }
 
         return $Module;

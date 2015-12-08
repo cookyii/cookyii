@@ -41,7 +41,7 @@ class ItemEditForm extends \cookyii\base\FormModel
     public function init()
     {
         if (!($this->Item instanceof \cookyii\modules\Feed\resources\FeedItem)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('feed', 'Not specified item to edit.'));
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.feed', 'Not specified item to edit.'));
         }
     }
 
@@ -72,15 +72,15 @@ class ItemEditForm extends \cookyii\base\FormModel
     public function attributeLabels()
     {
         return [
-            'slug' => \Yii::t('feed', 'Slug'),
-            'title' => \Yii::t('feed', 'Title'),
-            'sort' => \Yii::t('feed', 'Sort'),
-            'sections' => \Yii::t('feed', 'Sections'),
-            'published_at' => \Yii::t('feed', 'Start publishing at'),
-            'archived_at' => \Yii::t('feed', 'End publishing at'),
-            'meta["title"]' => \Yii::t('feed', 'Meta title'),
-            'meta["keywords"]' => \Yii::t('feed', 'Meta keywords'),
-            'meta["description"]' => \Yii::t('feed', 'Meta description'),
+            'slug' => \Yii::t('cookyii.feed', 'Slug'),
+            'title' => \Yii::t('cookyii.feed', 'Title'),
+            'sort' => \Yii::t('cookyii.feed', 'Sort'),
+            'sections' => \Yii::t('cookyii.feed', 'Sections'),
+            'published_at' => \Yii::t('cookyii.feed', 'Start publishing at'),
+            'archived_at' => \Yii::t('cookyii.feed', 'End publishing at'),
+            'meta["title"]' => \Yii::t('cookyii.feed', 'Meta title'),
+            'meta["keywords"]' => \Yii::t('cookyii.feed', 'Meta keywords'),
+            'meta["description"]' => \Yii::t('cookyii.feed', 'Meta description'),
         ];
     }
 

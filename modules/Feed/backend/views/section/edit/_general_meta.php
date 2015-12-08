@@ -12,18 +12,18 @@
 echo $ActiveForm->field($SectionEditForm, 'meta["title"]')
     ->label($SectionEditForm->getAttributeLabel('meta["title"]'))
     ->textInput([
-        'placeholder' => Yii::t('feed', 'Marketing title'),
+        'placeholder' => Yii::t('cookyii.feed', 'Marketing title'),
     ]);
 
 echo $ActiveForm->field($SectionEditForm, 'meta["keywords"]')
     ->label($SectionEditForm->getAttributeLabel('meta["keywords"]'))
     ->textInput([
-        'placeholder' => Yii::t('feed', 'keyword, password, handball'),
+        'placeholder' => Yii::t('cookyii.feed', 'keyword, password, handball'),
     ]);
 
 echo $ActiveForm->field($SectionEditForm, 'meta["description"]')
     ->label($SectionEditForm->getAttributeLabel('meta["description"]'))
     ->textarea([
         'msd-elastic' => true,
-        'placeholder' => Yii::t('feed', 'A colorful description section'),
+        'placeholder' => Yii::t('cookyii.feed', 'A colorful description section'),
     ]);

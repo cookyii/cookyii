@@ -18,12 +18,12 @@
  */
 return [
     'A colorful description section' => '',
-    'Cancel' => '',
     'Create new item' => '',
     'Create new section' => '',
     'Edit item' => '',
     'Edit section' => '',
     'End publishing at' => '',
+    'Feeds' => '',
     'Filter' => '',
     'General information' => '',
     'Item successfully saved' => '',
@@ -41,8 +41,6 @@ return [
     'Removed items' => '',
     'Restore item' => '',
     'Restore section' => '',
-    'Save' => '',
-    'Search' => '',
     'Section successfully saved' => '',
     'Sections' => '',
     'Sections management' => '',
