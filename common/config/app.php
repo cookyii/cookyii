@@ -24,4 +24,5 @@ foreach ($path_list as $path) {
 return [
     'vendorPath' => $vendor_dir,
     'extensions' => $extensions,
+    'language' => 'en',
 ];
