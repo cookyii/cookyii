@@ -162,7 +162,7 @@ return [
             ],
             'cookyii*' => [
                 'class' => yii\i18n\PhpMessageSource::className(),
-                'basePath' => '@cookyii/base/messages',
+                'basePath' => '@cookyii/messages',
             ],
         ],
     ],
