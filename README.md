@@ -78,9 +78,11 @@
 ------------------------
 
 1. В консоли выполните команду
+
     ```bash
     composer create-project --prefer-dist --stability=dev cookyii/project new-project
     ```
+
 2. Перейдите в директорию `new-project` и запустите процес инсталяции с помощью команды `./build install`.
 Скрипт задаст несколько вопросов и выполнит следующие действия:
    * Создаст новую схему в базе данных (`install/database`)
@@ -94,11 +96,13 @@
 Вы можете удалить директории `crm-app`, `crm-assets`, `crm-modules`, `backend-app`, `backend-assets` и `backend-modules`.
 Аналогично, если Вам нужно какое-то дополнительное приложение (например `rest`), Вы можете создать схожие директории.
 8. Настройте [виртуальные хосты](http://www.yiiframework.com/doc-2.0/guide-start-installation.html#configuring-web-servers) для Ваших приложений, например:
+
     ```
     new-project.com     ->  .../frontend-app/web
     backend.new-project.com ->  .../backend-app/web
     crm.new-project.com     ->  .../crm-app/web
     ```
+
 
 Вот и всё, восемь простых шагов =) После всех этих манипуляций, Ваш новый сайт должен быть доступен по адресу `new-project.com`.
 
