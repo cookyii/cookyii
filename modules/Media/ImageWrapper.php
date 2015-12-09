@@ -47,7 +47,7 @@ class ImageWrapper extends \yii\base\Object
         $Media = $this->Media;
 
         if (!($Media instanceof Media\resources\Media)) {
-            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii', 'Model must be `{class}`', [
+            throw new \yii\base\InvalidConfigException(\Yii::t('cookyii', 'Model must be `{class}`.', [
                 'class' => Media\resources\Media::className(),
             ]));
         }

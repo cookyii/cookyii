@@ -6,7 +6,7 @@
  */
 
 return [
-    'sourcePath' => __DIR__ . '/..',
+    'sourcePath' => __DIR__ . '/../..',
     'messagePath' => __DIR__,
     'languages' => ['en', 'ru', 'de'],
     'translator' => 'Yii::t',
@@ -27,14 +27,7 @@ return [
         '/vendor',
     ],
     'ignoreCategories' => [
-        'cookyii',
-        'cookyii.account',
-        'cookyii.client',
-        'cookyii.feed',
-        'cookyii.media',
-        'cookyii.page',
-        'cookyii.postman',
-        'cookyii.translation',
+        'app',
     ],
     'only' => ['*.php'],
     'format' => 'php',

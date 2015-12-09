@@ -20,7 +20,6 @@ return [
     'Cancel' => 'Отмена',
     'Changes not saved yet' => 'Изменения ещё не сохранены',
     'Filter' => 'Фильтр',
-    'Model must be `{class}`' => '',
     'Model must be `{class}`.' => 'Модель должна быть `{class}`',
     'Model must contain an attribute `{attribute}`.' => 'Модель должна содержать атрибут `{class}`',
     'Recommended {refresh} the page.' => 'Рекомендуется {refresh} страницу.',

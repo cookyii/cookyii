@@ -20,7 +20,6 @@ return [
     'Cancel' => '',
     'Changes not saved yet' => '',
     'Filter' => '',
-    'Model must be `{class}`' => '',
     'Model must be `{class}`.' => '',
     'Model must contain an attribute `{attribute}`.' => '',
     'Recommended {refresh} the page.' => '',

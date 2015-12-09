@@ -156,9 +156,13 @@ return [
     'component.i18n' => [
         'class' => yii\i18n\I18N::className(),
         'translations' => [
-            'cookyii*' => [
+            'app*' => [
                 'class' => yii\i18n\PhpMessageSource::className(),
                 'basePath' => '@messages',
+            ],
+            'cookyii*' => [
+                'class' => yii\i18n\PhpMessageSource::className(),
+                'basePath' => '@cookyii/base/messages',
             ],
         ],
     ],
