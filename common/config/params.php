@@ -168,10 +168,9 @@ return [
     ],
     'component.formatter' => [
         'class' => cookyii\i18n\Formatter::className(),
-        'locale' => 'en',
         'timeZone' => 'Etc/GMT',
         'dateFormat' => 'dd MMMM y',
         'timeFormat' => 'HH:mm',
-        'datetimeFormat' => 'dd MMMM y HH:mm',
+        'datetimeFormat' => 'dd.MM.y HH:mm',
     ],
 ];
