@@ -77,28 +77,28 @@
 Установка (first deploy)
 ------------------------
 
-0. В консоли выполните команду
-```bash
-composer create-project --prefer-dist --stability=dev cookyii/project new-project
-```
-1. Перейдите в директорию `new-project` и запустите процес инсталяции с помощью команды `./build install`.
+1. В консоли выполните команду
+    ```bash
+    composer create-project --prefer-dist --stability=dev cookyii/project new-project
+    ```
+2. Перейдите в директорию `new-project` и запустите процес инсталяции с помощью команды `./build install`.
 Скрипт задаст несколько вопросов и выполнит следующие действия:
    * Создаст новую схему в базе данных (`install/database`)
    * Создаст нового пользователя в базе данных и даст ему права на доступ к новой схеме (`install/mysqlUserName`)
    * Скопирует файл `.env.dist.php` в `.env.php` и заполнит некоторые поля автоматически.
-2. Проверьте, что в созданном файле конфигурации `.env.php` заполнены все необходимые поля.
-3. (опционально) Скопируйте файлы `~/*-app/.credentials.dist.php` в `~/*-app/.credentials.php` (в директориях приложений), заполнить необходимые данные.
-4. Соберите билд с помощью команды `./build` (для продакшена `./build prod`).
-5. Создайте нового пользователя - администратора с помощью команды `./yii account/add`
-6. (опционально) Если Вам не нужны приложения `crm` и `backend`,
+3. Проверьте, что в созданном файле конфигурации `.env.php` заполнены все необходимые поля.
+4. (опционально) Скопируйте файлы `~/*-app/.credentials.dist.php` в `~/*-app/.credentials.php` (в директориях приложений), заполнить необходимые данные.
+5. Соберите билд с помощью команды `./build` (для продакшена `./build prod`).
+6. Создайте нового пользователя - администратора с помощью команды `./yii account/add`
+7. (опционально) Если Вам не нужны приложения `crm` и `backend`,
 Вы можете удалить директории `crm-app`, `crm-assets`, `crm-modules`, `backend-app`, `backend-assets` и `backend-modules`.
 Аналогично, если Вам нужно какое-то дополнительное приложение (например `rest`), Вы можете создать схожие директории.
-7. Настройте [виртуальные хосты](http://www.yiiframework.com/doc-2.0/guide-start-installation.html#configuring-web-servers) для Ваших приложений, например:
-```
-new-project.com     ->  .../frontend-app/web
-backend.new-project.com ->  .../backend-app/web
-crm.new-project.com     ->  .../crm-app/web
-```
+8. Настройте [виртуальные хосты](http://www.yiiframework.com/doc-2.0/guide-start-installation.html#configuring-web-servers) для Ваших приложений, например:
+    ```
+    new-project.com     ->  .../frontend-app/web
+    backend.new-project.com ->  .../backend-app/web
+    crm.new-project.com     ->  .../crm-app/web
+    ```
 
 Вот и всё, восемь простых шагов =) После всех этих манипуляций, Ваш новый сайт должен быть доступен по адресу `new-project.com`.
 
