@@ -5,7 +5,6 @@
  * @link https://rmrevin.com
  */
 
-require __DIR__ . '/dev/build/ExtractTask.php';
 require __DIR__ . '/dev/build/InstallTask.php';
 
 /** @var array $apps list of existing applications */
@@ -166,16 +165,6 @@ $buildConfig = [
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => './yii rbac/update',
-        ],
-    ],
-
-    'extract' => [
-        '.description' => 'Extract codebase to split repos',
-        '.depends' => [
-            'clear',
-        ],
-        '.task' => [
-            'class' => 'dev\build\ExtractTask',
         ],
     ],
 ];
