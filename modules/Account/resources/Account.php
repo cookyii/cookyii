@@ -44,6 +44,10 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public $password;
 
+    protected $_presentHelper = null;
+
+    protected $_notificationHelper = null;
+
     /**
      * @inheritdoc
      */
@@ -230,25 +234,21 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return sha1($this->created_at . $this->auth_key . $this->email);
     }
 
-    protected $presentHelper = null;
-
     /**
      * @return \cookyii\modules\Account\resources\helpers\AccountPresent
      * @throws \yii\base\InvalidConfigException
      */
     public function getPresentHelper()
     {
-        if ($this->presentHelper === null) {
-            $this->presentHelper = \Yii::createObject([
+        if ($this->_presentHelper === null) {
+            $this->_presentHelper = \Yii::createObject([
                 'class' => \cookyii\modules\Account\resources\helpers\AccountPresent::className(),
                 'Model' => $this,
             ]);
         }
 
-        return $this->presentHelper;
+        return $this->_presentHelper;
     }
-
-    protected $notificationHelper = null;
 
     /**
      * @return \cookyii\modules\Account\resources\helpers\AccountNotification
@@ -256,14 +256,14 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getNotificationHelper()
     {
-        if ($this->notificationHelper === null) {
-            $this->notificationHelper = \Yii::createObject([
+        if ($this->_notificationHelper === null) {
+            $this->_notificationHelper = \Yii::createObject([
                 'class' => \cookyii\modules\Account\resources\helpers\AccountNotification::className(),
                 'Model' => $this,
             ]);
         }
 
-        return $this->notificationHelper;
+        return $this->_notificationHelper;
     }
 
     /**
