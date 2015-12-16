@@ -66,10 +66,11 @@ class AccountProperty extends \yii\db\ActiveRecord
      * @param integer $account_id
      * @param string $key
      * @param mixed $value
+     * @param bool $replace
      * @return static
      * @throw \InvalidArgumentException
      */
-    public static function push($account_id, $key, $value)
+    public static function push($account_id, $key, $value, $replace = true)
     {
         $Property = static::find()
             ->byAccountId($account_id)
@@ -80,13 +81,15 @@ class AccountProperty extends \yii\db\ActiveRecord
             $Property = new static;
         }
 
-        $Property->setAttributes([
-            'account_id' => $account_id,
-            'key' => $key,
-            'value' => (string)$value,
-        ]);
+        if ($replace || $Property->isNewRecord) {
+            $Property->setAttributes([
+                'account_id' => $account_id,
+                'key' => $key,
+                'value' => (string)$value,
+            ]);
 
-        $Property->validate() && $Property->save();
+            $Property->validate() && $Property->save();
+        }
 
         return $Property;
     }
