@@ -47,7 +47,6 @@ class AppAsset extends \yii\web\AssetBundle
         'cookyii\assets\AdminLteAssetBundle',
         'cookyii\assets\AnimateCssAssetBundle',
         'cookyii\assets\SweetAlertAssetBundle',
-        'cookyii\assets\SpeakingurlAssetBundle',
         'cookyii\assets\MomentAssetBundle',
         'cookyii\assets\angular\AngularAssetBundle',
         'cookyii\assets\angular\AngularMaterialAssetBundle',
