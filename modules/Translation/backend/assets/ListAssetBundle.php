@@ -10,10 +10,10 @@ namespace cookyii\modules\Translation\backend\assets;
  * Class ListAssetBundle
  * @package cookyii\modules\Translation\backend\assets
  */
-class ListAssetBundle extends \yii\web\AssetBundle
+class ListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'list.css',
@@ -27,11 +27,4 @@ class ListAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'backend\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }

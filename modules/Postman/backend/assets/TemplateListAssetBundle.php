@@ -11,10 +11,10 @@ namespace cookyii\modules\Postman\backend\assets;
  * Class TemplateListAssetBundle
  * @package cookyii\modules\Postman\backend\assets
  */
-class TemplateListAssetBundle extends \yii\web\AssetBundle
+class TemplateListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'template-list.css',
@@ -30,11 +30,4 @@ class TemplateListAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'backend\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }

@@ -11,10 +11,10 @@ namespace cookyii\modules\Feed\backend\assets;
  * Class EditSectionAssetBundle
  * @package cookyii\modules\Feed\backend\assets
  */
-class EditSectionAssetBundle extends \yii\web\AssetBundle
+class EditSectionAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'edit.css',
@@ -30,11 +30,4 @@ class EditSectionAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'backend\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }

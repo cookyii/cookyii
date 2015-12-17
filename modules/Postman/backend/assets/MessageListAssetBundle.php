@@ -11,10 +11,10 @@ namespace cookyii\modules\Postman\backend\assets;
  * Class MessageListAssetBundle
  * @package cookyii\modules\Postman\backend\assets
  */
-class MessageListAssetBundle extends \yii\web\AssetBundle
+class MessageListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'message-list.css',
@@ -30,11 +30,4 @@ class MessageListAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'backend\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }

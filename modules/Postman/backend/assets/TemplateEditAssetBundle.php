@@ -11,10 +11,10 @@ namespace cookyii\modules\Postman\backend\assets;
  * Class TemplateEditAssetBundle
  * @package cookyii\modules\Postman\backend\assets
  */
-class TemplateEditAssetBundle extends \yii\web\AssetBundle
+class TemplateEditAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'template-edit.css',
@@ -29,11 +29,4 @@ class TemplateEditAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'backend\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }

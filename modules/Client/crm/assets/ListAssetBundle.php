@@ -11,10 +11,10 @@ namespace cookyii\modules\Client\crm\assets;
  * Class ListAssetBundle
  * @package cookyii\modules\Client\crm\assets
  */
-class ListAssetBundle extends \yii\web\AssetBundle
+class ListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'list.css',
@@ -30,11 +30,4 @@ class ListAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'crm\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }

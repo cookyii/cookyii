@@ -11,10 +11,10 @@ namespace cookyii\modules\Account\frontend\assets;
  * Class SignUpAssetBundle
  * @package cookyii\modules\Account\frontend\assets
  */
-class SignUpAssetBundle extends \yii\web\AssetBundle
+class SignUpAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'styles.css',
@@ -27,11 +27,4 @@ class SignUpAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'frontend\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }

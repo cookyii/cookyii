@@ -11,10 +11,10 @@ namespace cookyii\modules\Postman\backend\assets;
  * Class MessageEditAssetBundle
  * @package cookyii\modules\Postman\backend\assets
  */
-class MessageEditAssetBundle extends \yii\web\AssetBundle
+class MessageEditAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 {
 
-    public $sourcePath;
+    public $path = __DIR__;
 
     public $css = [
         'message-edit.css',
@@ -29,11 +29,4 @@ class MessageEditAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'backend\assets\AppAsset',
     ];
-
-    public function init()
-    {
-        $this->sourcePath = __DIR__ . '/_sources';
-
-        parent::init();
-    }
 }
