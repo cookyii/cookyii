@@ -9,7 +9,7 @@ return [
     'cookyii/base' => [
         'name' => 'cookyii/base',
         'version' => '0.0.0.0',
-        'alias' => ['@cookyii/base' => __DIR__ . '/base'],
+        'alias' => ['@cookyii' => __DIR__ . '/base'],
     ],
     'cookyii/module-account' => [
         'name' => 'cookyii/module-account',

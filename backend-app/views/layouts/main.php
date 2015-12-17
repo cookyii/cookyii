@@ -95,7 +95,7 @@ $menu_items = include(__DIR__ . '/_menu.php');
         <!-- /.sidebar -->
     </aside>
 
-    <div class="content-wrapper" style="overflow-y: scroll!important;overflow-x: hidden!important;">
+    <div class="content-wrapper">
         <section class="content-header">
             <h1><?= $this->title ?></h1>
         </section>

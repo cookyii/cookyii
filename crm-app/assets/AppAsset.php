@@ -21,7 +21,6 @@ class AppAsset extends \yii\web\AssetBundle
     ];
 
     public $js = [
-        'js/app.js',
         'js/functions.js',
         'js/scripts.js',
         'js/directives.js',
@@ -45,11 +44,11 @@ class AppAsset extends \yii\web\AssetBundle
 
         'rmrevin\yii\fontawesome\cdn\AssetBundle',
 
+        'cookyii\assets\AdminLteAssetBundle',
         'cookyii\assets\AnimateCssAssetBundle',
         'cookyii\assets\SweetAlertAssetBundle',
         'cookyii\assets\SpeakingurlAssetBundle',
         'cookyii\assets\MomentAssetBundle',
-        'cookyii\assets\AdminLteAssetBundle',
         'cookyii\assets\angular\AngularAssetBundle',
         'cookyii\assets\angular\AngularMaterialAssetBundle',
         'cookyii\assets\jquery\DateTimePickerAssetBundle',

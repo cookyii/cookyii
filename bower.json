@@ -24,7 +24,7 @@
     "angular-websocket": "1.0.*",
     "angular-ui-utils": "0.2.*",
     "angular-ui-uploader": "1.1.*",
-    "admin-lte": "2.1.*",
+    "admin-lte": "2.3.*",
     "smalot-bootstrap-datetimepicker": "2.3.*",
     "jScrollPane": "2.0.*",
     "jquery-form": "3.45.*",
