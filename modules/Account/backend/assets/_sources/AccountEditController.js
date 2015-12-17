@@ -8,8 +8,10 @@ angular.module('BackendApp')
 
       $scope.inProgress = false;
 
-      $scope.submit = function (AccountEditForm, e) {
-        var $form = angular.element('#AccountEditForm');
+      $scope.submit = function (Form, e) {
+        var $form = angular.element('form[name="' + Form.$name + '"]');
+
+        console.log($scope.$parent.data);
 
         $scope.error = {};
         $scope.inProgress = true;
@@ -20,7 +22,7 @@ angular.module('BackendApp')
           data: {
             _csrf: $form.find('input[name="_csrf"]').val(),
             account_id: $scope.$parent.getAccountId(),
-            AccountEditForm: $scope.data
+            FormData: $scope.$parent.data
           }
         })
           .success(function (response) {

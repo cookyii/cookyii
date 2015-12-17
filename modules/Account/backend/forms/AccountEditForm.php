@@ -7,6 +7,9 @@
 
 namespace cookyii\modules\Account\backend\forms;
 
+use cookyii\modules\Account;
+use rmrevin\yii\rbac\RbacFactory;
+
 /**
  * Class AccountEditForm
  * @package cookyii\modules\Account\backend\forms
@@ -22,6 +25,7 @@ class AccountEditForm extends \cookyii\base\FormModel
     public $name;
     public $email;
     public $gender;
+    public $roles;
     public $new_password;
     public $new_password_app;
 
@@ -46,6 +50,7 @@ class AccountEditForm extends \cookyii\base\FormModel
             [['name', 'email'], 'required'],
             [['email'], 'email'],
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
+            [['roles'], 'checkRoles'],
             [['new_password_app'], 'compare', 'compareAttribute' => 'new_password', 'operator' => '==='],
 
             /** default values */
@@ -60,6 +65,7 @@ class AccountEditForm extends \cookyii\base\FormModel
         return [
             'name' => \Yii::t('cookyii.account', 'Username'),
             'email' => \Yii::t('cookyii.account', 'Email'),
+            'roles' => \Yii::t('cookyii.account', 'Roles'),
             'new_password' => \Yii::t('cookyii.account', 'New password'),
             'new_password_app' => \Yii::t('cookyii.account', 'Approve new password'),
         ];
@@ -82,6 +88,42 @@ class AccountEditForm extends \cookyii\base\FormModel
     }
 
     /**
+     * @param string $attribute
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function checkRoles($attribute)
+    {
+        $values = $this->$attribute;
+        if (empty($values)) {
+            $this->addError($attribute, \Yii::t('cookyii.account', 'You must select at least one role'));
+        } else {
+            /** @var Account\resources\Account $Account */
+            $Account = \Yii::createObject([
+                'class' => Account\resources\Account::className(),
+            ]);
+
+            $roles = array_keys($Account::getAllRoles());
+
+            $allright = false;
+            foreach ($values as $role => $checked) {
+                if ($checked === true) {
+                    if (!in_array($role, $roles, true)) {
+                        $this->addError($attribute, \Yii::t('cookyii.account', 'The role of `{role}` is not found', [
+                            'role' => $role,
+                        ]));
+                    } else {
+                        $allright = true;
+                    }
+                }
+            }
+
+            if (!$allright) {
+                $this->addError($attribute, \Yii::t('cookyii.account', 'You must select at least one role'));
+            }
+        }
+    }
+
+    /**
      * @return bool
      */
     public function save()
@@ -92,6 +134,10 @@ class AccountEditForm extends \cookyii\base\FormModel
         $Account->email = $this->email;
         $Account->gender = $this->gender;
 
+        if ($Account->isNewRecord) {
+            $Account->activated_at = time();
+        }
+
         if (!empty($this->new_password)) {
             $Account->password = $this->new_password;
         }
@@ -100,6 +146,17 @@ class AccountEditForm extends \cookyii\base\FormModel
 
         if ($Account->hasErrors()) {
             $this->populateErrors($Account, 'name');
+        } else {
+            AuthManager()->revokeAll($Account->id);
+
+            $roles = $this->roles;
+            if (!empty($roles)) {
+                foreach ($roles as $role => $checked) {
+                    if ($checked === true) {
+                        AuthManager()->assign(RbacFactory::Role($role), $Account->id);
+                    }
+                }
+            }
         }
 
         if (AuthManager() instanceof \yii\rbac\DbManager) {

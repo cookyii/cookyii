@@ -45,6 +45,23 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
 
             echo '<hr>';
 
+            echo Html::tag('label', Yii::t('cookyii.account', 'Roles'));
+
+            foreach ($AccountEditForm::getRoleValues() as $role => $label) {
+                $options = [
+                    'ng-model' => sprintf('data.roles.%s', $role),
+                    'value' => $role,
+                ];
+
+                if ($role === \common\Roles::USER) {
+                    $options['disabled'] = true;
+                }
+
+                echo Html::tag('md-checkbox', $label, $options);
+            }
+
+            echo '<hr>';
+
             echo $form->field($AccountEditForm, 'new_password')
                 ->passwordInput();
 

@@ -48,9 +48,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Account' => $Account,
         ]);
 
-        $AccountEditForm->load(Request()->post())
-        && $AccountEditForm->validate()
-        && $AccountEditForm->save();
+        $AccountEditForm->load(Request()->post(), 'FormData') && $AccountEditForm->validate() && $AccountEditForm->save();
 
         if ($AccountEditForm->hasErrors()) {
             $result = [

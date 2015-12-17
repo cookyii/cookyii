@@ -37,7 +37,7 @@ Account\backend\assets\EditAssetBundle::register($this);
                             'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('cookyii', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',
                                 'ng-click' => 'reload()',
-                            ])
+                            ]),
                         ]) ?>
                     </span>
                 </div>
@@ -49,11 +49,6 @@ Account\backend\assets\EditAssetBundle::register($this);
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
             <?php
             echo $this->render('_general', ['AccountEditForm' => $AccountEditForm]);
-            ?>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" ng-if="!isNewAccount">
-            <?php
-            echo $this->render('_rbac', ['AccountEditForm' => $AccountEditForm]);
             ?>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5" ng-if="!isNewAccount">

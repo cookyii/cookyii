@@ -24,7 +24,6 @@ class EditAssetBundle extends \yii\web\AssetBundle
         'AccountResource.js',
         'AccountDetailController.js',
         'AccountEditController.js',
-        'AccountRolesController.js',
         'AccountPropertiesController.js',
     ];
 

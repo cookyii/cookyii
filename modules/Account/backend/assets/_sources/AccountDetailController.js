@@ -7,7 +7,9 @@ angular.module('BackendApp')
     function ($scope, $location, $timeout, Account) {
       var hash = null,
         query = $location.search(),
-        defaultValues = {roles: []};
+        defaultValues = {gender: '1', roles: {user: true}};
+
+      $scope.data = {};
 
       $scope.getAccountId = function () {
         return typeof query.id === 'undefined'

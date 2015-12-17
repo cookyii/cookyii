@@ -39,7 +39,6 @@ class AccountController extends \cookyii\rest\ActiveController
         $verbs = parent::verbs();
 
         $verbs['edit'] = ['POST'];
-        $verbs['roles'] = ['PUT'];
         $verbs['detail'] = ['GET'];
         $verbs['activate'] = ['POST'];
         $verbs['deactivate'] = ['POST'];
@@ -60,12 +59,6 @@ class AccountController extends \cookyii\rest\ActiveController
 
         $actions['edit'] = [
             'class' => Account\backend\controllers\rest\AccountController\EditFormAction::className(),
-            'modelClass' => $this->modelClass,
-            'checkAccess' => [$this, 'checkAccess'],
-        ];
-
-        $actions['roles'] = [
-            'class' => Account\backend\controllers\rest\AccountController\RolesAction::className(),
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
