@@ -18,3 +18,9 @@ function str_repeat(input, multiplier) {
 
   return buf;
 }
+
+function strpos(haystack, needle, offset) {
+  var i = haystack.indexOf(needle, offset); // returns -1
+
+  return i >= 0 ? i : false;
+}
