@@ -30,7 +30,7 @@
     "sweetalert": "1.1.*",
     "speakingurl": "5.0.*",
     "moment": "2.10.*",
-    "iCheck": "1.0.*",
+    "icheck": "1.0.*",
     "jquery-mousewheel": "3.1.*"
   }
 }

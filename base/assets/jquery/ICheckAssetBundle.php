@@ -17,11 +17,11 @@ class ICheckAssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@bower';
 
     public $css = [
-        'iCheck/skins/all.css',
+        'icheck/skins/all.css',
     ];
 
     public $js = [
-        'iCheck/icheck.min.js',
+        'icheck/icheck.min.js',
     ];
 
     public $depends = [
