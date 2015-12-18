@@ -1,8 +1,8 @@
 angular.module('directives', [])
 
-  .directive('icheck', ['$timeout', iCheck])
-  .directive('ngDatePicker', DatePicker)
-  .directive('ngDatetimePicker', DatetimePicker)
+  .directive('ngIcheck', ['$timeout', iCheck])
+  .directive('ngDatePicker', ['$timeout', DatePicker])
+  .directive('ngDatetimePicker', ['$timeout', DatetimePicker])
   .directive('ngScrollPane', ['$window', '$timeout', ScrollPane]);
 
 function iCheck($timeout) {
@@ -41,50 +41,77 @@ function DatePicker() {
   return {
     restrict: 'A',
     require: 'ngModel',
-    scope: {
-      dateStart: '=ngDateStart'
-    },
-    link: function (scope, element, attrs, ngModelCtrl) {
-      element.datetimepicker({
-        format: 'dd.mm.yyyy',
-        autoclose: true,
-        weekStart: 1,
-        minView: 'month'
-      });
+    link: function ($scope, element, $attrs, ngModel) {
+      return $timeout(function () {
+        var options = {
+          weekStart: 1,
+          minView: 'month',
+          language: 'ru',
+          autoclose: true,
+          format: 'dd.mm.yyyy',
+          keyboardNavigation: false
+        };
 
-      scope.$watch('dateStart', function (val) {
-        element.datetimepicker(
-          'setStartDate',
-          typeof val === 'undefined'
-            ? null
-            : val.substr(0, 10)
-        );
+        if ($attrs['ngDatepicker']) {
+          options = angular.merge(options, $scope.$eval($attrs['ngDatepicker']));
+        }
+
+        function eval(type) {
+          if (typeof $attrs[type] !== 'undefined') {
+            $scope.$apply(function () {
+              $scope.$eval($attrs[type]);
+            });
+          }
+        }
+
+        return jQuery(element)
+          .datetimepicker(options)
+          .on('changeDate', function (e) {
+            eval('ngDatepickerChange');
+          })
+          .on('hide', function (e) {
+            eval('ngDatepickerHide');
+          });
       });
     }
   };
 }
 
-function DatetimePicker() {
+function DatetimePicker($timeout) {
   return {
     restrict: 'A',
     require: 'ngModel',
-    scope: {
-      dateStart: '=ngDateStart'
-    },
-    link: function (scope, element, attrs, ngModelCtrl) {
-      element.datetimepicker({
-        format: 'dd.mm.yyyy hh:ii',
-        autoclose: true,
-        weekStart: 1
-      });
+    link: function ($scope, element, $attrs, ngModel) {
+      return $timeout(function () {
+        var options = {
+          weekStart: 1,
+          minView: 'hour',
+          language: 'ru',
+          autoclose: true,
+          format: 'dd.mm.yyyy hh:ii',
+          keyboardNavigation: false
+        };
 
-      scope.$watch('dateStart', function (val) {
-        element.datetimepicker(
-          'setStartDate',
-          typeof val === 'undefined'
-            ? null
-            : val.substr(0, 10)
-        );
+        if ($attrs['ngDatetimepicker']) {
+          options = angular.merge(options, $scope.$eval($attrs['ngDatetimepicker']));
+        }
+
+        function eval(type) {
+          if (typeof $attrs[type] !== 'undefined') {
+            $scope.$apply(function () {
+              $scope.$eval($attrs[type]);
+            });
+          }
+        }
+
+        return jQuery(element)
+          .datetimepicker(options)
+          .on('changeDate', function (e) {
+            eval('ngDatetimepickerChange');
+          })
+          .on('hide', function (e) {
+            eval('ngDatetimepickerHide');
+          });
       });
     }
   };

@@ -44,7 +44,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
                 <?php
                 echo $form->field($SignInForm, 'remember')
                     ->label(false)
-                    ->checkbox(['icheck' => true]);
+                    ->checkbox(['ng-icheck' => true]);
                 ?>
             </div>
             <div class="col-xs-4">

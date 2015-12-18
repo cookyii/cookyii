@@ -169,7 +169,7 @@ class ActiveField extends \cookyii\widgets\angular\ActiveField
                 $options = [
                     'value' => $value,
                     'label' => $label,
-                    'iCheck' => true,
+                    'ng-icheck' => true,
                     'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
                 ];
 

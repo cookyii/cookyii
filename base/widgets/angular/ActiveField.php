@@ -502,7 +502,7 @@ class ActiveField extends \yii\widgets\ActiveField
                 $options = [
                     'value' => $value,
                     'label' => Html::tag('span', $label),
-                    'iCheck' => true,
+                    'ng-icheck' => true,
                     'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
                 ];
 
@@ -535,7 +535,7 @@ class ActiveField extends \yii\widgets\ActiveField
                 $options = [
                     'value' => $value,
                     'label' => Html::tag('span', $label),
-                    'iCheck' => true,
+                    'ng-icheck' => true,
                     'ng-model' => sprintf('data.%s', $this->attribute),
                 ];
 
