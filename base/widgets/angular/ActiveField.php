@@ -514,6 +514,8 @@ class ActiveField extends \yii\widgets\ActiveField
             }
         );
 
+        Html::addCssClass($options, 'checkbox-list');
+
         $this->beforeRenderInput(__METHOD__, $options);
 
         return parent::checkboxList($items, $options);
@@ -544,6 +546,8 @@ class ActiveField extends \yii\widgets\ActiveField
                 return Html::radio($name, $checked, $options);
             }
         );
+
+        Html::addCssClass($options, 'radio-list');
 
         $this->beforeRenderInput(__METHOD__, $options);
 

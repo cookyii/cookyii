@@ -1,8 +1,41 @@
 angular.module('directives', [])
 
+  .directive('icheck', ['$timeout', iCheck])
   .directive('ngDatePicker', DatePicker)
   .directive('ngDatetimePicker', DatetimePicker)
   .directive('ngScrollPane', ['$window', '$timeout', ScrollPane]);
+
+function iCheck($timeout) {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function ($scope, element, $attrs, ngModel) {
+      return $timeout(function () {
+        var value = $attrs['value'];
+
+        $scope.$watch($attrs['ngModel'], function (newValue) {
+          jQuery(element).iCheck('update');
+        });
+
+        return jQuery(element).iCheck({
+          checkboxClass: 'icheckbox_flat-red',
+          radioClass: 'iradio_flat-red'
+        }).on('ifChanged', function (event) {
+          if (jQuery(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
+            $scope.$apply(function () {
+              return ngModel.$setViewValue(event.target.checked);
+            });
+          }
+          if (jQuery(element).attr('type') === 'radio' && $attrs['ngModel']) {
+            return $scope.$apply(function () {
+              return ngModel.$setViewValue(value);
+            });
+          }
+        });
+      });
+    }
+  };
+}
 
 function DatePicker() {
   return {

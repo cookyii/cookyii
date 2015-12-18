@@ -1,6 +1,6 @@
 <?php
 /**
- * FormAssetBundle.php
+ * ICheckAssetBundle.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -8,16 +8,20 @@
 namespace cookyii\assets\jquery;
 
 /**
- * Class FormAssetBundle
+ * Class ICheckAssetBundle
  * @package cookyii\assets\jquery
  */
-class FormAssetBundle extends \yii\web\AssetBundle
+class ICheckAssetBundle extends \yii\web\AssetBundle
 {
 
     public $sourcePath = '@bower';
 
+    public $css = [
+        'iCheck/skins/all.css',
+    ];
+
     public $js = [
-        'jquery-form/jquery.form.js',
+        'iCheck/icheck.min.js',
     ];
 
     public $depends = [

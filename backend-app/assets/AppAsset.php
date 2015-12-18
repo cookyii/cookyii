@@ -29,6 +29,7 @@ class AppAsset extends \yii\web\AssetBundle
         'common\assets\CommonAssetBundle',
 
         'cookyii\assets\AdminLteAssetBundle',
+        'cookyii\assets\jquery\ICheckAssetBundle',
         'cookyii\assets\angular\AngularMaterialAssetBundle',
 
         'backend\assets\ImperaviAssetBundle',

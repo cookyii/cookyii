@@ -17,10 +17,10 @@ class MouseWheelAssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@bower';
 
     public $js = [
-        'jScrollPane/script/jquery.mousewheel.js',
+        'jquery-mousewheel/jquery.mousewheel.min.js',
     ];
 
     public $depends = [
-        \yii\web\JqueryAsset::class,
+        'yii\web\JqueryAsset',
     ];
 }

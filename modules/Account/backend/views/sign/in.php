@@ -40,11 +40,11 @@ Account\backend\assets\SignInAssetBundle::register($this);
 
         ?>
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-8" style="padding-top: 10px;">
                 <?php
-                echo $form->field($SignInForm, 'remember', ['class' => 'cookyii\widgets\angular\material\ActiveField'])
+                echo $form->field($SignInForm, 'remember')
                     ->label(false)
-                    ->checkbox();
+                    ->checkbox(['icheck' => true]);
                 ?>
             </div>
             <div class="col-xs-4">
