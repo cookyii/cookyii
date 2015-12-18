@@ -44,7 +44,6 @@ class CommonAssetBundle extends \yii\web\AssetBundle
         'cookyii\assets\SweetAlertAssetBundle',
         'cookyii\assets\MomentAssetBundle',
         'cookyii\assets\SpeakingUrlAssetBundle',
-        'cookyii\assets\angular\AngularAssetBundle',
         'cookyii\assets\jquery\DateTimePickerAssetBundle',
         'cookyii\assets\jquery\ScrollToAssetBundle',
     ];
