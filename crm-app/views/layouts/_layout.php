@@ -21,7 +21,7 @@ $title = empty($this->title)
 /** @var \crm\components\Controller $controller */
 $controller = $this->context;
 
-/** @var \cookyii\modules\Account\resources\Account|null $User */
+/** @var \resources\Account|null $User */
 $User = User()->identity;
 
 $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()], 'canonical');

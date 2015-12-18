@@ -21,14 +21,22 @@ $title = empty($this->title)
 /** @var \frontend\components\Controller $controller */
 $controller = $this->context;
 
-/** @var \resources\User|null $User */
+/** @var \resources\Account|null $User */
 $User = User()->identity;
 
-$this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()], 'canonical');
 
-$this->registerLinkTag([
-    'rel' => 'stylesheet',
-    'href' => '//fonts.googleapis.com/css?family=Open+Sans:200,400,700&subset=latin,cyrillic'
+$this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
+$this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'], 'viewport');
+if (!User()->isGuest) {
+    $this->registerMetaTag(['name' => 'token', 'content' => $User->token], 'token');
+}
+
+rmrevin\yii\favicon\Favicon::widget([
+    'forceGenerate' => true,
+    'appname' => 'Cookyii CMF',
+    'color' => '#2B5797',
+    'fillColor' => '#A4EDFF',
 ]);
 
 $this->beginPage();
@@ -41,25 +49,13 @@ $this->beginPage();
 <head>
     <!--[if IE]>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <?php
+
     echo Html::csrfMetaTags();
     echo Html::tag('title', $title);
 
-    echo Html::tag('meta', '', ['charset' => Yii::$app->charset]);
-    if (!User()->isGuest) {
-        echo Html::tag('meta', null, ['name' => 'token', 'content' => $User->token]) . "\n";
-    }
-
     $this->head();
-
-    echo rmrevin\yii\favicon\Favicon::widget([
-        'forceGenerate' => true,
-        'appname' => 'Cookyii CMF',
-        'color' => '#2B5797',
-        'fillColor' => '#A4EDFF',
-    ]);
 
     ?>
 </head>
@@ -73,6 +69,7 @@ echo $content;
 $this->endBody();
 
 echo $this->render('_toast');
+echo $this->render('_analytics');
 
 ?>
 
