@@ -3,10 +3,12 @@
 angular.module('BackendApp')
 
   .factory('FilterSectionScope', [
-    '$timeout', '$mdDialog', 'ToastScope', 'QueryScope', 'SectionResource',
-    function ($timeout, $mdDialog, ToastScope, QueryScope, Section) {
+    '$timeout', '$mdDialog', 'ToastrScope', 'QueryScope', 'SectionResource',
+    function ($timeout, $mdDialog, ToastrScope, QueryScope, Section) {
       return function ($parentScope) {
-        var $scope = $parentScope.$new();
+
+        var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope);
 
         $scope.selected = QueryScope.get('section');
 
@@ -57,30 +59,22 @@ angular.module('BackendApp')
 
           $mdDialog.show(confirm).then(function () {
             Section.remove({slug: section}, function () {
-              ToastScope.send('success', {
-                message: 'Section successfully removed'
-              });
+              toastr.success('Section successfully removed');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error removing section'
-              });
+              toastr.error('Error removing section');
             });
           });
         };
 
         $scope.restore = function (section) {
           Section.restore({slug: section}, function () {
-            ToastScope.send('success', {
-              message: 'Section successfully restored'
-            });
+            toastr.success('Section successfully restored');
 
             _refresh();
           }, function () {
-            ToastScope.send('error', {
-              message: 'Error restoring section'
-            });
+            toastr.error('Error restoring section');
           });
         };
 

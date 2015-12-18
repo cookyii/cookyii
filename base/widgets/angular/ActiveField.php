@@ -7,6 +7,7 @@
 
 namespace cookyii\widgets\angular;
 
+use rmrevin\yii\fontawesome\FA;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -36,7 +37,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
         if (!isset($this->options['ng-class'])) {
             $this->options['ng-class'] = Json::encode([
-                'has-error' => new JsExpression(sprintf('error.%s', str_replace('[]', '', $this->attribute)))
+                'has-error' => new JsExpression(sprintf('error.%s', str_replace('[]', '', $this->attribute))),
             ]);
         }
     }
@@ -83,11 +84,18 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function icon($icon)
     {
-        $this->parts['{icon}'] = Html::tag(
-            'span',
-            null,
-            ['class' => sprintf('glyphicon glyphicon-%s form-control-feedback', $icon)]
-        );
+        $icon = preg_match('|^\w+$|', $icon)
+            ? (string)FA::icon($icon, ['class' => 'form-control-feedback'])
+            : $icon;
+
+        if (!preg_match('|form-control-feedback|', $icon)) {
+            \Yii::warning(\Yii::t('cookyii', 'Icon must contain css class `{class}` ({icon})', [
+                'icon' => $icon,
+                'class' => 'form-control-feedback',
+            ]));
+        }
+
+        $this->parts['{icon}'] = $icon;
 
         return $this;
     }
@@ -566,6 +574,7 @@ class ActiveField extends \yii\widgets\ActiveField
         $tag = isset($options['tag']) ? $options['tag'] : 'div';
         unset($options['tag']);
         $options['ng-show'] = 'error.' . $attribute;
+
         return Html::tag($tag, '{{ error.' . $attribute . ' }}', $options);
     }
 }

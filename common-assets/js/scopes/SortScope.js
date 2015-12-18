@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('CrmApp')
+angular.module('scopes')
 
   .factory('SortScope', [
     'QueryScope',

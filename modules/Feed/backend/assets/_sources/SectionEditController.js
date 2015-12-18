@@ -3,8 +3,11 @@
 angular.module('BackendApp')
 
   .controller('SectionEditController', [
-    '$scope', '$http', '$timeout', 'QueryScope', 'ToastScope', 'SectionDropdownScope',
-    function ($scope, $http, $timeout, QueryScope, ToastScope, SectionDropdownScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'ToastrScope', 'SectionDropdownScope',
+    function ($scope, $http, $timeout, QueryScope, ToastrScope, SectionDropdownScope) {
+
+      var toastr = ToastrScope($scope);
+
       $scope.inProgress = false;
 
       var selectedTab = QueryScope.get('tab', 'parent');
@@ -25,7 +28,7 @@ angular.module('BackendApp')
 
       $scope.sections = SectionDropdownScope;
 
-      function reloadSectionList(){
+      function reloadSectionList() {
         $scope.sections.reload(true, function () {
           if ($scope.$parent.getSection() !== null) {
             $scope.sections.checkCurrentSection($scope.$parent.getSection());
@@ -57,14 +60,10 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                ToastScope.send('error', {
-                  message: 'Save error'
-                });
+                toastr.error('Save error');
               }
             } else {
-              ToastScope.send('success', {
-                message: 'Section successfully saved'
-              });
+              toastr.success('Section successfully saved');
 
               QueryScope.set('section', response.section_slug);
 
@@ -80,9 +79,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              ToastScope.send('error', {
-                message: 'Error updating section'
-              });
+              toastr.error('Error updating section');
             }
           })
           .finally(function () {

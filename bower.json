@@ -1,7 +1,7 @@
 {
-  "name": "cookyii/base",
+  "name": "cookyii/project",
   "version": "0.0.0",
-  "homepage": "https://github.com/cookyii/base",
+  "homepage": "https://github.com/cookyii/project",
   "license": "BSD-3-Clause",
   "private": true,
   "resolutions": {
@@ -26,8 +26,6 @@
     "angular-ui-uploader": "1.1.*",
     "admin-lte": "2.3.*",
     "smalot-bootstrap-datetimepicker": "2.3.*",
-    "jScrollPane": "2.0.*",
-    "jquery-form": "3.45.*",
     "jquery.scrollTo": "2.1.*",
     "sweetalert": "1.1.*",
     "speakingurl": "5.0.*",

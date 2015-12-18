@@ -20,7 +20,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
 
 <div class="box" ng-controller="ForgotPasswordController">
     <div class="box-logo">
-        <?= Html::a('<strong>COOKYII</strong>frontend', ['/']) ?>
+        <?= Html::a(Html::tag('strong', APP_NAME), ['/']) ?>
     </div>
 
     <div class="box-body">

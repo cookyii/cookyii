@@ -2,8 +2,11 @@ angular
   .module('CrmApp')
 
   .controller('DashController', [
-    '$scope', '$timeout', 'ToastScope', '$mdSidenav', '$mdUtil',
-    function ($scope, $timeout, ToastScope, $mdSidenav, $mdUtil) {
+    '$scope', '$timeout', 'ToastrScope', '$mdSidenav', '$mdUtil',
+    function ($scope, $timeout, ToastrScope, $mdSidenav, $mdUtil) {
+
+      var toastr = ToastrScope($scope);
+
       $scope.toggleSidePanel = buildToggler('side-panel');
 
       function buildToggler(navID) {
@@ -13,9 +16,7 @@ angular
       }
 
       $scope.t = function () {
-        ToastScope.send('success', {
-          message: 'Click'
-        });
+        toastr.success('Click');
       };
     }])
 

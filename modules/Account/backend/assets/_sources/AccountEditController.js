@@ -3,8 +3,10 @@
 angular.module('BackendApp')
 
   .controller('AccountEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastScope',
-    function ($scope, $http, $location, $timeout, ToastScope) {
+    '$scope', '$http', '$location', 'ToastrScope',
+    function ($scope, $http, $location, ToastrScope) {
+
+      var toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
@@ -32,14 +34,10 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                ToastScope.send('error', {
-                  message: 'Save error'
-                });
+                toastr.error('Save error');
               }
             } else {
-              ToastScope.send('success', {
-                message: 'Account successfully saved'
-              });
+              toastr.success('Account successfully saved');
 
               if ($scope.$parent.isNewAccount) {
                 $location.search('id', response.account_id);
@@ -54,9 +52,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              ToastScope.send('error', {
-                message: 'Error updating account'
-              });
+              toastr.error('Error updating account');
             }
           })
           .finally(function () {

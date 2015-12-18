@@ -33,32 +33,15 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
             echo $form->field($AccountEditForm, 'email')
                 ->textInput();
 
-            echo Html::beginTag('md-radio-group', ['ng-model' => 'data.gender']);
-            foreach ($AccountEditForm::getGenderValues() as $gender => $label) {
-                $options = [
-                    'value' => $gender,
-                ];
-
-                echo Html::tag('md-radio-button', $label, $options);
-            }
-            echo Html::endTag('md-radio-group');
+            echo $form->field($AccountEditForm, 'gender')
+                ->radioList($AccountEditForm::getGenderValues());
 
             echo '<hr>';
 
             echo Html::tag('label', Yii::t('cookyii.account', 'Roles'));
 
-            foreach ($AccountEditForm::getRoleValues() as $role => $label) {
-                $options = [
-                    'ng-model' => sprintf('data.roles.%s', $role),
-                    'value' => $role,
-                ];
-
-                if ($role === \common\Roles::USER) {
-                    $options['disabled'] = true;
-                }
-
-                echo Html::tag('md-checkbox', $label, $options);
-            }
+            echo $form->field($AccountEditForm, 'roles')
+                ->checkboxList($AccountEditForm::getRoleValues());
 
             echo '<hr>';
 

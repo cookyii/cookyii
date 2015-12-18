@@ -3,10 +3,11 @@
 angular.module('BackendApp')
 
   .factory('AccountListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastScope', 'SortScope', 'FilterScope', 'AccountResource',
-    function ($timeout, $mdDialog, QueryScope, ToastScope, SortScope, FilterScope, Account) {
+    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'AccountResource',
+    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Account) {
       return function ($parentScope) {
         var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope),
           page = QueryScope.get('page', 1),
           loaded = false;
 
@@ -55,30 +56,22 @@ angular.module('BackendApp')
 
           $mdDialog.show(confirm).then(function () {
             account.$remove(function () {
-              ToastScope.send('success', {
-                message: 'Account successfully removed'
-              });
+              toastr.success('Account successfully removed');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error removing account'
-              });
+              toastr.error('Error removing account');
             });
           });
         };
 
         $scope.restore = function (account) {
           account.$restore(function () {
-            ToastScope.send('success', {
-              message: 'Account successfully restored'
-            });
+            toastr.success('Account successfully restored');
 
             _refresh();
           }, function () {
-            ToastScope.send('error', {
-              message: 'Error restoring account'
-            });
+            toastr.error('Error restoring account');
           });
         };
 

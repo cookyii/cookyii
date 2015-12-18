@@ -3,13 +3,15 @@
 angular.module('FrontendApp')
 
   .controller('ForgotPasswordController', [
-    '$scope', '$http', 'ToastScope',
-    function ($scope, $http, ToastScope) {
+    '$scope', '$http', 'ToastrScope',
+    function ($scope, $http, ToastrScope) {
       var _config = {},
         defaultValues = {
           email: null
         },
         defaultErrors = {};
+
+      var toastr = ToastrScope($scope);
 
       $scope.in_progress = false;
 
@@ -39,16 +41,12 @@ angular.module('FrontendApp')
         })
           .success(function (response) {
             if (true === response.result) {
-              ToastScope.send('success', {
-                message: response.message
-              });
+              toastr.success(response.message);
             } else {
               if (typeof response.errors !== 'undefined') {
                 $scope.error = response.errors;
               } else {
-                ToastScope.send('danger', {
-                  message: response.message
-                });
+                toastr.error(response.message);
               }
             }
           })

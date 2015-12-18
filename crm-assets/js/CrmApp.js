@@ -2,16 +2,16 @@
   "use strict";
 
   ng.module('CrmApp', [
-    'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate', 'ngMaterial',
-    'ui.bootstrap', 'ui.uploader',
-    'directives', 'filters',
-    'monospaced.elastic',
-    'angular-loading-bar', 'angular-redactor'
-  ])
+      'directives', 'filters', 'scopes',
+      'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate', 'ngMaterial',
+      'ui.bootstrap', 'ui.uploader',
+      'monospaced.elastic',
+      'angular-loading-bar', 'angular-redactor', 'toastr'
+    ])
 
     .config([
-      '$httpProvider', '$animateProvider', '$mdThemingProvider', 'redactorOptions',
-      function ($httpProvider, $animateProvider, $mdThemingProvider, redactorOptions) {
+      '$httpProvider', '$animateProvider', '$mdThemingProvider', 'redactorOptions', 'toastrConfig',
+      function ($httpProvider, $animateProvider, $mdThemingProvider, redactorOptions, toastrConfig) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = yii.getCsrfToken();
 
@@ -31,15 +31,42 @@
           'alignment',
           'horizontalrule'
         ];
+
+        angular.extend(toastrConfig, {
+          allowHtml: true,
+          autoDismiss: true,
+          containerId: 'toast-container',
+          maxOpened: 1,
+          newestOnTop: true,
+          progressBar: false,
+          tapToDismiss: false,
+          timeOut: 30000,
+          extendedTimeOut: 10000,
+          positionClass: 'toast-bottom-right',
+          preventOpenDuplicates: false,
+          iconClasses: {
+            error: 'error',
+            info: 'info',
+            success: 'success',
+            warning: 'warning'
+          },
+          onTap: angular.noop
+        });
       }
     ])
 
     .run([
       '$cookies',
       function ($cookies) {
+        var $window = angular.element(window);
+
         if (typeof $cookies.get('timezone') === 'undefined') {
           $cookies.put('timezone', new Date().getTimezoneOffset() / 60);
         }
+
+        $window.load(function () {
+          angular.element('#global-loader').hide();
+        });
       }
     ]);
 

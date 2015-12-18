@@ -3,10 +3,12 @@
 angular.module('CrmApp')
 
   .factory('ClientAccountScope', [
-    '$timeout', '$mdDialog', '$http', 'ToastScope',
-    function ($timeout, $mdDialog, $http, ToastScope) {
+    '$timeout', '$mdDialog', '$http', 'ToastrScope',
+    function ($timeout, $mdDialog, $http, ToastrScope) {
       return function ($parentScope) {
-        var $scope = $parentScope.$new();
+
+        var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope);
 
         $scope.create = function (e) {
           var confirm = $mdDialog.confirm()
@@ -36,22 +38,17 @@ angular.module('CrmApp')
                       $parentScope.error[field] = message;
                     });
                   } else {
-                    ToastScope.send('error', {
-                      message: response.message
-                    });
+
+                    toastr.error(response.message);
                   }
                 } else {
-                  ToastScope.send('success', {
-                    message: response.message
-                  });
+                  toastr.success(response.message);
 
                   $parentScope.reload();
                 }
               })
               .error(function (response) {
-                ToastScope.send('error', {
-                  message: response.message.length > 0 ? response.message : response.name
-                });
+                toastr.error(response.message.length > 0 ? response.message : response.name);
               })
               .finally(function () {
                 $parentScope.inProgress = false;
@@ -87,22 +84,16 @@ angular.module('CrmApp')
                       $parentScope.error[field] = message;
                     });
                   } else {
-                    ToastScope.send('error', {
-                      message: response.message
-                    });
+                    toastr.error(response.message);
                   }
                 } else {
-                  ToastScope.send('success', {
-                    message: response.message
-                  });
+                  toastr.success(response.message);
 
                   $parentScope.reload();
                 }
               })
               .error(function (response) {
-                ToastScope.send('error', {
-                  message: response.message.length > 0 ? response.message : response.name
-                });
+                toastr.error(response.message.length > 0 ? response.message : response.name);
               })
               .finally(function () {
                 $parentScope.inProgress = false;

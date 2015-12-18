@@ -102,7 +102,7 @@ use yii\helpers\Html;
                             'class' => 'btn btn-slim btn-link',
                             'ng-click' => 'cancel()',
                         ]) ?>
-                        <?= Html::button(FA::icon('check') . ' ' . Yii::t('cookyii.account', 'Save'), [
+                        <?= Html::button(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                             'class' => 'btn btn-slim btn-success',
                             'ng-click' => 'save(editedProperty, false)',
                             'title' => Yii::t('cookyii.account', 'Save and edit property'),

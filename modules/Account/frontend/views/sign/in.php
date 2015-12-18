@@ -20,7 +20,7 @@ Account\frontend\assets\SignInAssetBundle::register($this);
 
 <div class="box" ng-controller="SignInController">
     <div class="box-logo">
-        <?= Html::a(Html::img('/img/cookyii.png') . ' <strong>COOKYII</strong>frontend', ['/']) ?>
+        <?= Html::a(Html::tag('strong', APP_NAME), ['/']) ?>
     </div>
 
     <div class="box-body">

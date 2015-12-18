@@ -3,13 +3,15 @@
 angular.module('FrontendApp')
 
   .controller('FillAttributesController', [
-    '$scope', '$http', 'ToastScope',
-    function ($scope, $http, ToastScope) {
+    '$scope', '$http', 'ToastrScope',
+    function ($scope, $http, ToastrScope) {
       var _config = {},
         defaultValues = {
           email: null
         },
         defaultErrors = {};
+
+      var toastr = ToastrScope($scope);
 
       $scope.in_progress = false;
 
@@ -44,9 +46,7 @@ angular.module('FrontendApp')
               if (typeof response.errors !== 'undefined') {
                 $scope.error = response.errors;
               } else {
-                ToastScope.send('danger', {
-                  message: response.message
-                });
+                toastr.error(response.message);
               }
             }
           })

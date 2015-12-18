@@ -3,9 +3,11 @@
 angular.module('CrmApp')
 
   .controller('ClientPropertiesController', [
-    '$scope', '$window', '$location', '$http', '$timeout', 'ToastScope', '$mdDialog',
-    function ($scope, $window, $location, $http, $timeout, ToastScope, $mdDialog) {
-      var query = $location.search();
+    '$scope', '$window', '$location', '$http', '$timeout', 'ToastrScope', '$mdDialog',
+    function ($scope, $window, $location, $http, $timeout, ToastrScope, $mdDialog) {
+
+      var query = $location.search(),
+        toastr = ToastrScope($scope);
 
       $scope.limit = 5;
       $scope.detailedList = false;
@@ -74,14 +76,10 @@ angular.module('CrmApp')
             if (response.result === false) {
               if (typeof response.errors !== 'undefined') {
                 angular.forEach(response.errors, function (error) {
-                  ToastScope.send('error', {
-                    message: error
-                  });
+                  toastr.error(error);
                 });
               } else {
-                ToastScope.send('error', {
-                  message: response.message
-                });
+                toastr.error(response.message);
               }
             } else {
               if (!createNew) {
@@ -90,15 +88,11 @@ angular.module('CrmApp')
 
               $scope.$emit('reloadClientData');
 
-              ToastScope.send('success', {
-                message: response.message
-              });
+              toastr.success(response.message);
             }
           })
           .error(function (response, status) {
-            ToastScope.send('error', {
-              message: response.message
-            });
+            toastr.error(response.message);
           });
       };
 
@@ -121,25 +115,19 @@ angular.module('CrmApp')
           })
             .success(function (response) {
               if (response.result === false) {
-                ToastScope.send('error', {
-                  message: response.message
-                });
+                toastr.error(response.message);
               } else {
                 $scope.$emit('reloadClientData');
 
                 $location.search('prop', null);
 
-                ToastScope.send('success', {
-                  message: response.message
-                });
+                toastr.success(response.message);
 
                 $scope.editedProperty = null;
               }
             })
             .error(function (response, status) {
-              ToastScope.send('error', {
-                message: response.message
-              });
+              toastr.error(response.message);
             });
         });
       };

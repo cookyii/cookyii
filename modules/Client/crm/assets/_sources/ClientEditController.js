@@ -3,8 +3,10 @@
 angular.module('CrmApp')
 
   .controller('ClientEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastScope', 'ClientAccountScope',
-    function ($scope, $http, $location, $timeout, ToastScope, ClientAccountScope) {
+    '$scope', '$http', '$location', '$timeout', 'ToastrScope', 'ClientAccountScope',
+    function ($scope, $http, $location, $timeout, ToastrScope, ClientAccountScope) {
+
+      var toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
@@ -33,14 +35,10 @@ angular.module('CrmApp')
                   $scope.error[field] = message;
                 });
               } else {
-                ToastScope.send('error', {
-                  message: 'Save error'
-                });
+                toastr.error('Save error');
               }
             } else {
-              ToastScope.send('success', {
-                message: 'Client successfully saved'
-              });
+              toastr.success('Client successfully saved');
 
               if ($scope.$parent.isNewClient) {
                 $location.search('id', response.client_id);
@@ -55,9 +53,7 @@ angular.module('CrmApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              ToastScope.send('error', {
-                message: 'Error updating client'
-              });
+              toastr.error('Error updating client');
             }
           })
           .finally(function () {

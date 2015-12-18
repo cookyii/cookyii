@@ -1,8 +1,8 @@
 {
   "version": "0.0.0",
   "private": true,
-  "name": "yii2-application",
-  "repository": "https://github.com/rmrevin/yii2-application",
+  "name": "cookyii-project",
+  "repository": "https://github.com/cookyii/project",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "bower": "^1.6.0",

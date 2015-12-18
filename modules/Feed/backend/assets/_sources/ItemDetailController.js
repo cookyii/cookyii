@@ -44,7 +44,7 @@ angular.module('BackendApp')
         } else {
           Item.detail({id: $scope.getItem()}, function (response) {
             $scope.data = response;
-            $scope.data.meta = $scope.data.meta.length === 0
+            $scope.data.meta = $scope.data.meta === null || $scope.data.meta.length === 0
               ? {}
               : $scope.data.meta;
 

@@ -20,6 +20,7 @@ return [
     'Cancel' => '',
     'Changes not saved yet' => '',
     'Filter' => '',
+    'Icon must contain css class `{class}` ({icon})' => '',
     'Model must be `{class}`.' => '',
     'Model must contain an attribute `{attribute}`.' => '',
     'Recommended {refresh} the page.' => '',

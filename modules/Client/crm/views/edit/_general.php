@@ -26,7 +26,7 @@ $form = \cookyii\widgets\angular\ActiveForm::begin([
         </div>
 
         <div class="box-body">
-            <div class="form-group" style="margin-bottom: -15px;">
+            <div class="form-group" ng-if="getClientId()">
                 <label class="control-label" for="clienteditform-email">Account</label>
 
                 <span ng-if="!data.account_id">

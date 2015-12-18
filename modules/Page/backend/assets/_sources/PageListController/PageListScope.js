@@ -3,10 +3,12 @@
 angular.module('BackendApp')
 
   .factory('PageListScope', [
-    '$timeout', '$mdDialog', 'ToastScope', 'QueryScope', 'SortScope', 'FilterScope', 'PageResource',
-    function ($timeout, $mdDialog, ToastScope, QueryScope, SortScope, FilterScope, Page) {
+    '$timeout', '$mdDialog', 'ToastrScope', 'QueryScope', 'SortScope', 'FilterScope', 'PageResource',
+    function ($timeout, $mdDialog, ToastrScope, QueryScope, SortScope, FilterScope, Page) {
       return function ($parentScope) {
+
         var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope),
           page = QueryScope.get('page', 1),
           loaded = false;
 
@@ -55,30 +57,22 @@ angular.module('BackendApp')
 
           $mdDialog.show(confirm).then(function () {
             page.$remove(function () {
-              ToastScope.send('success', {
-                message: 'Page successfully removed'
-              });
+              toastr.success('Page successfully removed');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error removing page'
-              });
+              toastr.error('Error removing page');
             });
           });
         };
 
         $scope.restore = function (page) {
           page.$restore(function () {
-            ToastScope.send('success', {
-              message: 'Page successfully restored'
-            });
+            toastr.success('Page successfully restored');
 
             _refresh();
           }, function () {
-            ToastScope.send('error', {
-              message: 'Error restoring page'
-            });
+            toastr.error('Error restoring page');
           });
         };
 

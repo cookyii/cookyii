@@ -3,9 +3,11 @@
 angular.module('BackendApp')
 
   .controller('TemplateEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastScope',
-    function ($scope, $http, $location, $timeout, ToastScope) {
-      var query = $location.search();
+    '$scope', '$http', '$location', '$timeout', 'ToastrScope',
+    function ($scope, $http, $location, $timeout, ToastrScope) {
+
+      var query = $location.search(),
+        toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
@@ -90,14 +92,10 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                ToastScope.send('error', {
-                  message: 'Save error'
-                });
+                toastr.error('Save error');
               }
             } else {
-              ToastScope.send('success', {
-                message: 'Template successfully saved'
-              });
+              toastr.success('Template successfully saved');
 
               if ($scope.$parent.isNewTemplate) {
                 $location.search('id', response.template_id);
@@ -114,9 +112,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              ToastScope.send('error', {
-                message: 'Error updating template'
-              });
+              toastr.error('Error updating template');
             }
           })
           .finally(function () {

@@ -5,6 +5,10 @@
  * @link https://rmrevin.com
  */
 
+// Application
+// -----------
+define('APP_NAME', 'COOKYII');
+
 // Framework
 // ---------
 define('YII_DEBUG', false);

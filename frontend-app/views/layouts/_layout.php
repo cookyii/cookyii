@@ -68,15 +68,6 @@ $this->beginPage();
 
 $this->beginBody();
 
-if ($controller->hideLoader === false) {
-    echo Html::tag('div', '<md-progress-circular class="md-warn md-hue-3" md-mode="indeterminate"></md-progress-circular>', [
-        'id' => 'global-loader',
-        'class' => 'loader-layout',
-        'layout' => 'row',
-        'layout-align' => 'center center',
-    ]);
-}
-
 echo $content;
 
 $this->endBody();

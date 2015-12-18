@@ -3,10 +3,12 @@
 angular.module('CrmApp')
 
   .factory('ClientListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastScope', 'SortScope', 'FilterScope', 'ClientResource',
-    function ($timeout, $mdDialog, QueryScope, ToastScope, SortScope, FilterScope, Client) {
+    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'ClientResource',
+    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Client) {
       return function ($parentScope) {
+
         var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope),
           page = QueryScope.get('page', 1),
           loaded = false;
 
@@ -55,30 +57,22 @@ angular.module('CrmApp')
 
           $mdDialog.show(confirm).then(function () {
             client.$remove(function () {
-              ToastScope.send('success', {
-                message: 'Client successfully removed'
-              });
+              toastr.success('Client successfully removed');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error removing client'
-              });
+              toastr.error('Error removing client');
             });
           });
         };
 
         $scope.restore = function (client) {
           client.$restore(function () {
-            ToastScope.send('success', {
-              message: 'Client successfully restored'
-            });
+            toastr.success('Client successfully restored');
 
             _refresh();
           }, function () {
-            ToastScope.send('error', {
-              message: 'Error restoring client'
-            });
+            toastr.error('Error restoring client');
           });
         };
 
@@ -90,7 +84,8 @@ angular.module('CrmApp')
             deleted: $scope.filter.deleted,
             search: $scope.filter.search.query,
             sort: $scope.sort.order,
-            page: loaded ? $scope.pagination.currentPage : page
+            page: loaded ? $scope.pagination.currentPage : page,
+            expand: 'account'
           }, function (clients, headers) {
             var _headers = headers();
 

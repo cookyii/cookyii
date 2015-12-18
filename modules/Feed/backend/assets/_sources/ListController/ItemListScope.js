@@ -3,10 +3,12 @@
 angular.module('BackendApp')
 
   .factory('ItemListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'SortScope', 'FilterScope', 'ToastScope', 'ItemResource',
-    function ($timeout, $mdDialog, QueryScope, SortScope, FilterScope, ToastScope, Item) {
+    '$timeout', '$mdDialog', 'QueryScope', 'SortScope', 'FilterScope', 'ToastrScope', 'ItemResource',
+    function ($timeout, $mdDialog, QueryScope, SortScope, FilterScope, ToastrScope, Item) {
       return function ($parentScope) {
+
         var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope),
           page = QueryScope.get('page', 1),
           loaded = false;
 
@@ -58,30 +60,22 @@ angular.module('BackendApp')
 
           $mdDialog.show(confirm).then(function () {
             item.$remove(function () {
-              ToastScope.send('success', {
-                message: 'Item successfully removed'
-              });
+              toastr.success('Item successfully removed');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error removing item'
-              });
+              toastr.error('Error removing item');
             });
           });
         };
 
         $scope.restore = function (item) {
           item.$restore(function () {
-            ToastScope.send('success', {
-              message: 'Item successfully restored'
-            });
+            toastr.success('Item successfully restored');
 
             _refresh();
           }, function () {
-            ToastScope.send('error', {
-              message: 'Error restoring item'
-            });
+            toastr.error('Error restoring item');
           });
         };
 

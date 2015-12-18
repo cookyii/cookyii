@@ -5,8 +5,6 @@
  * @link https://rmrevin.com
  */
 
-defined('APP_NAME') or define('APP_NAME', 'Cookyii Backend');
-
 $config = require(__DIR__ . '/../../common/config/app.php');
 
 $params = array_merge(
@@ -18,7 +16,6 @@ $params['module.postman']['class'] = cookyii\modules\Postman\backend\Module::cla
 
 return array_merge($config, [
     'id' => 'backend-app',
-    'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [

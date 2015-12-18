@@ -20,7 +20,7 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
 
 <div class="box" ng-controller="SignUpController">
     <div class="box-logo">
-        <?= Html::a(Html::img('/img/cookyii.png') . ' <strong>COOKYII</strong>frontend', ['/']) ?>
+        <?= Html::a(Html::tag('strong', APP_NAME), ['/']) ?>
     </div>
 
     <div class="box-body">
@@ -50,7 +50,7 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
             ->checkbox([
                 'value' => '1',
                 'label' => \Yii::t('cookyii.account', 'I agree to the {terms} of use', [
-                    'terms' => Html::a(\Yii::t('cookyii.account', 'terms'), ['/site/terms'])
+                    'terms' => Html::a(\Yii::t('cookyii.account', 'terms'), ['/site/terms']),
                 ]),
             ]);
 

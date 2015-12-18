@@ -3,10 +3,12 @@
 angular.module('BackendApp')
 
   .factory('TemplateListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastScope', 'SortScope', 'FilterScope', 'TemplateResource',
-    function ($timeout, $mdDialog, QueryScope, ToastScope, SortScope, FilterScope, Template) {
+    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'TemplateResource',
+    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Template) {
       return function ($parentScope) {
+
         var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope),
           page = QueryScope.get('page', 1),
           loaded = false;
 
@@ -55,30 +57,22 @@ angular.module('BackendApp')
 
           $mdDialog.show(confirm).then(function () {
             template.$remove(function () {
-              ToastScope.send('success', {
-                message: 'Template successfully removed'
-              });
+              toastr.success('Template successfully removed');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error removing template'
-              });
+              toastr.error('Error removing template');
             });
           });
         };
 
         $scope.restore = function (template) {
           template.$restore(function () {
-            ToastScope.send('success', {
-              message: 'Template successfully restored'
-            });
+            toastr.success('Template successfully restored');
 
             _refresh();
           }, function () {
-            ToastScope.send('error', {
-              message: 'Error restoring template'
-            });
+            toastr.error('Error restoring template');
           });
         };
 

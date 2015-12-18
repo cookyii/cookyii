@@ -1,19 +1,19 @@
 "use strict";
 
-angular.module('CrmApp')
+angular.module('scopes')
 
   .factory('FilterSearchScope', [
-    '$rootScope', '$mdUtil', 'QueryScope',
-    function ($rootScope, $mdUtil, QueryScope) {
+    '$rootScope', 'QueryScope',
+    function ($rootScope, QueryScope) {
       var $scope = $rootScope.$new();
 
       $scope.query = QueryScope.get('search');
 
-      $scope.do = $mdUtil.debounce(function () {
+      $scope.do = function () {
         QueryScope.set('search', $scope.query);
 
         _refresh();
-      }, 500);
+      };
 
       $scope.clear = function () {
         $scope.query = null;

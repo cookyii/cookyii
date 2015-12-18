@@ -8,8 +8,11 @@ angular.module('BackendApp')
   })
 
   .controller('ItemEditController', [
-    '$scope', '$http', '$timeout', 'QueryScope', 'ToastScope', 'uiUploader', 'SectionDropdownScope',
-    function ($scope, $http, $timeout, QueryScope, ToastScope, uiUploader, SectionDropdownScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'ToastrScope', 'uiUploader', 'SectionDropdownScope',
+    function ($scope, $http, $timeout, QueryScope, ToastrScope, uiUploader, SectionDropdownScope) {
+
+      var toastr = ToastrScope($scope);
+
       $scope.inProgress = false;
 
       var selectedTab = QueryScope.get('tab', 'content');
@@ -58,14 +61,10 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                ToastScope.send('error', {
-                  message: 'Save error'
-                });
+                toastr.error('Save error');
               }
             } else {
-              ToastScope.send('success', {
-                message: 'Item successfully saved'
-              });
+              toastr.success('Item successfully saved');
 
               QueryScope.set('id', response.item_id);
 
@@ -78,9 +77,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              ToastScope.send('error', {
-                message: 'Error updating item'
-              });
+              toastr.error('Error updating item');
             }
           })
           .finally(function () {
@@ -116,7 +113,7 @@ angular.module('BackendApp')
               $scope.data.picture_media_id = response.id;
               $scope.data.picture_300 = response.url;
             } else {
-              ToastScope.send('error', {message: 'Upload error'});
+              toastr.error('Upload error');
             }
 
             $scope.previewInProgress = false;

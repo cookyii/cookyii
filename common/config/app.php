@@ -22,6 +22,7 @@ foreach ($path_list as $path) {
 }
 
 return [
+    'name' => APP_NAME,
     'vendorPath' => $vendor_dir,
     'extensions' => $extensions,
     'language' => 'en',

@@ -8,9 +8,11 @@ angular.module('BackendApp')
   })
 
   .controller('PageEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastScope',
-    function ($scope, $http, $location, $timeout, ToastScope) {
-      var query = $location.search();
+    '$scope', '$http', '$location', '$timeout', 'ToastrScope',
+    function ($scope, $http, $location, $timeout, ToastrScope) {
+
+      var query = $location.search(),
+        toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
@@ -53,14 +55,10 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                ToastScope.send('error', {
-                  message: 'Save error'
-                });
+                toastr.error('Save error');
               }
             } else {
-              ToastScope.send('success', {
-                message: 'Page successfully saved'
-              });
+              toastr.success('Page successfully saved');
 
               if ($scope.$parent.isNewPage) {
                 $location.search('id', response.page_id);
@@ -75,9 +73,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              ToastScope.send('error', {
-                message: 'Error updating page'
-              });
+              toastr.error('Error updating page');
             }
           })
           .finally(function () {

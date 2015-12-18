@@ -3,9 +3,11 @@
 angular.module('BackendApp')
 
   .controller('MessageEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastScope',
-    function ($scope, $http, $location, $timeout, ToastScope) {
-      var query = $location.search();
+    '$scope', '$http', '$location', '$timeout', 'ToastrScope',
+    function ($scope, $http, $location, $timeout, ToastrScope) {
+
+      var query = $location.search(),
+        toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
@@ -83,14 +85,10 @@ angular.module('BackendApp')
                   $scope.error[field] = message;
                 });
               } else {
-                ToastScope.send('error', {
-                  message: 'Save error'
-                });
+                toastr.error('Save error');
               }
             } else {
-              ToastScope.send('success', {
-                message: 'Message successfully saved'
-              });
+              toastr.success('Message successfully saved');
 
               if ($scope.$parent.isNewMessage) {
                 $location.search('id', response.message_id);
@@ -107,9 +105,7 @@ angular.module('BackendApp')
                 $scope.error[val.field] = val.message;
               });
             } else {
-              ToastScope.send('error', {
-                message: 'Error updating message'
-              });
+              toastr.error('Error updating message');
             }
           })
           .finally(function () {

@@ -3,10 +3,12 @@
 angular.module('BackendApp')
 
   .factory('MessageListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastScope', 'SortScope', 'FilterScope', 'MessageResource',
-    function ($timeout, $mdDialog, QueryScope, ToastScope, SortScope, FilterScope, Message) {
+    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'MessageResource',
+    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Message) {
       return function ($parentScope) {
+
         var $scope = $parentScope.$new(),
+          toastr = ToastrScope($scope),
           page = QueryScope.get('page', 1),
           loaded = false;
 
@@ -55,15 +57,11 @@ angular.module('BackendApp')
 
           $mdDialog.show(confirm).then(function () {
             message.$resent(function () {
-              ToastScope.send('success', {
-                message: 'Message successfully resent'
-              });
+              toastr.success('Message successfully resent');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error resenting message'
-              });
+              toastr.error('Error resenting message');
             });
           });
 
@@ -80,30 +78,22 @@ angular.module('BackendApp')
 
           $mdDialog.show(confirm).then(function () {
             message.$remove(function () {
-              ToastScope.send('success', {
-                message: 'Message successfully removed'
-              });
+              toastr.success('Message successfully removed');
 
               _refresh();
             }, function () {
-              ToastScope.send('error', {
-                message: 'Error removing message'
-              });
+              toastr.error('Error removing message');
             });
           });
         };
 
         $scope.restore = function (message) {
           message.$restore(function () {
-            ToastScope.send('success', {
-              message: 'Message successfully restored'
-            });
+            toastr.success('Message successfully restored');
 
             _refresh();
           }, function () {
-            ToastScope.send('error', {
-              message: 'Error restoring message'
-            });
+            toastr.error('Error restoring message');
           });
         };
 

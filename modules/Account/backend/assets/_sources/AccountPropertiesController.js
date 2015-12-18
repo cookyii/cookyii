@@ -3,9 +3,11 @@
 angular.module('BackendApp')
 
   .controller('AccountPropertiesController', [
-    '$scope', '$window', '$location', '$http', '$timeout', 'ToastScope', '$mdDialog',
-    function ($scope, $window, $location, $http, $timeout, ToastScope, $mdDialog) {
-      var query = $location.search();
+    '$scope', '$window', '$location', '$http', '$timeout', '$mdDialog', 'ToastrScope',
+    function ($scope, $window, $location, $http, $timeout, $mdDialog, ToastrScope) {
+
+      var query = $location.search(),
+        toastr = ToastrScope($scope);
 
       $scope.limit = 5;
       $scope.detailedList = false;
@@ -74,14 +76,10 @@ angular.module('BackendApp')
             if (response.result === false) {
               if (typeof response.errors !== 'undefined') {
                 angular.forEach(response.errors, function (error) {
-                  ToastScope.send('error', {
-                    message: error
-                  });
+                  toastr.error(error);
                 });
               } else {
-                ToastScope.send('error', {
-                  message: response.message
-                });
+                toastr.error(response.message);
               }
             } else {
               if (!createNew) {
@@ -90,15 +88,11 @@ angular.module('BackendApp')
 
               $scope.$emit('reloadAccountData');
 
-              ToastScope.send('success', {
-                message: response.message
-              });
+              toastr.success(response.message);
             }
           })
           .error(function (response, status) {
-            ToastScope.send('error', {
-              message: response.message
-            });
+            toastr.error(response.message);
           });
       };
 
@@ -121,25 +115,19 @@ angular.module('BackendApp')
           })
             .success(function (response) {
               if (response.result === false) {
-                ToastScope.send('error', {
-                  message: response.message
-                });
+                toastr.error(response.message);
               } else {
                 $scope.$emit('reloadAccountData');
 
                 $location.search('prop', null);
 
-                ToastScope.send('success', {
-                  message: response.message
-                });
+                toastr.success(response.message);
 
                 $scope.editedProperty = null;
               }
             })
             .error(function (response, status) {
-              ToastScope.send('error', {
-                message: response.message
-              });
+              toastr.error(response.message);
             });
         });
       };
