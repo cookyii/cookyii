@@ -54,11 +54,10 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                     echo $form->field($TemplateEditForm, 'description')
                         ->textarea(['msd-elastic' => true]);
 
-                    echo $form->field($TemplateEditForm, 'use_layout', [
-                        'class' => \cookyii\widgets\angular\material\ActiveField::className(),
-                    ])
+                    echo $form->field($TemplateEditForm, 'use_layout')
                         ->label(false)
                         ->checkbox([
+                            'icheck' => true,
                             'ng-if' => sprintf('data.code !== "%s"', $MessageModel::LAYOUT_CODE),
                         ]);
                     ?>
