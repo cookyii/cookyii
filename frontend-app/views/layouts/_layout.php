@@ -21,15 +21,15 @@ $title = empty($this->title)
 /** @var \frontend\components\Controller $controller */
 $controller = $this->context;
 
-/** @var \resources\Account|null $User */
-$User = User()->identity;
+/** @var \resources\Account|null $Account */
+$Account = User()->identity;
 
 $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()], 'canonical');
 
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'], 'viewport');
 if (!User()->isGuest) {
-    $this->registerMetaTag(['name' => 'token', 'content' => $User->token], 'token');
+    $this->registerMetaTag(['name' => 'token', 'content' => $Account->token], 'token');
 }
 
 rmrevin\yii\favicon\Favicon::widget([
