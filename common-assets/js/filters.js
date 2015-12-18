@@ -8,7 +8,7 @@ angular.module('filters', [])
     };
   })
 
-  .filter('htmlToPlaintext', function () {
+  .filter('html2PlainText', function () {
     return function (text) {
       return text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
