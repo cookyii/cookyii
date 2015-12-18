@@ -86,7 +86,7 @@ return [
         'class' => yii\web\User::className(),
         'enableAutoLogin' => true,
         'loginUrl' => ['/account/sign/in'],
-        'identityClass' => cookyii\modules\Account\resources\Account::className(),
+        'identityClass' => resources\Account::className(),
         'identityCookie' => [
             'name' => '_identity',
             'httpOnly' => true,
