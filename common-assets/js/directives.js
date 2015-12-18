@@ -37,7 +37,7 @@ function iCheck($timeout) {
   };
 }
 
-function DatePicker() {
+function DatePicker($timeout) {
   return {
     restrict: 'A',
     require: 'ngModel',

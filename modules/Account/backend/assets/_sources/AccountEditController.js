@@ -13,8 +13,6 @@ angular.module('BackendApp')
       $scope.submit = function (Form, e) {
         var $form = angular.element('form[name="' + Form.$name + '"]');
 
-        console.log($scope.$parent.data);
-
         $scope.error = {};
         $scope.inProgress = true;
 
