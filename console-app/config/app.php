@@ -5,8 +5,6 @@
  * @link https://rmrevin.ru
  */
 
-defined('APP_NAME') or define('APP_NAME', 'Cookyii Base App application');
-
 $config = require(__DIR__ . '/../../common/config/app.php');
 
 $params = array_merge(
@@ -16,7 +14,6 @@ $params = array_merge(
 
 return array_merge($config, [
     'id' => 'console-app',
-    'name' => APP_NAME,
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
