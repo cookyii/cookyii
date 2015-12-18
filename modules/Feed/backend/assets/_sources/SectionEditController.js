@@ -6,11 +6,12 @@ angular.module('BackendApp')
     '$scope', '$http', '$timeout', 'QueryScope', 'ToastrScope', 'SectionDropdownScope',
     function ($scope, $http, $timeout, QueryScope, ToastrScope, SectionDropdownScope) {
 
-      var toastr = ToastrScope($scope);
+      var query = QueryScope($scope),
+        toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
-      var selectedTab = QueryScope.get('tab', 'parent');
+      var selectedTab = query.get('tab', 'parent');
 
       $scope.tabs = {
         parent: selectedTab === 'parent',
@@ -19,7 +20,7 @@ angular.module('BackendApp')
       };
 
       $scope.selectTab = function (tab) {
-        QueryScope.set('tab', tab);
+        query.set('tab', tab);
 
         $timeout(function () {
           jQuery(window).trigger('resize');
@@ -65,7 +66,7 @@ angular.module('BackendApp')
             } else {
               toastr.success('Section successfully saved');
 
-              QueryScope.set('section', response.section_slug);
+              query.set('section', response.section_slug);
 
               $timeout(function () {
                 reloadSectionList();

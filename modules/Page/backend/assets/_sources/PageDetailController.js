@@ -5,11 +5,13 @@ angular.module('BackendApp')
   .controller('PageDetailController', [
     '$scope', '$timeout', 'QueryScope', 'PageResource',
     function ($scope, $timeout, QueryScope, Page) {
+
       var hash = null,
+        query = QueryScope($scope),
         defaultValues = {roles: []};
 
       $scope.getPageId = function () {
-        return QueryScope.get('id');
+        return query.get('id');
       };
 
       $scope.isNewPage = $scope.getPageId() === null;

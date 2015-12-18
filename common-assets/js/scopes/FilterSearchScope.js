@@ -3,27 +3,30 @@
 angular.module('scopes')
 
   .factory('FilterSearchScope', [
-    '$rootScope', 'QueryScope',
-    function ($rootScope, QueryScope) {
-      var $scope = $rootScope.$new();
+    'QueryScope',
+    function (QueryScope) {
+      return function ($parentScope) {
 
-      $scope.query = QueryScope.get('search');
+        var $scope = $parentScope.$new(),
+          query = QueryScope($scope);
 
-      $scope.do = function () {
-        QueryScope.set('search', $scope.query);
+        $scope.query = query.get('search');
 
-        _refresh();
-      };
+        $scope.do = function () {
+          query.set('search', $scope.query);
 
-      $scope.clear = function () {
-        $scope.query = null;
-        $scope.do();
-      };
+          if (typeof $scope.query === 'string' && $scope.query.length > 0) {
+            $scope.reload();
+          }
+        };
 
-      function _refresh() {
-        $rootScope.$broadcast('refresh');
+        $scope.clear = function () {
+          $scope.query = null;
+
+          $scope.do();
+        };
+
+        return $scope;
       }
-
-      return $scope;
     }
   ]);

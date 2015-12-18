@@ -6,9 +6,11 @@ angular.module('BackendApp')
     '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'AccountResource',
     function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Account) {
       return function ($parentScope) {
+
         var $scope = $parentScope.$new(),
           toastr = ToastrScope($scope),
-          page = QueryScope.get('page', 1),
+          query = QueryScope($scope),
+          page = query.get('page', 1),
           loaded = false;
 
         $scope.sort = SortScope($scope);
@@ -22,7 +24,7 @@ angular.module('BackendApp')
 
         $scope.doPageChanged = function () {
           if (loaded === true) {
-            QueryScope.set('page', $scope.pagination.currentPage);
+            query.set('page', $scope.pagination.currentPage);
           }
 
           _refresh();

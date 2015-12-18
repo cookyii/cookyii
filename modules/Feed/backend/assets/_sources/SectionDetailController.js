@@ -5,12 +5,14 @@ angular.module('BackendApp')
   .controller('SectionDetailController', [
     '$scope', '$timeout', 'QueryScope', 'SectionResource',
     function ($scope, $timeout, QueryScope, Section) {
-      var defaultValues = {parent_id: QueryScope.get('parent')};
+
+      var query = QueryScope($scope),
+        defaultValues = {parent_id: query.get('parent')};
 
       $scope.data = {};
 
       $scope.getSection = function () {
-        return QueryScope.get('section');
+        return query.get('section');
       };
 
       $scope.isNewSection = $scope.getSection() === null;

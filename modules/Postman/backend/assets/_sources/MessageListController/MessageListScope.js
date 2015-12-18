@@ -8,8 +8,9 @@ angular.module('BackendApp')
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
+          query = QueryScope($scope),
           toastr = ToastrScope($scope),
-          page = QueryScope.get('page', 1),
+          page = query.get('page', 1),
           loaded = false;
 
         $scope.sort = SortScope($scope);
@@ -23,7 +24,7 @@ angular.module('BackendApp')
 
         $scope.doPageChanged = function () {
           if (loaded === true) {
-            QueryScope.set('page', $scope.pagination.currentPage);
+            query.set('page', $scope.pagination.currentPage);
           }
 
           _refresh();

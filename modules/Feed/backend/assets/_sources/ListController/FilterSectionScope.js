@@ -8,9 +8,10 @@ angular.module('BackendApp')
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
+          query = QueryScope($scope),
           toastr = ToastrScope($scope);
 
-        $scope.selected = QueryScope.get('section');
+        $scope.selected = query.get('section');
 
         $scope.list = {};
         $scope.tree = [];
@@ -40,7 +41,7 @@ angular.module('BackendApp')
             $scope.selected = section.slug;
           }
 
-          QueryScope.set('section', $scope.selected);
+          query.set('section', $scope.selected);
 
           _refresh();
         };

@@ -6,9 +6,11 @@ angular.module('scopes')
     'QueryScope',
     function (QueryScope) {
       return function ($parentScope) {
-        var $scope = $parentScope.$new();
 
-        $scope.order = QueryScope.get('sort', '-id');
+        var $scope = $parentScope.$new(),
+          query = QueryScope($scope);
+
+        $scope.order = query.get('sort', '-id');
 
         $scope.setOrder = function (sort) {
           if ($scope.order === sort) {
@@ -17,7 +19,7 @@ angular.module('scopes')
             $scope.order = sort;
           }
 
-          QueryScope.set('sort', $scope.order);
+          query.set('sort', $scope.order);
 
           _refresh();
         };

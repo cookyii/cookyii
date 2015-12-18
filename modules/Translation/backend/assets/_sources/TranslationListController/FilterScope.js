@@ -6,17 +6,19 @@ angular.module('BackendApp')
     'QueryScope',
     function (QueryScope) {
       return function ($parentScope) {
-        var $scope = $parentScope.$new();
 
-        $scope.translated = QueryScope.get('translated', true);
+        var $scope = $parentScope.$new(),
+          query = QueryScope($scope);
+
+        $scope.translated = query.get('translated', true);
 
         $scope.toggleTranslated = function () {
           $scope.translated = !$scope.translated;
 
-          QueryScope.set('translated', $scope.translated === true ? 'true' : 'false');
+          query.set('translated', $scope.translated === true ? 'true' : 'false');
         };
 
-        var languages = QueryScope.get('languages', '');
+        var languages = query.get('languages', '');
         languages = languages.length > 0
           ? languages.split(',')
           : null;
@@ -44,7 +46,7 @@ angular.module('BackendApp')
 
           languages = result;
 
-          QueryScope.set('languages', languages.join(','));
+          query.set('languages', languages.join(','));
         };
 
         $scope.isAllLanguagesSelected = function () {
@@ -55,12 +57,12 @@ angular.module('BackendApp')
           return !$scope.isAllLanguagesSelected() && languages.indexOf(language) > -1;
         };
 
-        $scope.selectedCategory = QueryScope.get('category');
+        $scope.selectedCategory = query.get('category');
 
         $scope.setCategory = function (category) {
           $scope.selectedCategory = category;
 
-          QueryScope.set('category', $scope.selectedCategory);
+          query.set('category', $scope.selectedCategory);
         };
 
         return $scope;

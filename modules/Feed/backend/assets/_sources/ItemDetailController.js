@@ -5,12 +5,14 @@ angular.module('BackendApp')
   .controller('ItemDetailController', [
     '$scope', '$timeout', 'QueryScope', 'ItemResource',
     function ($scope, $timeout, QueryScope, Item) {
-      var defaultValues = {sections: []};
+
+      var query = QueryScope($scope),
+        defaultValues = {sections: []};
 
       $scope.data = {};
 
       $scope.getItem = function () {
-        return QueryScope.get('id');
+        return query.get('id');
       };
 
       $scope.isNewItem = $scope.getItem() === null;
@@ -25,8 +27,8 @@ angular.module('BackendApp')
         }
       });
 
-      if ($scope.isNewItem && QueryScope.get('section') !== null) {
-        defaultValues.sections = [parseInt(QueryScope.get('section'))];
+      if ($scope.isNewItem && query.get('section') !== null) {
+        defaultValues.sections = [parseInt(query.get('section'))];
       }
 
       $scope.isItemDisabled = function (item) {

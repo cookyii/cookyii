@@ -11,11 +11,12 @@ angular.module('BackendApp')
     '$scope', '$http', '$timeout', 'QueryScope', 'ToastrScope', 'uiUploader', 'SectionDropdownScope',
     function ($scope, $http, $timeout, QueryScope, ToastrScope, uiUploader, SectionDropdownScope) {
 
-      var toastr = ToastrScope($scope);
+      var query = QueryScope($scope),
+        toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
-      var selectedTab = QueryScope.get('tab', 'content');
+      var selectedTab = query.get('tab', 'content');
 
       $scope.tabs = {
         content: selectedTab === 'content',
@@ -26,7 +27,7 @@ angular.module('BackendApp')
       };
 
       $scope.selectTab = function (tab) {
-        QueryScope.set('tab', tab);
+        query.set('tab', tab);
 
         $timeout(function () {
           jQuery(window).trigger('resize');
@@ -66,7 +67,7 @@ angular.module('BackendApp')
             } else {
               toastr.success('Item successfully saved');
 
-              QueryScope.set('id', response.item_id);
+              query.set('id', response.item_id);
 
               $scope.reload();
             }

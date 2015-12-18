@@ -6,18 +6,20 @@ angular.module('BackendApp')
     'QueryScope', 'FilterSearchScope', 'FilterSectionScope',
     function (QueryScope, FilterSearchScope, FilterSectionScope) {
       return function ($parentScope) {
-        var $scope = $parentScope.$new();
+
+        var $scope = $parentScope.$new(),
+          query = QueryScope($scope);
 
         $scope.section = FilterSectionScope($scope);
 
-        $scope.search = FilterSearchScope;
+        $scope.search = FilterSearchScope($scope);
 
-        $scope.deleted = QueryScope.get('deleted', false);
+        $scope.deleted = query.get('deleted', false);
 
         $scope.toggleDeleted = function () {
           $scope.deleted = !$scope.deleted;
 
-          QueryScope.set('deleted', $scope.deleted === true ? 'true' : 'false');
+          query.set('deleted', $scope.deleted === true ? 'true' : 'false');
 
           _refresh();
         };
