@@ -33,6 +33,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
             // project
             'rsync -rt ./dev/ ../project/dev/',
             'rsync -rt ./common/ ../project/common/',
+            'rsync -rt ./common-assets/ ../project/common-assets/',
             'rsync -rt ./messages/ ../project/messages/',
             'rsync -rt ./conf.d/ ../project/conf.d/',
             'rsync -rt ./console-app/ ../project/console-app/ --exclude=runtime',
