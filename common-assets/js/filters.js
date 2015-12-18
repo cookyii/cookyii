@@ -8,6 +8,12 @@ angular.module('filters', [])
     };
   })
 
+  .filter('htmlToPlaintext', function () {
+    return function (text) {
+      return text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+  })
+
   .filter('truncateCharacters', function () {
     return function (input, chars, breakOnWord) {
       if (isNaN(chars)) return input;
