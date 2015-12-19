@@ -18,6 +18,8 @@ angular.module('CrmApp')
 
         $scope.list = [];
 
+        $scope.inProgress = false;
+
         $scope.pagination = {
           currentPage: page
         };
@@ -77,9 +79,9 @@ angular.module('CrmApp')
           });
         };
 
-        var reloadTimeout;
-
         $scope.reload = function () {
+          $scope.inProgress = true;
+
           Client.query({
             deactivated: $scope.filter.deactivated,
             deleted: $scope.filter.deleted,
@@ -99,10 +101,9 @@ angular.module('CrmApp')
 
             $scope.list = clients;
 
-            $timeout.cancel(reloadTimeout);
-            reloadTimeout = $timeout($scope.reload, 5000);
-
             loaded = true;
+
+            $scope.inProgress = false;
           });
         };
 

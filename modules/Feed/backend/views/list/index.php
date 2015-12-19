@@ -83,13 +83,20 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('cookyii.feed', 'Items list') ?></h3>
+                    <h3 class="box-title">
+                        <?= Yii::t('cookyii.feed', 'Items list') ?>
+
+                        <a ng-click="items.reload()" ng-if="items.filter.section.selected"
+                           class="btn-reload pull-right">
+                            <?= FA::icon('refresh', ['ng-class' => '{"fa-spin": accounts.inProgress}']) ?>
+                        </a>
+                    </h3>
 
                     <div class="box-section" ng-if="items.filter.section.selected">
                         Edit section:
                         <?= Html::a('{{ items.filter.section.getSelected().title }}', null, [
                             'ng-click' => 'items.filter.section.edit(items.filter.section.selected)',
-                            'title' => Yii::t('cookyii.feed', 'Edit section')
+                            'title' => Yii::t('cookyii.feed', 'Edit section'),
                         ]) ?>
 
                         <?php
@@ -128,7 +135,6 @@ function sortLink($type, $label)
                                     'maxlength' => 100,
                                     'ng-model' => 'items.filter.search.query',
                                     'ng-blur' => 'items.filter.search.do()',
-                                    'ng-keydown' => 'items.filter.search.do()',
                                 ]) ?>
                                 <a ng-click="items.filter.search.clear()" ng-show="items.filter.search.query"
                                    class="clear-search">
@@ -136,7 +142,7 @@ function sortLink($type, $label)
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="items.filter.search.do()">
+                                    <button type="submit" class="btn btn-sm btn-default">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>

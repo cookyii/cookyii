@@ -54,7 +54,13 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('cookyii.postman', 'Templates list') ?></h3>
+                    <h3 class="box-title">
+                        <?= Yii::t('cookyii.postman', 'Templates list') ?>
+
+                        <a ng-click="templates.reload()" class="btn-reload pull-right">
+                            <?= FA::icon('refresh', ['ng-class' => '{"fa-spin": accounts.inProgress}']) ?>
+                        </a>
+                    </h3>
 
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
@@ -76,7 +82,6 @@ function sortLink($type, $label)
                                     'maxlength' => 100,
                                     'ng-model' => 'templates.filter.search.query',
                                     'ng-blur' => 'templates.filter.search.do()',
-                                    'ng-keydown' => 'templates.filter.search.do()',
                                 ]) ?>
                                 <a ng-click="templates.filter.search.clear()" ng-show="templates.filter.search.query"
                                    class="clear-search">
@@ -84,7 +89,7 @@ function sortLink($type, $label)
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="templates.filter.search.do()">
+                                    <button type="submit" class="btn btn-sm btn-default">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>

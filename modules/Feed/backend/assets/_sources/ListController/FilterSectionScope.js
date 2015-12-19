@@ -79,8 +79,6 @@ angular.module('BackendApp')
           });
         };
 
-        var reloadTimeout;
-
         $scope.reload = function () {
           if ($scope.searchFocus === true) {
             $timeout($scope.reload, 5000);
@@ -93,9 +91,6 @@ angular.module('BackendApp')
           }, function (response) {
             $scope.tree = response.sections;
             $scope.list = response.models;
-
-            $timeout.cancel(reloadTimeout);
-            reloadTimeout = $timeout($scope.reload, 5000);
           });
         };
 

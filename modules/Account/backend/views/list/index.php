@@ -54,7 +54,13 @@ function sortLink($type, $label)
         <div class="col-xs-9 com-sm-9 col-md-9 col-lg-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('cookyii.account', 'Accounts list') ?></h3>
+                    <h3 class="box-title">
+                        <?= Yii::t('cookyii.account', 'Accounts list') ?>
+
+                        <a ng-click="accounts.reload()" class="btn-reload pull-right">
+                            <?= FA::icon('refresh', ['ng-class' => '{"fa-spin": accounts.inProgress}']) ?>
+                        </a>
+                    </h3>
 
                     <div class="box-tools">
                         <?= Html::tag('pagination', null, [
@@ -68,6 +74,7 @@ function sortLink($type, $label)
                             'next-text' => '›',
                         ]) ?>
 
+
                         <form ng-submit="accounts.filter.search.do()" class="pull-right">
                             <div class="input-group search" ng-class="{'wide':accounts.filter.search.query.length>0}">
                                 <?= Html::textInput(null, null, [
@@ -76,7 +83,6 @@ function sortLink($type, $label)
                                     'maxlength' => 100,
                                     'ng-model' => 'accounts.filter.search.query',
                                     'ng-blur' => 'accounts.filter.search.do()',
-                                    'ng-keydown' => 'accounts.filter.search.do()',
                                 ]) ?>
                                 <a ng-click="accounts.filter.search.clear()" ng-show="accounts.filter.search.query"
                                    class="clear-search">
@@ -84,7 +90,7 @@ function sortLink($type, $label)
                                 </a>
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default" ng-click="accounts.filter.search.do()">
+                                    <button type="submit" class="btn btn-sm btn-default">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>

@@ -15,9 +15,7 @@ angular.module('scopes')
         $scope.do = function () {
           query.set('search', $scope.query);
 
-          if (typeof $scope.query === 'string' && $scope.query.length > 0) {
-            $scope.reload();
-          }
+          $scope.reload();
         };
 
         $scope.clear = function () {

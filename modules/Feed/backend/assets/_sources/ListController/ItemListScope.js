@@ -18,6 +18,8 @@ angular.module('BackendApp')
 
         $scope.lsit = [];
 
+        $scope.inProgress = false;
+
         $scope.pagination = {
           currentPage: page
         };
@@ -80,14 +82,14 @@ angular.module('BackendApp')
           });
         };
 
-        var reloadTimeout;
-
         $scope.reload = function () {
           if ($scope.filter.section.selected === null) {
             $scope.list = [];
 
             return;
           }
+
+          $scope.inProgress = true;
 
           Item.query({
             deactivated: $scope.deactivated,
@@ -109,10 +111,9 @@ angular.module('BackendApp')
 
             $scope.list = response;
 
-            $timeout.cancel(reloadTimeout);
-            reloadTimeout = $timeout($scope.reload, 5000);
-
             loaded = true;
+
+            $scope.inProgress = false;
           });
         };
 

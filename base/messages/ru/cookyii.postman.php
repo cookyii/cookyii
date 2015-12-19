@@ -35,6 +35,7 @@ return [
     'Message successfully saved' => 'Сообщение успешно сохранено',
     'Message templates management' => 'Управление шаблонами сообщений',
     'Messages' => 'Сообщения',
+    'Messages list' => 'Список сообщений',
     'Messages management' => 'Управление сообщениями',
     'Messages not found' => 'Сообщения не найдены',
     'Name' => 'Имя',

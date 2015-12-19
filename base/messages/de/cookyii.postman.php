@@ -35,6 +35,7 @@ return [
     'Message successfully saved' => '',
     'Message templates management' => '',
     'Messages' => '',
+    'Messages list' => '',
     'Messages management' => '',
     'Messages not found' => '',
     'Name' => '',
