@@ -52,8 +52,8 @@ function DatePicker($timeout) {
           keyboardNavigation: false
         };
 
-        if ($attrs['ngDatepicker']) {
-          options = angular.merge(options, $scope.$eval($attrs['ngDatepicker']));
+        if ($attrs['ngDatePicker']) {
+          options = angular.merge(options, $scope.$eval($attrs['ngDatePicker']));
         }
 
         function eval(type) {
@@ -67,10 +67,10 @@ function DatePicker($timeout) {
         return jQuery(element)
           .datetimepicker(options)
           .on('changeDate', function (e) {
-            eval('ngDatepickerChange');
+            eval('ngDatePickerChange');
           })
           .on('hide', function (e) {
-            eval('ngDatepickerHide');
+            eval('ngDatePickerHide');
           });
       });
     }
@@ -92,8 +92,8 @@ function DatetimePicker($timeout) {
           keyboardNavigation: false
         };
 
-        if ($attrs['ngDatetimepicker']) {
-          options = angular.merge(options, $scope.$eval($attrs['ngDatetimepicker']));
+        if ($attrs['ngDatetimePicker']) {
+          options = angular.merge(options, $scope.$eval($attrs['ngDatetimePicker']));
         }
 
         function eval(type) {
@@ -107,10 +107,10 @@ function DatetimePicker($timeout) {
         return jQuery(element)
           .datetimepicker(options)
           .on('changeDate', function (e) {
-            eval('ngDatetimepickerChange');
+            eval('ngDatetimePickerChange');
           })
           .on('hide', function (e) {
-            eval('ngDatetimepickerHide');
+            eval('ngDatetimePickerHide');
           });
       });
     }
