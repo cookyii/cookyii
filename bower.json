@@ -25,7 +25,7 @@
     "angular-ui-utils": "0.2.*",
     "angular-ui-uploader": "1.1.*",
     "admin-lte": "2.3.*",
-    "smalot-bootstrap-datetimepicker": "2.3.*",
+    "smalot-bootstrap-datetimepicker": "2.3.4",
     "jquery.scrollTo": "2.1.*",
     "sweetalert": "1.1.*",
     "speakingurl": "5.0.*",
