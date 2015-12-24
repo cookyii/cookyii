@@ -11,17 +11,16 @@ namespace cookyii\assets;
  * Class AdminLteAssetBundle
  * @package cookyii\assets
  */
-class AdminLteAssetBundle extends \yii\web\AssetBundle
+class AdminLteAssetBundle extends AbstractModuleAssetBundle
 {
 
-    public $sourcePath = '@bower';
+    public $path = __DIR__;
 
     public $js = [
-        'admin-lte/dist/js/app.min.js',
+        'js/adminlte.js',
     ];
 
     public $css = [
-        'admin-lte/dist/css/AdminLTE.min.css',
-        'admin-lte/dist/css/skins/_all-skins.min.css',
+        'css/adminlte.css',
     ];
 }

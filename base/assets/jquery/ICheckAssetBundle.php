@@ -17,7 +17,7 @@ class ICheckAssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@bower';
 
     public $css = [
-        'icheck/skins/all.css',
+        'icheck/skins/square/_all.css',
     ];
 
     public $js = [

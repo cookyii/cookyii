@@ -49,6 +49,15 @@ $buildConfig = [
             'class' => 'dev\build\ExtractTask',
         ],
     ],
+
+    'less' => [
+        '.description' => 'Compile base less styles',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\CommandTask',
+            'cwd' => __DIR__ . '/base/assets/_sources',
+            'commandline' => cmd('{node}/gulp less'),
+        ],
+    ],
 ];
 
 // create applications tasks
@@ -122,11 +131,11 @@ function prepareEmptyTask(array &$buildConfig, $task_name)
 }
 
 /**
- * @param string $app
  * @param string $command
+ * @param string|null $app
  * @return string
  */
-function cmd($app, $command)
+function cmd($command, $app = null)
 {
     $path = getPath($app);
 

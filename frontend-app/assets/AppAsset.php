@@ -26,6 +26,6 @@ class AppAsset extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'common\assets\CommonAssetBundle',
+        'cookyii\assets\CommonAssetBundle',
     ];
 }
