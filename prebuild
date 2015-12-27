@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+$build = [
+    'target' => __DIR__ . '/vendor/bin/build.phar',
+    'source_url' => 'http://cookyii.com/b/build.phar',
+    'checksum_url' => 'http://cookyii.com/b/checksum',
+    'checksum' => null,
+];
+
+$build['checksum'] = file_get_contents($build['checksum_url']);
+
+$path = dirname($build['target']);
+if (!file_exists($path) || !is_dir($path)) {
+    mkdir($path, 0775, true);
+}
+
+if (!file_exists($build['target']) || sha1_file($build['target']) !== $build['checksum']) {
+    echo 'Downloading a new version of build.phar... ' . PHP_EOL;
+    passthru(sprintf('wget %s -O %s', $build['source_url'], $build['target']));
+}
+
+if (!file_exists($build['target'])) {
+    throw new Exception('Script `build.phar` not found.');
+}
+
+chmod($build['target'], 0774);
+
+$argv = $_SERVER['argv'];
+unset($argv[0]);
+$argv = implode(' ', $argv);

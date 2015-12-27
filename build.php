@@ -5,6 +5,12 @@
  * @link https://rmrevin.com
  */
 
+if (file_exists(__DIR__ . '/.env.php')) {
+    require __DIR__ . '/.env.php';
+}
+
+defined('YII_ENV') || define('YII_ENV', 'dev');
+
 require __DIR__ . '/dev/build/InstallTask.php';
 
 /** @var array $apps list of existing applications */
@@ -17,7 +23,7 @@ automaticDetectionApplications($apps);
 $buildConfig = [
     'default' => [
         '.description' => 'Default build',
-        '.depends' => ['dev'],
+        '.depends' => [YII_ENV],
     ],
 
     'map' => [
@@ -46,7 +52,6 @@ $buildConfig = [
     'prod' => [
         '.description' => 'Build project with production environment',
         '.depends' => [
-            'self/update',
             'environment/check',
             'clear',
             'composer/selfupdate', 'composer/update-fxp', 'composer/install-prod',
@@ -58,7 +63,6 @@ $buildConfig = [
     'demo' => [
         '.description' => 'Build project with demo environment',
         '.depends' => [
-            'self/update',
             'environment/check',
             'clear',
             'composer/selfupdate', 'composer/update-fxp', 'composer/install',
@@ -70,7 +74,6 @@ $buildConfig = [
     'dev' => [
         '.description' => 'Build project with developer environment',
         '.depends' => [
-            'self/update',
             'environment/check',
             'clear',
             'composer/selfupdate', 'composer/update-fxp', 'composer/install',

@@ -1,2 +1,3 @@
 #!/bin/bash
-./build.phar -c build-dev.php $*
+./prebuild
+./vendor/bin/build.phar -c build-dev.php $*
