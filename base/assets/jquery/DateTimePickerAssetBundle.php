@@ -23,4 +23,19 @@ class DateTimePickerAssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'yii\web\JqueryAsset',
     ];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        $langFile = sprintf('bootstrap-datetimepicker.%s.js', \Yii::$app->language);
+        $langFile = \Yii::getAlias('@bower/smalot-bootstrap-datetimepicker/js/locales/') . $langFile;
+
+        if (file_exists($langFile)) {
+            $this->js[] = $langFile;
+        }
+    }
 }
