@@ -87,7 +87,7 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         Html::addCssClass($options, 'form-control-feedback');
 
-        $icon = preg_match('|^\w+$|', $icon)
+        $icon = preg_match('|^[a-z0-9-]+$|', $icon)
             ? (string)FA::icon($icon, $options)->fixedWidth()
             : $icon;
 
