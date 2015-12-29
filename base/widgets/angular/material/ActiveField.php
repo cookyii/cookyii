@@ -210,6 +210,7 @@ class ActiveField extends \cookyii\widgets\angular\ActiveField
         $tag = isset($options['tag']) ? $options['tag'] : 'div';
         unset($options['tag']);
         $options['ng-if'] = 'error.' . $attribute;
+
         return Html::tag($tag, Html::tag('div', '{{ error.' . $attribute . ' }}'), $options);
     }
 }
