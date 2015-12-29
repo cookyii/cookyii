@@ -32,9 +32,8 @@ class DateTimePickerAssetBundle extends \yii\web\AssetBundle
         parent::init();
 
         $langFile = sprintf('bootstrap-datetimepicker.%s.js', \Yii::$app->language);
-        $langFile = \Yii::getAlias('@bower/smalot-bootstrap-datetimepicker/js/locales/') . $langFile;
 
-        if (file_exists($langFile)) {
+        if (file_exists(\Yii::getAlias('@bower/smalot-bootstrap-datetimepicker/js/locales/') . $langFile)) {
             $this->js[] = 'smalot-bootstrap-datetimepicker/js/locales/' . $langFile;
         }
     }
