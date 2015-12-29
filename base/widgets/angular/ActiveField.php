@@ -580,7 +580,7 @@ class ActiveField extends \yii\widgets\ActiveField
         $attribute = Html::getAttributeName($attribute);
         $tag = isset($options['tag']) ? $options['tag'] : 'div';
         unset($options['tag']);
-        $options['ng-show'] = 'error.' . $attribute;
+        $options['ng-if'] = 'error.' . $attribute;
 
         return Html::tag($tag, '{{ error.' . $attribute . ' }}', $options);
     }
