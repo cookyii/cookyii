@@ -6,6 +6,7 @@
 
     .directive('ngIcheck', ['$timeout', 'iCheckConfig', iCheck])
     .directive('ngDatePicker', ['$timeout', DatePicker])
+    .directive('ngTimePicker', ['$timeout', TimePicker])
     .directive('ngDatetimePicker', ['$timeout', DatetimePicker])
     .directive('ngScrollPane', ['$window', '$timeout', ScrollPane]);
 
@@ -92,6 +93,47 @@
             })
             .on('hide', function (e) {
               eval('ngDatePickerHide');
+            });
+        });
+      }
+    };
+  }
+
+  function TimePicker($timeout) {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function ($scope, element, $attrs, ngModel) {
+        return $timeout(function () {
+          var options = {
+            weekStart: 1,
+            startView: 'day',
+            minView: 'hour',
+            language: 'ru',
+            autoclose: true,
+            format: 'hh:ii',
+            keyboardNavigation: false
+          };
+
+          if ($attrs['ngTimePicker']) {
+            options = angular.merge(options, $scope.$eval($attrs['ngTimePicker']));
+          }
+
+          function eval(type) {
+            if (typeof $attrs[type] !== 'undefined') {
+              $scope.$apply(function () {
+                $scope.$eval($attrs[type]);
+              });
+            }
+          }
+
+          return jQuery(element)
+            .datetimepicker(options)
+            .on('changeDate', function (e) {
+              eval('ngTimePickerChange');
+            })
+            .on('hide', function (e) {
+              eval('ngTimePickerHide');
             });
         });
       }

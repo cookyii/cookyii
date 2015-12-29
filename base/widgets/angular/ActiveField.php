@@ -80,12 +80,15 @@ class ActiveField extends \yii\widgets\ActiveField
 
     /**
      * @param string $icon
+     * @param array $options
      * @return static
      */
-    public function icon($icon)
+    public function icon($icon, $options = [])
     {
+        Html::addCssClass($options, 'form-control-feedback');
+
         $icon = preg_match('|^\w+$|', $icon)
-            ? (string)FA::icon($icon, ['class' => 'form-control-feedback'])
+            ? (string)FA::icon($icon, $options)->fixedWidth()
             : $icon;
 
         if (!preg_match('|form-control-feedback|', $icon)) {
