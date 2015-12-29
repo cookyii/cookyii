@@ -141,7 +141,7 @@
     };
   }
 
-  function DatetimePicker($timeout) {
+  function DatetimePicker($timeout, datetimePickerConfig) {
     return {
       restrict: 'A',
       require: 'ngModel',
