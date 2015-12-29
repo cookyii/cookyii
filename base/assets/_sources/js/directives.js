@@ -3,17 +3,26 @@
   angular.module('directives', [])
 
     .constant('iCheckConfig', iCheckConfig())
+    .constant('datetimePickerConfig', datetimePickerConfig())
 
     .directive('ngIcheck', ['$timeout', 'iCheckConfig', iCheck])
-    .directive('ngDatePicker', ['$timeout', DatePicker])
-    .directive('ngTimePicker', ['$timeout', TimePicker])
-    .directive('ngDatetimePicker', ['$timeout', DatetimePicker])
+    .directive('ngDatePicker', ['$timeout', 'datetimePickerConfig', DatePicker])
+    .directive('ngTimePicker', ['$timeout', 'datetimePickerConfig', TimePicker])
+    .directive('ngDatetimePicker', ['$timeout', 'datetimePickerConfig', DatetimePicker])
     .directive('ngScrollPane', ['$window', '$timeout', ScrollPane]);
 
   function iCheckConfig() {
     return {
       checkboxClass: 'icheckbox_square-red',
       radioClass: 'iradio_square-red'
+    };
+  }
+
+  function datetimePickerConfig() {
+    return {
+      weekStart: 1,
+      language: 'en',
+      autoclose: true
     };
   }
 
@@ -59,20 +68,16 @@
     };
   }
 
-  function DatePicker($timeout) {
+  function DatePicker($timeout, datetimePickerConfig) {
     return {
       restrict: 'A',
       require: 'ngModel',
       link: function ($scope, element, $attrs, ngModel) {
         return $timeout(function () {
-          var options = {
-            weekStart: 1,
+          var options = angular.merge(datetimePickerConfig, {
             minView: 'month',
-            language: 'ru',
-            autoclose: true,
-            format: 'dd.mm.yyyy',
-            keyboardNavigation: false
-          };
+            format: 'dd.mm.yyyy'
+          });
 
           if ($attrs['ngDatePicker']) {
             options = angular.merge(options, $scope.$eval($attrs['ngDatePicker']));
@@ -99,21 +104,17 @@
     };
   }
 
-  function TimePicker($timeout) {
+  function TimePicker($timeout, datetimePickerConfig) {
     return {
       restrict: 'A',
       require: 'ngModel',
       link: function ($scope, element, $attrs, ngModel) {
         return $timeout(function () {
-          var options = {
-            weekStart: 1,
+          var options = angular.merge(datetimePickerConfig, {
             startView: 'day',
             minView: 'hour',
-            language: 'ru',
-            autoclose: true,
-            format: 'hh:ii',
-            keyboardNavigation: false
-          };
+            format: 'hh:ii'
+          });
 
           if ($attrs['ngTimePicker']) {
             options = angular.merge(options, $scope.$eval($attrs['ngTimePicker']));
@@ -146,14 +147,10 @@
       require: 'ngModel',
       link: function ($scope, element, $attrs, ngModel) {
         return $timeout(function () {
-          var options = {
-            weekStart: 1,
+          var options = angular.merge(datetimePickerConfig, {
             minView: 'hour',
-            language: 'ru',
-            autoclose: true,
-            format: 'dd.mm.yyyy hh:ii',
-            keyboardNavigation: false
-          };
+            format: 'dd.mm.yyyy hh:ii'
+          });
 
           if ($attrs['ngDatetimePicker']) {
             options = angular.merge(options, $scope.$eval($attrs['ngDatetimePicker']));
