@@ -13,7 +13,7 @@ use cookyii\modules\Feed;
  * Class SectionController
  * @package cookyii\modules\Feed\backend\controllers\section\rest
  */
-class SectionController extends \cookyii\rest\ActiveController
+class SectionController extends \cookyii\rest\Controller
 {
 
     public $modelClass = 'cookyii\modules\Feed\resources\FeedSection';

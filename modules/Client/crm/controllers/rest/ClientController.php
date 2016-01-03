@@ -13,7 +13,7 @@ use cookyii\modules\Client;
  * Class ClientController
  * @package cookyii\modules\Client\crm\controllers\rest
  */
-class ClientController extends \cookyii\rest\ActiveController
+class ClientController extends \cookyii\rest\Controller
 {
 
     public $modelClass = 'cookyii\modules\Client\resources\Client';

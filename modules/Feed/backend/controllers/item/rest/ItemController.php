@@ -13,7 +13,7 @@ use cookyii\modules\Feed;
  * Class ItemController
  * @package cookyii\modules\Feed\backend\controllers\item\rest
  */
-class ItemController extends \cookyii\rest\ActiveController
+class ItemController extends \cookyii\rest\Controller
 {
 
     public $modelClass = 'cookyii\modules\Feed\resources\FeedItem';

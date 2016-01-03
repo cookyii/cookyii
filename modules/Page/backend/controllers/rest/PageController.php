@@ -13,7 +13,7 @@ use cookyii\modules\Page;
  * Class PageController
  * @package cookyii\modules\Page\backend\controllers\rest
  */
-class PageController extends \cookyii\rest\ActiveController
+class PageController extends \cookyii\rest\Controller
 {
 
     public $modelClass = 'cookyii\modules\Page\resources\Page';

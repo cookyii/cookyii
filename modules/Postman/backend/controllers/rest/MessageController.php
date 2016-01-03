@@ -13,7 +13,7 @@ use cookyii\modules\Postman;
  * Class MessageController
  * @package cookyii\modules\Postman\backend\controllers\rest
  */
-class MessageController extends \cookyii\rest\ActiveController
+class MessageController extends \cookyii\rest\Controller
 {
 
     public $modelClass = 'cookyii\modules\Postman\resources\PostmanMessage';

@@ -13,7 +13,7 @@ use cookyii\modules\Account;
  * Class AccountController
  * @package cookyii\modules\Account\backend\controllers\rest
  */
-class AccountController extends \cookyii\rest\ActiveController
+class AccountController extends \cookyii\rest\Controller
 {
 
     public $modelClass = 'cookyii\modules\Account\resources\Account';
