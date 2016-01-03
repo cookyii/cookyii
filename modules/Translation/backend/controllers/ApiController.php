@@ -14,7 +14,7 @@ use yii\helpers\VarDumper;
  * Class ApiController
  * @package cookyii\modules\Translation\backend\controllers
  */
-class ApiController extends \cookyii\rest\Controller
+class ApiController extends \cookyii\api\Controller
 {
 
     /**

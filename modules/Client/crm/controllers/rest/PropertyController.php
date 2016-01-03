@@ -13,7 +13,7 @@ use cookyii\modules\Client;
  * Class PropertyController
  * @package cookyii\modules\Client\crm\controllers\rest
  */
-class PropertyController extends \cookyii\rest\Controller
+class PropertyController extends \cookyii\api\Controller
 {
 
     /**

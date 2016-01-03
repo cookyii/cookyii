@@ -13,7 +13,7 @@ use cookyii\modules\Account;
  * Class ApiController
  * @package cookyii\modules\Account\crm\controllers
  */
-class ApiController extends \cookyii\rest\Controller
+class ApiController extends \cookyii\api\Controller
 {
 
     /**
