@@ -53,11 +53,15 @@ trait SoftDeleteTrait
         if (true === $permanently || $this->isDeleted()) {
             // permanently delete
             $result = parent::delete();
+        } elseif (!$this->beforeDelete()) {
+            $result = false;
         } else {
             // soft delete
             $this->deleted_at = time();
 
             $result = $this->update();
+
+            $this->afterDelete();
         }
 
         return $result;
