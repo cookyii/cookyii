@@ -75,14 +75,15 @@ class Config
     public static function requireGlobals($baseDir)
     {
         $files = [
-            $baseDir . '/vendor/cookyii/base/globals.php',
-            $baseDir . '/base/globals.php',
             $baseDir . '/globals.php',
+            $baseDir . '/base/globals.php',
+            $baseDir . '/vendor/cookyii/base/globals.php',
         ];
 
         foreach ($files as $file) {
             if (file_exists($file)) {
                 require_once $file;
+                break;
             }
         }
     }
