@@ -5,7 +5,7 @@ use yii\db\Schema;
 class m150610_170100_account_auth extends \cookyii\db\Migration
 {
 
-    static $socials = ['facebook', 'github', 'google', 'linkedin', 'live', 'twitter', 'vkontakte', 'yandex'];
+    static $providers = ['facebook', 'github', 'google', 'linkedin', 'live', 'twitter', 'vkontakte', 'yandex'];
 
     public function up()
     {
@@ -20,8 +20,8 @@ class m150610_170100_account_auth extends \cookyii\db\Migration
 
         $this->createIndex('idx_received_at', '{{%account_auth_response}}', ['received_at']);
 
-        foreach (static::$socials as $social) {
-            $this->createTable('{{%account_auth_' . $social . '}}', [
+        foreach (static::$providers as $provider) {
+            $this->createTable('{{%account_auth_' . $provider . '}}', [
                 'account_id' => Schema::TYPE_INTEGER,
                 'social_id' => Schema::TYPE_STRING,
                 'PRIMARY KEY (`account_id`, `social_id`)',
@@ -32,8 +32,8 @@ class m150610_170100_account_auth extends \cookyii\db\Migration
 
     public function down()
     {
-        foreach (static::$socials as $social) {
-            $this->dropTable('{{%account_auth_' . $social . '}}');
+        foreach (static::$providers as $provider) {
+            $this->dropTable('{{%account_auth_' . $provider . '}}');
         }
 
         $this->dropTable('{{%account_auth_response}}');

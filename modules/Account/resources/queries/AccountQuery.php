@@ -174,18 +174,17 @@ class AccountQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param string $client
-     * @param integer|array $social_id
+     * @param string|array $social_type
+     * @param string|array $social_id
      * @return $this|static
      */
-    protected function bySocialId($client, $social_id)
+    protected function bySocialId($social_type, $social_id)
     {
-        $clients = Account\resources\AbstractAccountAuth::getClientsList();
-
-        /** @var $class \cookyii\modules\Account\resources\AbstractAccountAuth */
-        $class = $clients[$client];
+        /** @var $class \cookyii\modules\Account\resources\AccountAuth */
+        $class = \Yii::createObject(\cookyii\modules\Account\resources\AccountAuth::className());
 
         $Social = $class::find()
+            ->bySocialType($social_type)
             ->bySocialId($social_id)
             ->one();
 

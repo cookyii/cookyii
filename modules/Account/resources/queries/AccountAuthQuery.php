@@ -11,8 +11,8 @@ namespace cookyii\modules\Account\resources\queries;
  * Class AccountAuthQuery
  * @package cookyii\modules\Account\resources\queries
  *
- * @method \cookyii\modules\Account\resources\AbstractAccountAuth|array|null one($db = null)
- * @method \cookyii\modules\Account\resources\AbstractAccountAuth[]|array all($db = null)
+ * @method \cookyii\modules\Account\resources\AccountAuth|array|null one($db = null)
+ * @method \cookyii\modules\Account\resources\AccountAuth[]|array all($db = null)
  */
 class AccountAuthQuery extends \yii\db\ActiveQuery
 {
@@ -29,7 +29,18 @@ class AccountAuthQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param integer|array $social_id
+     * @param string|array $social_type
+     * @return static
+     */
+    public function bySocialType($social_type)
+    {
+        $this->andWhere(['social_type' => $social_type]);
+
+        return $this;
+    }
+
+    /**
+     * @param string|array $social_id
      * @return static
      */
     public function bySocialId($social_id)

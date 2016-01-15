@@ -13,8 +13,6 @@ use yii\helpers\Json;
 /**
  * Trait AccountSocialTrait
  * @package cookyii\modules\Account\resources\traits
- *
- * @property integer $id
  */
 trait AccountSocialTrait
 {
@@ -26,32 +24,31 @@ trait AccountSocialTrait
      */
     public function pushSocialLink(\yii\authclient\ClientInterface $Client)
     {
-        $client = $Client->getId();
-        $clients = \cookyii\modules\Account\resources\AbstractAccountAuth::getClientsList();
-
-        if (!isset($clients[$client])) {
-            throw new \yii\web\ServerErrorHttpException(\Yii::t('cookyii.account', 'Provider for client `{client}` not found.', [
-                'client' => $Client->getName()
-            ]));
-        }
+        /** @var \cookyii\modules\Account\resources\Account $self */
+        $self = $this;
 
         $attributes = $Client->getUserAttributes();
 
         $credentials = [
-            'account_id' => (integer)$this->id,
+            'account_id' => (integer)$self->id,
             'social_id' => (string)$attributes['id'],
         ];
 
-        /** @var $class \cookyii\modules\Account\resources\AbstractAccountAuth */
-        $class = $clients[$client];
+        $socialnetwork = $Client->getId();
 
+        /** @var $class \cookyii\modules\Account\resources\AccountAuth */
+        $class = \Yii::createObject(\cookyii\modules\Account\resources\AccountAuth::className());
+
+        /** @var \cookyii\modules\Account\resources\AccountAuth $Auth */
         $Auth = $class::find()
             ->byAccountId($credentials['account_id'])
+            ->bySocialType($socialnetwork)
             ->bySocialId($credentials['social_id'])
             ->one();
 
         if (empty($Auth)) {
             $Auth = new $class($credentials);
+            $Auth->social_type = $socialnetwork;
         }
 
         if ($Client instanceof \yii\authclient\BaseOAuth) {
@@ -73,6 +70,9 @@ trait AccountSocialTrait
      */
     public function appendClientAttributes(\yii\authclient\ClientInterface $Client)
     {
+        /** @var \cookyii\modules\Account\resources\Account $self */
+        $self = $this;
+
         $attributes = $Client->getUserAttributes();
 
         switch ($Client->getId()) {
@@ -107,8 +107,8 @@ trait AccountSocialTrait
 
         if (!empty($attributes)) {
             foreach ($attributes as $key => $value) {
-                if ($this->hasAttribute($key) && empty($this->$key)) {
-                    $this->setAttribute($key, $value);
+                if ($self->hasAttribute($key) && empty($self->$key)) {
+                    $self->setAttribute($key, $value);
                 }
             }
         }
@@ -333,6 +333,7 @@ trait AccountSocialTrait
         }
 
         $avatar = null;
+
         // @todo implement yandex avatar $attributes['default_avatar_id']
 
         return [
