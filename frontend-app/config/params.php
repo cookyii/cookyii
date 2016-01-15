@@ -8,13 +8,6 @@
 return [
     'component.authClientCollection' => [
         'class' => yii\authclient\Collection::className(),
-        'clients' => [
-            'github' => [
-                'class' => yii\authclient\clients\GitHub::class,
-                'clientId' => GITHUB_CLIENT_ID,
-                'clientSecret' => GITHUB_CLIENT_SECRET,
-                'scope' => 'user:email',
-            ],
-        ],
+        'clients' => require __DIR__ . '/auth_clients.php',
     ],
 ];

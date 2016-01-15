@@ -8,6 +8,6 @@
 return [
     'component.authClientCollection' => [
         'class' => yii\authclient\Collection::className(),
-        'clients' => [],
+        'clients' => require __DIR__ . '/auth_clients.php',
     ],
 ];
