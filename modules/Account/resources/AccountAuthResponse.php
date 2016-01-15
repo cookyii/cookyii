@@ -13,11 +13,11 @@ use yii\helpers\Json;
  * @package cookyii\modules\Account\resources
  *
  * @property integer $id
+ * @property string $user_ip
  * @property integer $received_at
  * @property string $client
  * @property string $response
  * @property string $result
- * @property string $user_ip
  */
 class AccountAuthResponse extends \yii\db\ActiveRecord
 {
@@ -29,15 +29,15 @@ class AccountAuthResponse extends \yii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['received_at', 'user_ip'], 'integer'],
-            [['client', 'response', 'result'], 'string'],
+            [['received_at'], 'integer'],
+            [['client', 'response', 'result', 'user_ip'], 'string'],
 
             /** semantic validators */
             [['client', 'response', 'result'], 'required'],
 
             /** default values */
             [['received_at'], 'default', 'value' => time()],
-            [['user_ip'], 'default', 'value' => ip2long(Request()->userIP)],
+            [['user_ip'], 'default', 'value' => Request()->userIP],
         ];
     }
 
