@@ -32,13 +32,18 @@ class m160115_225122_account_auth_response_user_ip_string extends \cookyii\db\Mi
             ->from('{{%account_auth_response}}')
             ->all();
 
+        $this->update(
+            '{{%account_auth_response}}',
+            ['user_ip' => null]
+        );
+
         $this->alterColumn('{{%account_auth_response}}', 'user_ip', Schema::TYPE_INTEGER);
 
         if (!empty($data)) {
             foreach ($data as $row) {
                 $this->update(
                     '{{%account_auth_response}}',
-                    ['user_ip' => long2ip($row['user_ip'])],
+                    ['user_ip' => ip2long($row['user_ip'])],
                     ['id' => $row['id']]
                 );
             }
