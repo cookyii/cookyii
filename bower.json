@@ -8,6 +8,7 @@
     "angular": "~1.4"
   },
   "dependencies": {
+    "animate.css": "3.5.*",
     "angular": "1.4.*",
     "angular-cookies": "1.4.*",
     "angular-resource": "1.4.*",

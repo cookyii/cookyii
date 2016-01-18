@@ -29,16 +29,12 @@ class CommonAssetBundle extends AbstractModuleAssetBundle
     ];
 
     public $depends = [
-        'cookyii\assets\Html5shivAssetBundle',
-        'cookyii\assets\RespondAssetBundle',
-        'cookyii\assets\ModernizrAssetBundle',
-
         'yii\web\YiiAsset',
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
 
-        'rmrevin\yii\fontawesome\cdn\AssetBundle',
+        'rmrevin\yii\fontawesome\AssetBundle',
 
         'cookyii\assets\AnimateCssAssetBundle',
         'cookyii\assets\SweetAlertAssetBundle',

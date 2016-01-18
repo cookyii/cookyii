@@ -14,7 +14,9 @@ namespace cookyii\assets;
 class AnimateCssAssetBundle extends \yii\web\AssetBundle
 {
 
+    public $sourcePath = '@bower';
+
     public $css = [
-        'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css',
+        'animate.css/animate.min.css',
     ];
 }
