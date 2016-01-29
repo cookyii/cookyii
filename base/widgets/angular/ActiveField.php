@@ -22,7 +22,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
     public $template = "{label}\n{error}\n{input}\n{icon}\n{hint}";
 
-    public $options = ['class' => 'form-group has-feedback'];
+    public $options = ['class' => 'form-group'];
 
     public $errorOptions = ['class' => 'error-balloon', 'tag' => 'span'];
 
@@ -85,6 +85,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function icon($icon, $options = [])
     {
+        Html::addCssClass($this->options, 'has-feedback');
         Html::addCssClass($options, 'form-control-feedback');
 
         $icon = preg_match('|^[a-z0-9-]+$|', $icon)

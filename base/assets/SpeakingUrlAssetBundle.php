@@ -1,6 +1,6 @@
 <?php
 /**
- * SpeakingurlAssetBundle.php
+ * SpeakingUrlAssetBundle.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -8,7 +8,7 @@
 namespace cookyii\assets;
 
 /**
- * Class SpeakingurlAssetBundle
+ * Class SpeakingUrlAssetBundle
  * @package cookyii\assets
  */
 class SpeakingUrlAssetBundle extends \yii\web\AssetBundle

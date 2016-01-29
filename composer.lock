@@ -601,16 +601,16 @@
         },
         {
             "name": "rmrevin/yii2-minify-view",
-            "version": "1.9.1",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-minify-view.git",
-                "reference": "a2bb08ffd500166a62cf034a7a42a347dd45092b"
+                "reference": "36018d5892576b55e832d2a2e6d7e60fd957d181"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/a2bb08ffd500166a62cf034a7a42a347dd45092b",
-                "reference": "a2bb08ffd500166a62cf034a7a42a347dd45092b",
+                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/36018d5892576b55e832d2a2e6d7e60fd957d181",
+                "reference": "36018d5892576b55e832d2a2e6d7e60fd957d181",
                 "shasum": ""
             },
             "require": {
@@ -630,8 +630,8 @@
             "authors": [
                 {
                     "name": "Revin Roman",
-                    "email": "xgismox@gmail.com",
-                    "homepage": "http://phptime.ru/"
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
                 }
             ],
             "description": "Yii2 View component with minification css & js",
@@ -642,7 +642,7 @@
                 "view",
                 "yii2"
             ],
-            "time": "2015-08-20 09:27:04"
+            "time": "2016-01-27 18:17:29"
         },
         {
             "name": "rmrevin/yii2-power-migration",
@@ -3072,16 +3072,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "49ff736bd5d41f45240cec77b44967d76e0c3d25"
+                "reference": "1289d16209491b584839022f29257ad859b8532d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/49ff736bd5d41f45240cec77b44967d76e0c3d25",
-                "reference": "49ff736bd5d41f45240cec77b44967d76e0c3d25",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
+                "reference": "1289d16209491b584839022f29257ad859b8532d",
                 "shasum": ""
             },
             "require": {
@@ -3093,7 +3093,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -3127,7 +3127,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2015-11-20 09:19:13"
+            "time": "2016-01-20 09:13:37"
         },
         {
             "name": "symfony/yaml",

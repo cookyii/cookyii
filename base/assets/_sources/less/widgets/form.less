@@ -23,8 +23,15 @@
     line-height: 1.4;
   }
 }
-.has-feedback .form-control-feedback {
-  top: initial !important;
-  margin-top: -35px;
-  color: lighten(@text-color, 20%);
+.has-feedback {
+  .form-control {
+    padding-right: 30px;
+  }
+  .form-control-feedback {
+    top: initial !important;
+    margin: -24px 5px 0 0;
+    color: lighten(@text-color, 20%);
+    line-height: 1;
+    font-size: 1.6rem;
+  }
 }
