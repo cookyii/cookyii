@@ -53,7 +53,6 @@ return [
     'Properties' => '',
     'Property successfully saved' => '',
     'Property was successfully removed' => '',
-    'Provider for client `{client}` not found.' => '',
     'Remember me' => '',
     'Remove account' => '',
     'Removed accounts' => '',

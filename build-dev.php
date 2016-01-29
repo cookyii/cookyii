@@ -25,6 +25,16 @@ $buildConfig = [
         '.task' => 'cookyii\build\tasks\MapTask',
     ],
 
+    'extract' => [
+        '.description' => 'Extract codebase to split repos',
+        '.depends' => [
+            'clear', 'less', 'messages',
+        ],
+        '.task' => [
+            'class' => 'dev\build\ExtractTask',
+        ],
+    ],
+
     'messages' => [
         '.description' => 'Extract codebase to split repos',
         '.task' => [
@@ -38,16 +48,6 @@ $buildConfig = [
 
     'clear' => [
         '.description' => 'Delete all temporary files and remove installed packages',
-    ],
-
-    'extract' => [
-        '.description' => 'Extract codebase to split repos',
-        '.depends' => [
-            'clear',
-        ],
-        '.task' => [
-            'class' => 'dev\build\ExtractTask',
-        ],
     ],
 
     'less' => [

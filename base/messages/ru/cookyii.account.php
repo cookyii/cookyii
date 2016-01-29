@@ -53,7 +53,6 @@ return [
     'Properties' => 'Свойства',
     'Property successfully saved' => 'Свойство успешно сохранено',
     'Property was successfully removed' => 'Свойство успешно удалено',
-    'Provider for client `{client}` not found.' => 'Провайдер для клиента `{client}` не найден.',
     'Remember me' => 'Запомнить меня',
     'Remove account' => 'Удалить пользователя',
     'Removed accounts' => 'Удаленные пользователи',
