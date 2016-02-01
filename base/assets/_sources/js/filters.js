@@ -1,5 +1,29 @@
 angular.module('filters', [])
 
+  .filter('trustAsJs', ['$sce', function ($sce) {
+    return function (val) {
+      return $sce.trustAsJs(val);
+    };
+  }])
+
+  .filter('trustAsHtml', ['$sce', function ($sce) {
+    return function (val) {
+      return $sce.trustAsHtml(val);
+    };
+  }])
+
+  .filter('trustAsUrl', ['$sce', function ($sce) {
+    return function (val) {
+      return $sce.trustAsUrl(val);
+    };
+  }])
+
+  .filter('trustAsResourceUrl', ['$sce', function ($sce) {
+    return function (val) {
+      return $sce.trustAsResourceUrl(val);
+    };
+  }])
+
   .filter('nl2br', function () {
     return function (input) {
       if (typeof input === 'string') {
