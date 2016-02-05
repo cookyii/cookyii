@@ -42,7 +42,7 @@
 
           try {
             options = typeof $attrs['ngIcheck'] === 'string' && $attrs['ngIcheck'].length > 0
-              ? jQuery.parseJSON($attrs['ngIcheck'])
+              ? $scope.$eval($attrs['ngIcheck'])
               : {};
           } catch (e) {
             options = {};
