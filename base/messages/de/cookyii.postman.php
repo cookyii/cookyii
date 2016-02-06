@@ -28,6 +28,7 @@ return [
     'Edit message' => '',
     'Edit template' => '',
     'Email' => '',
+    'Failed to find message' => '',
     'General information' => '',
     'HTML content' => '',
     'ID' => '',
@@ -64,6 +65,7 @@ return [
     'Templates list' => '',
     'Templates not found' => '',
     'To' => '',
+    'Unable to determine the id of the message' => '',
     'Updated at' => '',
     'Use layout' => '',
 ];

@@ -28,6 +28,7 @@ return [
     'Edit message' => 'Редактировать сообщение',
     'Edit template' => 'Редактировать шаблон',
     'Email' => 'Email',
+    'Failed to find message' => 'Неудалось найти сообщение',
     'General information' => 'Основная информация',
     'HTML content' => 'HTML версия',
     'ID' => 'ID',
@@ -64,6 +65,7 @@ return [
     'Templates list' => 'Список шаблонов',
     'Templates not found' => 'Шаблон не найден',
     'To' => 'Кому (to)',
+    'Unable to determine the id of the message' => 'Неудалось определить id сообщения',
     'Updated at' => 'Обновлено',
     'Use layout' => 'Использовать стандартный шаблон (layout)',
 ];
