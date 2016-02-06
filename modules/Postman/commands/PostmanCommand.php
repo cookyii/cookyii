@@ -19,7 +19,11 @@ class PostmanCommand extends \yii\console\Controller
 
     public $defaultAction = 'send';
 
-    public function actionSend($limit = 10, $try = 3)
+    /**
+     * @param integer $limit
+     * @throws \yii\console\Exception
+     */
+    public function actionSend($limit = 10)
     {
         $this->stdout(sprintf('Looking for the next %d letters to send... ', $limit));
 
@@ -44,7 +48,9 @@ class PostmanCommand extends \yii\console\Controller
                     $this->stderr('an error occurred.' . PHP_EOL);
                     $this->stderr(print_r($errors, 1) . PHP_EOL);
 
-                    $Message->repeatAfter($try, '+3 min');
+                    $Postman = PostmanMessage::getPostman();
+
+                    $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
 
                     $Message->error = Json::encode($errors);
                     $Message->validate() && $Message->save();

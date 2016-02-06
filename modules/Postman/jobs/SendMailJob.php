@@ -8,6 +8,7 @@
 namespace cookyii\modules\Postman\jobs;
 
 use cookyii\modules\Postman\resources\PostmanMessage;
+use yii\helpers\Json;
 
 /**
  * Class SendMailJob
@@ -39,7 +40,20 @@ class SendMailJob extends \cookyii\queue\ActiveJob
             throw new \yii\base\ErrorException(\Yii::t('cookyii.postman', 'Failed to find message'));
         }
 
-        return $Message->sendImmediately();
+        $result = $Message->sendImmediately();
+
+        if ($Message->hasErrors()) {
+            $errors = $Message->getErrors();
+
+            $Postman = PostmanMessage::getPostman();
+
+            $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
+
+            $Message->error = Json::encode($errors);
+            $Message->validate() && $Message->save();
+        }
+
+        return $result;
     }
 
     /**

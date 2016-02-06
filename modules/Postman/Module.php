@@ -22,4 +22,10 @@ class Module extends \yii\base\Module
 
     /** @var string|null */
     public $subjectSuffix;
+
+    /** @var integer */
+    public $resentTry = 3;
+
+    /** @var integer */
+    public $resentOffset = '+3 min';
 }
