@@ -25,6 +25,10 @@ return array_merge($config, [
         ],
     ],
     'bootstrap' => ['log'],
+    'modules' => [
+        'media' => $params['module.media'],
+        'postman' => $params['module.postman'],
+    ],
     'components' => [
         'db' => $params['component.db'],
         'security' => $params['component.security'],
