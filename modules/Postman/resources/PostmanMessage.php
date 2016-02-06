@@ -20,17 +20,20 @@ use yii\helpers\Json;
  * @property string $content_text
  * @property string $content_html
  * @property string $address
+ * @property integer $try_message_id
  * @property string $code
  * @property string $error
  * @property integer $created_at
  * @property integer $scheduled_at
+ * @property integer $executed_at
  * @property integer $sent_at
  * @property integer $deleted_at
  */
 class PostmanMessage extends \yii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\SoftDeleteTrait;
+    use \cookyii\db\traits\SoftDeleteTrait,
+        \cookyii\traits\PopulateErrorsTrait;
 
     const LAYOUT_CODE = '.layout';
 
@@ -79,6 +82,10 @@ class PostmanMessage extends \yii\db\ActiveRecord
             return Formatter()->asDatetime($Model->scheduled_at);
         };
 
+        $fields['executed_at_format'] = function (PostmanMessage $Model) {
+            return Formatter()->asDatetime($Model->executed_at);
+        };
+
         $fields['sent_at_format'] = function (PostmanMessage $Model) {
             return Formatter()->asDatetime($Model->sent_at);
         };
@@ -101,7 +108,7 @@ class PostmanMessage extends \yii\db\ActiveRecord
         return [
             /** type validators */
             [['subject', 'content_text', 'content_html', 'address', 'code', 'error'], 'string'],
-            [['created_at', 'scheduled_at', 'sent_at', 'deleted_at'], 'integer'],
+            [['try_message_id', 'created_at', 'scheduled_at', 'executed_at', 'sent_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['subject'], 'required'],
@@ -180,19 +187,50 @@ class PostmanMessage extends \yii\db\ActiveRecord
     }
 
     /**
-     * Put message to queue
-     * @return bool
+     * @param integer $try
+     * @param string $period strtotime string format
+     * @return boolean
+     * @throws \yii\base\InvalidConfigException
      */
-    public function toQueue()
+    public function repeatAfter($try, $period)
     {
-        $result = $this->validate() && $this->save();
+        $try_message_id = !empty($this->try_message_id) ? $this->try_message_id : $this->id;
 
-        if (!$this->isNewRecord) {
-            (new SendMailJob(['postmanMessageId' => $this->id]))
-                ->push();
+        $count = static::find()
+            ->byTryMessageId($try_message_id)
+            ->count();
+
+        if ($count >= $try) {
+            $this->addError('try_message_id', \Yii::t('cookyii.postman', 'Limit exceeded retries'));
+        } else {
+            $Message = new static;
+            $Message->setAttributes([
+                'subject' => $this->subject,
+                'content_text' => $this->content_text,
+                'content_html' => $this->content_html,
+                'address' => $this->address,
+                'try_message_id' => !empty($this->try_message_id) ? $this->try_message_id : $this->id,
+                'scheduled_at' => strtotime($period),
+            ]);
+
+            $Message->validate() && $Message->save();
+
+            if (!$Message->hasErrors()) {
+                /** @var SendMailJob $Job */
+                $Job = \Yii::createObject(
+                    SendMailJob::className(),
+                    ['postmanMessageId' => $Message->id]
+                );
+
+                if (\Yii::$app->has($Job->queue)) {
+                    $Job->push();
+                }
+            } else {
+                $this->populateErrors($Message, 'id');
+            }
         }
 
-        return $result;
+        return !$this->hasErrors();
     }
 
     /**
@@ -205,25 +243,66 @@ class PostmanMessage extends \yii\db\ActiveRecord
     }
 
     /**
+     * Put message to queue
+     * @return bool
+     */
+    public function sendToQueue()
+    {
+        $result = $this->validate() && $this->save();
+
+        if (!$this->isNewRecord) {
+            /** @var SendMailJob $Job */
+            $Job = \Yii::createObject(
+                SendMailJob::className(),
+                ['postmanMessageId' => $this->id]
+            );
+
+            if (\Yii::$app->has($Job->queue)) {
+                $Job->push();
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Send message to user immediately
+     * @deprecated
      * @return bool|array
      */
     public function send()
     {
+        return $this->sendImmediately();
+    }
+
+    /**
+     * Send message to user immediately
+     * @return bool
+     * @throws \Exception
+     */
+    public function sendImmediately()
+    {
+        $result = false;
+
+        $this->executed_at = time();
+
         $this->validate() && $this->save();
 
         $Postman = static::getPostman();
 
-        if ($this->hasErrors()) {
-            $result = $this->getErrors();
-        } else {
-            $address = empty($this->address) ? [] : Json::decode($this->address);
+        if (!$this->hasErrors()) {
+            $address = empty($this->address)
+                ? []
+                : Json::decode($this->address);
 
             $reply_to = [];
             $to = [];
             $cc = [];
             $bcc = [];
 
-            if (!empty($address)) {
+            if (empty($address)) {
+                $this->addError('address', \Yii::t('cookyii.postman', 'Cannot send message without a recipient'));
+            } else {
                 foreach ($address as $addr) {
                     switch ($addr['type']) {
                         case static::ADDRESS_TYPE_REPLY_TO:
@@ -240,40 +319,42 @@ class PostmanMessage extends \yii\db\ActiveRecord
                             break;
                     }
                 }
-            }
 
-            $from = empty($Postman->from)
-                ? 'Postman'
-                : $Postman->from;
+                $from = empty($Postman->from)
+                    ? 'Postman'
+                    : $Postman->from;
 
-            $Message = \Yii::$app->mailer->compose()
-                ->setCharset('UTF-8')
-                ->setFrom([SMTP_USER => $from])
-                ->setSubject($this->subject)
-                ->setTextBody($this->content_text)
-                ->setHtmlBody($this->content_html);
+                $Message = \Yii::$app->mailer->compose()
+                    ->setCharset('UTF-8')
+                    ->setFrom([SMTP_USER => $from])
+                    ->setSubject($this->subject)
+                    ->setTextBody($this->content_text)
+                    ->setHtmlBody($this->content_html);
 
-            if (!empty($reply_to)) {
-                $Message->setReplyTo($reply_to);
-            }
+                if (!empty($reply_to)) {
+                    $Message->setReplyTo($reply_to);
+                }
 
-            if (!empty($to)) {
-                $Message->setTo($to);
-            }
+                if (!empty($to)) {
+                    $Message->setTo($to);
+                }
 
-            if (!empty($cc)) {
-                $Message->setCc($cc);
-            }
+                if (!empty($cc)) {
+                    $Message->setCc($cc);
+                }
 
-            if (!empty($bcc)) {
-                $Message->setBcc($bcc);
-            }
+                if (!empty($bcc)) {
+                    $Message->setBcc($bcc);
+                }
 
-            $result = $Message->send();
+                $result = $Message->send();
 
-            if ($result === true) {
-                $this->sent_at = time();
-                $this->update();
+                if ($result === true) {
+                    $this->sent_at = time();
+                    $this->update();
+                } else {
+                    $this->addError('sent_at', \Yii::t('cookyii.postman', 'Failed to send message'));
+                }
             }
         }
 

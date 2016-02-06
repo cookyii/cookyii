@@ -58,7 +58,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
 
         $Message->addTo($Account->email, $Account->name);
 
-        return $Message->send();
+        return $Message->sendImmediately();
     }
 
     /**
@@ -83,7 +83,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
 
         $Message->addTo($Account->email, $Account->name);
 
-        return $Message->send();
+        return $Message->sendImmediately();
     }
 
     /**
@@ -104,7 +104,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
 
         $Message->addTo($Account->email, $Account->name);
 
-        return $Message->send();
+        return $Message->sendImmediately();
     }
 
     /**
@@ -123,7 +123,7 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
 
         $Message->addTo($Account->email, $Account->name);
 
-        return $Message->send();
+        return $Message->sendImmediately();
     }
 
     /**
@@ -142,6 +142,6 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
 
         $Message->addTo($Account->email, $Account->name);
 
-        return $Message->send();
+        return $Message->sendImmediately();
     }
 }

@@ -24,7 +24,7 @@ class ResentAction extends \cookyii\rest\Action
         /** @var \cookyii\modules\Postman\resources\PostmanMessage $model */
         $model = $this->findModel($id);
 
-        if ($model->send() !== true) {
+        if ($model->sendImmediately() !== true) {
             throw new \yii\web\ServerErrorHttpException('Failed to resent email the object for unknown reason.');
         }
 

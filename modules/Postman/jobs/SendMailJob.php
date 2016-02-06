@@ -19,6 +19,10 @@ class SendMailJob extends \cookyii\queue\ActiveJob
     /** @var integer */
     public $postmanMessageId;
 
+    /**
+     * @return array|bool
+     * @throws \yii\base\ErrorException
+     */
     public function run()
     {
         $id = $this->postmanMessageId;
@@ -35,9 +39,12 @@ class SendMailJob extends \cookyii\queue\ActiveJob
             throw new \yii\base\ErrorException(\Yii::t('cookyii.postman', 'Failed to find message'));
         }
 
-        return $Message->send();
+        return $Message->sendImmediately();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function queueName()
     {
         return 'mail';

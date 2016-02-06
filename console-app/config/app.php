@@ -18,6 +18,7 @@ return array_merge($config, [
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'account' => cookyii\modules\Account\commands\AccountCommand::className(),
+        'postman' => cookyii\modules\Postman\commands\PostmanCommand::className(),
         'migrate' => [
             'class' => cookyii\console\controllers\MigrateController::className(),
             'templateFile' => '@console/views/migration.php',

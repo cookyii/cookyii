@@ -31,11 +31,48 @@ class PostmanMessageQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     * @param integer|array $message_id
+     * @return static
+     */
+    public function byTryMessageId($message_id)
+    {
+        $this->andWhere(['try_message_id' => $message_id]);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function onlyNotExecuted()
+    {
+        $this->andWhere(['executed_at' => null]);
+
+        return $this;
+    }
+
+    /**
      * @return static
      */
     public function onlyNotSent()
     {
         $this->andWhere(['sent_at' => null]);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function forMailQueue()
+    {
+        $this->onlyNotExecuted();
+
+        $this->andWhere([
+            'or',
+            ['scheduled_at' => null],
+            ['<=', 'scheduled_at', time()],
+        ]);
 
         return $this;
     }
