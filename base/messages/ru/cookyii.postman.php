@@ -29,6 +29,7 @@ return [
     'Edit message' => 'Редактировать сообщение',
     'Edit template' => 'Редактировать шаблон',
     'Email' => 'Email',
+    'Emergency response' => 'Нерпедвиденный ответ',
     'Failed to find message' => 'Неудалось найти сообщение',
     'Failed to send message' => 'Неудалось отправить сообщение',
     'General information' => 'Основная информация',

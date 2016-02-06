@@ -27,5 +27,5 @@ class Module extends \yii\base\Module
     public $resentTry = 3;
 
     /** @var integer */
-    public $resentOffset = '+3 min';
+    public $resentOffset = '+5 min';
 }

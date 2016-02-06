@@ -45,12 +45,15 @@ class SendMailJob extends \cookyii\queue\ActiveJob
         if ($Message->hasErrors()) {
             $errors = $Message->getErrors();
 
+            $Message->error = Json::encode($errors);
+            $Message->validate() && $Message->save();
+        } elseif (is_bool($result) && $result === true) {
+        } elseif (is_bool($result) && $result === false) {
             $Postman = PostmanMessage::getPostman();
 
             $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
-
-            $Message->error = Json::encode($errors);
-            $Message->validate() && $Message->save();
+        } else {
+            throw new \yii\base\ErrorException(\Yii::t('cookyii.postman', 'Emergency response'));
         }
 
         return $result;

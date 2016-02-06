@@ -48,15 +48,15 @@ class PostmanCommand extends \yii\console\Controller
                     $this->stderr('an error occurred.' . PHP_EOL);
                     $this->stderr(print_r($errors, 1) . PHP_EOL);
 
-                    $Postman = PostmanMessage::getPostman();
-
-                    $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
-
                     $Message->error = Json::encode($errors);
                     $Message->validate() && $Message->save();
                 } elseif (is_bool($result) && $result === true) {
                     $this->stdout('send.' . PHP_EOL);
                 } elseif (is_bool($result) && $result === false) {
+                    $Postman = PostmanMessage::getPostman();
+
+                    $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
+
                     $this->stdout('NOT send.' . PHP_EOL);
                 } else {
                     throw new \yii\console\Exception('Emergency response');

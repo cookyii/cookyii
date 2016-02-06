@@ -29,6 +29,7 @@ return [
     'Edit message' => '',
     'Edit template' => '',
     'Email' => '',
+    'Emergency response' => '',
     'Failed to find message' => '',
     'Failed to send message' => '',
     'General information' => '',
