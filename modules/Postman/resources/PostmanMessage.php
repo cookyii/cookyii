@@ -181,22 +181,23 @@ class PostmanMessage extends \yii\db\ActiveRecord
 
     /**
      * Put message to queue
+     * @return bool
      */
     public function toQueue()
     {
-        $this->validate() && $this->save();
+        $result = $this->validate() && $this->save();
 
         if (!$this->isNewRecord) {
             (new SendMailJob(['postmanMessageId' => $this->id]))
                 ->push();
         }
+
+        return $result;
     }
 
     /**
      * Save message to database
-     * @param bool $runValidation
-     * @param null $attributeNames
-     * @return bool
+     * @inheritdoc
      */
     public function save($runValidation = true, $attributeNames = null)
     {
