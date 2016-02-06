@@ -16,9 +16,7 @@ return array_merge($config, [
     'id' => 'crm-app',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'crm\controllers',
-    'bootstrap' => [
-        'log', 'rollbar',
-    ],
+    'bootstrap' => ['log',],
     'modules' => [
         'account' => cookyii\modules\Account\crm\Module::className(),
         'client' => cookyii\modules\Client\crm\Module::className(),
@@ -47,9 +45,8 @@ return array_merge($config, [
         'formatter' => $params['component.formatter'],
         'view' => $params['component.view'],
         'log' => $params['component.log'],
-        'rollbar' => $params['component.rollbar'],
         'errorHandler' => [
-            'class' => rmrevin\yii\rollbar\web\ErrorHandler::className(),
+            'class' => yii\web\ErrorHandler::className(),
             'errorAction' => 'site/error'
         ],
     ],

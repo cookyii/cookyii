@@ -55,14 +55,6 @@ return [
             'encryption' => SMTP_ENC,
         ],
     ],
-    'component.rollbar' => [
-        'class' => rmrevin\yii\rollbar\Component::className(),
-        'accessToken' => defined('ROLLBAR_ACCESS_TOKEN') ? ROLLBAR_ACCESS_TOKEN : null,
-        'enabled' => defined('ROLLBAR_ACCESS_TOKEN'),
-        'useLogger' => YII_DEBUG,
-        'environment' => YII_ENV,
-        'reportSuppressed' => true,
-    ],
     'component.session' => [
         'class' => yii\web\DbSession::className(),
         'cookieParams' => [

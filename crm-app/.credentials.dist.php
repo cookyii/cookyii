@@ -5,11 +5,6 @@
  * @link https://rmrevin.com
  */
 
-// Rollbar
-// https://rollbar.com/
-// --------------------
-define('ROLLBAR_ACCESS_TOKEN', null);
-
 // Facebook
 // https://developers.facebook.com/apps
 // ------------------------------------

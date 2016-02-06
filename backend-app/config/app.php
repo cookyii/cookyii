@@ -18,9 +18,7 @@ return array_merge($config, [
     'id' => 'backend-app',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => [
-        'log', 'rollbar',
-    ],
+    'bootstrap' => ['log'],
     'modules' => [
         'feed' => cookyii\modules\Feed\backend\Module::className(),
         'page' => cookyii\modules\Page\backend\Module::className(),
@@ -51,9 +49,8 @@ return array_merge($config, [
         'formatter' => $params['component.formatter'],
         'view' => $params['component.view'],
         'log' => $params['component.log'],
-        'rollbar' => $params['component.rollbar'],
         'errorHandler' => [
-            'class' => rmrevin\yii\rollbar\web\ErrorHandler::className(),
+            'class' => yii\web\ErrorHandler::className(),
             'errorAction' => 'site/error',
         ],
     ],

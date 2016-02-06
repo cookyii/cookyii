@@ -30,6 +30,4 @@ if (!isset($config['modules']['debug'])) {
     ];
 }
 
-$config['components']['rollbar']['enabled'] = false;
-
 return $config;
