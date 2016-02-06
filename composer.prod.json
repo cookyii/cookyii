@@ -33,6 +33,7 @@
     "yiisoft/yii2-imagine": "2.0.*",
     "yiisoft/yii2-authclient": "2.0.*",
     "yiisoft/yii2-swiftmailer": "2.0.*",
+    "yiisoft/yii2-queue": "dev-master",
 
     "cookyii/base": "dev-master",
     "cookyii/module-feed": "dev-master",
