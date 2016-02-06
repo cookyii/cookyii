@@ -24,7 +24,7 @@ class SendMailJob extends \cookyii\queue\ActiveJob
         $id = $this->postmanMessageId;
 
         if (empty($id)) {
-            throw new \yii\base\ErrorException('Не определён id сообщения');
+            throw new \yii\base\ErrorException(\Yii::t('app.postman', 'Unable to determine the id of the message'));
         }
 
         $Message = PostmanMessage::find()
@@ -32,7 +32,7 @@ class SendMailJob extends \cookyii\queue\ActiveJob
             ->one();
 
         if (empty($Message)) {
-            throw new \yii\base\ErrorException('Не удалось найти запись сообщения');
+            throw new \yii\base\ErrorException(\Yii::t('app.postman', 'Failed to find message'));
         }
 
         return $Message->send();
