@@ -366,11 +366,10 @@ class PostmanMessage extends \yii\db\ActiveRecord
      * @param string $template_code
      * @param array $placeholders
      * @param string|null $subject
-     * @param string $styles
      * @return \cookyii\modules\Postman\resources\PostmanMessage
      * @throws \yii\web\ServerErrorHttpException
      */
-    public static function create($template_code, $placeholders = [], $subject = null, $styles = '')
+    public static function create($template_code, $placeholders = [], $subject = null)
     {
         /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
         $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
@@ -387,9 +386,14 @@ class PostmanMessage extends \yii\db\ActiveRecord
             ? $Template->subject
             : $subject;
 
-        $styles = trim($Template->styles . PHP_EOL . $styles);
-
-        $Message = static::compose($subject, $Template->content_text, $Template->content_html, $placeholders, $styles, $Template->use_layout);
+        $Message = static::compose(
+            $subject,
+            $Template->content_text,
+            $Template->content_html,
+            $placeholders,
+            $Template->styles,
+            $Template->use_layout
+        );
 
         $Message->address = $Template->address;
 
@@ -408,25 +412,13 @@ class PostmanMessage extends \yii\db\ActiveRecord
      */
     public static function compose($subject, $content_text, $content_html, $placeholders = [], $styles = '', $use_layout = true)
     {
-        $layout_text = '{content}';
-        $layout_html = '{content}';
-
-        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
-
-        if ($use_layout) {
-            $LayoutTemplate = $TemplateModel::find()
-                ->byCode(static::LAYOUT_CODE)
-                ->one();
-
-            if (!empty($LayoutTemplate)) {
-                $layout_text = $LayoutTemplate->content_text;
-                $layout_html = $LayoutTemplate->content_html;
-                $styles = $LayoutTemplate->styles . PHP_EOL . $styles;
-            }
+        if (!$use_layout) {
+            $layout_text = '{content}';
+            $layout_html = '{content}';
+        } else {
+            list($layout_text, $layout_html, $css) = static::getLayout();
+            $styles .= $css;
         }
-
-        $styles = trim($styles);
 
         $Postman = static::getPostman();
 
@@ -478,6 +470,34 @@ class PostmanMessage extends \yii\db\ActiveRecord
         }
 
         return $Message;
+    }
+
+    /**
+     * @return array
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function getLayout()
+    {
+        $result = [
+            'text' => '{content}',
+            'html' => '{content}',
+            'css' => null,
+        ];
+
+        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
+        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
+
+        $LayoutTemplate = $TemplateModel::find()
+            ->byCode(static::LAYOUT_CODE)
+            ->one();
+
+        if (!empty($LayoutTemplate)) {
+            $result['text'] = $LayoutTemplate->content_text;
+            $result['html'] = $LayoutTemplate->content_html;
+            $result['css'] = $LayoutTemplate->styles;
+        }
+
+        return [$result['text'], $result['html'], $result['css']];
     }
 
     /**

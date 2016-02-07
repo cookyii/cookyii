@@ -21,17 +21,16 @@ class AccountNotification extends \cookyii\helpers\AbstractNotificator
      * @param string $template_code
      * @param array $placeholders
      * @param null $subject
-     * @param string $styles
      * @return \cookyii\modules\Postman\resources\PostmanMessage
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\web\ServerErrorHttpException
      */
-    protected function createMessage($template_code, $placeholders = [], $subject = null, $styles = '')
+    protected function createMessage($template_code, $placeholders = [], $subject = null)
     {
         /** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
         $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
 
-        $Message = $MessageModel::create($template_code, $placeholders, $subject, $styles);
+        $Message = $MessageModel::create($template_code, $placeholders, $subject);
 
         unset($MessageModel);
 
