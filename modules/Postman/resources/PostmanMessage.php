@@ -41,6 +41,9 @@ class PostmanMessage extends \yii\db\ActiveRecord
     /** @var string ID of postman component */
     public static $postman = 'postman';
 
+    /** @var string ID of view component */
+    public static $view = 'view';
+
     /** @var string ID of url manager component */
     public static $urlManager = 'urlManager';
 
@@ -545,7 +548,7 @@ class PostmanMessage extends \yii\db\ActiveRecord
     {
         $params['content'] = '{content}';
 
-        return View()->renderFile($viewFile, $params);
+        return \Yii::$app->get(static::$view)->renderFile($viewFile, $params);
     }
 
     /**
