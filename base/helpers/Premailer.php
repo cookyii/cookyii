@@ -55,7 +55,7 @@ class Premailer
 
         unlink($file);
 
-        if ($returnVar === 1) {
+        if ($returnVar > 0) {
             throw new \yii\base\ErrorException(sprintf('Premailer return bad result code - %d', $returnVar));
         }
 
@@ -82,7 +82,7 @@ class Premailer
 
         unlink($file);
 
-        if ($returnVar !== 0) {
+        if ($returnVar > 0) {
             throw new \yii\base\ErrorException(sprintf('Premailer return bad result code - %d', $returnVar));
         }
 
