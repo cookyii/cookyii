@@ -482,10 +482,11 @@ class PostmanMessage extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param string|boolean $layout
      * @return array
      * @throws \yii\base\InvalidConfigException
      */
-    public static function getLayout()
+    public static function getLayout($layout = false)
     {
         $result = [
             'text' => '{content}',
@@ -493,20 +494,58 @@ class PostmanMessage extends \yii\db\ActiveRecord
             'css' => null,
         ];
 
-        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
+        $Postman = static::getPostman();
 
-        $LayoutTemplate = $TemplateModel::find()
-            ->byCode(static::LAYOUT_CODE)
-            ->one();
+        $layout = empty($layout)
+            ? $Postman->defaultLayout
+            : $layout;
 
-        if (!empty($LayoutTemplate)) {
-            $result['text'] = $LayoutTemplate->content_text;
-            $result['html'] = $LayoutTemplate->content_html;
-            $result['css'] = $LayoutTemplate->styles;
+        $layoutVariants = $Postman->layoutVariants;
+
+        if (isset($layoutVariants[$layout])) {
+            $construct = $layoutVariants[$layout];
+
+            if (is_callable($construct)) {
+                $result = $construct();
+            } elseif (is_array($construct)) {
+                $result = [
+                    'text' => \Yii::getAlias($construct['text']),
+                    'html' => \Yii::getAlias($construct['html']),
+                    'css' => \Yii::getAlias($construct['css']),
+                ];
+            } else {
+                throw new \yii\base\InvalidConfigException;
+            }
+        } elseif ($layout === 'database') {
+            /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
+            $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
+
+            $LayoutTemplate = $TemplateModel::find()
+                ->byCode(static::LAYOUT_CODE)
+                ->one();
+
+            if (!empty($LayoutTemplate)) {
+                $result = [
+                    'text' => $LayoutTemplate->content_text,
+                    'html' => $LayoutTemplate->content_html,
+                    'css' => $LayoutTemplate->styles,
+                ];
+            }
         }
 
         return [$result['text'], $result['html'], $result['css']];
+    }
+
+    /**
+     * @param string $viewFile
+     * @param array $params
+     * @return string
+     */
+    public static function renderView($viewFile, $params = [])
+    {
+        $params['content'] = '{content}';
+
+        return View()->renderFile($viewFile, $params);
     }
 
     /**

@@ -31,4 +31,10 @@ class Module extends \yii\base\Module
 
     /** @var bool */
     public $usePremailer = false;
+
+    /** @var string */
+    public $defaultLayout = 'database';
+
+    /** @var array */
+    public $layoutVariants = [];
 }
