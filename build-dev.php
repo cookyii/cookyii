@@ -25,6 +25,10 @@ $buildConfig = [
         '.task' => 'cookyii\build\tasks\MapTask',
     ],
 
+    'e' => [
+        '.depends' => ['extract'],
+    ],
+
     'extract' => [
         '.description' => 'Extract codebase to split repos',
         '.depends' => [
