@@ -477,7 +477,6 @@ class PostmanMessage extends \yii\db\ActiveRecord
         }
 
         if ($Postman->usePremailer) {
-            $Message->content_text = Premailer::getConvertedText($Message->content_text);
             $Message->content_html = Premailer::getConvertedHtml($Message->content_html);
         }
 
