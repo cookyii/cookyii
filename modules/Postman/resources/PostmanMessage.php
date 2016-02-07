@@ -512,9 +512,9 @@ class PostmanMessage extends \yii\db\ActiveRecord
                 $result = $construct();
             } elseif (is_array($construct)) {
                 $result = [
-                    'text' => static::renderView(\Yii::getAlias($construct['text'])),
-                    'html' => static::renderView(\Yii::getAlias($construct['html'])),
-                    'css' => static::renderView(\Yii::getAlias($construct['css'])),
+                    'text' => empty($construct['text']) ? '{content}' : static::renderView(\Yii::getAlias($construct['text'])),
+                    'html' => empty($construct['html']) ? '{content}' : static::renderView(\Yii::getAlias($construct['html'])),
+                    'css' => empty($construct['css']) ? '' : static::renderView(\Yii::getAlias($construct['css'])),
                 ];
             } else {
                 throw new \yii\base\InvalidConfigException;
