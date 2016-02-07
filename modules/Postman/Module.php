@@ -28,4 +28,7 @@ class Module extends \yii\base\Module
 
     /** @var integer */
     public $resentOffset = '+5 min';
+
+    /** @var bool */
+    public $usePremailer = false;
 }

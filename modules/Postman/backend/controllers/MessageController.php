@@ -25,7 +25,6 @@ class MessageController extends Postman\backend\components\Controller
         return [
             [
                 'allow' => true,
-                'actions' => ['list', 'edit', 'preview'],
                 'roles' => [Postman\backend\Permissions::ACCESS],
             ],
         ];

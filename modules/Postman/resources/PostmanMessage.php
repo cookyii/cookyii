@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\resources;
 
+use cookyii\helpers\Premailer;
 use cookyii\modules\Postman\jobs\SendMailJob;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -470,6 +471,11 @@ class PostmanMessage extends \yii\db\ActiveRecord
             } else {
                 $Message->content_html = $styles . $Message->content_html;
             }
+        }
+
+        if ($Postman->usePremailer) {
+            $Message->content_text = Premailer::getConvertedText($Message->content_text);
+            $Message->content_html = Premailer::getConvertedHtml($Message->content_html);
         }
 
         return $Message;
