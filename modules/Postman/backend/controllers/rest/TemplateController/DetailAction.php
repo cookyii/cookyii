@@ -33,31 +33,37 @@ class DetailAction extends \cookyii\rest\Action
 
         $result['params'][] = [
             'key' => 'host',
-            'description' => 'Http host of current site',
+            'description' => \Yii::t('cookyii.postman', 'Http host of current site'),
+            'default' => true,
+        ];
+
+        $result['params'][] = [
+            'key' => 'domain',
+            'description' => \Yii::t('cookyii.postman', 'Domain of current site'),
             'default' => true,
         ];
 
         $result['params'][] = [
             'key' => 'appname',
-            'description' => 'Current application name',
+            'description' => \Yii::t('cookyii.postman', 'Current application name'),
             'default' => true,
         ];
 
         $result['params'][] = [
             'key' => 'subject',
-            'description' => 'Subject of current letter',
+            'description' => \Yii::t('cookyii.postman', 'Subject of current letter'),
             'default' => true,
         ];
 
         $result['params'][] = [
             'key' => 'user_id',
-            'description' => 'ID of current user',
+            'description' => \Yii::t('cookyii.postman', 'ID of current user'),
             'default' => true,
         ];
 
         $result['params'][] = [
             'key' => 'username',
-            'description' => 'Name of current user',
+            'description' => \Yii::t('cookyii.postman', 'Name of current user'),
             'default' => true,
         ];
 

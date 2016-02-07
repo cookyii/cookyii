@@ -425,8 +425,11 @@ class PostmanMessage extends \yii\db\ActiveRecord
         $Message = new static;
         $Message->subject = trim(sprintf('%s %s %s', $Postman->subjectPrefix, $subject, $Postman->subjectSuffix));
 
+        $host = \Yii::$app->get(static::$urlManager)->hostInfo;
+
         $base_placeholders = [
-            '{host}' => \Yii::$app->get(static::$urlManager)->hostInfo,
+            '{host}' => $host,
+            '{domain}' => parse_url($host, PHP_URL_HOST),
             '{appname}' => APP_NAME,
             '{subject}' => $subject,
             '{user_id}' => null,

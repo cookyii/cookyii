@@ -74,6 +74,10 @@ class TemplateController extends Postman\backend\components\Controller
         /** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
         $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
 
+        if (\Yii::$app->has('urlManager.frontend')) {
+            $MessageModel::$urlManager = 'urlManager.frontend';
+        }
+
         switch ($type) {
             default:
             case 'text':
