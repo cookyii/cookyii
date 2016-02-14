@@ -10,13 +10,15 @@ class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%account_auth}}', [
-            'social_type' => Schema::TYPE_STRING,
-            'social_id' => Schema::TYPE_STRING,
-            'account_id' => Schema::TYPE_INTEGER,
-            'token' => Schema::TYPE_TEXT,
-            'PRIMARY KEY ([[social_type]], [[social_id]], [[account_id]])',
-            'FOREIGN KEY (account_id) REFERENCES {{%account}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
+            'social_type' => $this->string(),
+            'social_id' => $this->string(),
+            'account_id' => $this->integer(),
+            'token' => $this->text(),
         ]);
+
+        $this->addPrimaryKey('primary', '{{%account_auth}}', ['social_type', 'social_id', 'account_id']);
+
+        $this->addForeignKey('fkey_account_auth_account', '{{%account_auth}}', 'account_id', '{{%account}}', 'id', 'CASCADE', 'CASCADE');
 
         foreach (static::$providers as $provider) {
             $data = (new \yii\db\Query)
@@ -51,16 +53,23 @@ class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
             ->from('{{%account_auth}}')
             ->all();
 
+        $this->dropForeignKey('fkey_account_auth_account', '{{%account_auth}}');
+
         $this->dropTable('{{%account_auth}}');
 
         foreach (static::$providers as $provider) {
-            $this->createTable('{{%account_auth_' . $provider . '}}', [
+            $table = '{{%account_auth_' . $provider . '}}';
+
+            $this->createTable($table, [
                 'account_id' => Schema::TYPE_INTEGER,
                 'social_id' => Schema::TYPE_STRING,
                 'token' => Schema::TYPE_TEXT,
-                'PRIMARY KEY (`account_id`, `social_id`)',
                 'FOREIGN KEY (account_id) REFERENCES {{%account}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
             ]);
+
+            $this->addPrimaryKey('primary', $table, ['account_id', 'social_id']);
+
+            $this->addForeignKey(sprintf('fkey_account_auth_%s_account', $provider), $table, 'account_id', '{{%account}}', 'id', 'CASCADE', 'CASCADE');
 
             $values = [];
             if (!empty($data)) {

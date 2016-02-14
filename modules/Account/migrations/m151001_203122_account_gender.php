@@ -5,7 +5,7 @@ class m151001_203122_account_gender extends \cookyii\db\Migration
 
     public function up()
     {
-        $this->addColumn('{{%account}}', 'gender', 'TINYINT(2) NOT NULL DEFAULT 1 AFTER [[avatar]]');
+        $this->addColumn('{{%account}}', 'gender', $this->smallInteger(2)->notNull()->defaultValue(1) . $this->after('avatar'));
     }
 
     public function down()

@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\helpers\Json;
 
 class m150619_164200_postman_template extends \cookyii\db\Migration
@@ -9,37 +8,45 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%postman_template}}', [
-            'id' => Schema::TYPE_PK,
-            'code' => Schema::TYPE_STRING,
-            'subject' => Schema::TYPE_TEXT,
-            'content_text' => Schema::TYPE_TEXT,
-            'content_html' => Schema::TYPE_TEXT,
-            'styles' => Schema::TYPE_TEXT,
-            'description' => Schema::TYPE_TEXT,
-            'address' => Schema::TYPE_TEXT,
-            'params' => Schema::TYPE_TEXT,
-            'use_layout' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 1',
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
-            'deleted_at' => Schema::TYPE_INTEGER,
+            'id' => $this->primaryKey(),
+            'code' => $this->string(),
+            'subject' => $this->text(),
+            'content_text' => $this->text(),
+            'content_html' => $this->text(),
+            'styles' => $this->text(),
+            'description' => $this->text(),
+            'address' => $this->text(),
+            'params' => $this->text(),
+            'use_layout' => $this->boolean()->notNull()->defaultValue(1),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+            'deleted_at' => $this->integer(),
         ]);
 
-        $this->createIndex('idx_code', '{{%postman_template}}', ['code'], true);
+        $this->createIndex('idx_postman_t_code', '{{%postman_template}}', ['code'], true);
 
         $this->createTable('{{%postman_template_attach}}', [
-            'template_id' => Schema::TYPE_INTEGER,
-            'media_id' => Schema::TYPE_INTEGER,
-            'embed' => Schema::TYPE_BOOLEAN,
+            'template_id' => $this->integer(),
+            'media_id' => $this->integer(),
+            'embed' => $this->boolean(),
             'PRIMARY KEY (`template_id`, `media_id`)',
             'FOREIGN KEY (template_id) REFERENCES {{%postman_template}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
             'FOREIGN KEY (media_id) REFERENCES {{%media}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
         ]);
+
+        $this->addPrimaryKey('primary', '{{%postman_template_attach}}', ['template_id', 'media_id']);
+
+        $this->addForeignKey('fkey_postman_template_attach_template', '{{%postman_template_attach}}', 'template_id', '{{%postman_template}}', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fkey_postman_template_attach_media', '{{%postman_template_attach}}', 'media_id', '{{%media}}', 'id', 'CASCADE', 'CASCADE');
 
         $this->insertLayoutMessage();
     }
 
     public function down()
     {
+        $this->dropForeignKey('fkey_postman_template_attach_media', '{{%postman_template_attach}}');
+        $this->dropForeignKey('fkey_postman_template_attach_template', '{{%postman_template_attach}}');
+
         $this->dropTable('{{%postman_template_attach}}');
         $this->dropTable('{{%postman_template}}');
     }

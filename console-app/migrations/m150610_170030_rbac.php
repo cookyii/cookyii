@@ -1,7 +1,5 @@
 <?php
 
-use yii\db\Schema;
-
 class m150610_170030_rbac extends \cookyii\db\Migration
 {
 
@@ -15,6 +13,7 @@ class m150610_170030_rbac extends \cookyii\db\Migration
         if (!$authManager instanceof \yii\rbac\DbManager) {
             throw new \yii\base\InvalidConfigException('You should configure "authManager" component to use database before executing this migration.');
         }
+
         return $authManager;
     }
 
@@ -23,46 +22,52 @@ class m150610_170030_rbac extends \cookyii\db\Migration
         $authManager = $this->getAuthManager();
 
         $this->createTable($authManager->ruleTable, [
-            'name' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'data' => Schema::TYPE_TEXT,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
-            'PRIMARY KEY (name)',
+            'name' => $this->string(64)->notNull(),
+            'data' => $this->text(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         $this->createTable($authManager->itemTable, [
-            'name' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'type' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'description' => Schema::TYPE_TEXT,
-            'rule_name' => Schema::TYPE_STRING . '(64)',
-            'data' => Schema::TYPE_TEXT,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
-            'PRIMARY KEY (name)',
-            'FOREIGN KEY (rule_name) REFERENCES ' . $authManager->ruleTable . ' (name) ON DELETE SET NULL ON UPDATE CASCADE',
+            'name' => $this->string(64)->notNull(),
+            'type' => $this->integer()->notNull(),
+            'description' => $this->text(),
+            'rule_name' => $this->string(64),
+            'data' => $this->text(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
-        $this->createIndex('idx_type', $authManager->itemTable, 'type');
-
         $this->createTable($authManager->itemChildTable, [
-            'parent' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'child' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'PRIMARY KEY (parent, child)',
-            'FOREIGN KEY (parent) REFERENCES ' . $authManager->itemTable . ' (name) ON DELETE CASCADE ON UPDATE CASCADE',
-            'FOREIGN KEY (child) REFERENCES ' . $authManager->itemTable . ' (name) ON DELETE CASCADE ON UPDATE CASCADE',
+            'parent' => $this->string(64)->notNull(),
+            'child' => $this->string(64)->notNull(),
         ]);
 
         $this->createTable($authManager->assignmentTable, [
-            'item_name' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'user_id' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'created_at' => Schema::TYPE_INTEGER,
-            'PRIMARY KEY (item_name, user_id)'
+            'item_name' => $this->string(64)->notNull(),
+            'user_id' => $this->string(64)->notNull(),
+            'created_at' => $this->integer(),
         ]);
+
+        $this->addPrimaryKey('primary', $authManager->ruleTable, ['name']);
+        $this->addPrimaryKey('primary', $authManager->itemTable, ['name']);
+        $this->addPrimaryKey('primary', $authManager->itemChildTable, ['parent', 'child']);
+        $this->addPrimaryKey('primary', $authManager->assignmentTable, ['item_name', 'user_id']);
+
+        $this->createIndex('idx_rbac_item_type', $authManager->itemTable, 'type');
+
+        $this->addForeignKey('fkey_rbac_item_rule', $authManager->itemChildTable, 'rule_name', $authManager->ruleTable, 'name', 'SET NULL', 'CASCADE');
+        $this->addForeignKey('fkey_rbac_item_parent', $authManager->itemChildTable, 'parent', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fkey_rbac_item_child', $authManager->itemChildTable, 'child', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
     }
 
     public function down()
     {
         $authManager = $this->getAuthManager();
+
+        $this->dropForeignKey('fkey_rbac_item_child', $authManager->itemChildTable);
+        $this->dropForeignKey('fkey_rbac_item_parent', $authManager->itemChildTable);
+        $this->dropForeignKey('fkey_rbac_item_rule', $authManager->itemChildTable);
 
         $this->dropTable($authManager->assignmentTable);
         $this->dropTable($authManager->itemChildTable);

@@ -1,26 +1,24 @@
 <?php
 
-use yii\db\Schema;
-
 class m150610_170130_media extends \cookyii\db\Migration
 {
 
     public function up()
     {
         $this->createTable('{{%media}}', [
-            'id' => Schema::TYPE_PK,
-            'origin_name' => Schema::TYPE_STRING . ' NOT NULL',
-            'name' => Schema::TYPE_STRING . ' NOT NULL',
-            'mime' => Schema::TYPE_STRING . ' NOT NULL',
-            'size' => Schema::TYPE_BIGINT . ' NOT NULL DEFAULT 0',
-            'sha1' => Schema::TYPE_STRING . '(40) NOT NULL',
-            'created_by' => Schema::TYPE_INTEGER,
-            'updated_by' => Schema::TYPE_INTEGER,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
+            'id' => $this->primaryKey(),
+            'origin_name' => $this->string()->notNull(),
+            'name' => $this->string()->notNull(),
+            'mime' => $this->string()->notNull(),
+            'size' => $this->bigInteger()->unsigned()->notNull()->defaultValue(0),
+            'sha1' => $this->string(40)->notNull(),
+            'created_by' => $this->integer(),
+            'updated_by' => $this->integer(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
-        $this->createIndex('idx_sha', '{{%media}}', ['sha1']);
+        $this->createIndex('idx_media_sha', '{{%media}}', ['sha1']);
     }
 
     public function down()

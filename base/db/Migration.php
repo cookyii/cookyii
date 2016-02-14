@@ -7,12 +7,16 @@
 
 namespace cookyii\db;
 
+use yii\db\Schema;
+
 /**
  * Class Migration
  * @package cookyii\db
  */
 class Migration extends \yii\db\Migration
 {
+
+    use \cookyii\db\traits\MigrationCheckSupportTrait;
 
     /**
      * @inheritdoc
@@ -25,6 +29,45 @@ class Migration extends \yii\db\Migration
         }
 
         parent::createTable($table, $columns, $options);
+    }
+
+    /**
+     * @param string $column
+     * @return string|null
+     */
+    public function after($column)
+    {
+        $Schema = $this->getDb()->getSchema();
+
+        return $Schema instanceof \yii\db\mysql\Schema
+            ? sprintf(' AFTER [[%s]]', $column)
+            : null;
+    }
+
+    /**
+     * Creates a text column.
+     * @return \yii\db\ColumnSchemaBuilder the column instance which can be further customized.
+     */
+    public function mediumText()
+    {
+        $Schema = $this->getDb()->getSchema();
+
+        return $Schema instanceof \yii\db\mysql\Schema
+            ? $Schema->createColumnSchemaBuilder('MEDIUMTEXT')
+            : $Schema->createColumnSchemaBuilder(Schema::TYPE_TEXT);
+    }
+
+    /**
+     * Creates a text column.
+     * @return \yii\db\ColumnSchemaBuilder the column instance which can be further customized.
+     */
+    public function longText()
+    {
+        $Schema = $this->getDb()->getSchema();
+
+        return $Schema instanceof \yii\db\mysql\Schema
+            ? $Schema->createColumnSchemaBuilder('LONGTEXT')
+            : $Schema->createColumnSchemaBuilder(Schema::TYPE_TEXT);
     }
 
     /**

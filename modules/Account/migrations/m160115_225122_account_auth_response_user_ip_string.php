@@ -1,7 +1,5 @@
 <?php
 
-use yii\db\Schema;
-
 class m160115_225122_account_auth_response_user_ip_string extends \cookyii\db\Migration
 {
 
@@ -12,7 +10,7 @@ class m160115_225122_account_auth_response_user_ip_string extends \cookyii\db\Mi
             ->from('{{%account_auth_response}}')
             ->all();
 
-        $this->alterColumn('{{%account_auth_response}}', 'user_ip', Schema::TYPE_STRING);
+        $this->alterColumn('{{%account_auth_response}}', 'user_ip', $this->string());
 
         if (!empty($data)) {
             foreach ($data as $row) {
@@ -37,7 +35,7 @@ class m160115_225122_account_auth_response_user_ip_string extends \cookyii\db\Mi
             ['user_ip' => null]
         );
 
-        $this->alterColumn('{{%account_auth_response}}', 'user_ip', Schema::TYPE_INTEGER);
+        $this->alterColumn('{{%account_auth_response}}', 'user_ip', $this->integer());
 
         if (!empty($data)) {
             foreach ($data as $row) {

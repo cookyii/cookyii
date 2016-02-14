@@ -1,20 +1,18 @@
 <?php
 
-use yii\db\Schema;
-
 class m150715_120825_client extends \cookyii\db\Migration
 {
 
     public function up()
     {
         $this->createTable('{{%client}}', [
-            'id' => Schema::TYPE_PK,
-            'name' => Schema::TYPE_STRING,
-            'email' => Schema::TYPE_STRING,
-            'phone' => Schema::TYPE_STRING,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
-            'deleted_at' => Schema::TYPE_INTEGER,
+            'id' => $this->primaryKey(),
+            'name' => $this->string(),
+            'email' => $this->string(),
+            'phone' => $this->string(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+            'deleted_at' => $this->integer(),
         ]);
     }
 

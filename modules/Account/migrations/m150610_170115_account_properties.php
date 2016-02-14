@@ -1,28 +1,26 @@
 <?php
 
-use yii\db\Schema;
-
 class m150610_170115_account_properties extends \cookyii\db\Migration
 {
 
     public function up()
     {
-        $this->createTable(
-            '{{%account_property}}',
-            [
-                'account_id' => Schema::TYPE_INTEGER,
-                'key' => Schema::TYPE_STRING . ' NOT NULL',
-                'value' => Schema::TYPE_TEXT,
-                'created_at' => Schema::TYPE_INTEGER,
-                'updated_at' => Schema::TYPE_INTEGER,
-                'PRIMARY KEY (`account_id`, `key`)',
-                'FOREIGN KEY (account_id) REFERENCES {{%account}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
-            ]
-        );
+        $this->createTable('{{%account_property}}', [
+            'account_id' => $this->integer(),
+            'key' => $this->string()->notNull(),
+            'value' => $this->text(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
+            'PRIMARY KEY ([[account_id]], [[key]])',
+        ]);
+
+        $this->addForeignKey('fkey_account_property_account', '{{%account_property}}', 'account_id', '{{%account}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function down()
     {
+        $this->dropForeignKey('fkey_account_property_account', '{{%account_property}}');
+
         $this->dropTable('{{%account_property}}');
     }
 }
