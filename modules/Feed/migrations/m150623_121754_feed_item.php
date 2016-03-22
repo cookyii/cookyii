@@ -38,7 +38,7 @@ class m150623_121754_feed_item extends \cookyii\db\Migration
             'section_id' => $this->integer(),
         ]);
 
-        $this->addPrimaryKey('primary', '{{%feed_item_section}}', ['item_id', 'section_id']);
+        $this->addPrimaryKey('pk', '{{%feed_item_section}}', ['item_id', 'section_id']);
 
         $this->addForeignKey('fkey_feed_item_media', '{{%feed_item}}', 'picture_media_id', '{{%media}}', 'id', 'SET NULL', 'CASCADE');
         $this->addForeignKey('fkey_feed_item_section_item', '{{%feed_item_section}}', 'item_id', '{{%feed_item}}', 'id', 'CASCADE', 'CASCADE');

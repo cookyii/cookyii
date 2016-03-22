@@ -14,7 +14,7 @@ class m150715_120931_client_properties extends \cookyii\db\Migration
             'FOREIGN KEY (client_id) REFERENCES {{%client}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
         ]);
 
-        $this->addPrimaryKey('primary', '{{%client_property}}', ['client_id', 'key']);
+        $this->addPrimaryKey('pk', '{{%client_property}}', ['client_id', 'key']);
 
         $this->addForeignKey('fkey_client_property_client', '{{%client_property}}', 'client_id', '{{%client}}', 'id', 'CASCADE', 'CASCADE');
     }

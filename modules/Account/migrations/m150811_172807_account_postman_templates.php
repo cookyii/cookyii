@@ -23,7 +23,7 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 'account.frontend.forgot-password.new-password',
                 'account.frontend.forgot-password.request',
                 'account.frontend.sign-up',
-            ]
+            ],
         ]);
     }
 

@@ -34,7 +34,7 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
             'FOREIGN KEY (media_id) REFERENCES {{%media}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
         ]);
 
-        $this->addPrimaryKey('primary', '{{%postman_template_attach}}', ['template_id', 'media_id']);
+        $this->addPrimaryKey('pk', '{{%postman_template_attach}}', ['template_id', 'media_id']);
 
         $this->addForeignKey('fkey_postman_template_attach_template', '{{%postman_template_attach}}', 'template_id', '{{%postman_template}}', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fkey_postman_template_attach_media', '{{%postman_template_attach}}', 'media_id', '{{%media}}', 'id', 'CASCADE', 'CASCADE');

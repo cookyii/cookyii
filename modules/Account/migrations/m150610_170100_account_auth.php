@@ -26,7 +26,7 @@ class m150610_170100_account_auth extends \cookyii\db\Migration
                 'social_id' => $this->string(),
             ]);
 
-            $this->addPrimaryKey('primary', $table, ['account_id','social_id']);
+            $this->addPrimaryKey('pk', $table, ['account_id', 'social_id']);
 
             $this->addForeignKey(sprintf('fkey_account_auth_%s_account', $provider), $table, 'account_id', '{{%account}}', 'id', 'CASCADE', 'CASCADE');
         }
