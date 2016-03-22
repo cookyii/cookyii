@@ -16,7 +16,7 @@ class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
             'token' => $this->text(),
         ]);
 
-        $this->addPrimaryKey('primary', '{{%account_auth}}', ['social_type', 'social_id', 'account_id']);
+        $this->addPrimaryKey('pk', '{{%account_auth}}', ['social_type', 'social_id', 'account_id']);
 
         $this->addForeignKey('fkey_account_auth_account', '{{%account_auth}}', 'account_id', '{{%account}}', 'id', 'CASCADE', 'CASCADE');
 
@@ -64,10 +64,9 @@ class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
                 'account_id' => Schema::TYPE_INTEGER,
                 'social_id' => Schema::TYPE_STRING,
                 'token' => Schema::TYPE_TEXT,
-                'FOREIGN KEY (account_id) REFERENCES {{%account}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
             ]);
 
-            $this->addPrimaryKey('primary', $table, ['account_id', 'social_id']);
+            $this->addPrimaryKey('pk', $table, ['account_id', 'social_id']);
 
             $this->addForeignKey(sprintf('fkey_account_auth_%s_account', $provider), $table, 'account_id', '{{%account}}', 'id', 'CASCADE', 'CASCADE');
 

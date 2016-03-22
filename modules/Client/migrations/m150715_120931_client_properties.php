@@ -11,7 +11,6 @@ class m150715_120931_client_properties extends \cookyii\db\Migration
             'value' => $this->text(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
-            'FOREIGN KEY (client_id) REFERENCES {{%client}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
         ]);
 
         $this->addPrimaryKey('pk', '{{%client_property}}', ['client_id', 'key']);

@@ -22,7 +22,6 @@ class m150623_121754_feed_item extends \cookyii\db\Migration
             'updated_at' => $this->integer(),
             'deleted_at' => $this->integer(),
             'activated_at' => $this->integer(),
-            'FOREIGN KEY (picture_media_id) REFERENCES {{%media}} (id) ON DELETE SET NULL ON UPDATE CASCADE',
         ]);
 
         $this->createIndex('idx_feed_i_slug', '{{%feed_item}}', ['slug'], true);

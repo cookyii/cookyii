@@ -22,8 +22,6 @@ class m150619_163157_postman_message extends \cookyii\db\Migration
             'message_id' => $this->integer(),
             'media_id' => $this->integer(),
             'embed' => $this->boolean(),
-            'FOREIGN KEY (message_id) REFERENCES {{%postman_message}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
-            'FOREIGN KEY (media_id) REFERENCES {{%media}} (id) ON DELETE CASCADE ON UPDATE CASCADE',
         ]);
 
         $this->addPrimaryKey('pk', '{{%postman_message_attach}}', ['message_id', 'media_id']);
