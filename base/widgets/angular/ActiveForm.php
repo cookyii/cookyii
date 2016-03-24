@@ -99,7 +99,9 @@ class ActiveForm extends \yii\widgets\ActiveForm
         $icon = empty($icon) ? null : static::submitIcon($icon);
         $label = trim(sprintf('%s %s', $icon, $label));
 
-        $options['ng-disabled'] = 'inProgress';
+        if (!isset($options['ng-disabled'])) {
+            $options['ng-disabled'] = 'inProgress';
+        }
 
         if (!isset($options['class'])) {
             $options['class'] = 'btn btn-success';
@@ -117,8 +119,13 @@ class ActiveForm extends \yii\widgets\ActiveForm
     {
         $label = empty($label) ? \Yii::t('cookyii', 'Cancel') : $label;
 
-        $options['ng-click'] = 'reset($event)';
-        $options['ng-disabled'] = 'inProgress';
+        if (!isset($options['ng-click'])) {
+            $options['ng-click'] = 'reset($event)';
+        }
+
+        if (!isset($options['ng-disabled'])) {
+            $options['ng-disabled'] = 'inProgress';
+        }
 
         if (!isset($options['class'])) {
             $options['class'] = 'btn btn-link';
