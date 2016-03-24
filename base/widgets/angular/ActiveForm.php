@@ -54,8 +54,13 @@ class ActiveForm extends \yii\widgets\ActiveForm
             $this->options['ng-controller'] = $this->controller;
         }
 
-        $this->options['name'] = $this->name;
-        $this->options['novalidate'] = true;
+        if (!isset($this->options['name'])) {
+            $this->options['name'] = $this->name;
+        }
+
+        if (!isset($this->options['novalidate'])) {
+            $this->options['novalidate'] = true;
+        }
 
         echo Html::beginForm($this->action, $this->method, $this->options);
     }
@@ -78,12 +83,30 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
     /**
      * @param string $icon
+     * @param array $iconOptions
+     * @param array $loaderOptions
      * @return string
      */
-    public static function submitIcon($icon)
+    public static function submitIcon($icon, $iconOptions = [], $loaderOptions = [])
     {
-        $result = (string)FA::icon('circle-o-notch', ['ng-show' => 'inProgress', 'class' => 'wo-animate'])->fixedWidth()->spin();
-        $result .= (string)FA::icon($icon, ['ng-hide' => 'inProgress', 'class' => 'wo-animate'])->fixedWidth();
+        if (!isset($iconOptions['ng-hide'])) {
+            $iconOptions['ng-hide'] = 'inProgress';
+        }
+
+        if (!isset($iconOptions['class'])) {
+            $iconOptions['class'] = 'wo-animate';
+        }
+
+        if (!isset($loaderOptions['ng-show'])) {
+            $loaderOptions['ng-show'] = 'inProgress';
+        }
+
+        if (!isset($loaderOptions['class'])) {
+            $loaderOptions['class'] = 'wo-animate';
+        }
+
+        $result = (string)FA::icon('circle-o-notch', $loaderOptions)->fixedWidth()->spin();
+        $result .= (string)FA::icon($icon, $iconOptions)->fixedWidth();
 
         return $result;
     }
