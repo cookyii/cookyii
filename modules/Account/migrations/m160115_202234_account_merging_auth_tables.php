@@ -1,7 +1,5 @@
 <?php
 
-use yii\db\Schema;
-
 class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
 {
 
@@ -61,9 +59,9 @@ class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
             $table = '{{%account_auth_' . $provider . '}}';
 
             $this->createTable($table, [
-                'account_id' => Schema::TYPE_INTEGER,
-                'social_id' => Schema::TYPE_STRING,
-                'token' => Schema::TYPE_TEXT,
+                'account_id' => $this->integer(),
+                'social_id' => $this->string(),
+                'token' => $this->text(),
             ]);
 
             $this->addPrimaryKey('pk', $table, ['account_id', 'social_id']);

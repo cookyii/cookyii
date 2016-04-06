@@ -89,20 +89,52 @@ class Config
     }
 
     /**
-     * Setting timezone from cookies or session
+     * Setting timezone from cookies, account or session
+     * @param mixed $force
+     * @throws \yii\base\InvalidConfigException
      */
-    public static function loadTimeZone()
+    public static function loadTimeZone($force = false)
     {
         $gmt = 0;
 
+        $cookie_gmt = 0;
+        $account_gmt = 0;
+        $session_gmt = 0;
+
         if (isset($_COOKIE['timezone'])) {
-            $gmt = (int)$_COOKIE['timezone'];
+            $gmt = $cookie_gmt = (int)$_COOKIE['timezone'];
+        }
+
+        if (!User()->isGuest) {
+            /** @var \resources\Account $Account */
+            $Account = User()->identity;
+
+            $gmt = $account_gmt = !empty($Account->timezone)
+                ? $Account->timezone
+                : $gmt;
         }
 
         $Session = \Yii::$app->get('session', false);
 
         if ($Session && $Session->has('timezone')) {
-            $gmt = (int)$Session->get('timezone', 0);
+            $gmt = $session_gmt = (int)$Session->get('timezone', 0);
+        }
+
+        if (is_integer($force)) {
+            $gmt = $force;
+        } elseif (is_string($force) && in_array($force, ['cookie', 'cookies', 'account', 'session'])) {
+            switch ($force) {
+                case 'cookie':
+                case 'cookies':
+                    $gmt = $cookie_gmt;
+                    break;
+                case 'account':
+                    $gmt = $account_gmt;
+                    break;
+                case 'session':
+                    $gmt = $session_gmt;
+                    break;
+            }
         }
 
         $gmt = $gmt < -14 || $gmt > 12 // GMT-14 && GMT+12

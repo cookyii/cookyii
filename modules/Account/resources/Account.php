@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
  * @property string $email
  * @property string $avatar
  * @property integer $gender
+ * @property integer $timezone
  * @property string $password_hash
  * @property string $token
  * @property string $auth_key
@@ -149,12 +150,11 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             /** type validators */
             [['name', 'avatar', 'password', 'password_hash'], 'string'],
-            [['gender', 'created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
+            [['gender', 'timezone', 'created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['email'], 'email'],
             [['email'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
-            [['email'], 'required'],
             [['name', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
             [['gender'], 'in', 'range' => [static::MALE, static::FEMALE]],
 
@@ -475,6 +475,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
                 /** @var static $Model */
                 $Model = $Event->sender;
                 $Model->password_hash = Security()->generatePasswordHash($this->password);
+                $Model->timezone = isset($_COOKIE['timezone']) && !empty($_COOKIE['timezone']) ? $_COOKIE['timezone'] : 0;
                 $Model->auth_key = Security()->generateRandomString();
                 $Model->token = Security()->generateRandomString();
             }
