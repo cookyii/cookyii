@@ -26,6 +26,7 @@ class m150610_170030_rbac extends \cookyii\db\Migration
             'data' => $this->text(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
+            'PRIMARY KEY ([[name]])',
         ]);
 
         $this->createTable($authManager->itemTable, [
@@ -36,41 +37,43 @@ class m150610_170030_rbac extends \cookyii\db\Migration
             'data' => $this->text(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
+            'PRIMARY KEY ([[name]])',
         ]);
+
+        $this->createIndex('idx_rbac_item_type', $authManager->itemTable, 'type');
+
+        $this->addForeignKey('fkey_rbac_item_rule', $authManager->itemTable, 'rule_name', $authManager->ruleTable, 'name', 'SET NULL', 'CASCADE');
 
         $this->createTable($authManager->itemChildTable, [
             'parent' => $this->string(64)->notNull(),
             'child' => $this->string(64)->notNull(),
+            'PRIMARY KEY ([[parent]], [[child]])',
         ]);
+
+        $this->addForeignKey('fkey_rbac_item_parent', $authManager->itemChildTable, 'parent', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fkey_rbac_item_child', $authManager->itemChildTable, 'child', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
 
         $this->createTable($authManager->assignmentTable, [
             'item_name' => $this->string(64)->notNull(),
             'user_id' => $this->string(64)->notNull(),
             'created_at' => $this->integer(),
+            'PRIMARY KEY ([[item_name]], [[user_id]])',
         ]);
-
-        $this->addPrimaryKey('primary', $authManager->ruleTable, ['name']);
-        $this->addPrimaryKey('primary', $authManager->itemTable, ['name']);
-        $this->addPrimaryKey('primary', $authManager->itemChildTable, ['parent', 'child']);
-        $this->addPrimaryKey('primary', $authManager->assignmentTable, ['item_name', 'user_id']);
-
-        $this->createIndex('idx_rbac_item_type', $authManager->itemTable, 'type');
-
-        $this->addForeignKey('fkey_rbac_item_rule', $authManager->itemChildTable, 'rule_name', $authManager->ruleTable, 'name', 'SET NULL', 'CASCADE');
-        $this->addForeignKey('fkey_rbac_item_parent', $authManager->itemChildTable, 'parent', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fkey_rbac_item_child', $authManager->itemChildTable, 'child', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
     }
 
     public function down()
     {
         $authManager = $this->getAuthManager();
 
+        $this->dropTable($authManager->assignmentTable);
+
         $this->dropForeignKey('fkey_rbac_item_child', $authManager->itemChildTable);
         $this->dropForeignKey('fkey_rbac_item_parent', $authManager->itemChildTable);
-        $this->dropForeignKey('fkey_rbac_item_rule', $authManager->itemChildTable);
 
-        $this->dropTable($authManager->assignmentTable);
         $this->dropTable($authManager->itemChildTable);
+
+        $this->dropForeignKey('fkey_rbac_item_rule', $authManager->itemTable);
+
         $this->dropTable($authManager->itemTable);
         $this->dropTable($authManager->ruleTable);
     }
