@@ -62,7 +62,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
             $this->options['novalidate'] = true;
         }
 
-        echo Html::beginForm($this->action, $this->method, $this->options);
+        parent::init();
     }
 
     /**
