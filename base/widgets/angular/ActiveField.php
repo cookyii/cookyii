@@ -507,7 +507,7 @@ class ActiveField extends \yii\widgets\ActiveField
                     'value' => $value,
                     'label' => Html::tag('span', $label),
                     'ng-icheck' => true,
-                    'ng-model' => sprintf('data.%s["%s"]', $this->attribute, $value),
+                    'ng-model' => ArrayHelper::remove($item_options, 'ng-model', sprintf('data.%s["%s"]', $this->attribute, $value)),
                 ];
 
                 if (isset($item_options[$value])) {
@@ -540,7 +540,7 @@ class ActiveField extends \yii\widgets\ActiveField
                     'value' => $value,
                     'label' => Html::tag('span', $label),
                     'ng-icheck' => true,
-                    'ng-model' => sprintf('data.%s', $this->attribute),
+                    'ng-model' => ArrayHelper::remove($item_options, 'ng-model', sprintf('data.%s', $this->attribute)),
                 ];
 
                 if (isset($item_options[$value])) {
