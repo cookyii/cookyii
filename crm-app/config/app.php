@@ -46,7 +46,7 @@ return array_merge($config, [
         'view' => $params['component.view'],
         'log' => $params['component.log'],
         'errorHandler' => [
-            'class' => yii\web\ErrorHandler::className(),
+            'class' => cookyii\web\ErrorHandler::className(),
             'errorAction' => 'site/error'
         ],
     ],
