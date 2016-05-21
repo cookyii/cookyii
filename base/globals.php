@@ -198,7 +198,11 @@ function str_clean($str)
  */
 function str_pretty($str)
 {
-    return trim(preg_replace('/(\r?\n){2,}/', "\n\n", $str));
+    $str = trim($str);
+    $str = preg_replace('/(\r?\n){2,}/', "\n\n", $str);
+    $str = preg_replace('/(\s){2,}/', ' ', $str);
+
+    return trim($str);
 }
 
 /**
