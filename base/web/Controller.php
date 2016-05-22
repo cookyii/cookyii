@@ -26,6 +26,10 @@ abstract class Controller extends \yii\web\Controller
             Cache('authManager')->flush();
             Cache('schema')->flush();
             Cache('query')->flush();
+
+            if (function_exists('opcache_reset')) {
+                opcache_reset();
+            }
         }
     }
 
