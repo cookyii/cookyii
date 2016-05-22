@@ -30,7 +30,6 @@
     "bower-asset/punycode": "*",
     "bower-asset/yii2-pjax": "*",
     "bower-asset/bootstrap": "*",
-    "bower-asset/fontawesome": "*",
 
     "cookyii/base": "self.version",
     "cookyii/module-feed": "self.version",
