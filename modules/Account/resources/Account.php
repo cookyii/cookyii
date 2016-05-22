@@ -56,7 +56,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         parent::init();
 
-        $this->events();
+        $this->registerEventHandlers();
     }
 
     /**
@@ -465,16 +465,16 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
-     * Events
+     * Register event handlers
      */
-    private function events()
+    private function registerEventHandlers()
     {
         $this->on(
             static::EVENT_BEFORE_INSERT,
             function (\yii\base\ModelEvent $Event) {
                 /** @var static $Model */
                 $Model = $Event->sender;
-                $Model->password_hash = Security()->generatePasswordHash($this->password);
+                $Model->password_hash = empty($this->password) ? null : Security()->generatePasswordHash($this->password);
                 $Model->timezone = isset($_COOKIE['timezone']) && !empty($_COOKIE['timezone']) ? $_COOKIE['timezone'] : 0;
                 $Model->auth_key = Security()->generateRandomString();
                 $Model->token = Security()->generateRandomString();
