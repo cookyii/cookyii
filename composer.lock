@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "229a8e7f224ca52043ec61795f6b1673",
-    "content-hash": "eb2122ab74d06fb86361eeba21e0f241",
+    "hash": "89220ba90660bdf7eb175e2fb6a1eb2b",
+    "content-hash": "b3849fd7c92435b55b34413a59e98241",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -260,20 +260,19 @@
         },
         {
             "name": "rmrevin/yii2-fontawesome",
-            "version": "2.14.0",
+            "version": "2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-                "reference": "baac28412963974940cbfb6b83940b3aa179b0ee"
+                "reference": "277edae224e63d2a41e00eb043829eab4903fdd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/baac28412963974940cbfb6b83940b3aa179b0ee",
-                "reference": "baac28412963974940cbfb6b83940b3aa179b0ee",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/277edae224e63d2a41e00eb043829eab4903fdd5",
+                "reference": "277edae224e63d2a41e00eb043829eab4903fdd5",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/fontawesome": "4.6.*",
                 "php": ">=5.4.0",
                 "yiisoft/yii2": "2.0.*"
             },
@@ -308,7 +307,7 @@
                 "font",
                 "yii"
             ],
-            "time": "2016-04-21 11:55:25"
+            "time": "2016-05-22 20:07:51"
         },
         {
             "name": "rmrevin/yii2-imperavi-bundle",
@@ -357,17 +356,70 @@
             "time": "2015-06-18 17:43:46"
         },
         {
-            "name": "rmrevin/yii2-minify-view",
-            "version": "1.9.4",
+            "name": "rmrevin/yii2-ionicon",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rmrevin/yii2-minify-view.git",
-                "reference": "480b8def806e5bff2b579177f307da9df08dc20c"
+                "url": "https://github.com/rmrevin/yii2-ionicon.git",
+                "reference": "eb1296d5db4a766faf4d14e1235c1d84d48e68e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/480b8def806e5bff2b579177f307da9df08dc20c",
-                "reference": "480b8def806e5bff2b579177f307da9df08dc20c",
+                "url": "https://api.github.com/repos/rmrevin/yii2-ionicon/zipball/eb1296d5db4a766faf4d14e1235c1d84d48e68e8",
+                "reference": "eb1296d5db4a766faf4d14e1235c1d84d48e68e8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\ionicon\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Revin Roman",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
+                }
+            ],
+            "description": "Asset Bundle for Yii2 with Ionicon",
+            "keywords": [
+                "asset",
+                "bundle",
+                "font",
+                "icons",
+                "ionicon",
+                "social",
+                "yii"
+            ],
+            "time": "2016-05-22 20:07:18"
+        },
+        {
+            "name": "rmrevin/yii2-minify-view",
+            "version": "1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-minify-view.git",
+                "reference": "2fd39c2220455d4432c3c7379e135da72474cddb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/2fd39c2220455d4432c3c7379e135da72474cddb",
+                "reference": "2fd39c2220455d4432c3c7379e135da72474cddb",
                 "shasum": ""
             },
             "require": {
@@ -399,7 +451,7 @@
                 "view",
                 "yii2"
             ],
-            "time": "2016-02-23 19:31:58"
+            "time": "2016-05-22 20:13:33"
         },
         {
             "name": "rmrevin/yii2-power-migration",
