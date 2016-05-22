@@ -27,5 +27,6 @@ class AppAsset extends \yii\web\AssetBundle
 
     public $depends = [
         'cookyii\assets\CommonAssetBundle',
+        'cookyii\assets\jquery\ICheckAssetBundle',
     ];
 }
