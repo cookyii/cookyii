@@ -20,7 +20,7 @@ Feed\backend\assets\EditItemAssetBundle::register($this);
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'ItemDetailController',
+    'ng-controller' => 'feed.item.DetailController',
 ]) ?>>
 
     <div class="row" ng-show="updatedWarning">

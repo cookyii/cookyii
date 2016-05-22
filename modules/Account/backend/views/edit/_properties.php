@@ -12,7 +12,7 @@ use yii\helpers\Html;
 
 ?>
 
-<div class="box properties" ng-controller="AccountPropertiesController">
+<div class="box properties" ng-controller="account.edit.PropertiesController">
     <div class="box-header">
         <h3 class="box-title" style="padding-bottom: 0;">
             <?= Yii::t('cookyii.account', 'Properties') ?>

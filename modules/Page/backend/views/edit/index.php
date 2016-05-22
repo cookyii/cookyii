@@ -20,7 +20,7 @@ Page\backend\assets\EditAssetBundle::register($this);
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'PageDetailController',
+    'ng-controller' => 'page.DetailController',
 ]) ?>>
 
     <div class="row" ng-show="updatedWarning">

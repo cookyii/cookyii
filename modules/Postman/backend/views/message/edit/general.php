@@ -17,7 +17,7 @@ use yii\helpers\Json;
 /** @var ActiveForm $form */
 $form = ActiveForm::begin([
     'model' => $MessageEditForm,
-    'controller' => 'MessageEditController',
+    'controller' => 'postman.message.EditController',
 ]);
 
 ?>

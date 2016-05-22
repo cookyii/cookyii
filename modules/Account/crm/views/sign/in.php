@@ -20,7 +20,7 @@ Account\crm\assets\SignInAssetBundle::register($this);
 
 ?>
 
-<div class="login-box" ng-controller="SignInController">
+<div class="login-box" ng-controller="Account.SignInController">
     <div class="login-logo">
         <strong>COOKYII</strong>CRM
     </div>

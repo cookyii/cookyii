@@ -22,10 +22,10 @@ class EditAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 
     public $js = [
         'ClientResource.js',
-        'ClientDetailController.js',
-        'ClientPropertiesController.js',
-        'ClientEditController.js',
-        'ClientEditController/ClientAccountScope.js',
+        'DetailController.js',
+        'EditController.js',
+        'EditController/AccountScope.js',
+        'EditController/PropertiesController.js',
     ];
 
     public $depends = [

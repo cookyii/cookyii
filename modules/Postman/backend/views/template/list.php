@@ -35,7 +35,7 @@ function sortLink($type, $label)
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'TemplateListController',
+    'ng-controller' => 'postman.template.ListController',
 ]) ?>>
     <div class="row">
         <div class="col-xs-3 com-sm-3 col-md-3 col-lg-2">

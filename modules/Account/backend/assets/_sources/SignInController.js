@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .controller('SignInController', [
+  .controller('account.SignInController', [
     '$scope', '$http', 'ToastrScope',
     function ($scope, $http, ToastrScope) {
       var _config = {},

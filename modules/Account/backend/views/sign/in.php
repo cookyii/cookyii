@@ -20,7 +20,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
 
 ?>
 
-<div class="login-box" ng-controller="SignInController">
+<div class="login-box" ng-controller="account.SignInController">
     <div class="login-logo">
         <strong>COOKYII</strong>BACKEND
     </div>

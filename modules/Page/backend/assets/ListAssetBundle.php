@@ -22,9 +22,9 @@ class ListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 
     public $js = [
         'PageResource.js',
-        'PageListController.js',
-        'PageListController/FilterScope.js',
-        'PageListController/PageListScope.js',
+        'ListController.js',
+        'ListController/FilterScope.js',
+        'ListController/ListScope.js',
     ];
 
     public $depends = [

@@ -22,9 +22,9 @@ class MessageListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 
     public $js = [
         'MessageResource.js',
-        'MessageListController.js',
-        'MessageListController/FilterScope.js',
-        'MessageListController/MessageListScope.js',
+        'message/ListController.js',
+        'message/ListController/FilterScope.js',
+        'message/ListController/ListScope.js',
     ];
 
     public $depends = [

@@ -2,8 +2,8 @@
 
 angular.module('BackendApp')
 
-  .factory('FilterScope', [
-    'QueryScope', 'FilterSearchScope', 'FilterSectionScope',
+  .factory('feed.list.FilterScope', [
+    'QueryScope', 'FilterSearchScope', 'feed.list.FilterSectionScope',
     function (QueryScope, FilterSearchScope, FilterSectionScope) {
       return function ($parentScope) {
 

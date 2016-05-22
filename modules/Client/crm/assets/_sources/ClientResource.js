@@ -2,7 +2,7 @@
 
 angular.module('CrmApp')
 
-  .factory('ClientResource', ['$resource',
+  .factory('client.ClientResource', ['$resource',
     function ($resource) {
       return $resource('/client/rest/clients/:action:id', {
         action: '',

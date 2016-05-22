@@ -24,8 +24,8 @@ class EditItemAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
         'SectionDropdownScope.js',
         'SectionResource.js',
         'ItemResource.js',
-        'ItemDetailController.js',
-        'ItemEditController.js',
+        'item/DetailController.js',
+        'item/EditController.js',
     ];
 
     public $depends = [

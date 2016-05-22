@@ -20,7 +20,7 @@ Client\crm\assets\EditAssetBundle::register($this);
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'ClientDetailController',
+    'ng-controller' => 'client.DetailController',
 ]) ?>>
 
     <div class="row" ng-show="clientUpdatedWarning">

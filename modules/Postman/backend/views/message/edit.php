@@ -20,7 +20,7 @@ Postman\backend\assets\MessageEditAssetBundle::register($this);
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'MessageDetailController',
+    'ng-controller' => 'postman.message.DetailController',
 ]) ?>>
 
     <div class="row" ng-show="messageUpdatedWarning">

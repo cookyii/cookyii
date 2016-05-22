@@ -20,7 +20,7 @@ Account\backend\assets\EditAssetBundle::register($this);
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'AccountDetailController',
+    'ng-controller' => 'account.DetailController',
 ]) ?>>
 
     <div class="row" ng-show="accountUpdatedWarning">

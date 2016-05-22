@@ -2,7 +2,7 @@
 
 angular.module('FrontendApp')
 
-  .controller('ForgotPasswordController', [
+  .controller('Account.ForgotPasswordController', [
     '$scope', '$http', 'ToastrScope',
     function ($scope, $http, ToastrScope) {
       var _config = {},

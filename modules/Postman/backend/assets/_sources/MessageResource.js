@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('MessageResource', ['$resource',
+  .factory('postman.MessageResource', ['$resource',
     function ($resource) {
       return $resource('/postman/rest/messages/:action:id', {
         action: '',

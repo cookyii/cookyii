@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('PageResource', ['$resource',
+  .factory('page.PageResource', ['$resource',
     function ($resource) {
       return $resource('/page/rest/pages/:action:id', {
         action: '',

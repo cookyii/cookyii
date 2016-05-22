@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('TemplateResource', ['$resource',
+  .factory('postman.TemplateResource', ['$resource',
     function ($resource) {
       return $resource('/postman/rest/templates/:action:id', {
         action: '',

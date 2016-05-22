@@ -2,7 +2,7 @@
 
 angular.module('CrmApp')
 
-  .controller('SignInController', [
+  .controller('Account.SignInController', [
     '$scope', '$http', 'ToastrScope',
     function ($scope, $http, ToastrScope) {
       var _config = {},

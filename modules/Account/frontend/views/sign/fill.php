@@ -17,7 +17,7 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
 
 ?>
 
-<div class="box" ng-controller="FillAttributesController">
+<div class="box" ng-controller="Account.FillAttributesController">
     <div class="box-logo">
         <?= Yii::t('cookyii.account', 'To complete the registration you must specify your email') ?>
     </div>

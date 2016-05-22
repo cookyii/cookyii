@@ -2,8 +2,8 @@
 
 angular.module('BackendApp')
 
-  .factory('SectionDropdownScope', [
-    '$timeout', 'SectionResource',
+  .factory('feed.SectionDropdownScope', [
+    '$timeout', 'feed.SectionResource',
     function ($timeout, Section) {
       return function ($parentScope) {
 

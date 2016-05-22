@@ -2,9 +2,9 @@
 
 angular.module('BackendApp')
 
-  .factory('ItemListScope', [
-    '$timeout', 'QueryScope', 'SortScope', 'FilterScope', 'ToastrScope', 'ItemResource',
-    function ($timeout, QueryScope, SortScope, FilterScope, ToastrScope, Item) {
+  .factory('feed.list.ItemListScope', [
+    '$timeout', 'QueryScope', 'SortScope', 'ToastrScope', 'feed.list.FilterScope', 'feed.ItemResource',
+    function ($timeout, QueryScope, SortScope, ToastrScope, FilterScope, Item) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),

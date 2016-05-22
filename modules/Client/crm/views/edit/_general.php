@@ -16,7 +16,7 @@ use yii\helpers\Html;
 /** @var ActiveForm $form */
 $form = ActiveForm::begin([
     'model' => $ClientEditForm,
-    'controller' => 'ClientEditController',
+    'controller' => 'client.EditController',
 ]);
 
 ?>

@@ -17,7 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Back to index' => 'asd',
+    'Back to index' => '234234',
     'Dashboard' => '',
     'Error' => '',
     'Error {number}' => '',

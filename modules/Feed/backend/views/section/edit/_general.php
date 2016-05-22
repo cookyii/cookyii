@@ -15,7 +15,7 @@ use yii\helpers\Html;
 /** @var ActiveForm $ActiveForm */
 $ActiveForm = ActiveForm::begin([
     'model' => $SectionEditForm,
-    'controller' => 'SectionEditController',
+    'controller' => 'feed.section.EditController',
 ]);
 
 ?>

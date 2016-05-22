@@ -2,7 +2,7 @@
 
 angular.module('FrontendApp')
 
-  .controller('SignUpController', [
+  .controller('Account.SignUpController', [
     '$scope', '$http', 'ToastrScope',
     function ($scope, $http, ToastrScope) {
       var _config = {},

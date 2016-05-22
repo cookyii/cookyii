@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('AccountResource', ['$resource',
+  .factory('account.AccountResource', ['$resource',
     function ($resource) {
       return $resource('/account/rest/accounts/:action:id', {
         action: '',

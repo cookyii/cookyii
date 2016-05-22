@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('SectionResource', ['$resource',
+  .factory('feed.SectionResource', ['$resource',
     function ($resource) {
       return $resource('/feed/section/rest/sections/:action:id:slug', {
         action: '',

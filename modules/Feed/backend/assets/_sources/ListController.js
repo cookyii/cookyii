@@ -2,8 +2,8 @@
 
 angular.module('BackendApp')
 
-  .controller('ListController', [
-    '$scope', '$timeout', 'ItemListScope',
+  .controller('feed.ListController', [
+    '$scope', '$timeout', 'feed.list.ItemListScope',
     function ($scope, $timeout, ItemListScope) {
 
       $scope.items = ItemListScope($scope);

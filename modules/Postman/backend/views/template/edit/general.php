@@ -17,7 +17,7 @@ use yii\helpers\Json;
 /** @var ActiveForm $form */
 $form = ActiveForm::begin([
     'model' => $TemplateEditForm,
-    'controller' => 'TemplateEditController',
+    'controller' => 'postman.template.EditController',
 ]);
 
 /** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */

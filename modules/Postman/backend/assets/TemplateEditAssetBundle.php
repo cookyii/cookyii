@@ -22,8 +22,8 @@ class TemplateEditAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 
     public $js = [
         'TemplateResource.js',
-        'TemplateDetailController.js',
-        'TemplateEditController.js',
+        'template/DetailController.js',
+        'template/EditController.js',
     ];
 
     public $depends = [

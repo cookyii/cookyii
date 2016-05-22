@@ -19,7 +19,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
 
 ?>
 
-<div class="box" ng-controller="ForgotPasswordController">
+<div class="box" ng-controller="Account.ForgotPasswordController">
     <div class="box-logo">
         <?= Html::a(Html::tag('strong', APP_NAME), ['/']) ?>
     </div>

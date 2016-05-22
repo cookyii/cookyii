@@ -20,8 +20,8 @@ class ListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
     ];
 
     public $js = [
-        'TranslationListController/FilterScope.js',
-        'TranslationListController.js',
+        'ListController.js',
+        'ListController/FilterScope.js',
     ];
 
     public $depends = [

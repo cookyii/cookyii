@@ -22,9 +22,9 @@ class TemplateListAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 
     public $js = [
         'TemplateResource.js',
-        'TemplateListController.js',
-        'TemplateListController/FilterScope.js',
-        'TemplateListController/TemplateListScope.js',
+        'template/ListController.js',
+        'template/ListController/FilterScope.js',
+        'template/ListController/ListScope.js',
     ];
 
     public $depends = [

@@ -20,7 +20,7 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
 
 ?>
 
-<div class="box" ng-controller="SignUpController">
+<div class="box" ng-controller="Account.SignUpController">
     <div class="box-logo">
         <?= Html::a(Html::tag('strong', APP_NAME), ['/']) ?>
     </div>

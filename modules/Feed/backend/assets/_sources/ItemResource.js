@@ -2,7 +2,7 @@
 
 angular.module('BackendApp')
 
-  .factory('ItemResource', ['$resource',
+  .factory('feed.ItemResource', ['$resource',
     function ($resource) {
       return $resource('/feed/item/rest/items/:action:id', {
         action: '',

@@ -22,8 +22,8 @@ class MessageEditAssetBundle extends \cookyii\assets\AbstractModuleAssetBundle
 
     public $js = [
         'MessageResource.js',
-        'MessageDetailController.js',
-        'MessageEditController.js',
+        'message/DetailController.js',
+        'message/EditController.js',
     ];
 
     public $depends = [

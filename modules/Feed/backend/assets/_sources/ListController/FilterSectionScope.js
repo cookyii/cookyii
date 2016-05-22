@@ -2,8 +2,8 @@
 
 angular.module('BackendApp')
 
-  .factory('FilterSectionScope', [
-    '$timeout', 'ToastrScope', 'QueryScope', 'SectionResource',
+  .factory('feed.list.FilterSectionScope', [
+    '$timeout', 'ToastrScope', 'QueryScope', 'feed.SectionResource',
     function ($timeout, ToastrScope, QueryScope, Section) {
       return function ($parentScope) {
 
@@ -25,7 +25,7 @@ angular.module('BackendApp')
         };
 
         $scope.add = function () {
-          var parent = $scope.selected === null ? null : $scope.sections[$scope.selected].id;
+          var parent = $scope.selected === null ? null : $scope.list[$scope.selected].id;
 
           location.href = '/feed/section/edit#?parent=' + parent;
         };

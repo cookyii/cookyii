@@ -20,7 +20,7 @@ Postman\backend\assets\TemplateEditAssetBundle::register($this);
 
 <section <?= Html::renderTagAttributes([
     'class' => 'content',
-    'ng-controller' => 'TemplateDetailController',
+    'ng-controller' => 'postman.template.DetailController',
 ]) ?>>
 
     <div class="row" ng-show="templateUpdatedWarning">

@@ -2,7 +2,7 @@
 
 angular.module('FrontendApp')
 
-  .controller('FillAttributesController', [
+  .controller('Account.FillAttributesController', [
     '$scope', '$http', 'ToastrScope',
     function ($scope, $http, ToastrScope) {
       var _config = {},
