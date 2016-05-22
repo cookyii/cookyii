@@ -3,10 +3,10 @@
 angular.module('CrmApp')
 
   .controller('ClientPropertiesController', [
-    '$scope', '$window', '$location', '$http', '$timeout', 'ToastrScope', '$mdDialog',
-    function ($scope, $window, $location, $http, $timeout, ToastrScope, $mdDialog) {
+    '$scope', '$window', '$http', '$timeout', 'QueryScope', 'ToastrScope',
+    function ($scope, $window, $http, $timeout, QueryScope, ToastrScope) {
 
-      var query = $location.search(),
+      var query = QueryScope($scope),
         toastr = ToastrScope($scope);
 
       $scope.limit = 5;
@@ -16,11 +16,11 @@ angular.module('CrmApp')
       $scope.editedProperty = null;
 
       $scope.$on('clientDataReloaded', function (e, client) {
-        if (query.prop === '__new') {
+        if (query.get('prop') === '__new') {
           $scope.create();
         } else {
           angular.forEach(client.properties, function (item) {
-            if (item.key === query.prop) {
+            if (item.key === query.get('prop')) {
               $scope.edit(item);
             }
           });
@@ -35,14 +35,14 @@ angular.module('CrmApp')
         $scope.isNewProperty = false;
         $scope.editedProperty = null;
 
-        $location.search('prop', null);
+        query.set('prop', null);
       };
 
       $scope.create = function () {
         $scope.isNewProperty = true;
         $scope.editedProperty = {};
 
-        $location.search('prop', '__new');
+        query.set('prop', '__new');
       };
 
       $scope.edit = function (property) {
@@ -55,7 +55,7 @@ angular.module('CrmApp')
             .trigger('resize');
         }, 100);
 
-        $location.search('prop', $scope.editedProperty.key);
+        query.set('prop', $scope.editedProperty.key);
       };
 
       $scope.save = function (property, createNew) {
@@ -67,67 +67,66 @@ angular.module('CrmApp')
           method: 'POST',
           url: '/client/rest/property',
           data: {
-            key: query.prop,
+            key: query.get('prop'),
             client_id: $scope.$parent.getClientId(),
             property: $scope.editedProperty
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (error) {
+          .then(function (response) {
+            if (response.data.result === false) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (error) {
                   toastr.error(error);
                 });
               } else {
-                toastr.error(response.message);
+                toastr.error(response.data.message);
               }
             } else {
               if (!createNew) {
-                $location.search('prop', $scope.editedProperty.key);
+                query.set('prop', $scope.editedProperty.key);
               }
 
               $scope.$emit('reloadClientData');
 
-              toastr.success(response.message);
+              toastr.success(response.data.message);
             }
-          })
-          .error(function (response, status) {
-            toastr.error(response.message);
+          }, function (response) {
+            toastr.error(response.data.message);
           });
       };
 
       $scope.remove = function (property, e) {
-        var confirm = $mdDialog.confirm()
-          .parent(angular.element(document.body))
-          .title('Would you like to delete this property?')
-          .ok('Please do it!')
-          .cancel('Cancel')
-          .targetEvent(e);
-
-        $mdDialog.show(confirm).then(function () {
+        swal({
+          type: "warning",
+          title: "Would you like to delete this property?",
+          showCancelButton: true,
+          closeOnConfirm: true,
+          showLoaderOnConfirm: true,
+          confirmButtonText: "Please do it!",
+          cancelButtonText: "Cancel"
+        }, function () {
           $http({
             method: 'DELETE',
             url: '/client/rest/property',
             params: {
-              key: query.prop,
+              key: query.get('prop'),
               client_id: $scope.$parent.getClientId()
             }
           })
-            .success(function (response) {
-              if (response.result === false) {
-                toastr.error(response.message);
+            .then(function (response) {
+              if (response.data.result === false) {
+                toastr.error(response.data.message);
               } else {
                 $scope.$emit('reloadClientData');
 
-                $location.search('prop', null);
+                query.set('prop', null);
 
-                toastr.success(response.message);
+                toastr.success(response.data.message);
 
                 $scope.editedProperty = null;
               }
-            })
-            .error(function (response, status) {
-              toastr.error(response.message);
+            }, function (response) {
+              toastr.error(response.data.message);
             });
         });
       };

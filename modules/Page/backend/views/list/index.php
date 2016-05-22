@@ -169,15 +169,18 @@ function sortLink($type, $label)
                     ]) ?>
                 </div>
             </div>
+
+            <div class="box-actions pull-right">
+                <?php
+
+                echo Html::tag('button', FA::icon('plus')->fixedWidth() . Yii::t('cookyii.page', 'Create new page'), [
+                    'class' => 'btn btn-primary',
+                    'ng-click' => 'pages.add()',
+                    'aria-label' => 'Add page',
+                ]);
+
+                ?>
+            </div>
         </div>
     </div>
-
-    <?php
-    echo Html::tag('md-button', FA::icon('plus')->fixedWidth(), [
-        'class' => 'md-warn md-fab md-fab-bottom-right',
-        'title' => Yii::t('cookyii.page', 'Create new page'),
-        'ng-click' => 'pages.add()',
-        'aria-label' => 'Add page',
-    ]);
-    ?>
 </section>

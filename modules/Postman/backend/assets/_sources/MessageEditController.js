@@ -3,10 +3,10 @@
 angular.module('BackendApp')
 
   .controller('MessageEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastrScope',
-    function ($scope, $http, $location, $timeout, ToastrScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'TabScope', 'ToastrScope',
+    function ($scope, $http, $timeout, QueryScope, TabScope, ToastrScope) {
 
-      var query = $location.search(),
+      var query = QueryScope($scope),
         toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
@@ -18,23 +18,7 @@ angular.module('BackendApp')
         {id: 4, label: 'Bcc'}
       ];
 
-      var selectedTab = typeof query.tab === 'undefined'
-        ? 'content'
-        : query.tab;
-
-      $scope.tabs = {
-        content: selectedTab === 'content',
-        address: selectedTab === 'address',
-        preview: selectedTab === 'preview'
-      };
-
-      $scope.selectTab = function (tab) {
-        $location.search('tab', tab);
-
-        $timeout(function () {
-          jQuery(window).trigger('resize');
-        });
-      };
+      $scope.tab = TabScope($scope);
 
       $scope.addAddress = function () {
         $scope.$parent.data.address.push({
@@ -76,12 +60,12 @@ angular.module('BackendApp')
             MessageEditForm: $scope.data
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
+          .then(function (response) {
+            if (response.data.result === false) {
               MessageEditForm.$setDirty();
 
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (message, field) {
                   $scope.error[field] = message;
                 });
               } else {
@@ -91,17 +75,16 @@ angular.module('BackendApp')
               toastr.success('Message successfully saved');
 
               if ($scope.$parent.isNewMessage) {
-                $location.search('id', response.message_id);
+                query.set('id', response.data.message_id);
               }
 
               $scope.reload();
             }
-          })
-          .error(function (response) {
+          }, function (response) {
             MessageEditForm.$setDirty();
 
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
+            if (typeof response.data.data !== 'undefined') {
+              angular.forEach(response.data.data, function (val, index) {
                 $scope.error[val.field] = val.message;
               });
             } else {

@@ -7,7 +7,7 @@ angular.module('scopes')
     function (QueryScope) {
       return function ($parentScope) {
 
-        var $scope = $parentScope.$new(),
+        var $scope = $parentScope.$new(true),
           query = QueryScope($scope);
 
         $scope.order = query.get('sort', '-id');

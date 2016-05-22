@@ -8,12 +8,6 @@ angular.module('BackendApp')
 
       $scope.items = ItemListScope($scope);
 
-      $scope.fab = {
-        isOpen: false,
-        selectedMode: 'md-fling',
-        selectedDirection: 'left'
-      };
-
       function _refresh() {
         $scope.items.filter.section.reload();
         $scope.items.reload();

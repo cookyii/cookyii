@@ -41,18 +41,19 @@ angular.module('FrontendApp')
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         })
-          .success(function (response) {
-            if (true === response.result) {
-              location.href = response.redirect;
+          .then(function (response) {
+            if (true === response.data.result) {
+              location.href = response.data.redirect;
             } else {
-              if (typeof response.errors !== 'undefined') {
-                $scope.error = response.errors;
+              if (typeof response.data.errors !== 'undefined') {
+                $scope.error = response.data.errors;
               } else {
-                toastr.error(response.message);
+                toastr.error(response.data.message);
               }
             }
+          }, function (response) {
+            toastr.error(response.data.message);
           })
-          .error(defaultHttpErrorHandler)
           .finally(function () {
             $scope.in_progress = false;
           });

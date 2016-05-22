@@ -1,6 +1,6 @@
 <?php
 /**
- * build.php
+ * build-dev.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -8,10 +8,7 @@
 require __DIR__ . '/dev/build/ExtractTask.php';
 
 /** @var array $apps list of existing applications */
-$apps = ['frontend', 'backend', 'crm'];
-
-/** Automatic detection applications */
-automaticDetectionApplications($apps);
+$apps = json_decode(file_get_contents(__DIR__ . '/.apps.json'), true);
 
 /** @var array $config build configuration */
 $buildConfig = [
@@ -59,7 +56,7 @@ $buildConfig = [
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
             'cwd' => __DIR__ . '/base/assets/_sources',
-            'commandline' => cmd('{node}/gulp less'),
+            'commandline' => __DIR__ . '/node_modules/.bin/gulp css/optimize',
         ],
     ],
 ];
@@ -72,28 +69,6 @@ if (!empty($apps)) {
 }
 
 /**
- * @param string $app
- * @param string|null $key
- * @return array|string|null
- */
-function getPath($app, $key = null)
-{
-    $basePath = __DIR__;
-    $appPath = $basePath . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
-
-    $list = [
-        'base' => $basePath,
-        'app' => $appPath,
-        'assets' => $basePath . DIRECTORY_SEPARATOR . $app . '-assets',
-        'node' => $basePath . DIRECTORY_SEPARATOR . 'node_modules' . DIRECTORY_SEPARATOR . '.bin',
-    ];
-
-    return empty($key)
-        ? $list
-        : (isset($list[$key]) ? $list[$key] : null);
-}
-
-/**
  * @param array $buildConfig
  * @param string $task_name
  * @param string $app
@@ -102,7 +77,7 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
 {
     prepareEmptyTask($buildConfig, $task_name);
 
-    $path = getPath($app);
+    $appPath = __DIR__ . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
 
     $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $buildConfig[$task_name][$app] = [
@@ -111,9 +86,9 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
             'class' => 'cookyii\build\tasks\DeleteTask',
             'deleteDir' => false,
             'fileSets' => [
-                ['dir' => sprintf('%s/runtime', $path['app']), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/assets', $path['app']), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/minify', $path['app']), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/runtime', $appPath), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/assets', $appPath), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/minify', $appPath), 'exclude' => ['.gitignore']],
             ],
         ],
     ];
@@ -131,47 +106,6 @@ function prepareEmptyTask(array &$buildConfig, $task_name)
 
     if (!isset($buildConfig[$task_name]['.depends'])) {
         $buildConfig[$task_name]['.depends'] = [];
-    }
-}
-
-/**
- * @param string $command
- * @param string|null $app
- * @return string
- */
-function cmd($command, $app = null)
-{
-    $path = getPath($app);
-
-    $command = str_replace(
-        ['{a}'],
-        [$app],
-        $command
-    );
-
-    return str_replace(
-        array_map(function ($val) { return sprintf('{%s}', $val); }, array_keys($path)),
-        array_values($path),
-        $command
-    );
-}
-
-/**
- * @param array $apps
- */
-function automaticDetectionApplications(array &$apps)
-{
-    $handler = opendir(__DIR__);
-    if (is_resource($handler)) {
-        while (($file = readdir($handler)) !== false) {
-            if (preg_match('|^([a-zA-Z0-9\-]+)\-app$|i', $file, $m)) {
-                if (!in_array($m[1], $apps, true)) {
-                    $apps[] = $m[1];
-                }
-            }
-        }
-
-        closedir($handler);
     }
 }
 

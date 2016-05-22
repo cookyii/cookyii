@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .factory('MessageListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'MessageResource',
-    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Message) {
+    '$timeout', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'MessageResource',
+    function ($timeout, QueryScope, ToastrScope, SortScope, FilterScope, Message) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
@@ -51,14 +51,15 @@ angular.module('BackendApp')
         };
 
         $scope.resent = function (message, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to resent this message?')
-            .ok('Please resent it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to resent this message?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             message.$resent(function () {
               toastr.success('Message successfully resent');
 
@@ -72,14 +73,15 @@ angular.module('BackendApp')
         };
 
         $scope.remove = function (message, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to delete this message?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to delete this message?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             message.$remove(function () {
               toastr.success('Message successfully removed');
 

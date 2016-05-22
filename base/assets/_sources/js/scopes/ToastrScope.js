@@ -6,7 +6,8 @@ angular.module('scopes')
     'toastr',
     function (toastr) {
       return function ($parentScope) {
-        var $scope = $parentScope.$new();
+
+        var $scope = $parentScope.$new(true);
 
         $scope.error = function (text, title, options) {
           toastr.error(text, title, options);

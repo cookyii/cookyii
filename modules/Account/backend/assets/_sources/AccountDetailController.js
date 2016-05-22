@@ -3,18 +3,17 @@
 angular.module('BackendApp')
 
   .controller('AccountDetailController', [
-    '$scope', '$location', '$timeout', 'AccountResource',
-    function ($scope, $location, $timeout, Account) {
+    '$scope', '$timeout', 'QueryScope', 'AccountResource',
+    function ($scope, $timeout, QueryScope, Account) {
+
       var hash = null,
-        query = $location.search(),
+        query = QueryScope($scope),
         defaultValues = {gender: '1', roles: {user: true}};
 
       $scope.data = {};
 
       $scope.getAccountId = function () {
-        return typeof query.id === 'undefined'
-          ? null
-          : parseInt(query.id);
+        return query.get('id');
       };
 
       $scope.isNewAccount = $scope.getAccountId() === null;

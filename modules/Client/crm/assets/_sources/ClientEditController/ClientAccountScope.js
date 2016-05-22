@@ -3,22 +3,23 @@
 angular.module('CrmApp')
 
   .factory('ClientAccountScope', [
-    '$timeout', '$mdDialog', '$http', 'ToastrScope',
-    function ($timeout, $mdDialog, $http, ToastrScope) {
+    '$timeout', '$http', 'ToastrScope',
+    function ($timeout, $http, ToastrScope) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
           toastr = ToastrScope($scope);
 
         $scope.create = function (e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to create user account for this client?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to create user account for this client?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             $parentScope.error = {};
 
             $parentScope.inProgress = true;
@@ -31,24 +32,23 @@ angular.module('CrmApp')
                 client_id: $parentScope.$parent.getClientId()
               }
             })
-              .success(function (response) {
-                if (response.result === false) {
-                  if (typeof response.errors !== 'undefined') {
-                    angular.forEach(response.errors, function (message, field) {
+              .then(function (response) {
+                if (response.data.result === false) {
+                  if (typeof response.data.errors !== 'undefined') {
+                    angular.forEach(response.data.errors, function (message, field) {
                       $parentScope.error[field] = message;
                     });
                   } else {
 
-                    toastr.error(response.message);
+                    toastr.error(response.data.message);
                   }
                 } else {
-                  toastr.success(response.message);
+                  toastr.success(response.data.message);
 
                   $parentScope.reload();
                 }
-              })
-              .error(function (response) {
-                toastr.error(response.message.length > 0 ? response.message : response.name);
+              }, function (response) {
+                toastr.error(response.data.message.length > 0 ? response.data.message : response.data.name);
               })
               .finally(function () {
                 $parentScope.inProgress = false;
@@ -57,14 +57,15 @@ angular.module('CrmApp')
         };
 
         $scope.unlink = function (e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to unlink user account from this client?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to unlink user account from this client?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             $parentScope.error = {};
 
             $parentScope.inProgress = true;
@@ -77,23 +78,22 @@ angular.module('CrmApp')
                 client_id: $parentScope.$parent.getClientId()
               }
             })
-              .success(function (response) {
-                if (response.result === false) {
-                  if (typeof response.errors !== 'undefined') {
-                    angular.forEach(response.errors, function (message, field) {
+              .then(function (response) {
+                if (response.data.result === false) {
+                  if (typeof response.data.errors !== 'undefined') {
+                    angular.forEach(response.data.errors, function (message, field) {
                       $parentScope.error[field] = message;
                     });
                   } else {
-                    toastr.error(response.message);
+                    toastr.error(response.data.message);
                   }
                 } else {
-                  toastr.success(response.message);
+                  toastr.success(response.data.message);
 
                   $parentScope.reload();
                 }
-              })
-              .error(function (response) {
-                toastr.error(response.message.length > 0 ? response.message : response.name);
+              }, function (response) {
+                toastr.error(response.data.message.length > 0 ? response.data.message : response.data.name);
               })
               .finally(function () {
                 $parentScope.inProgress = false;

@@ -8,11 +8,12 @@
  * @var cookyii\modules\Feed\backend\forms\SectionEditForm $SectionEditForm
  */
 
+use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \cookyii\widgets\angular\ActiveForm $ActiveForm */
-$ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
+/** @var ActiveForm $ActiveForm */
+$ActiveForm = ActiveForm::begin([
     'model' => $SectionEditForm,
     'controller' => 'SectionEditController',
 ]);
@@ -35,32 +36,32 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
                     ?>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <tabset>
-                        <tab heading="Parent section" active="tabs.parent" select="selectTab('parent')">
+                    <uib-tabset active="tab.selected">
+                        <uib-tab heading="Parent section">
                             <?php
                             echo $this->render('_general_parent', [
                                 'ActiveForm' => $ActiveForm,
                                 'SectionEditForm' => $SectionEditForm,
                             ]);
                             ?>
-                        </tab>
-                        <tab heading="Publishing" active="tabs.publishing" select="selectTab('publishing')">
+                        </uib-tab>
+                        <uib-tab heading="Publishing">
                             <?php
                             echo $this->render('_general_publishing', [
                                 'ActiveForm' => $ActiveForm,
                                 'SectionEditForm' => $SectionEditForm,
                             ]);
                             ?>
-                        </tab>
-                        <tab heading="Meta" active="tabs.meta" select="selectTab('meta')">
+                        </uib-tab>
+                        <uib-tab heading="Meta">
                             <?php
                             echo $this->render('_general_meta', [
                                 'ActiveForm' => $ActiveForm,
                                 'SectionEditForm' => $SectionEditForm,
                             ]);
                             ?>
-                        </tab>
-                    </tabset>
+                        </uib-tab>
+                    </uib-tabset>
                 </div>
             </div>
         </div>
@@ -86,4 +87,4 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
 
 <?php
 
-\cookyii\widgets\angular\ActiveForm::end();
+ActiveForm::end();

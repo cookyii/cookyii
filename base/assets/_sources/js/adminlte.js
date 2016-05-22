@@ -7,7 +7,7 @@
  * @Author  Almsaeed Studio
  * @Support <http://www.almsaeedstudio.com>
  * @Email   <support@almsaeedstudio.com>
- * @version 2.3.2
+ * @version 2.3.3
  * @license MIT <http://opensource.org/licenses/MIT>
  */
 
@@ -388,7 +388,7 @@ function _init() {
   $.AdminLTE.tree = function (menu) {
     var _this = this;
     var animationSpeed = $.AdminLTE.options.animationSpeed;
-    $(menu).on('click', 'li a', function (e) {
+    $(document).on('click', menu + ' li a', function (e) {
       //Get the clicked link and the next element
       var $this = $(this);
       var checkElement = $this.next();
@@ -499,11 +499,16 @@ function _init() {
     _fix: function (sidebar) {
       var _this = this;
       if ($("body").hasClass('layout-boxed')) {
+        var $window = $(window);
         sidebar.css('position', 'absolute');
         sidebar.height($(".wrapper").height());
-        $(window).resize(function () {
-          _this._fix(sidebar);
-        });
+        if(typeof $window.data('resize-handler-set') === 'undefined') {
+          $window.on('resize', function () {
+            _this._fix(sidebar);
+          });
+
+          $window.data('resize-handler-set', true);
+        }
       } else {
         sidebar.css({
           'position': 'fixed',
@@ -691,12 +696,12 @@ function _init() {
     $.AdminLTE.boxWidget.activate(this);
   };
 
-  $.fn.toggleBox = function(){
+  $.fn.toggleBox = function () {
     var button = $($.AdminLTE.boxWidget.selectors.collapse, this);
     $.AdminLTE.boxWidget.collapse(button);
   };
 
-  $.fn.removeBox = function(){
+  $.fn.removeBox = function () {
     var button = $($.AdminLTE.boxWidget.selectors.remove, this);
     $.AdminLTE.boxWidget.remove(button);
   };

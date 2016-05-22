@@ -9,7 +9,9 @@
  */
 
 use cookyii\modules\Account;
+use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
+use yii\authclient\widgets\AuthChoice;
 use yii\helpers\Html;
 
 $this->title = \Yii::t('cookyii.account', 'Sign in');
@@ -25,8 +27,8 @@ Account\frontend\assets\SignInAssetBundle::register($this);
 
     <div class="box-body">
         <?php
-        /** @var \cookyii\widgets\angular\ActiveForm $form */
-        $form = \cookyii\widgets\angular\ActiveForm::begin([
+        /** @var ActiveForm $form */
+        $form = ActiveForm::begin([
             'model' => $SignInForm,
         ]);
 
@@ -65,9 +67,9 @@ Account\frontend\assets\SignInAssetBundle::register($this);
             </div>
         </div>
         <?php
-        \cookyii\widgets\angular\ActiveForm::end();
+        ActiveForm::end();
 
-        $authAuthChoice = \yii\authclient\widgets\AuthChoice::begin([
+        $authAuthChoice = AuthChoice::begin([
             'baseAuthUrl' => ['/account/sign/auth'],
             'popupMode' => false,
             'autoRender' => false,
@@ -107,7 +109,7 @@ Account\frontend\assets\SignInAssetBundle::register($this);
             </div>
             <?php
         }
-        \yii\authclient\widgets\AuthChoice::end();
+        AuthChoice::end();
 
         ?>
 

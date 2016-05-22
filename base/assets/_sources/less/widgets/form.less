@@ -1,3 +1,18 @@
+form {
+  .form-notify {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: none;
+    background-color: #FFD696;
+    padding: 10px 0;
+    text-align: center;
+    .btn { margin-left: 10px; }
+  }
+  &.ng-dirty {
+    .form-notify { display: block; }
+  }
+}
 .clear-search {
   position: absolute;
   top: 3px; right: 50px;

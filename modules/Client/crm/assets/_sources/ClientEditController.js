@@ -3,10 +3,11 @@
 angular.module('CrmApp')
 
   .controller('ClientEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastrScope', 'ClientAccountScope',
-    function ($scope, $http, $location, $timeout, ToastrScope, ClientAccountScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'ToastrScope', 'ClientAccountScope',
+    function ($scope, $http, $timeout, QueryScope, ToastrScope, ClientAccountScope) {
 
-      var toastr = ToastrScope($scope);
+      var query = QueryScope($scope),
+        toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
@@ -28,10 +29,10 @@ angular.module('CrmApp')
             ClientEditForm: $scope.data
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
+          .then(function (response) {
+            if (response.data.result === false) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (message, field) {
                   $scope.error[field] = message;
                 });
               } else {
@@ -41,15 +42,14 @@ angular.module('CrmApp')
               toastr.success('Client successfully saved');
 
               if ($scope.$parent.isNewClient) {
-                $location.search('id', response.client_id);
+                query.set('id', response.data.client_id);
               }
 
               $scope.reload();
             }
-          })
-          .error(function (response) {
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
+          }, function (response) {
+            if (typeof response.data.data !== 'undefined') {
+              angular.forEach(response.data.data, function (val, index) {
                 $scope.error[val.field] = val.message;
               });
             } else {

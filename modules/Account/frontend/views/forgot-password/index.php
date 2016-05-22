@@ -9,6 +9,7 @@
  */
 
 use cookyii\modules\Account;
+use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
@@ -25,8 +26,8 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
 
     <div class="box-body">
         <?php
-        /** @var \cookyii\widgets\angular\ActiveForm $form */
-        $form = \cookyii\widgets\angular\ActiveForm::begin([
+        /** @var ActiveForm $form */
+        $form = ActiveForm::begin([
             'model' => $ForgotPasswordForm,
         ]);
 
@@ -50,7 +51,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
             </div>
         </div>
         <?php
-        \cookyii\widgets\angular\ActiveForm::end();
+        ActiveForm::end();
         ?>
 
         <?= Html::a(Yii::t('cookyii.account', 'Sign in'), ['/account/sign/in']) ?><br>

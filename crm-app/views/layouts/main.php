@@ -296,7 +296,7 @@ $menu_items = include(__DIR__ . '/_menu.php');
     </div>
 
     <footer class="main-footer">
-        <strong>Copyright &copy; 2015 <?= APP_NAME ?>.</strong> All rights reserved.
+        <strong>Copyright &copy; <?= date('Y') ?> <?= APP_NAME ?>.</strong> All rights reserved.
     </footer>
 
 <?php

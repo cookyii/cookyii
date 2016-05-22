@@ -9,11 +9,12 @@
  */
 
 use cookyii\modules\Feed;
+use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \cookyii\widgets\angular\ActiveForm $ActiveForm */
-$ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
+/** @var ActiveForm $ActiveForm */
+$ActiveForm = ActiveForm::begin([
     'model' => $ItemEditForm,
     'controller' => 'ItemEditController',
 ]);
@@ -36,24 +37,24 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
                     ?>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
-                    <tabset>
-                        <tab heading="Content" active="tabs.content" select="selectTab('content')">
+                    <uib-tabset active="tab.selected">
+                        <uib-tab heading="Content">
                             <?php
                             echo $this->render('_general_content', [
                                 'ActiveForm' => $ActiveForm,
                                 'ItemEditForm' => $ItemEditForm,
                             ]);
                             ?>
-                        </tab>
-                        <tab heading="Picture" active="tabs.picture" select="selectTab('picture')">
+                        </uib-tab>
+                        <uib-tab heading="Picture">
                             <?php
                             echo $this->render('_general_picture', [
                                 'ActiveForm' => $ActiveForm,
                                 'ItemEditForm' => $ItemEditForm,
                             ]);
                             ?>
-                        </tab>
-                        <tab heading="Section" active="tabs.sections" select="selectTab('sections')">
+                        </uib-tab>
+                        <uib-tab heading="Section">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
                                     <?php
@@ -64,8 +65,8 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
                                     ?>
                                 </div>
                             </div>
-                        </tab>
-                        <tab heading="Publishing" active="tabs.publishing" select="selectTab('publishing')">
+                        </uib-tab>
+                        <uib-tab heading="Publishing">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
                                     <?php
@@ -76,8 +77,8 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
                                     ?>
                                 </div>
                             </div>
-                        </tab>
-                        <tab heading="Meta" active="tabs.meta" select="selectTab('meta')">
+                        </uib-tab>
+                        <uib-tab heading="Meta">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
                                     <?php
@@ -88,8 +89,8 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
                                     ?>
                                 </div>
                             </div>
-                        </tab>
-                    </tabset>
+                        </uib-tab>
+                    </uib-tabset>
                 </div>
             </div>
         </div>
@@ -115,4 +116,4 @@ $ActiveForm = \cookyii\widgets\angular\ActiveForm::begin([
 
 <?php
 
-\cookyii\widgets\angular\ActiveForm::end();
+ActiveForm::end();

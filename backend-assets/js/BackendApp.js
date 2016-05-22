@@ -3,22 +3,19 @@
 
   ng.module('BackendApp', [
       'directives', 'filters', 'scopes',
-      'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate', 'ngMaterial',
+      'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate',
       'ui.bootstrap', 'ui.uploader',
       'monospaced.elastic',
       'angular-loading-bar', 'angular-redactor'
     ])
 
     .config([
-      '$httpProvider', '$animateProvider', '$mdThemingProvider', 'redactorOptions', 'toastrConfig',
-      function ($httpProvider, $animateProvider, $mdThemingProvider, redactorOptions, toastrConfig) {
+      '$httpProvider', '$animateProvider', 'redactorOptions', 'toastrConfig',
+      function ($httpProvider, $animateProvider, redactorOptions, toastrConfig) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = yii.getCsrfToken();
 
         $animateProvider.classNameFilter(/^(?:(?!wo-animate).)*$/);
-
-        $mdThemingProvider.theme('default')
-          .accentPalette('red');
 
         redactorOptions.plugins = ['filemanager', 'imagemanager', 'fullscreen'];
         redactorOptions.minHeight = 200;

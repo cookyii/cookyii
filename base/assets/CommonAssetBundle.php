@@ -24,6 +24,7 @@ class CommonAssetBundle extends AbstractModuleAssetBundle
         'js/scopes/QueryScope.js',
         'js/scopes/ToastrScope.js',
         'js/scopes/SortScope.js',
+        'js/scopes/TabScope.js',
         'js/scopes/FilterSearchScope.js',
         'js/third/angular-toastr.tpls.js',
     ];

@@ -17,7 +17,6 @@ class MomentAssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@bower';
 
     public $js = [
-        'moment/min/moment.min.js',
-        'moment/locale/en-gb.js',
+        'moment/min/moment-with-locales.min.js',
     ];
 }

@@ -3,33 +3,15 @@
 angular.module('BackendApp')
 
   .controller('TemplateEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastrScope',
-    function ($scope, $http, $location, $timeout, ToastrScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'TabScope', 'ToastrScope',
+    function ($scope, $http, $timeout, QueryScope, TabScope, ToastrScope) {
 
-      var query = $location.search(),
+      var query = QueryScope($scope),
         toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
-      var selectedTab = typeof query.tab === 'undefined'
-        ? 'content'
-        : query.tab;
-
-      $scope.tabs = {
-        content: selectedTab === 'content',
-        styles: selectedTab === 'styles',
-        address: selectedTab === 'address',
-        params: selectedTab === 'params',
-        preview: selectedTab === 'preview'
-      };
-
-      $scope.selectTab = function (tab) {
-        $location.search('tab', tab);
-
-        $timeout(function () {
-          jQuery(window).trigger('resize');
-        });
-      };
+      $scope.tab = TabScope($scope);
 
       $scope.addAddress = function () {
         $scope.$parent.data.address.push({
@@ -83,12 +65,12 @@ angular.module('BackendApp')
             TemplateEditForm: $scope.data
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
+          .then(function (response) {
+            if (response.data.result === false) {
               TemplateEditForm.$setDirty();
 
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (message, field) {
                   $scope.error[field] = message;
                 });
               } else {
@@ -98,17 +80,16 @@ angular.module('BackendApp')
               toastr.success('Template successfully saved');
 
               if ($scope.$parent.isNewTemplate) {
-                $location.search('id', response.template_id);
+                query.set('id', response.data.template_id);
               }
 
               $scope.reload();
             }
-          })
-          .error(function (response) {
+          }, function (response) {
             TemplateEditForm.$setDirty();
 
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
+            if (typeof response.data.data !== 'undefined') {
+              angular.forEach(response.data.data, function (val, index) {
                 $scope.error[val.field] = val.message;
               });
             } else {

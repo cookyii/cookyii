@@ -3,8 +3,8 @@
 angular.module('CrmApp')
 
   .factory('ClientListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'ClientResource',
-    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Client) {
+    '$timeout', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'ClientResource',
+    function ($timeout, QueryScope, ToastrScope, SortScope, FilterScope, Client) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
@@ -51,14 +51,15 @@ angular.module('CrmApp')
         };
 
         $scope.remove = function (client, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to delete this client?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to delete this client?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             client.$remove(function () {
               toastr.success('Client successfully removed');
 

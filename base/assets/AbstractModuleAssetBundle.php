@@ -14,13 +14,19 @@ namespace cookyii\assets;
 abstract class AbstractModuleAssetBundle extends \yii\web\AssetBundle
 {
 
+    /**
+     * @var string
+     */
     public $path;
 
-    public $sourcePath;
-
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
-        $this->sourcePath = $this->path . '/_sources';
+        if (empty($this->sourcePath)) {
+            $this->sourcePath = $this->path . '/_sources';
+        }
 
         parent::init();
     }

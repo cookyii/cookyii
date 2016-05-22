@@ -3,10 +3,11 @@
 angular.module('BackendApp')
 
   .controller('AccountEditController', [
-    '$scope', '$http', '$location', 'ToastrScope',
-    function ($scope, $http, $location, ToastrScope) {
+    '$scope', '$http', 'QueryScope', 'ToastrScope',
+    function ($scope, $http, QueryScope, ToastrScope) {
 
-      var toastr = ToastrScope($scope);
+      var query = QueryScope($scope),
+        toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
@@ -25,10 +26,10 @@ angular.module('BackendApp')
             FormData: $scope.$parent.data
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
+          .then(function (response) {
+            if (response.data.result === false) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (message, field) {
                   $scope.error[field] = message;
                 });
               } else {
@@ -38,15 +39,14 @@ angular.module('BackendApp')
               toastr.success('Account successfully saved');
 
               if ($scope.$parent.isNewAccount) {
-                $location.search('id', response.account_id);
+                query.set('id', response.data.account_id);
               }
 
               $scope.reload();
             }
-          })
-          .error(function (response) {
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
+          }, function (response) {
+            if (typeof response.data.data !== 'undefined') {
+              angular.forEach(response.data.data, function (val, index) {
                 $scope.error[val.field] = val.message;
               });
             } else {

@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .factory('AccountListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'AccountResource',
-    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Account) {
+    '$timeout', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'AccountResource',
+    function ($timeout, QueryScope, ToastrScope, SortScope, FilterScope, Account) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
@@ -51,14 +51,15 @@ angular.module('BackendApp')
         };
 
         $scope.remove = function (account, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to delete this account?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to delete this account?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             account.$remove(function () {
               toastr.success('Account successfully removed');
 

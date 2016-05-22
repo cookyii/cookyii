@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .factory('FilterSectionScope', [
-    '$timeout', '$mdDialog', 'ToastrScope', 'QueryScope', 'SectionResource',
-    function ($timeout, $mdDialog, ToastrScope, QueryScope, Section) {
+    '$timeout', 'ToastrScope', 'QueryScope', 'SectionResource',
+    function ($timeout, ToastrScope, QueryScope, Section) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
@@ -51,14 +51,15 @@ angular.module('BackendApp')
         };
 
         $scope.remove = function (section, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to delete this section?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to delete this section?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             Section.remove({slug: section}, function () {
               toastr.success('Section successfully removed');
 

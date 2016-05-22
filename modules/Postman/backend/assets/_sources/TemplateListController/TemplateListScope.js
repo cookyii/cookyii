@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .factory('TemplateListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'TemplateResource',
-    function ($timeout, $mdDialog, QueryScope, ToastrScope, SortScope, FilterScope, Template) {
+    '$timeout', 'QueryScope', 'ToastrScope', 'SortScope', 'FilterScope', 'TemplateResource',
+    function ($timeout, QueryScope, ToastrScope, SortScope, FilterScope, Template) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
@@ -51,14 +51,15 @@ angular.module('BackendApp')
         };
 
         $scope.remove = function (template, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to delete this template?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to delete this template?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             template.$remove(function () {
               toastr.success('Template successfully removed');
 

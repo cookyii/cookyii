@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .factory('PageListScope', [
-    '$timeout', '$mdDialog', 'ToastrScope', 'QueryScope', 'SortScope', 'FilterScope', 'PageResource',
-    function ($timeout, $mdDialog, ToastrScope, QueryScope, SortScope, FilterScope, Page) {
+    '$timeout', 'ToastrScope', 'QueryScope', 'SortScope', 'FilterScope', 'PageResource',
+    function ($timeout, ToastrScope, QueryScope, SortScope, FilterScope, Page) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
@@ -51,14 +51,15 @@ angular.module('BackendApp')
         };
 
         $scope.remove = function (page, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to delete this page?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to delete this page?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             page.$remove(function () {
               toastr.success('Page successfully removed');
 

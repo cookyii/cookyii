@@ -8,30 +8,15 @@ angular.module('BackendApp')
   })
 
   .controller('PageEditController', [
-    '$scope', '$http', '$location', '$timeout', 'ToastrScope',
-    function ($scope, $http, $location, $timeout, ToastrScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'TabScope', 'ToastrScope',
+    function ($scope, $http, $timeout, QueryScope, TabScope, ToastrScope) {
 
-      var query = $location.search(),
+      var query = QueryScope($scope),
         toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
-      var selectedTab = typeof query.tab === 'undefined'
-        ? 'content'
-        : query.tab;
-
-      $scope.tabs = {
-        content: selectedTab === 'content',
-        meta: selectedTab === 'meta'
-      };
-
-      $scope.selectTab = function (tab) {
-        $location.search('tab', tab);
-
-        $timeout(function () {
-          jQuery(window).trigger('resize');
-        });
-      };
+      $scope.tab = TabScope($scope);
 
       $scope.submit = function (PageEditForm, e) {
         var $form = angular.element('#PageEditForm');
@@ -48,10 +33,10 @@ angular.module('BackendApp')
             PageEditForm: $scope.data
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
+          .then(function (response) {
+            if (response.data.result === false) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (message, field) {
                   $scope.error[field] = message;
                 });
               } else {
@@ -61,15 +46,14 @@ angular.module('BackendApp')
               toastr.success('Page successfully saved');
 
               if ($scope.$parent.isNewPage) {
-                $location.search('id', response.page_id);
+                query.set('id', response.data.page_id);
               }
 
               $scope.reload();
             }
-          })
-          .error(function (response) {
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
+          }, function (response) {
+            if (typeof response.data.data !== 'undefined') {
+              angular.forEach(response.data.data, function (val, index) {
                 $scope.error[val.field] = val.message;
               });
             } else {

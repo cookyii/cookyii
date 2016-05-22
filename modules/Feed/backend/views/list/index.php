@@ -231,44 +231,24 @@ function sortLink($type, $label)
                     ]) ?>
                 </div>
             </div>
+
+            <div class="box-actions pull-right">
+                <?php
+
+                echo Html::button(FA::icon('folder-o')->fixedWidth() . Yii::t('cookyii.feed', 'Create new section'), [
+                    'class' => 'btn btn-primary',
+                    'ng-click' => 'items.filter.section.add()',
+                    'aria-label' => 'Add section',
+                ]);
+
+                echo Html::button(FA::icon('file-o')->fixedWidth() . Yii::t('cookyii.feed', 'Create new item'), [
+                    'class' => 'btn btn-primary',
+                    'ng-click' => 'items.add()',
+                    'aria-label' => 'Add item',
+                ]);
+
+                ?>
+            </div>
         </div>
     </div>
-
-    <md-fab-speed-dial md-open="fab.isOpen" md-direction="{{fab.selectedDirection}}" ng-class="fab.selectedMode">
-        <md-fab-trigger>
-            <?php
-            echo Material::button(FA::icon('plus')->fixedWidth(), [
-                'class' => 'md-fab md-warn',
-                'aria-label' => 'menu',
-            ]);
-            ?>
-        </md-fab-trigger>
-        <md-fab-actions>
-            <?php
-
-            $tooltip = Material::tooltip(Yii::t('cookyii.feed', 'Create new section'), [
-                'md-direction' => 'top',
-            ]);
-
-            echo Material::button($tooltip . FA::icon('folder-o')->fixedWidth(), [
-                'class' => 'md-fab md-raised md-mini',
-                'title' => Yii::t('cookyii.feed', 'Create new section'),
-                'ng-click' => 'items.filter.section.add()',
-                'aria-label' => 'Add section',
-            ]);
-
-            $tooltip = Material::tooltip(Yii::t('cookyii.feed', 'Create new item'), [
-                'md-direction' => 'top',
-            ]);
-
-            echo Material::button($tooltip . FA::icon('file-o')->fixedWidth(), [
-                'class' => 'md-fab md-raised md-mini',
-                'title' => Yii::t('cookyii.feed', 'Create new item'),
-                'ng-click' => 'items.add()',
-                'aria-label' => 'Add item',
-            ]);
-
-            ?>
-        </md-fab-actions>
-    </md-fab-speed-dial>
 </section>

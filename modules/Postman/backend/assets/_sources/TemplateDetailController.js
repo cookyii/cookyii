@@ -3,10 +3,11 @@
 angular.module('BackendApp')
 
   .controller('TemplateDetailController', [
-    '$scope', '$location', '$timeout', 'TemplateResource',
-    function ($scope, $location, $timeout, Template) {
+    '$scope', '$timeout', 'QueryScope', 'TemplateResource',
+    function ($scope, $timeout, QueryScope, Template) {
+
       var hash = null,
-        query = $location.search(),
+        query = QueryScope($scope),
         defaultValues = {
           subject: null,
           content_text: null,
@@ -17,9 +18,7 @@ angular.module('BackendApp')
         };
 
       $scope.getTemplateId = function () {
-        return typeof query.id === 'undefined'
-          ? null
-          : parseInt(query.id);
+        return query.get('id');
       };
 
       $scope.isNewTemplate = $scope.getTemplateId() === null;

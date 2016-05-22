@@ -8,33 +8,17 @@ angular.module('BackendApp')
   })
 
   .controller('ItemEditController', [
-    '$scope', '$http', '$timeout', 'QueryScope', 'ToastrScope', 'uiUploader', 'SectionDropdownScope',
-    function ($scope, $http, $timeout, QueryScope, ToastrScope, uiUploader, SectionDropdownScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'TabScope', 'ToastrScope', 'uiUploader', 'SectionDropdownScope',
+    function ($scope, $http, $timeout, QueryScope, TabScope, ToastrScope, uiUploader, SectionDropdownScope) {
 
       var query = QueryScope($scope),
         toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
-      var selectedTab = query.get('tab', 'content');
+      $scope.tab = TabScope($scope);
 
-      $scope.tabs = {
-        content: selectedTab === 'content',
-        picture: selectedTab === 'picture',
-        sections: selectedTab === 'sections',
-        publishing: selectedTab === 'publishing',
-        meta: selectedTab === 'meta'
-      };
-
-      $scope.selectTab = function (tab) {
-        query.set('tab', tab);
-
-        $timeout(function () {
-          jQuery(window).trigger('resize');
-        });
-      };
-
-      $scope.sections = SectionDropdownScope;
+      $scope.sections = SectionDropdownScope($scope);
 
       $timeout(function () {
         $scope.sections.reload(false);
@@ -55,10 +39,10 @@ angular.module('BackendApp')
             ItemEditForm: $scope.data
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
+          .then(function (response) {
+            if (response.data.result === false) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (message, field) {
                   $scope.error[field] = message;
                 });
               } else {
@@ -67,14 +51,13 @@ angular.module('BackendApp')
             } else {
               toastr.success('Item successfully saved');
 
-              query.set('id', response.item_id);
+              query.set('id', response.data.item_id);
 
               $scope.reload();
             }
-          })
-          .error(function (response) {
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
+          }, function (response) {
+            if (typeof response.data.data !== 'undefined') {
+              angular.forEach(response.data.data, function (val, index) {
                 $scope.error[val.field] = val.message;
               });
             } else {

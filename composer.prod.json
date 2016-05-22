@@ -24,12 +24,19 @@
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
+  "replace": {
+    "bower-asset/jquery": "*",
+    "bower-asset/jquery.inputmask": "*",
+    "bower-asset/punycode": "*",
+    "bower-asset/yii2-pjax": "*",
+    "bower-asset/bootstrap": "*",
+    "bower-asset/fontawesome": "*"
+  },
   "require": {
     "php": ">=5.4.0",
 
     "yiisoft/yii2": "2.0.8",
     "yiisoft/yii2-composer": "2.0.*",
-    "yiisoft/yii2-bootstrap": "2.0.*",
     "yiisoft/yii2-imagine": "2.0.*",
     "yiisoft/yii2-authclient": "2.0.*",
     "yiisoft/yii2-swiftmailer": "2.0.*",

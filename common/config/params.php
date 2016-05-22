@@ -110,8 +110,6 @@ return [
         'keyPrefix' => 'query-',
     ],
     'component.assetManager' => [
-        'basePath' => '@webroot/assets',
-        'baseUrl' => '@web/assets',
         'linkAssets' => true,
     ],
     'component.urlManager.frontend' => [

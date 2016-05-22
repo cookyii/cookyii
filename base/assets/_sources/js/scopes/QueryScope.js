@@ -7,8 +7,7 @@ angular.module('scopes')
     function ($location) {
       return function ($parentScope) {
 
-        var $scope = $parentScope.$new(),
-          query = $location.search();
+        var $scope = $parentScope.$new(true);
 
         var converter = {
           'null': null,
@@ -25,7 +24,8 @@ angular.module('scopes')
             ? null
             : defaultValue;
 
-          var result = typeof query[key] === 'undefined' ? defaultValue : query[key];
+          var query = $location.search(),
+            result = typeof query[key] === 'undefined' ? defaultValue : query[key];
 
           if (typeof converter[result] !== 'undefined') {
             result = converter[result];

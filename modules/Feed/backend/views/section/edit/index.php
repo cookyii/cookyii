@@ -46,7 +46,7 @@ Feed\backend\assets\EditSectionAssetBundle::register($this);
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <?php
             echo $this->render('_general', ['SectionEditForm' => $SectionEditForm]);
             ?>

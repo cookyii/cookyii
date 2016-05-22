@@ -3,10 +3,11 @@
 angular.module('BackendApp')
 
   .controller('MessageDetailController', [
-    '$scope', '$location', '$timeout', 'MessageResource',
-    function ($scope, $location, $timeout, Message) {
+    '$scope', '$timeout', 'QueryScope', 'MessageResource',
+    function ($scope, $timeout, QueryScope, Message) {
+     
       var hash = null,
-        query = $location.search(),
+        query = QueryScope($scope),
         defaultValues = {
           subject: null,
           content_text: null,
@@ -15,9 +16,7 @@ angular.module('BackendApp')
         };
 
       $scope.getMessageId = function () {
-        return typeof query.id === 'undefined'
-          ? null
-          : parseInt(query.id);
+        return query.get('id');
       };
 
       $scope.isNewMessage = $scope.getMessageId() === null;

@@ -3,16 +3,15 @@
 angular.module('CrmApp')
 
   .controller('ClientDetailController', [
-    '$scope', '$location', '$timeout', 'ClientResource',
-    function ($scope, $location, $timeout, Client) {
+    '$scope', '$timeout', 'QueryScope', 'ClientResource',
+    function ($scope, $timeout, QueryScope, Client) {
+
       var hash = null,
-        query = $location.search(),
+        query = QueryScope($scope),
         defaultValues = {roles: []};
 
       $scope.getClientId = function () {
-        return typeof query.id === 'undefined'
-          ? null
-          : parseInt(query.id);
+        return query.get('id');
       };
 
       $scope.isNewClient = $scope.getClientId() === null;

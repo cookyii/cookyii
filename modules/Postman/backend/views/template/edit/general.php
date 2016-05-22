@@ -9,12 +9,13 @@
  */
 
 use cookyii\modules\Postman;
+use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
-/** @var \cookyii\widgets\angular\ActiveForm $form */
-$form = \cookyii\widgets\angular\ActiveForm::begin([
+/** @var ActiveForm $form */
+$form = ActiveForm::begin([
     'model' => $TemplateEditForm,
     'controller' => 'TemplateEditController',
 ]);
@@ -29,12 +30,17 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
             <h3 class="box-title"><?= Yii::t('cookyii.postman', 'General information') ?></h3>
         </div>
 
-        <div class="box-notify">
+        <div class="form-notify">
             <?= Yii::t('cookyii', 'Changes not saved yet') ?>
             <?php
             echo Html::submitButton(FA::icon('check') . ' ' . Yii::t('cookyii', 'Save'), [
                 'class' => 'btn btn-slim btn-success',
                 'ng-disabled' => 'in_progress',
+            ]);
+
+            echo Html::button(Yii::t('cookyii', 'Cancel'), [
+                'class' => 'btn btn-slim btn-link',
+                'ng-click' => 'reload(TemplateEditForm)',
             ]);
             ?>
         </div>
@@ -63,8 +69,8 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                     ?>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                    <tabset>
-                        <tab heading="Content" active="tabs.content" select="selectTab('content')">
+                    <uib-tabset active="tab.selected">
+                        <uib-tab heading="Content">
                             <div class="col-xs-12 col-sm-6 col-md-9">
                                 <?php
                                 echo $form->field($TemplateEditForm, 'content_text')
@@ -90,8 +96,8 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                     <dd ng-repeat-end ng-bind-html="param.description | nl2br" ng-show="param.key"></dd>
                                 </dl>
                             </div>
-                        </tab>
-                        <tab heading="Styles" active="tabs.styles" select="selectTab('styles')">
+                        </uib-tab>
+                        <uib-tab heading="Styles">
                             <div class="col-xs-12 col-sm-6 col-md-9">
                                 <?php
                                 echo $form->field($TemplateEditForm, 'styles')
@@ -102,8 +108,8 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                     ]);
                                 ?>
                             </div>
-                        </tab>
-                        <tab heading="Address" active="tabs.address" select="selectTab('address')">
+                        </uib-tab>
+                        <uib-tab heading="Address">
                             <div class="address" ng-repeat="address in data.address track by $index"
                                  ng-if="address !== undefined">
                                 <label>&nbsp;</label>
@@ -152,8 +158,8 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                     'ng-click' => 'addAddress()',
                                 ]) ?>
                             </div>
-                        </tab>
-                        <tab heading="Parameters" active="tabs.params" select="selectTab('params')">
+                        </uib-tab>
+                        <uib-tab heading="Parameters">
                             <div class="param" ng-repeat="param in data.params track by $index"
                                  ng-if="param !== undefined && !param.default">
                                 <label>&nbsp;</label>
@@ -188,8 +194,8 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                                     'ng-click' => 'addParameter()',
                                 ]) ?>
                             </div>
-                        </tab>
-                        <tab heading="Preview" active="tabs.preview" select="selectTab('preview')">
+                        </uib-tab>
+                        <uib-tab heading="Preview">
                             <label>text/plain preview</label>
 
                             <iframe ng-src="{{ previewUrl(data, 'text') }}" class="preview"></iframe>
@@ -197,8 +203,8 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                             <label>text/html preview</label>
 
                             <iframe ng-src="{{ previewUrl(data, 'html') }}" class="preview"></iframe>
-                        </tab>
-                    </tabset>
+                        </uib-tab>
+                    </uib-tabset>
                 </div>
             </div>
         </div>
@@ -224,4 +230,4 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
 
 <?php
 
-\cookyii\widgets\angular\ActiveForm::end();
+ActiveForm::end();

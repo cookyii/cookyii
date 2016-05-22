@@ -9,6 +9,7 @@
  */
 
 use cookyii\modules\Account;
+use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
@@ -23,8 +24,8 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
 
     <div class="box-body">
         <?php
-        /** @var \cookyii\widgets\angular\ActiveForm $form */
-        $form = \cookyii\widgets\angular\ActiveForm::begin([
+        /** @var ActiveForm $form */
+        $form = ActiveForm::begin([
             'model' => $FillAttributesForm,
         ]);
 
@@ -48,7 +49,7 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
             </div>
         </div>
         <?php
-        \cookyii\widgets\angular\ActiveForm::end();
+        ActiveForm::end();
         ?>
     </div>
 </div>

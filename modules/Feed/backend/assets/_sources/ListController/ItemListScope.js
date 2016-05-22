@@ -3,8 +3,8 @@
 angular.module('BackendApp')
 
   .factory('ItemListScope', [
-    '$timeout', '$mdDialog', 'QueryScope', 'SortScope', 'FilterScope', 'ToastrScope', 'ItemResource',
-    function ($timeout, $mdDialog, QueryScope, SortScope, FilterScope, ToastrScope, Item) {
+    '$timeout', 'QueryScope', 'SortScope', 'FilterScope', 'ToastrScope', 'ItemResource',
+    function ($timeout, QueryScope, SortScope, FilterScope, ToastrScope, Item) {
       return function ($parentScope) {
 
         var $scope = $parentScope.$new(),
@@ -54,14 +54,15 @@ angular.module('BackendApp')
         };
 
         $scope.remove = function (item, e) {
-          var confirm = $mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .title('Would you like to delete this item?')
-            .ok('Please do it!')
-            .cancel('Cancel')
-            .targetEvent(e);
-
-          $mdDialog.show(confirm).then(function () {
+          swal({
+            type: "warning",
+            title: "Would you like to delete this item?",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: "Please do it!",
+            cancelButtonText: "Cancel"
+          }, function () {
             item.$remove(function () {
               toastr.success('Item successfully removed');
 

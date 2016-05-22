@@ -3,31 +3,17 @@
 angular.module('BackendApp')
 
   .controller('SectionEditController', [
-    '$scope', '$http', '$timeout', 'QueryScope', 'ToastrScope', 'SectionDropdownScope',
-    function ($scope, $http, $timeout, QueryScope, ToastrScope, SectionDropdownScope) {
+    '$scope', '$http', '$timeout', 'QueryScope', 'TabScope', 'ToastrScope', 'SectionDropdownScope',
+    function ($scope, $http, $timeout, QueryScope, TabScope, ToastrScope, SectionDropdownScope) {
 
       var query = QueryScope($scope),
         toastr = ToastrScope($scope);
 
       $scope.inProgress = false;
 
-      var selectedTab = query.get('tab', 'parent');
+      $scope.tab = TabScope($scope);
 
-      $scope.tabs = {
-        parent: selectedTab === 'parent',
-        publishing: selectedTab === 'publishing',
-        meta: selectedTab === 'meta'
-      };
-
-      $scope.selectTab = function (tab) {
-        query.set('tab', tab);
-
-        $timeout(function () {
-          jQuery(window).trigger('resize');
-        });
-      };
-
-      $scope.sections = SectionDropdownScope;
+      $scope.sections = SectionDropdownScope($scope);
 
       function reloadSectionList() {
         $scope.sections.reload(true, function () {
@@ -54,10 +40,10 @@ angular.module('BackendApp')
             SectionEditForm: $scope.data
           }
         })
-          .success(function (response) {
-            if (response.result === false) {
-              if (typeof response.errors !== 'undefined') {
-                angular.forEach(response.errors, function (message, field) {
+          .then(function (response) {
+            if (response.data.result === false) {
+              if (typeof response.data.errors !== 'undefined') {
+                angular.forEach(response.data.errors, function (message, field) {
                   $scope.error[field] = message;
                 });
               } else {
@@ -66,17 +52,16 @@ angular.module('BackendApp')
             } else {
               toastr.success('Section successfully saved');
 
-              query.set('section', response.section_slug);
+              query.set('section', response.data.section_slug);
 
               $timeout(function () {
                 reloadSectionList();
                 $scope.$parent.reload();
               });
             }
-          })
-          .error(function (response) {
-            if (typeof response.data !== 'undefined') {
-              angular.forEach(response.data, function (val, index) {
+          }, function (response) {
+            if (typeof response.data.data !== 'undefined') {
+              angular.forEach(response.data.data, function (val, index) {
                 $scope.error[val.field] = val.message;
               });
             } else {

@@ -14,10 +14,7 @@ defined('YII_ENV') || define('YII_ENV', 'dev');
 require __DIR__ . '/dev/build/InstallTask.php';
 
 /** @var array $apps list of existing applications */
-$apps = ['frontend', 'backend', 'crm'];
-
-/** Automatic detection applications */
-automaticDetectionApplications($apps);
+$apps = json_decode(file_get_contents(__DIR__ . '/.apps.json'), true);
 
 /** @var array $config build configuration */
 $buildConfig = [
@@ -153,6 +150,10 @@ $buildConfig = [
 
     'less' => [
         '.description' => 'Compile all less styles',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\CommandTask',
+            'commandline' => './node_modules/.bin/gulp css/optimize',
+        ],
     ],
 
     'migrate' => [
@@ -176,30 +177,7 @@ $buildConfig = [
 if (!empty($apps)) {
     foreach ($apps as $app) {
         appendClearTask($buildConfig, 'clear', $app);
-        appendLessTask($buildConfig, 'less', $app);
     }
-}
-
-/**
- * @param string $app
- * @param string|null $key
- * @return array|string|null
- */
-function getPath($app, $key = null)
-{
-    $basePath = __DIR__;
-    $appPath = $basePath . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
-
-    $list = [
-        'base' => $basePath,
-        'app' => $appPath,
-        'assets' => $basePath . DIRECTORY_SEPARATOR . $app . '-assets',
-        'node' => $basePath . DIRECTORY_SEPARATOR . 'node_modules' . DIRECTORY_SEPARATOR . '.bin',
-    ];
-
-    return empty($key)
-        ? $list
-        : (isset($list[$key]) ? $list[$key] : null);
 }
 
 /**
@@ -211,7 +189,7 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
 {
     prepareEmptyTask($buildConfig, $task_name);
 
-    $path = getPath($app);
+    $appPath = __DIR__ . DIRECTORY_SEPARATOR . sprintf('%s-app', $app);
 
     $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $buildConfig[$task_name][$app] = [
@@ -220,39 +198,12 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
             'class' => 'cookyii\build\tasks\DeleteTask',
             'deleteDir' => false,
             'fileSets' => [
-                ['dir' => sprintf('%s/runtime', $path['app']), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/assets', $path['app']), 'exclude' => ['.gitignore']],
-                ['dir' => sprintf('%s/web/minify', $path['app']), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/runtime', $appPath), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/assets', $appPath), 'exclude' => ['.gitignore']],
+                ['dir' => sprintf('%s/web/minify', $appPath), 'exclude' => ['.gitignore']],
             ],
         ],
     ];
-}
-
-/**
- * @param array $buildConfig
- * @param string $task_name
- * @param string $app
- */
-function appendLessTask(array &$buildConfig, $task_name, $app)
-{
-    $path = getPath($app);
-
-    $less = $path['assets'] . '/less/styles.less';
-
-    if (file_exists($less)) {
-        prepareEmptyTask($buildConfig, $task_name);
-
-        $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
-        $buildConfig[$task_name][$app] = [
-            '.description' => sprintf('Compile all less styles for `%s` application', $app),
-            '.task' => [
-                'class' => 'cookyii\build\tasks\CommandTask',
-                'commandline' => [
-                    cmd($app, '{node}/gulp less --app {a}'),
-                ],
-            ],
-        ];
-    }
 }
 
 /**
@@ -267,47 +218,6 @@ function prepareEmptyTask(array &$buildConfig, $task_name)
 
     if (!isset($buildConfig[$task_name]['.depends'])) {
         $buildConfig[$task_name]['.depends'] = [];
-    }
-}
-
-/**
- * @param string $app
- * @param string $command
- * @return string
- */
-function cmd($app, $command)
-{
-    $path = getPath($app);
-
-    $command = str_replace(
-        ['{a}'],
-        [$app],
-        $command
-    );
-
-    return str_replace(
-        array_map(function ($val) { return sprintf('{%s}', $val); }, array_keys($path)),
-        array_values($path),
-        $command
-    );
-}
-
-/**
- * @param array $apps
- */
-function automaticDetectionApplications(array &$apps)
-{
-    $handler = opendir(__DIR__);
-    if (is_resource($handler)) {
-        while (($file = readdir($handler)) !== false) {
-            if (preg_match('|^([a-zA-Z0-9\-]+)\-app$|i', $file, $m)) {
-                if (!in_array($m[1], $apps, true)) {
-                    $apps[] = $m[1];
-                }
-            }
-        }
-
-        closedir($handler);
     }
 }
 
