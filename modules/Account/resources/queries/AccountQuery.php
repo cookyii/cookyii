@@ -34,75 +34,84 @@ class AccountQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param integer|array $Facebook_id
+     * @param integer|array $facebook_user_id
      * @return static
      */
-    public function byFacebookId($Facebook_id)
+    public function byFacebookId($facebook_user_id)
     {
-        return $this->bySocialId('facebook', $Facebook_id);
+        return $this->bySocialId('facebook', $facebook_user_id);
     }
 
     /**
-     * @param integer|array $Github_id
+     * @param integer|array $instagram_user_id
      * @return static
      */
-    public function byGithubId($Github_id)
+    public function byInstagramId($instagram_user_id)
     {
-        return $this->bySocialId('github', $Github_id);
+        return $this->bySocialId('instagram', $instagram_user_id);
     }
 
     /**
-     * @param integer|array $Google_id
+     * @param integer|array $github_user_id
      * @return static
      */
-    public function byGoogleId($Google_id)
+    public function byGithubId($github_user_id)
     {
-        return $this->bySocialId('google', $Google_id);
+        return $this->bySocialId('github', $github_user_id);
     }
 
     /**
-     * @param integer|array $Linkedin_id
+     * @param integer|array $google_user_id
      * @return static
      */
-    public function byLinkedinId($Linkedin_id)
+    public function byGoogleId($google_user_id)
     {
-        return $this->bySocialId('linkedin', $Linkedin_id);
+        return $this->bySocialId('google', $google_user_id);
     }
 
     /**
-     * @param integer|array $Live_id
+     * @param integer|array $linkedin_user_id
      * @return static
      */
-    public function byLiveId($Live_id)
+    public function byLinkedinId($linkedin_user_id)
     {
-        return $this->bySocialId('live', $Live_id);
+        return $this->bySocialId('linkedin', $linkedin_user_id);
     }
 
     /**
-     * @param integer|array $Twitter_id
+     * @param integer|array $live_user_id
      * @return static
      */
-    public function byTwitterId($Twitter_id)
+    public function byLiveId($live_user_id)
     {
-        return $this->bySocialId('twitter', $Twitter_id);
+        return $this->bySocialId('live', $live_user_id);
     }
 
     /**
-     * @param integer|array $Vkontakte_id
+     * @param integer|array $twitter_user_id
      * @return static
      */
-    public function byVkontakteId($Vkontakte_id)
+    public function byTwitterId($twitter_user_id)
     {
-        return $this->bySocialId('vkontakte', $Vkontakte_id);
+        return $this->bySocialId('twitter', $twitter_user_id);
     }
 
     /**
-     * @param integer|array $Yandex_id
+     * @param integer|array $vkontakte_user_id
      * @return static
      */
-    public function byYandexId($Yandex_id)
+    public function byVkontakteId($vkontakte_user_id)
     {
-        return $this->bySocialId('yandex', $Yandex_id);
+        return $this->bySocialId('vkontakte', $vkontakte_user_id);
+    }
+
+    /**
+     * @param integer|array $yandex_user_id
+     * @return static
+     */
+    public function byYandexId($yandex_user_id)
+    {
+        return $this->bySocialId('yandex', $yandex_user_id);
     }
 
     /**

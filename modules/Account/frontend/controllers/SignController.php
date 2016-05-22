@@ -19,7 +19,23 @@ use yii\helpers\Url;
 class SignController extends Account\frontend\components\Controller
 {
 
-    public $public = true;
+    /**
+     * @var string name or alias of the view file, which should be rendered in order to perform redirection.
+     * If not set default one will be used.
+     */
+    public $redirectView;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->redirectView)) {
+            $this->redirectView = '@vendor/yiisoft/yii2-authclient/views/redirect.php';
+        }
+    }
 
     /**
      * @inheritdoc
@@ -28,7 +44,8 @@ class SignController extends Account\frontend\components\Controller
     {
         return [
             'auth' => [
-                'class' => 'yii\authclient\AuthAction',
+                'class' => \yii\authclient\AuthAction::className(),
+                'redirectView' => $this->redirectView,
                 'successCallback' => [$this, 'authSuccessCallback'],
             ],
         ];
@@ -131,7 +148,7 @@ class SignController extends Account\frontend\components\Controller
     {
         Session()->remove('OAuthResponseClient');
 
-        return $this->renderFile('@vendor/yiisoft/yii2-authclient/views/redirect.php', [
+        return $this->renderFile($this->redirectView, [
             'url' => Url::to(['/']),
             'enforceRedirect' => true,
         ]);
@@ -155,6 +172,9 @@ class SignController extends Account\frontend\components\Controller
         switch ($Client->getId()) {
             case 'facebook':
                 $AccountQuery->byFacebookId($attributes['id']);
+                break;
+            case 'instagram':
+                $AccountQuery->byInstagramId($attributes['id']);
                 break;
             case 'github':
                 $AccountQuery->byGithubId($attributes['id']);
@@ -217,7 +237,8 @@ class SignController extends Account\frontend\components\Controller
             } else {
                 Session()->set('OAuthResponseClient', $Client);
 
-                Response()->redirect(['/account/sign/fill'])
+                Response()
+                    ->redirect(['/account/sign/fill'])
                     ->send();
 
                 exit;

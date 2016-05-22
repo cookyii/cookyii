@@ -82,6 +82,9 @@ trait AccountSocialTrait
             case 'facebook':
                 $attributes = $this->appendFacebookAttributes($attributes);
                 break;
+            case 'instagram':
+                $attributes = $this->appendInstagramAttributes($attributes);
+                break;
             case 'github':
                 $attributes = $this->appendGithubAttributes($attributes);
                 break;
@@ -118,7 +121,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendFacebookAttributes(array $attributes)
+    protected function appendFacebookAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['name']) && !empty($attributes['name'])) {
@@ -141,7 +144,27 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendGithubAttributes(array $attributes)
+    protected function appendInstagramAttributes(array $attributes)
+    {
+        $name = null;
+        if (isset($attributes['data']) && isset($attributes['data']['full_name']) && !empty($attributes['data']['full_name'])) {
+            $name = $attributes['data']['full_name'];
+        }
+
+        $email = null;
+
+        return [
+            'login' => $email,
+            'name' => $name,
+            'email' => $email,
+        ];
+    }
+
+    /**
+     * @param array $attributes
+     * @return array
+     */
+    protected function appendGithubAttributes(array $attributes)
     {
         $name = $attributes['login'];
         if (isset($attributes['name']) && !empty($attributes['name'])) {
@@ -170,10 +193,10 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendGoogleAttributes(array $attributes)
+    protected function appendGoogleAttributes(array $attributes)
     {
         $name = $attributes['displayName'];
-        if (isset($attributes['name']['familyName']) && !empty($attributes['name']['familyName'])) {
+        if (isset($attributes['name']) && isset($attributes['name']['familyName']) && !empty($attributes['name']['familyName'])) {
             $name = $attributes['name']['familyName'] . ' ';
             if (isset($attributes['name']['givenName']) && !empty($attributes['name']['givenName'])) {
                 $name .= $attributes['name']['givenName'];
@@ -202,7 +225,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendLinkedinAttributes(array $attributes)
+    protected function appendLinkedinAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
@@ -228,7 +251,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendLiveAttributes(array $attributes)
+    protected function appendLiveAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
@@ -262,7 +285,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendTwitterAttributes(array $attributes)
+    protected function appendTwitterAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['name']) && !empty($attributes['name'])) {
@@ -288,7 +311,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendVkontakteAttributes(array $attributes)
+    protected function appendVkontakteAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
@@ -314,7 +337,7 @@ trait AccountSocialTrait
      * @param array $attributes
      * @return array
      */
-    private function appendYandexAttributes(array $attributes)
+    protected function appendYandexAttributes(array $attributes)
     {
         $name = null;
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
