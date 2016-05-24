@@ -28,6 +28,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $activated_at
  *
  * @property \cookyii\modules\Account\resources\AccountProperty[] $properties
+ * @property \cookyii\modules\Account\resources\AccountAlert[] $alerts
  *
  * @property \cookyii\modules\Account\resources\helpers\AccountPresent $presentHelper
  * @property \cookyii\modules\Account\resources\helpers\AccountNotification $notificationHelper
@@ -137,6 +138,14 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
         $fields['properties'] = function (Account $Model) {
             return $Model->properties();
+        };
+
+        $fields['alerts'] = function (self $Model) {
+            $Alerts = $this->alerts;
+
+            return empty($Alerts) ? [] : ArrayHelper::getColumn($Alerts, function (\resources\AccountAlert $Model) {
+                return $Model->toArray();
+            });
         };
 
         return $fields;
@@ -416,6 +425,18 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $AccountPropertyModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountProperty::className());
 
         return $this->hasMany($AccountPropertyModel::className(), ['account_id' => 'id']);
+    }
+
+    /**
+     * @return \cookyii\modules\Account\resources\queries\AccountAlertQuery
+     */
+    public function getAlerts()
+    {
+        /** @var \cookyii\modules\Account\resources\AccountAlert $AccountAlertModel */
+        $AccountAlertModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountAlert::className());
+
+        return $this->hasMany($AccountAlertModel::className(), ['account_id' => 'id'])
+            ->withoutDeleted();
     }
 
     /**

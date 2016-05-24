@@ -159,7 +159,10 @@ class AccountAlert extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \cookyii\modules\Account\resources\queries\AccountAlertQuery(get_called_class());
+        return \Yii::createObject(
+            \cookyii\modules\Account\resources\queries\AccountAlertQuery::className(),
+            [get_called_class()]
+        );
     }
 
     /**
