@@ -30,14 +30,11 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
         ]);
 
         echo $form->field($FillAttributesForm, 'email')
-            ->icon('envelope')
             ->textInput();
 
         ?>
         <div class="row">
-            <div class="col-xs-8">
-            </div>
-            <div class="col-xs-4">
+            <div class="col-xs-12 text-center">
                 <?php
                 $icon = FA::icon('cog', ['ng-show' => 'in_progress', 'class' => 'wo-animate'])->spin();
 

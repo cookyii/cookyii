@@ -35,7 +35,9 @@ class Instagram extends \yii\authclient\OAuth2
      */
     protected function initUserAttributes()
     {
-        return $this->api('/users/self', 'GET');
+        $response = $this->api('users/self', 'GET');
+
+        return empty($response) ? null : $response['data'];
     }
 
     /**

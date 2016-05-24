@@ -33,19 +33,15 @@ Account\frontend\assets\SignUpAssetBundle::register($this);
         ]);
 
         echo $form->field($SignUpForm, 'email')
-            ->icon('envelope')
             ->textInput();
 
         echo $form->field($SignUpForm, 'name')
-            ->icon('user')
             ->textInput();
 
         echo $form->field($SignUpForm, 'password')
-            ->icon('lock')
             ->passwordInput();
 
         echo $form->field($SignUpForm, 'password_app')
-            ->icon('lock')
             ->passwordInput();
 
         echo $form->field($SignUpForm, 'agree')
