@@ -29,8 +29,7 @@
     "bower-asset/jquery.inputmask": "*",
     "bower-asset/punycode": "*",
     "bower-asset/yii2-pjax": "*",
-    "bower-asset/bootstrap": "*",
-    "bower-asset/fontawesome": "*"
+    "bower-asset/bootstrap": "*"
   },
   "require": {
     "php": ">=5.4.0",
