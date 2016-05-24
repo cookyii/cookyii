@@ -97,14 +97,6 @@ trait SocialAuthCallbackTrait
                     $Account = $SearchAccount;
                     $Account->appendClientAttributes($Client);
                 }
-            } else {
-                Session()->set('OAuthResponseClient', $Client);
-
-                Response()
-                    ->redirect(['/account/sign/fill'])
-                    ->send();
-
-                exit;
             }
 
             $Account->activated_at = time();
