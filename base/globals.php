@@ -31,6 +31,14 @@ function dump($var, $depth = 10, $highlight = true, $return = false)
 }
 
 /**
+ * @return \resources\Account
+ */
+function Account()
+{
+    return User()->identity;
+}
+
+/**
  * @return \yii\web\Request|\yii\console\Request
  */
 function Request()
