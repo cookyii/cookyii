@@ -73,7 +73,6 @@ class FillAttributesForm extends \cookyii\base\FormModel
 
         $Account->setAttributes([
             'email' => $this->email,
-            'password' => Security()->generateRandomString(10),
         ]);
 
         $Account->validate() && $Account->save();
@@ -84,9 +83,6 @@ class FillAttributesForm extends \cookyii\base\FormModel
             $AuthResponse->result = Json::encode($Account->getErrors());
         } else {
             $AuthResponse->result = (string)$Account->id;
-
-            $Account->notificationHelper
-                ->sendSignUpEmail();
 
             $Account->pushSocialLink($Client);
 
