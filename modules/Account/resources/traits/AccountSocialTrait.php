@@ -110,7 +110,9 @@ trait AccountSocialTrait
 
         if (!empty($attributes)) {
             foreach ($attributes as $key => $value) {
-                if ($self->hasAttribute($key) && empty($self->$key)) {
+                $attr = $self->getAttribute($key);
+
+                if ($self->hasAttribute($key) && empty($attr)) {
                     $self->setAttribute($key, $value);
                 }
             }
@@ -123,20 +125,24 @@ trait AccountSocialTrait
      */
     protected function appendFacebookAttributes(array $attributes)
     {
+        $login = null;
         $name = null;
+        $email = null;
+        $avatar = null;
+
         if (isset($attributes['name']) && !empty($attributes['name'])) {
             $name = $attributes['name'];
         }
 
-        $email = null;
         if (isset($attributes['email']) && !empty($attributes['email'])) {
-            $email = $attributes['email'];
+            $login = $email = $attributes['email'];
         }
 
         return [
-            'login' => $email,
-            'name' => $name,
+            'login' => $login,
+            'name' => trim($name),
             'email' => $email,
+            'avatar' => $avatar,
         ];
     }
 
@@ -146,17 +152,28 @@ trait AccountSocialTrait
      */
     protected function appendInstagramAttributes(array $attributes)
     {
+        $login = null;
         $name = null;
-        if (isset($attributes['data']) && isset($attributes['data']['full_name']) && !empty($attributes['data']['full_name'])) {
-            $name = $attributes['data']['full_name'];
+        $email = null;
+        $avatar = null;
+
+        if (isset($attributes['username']) && !empty($attributes['username'])) {
+            $login = $attributes['username'];
         }
 
-        $email = null;
+        if (isset($attributes['full_name']) && !empty($attributes['full_name'])) {
+            $name = $attributes['full_name'];
+        }
+
+        if (isset($attributes['profile_picture']) && !empty($attributes['profile_picture'])) {
+            $avatar = $attributes['profile_picture'];
+        }
 
         return [
-            'login' => $email,
-            'name' => $name,
+            'login' => $login,
+            'name' => trim($name),
             'email' => $email,
+            'avatar' => $avatar,
         ];
     }
 
@@ -166,24 +183,33 @@ trait AccountSocialTrait
      */
     protected function appendGithubAttributes(array $attributes)
     {
-        $name = $attributes['login'];
+        $login = null;
+        $name = null;
+        $email = null;
+        $avatar = null;
+
+        if (isset($attributes['login']) && !empty($attributes['login'])) {
+            $login = $name = $attributes['login'];
+        }
+
         if (isset($attributes['name']) && !empty($attributes['name'])) {
             $name = $attributes['name'];
         }
 
-        $email = null;
         if (isset($attributes['email']) && !empty($attributes['email'])) {
             $email = $attributes['email'];
+            if (empty($login)) {
+                $login = $email;
+            }
         }
 
-        $avatar = null;
         if (isset($attributes['avatar_url']) && !empty($attributes['avatar_url'])) {
             $avatar = $attributes['avatar_url'];
         }
 
         return [
-            'login' => $attributes['login'],
-            'name' => $name,
+            'login' => $login,
+            'name' => trim($name),
             'email' => $email,
             'avatar' => $avatar,
         ];
@@ -195,7 +221,15 @@ trait AccountSocialTrait
      */
     protected function appendGoogleAttributes(array $attributes)
     {
-        $name = $attributes['displayName'];
+        $login = null;
+        $name = null;
+        $email = null;
+        $avatar = null;
+
+        if (isset($attributes['displayName']) && !empty($attributes['displayName'])) {
+            $name = $attributes['displayName'];
+        }
+
         if (isset($attributes['name']) && isset($attributes['name']['familyName']) && !empty($attributes['name']['familyName'])) {
             $name = $attributes['name']['familyName'] . ' ';
             if (isset($attributes['name']['givenName']) && !empty($attributes['name']['givenName'])) {
@@ -203,18 +237,16 @@ trait AccountSocialTrait
             }
         }
 
-        $email = null;
         if (isset($attributes['emails']) && !empty($attributes['emails'])) {
-            $email = array_shift($attributes['emails'])['value'];
+            $login = $email = array_shift($attributes['emails'])['value'];
         }
 
-        $avatar = null;
         if (isset($attributes['image']) && !empty($attributes['image'])) {
             $avatar = $attributes['image']['url'];
         }
 
         return [
-            'login' => empty($email) ? ('google-' . $attributes['id']) : $email,
+            'login' => $login,
             'name' => trim($name),
             'email' => $email,
             'avatar' => $avatar,
@@ -227,23 +259,28 @@ trait AccountSocialTrait
      */
     protected function appendLinkedinAttributes(array $attributes)
     {
+        $login = null;
         $name = null;
+        $email = null;
+        $avatar = null;
+
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
             $name = $attributes['last_name'] . ' ';
         }
+
         if (isset($attributes['first_name']) && !empty($attributes['first_name'])) {
             $name .= $attributes['first_name'];
         }
 
-        $email = null;
         if (isset($attributes['email']) && !empty($attributes['email'])) {
-            $email = $attributes['email'];
+            $login = $email = $attributes['email'];
         }
 
         return [
-            'login' => $email,
+            'login' => $login,
             'name' => trim($name),
             'email' => $email,
+            'avatar' => $avatar,
         ];
     }
 
@@ -253,31 +290,42 @@ trait AccountSocialTrait
      */
     protected function appendLiveAttributes(array $attributes)
     {
+        $login = null;
         $name = null;
+        $email = null;
+        $avatar = null;
+
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
             $name = $attributes['last_name'] . ' ';
         }
+
         if (isset($attributes['first_name']) && !empty($attributes['first_name'])) {
             $name .= $attributes['first_name'];
         }
 
-        $email = null;
         if (isset($attributes['emails']) && !empty($attributes['emails'])) {
             if (isset($attributes['emails']['business']) && !empty($attributes['emails']['business'])) {
                 $email = $attributes['emails']['business'];
             }
+
             if (isset($attributes['emails']['account']) && !empty($attributes['emails']['account'])) {
                 $email = $attributes['emails']['account'];
             }
+
             if (isset($attributes['emails']['personal']) && !empty($attributes['emails']['personal'])) {
                 $email = $attributes['emails']['personal'];
+            }
+
+            if (!empty($email)) {
+                $login = $email;
             }
         }
 
         return [
-            'login' => $email,
+            'login' => $login,
             'name' => trim($name),
             'email' => $email,
+            'avatar' => $avatar,
         ];
     }
 
@@ -287,22 +335,31 @@ trait AccountSocialTrait
      */
     protected function appendTwitterAttributes(array $attributes)
     {
+        $login = null;
         $name = null;
+        $email = null;
+        $avatar = null;
+
+        if (isset($attributes['screen_name']) && !empty($attributes['screen_name'])) {
+            $login = $attributes['screen_name'];
+        }
+
         if (isset($attributes['name']) && !empty($attributes['name'])) {
             $name = $attributes['name'];
         }
 
-        $avatar = null;
         if (isset($attributes['profile_image_url']) && !empty($attributes['profile_image_url'])) {
             $avatar = $attributes['profile_image_url'];
         }
+
         if (isset($attributes['profile_image_url_https']) && !empty($attributes['profile_image_url_https'])) {
             $avatar = $attributes['profile_image_url_https'];
         }
 
         return [
-            'login' => $attributes['screen_name'],
+            'login' => $login,
             'name' => $name,
+            'email' => $email,
             'avatar' => $avatar,
         ];
     }
@@ -313,22 +370,31 @@ trait AccountSocialTrait
      */
     protected function appendVkontakteAttributes(array $attributes)
     {
+        $login = null;
         $name = null;
+        $email = null;
+        $avatar = null;
+
+        if (isset($attributes['screen_name']) && !empty($attributes['screen_name'])) {
+            $login = $attributes['screen_name'];
+        }
+
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
             $name = $attributes['last_name'] . ' ';
         }
+
         if (isset($attributes['first_name']) && !empty($attributes['first_name'])) {
             $name .= $attributes['first_name'];
         }
 
-        $avatar = null;
         if (isset($attributes['photo']) && !empty($attributes['photo'])) {
             $avatar = $attributes['photo'];
         }
 
         return [
-            'login' => $attributes['screen_name'],
+            'login' => $login,
             'name' => trim($name),
+            'email' => $email,
             'avatar' => $avatar,
         ];
     }
@@ -339,30 +405,38 @@ trait AccountSocialTrait
      */
     protected function appendYandexAttributes(array $attributes)
     {
+        $login = null;
         $name = null;
+        $email = null;
+        $avatar = null;
+
+        if (isset($attributes['login']) && !empty($attributes['login'])) {
+            $login = $attributes['login'];
+        }
+
         if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
             $name = $attributes['last_name'] . ' ';
         }
+
         if (isset($attributes['first_name']) && !empty($attributes['first_name'])) {
             $name .= $attributes['first_name'];
         }
+
         if (isset($attributes['real_name']) && !empty($attributes['real_name'])) {
             $name = $attributes['real_name'];
         }
 
-        $email = null;
         if (isset($attributes['default_email']) && !empty($attributes['default_email'])) {
             $email = $attributes['default_email'];
         }
 
-        $avatar = null;
-
         // @todo implement yandex avatar $attributes['default_avatar_id']
 
         return [
-            'login' => $attributes['login'],
+            'login' => $login,
             'name' => trim($name),
             'email' => $email,
+            'avatar' => $avatar,
         ];
     }
 }
