@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "89220ba90660bdf7eb175e2fb6a1eb2b",
-    "content-hash": "b3849fd7c92435b55b34413a59e98241",
+    "hash": "e933f481dbc5b654e7d3db70fa138dc4",
+    "content-hash": "c437eaee06bbb7b871d281fd8348d50c",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -410,16 +410,16 @@
         },
         {
             "name": "rmrevin/yii2-minify-view",
-            "version": "1.10.0",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-minify-view.git",
-                "reference": "2fd39c2220455d4432c3c7379e135da72474cddb"
+                "reference": "5d8d2a56fc98cd4166d3fcfa915855224e7af7eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/2fd39c2220455d4432c3c7379e135da72474cddb",
-                "reference": "2fd39c2220455d4432c3c7379e135da72474cddb",
+                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/5d8d2a56fc98cd4166d3fcfa915855224e7af7eb",
+                "reference": "5d8d2a56fc98cd4166d3fcfa915855224e7af7eb",
                 "shasum": ""
             },
             "require": {
@@ -451,7 +451,7 @@
                 "view",
                 "yii2"
             ],
-            "time": "2016-05-22 20:13:33"
+            "time": "2016-05-22 22:02:15"
         },
         {
             "name": "rmrevin/yii2-power-migration",
