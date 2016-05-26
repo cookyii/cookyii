@@ -152,7 +152,7 @@ $buildConfig = [
         '.description' => 'Compile all less styles',
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
-            'commandline' => './node_modules/.bin/gulp css/optimize',
+            'commandline' => './node_modules/.bin/gulp css',
         ],
     ],
 
