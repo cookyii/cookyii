@@ -27,6 +27,7 @@ return [
         '/vendor',
     ],
     'ignoreCategories' => [
+        'yii',
         'app',
     ],
     'only' => ['*.php'],

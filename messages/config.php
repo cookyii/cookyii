@@ -27,6 +27,7 @@ return [
         '/vendor',
     ],
     'ignoreCategories' => [
+        'yii',
         'cookyii',
         'cookyii.account',
         'cookyii.client',
