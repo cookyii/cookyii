@@ -112,16 +112,12 @@ class ActiveForm extends \yii\widgets\ActiveForm
     }
 
     /**
-     * @param string|null $icon
      * @param string $label
      * @param array $options
      * @return string
      */
-    public static function button($icon, $label, $options = [])
+    public static function button($label, $options = [])
     {
-        $icon = empty($icon) ? null : static::submitIcon($icon);
-        $label = trim(sprintf('%s %s', $icon, $label));
-
         if (!isset($options['ng-disabled'])) {
             $options['ng-disabled'] = 'inProgress';
         }
