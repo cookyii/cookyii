@@ -63,7 +63,6 @@ $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMes
                     echo $form->field($TemplateEditForm, 'use_layout')
                         ->label(false)
                         ->checkbox([
-                            'ng-icheck' => true,
                             'ng-if' => sprintf('data.code !== "%s"', $MessageModel::LAYOUT_CODE),
                         ]);
                     ?>

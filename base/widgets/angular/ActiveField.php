@@ -471,6 +471,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+        $options['ng-custom-checkbox'] = true;
 
         $this->beforeRenderInput(__METHOD__, $options);
 
@@ -486,6 +487,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
+        $options['ng-custom-radio'] = true;
 
         $this->beforeRenderInput(__METHOD__, $options);
 
@@ -506,7 +508,7 @@ class ActiveField extends \yii\widgets\ActiveField
                 $options = [
                     'value' => $value,
                     'label' => Html::tag('span', $label),
-                    'ng-icheck' => true,
+                    'ng-custom-checkbox' => true,
                     'ng-model' => ArrayHelper::remove($item_options, 'ng-model', sprintf('data.%s["%s"]', $this->attribute, $value)),
                 ];
 
@@ -539,7 +541,7 @@ class ActiveField extends \yii\widgets\ActiveField
                 $options = [
                     'value' => $value,
                     'label' => Html::tag('span', $label),
-                    'ng-icheck' => true,
+                    'ng-custom-radio' => true,
                     'ng-model' => ArrayHelper::remove($item_options, 'ng-model', sprintf('data.%s', $this->attribute)),
                 ];
 

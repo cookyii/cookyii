@@ -6,6 +6,8 @@
     .constant('datetimePickerConfig', datetimePickerConfig())
 
     .directive('ngIcheck', ['$timeout', 'iCheckConfig', iCheck])
+    .directive('ngCustomCheckbox', ['$timeout', '$compile', customCheckbox])
+    .directive('ngCustomRadio', ['$timeout', '$compile', customRadio])
     .directive('ngDatePicker', ['$timeout', 'datetimePickerConfig', DatePicker])
     .directive('ngTimePicker', ['$timeout', 'datetimePickerConfig', TimePicker])
     .directive('ngDatetimePicker', ['$timeout', 'datetimePickerConfig', DatetimePicker])
@@ -63,6 +65,78 @@
                 });
               }
             });
+        });
+      }
+    };
+  }
+
+  function customCheckbox($timeout, $compile) {
+    return {
+      restrict: 'A',
+      scope: {
+        ngModel: '='
+      },
+      link: function ($scope, $element, attrs) {
+        return $timeout(function () {
+
+          $scope.checked = $scope.ngModel;
+
+          $scope.$watch('ngModel', function (val) {
+            $scope.checked = val;
+          });
+
+          $scope.setValue = function () {
+            $scope.ngModel = !$element.prop('checked');
+          };
+
+          $element.on('change', function () {
+            $scope.$apply(function () {
+              $scope.ngModel = $element.prop('checked');
+            });
+          });
+
+          $element.css({
+            position: 'absolute',
+            left: '-1000px'
+          });
+
+          $element.after($compile('<i class="custom-checkbox fa fa-fw" ng-class="{\'fa-square\':!checked,\'fa-check-square\':checked}"></i>')($scope));
+        });
+      }
+    };
+  }
+
+  function customRadio($timeout, $compile) {
+    return {
+      restrict: 'A',
+      scope: {
+        ngModel: '='
+      },
+      link: function ($scope, $element, attrs) {
+        return $timeout(function () {
+
+          $scope.checked = ($scope.ngModel + '') === $element.val();
+
+          $scope.$watch('ngModel', function (val) {
+            $scope.checked = (val + '') === $element.val();
+          });
+
+          $scope.setValue = function () {
+            $scope.ngModel = $element.val();
+          };
+
+          $element.on('change', function () {
+            $scope.$apply(function () {
+              $scope.ngModel = $element.val();
+            });
+          });
+
+          $element.css({
+            position: 'absolute',
+            left: '-1000px'
+          });
+
+          $element.after($compile('<i class="custom-radio fa fa-fw" ng-class="{\'fa-circle-o\':!checked,\'fa-dot-circle-o\':checked}"></i>')($scope));
         });
       }
     };
