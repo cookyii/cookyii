@@ -205,7 +205,7 @@ class Media extends \yii\db\ActiveRecord
         /** @var \cookyii\modules\Media\media\InternalResource $Resource */
         $Resource = \Yii::createObject(
             \cookyii\modules\Media\media\InternalResource::className(), [
-                ['source' => $image]
+                ['source' => $image],
             ]
         );
 
@@ -251,7 +251,15 @@ class Media extends \yii\db\ActiveRecord
      */
     public function isImage()
     {
-        return @getimagesize($this->getAbsolutePath()) !== false;
+        return $this->getImageSize() !== false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getImageSize()
+    {
+        return @getimagesize($this->getAbsolutePath());
     }
 
     /**

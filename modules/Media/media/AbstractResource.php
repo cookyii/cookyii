@@ -52,7 +52,15 @@ abstract class AbstractResource extends \yii\base\Object implements ResourceInte
      */
     public function isImage()
     {
-        return @getimagesize($this->getTemp()) !== false;
+        return $this->getImageSize() !== false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getImageSize()
+    {
+        return @getimagesize($this->getTemp());
     }
 
     /**
