@@ -102,6 +102,7 @@ $buildConfig = [
         '.task' => [
             'class' => 'cookyii\build\tasks\ComposerTask',
             'composer' => '../composer.phar',
+            'noPlugins' => true,
         ],
         'update-fxp' => [
             '.description' => 'Update `fxp/composer-asset-plugin`',
