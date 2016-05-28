@@ -36,6 +36,26 @@ abstract class AbstractResource extends \yii\base\Object implements ResourceInte
     }
 
     /**
+     * @param mixed $source
+     * @param array $options
+     * @return static
+     */
+    public static function create($source, $options = [])
+    {
+        $options['source'] = $source;
+
+        return new static($options);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isImage()
+    {
+        return @getimagesize($this->getTemp()) !== false;
+    }
+
+    /**
      * @return string
      */
     public function getSha1()
@@ -65,14 +85,6 @@ abstract class AbstractResource extends \yii\base\Object implements ResourceInte
         $this->clear();
 
         chmod($file_path, 0664);
-
-        \Yii::warning(print_r([
-            'copy',
-            $this->getTemp(),
-            'to',
-            $file_path,
-            $result ? 'true' : 'false'
-        ], 1));
 
         return $result === true ? $file_path : false;
     }
