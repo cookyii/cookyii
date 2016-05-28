@@ -60,6 +60,9 @@ trait SocialAuthCallbackTrait
             case 'yandex':
                 $AccountQuery->byYandexId($attributes['id']);
                 break;
+            case 'odnoklassniki':
+                $AccountQuery->byOdnoklassnikiId($attributes['id']);
+                break;
         }
 
         $Account = $AccountQuery->one();

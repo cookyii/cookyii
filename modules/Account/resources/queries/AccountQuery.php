@@ -115,6 +115,15 @@ class AccountQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     * @param integer|array $odnoklassniki_user_id
+     * @return static
+     */
+    public function byOdnoklassnikiId($odnoklassniki_user_id)
+    {
+        return $this->bySocialId('odnoklassniki', $odnoklassniki_user_id);
+    }
+
+    /**
      * @param string|array $token
      * @return static
      */

@@ -106,6 +106,9 @@ trait AccountSocialTrait
             case 'yandex':
                 $attributes = $this->appendYandexAttributes($attributes);
                 break;
+            case 'odnoklassniki':
+                $attributes = $this->appendOdnoklassnikiAttributes($attributes);
+                break;
         }
 
         if (!empty($attributes)) {
@@ -431,6 +434,35 @@ trait AccountSocialTrait
         }
 
         // @todo implement yandex avatar $attributes['default_avatar_id']
+
+        return [
+            'login' => $login,
+            'name' => trim($name),
+            'email' => $email,
+            'avatar' => $avatar,
+        ];
+    }
+
+    /**
+     * @param array $attributes
+     * @return array
+     */
+    protected function appendOdnoklassnikiAttributes(array $attributes)
+    {
+        $login = null;
+        $name = null;
+        $email = null;
+        $avatar = null;
+
+        if (isset($attributes['last_name']) && !empty($attributes['last_name'])) {
+            $name = $attributes['last_name'] . ' ';
+        }
+
+        if (isset($attributes['first_name']) && !empty($attributes['first_name'])) {
+            $name .= $attributes['first_name'];
+        }
+
+        // @todo implement odnoklassniki avatar $attributes['photo_id']
 
         return [
             'login' => $login,
