@@ -45,6 +45,16 @@ class Odnoklassniki extends \yii\authclient\OAuth2
     /**
      * @inheritdoc
      */
+    protected function defaultNormalizeUserAttributeMap()
+    {
+        return [
+            'id' => 'uid',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function apiInternal($accessToken, $url, $method, array $params, array $headers)
     {
         $params['method'] = $this->getMethod($url);
