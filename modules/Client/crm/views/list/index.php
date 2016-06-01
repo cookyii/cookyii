@@ -131,7 +131,7 @@ function sortLink($type, $label)
                                 <span ng-show="client.account_id">#{{ client.account.id }} {{ client.account.name }}</span>
                             </td>
                             <td class="updated clickable" ng-click="clients.edit(client)">
-                                {{ client.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
+                                {{ client.updated_at.format }}
                             </td>
                             <td class="actions">
                                 <?php

@@ -89,7 +89,7 @@ angular.module('CrmApp')
             search: $scope.filter.search.query,
             sort: $scope.sort.order,
             page: loaded ? $scope.pagination.currentPage : page,
-            expand: 'account'
+            expand: 'account,created_at,updated_at'
           }, function (clients, headers) {
             var _headers = headers();
 
