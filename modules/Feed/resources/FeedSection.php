@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Feed\resources;
 
+use cookyii\helpers\ApiAttribute;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
@@ -28,8 +29,13 @@ use yii\helpers\Json;
  * @property integer $archived_at
  * @property integer $deleted_at
  * @property integer $activated_at
+ *
+ * @property \cookyii\modules\Feed\resources\FeedSection[] $parents
+ * @property \cookyii\modules\Feed\resources\FeedSection[] $children
+ * @property \cookyii\modules\Feed\resources\FeedItemSection[] $sectionItems
+ * @property \cookyii\modules\Feed\resources\FeedItem[] $items
  */
-class FeedSection extends \yii\db\ActiveRecord
+class FeedSection extends \cookyii\db\ActiveRecord
 {
 
     use \cookyii\db\traits\ActivationTrait,
@@ -41,8 +47,8 @@ class FeedSection extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\BlameableBehavior::className(),
-            \yii\behaviors\TimestampBehavior::className(),
+            \cookyii\behaviors\BlameableBehavior::className(),
+            \cookyii\behaviors\TimestampBehavior::className(),
         ];
     }
 
@@ -53,29 +59,13 @@ class FeedSection extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['created_at_format'] = function (FeedSection $Model) {
-            return Formatter()->asDatetime($Model->created_at);
-        };
-
-        $fields['updated_at_format'] = function (FeedSection $Model) {
-            return Formatter()->asDatetime($Model->updated_at);
-        };
-
-        $fields['published_at_format'] = function (FeedSection $Model) {
-            return Formatter()->asDatetime($Model->published_at);
-        };
-
-        $fields['archived_at_format'] = function (FeedSection $Model) {
-            return Formatter()->asDatetime($Model->archived_at);
-        };
-
-        $fields['deleted_at_format'] = function (FeedSection $Model) {
-            return Formatter()->asDatetime($Model->deleted_at);
-        };
-
-        $fields['activated_at_format'] = function (FeedSection $Model) {
-            return Formatter()->asDatetime($Model->activated_at);
-        };
+        unset(
+            $fields['meta'],
+            $fields['created_by'], $fields['updated_by'],
+            $fields['created_at'], $fields['updated_at'],
+            $fields['published_at'], $fields['archived_at'],
+            $fields['deleted_at'], $fields['activated_at']
+        );
 
         $fields['published'] = [$this, 'isPublished'];
         $fields['archived'] = [$this, 'isArchived'];
@@ -96,6 +86,13 @@ class FeedSection extends \yii\db\ActiveRecord
             return $Model->meta();
         };
 
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'updated_at');
+        ApiAttribute::datetimeFormat($fields, 'published_at');
+        ApiAttribute::datetimeFormat($fields, 'archived_at');
+        ApiAttribute::datetimeFormat($fields, 'deleted_at');
+        ApiAttribute::datetimeFormat($fields, 'activated_at');
+
         return $fields;
     }
 
@@ -111,7 +108,7 @@ class FeedSection extends \yii\db\ActiveRecord
                 [
                     'parent_id', 'sort', 'created_by', 'updated_by',
                     'created_at', 'updated_at', 'published_at', 'archived_at', 'activated_at', 'deleted_at',
-                ], 'integer'
+                ], 'integer',
             ],
 
             /** semantic validators */
@@ -220,6 +217,54 @@ class FeedSection extends \yii\db\ActiveRecord
         unset($Sections);
 
         return $result;
+    }
+
+    /**
+     * @return \cookyii\modules\Feed\resources\queries\FeedSectionQuery
+     */
+    public function getParents()
+    {
+        /** @var FeedSection $SectionModel */
+        $SectionModel = \Yii::createObject(FeedSection::className());
+
+        return $this->hasMany($SectionModel::className(), ['id' => 'parent_id'])
+            ->inverseOf('section');
+    }
+
+    /**
+     * @return \cookyii\modules\Feed\resources\queries\FeedSectionQuery
+     */
+    public function getChildren()
+    {
+        /** @var FeedSection $SectionModel */
+        $SectionModel = \Yii::createObject(FeedSection::className());
+
+        return $this->hasMany($SectionModel::className(), ['parent_id' => 'id'])
+            ->inverseOf('section');
+    }
+
+    /**
+     * @return \cookyii\modules\Feed\resources\queries\FeedItemSectionQuery
+     */
+    public function getSectionItems()
+    {
+        /** @var FeedItemSection $ItemSectionModel */
+        $ItemSectionModel = \Yii::createObject(FeedItemSection::className());
+
+        return $this->hasMany($ItemSectionModel::className(), ['section_id' => 'id'])
+            ->inverseOf('section');
+    }
+
+    /**
+     * @return \cookyii\modules\Feed\resources\queries\FeedItemQuery
+     */
+    public function getItems()
+    {
+        /** @var FeedItem $ItemModel */
+        $ItemModel = \Yii::createObject(FeedItem::className());
+
+        return $this->hasMany($ItemModel::className(), ['id' => 'item_id'])
+            ->via('sectionItems');
     }
 
     /**

@@ -39,8 +39,6 @@ $form = ActiveForm::begin([
 
             echo '<hr>';
 
-            echo Html::tag('label', Yii::t('cookyii.account', 'Roles'));
-
             echo $form->field($AccountEditForm, 'roles')
                 ->checkboxList($AccountEditForm::getRoleValues());
 

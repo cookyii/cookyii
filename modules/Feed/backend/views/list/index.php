@@ -7,7 +7,6 @@
  * @var yii\web\View $this
  */
 
-use cookyii\helpers\Material;
 use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
@@ -193,7 +192,7 @@ function sortLink($type, $label)
                                     <small>{{ item.slug }}</small>
                                 </h3>
 
-                                <small>{{ item.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}</small>
+                                <small>{{ item.updated_at.format }}</small>
 
                                 <p ng-bind-html="item.content_preview" class="clickable"
                                    ng-click="items.edit(item)"></p>

@@ -15,7 +15,7 @@ namespace cookyii\modules\Postman\resources;
  * @property integer $media_id
  * @property integer $embed
  */
-class PostmanMessageAttach extends \yii\db\ActiveRecord
+class PostmanMessageAttach extends \cookyii\db\ActiveRecord
 {
 
     /**

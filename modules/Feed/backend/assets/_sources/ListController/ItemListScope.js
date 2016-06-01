@@ -99,7 +99,7 @@ angular.module('BackendApp')
             section: $scope.filter.section.selected,
             sort: $scope.sort.order,
             page: loaded ? $scope.pagination.currentPage : page,
-            expand: 'picture_300'
+            expand: 'picture_300,created_at,updated_at'
           }, function (response, headers) {
             var _headers = headers();
 

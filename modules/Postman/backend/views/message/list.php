@@ -139,7 +139,7 @@ function sortLink($type, $label)
                                 </div>
                             </td>
                             <td class="created clickable" ng-click="messages.edit(message)">
-                                {{ message.created_at * 1000 | date:'dd MMM yyyy HH:mm' }}
+                                {{ message.created_at.format }}
                             </td>
                             <td class="sent clickable" ng-click="messages.edit(message)">
                                 <?php
@@ -152,12 +152,12 @@ function sortLink($type, $label)
 
                                 echo Html::tag('span', 'in queue', [
                                     'class' => 'not-sent text-italic text-light',
-                                    'ng-hide' => 'message.sent_at',
+                                    'ng-hide' => 'message.sent',
                                 ]);
 
-                                echo Html::tag('span', '{{ message.sent_at * 1000 | date:\'dd MMM yyyy HH:mm\' }}', [
+                                echo Html::tag('span', '{{ message.sent_at.format }}', [
                                     'class' => 'datetime',
-                                    'ng-show' => 'message.sent_at',
+                                    'ng-show' => 'message.sent',
                                 ]);
                                 ?>
                             </td>

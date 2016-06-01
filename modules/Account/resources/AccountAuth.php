@@ -16,7 +16,7 @@ namespace cookyii\modules\Account\resources;
  * @property integer $account_id
  * @property string $token
  */
-class AccountAuth extends \yii\db\ActiveRecord
+class AccountAuth extends \cookyii\db\ActiveRecord
 {
 
     static $providers = ['facebook', 'github', 'google', 'linkedin', 'live', 'twitter', 'vkontakte', 'yandex'];

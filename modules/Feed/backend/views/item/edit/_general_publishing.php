@@ -19,5 +19,5 @@ echo $ActiveForm->field($ItemEditForm, 'archived_at')
     ->textInput([
         'ng-date-picker' => true,
         'ng-date-start' => 'data.published_at',
-        'placeholder' => Formatter()->asDate(time() + (86400 * 180), 'dd.MM.yyyy'),
+        'placeholder' => Yii::t('cookyii.feed', 'Never'),
     ]);

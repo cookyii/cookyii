@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\resources;
 
+use cookyii\helpers\ApiAttribute;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -32,11 +33,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property \cookyii\modules\Account\resources\helpers\AccountPresent $presentHelper
  * @property \cookyii\modules\Account\resources\helpers\AccountNotification $notificationHelper
- *
- * @method \cookyii\modules\Account\resources\queries\AccountQuery hasMany($class, $link)
- * @method \cookyii\modules\Account\resources\queries\AccountQuery hasOne($class, $link)
  */
-class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \cookyii\interfaces\AccountInterface
+class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterface, \cookyii\interfaces\AccountInterface
 {
 
     use \cookyii\modules\Account\resources\traits\AccountSocialTrait,
@@ -53,20 +51,10 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public function init()
-    {
-        parent::init();
-
-        $this->registerEventHandlers();
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
+            \cookyii\behaviors\TimestampBehavior::className(),
         ];
     }
 
@@ -77,23 +65,10 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $fields = parent::fields();
 
-        unset($fields['password_hash'], $fields['token'], $fields['auth_key']);
-
-        $fields['created_at_format'] = function (Account $Model) {
-            return Formatter()->asDatetime($Model->created_at);
-        };
-
-        $fields['updated_at_format'] = function (Account $Model) {
-            return Formatter()->asDatetime($Model->updated_at);
-        };
-
-        $fields['deleted_at_format'] = function (Account $Model) {
-            return Formatter()->asDatetime($Model->deleted_at);
-        };
-
-        $fields['activated_at_format'] = function (Account $Model) {
-            return Formatter()->asDatetime($Model->activated_at);
-        };
+        unset(
+            $fields['password_hash'], $fields['token'], $fields['auth_key'],
+            $fields['created_at'], $fields['updated_at'], $fields['activated_at'], $fields['deleted_at']
+        );
 
         $fields['avatar'] = [$this, 'getAvatar'];
 
@@ -143,10 +118,15 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $fields['alerts'] = function (self $Model) {
             $Alerts = $this->alerts;
 
-            return empty($Alerts) ? [] : ArrayHelper::getColumn($Alerts, function (\resources\AccountAlert $Model) {
+            return empty($Alerts) ? [] : ArrayHelper::getColumn($Alerts, function (AccountAlert $Model) {
                 return $Model->toArray();
             });
         };
+
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'updated_at');
+        ApiAttribute::datetimeFormat($fields, 'activated_at');
+        ApiAttribute::datetimeFormat($fields, 'deleted_at');
 
         return $fields;
     }
@@ -488,7 +468,7 @@ class Account extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * Register event handlers
      */
-    private function registerEventHandlers()
+    protected function registerEventHandlers()
     {
         $this->on(
             static::EVENT_BEFORE_INSERT,

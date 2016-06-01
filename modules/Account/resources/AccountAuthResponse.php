@@ -6,6 +6,7 @@
  */
 
 namespace cookyii\modules\Account\resources;
+
 use yii\helpers\Json;
 
 /**
@@ -19,7 +20,7 @@ use yii\helpers\Json;
  * @property string $response
  * @property string $result
  */
-class AccountAuthResponse extends \yii\db\ActiveRecord
+class AccountAuthResponse extends \cookyii\db\ActiveRecord
 {
 
     /**

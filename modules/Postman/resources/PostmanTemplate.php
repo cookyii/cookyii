@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\resources;
 
+use cookyii\helpers\ApiAttribute;
 use yii\helpers\Json;
 
 /**
@@ -27,7 +28,7 @@ use yii\helpers\Json;
  * @property integer $updated_at
  * @property integer $deleted_at
  */
-class PostmanTemplate extends \yii\db\ActiveRecord
+class PostmanTemplate extends \cookyii\db\ActiveRecord
 {
 
     use \cookyii\db\traits\SoftDeleteTrait;
@@ -38,7 +39,7 @@ class PostmanTemplate extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
+            \cookyii\behaviors\TimestampBehavior::className(),
         ];
     }
 
@@ -49,21 +50,29 @@ class PostmanTemplate extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['created_at_format'] = function (PostmanTemplate $Model) {
-            return Formatter()->asDatetime($Model->created_at);
-        };
-
-        $fields['updated_at_format'] = function (PostmanTemplate $Model) {
-            return Formatter()->asDatetime($Model->updated_at);
-        };
-
-        $fields['deleted_at_format'] = function (PostmanTemplate $Model) {
-            return Formatter()->asDatetime($Model->deleted_at);
-        };
+        unset(
+            $fields['code'],
+            $fields['created_at'], $fields['updated_at'], $fields['deleted_at']
+        );
 
         $fields['address'] = [$this, 'expandAddress'];
         $fields['params'] = [$this, 'expandParams'];
+
         $fields['deleted'] = [$this, 'isDeleted'];
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'updated_at');
+        ApiAttribute::datetimeFormat($fields, 'deleted_at');
 
         return $fields;
     }

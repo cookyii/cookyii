@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Media\resources;
 
+use cookyii\helpers\ApiAttribute;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
 
@@ -25,7 +26,7 @@ use yii\helpers\StringHelper;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Media extends \yii\db\ActiveRecord
+class Media extends \cookyii\db\ActiveRecord
 {
 
     /** @var string */
@@ -40,19 +41,9 @@ class Media extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\BlameableBehavior::className(),
-            \yii\behaviors\TimestampBehavior::className(),
+            \cookyii\behaviors\BlameableBehavior::className(),
+            \cookyii\behaviors\TimestampBehavior::className(),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-
-        $this->events();
     }
 
     /**
@@ -62,13 +53,23 @@ class Media extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['created_at_format'] = function (Media $Model) {
-            return Formatter()->asDatetime($Model->created_at);
-        };
+        unset(
+            $fields['created_by'], $fields['updated_by'],
+            $fields['created_at'], $fields['updated_at']
+        );
 
-        $fields['updated_at_format'] = function (Media $Model) {
-            return Formatter()->asDatetime($Model->updated_at);
-        };
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'updated_at');
 
         return $fields;
     }
@@ -297,9 +298,9 @@ class Media extends \yii\db\ActiveRecord
     }
 
     /**
-     * Events
+     * Register event handlers
      */
-    private function events()
+    protected function registerEventHandlers()
     {
         $this->on(static::EVENT_BEFORE_VALIDATE, function (\yii\base\ModelEvent $Event) {
             /** @var static $Model */

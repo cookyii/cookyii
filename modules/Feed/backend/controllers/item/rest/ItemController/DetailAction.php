@@ -26,13 +26,13 @@ class DetailAction extends \cookyii\rest\Action
 
         $result = $Model->toArray([], ['picture_300', 'sections', 'meta']);
 
-        $result['published_at'] = empty($result['published_at'])
+        $result['published_at'] = empty($Model->published_at)
             ? null
-            : Formatter()->asDatetime($result['published_at'], 'dd.MM.yyyy HH:mm');
+            : Formatter()->asDatetime($Model->published_at, 'dd.MM.yyyy HH:mm');
 
-        $result['archived_at'] = empty($result['archived_at'])
+        $result['archived_at'] = empty($Model->archived_at)
             ? null
-            : Formatter()->asDate($result['archived_at'], 'dd.MM.yyyy');
+            : Formatter()->asDate($Model->archived_at, 'dd.MM.yyyy');
 
         $result['hash'] = sha1(serialize($result));
 

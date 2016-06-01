@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\resources;
 
+use cookyii\helpers\ApiAttribute;
 
 /**
  * Class AccountAlert
@@ -23,7 +24,7 @@ namespace cookyii\modules\Account\resources;
  *
  * @property \cookyii\modules\Account\resources\Account $account
  */
-class AccountAlert extends \yii\db\ActiveRecord
+class AccountAlert extends \cookyii\db\ActiveRecord
 {
 
     use \cookyii\db\traits\SoftDeleteTrait;
@@ -46,7 +47,10 @@ class AccountAlert extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        unset($fields['account_id']);
+        unset(
+            $fields['account_id'],
+            $fields['created_at'], $fields['updated_at'], $fields['deleted_at']
+        );
 
         $fields['class'] = function (self $Model) {
             switch ($Model->type) {
@@ -69,6 +73,20 @@ class AccountAlert extends \yii\db\ActiveRecord
 
             return $result;
         };
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'updated_at');
+        ApiAttribute::datetimeFormat($fields, 'deleted_at');
 
         return $fields;
     }

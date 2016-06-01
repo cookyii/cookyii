@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Client\resources;
 
+use cookyii\helpers\ApiAttribute;
+
 /**
  * Class ClientProperty
  * @package cookyii\modules\Client\resources
@@ -17,7 +19,7 @@ namespace cookyii\modules\Client\resources;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class ClientProperty extends \yii\db\ActiveRecord
+class ClientProperty extends \cookyii\db\ActiveRecord
 {
 
     /**
@@ -26,8 +28,36 @@ class ClientProperty extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
+            \cookyii\behaviors\TimestampBehavior::className(),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        unset(
+            $fields['client_id'],
+            $fields['created_at'], $fields['updated_at']
+        );
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'updated_at');
+
+        return $fields;
     }
 
     /**

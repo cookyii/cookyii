@@ -133,7 +133,7 @@ function sortLink($type, $label)
                             <td class="id clickable" ng-click="pages.edit(page)">{{ page.id }}</td>
                             <td class="title clickable" ng-click="pages.edit(page)">{{ page.title }}</td>
                             <td class="updated clickable" ng-click="pages.edit(page)">
-                                {{ page.updated_at * 1000 | date:'dd MMM yyyy HH:mm' }}
+                                {{ page.updated_at.format }}
                             </td>
                             <td class="actions">
                                 <?php

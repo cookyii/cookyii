@@ -13,8 +13,11 @@ namespace cookyii\modules\Feed\resources;
  *
  * @property integer $item_id
  * @property integer $section_id
+ *
+ * @property \cookyii\modules\Feed\resources\FeedItem $item
+ * @property \cookyii\modules\Feed\resources\FeedSection $sections
  */
-class FeedItemSection extends \yii\db\ActiveRecord
+class FeedItemSection extends \cookyii\db\ActiveRecord
 {
 
     /**
@@ -31,6 +34,30 @@ class FeedItemSection extends \yii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @return queries\FeedItemQuery
+     */
+    public function getItem()
+    {
+        /** @var FeedItem $ItemModel */
+        $ItemModel = \Yii::createObject(FeedItem::className());
+
+        return $this->hasOne($ItemModel::className(), ['id' => 'item_id'])
+            ->inverseOf('itemSections');
+    }
+
+    /**
+     * @return queries\FeedSectionQuery
+     */
+    public function getSection()
+    {
+        /** @var FeedSection $SectionModel */
+        $SectionModel = \Yii::createObject(FeedSection::className());
+
+        return $this->hasOne($SectionModel::className(), ['id' => 'section_id'])
+            ->inverseOf('sectionItems');
     }
 
     /**

@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\resources;
 
+use cookyii\helpers\ApiAttribute;
 use cookyii\helpers\Premailer;
 use cookyii\modules\Postman\jobs\SendMailJob;
 use yii\helpers\Html;
@@ -30,7 +31,7 @@ use yii\helpers\Json;
  * @property integer $sent_at
  * @property integer $deleted_at
  */
-class PostmanMessage extends \yii\db\ActiveRecord
+class PostmanMessage extends \cookyii\db\ActiveRecord
 {
 
     use \cookyii\db\traits\SoftDeleteTrait,
@@ -54,17 +55,13 @@ class PostmanMessage extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => \yii\behaviors\TimestampBehavior::className(),
+                'class' => \cookyii\behaviors\TimestampBehavior::className(),
                 'updatedAtAttribute' => false,
             ],
             [
-                'class' => \yii\behaviors\AttributeBehavior::className(),
-                'attributes' => [
-                    static::EVENT_BEFORE_INSERT => 'code',
-                ],
-                'value' => function ($event) {
-                    return Security()->generateRandomString(32);
-                },
+                'class' => \cookyii\behaviors\UniqueCodeIdBehavior::className(),
+                'codeAtAttribute' => 'code',
+                'length' => 32,
             ],
         ];
     }
@@ -76,30 +73,30 @@ class PostmanMessage extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        unset($fields['code']);
-
-        $fields['created_at_format'] = function (PostmanMessage $Model) {
-            return Formatter()->asDatetime($Model->created_at);
-        };
-
-        $fields['scheduled_at_format'] = function (PostmanMessage $Model) {
-            return Formatter()->asDatetime($Model->scheduled_at);
-        };
-
-        $fields['executed_at_format'] = function (PostmanMessage $Model) {
-            return Formatter()->asDatetime($Model->executed_at);
-        };
-
-        $fields['sent_at_format'] = function (PostmanMessage $Model) {
-            return Formatter()->asDatetime($Model->sent_at);
-        };
-
-        $fields['deleted_at_format'] = function (PostmanMessage $Model) {
-            return Formatter()->asDatetime($Model->deleted_at);
-        };
+        unset(
+            $fields['code'],
+            $fields['created_at'], $fields['scheduled_at'], $fields['sent_at'], $fields['deleted_at']
+        );
 
         $fields['address'] = [$this, 'expandAddress'];
+
+        $fields['sent'] = [$this, 'isSent'];
         $fields['deleted'] = [$this, 'isDeleted'];
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'scheduled_at');
+        ApiAttribute::datetimeFormat($fields, 'sent_at');
+        ApiAttribute::datetimeFormat($fields, 'deleted_at');
 
         return $fields;
     }
@@ -121,6 +118,14 @@ class PostmanMessage extends \yii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSent()
+    {
+        return !empty($this->sent_at);
     }
 
     /**

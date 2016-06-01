@@ -88,7 +88,8 @@ angular.module('BackendApp')
             deleted: $scope.filter.deleted,
             search: $scope.filter.search.query,
             sort: $scope.sort.order,
-            page: loaded ? $scope.pagination.currentPage : page
+            page: loaded ? $scope.pagination.currentPage : page,
+            expand: 'created_at,updated_at'
           }, function (response, headers) {
             var _headers = headers();
 

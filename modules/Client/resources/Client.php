@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Client\resources;
 
+use cookyii\helpers\ApiAttribute;
+
 /**
  * Class Client
  * @package resources
@@ -25,11 +27,8 @@ namespace cookyii\modules\Client\resources;
  *
  * @property \cookyii\modules\Client\resources\helpers\ClientPresent $presentHelper
  * @property \cookyii\modules\Client\resources\helpers\ClientAccount $accountHelper
- *
- * @method \cookyii\modules\Client\resources\queries\ClientQuery hasMany($class, $link)
- * @method \cookyii\modules\Client\resources\queries\ClientQuery hasOne($class, $link)
  */
-class Client extends \yii\db\ActiveRecord
+class Client extends \cookyii\db\ActiveRecord
 {
 
     use \cookyii\traits\GravatrTrait,
@@ -41,7 +40,7 @@ class Client extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
+            \cookyii\behaviors\TimestampBehavior::className(),
         ];
     }
 
@@ -52,17 +51,10 @@ class Client extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['created_at_format'] = function (Client $Model) {
-            return Formatter()->asDatetime($Model->created_at);
-        };
-
-        $fields['updated_at_format'] = function (Client $Model) {
-            return Formatter()->asDatetime($Model->updated_at);
-        };
-
-        $fields['deleted_at_format'] = function (Client $Model) {
-            return Formatter()->asDatetime($Model->deleted_at);
-        };
+        unset(
+            $fields['account_id'],
+            $fields['created_at'], $fields['updated_at'], $fields['deleted_at']
+        );
 
         $fields['avatar'] = [$this, 'getAvatar'];
 
@@ -102,6 +94,10 @@ class Client extends \yii\db\ActiveRecord
 
             return $result;
         };
+
+        ApiAttribute::datetimeFormat($fields, 'created_at');
+        ApiAttribute::datetimeFormat($fields, 'updated_at');
+        ApiAttribute::datetimeFormat($fields, 'deleted_at');
 
         return $fields;
     }
