@@ -29,7 +29,7 @@ if (!empty($modules)) {
     foreach ($modules as $module => $conf) {
         $Module = Yii::$app->getModule($module);
 
-        if ($Module instanceof \backend\interfaces\BackendModuleInterface) {
+        if ($Module instanceof \cookyii\interfaces\BackendModuleInterface) {
             $menu = array_merge($menu, $Module->menu($this->context));
         }
     }

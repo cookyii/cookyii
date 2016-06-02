@@ -14,7 +14,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Feed\backend
  */
-class Module extends \yii\base\Module implements \backend\interfaces\BackendModuleInterface
+class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModuleInterface
 {
 
     /**

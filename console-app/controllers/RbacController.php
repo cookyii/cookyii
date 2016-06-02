@@ -37,8 +37,7 @@ class RbacController extends \rmrevin\yii\rbac\Command
     public $backendMerge = [
         'cookyii\modules\Feed\backend\Permissions',
         'cookyii\modules\Account\backend\Permissions',
-        'cookyii\modules\Account\crm\Permissions',
-        'cookyii\modules\Client\crm\Permissions',
+        'cookyii\modules\Client\backend\Permissions',
         'cookyii\modules\Page\backend\Permissions',
         'cookyii\modules\Translation\backend\Permissions',
         'cookyii\modules\Postman\backend\Permissions',
@@ -49,12 +48,7 @@ class RbacController extends \rmrevin\yii\rbac\Command
      */
     protected function roles()
     {
-        return [
-            F::Role(Roles::ADMIN, 'Administrator'),
-            F::Role(Roles::MANAGER, 'Manager'),
-            F::Role(Roles::CLIENT, 'Client'),
-            F::Role(Roles::USER, 'User'),
-        ];
+        return \common\Roles::getAllRoles();
     }
 
     /**
@@ -132,7 +126,7 @@ class RbacController extends \rmrevin\yii\rbac\Command
             ],
             Roles::MANAGER => [
                 backend\Permissions::ACCESS,
-                Client\crm\Permissions::ACCESS,
+                Client\backend\Permissions::ACCESS,
                 Page\backend\Permissions::ACCESS,
                 Translation\backend\Permissions::ACCESS,
                 Postman\backend\Permissions::ACCESS,

@@ -92,4 +92,4 @@ class ClientQuery extends \yii\db\ActiveQuery
 
         return $this;
     }
-} 
+}

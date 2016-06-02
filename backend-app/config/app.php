@@ -22,6 +22,7 @@ return array_merge($config, [
     'modules' => [
         'feed' => cookyii\modules\Feed\backend\Module::className(),
         'page' => cookyii\modules\Page\backend\Module::className(),
+        'client' => cookyii\modules\Client\backend\Module::className(),
         'account' => cookyii\modules\Account\backend\Module::className(),
         'translation' => cookyii\modules\Translation\backend\Module::className(),
         'media' => $params['module.media'],
@@ -42,7 +43,6 @@ return array_merge($config, [
         'urlManager' => $params['component.urlManager.backend'],
         'urlManager.frontend' => $params['component.urlManager.frontend'],
         'urlManager.backend' => $params['component.urlManager.backend'],
-        'urlManager.crm' => $params['component.urlManager.crm'],
         'authManager' => $params['component.authManager'],
         'authClientCollection' => $params['component.authClientCollection'],
         'i18n' => $params['component.i18n'],

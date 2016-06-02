@@ -10,7 +10,7 @@ namespace cookyii\modules\Page\frontend;
  * Class Module
  * @package cookyii\modules\Page\frontend
  */
-class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements \yii\base\BootstrapInterface, \cookyii\interfaces\FrontendModuleInterface
 {
 
     /**

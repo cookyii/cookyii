@@ -13,7 +13,7 @@ use cookyii\modules\Account;
  * Class Module
  * @package cookyii\modules\Account\frontend
  */
-class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements \yii\base\BootstrapInterface, \cookyii\interfaces\FrontendModuleInterface
 {
 
     public $defaultRoute = 'sign/in';

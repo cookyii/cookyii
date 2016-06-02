@@ -42,9 +42,6 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
             'rsync -rt ./backend-app/ ../project/backend-app/ --exclude=runtime',
             'rsync -rt ./backend-assets/ ../project/backend-assets/',
             'rsync -rt ./backend-modules/ ../project/backend-modules/',
-            'rsync -rt ./crm-app/ ../project/crm-app/ --exclude=runtime',
-            'rsync -rt ./crm-assets/ ../project/crm-assets/',
-            'rsync -rt ./crm-modules/ ../project/crm-modules/',
         ];
 
         // project files

@@ -78,9 +78,7 @@
       "frontend\\": "./frontend-app",
       "frontend\\modules\\": "./frontend-modules",
       "backend\\": "./backend-app",
-      "backend\\modules\\": "./backend-modules",
-      "crm\\": "./crm-app",
-      "crm\\modules\\": "./crm-modules"
+      "backend\\modules\\": "./backend-modules"
     }
   },
   "extra": {

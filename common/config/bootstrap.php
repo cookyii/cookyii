@@ -25,7 +25,3 @@ Yii::setAlias('frontend/modules', '@base/frontend-modules');
 Yii::setAlias('backend', '@base/backend-app');
 Yii::setAlias('backend/assets', '@base/backend-assets');
 Yii::setAlias('backend/modules', '@base/backend-modules');
-
-Yii::setAlias('crm', '@base/crm-app');
-Yii::setAlias('crm/assets', '@base/crm-assets');
-Yii::setAlias('crm/modules', '@base/crm-modules');

@@ -10,12 +10,11 @@ namespace cookyii\modules\Account\resources\helpers;
 /**
  * Class AccountNotification
  * @package cookyii\modules\Account\resources\helpers
+ *
+ * @property \cookyii\modules\Account\resources\Account $Model
  */
-class AccountNotification extends \cookyii\helpers\AbstractNotificator
+class AccountNotification extends \cookyii\db\helpers\AbstractHelper
 {
-
-    /** @var \cookyii\modules\Account\resources\Account */
-    public $Model;
 
     /**
      * @param string $template_code

@@ -51,7 +51,7 @@ $buildConfig = [
         '.depends' => [
             'environment/check',
             'clear',
-            'composer/selfupdate', 'composer/update-fxp', 'composer/install-prod',
+            'composer/selfupdate', 'composer/install-prod',
             'npm/install', 'bower/update', 'less',
             'migrate', 'rbac',
         ],
@@ -62,7 +62,7 @@ $buildConfig = [
         '.depends' => [
             'environment/check',
             'clear',
-            'composer/selfupdate', 'composer/update-fxp', 'composer/install',
+            'composer/selfupdate', 'composer/install',
             'npm/install', 'bower/update', 'less',
             'migrate', 'rbac',
         ],
@@ -73,7 +73,7 @@ $buildConfig = [
         '.depends' => [
             'environment/check',
             'clear',
-            'composer/selfupdate', 'composer/update-fxp', 'composer/install',
+            'composer/selfupdate', 'composer/install',
             'npm/install', 'bower/update', 'less',
             'migrate', 'rbac',
         ],
@@ -103,13 +103,6 @@ $buildConfig = [
             'class' => 'cookyii\build\tasks\ComposerTask',
             'composer' => '../composer.phar',
             'noPlugins' => true,
-        ],
-        'update-fxp' => [
-            '.description' => 'Update `fxp/composer-asset-plugin`',
-            '.task' => [
-                'class' => 'cookyii\build\tasks\CommandTask',
-                'commandline' => '../composer.phar global require "fxp/composer-asset-plugin:~1.1.0"',
-            ],
         ],
     ],
 

@@ -39,7 +39,6 @@ return array_merge($config, [
         'cache.query' => $params['component.cache.query'],
         'urlManager.frontend' => $params['component.urlManager.frontend'],
         'urlManager.backend' => $params['component.urlManager.backend'],
-        'urlManager.crm' => $params['component.urlManager.crm'],
         'authManager' => $params['component.authManager'],
         'i18n' => $params['component.i18n'],
         'formatter' => $params['component.formatter'],

@@ -12,12 +12,11 @@ use cookyii\modules\Account;
 /**
  * Class ClientAccount
  * @package cookyii\modules\Client\resources\helpers
+ *
+ * @property \cookyii\modules\Client\resources\Client $Model
  */
-class ClientAccount extends \yii\base\Object
+class ClientAccount extends \cookyii\db\helpers\AbstractHelper
 {
-
-    /** @var \cookyii\modules\Client\resources\Client */
-    public $Model;
 
     /**
      * @param null|string $name

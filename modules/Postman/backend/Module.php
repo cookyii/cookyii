@@ -13,7 +13,7 @@ use rmrevin\yii\fontawesome\FA;
  * Class Module
  * @package cookyii\modules\Postman\backend
  */
-class Module extends \cookyii\modules\Postman\Module implements \backend\interfaces\BackendModuleInterface
+class Module extends \cookyii\modules\Postman\Module implements \cookyii\interfaces\BackendModuleInterface
 {
 
     /**

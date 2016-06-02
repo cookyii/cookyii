@@ -7,7 +7,6 @@
 
 $frontend = parse_url(FRONTEND_URL);
 $backend = parse_url(BACKEND_URL);
-$crm = parse_url(CRM_URL);
 
 if (empty($frontend)) {
     throw new \yii\base\InvalidConfigException('You must specify the url for the frontend application (FRONTEND_URL).');
@@ -15,10 +14,6 @@ if (empty($frontend)) {
 
 if (empty($backend)) {
     throw new \yii\base\InvalidConfigException('You must specify the url for the backend application (BACKEND_URL).');
-}
-
-if (empty($crm)) {
-    throw new \yii\base\InvalidConfigException('You must specify the url for the crm application (CRM_URL).');
 }
 
 $cookieDomain = str_replace('backend', '', parse_url(BACKEND_URL, PHP_URL_HOST));
@@ -129,15 +124,6 @@ return [
         'showScriptName' => false,
         'cache' => false,
         'rules' => require(\Yii::getAlias('@backend/config/urls.php')),
-    ],
-    'component.urlManager.crm' => [
-        'class' => yii\web\UrlManager::className(),
-        'baseUrl' => isset($crm['path']) ? $crm['path'] : '/',
-        'hostInfo' => sprintf('%s://%s', $crm['scheme'], $crm['host']),
-        'enablePrettyUrl' => true,
-        'showScriptName' => false,
-        'cache' => false,
-        'rules' => require(\Yii::getAlias('@crm/config/urls.php')),
     ],
     'component.request' => [
         'cookieValidationKey' => COOKIE_VALIDATION_KEY,

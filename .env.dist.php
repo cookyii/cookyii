@@ -27,7 +27,6 @@ define('DB_DSN', 'mysql:unix_socket=/var/run/mysqld/mysqld.sock;dbname=' . DB_BA
 // ----
 define('FRONTEND_URL', 'http://<domain>');
 define('BACKEND_URL', 'http://backend.<domain>');
-define('CRM_URL', 'http://crm.<domain>');
 
 // SMTP
 // ----

@@ -38,15 +38,23 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
 {
 
     use \cookyii\modules\Account\resources\traits\AccountSocialTrait,
-        \cookyii\traits\GravatrTrait,
         \cookyii\db\traits\ActivationTrait,
         \cookyii\db\traits\SoftDeleteTrait;
 
+    /**
+     * @var string
+     */
     public $password;
 
-    protected $_presentHelper = null;
+    /**
+     * @var string
+     */
+    public $presentHelperClass = 'cookyii\\modules\\Account\\resources\\helpers\\AccountPresent';
 
-    protected $_notificationHelper = null;
+    /**
+     * @var string
+     */
+    public $notificationHelperClass = 'cookyii\\modules\\Account\\resources\\helpers\\AccountNotification';
 
     /**
      * @inheritdoc
@@ -56,6 +64,15 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
         return [
             \cookyii\behaviors\TimestampBehavior::className(),
         ];
+    }
+
+    /**
+     * Register event handlers
+     */
+    protected function registerEventHandlers()
+    {
+        $this->on(static::EVENT_BEFORE_INSERT, [$this, 'appendDataBeforeInsert']);
+        $this->on(static::EVENT_BEFORE_UPDATE, [$this, 'updatePasswordHashBeforeUpdate']);
     }
 
     /**
@@ -70,7 +87,9 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
             $fields['created_at'], $fields['updated_at'], $fields['activated_at'], $fields['deleted_at']
         );
 
-        $fields['avatar'] = [$this, 'getAvatar'];
+        $fields['avatar'] = function (self $Model) {
+            return $Model->presentHelper->avatar;
+        };
 
         $fields['deleted'] = [$this, 'isDeleted'];
         $fields['activated'] = [$this, 'isActivated'];
@@ -184,15 +203,6 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
         return $this->gender === static::FEMALE;
     }
 
-    /**
-     * @return string
-     * @throws \yii\base\Exception
-     */
-    public function getAvatar()
-    {
-        return $this->getGravatar();
-    }
-
     /** @var array */
     private $_access = [];
 
@@ -229,14 +239,7 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
      */
     public function getPresentHelper()
     {
-        if ($this->_presentHelper === null) {
-            $this->_presentHelper = \Yii::createObject([
-                'class' => \cookyii\modules\Account\resources\helpers\AccountPresent::className(),
-                'Model' => $this,
-            ]);
-        }
-
-        return $this->_presentHelper;
+        return $this->getHelper($this->presentHelperClass);
     }
 
     /**
@@ -245,14 +248,7 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
      */
     public function getNotificationHelper()
     {
-        if ($this->_notificationHelper === null) {
-            $this->_notificationHelper = \Yii::createObject([
-                'class' => \cookyii\modules\Account\resources\helpers\AccountNotification::className(),
-                'Model' => $this,
-            ]);
-        }
-
-        return $this->_notificationHelper;
+        return $this->getHelper($this->notificationHelperClass);
     }
 
     /**
@@ -415,7 +411,10 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
         /** @var \cookyii\modules\Account\resources\AccountAlert $AccountAlertModel */
         $AccountAlertModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountAlert::className());
 
-        return $this->hasMany($AccountAlertModel::className(), ['account_id' => 'id'])
+        /** @var \cookyii\modules\Account\resources\queries\AccountAlertQuery $Query */
+        $Query = $this->hasMany($AccountAlertModel::className(), ['account_id' => 'id']);
+
+        return $Query
             ->withoutDeleted();
     }
 
@@ -466,32 +465,32 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
     }
 
     /**
-     * Register event handlers
+     * @param \yii\base\ModelEvent $Event
+     * @throws \yii\base\Exception
      */
-    protected function registerEventHandlers()
+    public function appendDataBeforeInsert(\yii\base\ModelEvent $Event)
     {
-        $this->on(
-            static::EVENT_BEFORE_INSERT,
-            function (\yii\base\ModelEvent $Event) {
-                /** @var static $Model */
-                $Model = $Event->sender;
-                $Model->password_hash = empty($this->password) ? null : Security()->generatePasswordHash($this->password);
-                $Model->timezone = isset($_COOKIE['timezone']) && !empty($_COOKIE['timezone']) ? $_COOKIE['timezone'] : 0;
-                $Model->auth_key = Security()->generateRandomString();
-                $Model->token = Security()->generateRandomString();
-            }
-        );
+        /** @var static $Model */
+        $Model = $Event->sender;
 
-        $this->on(
-            static::EVENT_BEFORE_UPDATE,
-            function (\yii\base\ModelEvent $Event) {
-                /** @var static $Model */
-                $Model = $Event->sender;
-                if (!empty($this->password)) {
-                    $Model->password_hash = Security()->generatePasswordHash($this->password);
-                }
-            }
-        );
+        $Model->password_hash = empty($this->password) ? null : Security()->generatePasswordHash($this->password);
+        $Model->timezone = isset($_COOKIE['timezone']) && !empty($_COOKIE['timezone']) ? $_COOKIE['timezone'] : 0;
+        $Model->auth_key = Security()->generateRandomString();
+        $Model->token = Security()->generateRandomString();
+    }
+
+    /**
+     * @param \yii\base\ModelEvent $Event
+     * @throws \yii\base\Exception
+     */
+    public function updatePasswordHashBeforeUpdate(\yii\base\ModelEvent $Event)
+    {
+        /** @var static $Model */
+        $Model = $Event->sender;
+
+        if (!empty($this->password)) {
+            $Model->password_hash = Security()->generatePasswordHash($this->password);
+        }
     }
 
     const MALE = 1;

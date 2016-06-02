@@ -31,8 +31,17 @@ use cookyii\helpers\ApiAttribute;
 class Client extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\traits\GravatrTrait,
-        \cookyii\db\traits\SoftDeleteTrait;
+    use \cookyii\db\traits\SoftDeleteTrait;
+
+    /**
+     * @var string
+     */
+    public $presentHelperClass = 'cookyii\\modules\\Client\\resources\\helpers\\ClientPresent';
+
+    /**
+     * @var string
+     */
+    public $accountHelperClass = 'cookyii\\modules\\Client\\resources\\helpers\\ClientAccount';
 
     /**
      * @inheritdoc
@@ -55,8 +64,6 @@ class Client extends \cookyii\db\ActiveRecord
             $fields['account_id'],
             $fields['created_at'], $fields['updated_at'], $fields['deleted_at']
         );
-
-        $fields['avatar'] = [$this, 'getAvatar'];
 
         $fields['deleted'] = [$this, 'isDeleted'];
 
@@ -122,48 +129,12 @@ class Client extends \cookyii\db\ActiveRecord
     }
 
     /**
-     * @return string
-     * @throws \yii\base\Exception
-     */
-    public function getAvatar()
-    {
-        return $this->getGravatar();
-    }
-
-    private $presentHelper = null;
-
-    /**
-     * @return \cookyii\modules\Client\resources\helpers\ClientPresent
-     * @throws \yii\base\InvalidConfigException
-     */
-    public function getPresentHelper()
-    {
-        if ($this->presentHelper === null) {
-            $this->presentHelper = \Yii::createObject([
-                'class' => \cookyii\modules\Client\resources\helpers\ClientPresent::className(),
-                'Model' => $this,
-            ]);
-        }
-
-        return $this->presentHelper;
-    }
-
-    private $accountHelper = null;
-
-    /**
-     * @return \cookyii\modules\Client\resources\helpers\ClientAccount
+     * @return \cookyii\db\helpers\NotificationHelper
      * @throws \yii\base\InvalidConfigException
      */
     public function getAccountHelper()
     {
-        if ($this->accountHelper === null) {
-            $this->accountHelper = \Yii::createObject([
-                'class' => \cookyii\modules\Client\resources\helpers\ClientAccount::className(),
-                'Model' => $this,
-            ]);
-        }
-
-        return $this->accountHelper;
+        return $this->getHelper($this->accountHelperClass);
     }
 
     private $_properties = null;
