@@ -53,6 +53,24 @@ class Angular extends \yii\helpers\BaseHtml
     }
 
     /**
+     * @param string $updateOn
+     * @param array $debounce
+     * @return string
+     */
+    public static function ngModelOptions($updateOn, $debounce = [])
+    {
+        $result = [
+            'updateOn' => $updateOn,
+        ];
+
+        if (!empty($debounce)) {
+            $result['debounce'] = new JsExpression(Json::encode($debounce));
+        }
+
+        return Json::encode($result);
+    }
+
+    /**
      * @param array $values
      * @param string $operator
      * @return string
