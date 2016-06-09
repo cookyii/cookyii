@@ -17,6 +17,8 @@ use yii\helpers\Json;
  * @property string $social_id
  * @property integer $account_id
  * @property string $token
+ *
+ * @property \yii\authclient\OAuthToken $accessToken
  */
 class AccountAuth extends \cookyii\db\ActiveRecord
 {
@@ -38,6 +40,16 @@ class AccountAuth extends \cookyii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @return \yii\authclient\OAuthToken
+     */
+    public function getAccessToken()
+    {
+        $token = Json::decode($this->token);
+
+        return new \yii\authclient\OAuthToken($token);
     }
 
     /**
