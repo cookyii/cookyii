@@ -8,7 +8,6 @@
 namespace cookyii\modules\Account\resources\traits;
 
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
 
 /**
  * Trait AccountSocialTrait
@@ -29,39 +28,17 @@ trait AccountSocialTrait
 
         $attributes = $Client->getUserAttributes();
 
-        $credentials = [
-            'account_id' => (integer)$self->id,
-            'social_id' => (string)$attributes['id'],
-        ];
-
-        $socialnetwork = $Client->getId();
-
         /** @var $class \cookyii\modules\Account\resources\AccountAuth */
         $class = \Yii::createObject(\cookyii\modules\Account\resources\AccountAuth::className());
 
-        /** @var \cookyii\modules\Account\resources\AccountAuth $Auth */
-        $Auth = $class::find()
-            ->byAccountId($credentials['account_id'])
-            ->bySocialType($socialnetwork)
-            ->bySocialId($credentials['social_id'])
-            ->one();
-
-        if (empty($Auth)) {
-            $Auth = new $class($credentials);
-            $Auth->social_type = $socialnetwork;
-        }
-
+        $token = null;
         if ($Client instanceof \yii\authclient\BaseOAuth) {
             $Token = $Client->getAccessToken();
             $token = ArrayHelper::toArray($Token);
             $token['params'] = $Token->getParams();
-
-            $Auth->token = Json::encode($token);
         }
 
-        $Auth->validate() && $Auth->save();
-
-        return $Auth;
+        return $class::push($self->id, $Client->getId(), $attributes['id'], $token);
     }
 
     /**

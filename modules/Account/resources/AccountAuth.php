@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Account\resources;
 
+use yii\helpers\Json;
+
 /**
  * Class AccountAuth
  * @package cookyii\modules\Account\resources
@@ -36,6 +38,41 @@ class AccountAuth extends \cookyii\db\ActiveRecord
 
             /** default values */
         ];
+    }
+
+    /**
+     * @param integer $account_id
+     * @param string $social_type
+     * @param integer|string $social_id
+     * @param array|null $token
+     * @return static
+     */
+    public static function push($account_id, $social_type, $social_id, $token = null)
+    {
+        /** @var static $Auth */
+        $Auth = static::find()
+            ->byAccountId($account_id)
+            ->bySocialType($social_type)
+            ->bySocialId($social_id)
+            ->one();
+
+        if (empty($Auth)) {
+            $Auth = new static;
+
+            $Auth->setAttributes([
+                'account_id' => $account_id,
+                'social_type' => $social_type,
+                'social_id' => $social_id,
+            ]);
+        }
+
+        if (!empty($token)) {
+            $Auth->token = Json::encode($token);
+        }
+
+        $Auth->validate() && $Auth->save(false);
+
+        return $Auth;
     }
 
     /**

@@ -38,6 +38,14 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return bool
+     */
+    public function isDirty()
+    {
+        return !empty($this->dirtyAttributes);
+    }
+
+    /**
      * @param string $helperClass
      * @return helpers\AbstractHelper
      * @throws \yii\base\InvalidConfigException
