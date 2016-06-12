@@ -21,7 +21,7 @@ class ErrorHandler extends \yii\web\ErrorHandler
     {
         $array = parent::convertExceptionToArray($exception);
 
-        if ($exception instanceof FormErrorsException) {
+        if ($exception instanceof ErrorsException) {
             $array['errors'] = $exception->errors;
         }
 

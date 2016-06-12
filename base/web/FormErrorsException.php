@@ -13,10 +13,8 @@ use cookyii\base\FormModel;
  * Class FormErrorsException
  * @package cookyii\web
  */
-class FormErrorsException extends \yii\web\ServerErrorHttpException
+class FormErrorsException extends ErrorsException
 {
-
-    public $errors = [];
 
     /**
      * FormErrorsException constructor.
@@ -27,7 +25,7 @@ class FormErrorsException extends \yii\web\ServerErrorHttpException
      */
     public function __construct(FormModel $FormModel = null, $message = null, $code = 0, \Exception $previous = null)
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct([], $message, $code, $previous);
 
         if (!empty($FormModel)) {
             $this->applyFirstErrors($FormModel);
@@ -39,7 +37,7 @@ class FormErrorsException extends \yii\web\ServerErrorHttpException
      */
     public function applyFirstErrors(FormModel $FormModel)
     {
-        $this->errors = $FormModel->getFirstErrors();
+        $this->applyErrors($FormModel->getFirstErrors());
     }
 
     /**
@@ -47,6 +45,6 @@ class FormErrorsException extends \yii\web\ServerErrorHttpException
      */
     public function applyAllErrors(FormModel $FormModel)
     {
-        $this->errors = $FormModel->getErrors();
+        $this->applyErrors($FormModel->getErrors());
     }
 }
