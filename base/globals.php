@@ -207,8 +207,10 @@ function str_clean($str)
 function str_pretty($str)
 {
     $str = trim($str);
-    $str = preg_replace('/(\r?\n){2,}/', "\n\n", $str);
-    $str = preg_replace('/(\s){2,}/', ' ', $str);
+    $str = preg_replace('/[^\P{C}\s]+/u', '', $str);
+    $str = preg_replace('/(\r?\n){2,}/', "\r\n\r\n", $str);
+    $str = preg_replace('/\t+/', ' ', $str);
+    $str = preg_replace('/( ){2,}/', ' ', $str);
 
     return trim($str);
 }
