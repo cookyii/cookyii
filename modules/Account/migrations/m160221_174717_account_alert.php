@@ -6,29 +6,37 @@ class m160221_174717_account_alert extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%account_alert}}', [
-            'id' => $this->string(),
-            'account_id' => $this->integer(),
-            'type' => $this->smallInteger(),
-            'message' => $this->string(),
-            'detail' => $this->text(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'deleted_at' => $this->integer(),
-            'PRIMARY KEY (id)',
+            'schema' => [
+                'id' => $this->string(),
+                'account_id' => $this->integer(),
+                'type' => $this->smallInteger(),
+                'message' => $this->string(),
+                'detail' => $this->text(),
+                'created_at' => $this->unixTimestamp(),
+                'updated_at' => $this->unixTimestamp(),
+                'deleted_at' => $this->unixTimestamp(),
+                'PRIMARY KEY ([[id]])',
+            ],
+            'indexes' => [
+                'idx_account' => ['account_id'],
+                'idx_available' => ['message', 'deleted_at'],
+                'idx_deleted_at' => ['deleted_at'],
+            ],
+            'fkeys' => [
+                'fkey_account_alert_account_id' => [
+                    'from' => 'account_id',
+                    'to' => ['{{%account}}', 'id'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
-
-        $this->addForeignKey(
-            'fkey_account_alert_account_id',
-            '{{%account_alert}}', 'account_id',
-            '{{%account}}', 'id',
-            'CASCADE', 'CASCADE'
-        );
-
-        $this->createIndex('idx_deleted', '{{%account_alert}}', ['message', 'deleted_at']);
     }
 
     public function down()
     {
+        $this->dropForeignKey('fkey_account_alert_account_id', '{{%account_alert}}');
+
         $this->dropTable('{{%account_alert}}');
     }
 }

@@ -55,7 +55,6 @@
     "rmrevin/yii2-socicon": "~1.0",
     "rmrevin/yii2-minify-view": "~1.9",
     "rmrevin/yii2-rbac-command": "~1.3",
-    "rmrevin/yii2-power-migration": "~1.1",
     "rmrevin/yii2-imperavi-bundle": "~1.0",
     "rmrevin/yii2-favicon-widget": "~1.1",
 

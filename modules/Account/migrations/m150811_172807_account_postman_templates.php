@@ -1,17 +1,15 @@
 <?php
 
-use yii\helpers\Json;
-
 class m150811_172807_account_postman_templates extends \cookyii\db\Migration
 {
 
     public function up()
     {
-        $this->insertSignUpMessage('account.frontend.sign-up');
-        $this->insertForgotPasswordRequestMessage('account.frontend.forgot-password.request');
-        $this->insertForgotPasswordNewPasswordMessage('account.frontend.forgot-password.new-password');
-        $this->insertBanMessage('account.frontend.ban');
-        $this->insertUnbanMessage('account.frontend.unban');
+        $this->insertSignUpTemplate('account.frontend.sign-up');
+        $this->insertForgotPasswordRequestTemplate('account.frontend.forgot-password.request');
+        $this->insertForgotPasswordNewPasswordTemplate('account.frontend.forgot-password.new-password');
+        $this->insertBanTemplate('account.frontend.ban');
+        $this->insertUnbanTemplate('account.frontend.unban');
     }
 
     public function down()
@@ -27,10 +25,8 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
         ]);
     }
 
-    protected function insertSignUpMessage($code)
+    protected function insertSignUpTemplate($code)
     {
-        $time = time();
-
         $params = [
             [
                 'key' => 'email',
@@ -57,25 +53,17 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p><strong style="color:#dd4b39">Attention!</strong> No they do not share your password.</p>',
         ];
 
-        $this->insert('{{%postman_template}}', [
-            'code' => $code,
-            'subject' => 'Your registration details',
-            'content_text' => $content['text'],
-            'content_html' => $content['html'],
-            'styles' => null,
-            'description' => 'This letter will be sent after the registration of the new user in the frontend.',
-            'address' => Json::encode([]),
-            'params' => Json::encode($params),
-            'use_layout' => 1,
-            'created_at' => $time,
-            'updated_at' => $time,
-        ]);
+        $this->insertPostmanMessageTemplate(
+            $code,
+            'Your registration details',
+            'This letter will be sent after the registration of the new user in the frontend.',
+            $content,
+            $params
+        );
     }
 
-    protected function insertForgotPasswordRequestMessage($code)
+    protected function insertForgotPasswordRequestTemplate($code)
     {
-        $time = time();
-
         $params = [
             [
                 'key' => 'hash',
@@ -100,25 +88,17 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p><textarea style="width:100%;min-height:100px">{url}</textarea></p>',
         ];
 
-        $this->insert('{{%postman_template}}', [
-            'code' => $code,
-            'subject' => 'Password recovery',
-            'content_text' => $content['text'],
-            'content_html' => $content['html'],
-            'styles' => null,
-            'description' => 'This letter will be sent when the user requests password recovery.',
-            'address' => Json::encode([]),
-            'params' => Json::encode($params),
-            'use_layout' => 1,
-            'created_at' => $time,
-            'updated_at' => $time,
-        ]);
+        $this->insertPostmanMessageTemplate(
+            $code,
+            'Password recovery',
+            'This letter will be sent when the user requests password recovery.',
+            $content,
+            $params
+        );
     }
 
-    protected function insertForgotPasswordNewPasswordMessage($code)
+    protected function insertForgotPasswordNewPasswordTemplate($code)
     {
-        $time = time();
-
         $params = [
             [
                 'key' => 'email',
@@ -143,25 +123,17 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p><strong style="color:#dd4b39">Attention!</strong> No they do not share your password.</p>',
         ];
 
-        $this->insert('{{%postman_template}}', [
-            'code' => $code,
-            'subject' => 'Your new password',
-            'content_text' => $content['text'],
-            'content_html' => $content['html'],
-            'styles' => null,
-            'description' => 'This letter will be sent when you need to send a new password',
-            'address' => Json::encode([]),
-            'params' => Json::encode($params),
-            'use_layout' => 1,
-            'created_at' => $time,
-            'updated_at' => $time,
-        ]);
+        $this->insertPostmanMessageTemplate(
+            $code,
+            'Your new password',
+            'This letter will be sent when you need to send a new password',
+            $content,
+            $params
+        );
     }
 
-    protected function insertBanMessage($code)
+    protected function insertBanTemplate($code)
     {
-        $time = time();
-
         $params = [
             [
                 'key' => 'email',
@@ -176,25 +148,17 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p>We are sorry for inconvenience.</p>',
         ];
 
-        $this->insert('{{%postman_template}}', [
-            'code' => $code,
-            'subject' => 'Your account is blocked',
-            'content_text' => $content['text'],
-            'content_html' => $content['html'],
-            'styles' => null,
-            'description' => 'This letter is sent when the user banned',
-            'address' => Json::encode([]),
-            'params' => Json::encode($params),
-            'use_layout' => 1,
-            'created_at' => $time,
-            'updated_at' => $time,
-        ]);
+        $this->insertPostmanMessageTemplate(
+            $code,
+            'Your account is blocked',
+            'This letter is sent when the user banned',
+            $content,
+            $params
+        );
     }
 
-    protected function insertUnbanMessage($code)
+    protected function insertUnbanTemplate($code)
     {
-        $time = time();
-
         $params = [
             [
                 'key' => 'email',
@@ -207,18 +171,12 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
             'html' => '<p>Congratulations, your account is blocked on <a href="{host}">{host}</a>.</p>' . PHP_EOL,
         ];
 
-        $this->insert('{{%postman_template}}', [
-            'code' => $code,
-            'subject' => 'Your account is unblocked',
-            'content_text' => $content['text'],
-            'content_html' => $content['html'],
-            'styles' => null,
-            'description' => 'This letter is sent when the user unbanned',
-            'address' => Json::encode([]),
-            'params' => Json::encode($params),
-            'use_layout' => 1,
-            'created_at' => $time,
-            'updated_at' => $time,
-        ]);
+        $this->insertPostmanMessageTemplate(
+            $code,
+            'Your account is unblocked',
+            'This letter is sent when the user unbanned',
+            $content,
+            $params
+        );
     }
 }

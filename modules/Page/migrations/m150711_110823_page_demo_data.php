@@ -6,7 +6,7 @@ class m150711_110823_page_demo_data extends \cookyii\db\Migration
     public function up()
     {
         if (!YII_DEMO_DATA) {
-            echo 'm150715_122414_postman_template_demo_data skipped.' . PHP_EOL;
+            echo "    > m150711_110823_page_demo_data skipped.\n";
 
             return true;
         }
@@ -74,7 +74,7 @@ class m150711_110823_page_demo_data extends \cookyii\db\Migration
 
     public function down()
     {
-        echo "m150711_110823_page_demo_data reverted.\n";
+        echo "    > m150711_110823_page_demo_data reverted.\n";
 
         return true;
     }

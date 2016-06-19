@@ -6,42 +6,72 @@ class m150623_121754_feed_item extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%feed_item}}', [
-            'id' => $this->primaryKey(),
-            'slug' => $this->string(),
-            'title' => $this->string(),
-            'picture_media_id' => $this->integer(),
-            'content_preview' => $this->text(),
-            'content_detail' => $this->longText(),
-            'meta' => $this->text(),
-            'sort' => $this->integer(),
-            'created_by' => $this->integer(),
-            'updated_by' => $this->integer(),
-            'published_at' => $this->integer(),
-            'archived_at' => $this->integer(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'deleted_at' => $this->integer(),
-            'activated_at' => $this->integer(),
+            'schema' => [
+                'id' => $this->primaryKey(),
+                'slug' => $this->string(),
+                'title' => $this->string(),
+                'picture_media_id' => $this->integer(),
+                'content_preview' => $this->text(),
+                // @todo in yii version 2.0.9 replace to `$this->mediumText()`
+                'content_detail' => 'MEDIUMTEXT',
+                'meta' => $this->text(),
+                'sort' => $this->integer(),
+                'created_by' => $this->integer(),
+                'updated_by' => $this->integer(),
+                'published_at' => $this->unixTimestamp(),
+                'archived_at' => $this->unixTimestamp(),
+                'activated_at' => $this->unixTimestamp(),
+                'created_at' => $this->unixTimestamp(),
+                'updated_at' => $this->unixTimestamp(),
+                'deleted_at' => $this->unixTimestamp(),
+            ],
+            'uniques' => [
+                'idx_slug' => ['slug'],
+            ],
+            'indexes' => [
+                'idx_sort' => ['sort'],
+                'idx_picture_media' => ['picture_media_id'],
+                'idx_published_at' => ['published_at'],
+                'idx_archived_at' => ['archived_at'],
+                'idx_activated_at' => ['activated_at'],
+                'idx_deleted_at' => ['deleted_at'],
+                'idx_available' => ['published_at', 'archived_at', 'activated_at', 'deleted_at'],
+            ],
+            'fkeys' => [
+                'fkey_feed_item_media' => [
+                    'from' => 'picture_media_id',
+                    'to' => ['{{%media}}', 'id'],
+                    'delete' => 'SET NULL',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
-
-        $this->createIndex('idx_feed_i_slug', '{{%feed_item}}', ['slug'], true);
-        $this->createIndex('idx_feed_i_sort', '{{%feed_item}}', ['sort']);
-        $this->createIndex('idx_feed_i_published_at', '{{%feed_item}}', ['published_at']);
-        $this->createIndex('idx_feed_i_archived_at', '{{%feed_item}}', ['archived_at']);
-        $this->createIndex('idx_feed_i_activated_at', '{{%feed_item}}', ['activated_at']);
-        $this->createIndex('idx_feed_i_deleted_at', '{{%feed_item}}', ['deleted_at']);
-        $this->createIndex('idx_feed_i_published', '{{%feed_item}}', ['published_at', 'archived_at', 'activated_at', 'deleted_at']);
 
         $this->createTable('{{%feed_item_section}}', [
-            'item_id' => $this->integer(),
-            'section_id' => $this->integer(),
+            'schema' => [
+                'item_id' => $this->integer(),
+                'section_id' => $this->integer(),
+                'PRIMARY KEY ([[item_id]], [[section_id]])',
+            ],
+            'indexes' => [
+                'idx_item' => ['item_id'],
+                'idx_section' => ['section_id'],
+            ],
+            'fkeys' => [
+                'fkey_feed_item_section_item' => [
+                    'from' => 'item_id',
+                    'to' => ['{{%feed_item}}', 'id'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+                'fkey_feed_item_section_section' => [
+                    'from' => 'section_id',
+                    'to' => ['{{%feed_section}}', 'id'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
-
-        $this->addPrimaryKey('pk', '{{%feed_item_section}}', ['item_id', 'section_id']);
-
-        $this->addForeignKey('fkey_feed_item_media', '{{%feed_item}}', 'picture_media_id', '{{%media}}', 'id', 'SET NULL', 'CASCADE');
-        $this->addForeignKey('fkey_feed_item_section_item', '{{%feed_item_section}}', 'item_id', '{{%feed_item}}', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fkey_feed_item_section_section', '{{%feed_item_section}}', 'section_id', '{{%feed_section}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function down()

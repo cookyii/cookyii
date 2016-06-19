@@ -6,15 +6,26 @@ class m150610_170115_account_properties extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%account_property}}', [
-            'account_id' => $this->integer(),
-            'key' => $this->string()->notNull(),
-            'value' => $this->text(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'PRIMARY KEY ([[account_id]], [[key]])',
+            'schema' => [
+                'account_id' => $this->integer(),
+                'key' => $this->string()->notNull(),
+                'value' => $this->text(),
+                'created_at' => $this->unixTimestamp(),
+                'updated_at' => $this->unixTimestamp(),
+                'PRIMARY KEY ([[account_id]], [[key]])',
+            ],
+            'indexes' => [
+                'idx_account' => ['account_id'],
+            ],
+            'fkeys' => [
+                'fkey_account_property_account' => [
+                    'from' => 'account_id',
+                    'to' => ['{{%account}}', 'id'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
-
-        $this->addForeignKey('fkey_account_property_account', '{{%account_property}}', 'account_id', '{{%account}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function down()

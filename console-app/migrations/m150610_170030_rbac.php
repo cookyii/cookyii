@@ -22,42 +22,73 @@ class m150610_170030_rbac extends \cookyii\db\Migration
         $authManager = $this->getAuthManager();
 
         $this->createTable($authManager->ruleTable, [
-            'name' => $this->string(64)->notNull(),
-            'data' => $this->text(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'PRIMARY KEY ([[name]])',
+            'schema' => [
+                'name' => $this->string(64)->notNull(),
+                'data' => $this->text(),
+                'created_at' => $this->unixTimestamp(),
+                'updated_at' => $this->unixTimestamp(),
+                'PRIMARY KEY ([[name]])',
+            ],
         ]);
 
         $this->createTable($authManager->itemTable, [
-            'name' => $this->string(64)->notNull(),
-            'type' => $this->integer()->notNull(),
-            'description' => $this->text(),
-            'rule_name' => $this->string(64),
-            'data' => $this->text(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'PRIMARY KEY ([[name]])',
+            'schema' => [
+                'name' => $this->string(64)->notNull(),
+                'type' => $this->integer()->notNull(),
+                'description' => $this->text(),
+                'rule_name' => $this->string(64),
+                'data' => $this->text(),
+                'created_at' => $this->unixTimestamp(),
+                'updated_at' => $this->unixTimestamp(),
+                'PRIMARY KEY ([[name]])',
+            ],
+            'indexes' => [
+                'idx_type' => ['type'],
+                'idx_rule' => ['rule_name'],
+            ],
+            'fkeys' => [
+                'fkey_rbac_item_rule' => [
+                    'from' => 'rule_name',
+                    'to' => [$authManager->ruleTable, 'name'],
+                    'delete' => 'SET NULL',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
-
-        $this->createIndex('idx_rbac_item_type', $authManager->itemTable, 'type');
-
-        $this->addForeignKey('fkey_rbac_item_rule', $authManager->itemTable, 'rule_name', $authManager->ruleTable, 'name', 'SET NULL', 'CASCADE');
 
         $this->createTable($authManager->itemChildTable, [
-            'parent' => $this->string(64)->notNull(),
-            'child' => $this->string(64)->notNull(),
-            'PRIMARY KEY ([[parent]], [[child]])',
+            'schema' => [
+                'parent' => $this->string(64)->notNull(),
+                'child' => $this->string(64)->notNull(),
+                'PRIMARY KEY ([[parent]], [[child]])',
+            ],
+            'indexes' => [
+                'idx_parent' => ['parent'],
+                'idx_child' => ['child'],
+            ],
+            'fkeys' => [
+                'fkey_rbac_item_parent' => [
+                    'from' => 'parent',
+                    'to' => [$authManager->itemTable, 'name'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+                'fkey_rbac_item_child' => [
+                    'from' => 'child',
+                    'to' => [$authManager->itemTable, 'name'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
 
-        $this->addForeignKey('fkey_rbac_item_parent', $authManager->itemChildTable, 'parent', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fkey_rbac_item_child', $authManager->itemChildTable, 'child', $authManager->itemTable, 'name', 'CASCADE', 'CASCADE');
-
         $this->createTable($authManager->assignmentTable, [
-            'item_name' => $this->string(64)->notNull(),
-            'user_id' => $this->string(64)->notNull(),
-            'created_at' => $this->integer(),
-            'PRIMARY KEY ([[item_name]], [[user_id]])',
+            'schema' => [
+                'item_name' => $this->string(64)->notNull(),
+                'user_id' => $this->string(64)->notNull(),
+                'created_at' => $this->unixTimestamp(),
+                'PRIMARY KEY ([[item_name]], [[user_id]])',
+            ],
         ]);
     }
 

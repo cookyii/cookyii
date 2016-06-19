@@ -6,7 +6,7 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
     public function up()
     {
         if (!YII_DEMO_DATA) {
-            echo 'm150623_151118_feed_demo_data skipped.' . PHP_EOL;
+            echo "    > m150623_151118_feed_demo_data skipped.\n";
 
             return true;
         }
@@ -166,7 +166,7 @@ class m150623_151118_feed_demo_data extends \cookyii\db\Migration
 
     public function down()
     {
-        echo "m150623_151118_feed_demo_data reverted.\n";
+        echo "    > m150623_151118_feed_demo_data reverted.\n";
 
         return true;
     }

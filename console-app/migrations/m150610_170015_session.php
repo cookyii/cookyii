@@ -6,13 +6,16 @@ class m150610_170015_session extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%session}}', [
-            'id' => $this->string(40)->notNull(),
-            'expire' => $this->integer(),
-            'data' => $this->binary(),
-            'PRIMARY KEY ([[id]])',
+            'schema' => [
+                'id' => $this->string(40)->notNull(),
+                'expire' => $this->unixTimestamp(),
+                'data' => $this->binary(),
+                'PRIMARY KEY ([[id]])',
+            ],
+            'indexes' => [
+                'idx_expire' => ['expire'],
+            ],
         ]);
-
-        $this->createIndex('idx_session_expire', '{{%session}}', ['expire']);
     }
 
     public function down()

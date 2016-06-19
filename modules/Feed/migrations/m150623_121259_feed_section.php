@@ -6,31 +6,43 @@ class m150623_121259_feed_section extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%feed_section}}', [
-            'id' => $this->primaryKey(),
-            'parent_id' => $this->integer(),
-            'slug' => $this->string(),
-            'title' => $this->string(),
-            'meta' => $this->text(),
-            'sort' => $this->integer(),
-            'created_by' => $this->integer(),
-            'updated_by' => $this->integer(),
-            'published_at' => $this->integer(),
-            'archived_at' => $this->integer(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'deleted_at' => $this->integer(),
-            'activated_at' => $this->integer(),
+            'schema' => [
+                'id' => $this->primaryKey(),
+                'parent_id' => $this->integer(),
+                'slug' => $this->string(),
+                'title' => $this->string(),
+                'meta' => $this->text(),
+                'sort' => $this->integer(),
+                'created_by' => $this->integer(),
+                'updated_by' => $this->integer(),
+                'published_at' => $this->unixTimestamp(),
+                'archived_at' => $this->unixTimestamp(),
+                'activated_at' => $this->unixTimestamp(),
+                'created_at' => $this->unixTimestamp(),
+                'updated_at' => $this->unixTimestamp(),
+                'deleted_at' => $this->unixTimestamp(),
+            ],
+            'uniques' => [
+                'idx_slug' => ['slug'],
+            ],
+            'indexes' => [
+                'idx_parent' => ['parent_id'],
+                'idx_sort' => ['sort'],
+                'idx_published_at' => ['published_at'],
+                'idx_archived_at' => ['archived_at'],
+                'idx_activated_at' => ['activated_at'],
+                'idx_deleted_at' => ['deleted_at'],
+                'idx_available' => ['published_at', 'archived_at', 'activated_at', 'deleted_at'],
+            ],
+            'fkeys' => [
+                'fkey_feed_section_parent' => [
+                    'from' => 'parent_id',
+                    'to' => ['{{%feed_section}}', 'id'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
-
-        $this->createIndex('idx_feed_s_slug', '{{%feed_section}}', ['slug'], true);
-        $this->createIndex('idx_feed_s_sort', '{{%feed_section}}', ['sort']);
-        $this->createIndex('idx_feed_s_published_at', '{{%feed_section}}', ['published_at']);
-        $this->createIndex('idx_feed_s_archived_at', '{{%feed_section}}', ['archived_at']);
-        $this->createIndex('idx_feed_s_activated_at', '{{%feed_section}}', ['activated_at']);
-        $this->createIndex('idx_feed_s_deleted_at', '{{%feed_section}}', ['deleted_at']);
-        $this->createIndex('idx_feed_s_published', '{{%feed_section}}', ['published_at', 'archived_at', 'activated_at', 'deleted_at']);
-
-        $this->addForeignKey('fkey_feed_section_parent', '{{%feed_section}}', 'parent_id', '{{%feed_section}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function down()

@@ -6,13 +6,16 @@ class m150610_170000_cache extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%cache}}', [
-            'id' => $this->string(128)->notNull(),
-            'expire' => $this->integer(),
-            'data' => $this->binary(),
-            'PRIMARY KEY ([[id]])',
+            'schema' => [
+                'id' => $this->string(128)->notNull(),
+                'expire' => $this->unixTimestamp(),
+                'data' => $this->binary(),
+                'PRIMARY KEY ([[id]])',
+            ],
+            'indexes' => [
+                'idx_expire' => ['expire'],
+            ],
         ]);
-
-        $this->createIndex('idx_cache_expire', '{{%cache}}', ['expire']);
     }
 
     public function down()

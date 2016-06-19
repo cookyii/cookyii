@@ -8,33 +8,52 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%postman_template}}', [
-            'id' => $this->primaryKey(),
-            'code' => $this->string(),
-            'subject' => $this->text(),
-            'content_text' => $this->text(),
-            'content_html' => $this->text(),
-            'styles' => $this->text(),
-            'description' => $this->text(),
-            'address' => $this->text(),
-            'params' => $this->text(),
-            'use_layout' => $this->boolean()->notNull()->defaultValue(1),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
-            'deleted_at' => $this->integer(),
+            'schema' => [
+                'id' => $this->primaryKey(),
+                'code' => $this->string(),
+                'subject' => $this->text(),
+                'content_text' => $this->text(),
+                'content_html' => $this->text(),
+                'styles' => $this->text(),
+                'description' => $this->text(),
+                'address' => $this->text(),
+                'params' => $this->text(),
+                'use_layout' => $this->boolean()->notNull()->defaultValue(1),
+                'created_at' => $this->unixTimestamp(),
+                'updated_at' => $this->unixTimestamp(),
+                'deleted_at' => $this->unixTimestamp(),
+            ],
+            'uniques' => [
+                'idx_code' => ['code'],
+            ],
         ]);
-
-        $this->createIndex('idx_postman_t_code', '{{%postman_template}}', ['code'], true);
 
         $this->createTable('{{%postman_template_attach}}', [
-            'template_id' => $this->integer(),
-            'media_id' => $this->integer(),
-            'embed' => $this->boolean(),
+            'schema' => [
+                'template_id' => $this->integer(),
+                'media_id' => $this->integer(),
+                'embed' => $this->boolean()->notNull()->defaultValue(0),
+                'PRIMARY KEY ([[template_id]], [[media_id]])',
+            ],
+            'indexes' => [
+                'idx_template' => ['template_id'],
+                'idx_media' => ['media_id'],
+            ],
+            'fkeys' => [
+                'fkey_postman_template_attach_template' => [
+                    'from' => 'template_id',
+                    'to' => ['{{%postman_template}}', 'id'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+                'fkey_postman_template_attach_media' => [
+                    'from' => 'media_id',
+                    'to' => ['{{%media}}', 'id'],
+                    'delete' => 'CASCADE',
+                    'update' => 'CASCADE',
+                ],
+            ],
         ]);
-
-        $this->addPrimaryKey('pk', '{{%postman_template_attach}}', ['template_id', 'media_id']);
-
-        $this->addForeignKey('fkey_postman_template_attach_template', '{{%postman_template_attach}}', 'template_id', '{{%postman_template}}', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fkey_postman_template_attach_media', '{{%postman_template_attach}}', 'media_id', '{{%media}}', 'id', 'CASCADE', 'CASCADE');
 
         $this->insertLayoutMessage();
     }
@@ -90,6 +109,7 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
             'use_layout' => 0,
             'created_at' => $time,
             'updated_at' => $time,
+            'deleted_at' => null,
         ]);
     }
 }

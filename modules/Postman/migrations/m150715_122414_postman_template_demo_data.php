@@ -1,19 +1,15 @@
 <?php
 
-use yii\helpers\Json;
-
 class m150715_122414_postman_template_demo_data extends \cookyii\db\Migration
 {
 
     public function up()
     {
         if (!YII_DEMO_DATA) {
-            echo 'm150715_122414_postman_template_demo_data skipped.' . PHP_EOL;
+            echo "    > m150715_122414_postman_template_demo_data skipped.\n";
 
             return true;
         }
-
-        $time = time();
 
         $params = [
             [
@@ -21,6 +17,15 @@ class m150715_122414_postman_template_demo_data extends \cookyii\db\Migration
                 'description' => 'This is a variable placeholder',
             ],
         ];
+
+        $content = [
+            'text' => 'This is an example plain letter.' . PHP_EOL
+                . 'This is a variable: {param1}.' . PHP_EOL,
+            'html' => '<p>This is an example <i>html</i> letter.</p>' . PHP_EOL
+                . '<p>This is a variable: <i>{param1}</i>.</p>',
+        ];
+
+        $styles = 'p { color: #333; }';
 
         $address = [
             [
@@ -40,33 +45,22 @@ class m150715_122414_postman_template_demo_data extends \cookyii\db\Migration
             ],
         ];
 
-        $content = [
-            'text' => 'This is an example plain letter.' . PHP_EOL
-                . 'This is a variable: {param1}.' . PHP_EOL,
-            'html' => '<p>This is an example <i>html</i> letter.</p>' . PHP_EOL
-                . '<p>This is a variable: <i>{param1}</i>.</p>',
-        ];
-
-        $styles = 'p { color: #333; }';
-
-        $this->insert('{{%postman_template}}', [
-            'code' => 'example',
-            'subject' => 'Good Day!',
-            'content_text' => $content['text'],
-            'content_html' => $content['html'],
-            'styles' => $styles,
-            'description' => 'This is a sample letter template.',
-            'address' => Json::encode($address),
-            'params' => Json::encode($params),
-            'use_layout' => 1,
-            'created_at' => $time,
-            'updated_at' => $time,
-        ]);
+        $this->insertPostmanMessageTemplate(
+            'example',
+            'Good Day!',
+            'This is a sample letter template.',
+            $content,
+            $params,
+            [
+                'styles' => $styles,
+                'address' => $address,
+            ]
+        );
     }
 
     public function down()
     {
-        echo "m150715_122414_postman_template_demo_data reverted.\n";
+        echo "    > m150715_122414_postman_template_demo_data reverted.\n";
 
         return true;
     }
