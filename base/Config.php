@@ -149,6 +149,7 @@ class Config
 
         $timezone = sprintf('Etc/GMT%s%d', $char, abs($gmt));
 
+        \Yii::$app->formatter->defaultTimeZone = $timezone;
         \Yii::$app->formatter->timeZone = $timezone;
         \Yii::$app->timeZone = $timezone;
     }
