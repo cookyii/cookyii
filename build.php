@@ -102,7 +102,6 @@ $buildConfig = [
         '.task' => [
             'class' => 'cookyii\build\tasks\ComposerTask',
             'composer' => '../composer.phar',
-            'noPlugins' => true,
         ],
     ],
 
