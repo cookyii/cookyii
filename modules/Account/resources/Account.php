@@ -62,7 +62,7 @@ class Account extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInter
     public function behaviors()
     {
         return [
-            \cookyii\behaviors\TimestampBehavior::className(),
+            'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
     }
 

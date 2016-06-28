@@ -48,8 +48,8 @@ class FeedItem extends \cookyii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \cookyii\behaviors\BlameableBehavior::className(),
-            \cookyii\behaviors\TimestampBehavior::className(),
+            'blameable' => \cookyii\behaviors\BlameableBehavior::className(),
+            'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
     }
 

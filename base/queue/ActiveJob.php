@@ -34,14 +34,6 @@ abstract class ActiveJob extends \yii\base\Object
     abstract public function queueName();
 
     /**
-     * @return \yii\queue\QueueInterface
-     */
-    public function getQueue()
-    {
-        return \Yii::$app->get($this->queue);
-    }
-
-    /**
      * Pushs the job.
      *
      * @param integer $delay
@@ -98,5 +90,13 @@ abstract class ActiveJob extends \yii\base\Object
     public function delete($message)
     {
         $this->getQueue()->delete($message);
+    }
+
+    /**
+     * @return \yii\queue\QueueInterface
+     */
+    public function getQueue()
+    {
+        return \Yii::$app->get($this->queue);
     }
 }

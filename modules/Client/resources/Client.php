@@ -49,7 +49,7 @@ class Client extends \cookyii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \cookyii\behaviors\TimestampBehavior::className(),
+            'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
     }
 

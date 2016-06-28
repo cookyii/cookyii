@@ -38,8 +38,8 @@ class Page extends \cookyii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\BlameableBehavior::className(),
-            \yii\behaviors\TimestampBehavior::className(),
+            'blameable' => \yii\behaviors\BlameableBehavior::className(),
+            'timestamp' => \yii\behaviors\TimestampBehavior::className(),
         ];
     }
 

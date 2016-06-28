@@ -35,8 +35,8 @@ class AccountAlert extends \cookyii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \cookyii\behaviors\UniqueCodeIdBehavior::class,
-            \cookyii\behaviors\TimestampBehavior::class,
+            'unique-code-id' => \cookyii\behaviors\UniqueCodeIdBehavior::class,
+            'timestamp' => \cookyii\behaviors\TimestampBehavior::class,
         ];
     }
 

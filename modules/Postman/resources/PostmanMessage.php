@@ -54,14 +54,14 @@ class PostmanMessage extends \cookyii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            [
-                'class' => \cookyii\behaviors\TimestampBehavior::className(),
-                'updatedAtAttribute' => false,
-            ],
-            [
+            'unique-code-id' => [
                 'class' => \cookyii\behaviors\UniqueCodeIdBehavior::className(),
                 'codeAtAttribute' => 'code',
                 'length' => 32,
+            ],
+            'timestamp' => [
+                'class' => \cookyii\behaviors\TimestampBehavior::className(),
+                'updatedAtAttribute' => false,
             ],
         ];
     }
