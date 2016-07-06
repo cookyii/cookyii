@@ -81,12 +81,11 @@ class Migration extends \yii\db\Migration
     }
 
     /**
-     * @param int $defaultValue
      * @return \yii\db\ColumnSchemaBuilder
      */
-    public function boolean($defaultValue = 0)
+    public function boolean()
     {
-        return $this->boolean()->notNull()->defaultValue($defaultValue);
+        return $this->boolean()->notNull();
     }
 
     /**
