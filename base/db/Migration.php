@@ -42,6 +42,10 @@ class Migration extends \yii\db\Migration
         if (isset($columns['schema']) && is_array($columns['schema'])) {
             parent::createTable($table, $columns['schema'], $options);
 
+            if (isset($columns['pkey'])) {
+                $this->addPrimaryKey('pkey', $table, $columns['pkey']);
+            }
+
             if (isset($columns['pkeys'])) {
                 foreach ($columns['pkeys'] as $name => $cols) {
                     $this->addPrimaryKey($name, $table, $cols);
@@ -74,6 +78,15 @@ class Migration extends \yii\db\Migration
         } else {
             parent::createTable($table, $columns, $options);
         }
+    }
+
+    /**
+     * @param int $defaultValue
+     * @return \yii\db\ColumnSchemaBuilder
+     */
+    public function boolean($defaultValue = 0)
+    {
+        return $this->boolean()->notNull()->defaultValue($defaultValue);
     }
 
     /**

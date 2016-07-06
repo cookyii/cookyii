@@ -27,8 +27,8 @@ class m150610_170030_rbac extends \cookyii\db\Migration
                 'data' => $this->text(),
                 'created_at' => $this->unixTimestamp(),
                 'updated_at' => $this->unixTimestamp(),
-                'PRIMARY KEY ([[name]])',
             ],
+            'pkey' => ['name'],
         ]);
 
         $this->createTable($authManager->itemTable, [
@@ -40,8 +40,8 @@ class m150610_170030_rbac extends \cookyii\db\Migration
                 'data' => $this->text(),
                 'created_at' => $this->unixTimestamp(),
                 'updated_at' => $this->unixTimestamp(),
-                'PRIMARY KEY ([[name]])',
             ],
+            'pkey' => ['name'],
             'indexes' => [
                 'idx_type' => ['type'],
                 'idx_rule' => ['rule_name'],
@@ -60,8 +60,8 @@ class m150610_170030_rbac extends \cookyii\db\Migration
             'schema' => [
                 'parent' => $this->string(64)->notNull(),
                 'child' => $this->string(64)->notNull(),
-                'PRIMARY KEY ([[parent]], [[child]])',
             ],
+            'pkey' => ['parent', 'child'],
             'indexes' => [
                 'idx_parent' => ['parent'],
                 'idx_child' => ['child'],
@@ -87,8 +87,8 @@ class m150610_170030_rbac extends \cookyii\db\Migration
                 'item_name' => $this->string(64)->notNull(),
                 'user_id' => $this->string(64)->notNull(),
                 'created_at' => $this->unixTimestamp(),
-                'PRIMARY KEY ([[item_name]], [[user_id]])',
             ],
+            'pkey' => ['item_name', 'user_id'],
         ]);
     }
 

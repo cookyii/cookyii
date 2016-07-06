@@ -10,8 +10,8 @@ class m150610_170000_cache extends \cookyii\db\Migration
                 'id' => $this->string(128)->notNull(),
                 'expire' => $this->unixTimestamp(),
                 'data' => $this->binary(),
-                'PRIMARY KEY ([[id]])',
             ],
+            'pkey' => ['id'],
             'indexes' => [
                 'idx_expire' => ['expire'],
             ],
