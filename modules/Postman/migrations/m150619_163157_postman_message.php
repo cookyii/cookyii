@@ -27,7 +27,7 @@ class m150619_163157_postman_message extends \cookyii\db\Migration
             'schema' => [
                 'message_id' => $this->integer(),
                 'media_id' => $this->integer(),
-                'embed' => $this->boolean()->notNull()->defaultValue(0),
+                'embed' => $this->boolean()->defaultValue(0),
                 'PRIMARY KEY ([[message_id]], [[media_id]])',
             ],
             'indexes' => [

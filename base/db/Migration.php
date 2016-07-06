@@ -85,7 +85,7 @@ class Migration extends \yii\db\Migration
      */
     public function boolean()
     {
-        return $this->boolean()->notNull();
+        return parent::boolean()->notNull();
     }
 
     /**

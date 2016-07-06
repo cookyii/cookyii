@@ -18,7 +18,7 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
                 'description' => $this->text(),
                 'address' => $this->text(),
                 'params' => $this->text(),
-                'use_layout' => $this->boolean()->notNull()->defaultValue(1),
+                'use_layout' => $this->boolean()->defaultValue(1),
                 'created_at' => $this->unixTimestamp(),
                 'updated_at' => $this->unixTimestamp(),
                 'deleted_at' => $this->unixTimestamp(),
@@ -32,7 +32,7 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
             'schema' => [
                 'template_id' => $this->integer(),
                 'media_id' => $this->integer(),
-                'embed' => $this->boolean()->notNull()->defaultValue(0),
+                'embed' => $this->boolean()->defaultValue(0),
                 'PRIMARY KEY ([[template_id]], [[media_id]])',
             ],
             'indexes' => [
