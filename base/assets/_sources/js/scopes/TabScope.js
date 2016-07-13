@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('scopes')
+angular.module('cookyii.scopes')
 
   .factory('TabScope', [
     '$timeout', 'QueryScope',

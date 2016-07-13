@@ -1,44 +1,57 @@
-angular.module('filters', [])
+(function (ng) {
+  "use strict";
 
-  .filter('trustAsJs', ['$sce', function ($sce) {
+  ng.module('cookyii.filters', [])
+
+    .filter('trustAsJs', ['$sce', trustAsJs])
+    .filter('trustAsHtml', ['$sce', trustAsHtml])
+    .filter('trustAsUrl', ['$sce', trustAsUrl])
+    .filter('trustAsResourceUrl', ['$sce', trustAsResourceUrl])
+    .filter('nl2br', nl2br)
+    .filter('html2PlainText', html2PlainText)
+    .filter('truncateCharacters', truncateCharacters)
+    .filter('truncateSplitCharacters', truncateSplitCharacters)
+    .filter('truncateWords', truncateWords);
+
+  function trustAsJs($sce) {
     return function (val) {
       return $sce.trustAsJs(val);
     };
-  }])
+  }
 
-  .filter('trustAsHtml', ['$sce', function ($sce) {
+  function trustAsHtml($sce) {
     return function (val) {
       return $sce.trustAsHtml(val);
     };
-  }])
+  }
 
-  .filter('trustAsUrl', ['$sce', function ($sce) {
+  function trustAsUrl($sce) {
     return function (val) {
       return $sce.trustAsUrl(val);
     };
-  }])
+  }
 
-  .filter('trustAsResourceUrl', ['$sce', function ($sce) {
+  function trustAsResourceUrl($sce) {
     return function (val) {
       return $sce.trustAsResourceUrl(val);
     };
-  }])
+  }
 
-  .filter('nl2br', function () {
+  function nl2br() {
     return function (input) {
       if (typeof input === 'string') {
         return input.replace(/\n/g, '<br>');
       }
     };
-  })
+  }
 
-  .filter('html2PlainText', function () {
+  function html2PlainText() {
     return function (text) {
       return text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
-  })
+  }
 
-  .filter('truncateCharacters', function () {
+  function truncateCharacters() {
     return function (input, chars, breakOnWord) {
       if (isNaN(chars)) return input;
       if (chars <= 0) return '';
@@ -60,9 +73,9 @@ angular.module('filters', [])
       }
       return input;
     };
-  })
+  }
 
-  .filter('truncateSplitCharacters', function () {
+  function truncateSplitCharacters() {
     return function (input, chars) {
       if (isNaN(chars)) return input;
       if (chars <= 0) return '';
@@ -73,9 +86,9 @@ angular.module('filters', [])
       }
       return input;
     };
-  })
+  }
 
-  .filter('truncateWords', function () {
+  function truncateWords() {
     return function (input, words) {
       if (isNaN(words)) return input;
       if (words <= 0) return '';
@@ -87,4 +100,5 @@ angular.module('filters', [])
       }
       return input;
     };
-  });
+  }
+}(angular));

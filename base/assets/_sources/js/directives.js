@@ -1,6 +1,6 @@
-(function () {
+(function (ng) {
 
-  angular.module('directives', [])
+  ng.module('cookyii.directives', [])
 
     .constant('iCheckConfig', iCheckConfig())
     .constant('datetimePickerConfig', datetimePickerConfig())
@@ -50,7 +50,7 @@
             options = {};
           }
 
-          options = angular.merge(iCheckConfig, options);
+          options = ng.merge(iCheckConfig, options);
 
           return jQuery(element).iCheck(options)
             .on('ifChanged', function (event) {
@@ -148,13 +148,13 @@
       require: 'ngModel',
       link: function ($scope, element, $attrs, ngModel) {
         return $timeout(function () {
-          var options = angular.merge(datetimePickerConfig, {
+          var options = ng.merge(datetimePickerConfig, {
             minView: 'month',
             format: 'dd.mm.yyyy'
           });
 
           if ($attrs['ngDatePicker']) {
-            options = angular.merge(options, $scope.$eval($attrs['ngDatePicker']));
+            options = ng.merge(options, $scope.$eval($attrs['ngDatePicker']));
           }
 
           function eval(type) {
@@ -184,14 +184,14 @@
       require: 'ngModel',
       link: function ($scope, element, $attrs, ngModel) {
         return $timeout(function () {
-          var options = angular.merge(datetimePickerConfig, {
+          var options = ng.merge(datetimePickerConfig, {
             startView: 'day',
             minView: 'hour',
             format: 'hh:ii'
           });
 
           if ($attrs['ngTimePicker']) {
-            options = angular.merge(options, $scope.$eval($attrs['ngTimePicker']));
+            options = ng.merge(options, $scope.$eval($attrs['ngTimePicker']));
           }
 
           function eval(type) {
@@ -221,13 +221,13 @@
       require: 'ngModel',
       link: function ($scope, element, $attrs, ngModel) {
         return $timeout(function () {
-          var options = angular.merge(datetimePickerConfig, {
+          var options = ng.merge(datetimePickerConfig, {
             minView: 'hour',
             format: 'dd.mm.yyyy hh:ii'
           });
 
           if ($attrs['ngDatetimePicker']) {
-            options = angular.merge(options, $scope.$eval($attrs['ngDatetimePicker']));
+            options = ng.merge(options, $scope.$eval($attrs['ngDatetimePicker']));
           }
 
           function eval(type) {
@@ -264,7 +264,7 @@
           verticalGutter: 0
         };
 
-        var $$window = angular.element($window);
+        var $$window = ng.element($window);
 
         if (typeof $attrs.id === 'undefined') {
           $attrs.id = 'scroll-pane-' + parseInt(Math.random() * 10000000);
@@ -272,7 +272,7 @@
         }
 
         if (typeof $attrs.ngScrollPane !== 'undefined') {
-          config = angular.extend({}, config, $scope.$eval($attrs.ngScrollPane));
+          config = ng.extend({}, config, $scope.$eval($attrs.ngScrollPane));
         }
 
         var fn = function () {
@@ -281,7 +281,7 @@
           if ($attrs.scrollFitToWindow) {
             var offset = parseInt($scope.$eval($attrs.scrollFitToWindow));
             offset = isNaN(offset) ? 0 : offset;
-            $pane.height(angular.element($window).height() + offset);
+            $pane.height(ng.element($window).height() + offset);
           }
 
           $pane.jScrollPane(config);
@@ -325,10 +325,10 @@
 
         $$window.on('resize', function () {
           if ($scope.pane) {
-            var $pane = angular.element('#' + $attrs.id),
+            var $pane = ng.element('#' + $attrs.id),
               $content = $pane.find('.jspPane'),
               content_height = $content.height(),
-              window_height = $$window.height() - angular.element('.main-header').height();
+              window_height = $$window.height() - ng.element('.main-header').height();
 
             if (content_height > window_height) {
               $pane.height(window_height);
@@ -344,4 +344,4 @@
       }
     };
   }
-}());
+}(angular));

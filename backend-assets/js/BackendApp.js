@@ -2,12 +2,12 @@
   "use strict";
 
   ng.module('BackendApp', [
-      'directives', 'filters', 'scopes',
-      'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate',
-      'ui.bootstrap', 'ui.uploader',
-      'monospaced.elastic',
-      'angular-loading-bar', 'angular-redactor'
-    ])
+    'ngCookies', 'ngSanitize', 'ngResource', 'ngAnimate',
+    'ui.bootstrap', 'ui.uploader',
+    'cookyii.directives', 'cookyii.filters', 'cookyii.scopes',
+    'monospaced.elastic',
+    'angular-loading-bar', 'angular-redactor'
+  ])
 
     .config([
       '$httpProvider', '$animateProvider', 'redactorOptions', 'toastrConfig',

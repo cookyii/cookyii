@@ -2,11 +2,11 @@
   "use strict";
 
   ng.module('FrontendApp', [
-      'directives', 'filters', 'scopes',
-      'ngCookies', 'ngSanitize',
-      'ui.bootstrap',
-      'angular-loading-bar', 'toastr'
-    ])
+    'ngCookies', 'ngSanitize',
+    'cookyii.directives', 'cookyii.filters', 'cookyii.scopes',
+    'ui.bootstrap',
+    'angular-loading-bar', 'toastr'
+  ])
 
     .config([
       '$httpProvider', '$animateProvider', 'toastrConfig',

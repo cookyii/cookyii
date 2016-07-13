@@ -1,3 +1,6 @@
-"use strict";
+(function (ng) {
+  "use strict";
 
-angular.module('scopes', ['toastr']);
+  ng.module('cookyii.scopes', ['toastr']);
+
+}(angular));

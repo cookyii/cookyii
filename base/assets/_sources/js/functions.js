@@ -1,10 +1,4 @@
-function defaultHttpErrorHandler(error, status) {
-  if (typeof error !== 'undefined') {
-    console.log('Error ' + status, error.message);
-  } else {
-    console.log('Unknown Error');
-  }
-}
+"use strict";
 
 function str_repeat(input, multiplier) {
   // Repeat a string
