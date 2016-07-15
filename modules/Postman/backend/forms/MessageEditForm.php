@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\backend\forms;
 
+use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
 use yii\helpers\Json;
 
 /**
@@ -18,7 +19,7 @@ class MessageEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Postman\resources\PostmanMessage */
+    /** @var PostmanMessageModel */
     public $Message;
 
     public $subject;
@@ -30,7 +31,7 @@ class MessageEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Message instanceof \cookyii\modules\Postman\resources\PostmanMessage)) {
+        if (!($this->Message instanceof PostmanMessageModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.postman', 'Not specified message to edit.'));
         }
     }
@@ -114,8 +115,8 @@ class MessageEditForm extends \cookyii\base\FormModel
             }
         }
 
-        /** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
-        $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
+        /** @var PostmanMessageModel $MessageModel */
+        $MessageModel = \Yii::createObject(PostmanMessageModel::className());
 
         if ($Message->isNewRecord) {
             $Message = $MessageModel::compose($this->subject, $this->content_text, $this->content_html);

@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Account\forms;
 
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
+use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
 use rmrevin\yii\rbac\RbacFactory;
 use yii\helpers\Json;
 
@@ -26,8 +28,8 @@ class FillAttributesForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         return [
             /** type validators */
@@ -66,8 +68,8 @@ class FillAttributesForm extends \cookyii\base\FormModel
      */
     public function save(\yii\authclient\ClientInterface $Client)
     {
-        /** @var \cookyii\modules\Account\resources\Account $Account */
-        $Account = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $Account */
+        $Account = \Yii::createObject(AccountModel::className());
 
         $Account->appendClientAttributes($Client);
 
@@ -77,7 +79,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
 
         $Account->validate() && $Account->save();
 
-        $AuthResponse = \cookyii\modules\Account\resources\AccountAuthResponse::createLog($Client);
+        $AuthResponse = AccountAuthResponseModel::createLog($Client);
 
         if ($Account->hasErrors()) {
             $AuthResponse->result = Json::encode($Account->getErrors());

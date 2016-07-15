@@ -32,8 +32,7 @@ abstract class Controller extends \cookyii\web\Controller
             $Action = $ActionEvent->action;
 
             if (!User()->isGuest && !in_array($Action->getUniqueId(), ['site/error'], true)) {
-                /** @var \cookyii\modules\Account\resources\Account $Account */
-                $Account = User()->identity;
+                $Account = Account();
 
                 if (($reason = $Account->isAvailable()) !== true) {
                     switch ($reason) {

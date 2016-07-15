@@ -28,7 +28,7 @@ class EditFormAction extends \cookyii\rest\Action
 
         $message_id = (int)Request()->post('message_id');
 
-        /** @var $modelClass \cookyii\modules\Postman\resources\PostmanMessage */
+        /** @var $modelClass \cookyii\modules\Postman\resources\PostmanMessage\Model */
         $modelClass = $this->modelClass;
 
         $Message = null;

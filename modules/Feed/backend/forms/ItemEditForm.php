@@ -8,6 +8,8 @@
 namespace cookyii\modules\Feed\backend\forms;
 
 use cookyii\modules\Feed;
+use cookyii\modules\Feed\resources\FeedItem\Model as FeedItemModel;
+use cookyii\modules\Feed\resources\FeedItemSection\Model as FeedItemSectionModel;
 use yii\helpers\Json;
 
 /**
@@ -19,7 +21,7 @@ class ItemEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Feed\resources\FeedItem */
+    /** @var FeedItemModel */
     public $Item;
 
     public $slug;
@@ -40,7 +42,7 @@ class ItemEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Item instanceof \cookyii\modules\Feed\resources\FeedItem)) {
+        if (!($this->Item instanceof FeedItemModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.feed', 'Not specified item to edit.'));
         }
     }
@@ -122,8 +124,8 @@ class ItemEditForm extends \cookyii\base\FormModel
         if ($Item->hasErrors()) {
             $this->populateErrors($Item, 'title');
         } else {
-            /** @var Feed\resources\FeedItemSection $ItemSectionModel */
-            $ItemSectionModel = \Yii::createObject(Feed\resources\FeedItemSection::className());
+            /** @var FeedItemSectionModel $ItemSectionModel */
+            $ItemSectionModel = \Yii::createObject(FeedItemSectionModel::className());
 
             $ItemSectionModel::deleteAll(['item_id' => $Item->id]);
 

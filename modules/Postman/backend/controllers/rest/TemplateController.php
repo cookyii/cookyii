@@ -8,6 +8,7 @@
 namespace cookyii\modules\Postman\backend\controllers\rest;
 
 use cookyii\modules\Postman;
+use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
 
 /**
  * Class TemplateController
@@ -16,7 +17,7 @@ use cookyii\modules\Postman;
 class TemplateController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'cookyii\modules\Postman\resources\PostmanTemplate';
+    public $modelClass = PostmanTemplateModel::class;
 
     /**
      * @inheritdoc
@@ -75,7 +76,7 @@ class TemplateController extends \yii\rest\ActiveController
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Postman\resources\PostmanTemplate */
+        /* @var $modelClass PostmanTemplateModel */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find();

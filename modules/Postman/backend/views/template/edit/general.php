@@ -9,6 +9,7 @@
  */
 
 use cookyii\modules\Postman;
+use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
 use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
@@ -20,8 +21,8 @@ $form = ActiveForm::begin([
     'controller' => 'postman.template.EditController',
 ]);
 
-/** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
-$MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
+/** @var PostmanMessageModel $MessageModel */
+$MessageModel = \Yii::createObject(PostmanMessageModel::className());
 
 ?>
 

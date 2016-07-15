@@ -7,7 +7,8 @@
 
 namespace cookyii\modules\Feed\backend\controllers\item\rest;
 
-use cookyii\modules\Media;
+use cookyii\modules\Media\media\UploadedResource as UploadedMediaResource;
+use cookyii\modules\Media\resources\Media\Model as MediaModel;
 use yii\web\UploadedFile;
 
 /**
@@ -23,11 +24,14 @@ class UploadController extends \cookyii\rest\controllers\ImperaviUploadControlle
      */
     public function actionPicture()
     {
-        $Resource = new Media\media\UploadedResource([
+        $Resource = new UploadedMediaResource([
             'source' => UploadedFile::getInstanceByName('file'),
         ]);
 
-        $Media = Media\resources\Media::push($Resource);
+        /** @var MediaModel $MediaModel */
+        $MediaModel = \Yii::createObject(MediaModel::className());
+
+        $Media = $MediaModel::push($Resource);
 
         if (empty($Media)) {
             throw new \yii\web\ServerErrorHttpException;

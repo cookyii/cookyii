@@ -8,6 +8,7 @@
 namespace cookyii\modules\Media;
 
 use cookyii\modules\Media;
+use cookyii\modules\Media\resources\Media\Model as MediaModel;
 use Imagine\Image\ImageInterface;
 use Imagine\Image\ManipulatorInterface;
 use yii\helpers\FileHelper;
@@ -22,7 +23,7 @@ class ImageWrapper extends \yii\base\Object
     /** @var string */
     public static $mediaModule = 'media';
 
-    /** @var \cookyii\modules\Media\resources\Media */
+    /** @var MediaModel */
     public $Media = null;
 
     /** @var array */
@@ -46,9 +47,9 @@ class ImageWrapper extends \yii\base\Object
 
         $Media = $this->Media;
 
-        if (!($Media instanceof Media\resources\Media)) {
+        if (!($Media instanceof MediaModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii', 'Model must be `{class}`.', [
-                'class' => Media\resources\Media::className(),
+                'class' => MediaModel::className(),
             ]));
         }
 
@@ -254,8 +255,8 @@ class ImageWrapper extends \yii\base\Object
     {
         $p = $this->calculatePathByFilename($this->Media->name, $separator);
 
-        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
-        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+        /** @var MediaModel $MediaModel */
+        $MediaModel = \Yii::createObject(MediaModel::className());
 
         return $MediaModel::getMediaModule()->storagePath . $p;
     }
@@ -268,8 +269,8 @@ class ImageWrapper extends \yii\base\Object
     {
         $p = $this->calculatePathByFilename($this->Media->name, $separator);
 
-        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
-        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+        /** @var MediaModel $MediaModel */
+        $MediaModel = \Yii::createObject(MediaModel::className());
 
         return $MediaModel::getMediaModule()->storageWebPath . $p;
     }
@@ -311,8 +312,8 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::beginProfile(sprintf('create cache file: %s', $this->Media->id), __METHOD__);
 
-        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
-        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+        /** @var MediaModel $MediaModel */
+        $MediaModel = \Yii::createObject(MediaModel::className());
 
         $mark_file_path = $this->getMarkedMediaPath($mark);
 

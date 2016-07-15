@@ -8,6 +8,7 @@
 namespace cookyii\modules\Account\backend\controllers\rest;
 
 use cookyii\modules\Account;
+use cookyii\modules\Account\resources\AccountProperty\Model as AccountPropertyModel;
 
 /**
  * Class PropertyController
@@ -57,8 +58,8 @@ class PropertyController extends \cookyii\api\Controller
             throw new \yii\web\BadRequestHttpException('Empty property key');
         }
 
-        /** @var \cookyii\modules\Account\resources\AccountProperty $AccountPropertyModel */
-        $AccountPropertyModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountProperty::className());
+        /** @var AccountPropertyModel $AccountPropertyModel */
+        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::className());
 
         $Property = null;
 
@@ -126,8 +127,8 @@ class PropertyController extends \cookyii\api\Controller
             throw new \yii\web\BadRequestHttpException('Empty account id');
         }
 
-        /** @var \cookyii\modules\Account\resources\AccountProperty $AccountPropertyModel */
-        $AccountPropertyModel = \Yii::createObject(\cookyii\modules\Account\resources\AccountProperty::className());
+        /** @var AccountPropertyModel $AccountPropertyModel */
+        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::className());
 
         $Property = $AccountPropertyModel::find()
             ->byAccountId($account_id)

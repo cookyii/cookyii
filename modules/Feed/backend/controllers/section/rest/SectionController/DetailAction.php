@@ -21,7 +21,7 @@ class DetailAction extends \cookyii\rest\Action
      */
     public function run($slug)
     {
-        /* @var $modelClass \cookyii\modules\Feed\resources\FeedSection */
+        /* @var $modelClass \cookyii\modules\Feed\resources\FeedSection\Model */
         $modelClass = $this->modelClass;
 
         $Query = $modelClass::find();

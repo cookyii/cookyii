@@ -8,6 +8,7 @@
 namespace cookyii\modules\Client\backend\controllers;
 
 use cookyii\modules\Client;
+use cookyii\modules\Client\resources\Client\Model as ClientModel;
 
 /**
  * Class EditController
@@ -35,8 +36,8 @@ class EditController extends Client\backend\components\Controller
      */
     public function actionIndex()
     {
-        /** @var \cookyii\modules\Client\resources\Client $ClientModel */
-        $ClientModel = \Yii::createObject(\cookyii\modules\Client\resources\Client::className());
+        /** @var ClientModel $ClientModel */
+        $ClientModel = \Yii::createObject(ClientModel::className());
 
         $ClientEditForm = \Yii::createObject([
             'class' => Client\backend\forms\ClientEditForm::className(),

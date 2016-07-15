@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Account\forms;
 
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
+
 /**
  * Class SignInForm
  * @package cookyii\modules\Account\forms
@@ -25,8 +27,8 @@ class SignInForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         return [
             /** type validators */
@@ -103,13 +105,13 @@ class SignInForm extends \cookyii\base\FormModel
     private $_Account = null;
 
     /**
-     * @return \cookyii\modules\Account\resources\Account
+     * @return AccountModel
      */
     private function getAccount()
     {
         if ($this->_Account === null) {
-            /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-            $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+            /** @var AccountModel $AccountModel */
+            $AccountModel = \Yii::createObject(AccountModel::className());
 
             $this->_Account = $AccountModel::find()
                 ->byEmail($this->email)

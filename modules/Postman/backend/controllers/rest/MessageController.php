@@ -8,6 +8,7 @@
 namespace cookyii\modules\Postman\backend\controllers\rest;
 
 use cookyii\modules\Postman;
+use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
 
 /**
  * Class MessageController
@@ -16,7 +17,7 @@ use cookyii\modules\Postman;
 class MessageController extends \cookyii\rest\Controller
 {
 
-    public $modelClass = 'cookyii\modules\Postman\resources\PostmanMessage';
+    public $modelClass = PostmanMessageModel::class;
 
     /**
      * @inheritdoc
@@ -95,7 +96,7 @@ class MessageController extends \cookyii\rest\Controller
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Postman\resources\PostmanMessage */
+        /* @var $modelClass PostmanMessageModel */
         $modelClass = $action->modelClass;
 
         /** @var  $Query */

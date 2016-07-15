@@ -8,6 +8,7 @@
 namespace cookyii\modules\Account\backend\controllers\rest;
 
 use cookyii\modules\Account;
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
 
 /**
  * Class AccountController
@@ -16,7 +17,7 @@ use cookyii\modules\Account;
 class AccountController extends \cookyii\rest\Controller
 {
 
-    public $modelClass = 'cookyii\modules\Account\resources\Account';
+    public $modelClass = AccountModel::class;
 
     /**
      * @inheritdoc
@@ -110,7 +111,7 @@ class AccountController extends \cookyii\rest\Controller
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Account\resources\Account */
+        /* @var $modelClass AccountModel */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find();

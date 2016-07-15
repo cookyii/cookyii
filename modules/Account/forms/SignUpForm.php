@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use rmrevin\yii\rbac\RbacFactory;
 
 /**
@@ -32,8 +33,8 @@ class SignUpForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         return [
             /** type validators */
@@ -77,8 +78,8 @@ class SignUpForm extends \cookyii\base\FormModel
      */
     public function register()
     {
-        /** @var \cookyii\modules\Account\resources\Account $Account */
-        $Account = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $Account */
+        $Account = \Yii::createObject(AccountModel::className());
         $Account->setAttributes([
             'name' => $this->name,
             'email' => $this->email,

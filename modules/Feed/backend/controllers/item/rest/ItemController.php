@@ -8,6 +8,7 @@
 namespace cookyii\modules\Feed\backend\controllers\item\rest;
 
 use cookyii\modules\Feed;
+use cookyii\modules\Feed\resources\FeedItem\Model as FeedItemModel;
 
 /**
  * Class ItemController
@@ -16,7 +17,7 @@ use cookyii\modules\Feed;
 class ItemController extends \cookyii\rest\Controller
 {
 
-    public $modelClass = 'cookyii\modules\Feed\resources\FeedItem';
+    public $modelClass = FeedItemModel::class;
 
     /**
      * @inheritdoc
@@ -102,7 +103,7 @@ class ItemController extends \cookyii\rest\Controller
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Feed\resources\FeedItem */
+        /* @var $modelClass FeedItemModel */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find();

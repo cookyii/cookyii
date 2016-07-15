@@ -7,13 +7,14 @@
 
 namespace common;
 
+use cookyii\interfaces\RolesDictInterface;
 use rmrevin\yii\rbac\RbacFactory;
 
 /**
  * Class Roles
  * @package common
  */
-class Roles
+class Roles implements RolesDictInterface
 {
 
     const USER = 'user';
@@ -22,15 +23,34 @@ class Roles
     const ADMIN = 'admin';
 
     /**
-     * @return array
+     * @inheritdoc
      */
-    public static function getAllRoles()
+    public static function get()
     {
         return [
-            RbacFactory::Role(Roles::ADMIN, 'Administrator'),
-            RbacFactory::Role(Roles::MANAGER, 'Manager'),
-            RbacFactory::Role(Roles::CLIENT, 'Client'),
-            RbacFactory::Role(Roles::USER, 'User'),
+            RbacFactory::Role(static::ADMIN, 'Administrator'),
+            RbacFactory::Role(static::MANAGER, 'Manager'),
+            RbacFactory::Role(static::CLIENT, 'Client'),
+            RbacFactory::Role(static::USER, 'User'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function inheritance()
+    {
+        return [
+            static::ADMIN => [
+                static::MANAGER,
+            ],
+            static::MANAGER => [
+                static::USER,
+            ],
+            static::CLIENT => [
+                static::USER,
+            ],
+            static::USER => [],
         ];
     }
 }

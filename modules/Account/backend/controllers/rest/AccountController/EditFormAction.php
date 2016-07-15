@@ -28,7 +28,7 @@ class EditFormAction extends \cookyii\rest\Action
 
         $account_id = (int)Request()->post('account_id');
 
-        /** @var $modelClass \cookyii\modules\Account\resources\Account */
+        /** @var $modelClass \cookyii\modules\Account\resources\Account\Model */
         $modelClass = $this->modelClass;
 
         $Account = null;

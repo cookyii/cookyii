@@ -10,8 +10,7 @@
 
 use yii\helpers\Html;
 
-/** @var \cookyii\modules\Account\resources\Account $Account */
-$Account = User()->identity;
+$Account = Account();
 
 $this->beginContent('@app/views/layouts/_layout.php', ['content' => $content]);
 

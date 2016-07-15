@@ -31,7 +31,7 @@ function dump($var, $depth = 10, $highlight = true, $return = false)
 }
 
 /**
- * @return \resources\Account
+ * @return \resources\Account\Model
  */
 function Account()
 {

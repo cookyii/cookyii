@@ -7,6 +7,7 @@
 namespace cookyii\modules\Page\frontend\controllers;
 
 use cookyii\modules\Page;
+use cookyii\modules\Page\resources\Page\Model as PageModel;
 
 /**
  * Class DefaultController
@@ -36,8 +37,8 @@ class DefaultController extends Page\frontend\components\Controller
      */
     public function actionIndex($slug)
     {
-        /** @var \cookyii\modules\Page\resources\Page $PageModel */
-        $PageModel = \Yii::createObject(\cookyii\modules\Page\resources\Page::className());
+        /** @var PageModel $PageModel */
+        $PageModel = \Yii::createObject(PageModel::className());
 
         $Page = $PageModel::find()
             ->bySlug($slug)
@@ -45,12 +46,12 @@ class DefaultController extends Page\frontend\components\Controller
             ->withoutDeleted()
             ->one();
 
-        if (!($Page instanceof \cookyii\modules\Page\resources\Page)) {
+        if (!($Page instanceof PageModel)) {
             throw new \yii\web\NotFoundHttpException(\Yii::t('cookyii.page', 'Page not found'));
         }
 
         return $this->render('index', [
-            'Page' => $Page
+            'Page' => $Page,
         ]);
     }
 }

@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Client\backend\forms;
 
+use cookyii\modules\Client\resources\Client\Model as ClientModel;
+
 /**
  * Class ClientEditForm
  * @package cookyii\modules\Client\backend\forms
@@ -16,7 +18,7 @@ class ClientEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Client\resources\Client */
+    /** @var ClientModel */
     public $Client;
 
     public $name;
@@ -25,7 +27,7 @@ class ClientEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Client instanceof \cookyii\modules\Client\resources\Client)) {
+        if (!($this->Client instanceof ClientModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.client', 'Not specified client to edit.'));
         }
     }

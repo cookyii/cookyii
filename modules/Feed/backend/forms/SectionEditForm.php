@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Feed\backend\forms;
 
+use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
 use yii\helpers\Json;
 
 /**
@@ -18,7 +19,7 @@ class SectionEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Feed\resources\FeedSection */
+    /** @var FeedSectionModel */
     public $Section;
 
     public $parent_id;
@@ -33,7 +34,7 @@ class SectionEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Section instanceof \cookyii\modules\Feed\resources\FeedSection)) {
+        if (!($this->Section instanceof FeedSectionModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.feed', 'Not specified section to edit.'));
         }
     }

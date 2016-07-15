@@ -28,7 +28,7 @@ class EditFormAction extends \cookyii\rest\Action
 
         $item_id = (int)Request()->post('item_id');
 
-        /** @var $modelClass \cookyii\modules\Feed\resources\FeedItem */
+        /** @var $modelClass \cookyii\modules\Feed\resources\FeedItem\Model */
         $modelClass = $this->modelClass;
 
         $Item = null;

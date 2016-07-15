@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Page\backend\forms;
 
+use cookyii\modules\Page\resources\Page\Model as PageModel;
 use yii\helpers\Json;
 
 /**
@@ -18,7 +19,7 @@ class PageEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Page\resources\Page */
+    /** @var PageModel */
     public $Page;
 
     public $title;
@@ -29,7 +30,7 @@ class PageEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Page instanceof \cookyii\modules\Page\resources\Page)) {
+        if (!($this->Page instanceof PageModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.page', 'Not specified page to edit.'));
         }
     }

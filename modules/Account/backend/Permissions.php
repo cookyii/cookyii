@@ -7,22 +7,33 @@
 
 namespace cookyii\modules\Account\backend;
 
+use cookyii\interfaces\PermissionsModuleDictInterface;
+use rmrevin\yii\rbac\RbacFactory;
+
 /**
  * Class Permissions
  * @package cookyii\modules\Account\backend
  */
-class Permissions
+class Permissions implements PermissionsModuleDictInterface
 {
 
     const ACCESS = 'backend.account.access';
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public static function get()
     {
         return [
-            static::ACCESS => 'It has access to account backend module',
+            RbacFactory::Permission(static::ACCESS, 'It has access to account backend module'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function rules()
+    {
+        return [];
     }
 }

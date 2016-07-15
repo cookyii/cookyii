@@ -21,7 +21,7 @@ class DetailAction extends \cookyii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Postman\resources\PostmanMessage $Model */
+        /** @var \cookyii\modules\Postman\resources\PostmanMessage\Model $Model */
         $Model = $this->findModel($id);
 
         $result = $Model->toArray();

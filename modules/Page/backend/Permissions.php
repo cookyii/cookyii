@@ -7,11 +7,14 @@
 
 namespace cookyii\modules\Page\backend;
 
+use cookyii\interfaces\PermissionsModuleDictInterface;
+use rmrevin\yii\rbac\RbacFactory;
+
 /**
  * Class Permissions
  * @package cookyii\modules\Page\backend
  */
-class Permissions
+class Permissions implements PermissionsModuleDictInterface
 {
 
     const ACCESS = 'backend.page.access';
@@ -22,7 +25,15 @@ class Permissions
     public static function get()
     {
         return [
-            static::ACCESS => 'It has access to page backend module',
+            RbacFactory::Permission(static::ACCESS, 'It has access to page backend module'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function rules()
+    {
+        return [];
     }
 }

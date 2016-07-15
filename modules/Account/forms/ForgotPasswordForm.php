@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use yii\helpers\Json;
 
 /**
@@ -29,8 +30,8 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
      */
     public function rules()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         return [
             /** type validators */
@@ -163,13 +164,13 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     private $_Account = null;
 
     /**
-     * @return \cookyii\modules\Account\resources\Account
+     * @return AccountModel
      */
     private function getAccount()
     {
         if ($this->_Account === null) {
-            /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-            $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+            /** @var AccountModel $AccountModel */
+            $AccountModel = \Yii::createObject(AccountModel::className());
 
             $this->_Account = $AccountModel::find()
                 ->byEmail($this->email)
@@ -180,7 +181,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     }
 
     /**
-     * @param \cookyii\modules\Account\resources\Account $Account
+     * @param AccountModel $Account
      * @return string
      */
     private function encryptData($Account)
@@ -196,7 +197,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     }
 
     /**
-     * @param \cookyii\modules\Account\resources\Account $Account
+     * @param AccountModel $Account
      * @return array
      */
     private function decryptData($Account)

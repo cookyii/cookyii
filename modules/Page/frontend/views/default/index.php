@@ -5,7 +5,7 @@
  * @link https://rmrevin.com
  *
  * @var yii\web\View $this
- * @var cookyii\modules\Page\resources\Page $Page
+ * @var cookyii\modules\Page\resources\Page\Model $Page
  */
 
 use yii\helpers\Html;

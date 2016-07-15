@@ -8,6 +8,7 @@
 namespace cookyii\modules\Account\backend\forms;
 
 use cookyii\modules\Account;
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use rmrevin\yii\rbac\RbacFactory;
 
 /**
@@ -19,7 +20,7 @@ class AccountEditForm extends \cookyii\base\FormModel
 
     use \cookyii\traits\PopulateErrorsTrait;
 
-    /** @var \cookyii\modules\Account\resources\Account */
+    /** @var AccountModel */
     public $Account;
 
     public $name;
@@ -31,7 +32,7 @@ class AccountEditForm extends \cookyii\base\FormModel
 
     public function init()
     {
-        if (!($this->Account instanceof \cookyii\modules\Account\resources\Account)) {
+        if (!($this->Account instanceof AccountModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii.account', 'Not specified account to edit.'));
         }
     }
@@ -97,9 +98,9 @@ class AccountEditForm extends \cookyii\base\FormModel
         if (empty($values)) {
             $this->addError($attribute, \Yii::t('cookyii.account', 'You must select at least one role'));
         } else {
-            /** @var Account\resources\Account $Account */
+            /** @var AccountModel $Account */
             $Account = \Yii::createObject([
-                'class' => Account\resources\Account::className(),
+                'class' => AccountModel::className(),
             ]);
 
             $roles = array_keys($Account::getAllRoles());
@@ -173,8 +174,8 @@ class AccountEditForm extends \cookyii\base\FormModel
      */
     public static function getRoleValues()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         return $AccountModel::getAllRoles();
     }
@@ -184,8 +185,8 @@ class AccountEditForm extends \cookyii\base\FormModel
      */
     public static function getGenderValues()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         return $AccountModel::getGenderValues();
     }
@@ -195,8 +196,8 @@ class AccountEditForm extends \cookyii\base\FormModel
      */
     public static function getGroupedPermissionValues()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         $permissions = $AccountModel::getAllPermissions();
 

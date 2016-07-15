@@ -8,6 +8,7 @@
 namespace cookyii\modules\Client\backend\controllers\rest;
 
 use cookyii\modules\Client;
+use cookyii\modules\Client\resources\ClientProperty\Model as ClientPropertyModel;
 
 /**
  * Class PropertyController
@@ -57,8 +58,8 @@ class PropertyController extends \cookyii\api\Controller
             throw new \yii\web\BadRequestHttpException('Empty property key');
         }
 
-        /** @var \cookyii\modules\Client\resources\ClientProperty $ClientPropertyModel */
-        $ClientPropertyModel = \Yii::createObject(\cookyii\modules\Client\resources\ClientProperty::className());
+        /** @var ClientPropertyModel $ClientPropertyModel */
+        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::className());
 
         $Property = null;
 
@@ -126,8 +127,8 @@ class PropertyController extends \cookyii\api\Controller
             throw new \yii\web\BadRequestHttpException('Empty client id');
         }
 
-        /** @var \cookyii\modules\Client\resources\ClientProperty $ClientPropertyModel */
-        $ClientPropertyModel = \Yii::createObject(\cookyii\modules\Client\resources\ClientProperty::className());
+        /** @var ClientPropertyModel $ClientPropertyModel */
+        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::className());
 
         $Property = $ClientPropertyModel::find()
             ->byClientId($client_id)

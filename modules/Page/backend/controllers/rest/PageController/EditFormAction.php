@@ -28,7 +28,7 @@ class EditFormAction extends \cookyii\rest\Action
 
         $page_id = (int)Request()->post('page_id');
 
-        /** @var $modelClass \cookyii\modules\Page\resources\Page */
+        /** @var $modelClass \cookyii\modules\Page\resources\Page\Model */
         $modelClass = $this->modelClass;
 
         $Page = null;

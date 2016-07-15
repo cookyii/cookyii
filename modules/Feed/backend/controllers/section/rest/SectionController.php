@@ -8,6 +8,7 @@
 namespace cookyii\modules\Feed\backend\controllers\section\rest;
 
 use cookyii\modules\Feed;
+use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
 
 /**
  * Class SectionController
@@ -16,7 +17,7 @@ use cookyii\modules\Feed;
 class SectionController extends \cookyii\rest\Controller
 {
 
-    public $modelClass = 'cookyii\modules\Feed\resources\FeedSection';
+    public $modelClass = FeedSectionModel::class;
 
     /**
      * @inheritdoc
@@ -115,12 +116,12 @@ class SectionController extends \cookyii\rest\Controller
      * The order of the primary key values should follow that returned by the `primaryKey()` method
      * of the model.
      * @param $action
-     * @return \cookyii\modules\Feed\resources\FeedSection the model found
+     * @return FeedSectionModel the model found
      * @throws \yii\web\NotFoundHttpException if the model cannot be found
      */
     public function findModel($id, $action)
     {
-        /* @var $modelClass \cookyii\modules\Feed\resources\FeedSection */
+        /* @var $modelClass FeedSectionModel */
         $modelClass = $this->modelClass;
 
         $model = $modelClass::find()
@@ -140,7 +141,7 @@ class SectionController extends \cookyii\rest\Controller
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Feed\resources\FeedSection */
+        /* @var $modelClass FeedSectionModel */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find();

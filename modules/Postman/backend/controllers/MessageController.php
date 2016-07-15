@@ -8,6 +8,7 @@
 namespace cookyii\modules\Postman\backend\controllers;
 
 use cookyii\modules\Postman;
+use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
 use yii\helpers\Html;
 
 /**
@@ -43,8 +44,8 @@ class MessageController extends Postman\backend\components\Controller
      */
     public function actionEdit()
     {
-        /** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
-        $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
+        /** @var PostmanMessageModel $MessageModel */
+        $MessageModel = \Yii::createObject(PostmanMessageModel::className());
 
         $MessageEditForm = \Yii::createObject([
             'class' => Postman\backend\forms\MessageEditForm::className(),
@@ -69,8 +70,8 @@ class MessageController extends Postman\backend\components\Controller
 
         $use_layout = $use_layout === 'true';
 
-        /** @var \cookyii\modules\Postman\resources\PostmanMessage $MessageModel */
-        $MessageModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanMessage::className());
+        /** @var PostmanMessageModel $MessageModel */
+        $MessageModel = \Yii::createObject(PostmanMessageModel::className());
 
         switch ($type) {
             default:

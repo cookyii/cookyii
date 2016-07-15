@@ -8,6 +8,7 @@
 namespace cookyii\modules\Account\backend\controllers;
 
 use cookyii\modules\Account;
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
 
 /**
  * Class EditController
@@ -34,8 +35,8 @@ class EditController extends Account\backend\components\Controller
      */
     public function actionIndex()
     {
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         $AccountEditForm = \Yii::createObject([
             'class' => Account\backend\forms\AccountEditForm::className(),

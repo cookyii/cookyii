@@ -7,11 +7,14 @@
 
 namespace cookyii\modules\Postman\backend;
 
+use cookyii\interfaces\PermissionsModuleDictInterface;
+use rmrevin\yii\rbac\RbacFactory;
+
 /**
  * Class Permissions
  * @package cookyii\modules\Postman\backend
  */
-class Permissions
+class Permissions implements PermissionsModuleDictInterface
 {
 
     const ACCESS = 'backend.postman.access';
@@ -22,7 +25,15 @@ class Permissions
     public static function get()
     {
         return [
-            static::ACCESS => 'It has access to postman backend module',
+            RbacFactory::Permission(static::ACCESS, 'It has access to postman backend module'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function rules()
+    {
+        return [];
     }
 }

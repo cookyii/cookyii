@@ -23,8 +23,7 @@ if (User()->isGuest) {
         'selected' => false,
     ];
 } else {
-    /** @var \cookyii\modules\Account\resources\Account $Account */
-    $Account = User()->identity;
+    $Account = Account();
 
     $menu[] = [
         'label' => $Account->name,

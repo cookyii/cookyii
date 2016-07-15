@@ -7,7 +7,9 @@
 
 namespace cookyii\modules\Account\commands;
 
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use rmrevin\yii\rbac\RbacFactory;
+use yii\helpers\Console;
 
 /**
  * Class AccountCommand
@@ -42,8 +44,8 @@ class AccountCommand extends \yii\console\Controller
             ]);
         }
 
-        /** @var \cookyii\modules\Account\resources\Account $Account */
-        $Account = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $Account */
+        $Account = \Yii::createObject(AccountModel::className());
         $Account->setAttributes([
             'name' => $name,
             'email' => $email,
@@ -56,13 +58,13 @@ class AccountCommand extends \yii\console\Controller
             AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
             AuthManager()->assign(RbacFactory::Role(\common\Roles::ADMIN), $Account->id);
 
-            $this->stdout("User have been successfully added\n", \yii\helpers\Console::FG_GREEN);
+            $this->stdout("User have been successfully added\n", Console::FG_GREEN);
         } else {
-            $this->stdout("ERROR creating user\n", \yii\helpers\Console::FG_RED);
+            $this->stdout("ERROR creating user\n", Console::FG_RED);
 
             $error = array_shift($Account->getFirstErrors());
             if (!empty($error)) {
-                $this->stdout("\t> {$error}\n", \yii\helpers\Console::FG_RED);
+                $this->stdout("\t> {$error}\n", Console::FG_RED);
             }
 
             return static::EXIT_CODE_ERROR;

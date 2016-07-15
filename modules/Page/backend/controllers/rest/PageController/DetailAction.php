@@ -21,7 +21,7 @@ class DetailAction extends \cookyii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Page\resources\Page $Model */
+        /** @var \cookyii\modules\Page\resources\Page\Model $Model */
         $Model = $this->findModel($id);
 
         $result = $Model->toArray([], ['meta']);

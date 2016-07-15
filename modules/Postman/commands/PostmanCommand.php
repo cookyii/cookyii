@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Postman\commands;
 
-use cookyii\modules\Postman\resources\PostmanMessage;
+use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
 use yii\helpers\Json;
 
 /**
@@ -27,7 +27,7 @@ class PostmanCommand extends \yii\console\Controller
     {
         $this->stdout(sprintf('Looking for the next %d letters to send... ', $limit));
 
-        $Messages = PostmanMessage::find()
+        $Messages = PostmanMessageModel::find()
             ->forMailQueue()
             ->limit($limit)
             ->all();
@@ -53,7 +53,7 @@ class PostmanCommand extends \yii\console\Controller
                 } elseif (is_bool($result) && $result === true) {
                     $this->stdout('send.' . PHP_EOL);
                 } elseif (is_bool($result) && $result === false) {
-                    $Postman = PostmanMessage::getPostman();
+                    $Postman = PostmanMessageModel::getPostman();
 
                     $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
 

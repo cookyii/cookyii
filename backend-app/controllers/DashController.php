@@ -7,6 +7,8 @@
 
 namespace backend\controllers;
 
+use backend\Permissions;
+
 /**
  * Class DashController
  * @package backend\controllers
@@ -22,7 +24,7 @@ class DashController extends \backend\components\Controller
         return [
             [
                 'allow' => true,
-                'roles' => ['@'],
+                'roles' => [Permissions::ACCESS],
             ],
         ];
     }

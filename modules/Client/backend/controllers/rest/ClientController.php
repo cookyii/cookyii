@@ -8,6 +8,7 @@
 namespace cookyii\modules\Client\backend\controllers\rest;
 
 use cookyii\modules\Client;
+use cookyii\modules\Client\resources\Client\Model as ClientModel;
 
 /**
  * Class ClientController
@@ -16,7 +17,7 @@ use cookyii\modules\Client;
 class ClientController extends \cookyii\rest\Controller
 {
 
-    public $modelClass = 'cookyii\modules\Client\resources\Client';
+    public $modelClass = ClientModel::class;
 
     /**
      * @inheritdoc
@@ -125,7 +126,7 @@ class ClientController extends \cookyii\rest\Controller
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Client\resources\Client */
+        /* @var $modelClass ClientModel */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find()

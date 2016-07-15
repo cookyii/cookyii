@@ -6,11 +6,14 @@
 
 namespace cookyii\modules\Translation\backend;
 
+use cookyii\interfaces\PermissionsModuleDictInterface;
+use rmrevin\yii\rbac\RbacFactory;
+
 /**
  * Class Permissions
  * @package namespace cookyii\modules\Translation\backend
  */
-class Permissions
+class Permissions implements PermissionsModuleDictInterface
 {
 
     const ACCESS = 'backend.translation.access';
@@ -21,7 +24,15 @@ class Permissions
     public static function get()
     {
         return [
-            static::ACCESS => 'It has access to translation backend module',
+            RbacFactory::Permission(static::ACCESS, 'It has access to translation backend module'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function rules()
+    {
+        return [];
     }
 }

@@ -8,6 +8,7 @@
 namespace cookyii\modules\Page\backend\controllers\rest;
 
 use cookyii\modules\Page;
+use cookyii\modules\Page\resources\Page\Model as PageModel;
 
 /**
  * Class PageController
@@ -16,7 +17,7 @@ use cookyii\modules\Page;
 class PageController extends \cookyii\rest\Controller
 {
 
-    public $modelClass = 'cookyii\modules\Page\resources\Page';
+    public $modelClass = PageModel::class;
 
     /**
      * @inheritdoc
@@ -102,7 +103,7 @@ class PageController extends \cookyii\rest\Controller
      */
     public function prepareListDataProvider($action)
     {
-        /* @var $modelClass \cookyii\modules\Page\resources\Page */
+        /* @var $modelClass PageModel */
         $modelClass = $action->modelClass;
 
         $Query = $modelClass::find();

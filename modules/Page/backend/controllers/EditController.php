@@ -8,6 +8,7 @@
 namespace cookyii\modules\Page\backend\controllers;
 
 use cookyii\modules\Page;
+use cookyii\modules\Page\resources\Page\Model as PageModel;
 
 /**
  * Class EditController
@@ -35,8 +36,8 @@ class EditController extends Page\backend\components\Controller
      */
     public function actionIndex()
     {
-        /** @var \cookyii\modules\Page\resources\Page $PageModel */
-        $PageModel = \Yii::createObject(\cookyii\modules\Page\resources\Page::className());
+        /** @var PageModel $PageModel */
+        $PageModel = \Yii::createObject(PageModel::className());
 
         $PageEditForm = \Yii::createObject([
             'class' => Page\backend\forms\PageEditForm::className(),

@@ -7,7 +7,9 @@
 
 namespace cookyii\rest\controllers;
 
-use cookyii\modules\Media;
+use cookyii\modules\Media\media\UploadedResource as UploadedMediaResource;
+use cookyii\modules\Media\resources\Media\Model as MediaModel;
+use yii\web\UploadedFile;
 
 /**
  * Class ImperaviUploadController
@@ -22,12 +24,12 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
      */
     public function actionFile()
     {
-        $UploadedResource = new Media\media\UploadedResource([
-            'source' => \yii\web\UploadedFile::getInstanceByName('file'),
+        $UploadedResource = new UploadedMediaResource([
+            'source' => UploadedFile::getInstanceByName('file'),
         ]);
 
-        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
-        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+        /** @var MediaModel $MediaModel */
+        $MediaModel = \Yii::createObject(MediaModel::className());
 
         $Media = $MediaModel::push($UploadedResource);
 
@@ -47,12 +49,12 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
      */
     public function actionImage()
     {
-        $UploadedResource = new Media\media\UploadedResource([
-            'source' => \yii\web\UploadedFile::getInstanceByName('file'),
+        $UploadedResource = new UploadedMediaResource([
+            'source' => UploadedFile::getInstanceByName('file'),
         ]);
 
-        /** @var \cookyii\modules\Media\resources\Media $MediaModel */
-        $MediaModel = \Yii::createObject(\cookyii\modules\Media\resources\Media::className());
+        /** @var MediaModel $MediaModel */
+        $MediaModel = \Yii::createObject(MediaModel::className());
 
         $Media = $MediaModel::push($UploadedResource);
 

@@ -21,7 +21,7 @@ class DetailAction extends \cookyii\rest\Action
      */
     public function run($id)
     {
-        /** @var $modelClass \cookyii\modules\Client\resources\Client */
+        /** @var $modelClass \cookyii\modules\Client\resources\Client\Model */
         $modelClass = $this->modelClass;
 
         $Client = $modelClass::find()

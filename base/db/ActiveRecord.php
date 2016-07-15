@@ -15,6 +15,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
 
     /**
+     * @var string
+     */
+    static $tableName;
+
+    /**
      * @var \cookyii\db\helpers\AbstractHelper[]
      */
     private $_helpers = [];
@@ -68,5 +73,15 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         return $this->_helpers[$helperClass];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return !empty(static::$tableName)
+            ? static::$tableName
+            : parent::tableName();
     }
 }

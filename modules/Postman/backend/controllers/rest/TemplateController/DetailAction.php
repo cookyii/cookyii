@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Postman\backend\controllers\rest\TemplateController;
 
+use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
+
 /**
  * Class DetailAction
  * @package cookyii\modules\Postman\backend\controllers\rest\TemplateController
@@ -21,13 +23,13 @@ class DetailAction extends \cookyii\rest\Action
      */
     public function run($id)
     {
-        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $Model */
+        /** @var PostmanTemplateModel $Model */
         $Model = $this->findModel($id);
 
         $result = $Model->toArray();
 
-        /** @var \cookyii\modules\Postman\resources\PostmanTemplate $TemplateModel */
-        $TemplateModel = \Yii::createObject(\cookyii\modules\Postman\resources\PostmanTemplate::className());
+        /** @var PostmanTemplateModel $TemplateModel */
+        $TemplateModel = \Yii::createObject(PostmanTemplateModel::className());
 
         $result['use_layout'] = $result['use_layout'] === $TemplateModel::USE_LAYOUT;
 

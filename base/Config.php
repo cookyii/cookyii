@@ -106,7 +106,7 @@ class Config
         }
 
         if (!User()->isGuest) {
-            /** @var \resources\Account $Account */
+            /** @var \resources\Account\Model $Account */
             $Account = User()->identity;
 
             $gmt = $account_gmt = !empty($Account->timezone)

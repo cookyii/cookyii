@@ -28,7 +28,7 @@ class EditFormAction extends \cookyii\rest\Action
 
         $template_id = (int)Request()->post('template_id');
 
-        /** @var $modelClass \cookyii\modules\Postman\resources\PostmanTemplate */
+        /** @var $modelClass \cookyii\modules\Postman\resources\PostmanTemplate\Model */
         $modelClass = $this->modelClass;
 
         $Template = null;

@@ -73,7 +73,7 @@ return [
         'class' => yii\web\User::className(),
         'enableAutoLogin' => true,
         'loginUrl' => ['/account/sign/in'],
-        'identityClass' => resources\Account::className(),
+        'identityClass' => resources\Account\Model::className(),
         'identityCookie' => [
             'name' => '_identity',
             'httpOnly' => true,

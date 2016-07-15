@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Account\traits;
 
+use cookyii\modules\Account\resources\Account\Model as AccountModel;
+use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
 use rmrevin\yii\rbac\RbacFactory;
 use yii\helpers\Json;
 
@@ -23,12 +25,12 @@ trait SocialAuthCallbackTrait
      */
     public function socialAuthCallback(\yii\authclient\ClientInterface $Client)
     {
-        $AuthResponse = \cookyii\modules\Account\resources\AccountAuthResponse::createLog($Client);
+        $AuthResponse = AccountAuthResponseModel::createLog($Client);
 
         $attributes = $Client->getUserAttributes();
 
-        /** @var \cookyii\modules\Account\resources\Account $AccountModel */
-        $AccountModel = \Yii::createObject(\cookyii\modules\Account\resources\Account::className());
+        /** @var AccountModel $AccountModel */
+        $AccountModel = \Yii::createObject(AccountModel::className());
 
         $AccountQuery = $AccountModel::find();
 
@@ -67,7 +69,7 @@ trait SocialAuthCallbackTrait
 
         $Account = $AccountQuery->one();
 
-        if ($Account instanceof \cookyii\modules\Account\resources\Account) {
+        if ($Account instanceof AccountModel) {
             $Account->pushSocialLink($Client);
 
             if (true !== ($reason = $Account->isAvailable())) {
@@ -121,7 +123,7 @@ trait SocialAuthCallbackTrait
 
         $AuthResponse->validate() && $AuthResponse->save();
 
-        if ($Account instanceof \cookyii\modules\Account\resources\Account && !$Account->isNewRecord && !$Account->hasErrors()) {
+        if ($Account instanceof AccountModel && !$Account->isNewRecord && !$Account->hasErrors()) {
             $Account->save();
 
             User()->login($Account, 86400);

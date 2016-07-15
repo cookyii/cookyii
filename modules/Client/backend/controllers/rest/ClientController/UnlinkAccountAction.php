@@ -28,7 +28,7 @@ class UnlinkAccountAction extends \cookyii\rest\Action
             throw new \yii\web\BadRequestHttpException;
         }
 
-        /** @var \cookyii\modules\Client\resources\Client $Client */
+        /** @var \cookyii\modules\Client\resources\Client\Model $Client */
         $Client = $this->findModel($client_id);
 
         if (!$Client->accountHelper->unlink()) {
