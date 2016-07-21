@@ -22,16 +22,17 @@ class m150610_170030_rbac extends \cookyii\db\Migration
         $authManager = $this->getAuthManager();
 
         $this->createTable($authManager->ruleTable, [
+            'pkey' => ['name'],
             'schema' => [
                 'name' => $this->string(64)->notNull(),
                 'data' => $this->text(),
                 'created_at' => $this->unixTimestamp(),
                 'updated_at' => $this->unixTimestamp(),
             ],
-            'pkey' => ['name'],
         ]);
 
         $this->createTable($authManager->itemTable, [
+            'pkey' => ['name'],
             'schema' => [
                 'name' => $this->string(64)->notNull(),
                 'type' => $this->integer()->notNull(),
@@ -41,7 +42,6 @@ class m150610_170030_rbac extends \cookyii\db\Migration
                 'created_at' => $this->unixTimestamp(),
                 'updated_at' => $this->unixTimestamp(),
             ],
-            'pkey' => ['name'],
             'indexes' => [
                 'idx_type' => ['type'],
                 'idx_rule' => ['rule_name'],
@@ -57,11 +57,11 @@ class m150610_170030_rbac extends \cookyii\db\Migration
         ]);
 
         $this->createTable($authManager->itemChildTable, [
+            'pkey' => ['parent', 'child'],
             'schema' => [
                 'parent' => $this->string(64)->notNull(),
                 'child' => $this->string(64)->notNull(),
             ],
-            'pkey' => ['parent', 'child'],
             'indexes' => [
                 'idx_parent' => ['parent'],
                 'idx_child' => ['child'],
@@ -83,12 +83,12 @@ class m150610_170030_rbac extends \cookyii\db\Migration
         ]);
 
         $this->createTable($authManager->assignmentTable, [
+            'pkey' => ['item_name', 'user_id'],
             'schema' => [
                 'item_name' => $this->string(64)->notNull(),
                 'user_id' => $this->string(64)->notNull(),
                 'created_at' => $this->unixTimestamp(),
             ],
-            'pkey' => ['item_name', 'user_id'],
         ]);
     }
 

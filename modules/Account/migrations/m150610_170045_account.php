@@ -20,7 +20,7 @@ class m150610_170045_account extends \cookyii\db\Migration
                 'deleted_at' => $this->unixTimestamp(),
             ],
             'indexes' => [
-                'idx_email' => ['email'],
+                'idx_email' => ['email(190)'],
                 'idx_token' => ['token'],
                 'idx_auth_key' => ['auth_key'],
                 'idx_available' => ['activated_at', 'deleted_at'],

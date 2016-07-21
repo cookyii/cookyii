@@ -16,7 +16,7 @@ class m150715_120825_client extends \cookyii\db\Migration
                 'deleted_at' => $this->unixTimestamp(),
             ],
             'indexes' => [
-                'idx_email' => ['email'],
+                'idx_email' => ['email(190)'],
                 'idx_deleted_at' => ['deleted_at'],
             ],
         ]);

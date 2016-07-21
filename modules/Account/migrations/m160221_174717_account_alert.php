@@ -6,8 +6,9 @@ class m160221_174717_account_alert extends \cookyii\db\Migration
     public function up()
     {
         $this->createTable('{{%account_alert}}', [
+            'pkey' => ['id'],
             'schema' => [
-                'id' => $this->string(),
+                'id' => $this->string(64),
                 'account_id' => $this->integer(),
                 'type' => $this->smallInteger(),
                 'message' => $this->string(),
@@ -15,11 +16,10 @@ class m160221_174717_account_alert extends \cookyii\db\Migration
                 'created_at' => $this->unixTimestamp(),
                 'updated_at' => $this->unixTimestamp(),
                 'deleted_at' => $this->unixTimestamp(),
-                'PRIMARY KEY ([[id]])',
             ],
             'indexes' => [
                 'idx_account' => ['account_id'],
-                'idx_available' => ['message', 'deleted_at'],
+                'idx_available' => ['message(190)', 'deleted_at'],
                 'idx_deleted_at' => ['deleted_at'],
             ],
             'fkeys' => [

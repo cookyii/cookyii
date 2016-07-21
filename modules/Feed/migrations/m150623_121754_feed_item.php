@@ -26,7 +26,7 @@ class m150623_121754_feed_item extends \cookyii\db\Migration
                 'deleted_at' => $this->unixTimestamp(),
             ],
             'uniques' => [
-                'idx_slug' => ['slug'],
+                'idx_slug' => ['slug(190)'],
             ],
             'indexes' => [
                 'idx_sort' => ['sort'],
@@ -48,10 +48,10 @@ class m150623_121754_feed_item extends \cookyii\db\Migration
         ]);
 
         $this->createTable('{{%feed_item_section}}', [
+            'pkey' => ['item_id', 'section_id'],
             'schema' => [
                 'item_id' => $this->integer(),
                 'section_id' => $this->integer(),
-                'PRIMARY KEY ([[item_id]], [[section_id]])',
             ],
             'indexes' => [
                 'idx_item' => ['item_id'],

@@ -19,16 +19,17 @@ class m150619_163157_postman_message extends \cookyii\db\Migration
                 'deleted_at' => $this->unixTimestamp(),
             ],
             'indexes' => [
+                'idx_code' => ['code'],
                 'idx_deleted_at' => ['deleted_at'],
             ],
         ]);
 
         $this->createTable('{{%postman_message_attach}}', [
+            'pkey' => ['message_id', 'media_id'],
             'schema' => [
                 'message_id' => $this->integer(),
                 'media_id' => $this->integer(),
                 'embed' => $this->boolean()->defaultValue(0),
-                'PRIMARY KEY ([[message_id]], [[media_id]])',
             ],
             'indexes' => [
                 'idx_message' => ['message_id'],

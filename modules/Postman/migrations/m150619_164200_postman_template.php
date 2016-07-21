@@ -10,7 +10,7 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
         $this->createTable('{{%postman_template}}', [
             'schema' => [
                 'id' => $this->primaryKey(),
-                'code' => $this->string(),
+                'code' => $this->string(128),
                 'subject' => $this->text(),
                 'content_text' => $this->text(),
                 'content_html' => $this->text(),
@@ -29,11 +29,11 @@ class m150619_164200_postman_template extends \cookyii\db\Migration
         ]);
 
         $this->createTable('{{%postman_template_attach}}', [
+            'pkey' => ['template_id', 'media_id'],
             'schema' => [
                 'template_id' => $this->integer(),
                 'media_id' => $this->integer(),
                 'embed' => $this->boolean()->defaultValue(0),
-                'PRIMARY KEY ([[template_id]], [[media_id]])',
             ],
             'indexes' => [
                 'idx_template' => ['template_id'],

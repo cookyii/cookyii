@@ -8,7 +8,7 @@ class m150610_170115_account_properties extends \cookyii\db\Migration
         $this->createTable('{{%account_property}}', [
             'schema' => [
                 'account_id' => $this->integer(),
-                'key' => $this->string()->notNull(),
+                'key' => $this->string(128)->notNull(),
                 'value' => $this->text(),
                 'created_at' => $this->unixTimestamp(),
                 'updated_at' => $this->unixTimestamp(),
@@ -16,6 +16,7 @@ class m150610_170115_account_properties extends \cookyii\db\Migration
             ],
             'indexes' => [
                 'idx_account' => ['account_id'],
+                'idx_key' => ['key'],
             ],
             'fkeys' => [
                 'fkey_account_property_account' => [

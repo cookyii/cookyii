@@ -23,13 +23,14 @@ class m150610_170100_account_auth extends \cookyii\db\Migration
 
         foreach (static::$providers as $provider) {
             $this->createTable("{{%account_auth_$provider}}", [
+                'pkey' => ['account_id', 'social_id'],
                 'schema' => [
                     'account_id' => $this->integer(),
-                    'social_id' => $this->string(),
-                    'PRIMARY KEY ([[account_id]], [[social_id]])',
+                    'social_id' => $this->string(128),
                 ],
                 'indexes' => [
                     'idx_account' => ['account_id'],
+                    'idx_social' => ['social_id'],
                 ],
                 'fkeys' => [
                     "fkey_account_auth_{$provider}_account" => [

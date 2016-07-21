@@ -23,7 +23,7 @@ class m150623_121259_feed_section extends \cookyii\db\Migration
                 'deleted_at' => $this->unixTimestamp(),
             ],
             'uniques' => [
-                'idx_slug' => ['slug'],
+                'idx_slug' => ['slug(190)'],
             ],
             'indexes' => [
                 'idx_parent' => ['parent_id'],

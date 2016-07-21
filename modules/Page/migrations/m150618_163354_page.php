@@ -20,6 +20,9 @@ class m150618_163354_page extends \cookyii\db\Migration
                 'updated_at' => $this->unixTimestamp(),
                 'deleted_at' => $this->unixTimestamp(),
             ],
+            'uniques' => [
+                'idx_slug' => ['slug(190)'],
+            ],
             'indexes' => [
                 'idx_activated_at' => ['activated_at'],
                 'idx_deleted_at' => ['deleted_at'],

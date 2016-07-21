@@ -29,7 +29,7 @@ return [
 
     'component.db' => [
         'class' => yii\db\Connection::className(),
-        'charset' => 'utf8',
+        'charset' => 'utf8mb4',
         'enableSchemaCache' => true,
         'schemaCache' => 'cache.schema',
         'enableQueryCache' => false,

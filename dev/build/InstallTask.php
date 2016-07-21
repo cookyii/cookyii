@@ -61,6 +61,9 @@ class InstallTask extends CallableTask
     /** @var \mysqli */
     protected $connect;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -172,6 +175,9 @@ class InstallTask extends CallableTask
         }
     }
 
+    /**
+     * @return bool|int
+     */
     protected function copyEnvironmentConfig()
     {
         $result = false;
@@ -226,7 +232,7 @@ class InstallTask extends CallableTask
      * @param string $collate
      * @return bool
      */
-    protected function createDatabases($charset = 'utf8', $collate = 'utf8_unicode_ci')
+    protected function createDatabases($charset = 'utf8mb4', $collate = 'utf8mb4_unicode_ci')
     {
         $result = false;
 
@@ -269,6 +275,13 @@ class InstallTask extends CallableTask
         return $result;
     }
 
+    /**
+     * @param $database
+     * @param $name
+     * @param string $host
+     * @param null $password
+     * @return bool|\mysqli_result
+     */
     protected function createDatabaseUser($database, $name, $host = 'localhost', $password = null)
     {
         if (empty($password)) {
@@ -319,6 +332,9 @@ class InstallTask extends CallableTask
         return false;
     }
 
+    /**
+     * @return string
+     */
     protected function generateRandomString()
     {
         return sha1(uniqid(time()));
