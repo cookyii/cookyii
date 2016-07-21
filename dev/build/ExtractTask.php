@@ -31,6 +31,7 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
             'rsync -rt ./modules/Translation/ ../module-translation/',
             'rsync -rt ./modules/Postman/ ../module-postman/',
             // project
+            'rsync -rt ./.backups/ ../project/.backups/',
             'rsync -rt ./dev/ ../project/dev/',
             'rsync -rt ./common/ ../project/common/',
             'rsync -rt ./messages/ ../project/messages/',
@@ -53,6 +54,9 @@ class ExtractTask extends \cookyii\build\tasks\CommandTask
         }
     }
 
+    /**
+     * @return bool
+     */
     public function run()
     {
         $result = parent::run();

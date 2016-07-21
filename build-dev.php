@@ -29,7 +29,7 @@ $buildConfig = [
     'extract' => [
         '.description' => 'Extract codebase to split repos',
         '.depends' => [
-            'clear', 'less', 'messages',
+            'clear', 'clear/backups', 'less',
         ],
         '.task' => [
             'class' => 'dev\build\ExtractTask',
@@ -49,6 +49,16 @@ $buildConfig = [
 
     'clear' => [
         '.description' => 'Delete all temporary files and remove installed packages',
+        'backups' => [
+            '.description' => 'Remove all backups',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\DeleteTask',
+                'deleteDir' => false,
+                'fileSets' => [
+                    ['dir' => __DIR__ . '/.backups', 'exclude' => ['.gitignore']],
+                ],
+            ],
+        ],
     ],
 
     'less' => [

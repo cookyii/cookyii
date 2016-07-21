@@ -19,9 +19,10 @@ class Migration extends \yii\db\Migration
     use \cookyii\db\traits\MigrationCheckSupportTrait;
 
     public $default = [
-        'charset' => 'utf8',
-        'collate' => 'utf8_unicode_ci',
+        'charset' => 'utf8mb4',
+        'collate' => 'utf8mb4_unicode_ci',
         'engine' => 'InnoDB',
+        'row-format' => 'COMPACT',
     ];
 
     /**
@@ -30,12 +31,12 @@ class Migration extends \yii\db\Migration
     public function createTable($table, $columns, $options = null)
     {
         if ($options === null && $this->db->driverName === 'mysql') {
-            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $options = sprintf(
-                'CHARACTER SET %s COLLATE %s ENGINE=%s',
+                'CHARACTER SET %s COLLATE %s ENGINE=%s ROW_FORMAT=%s',
                 $this->default['charset'],
                 $this->default['collate'],
-                $this->default['engine']
+                $this->default['engine'],
+                $this->default['row-format']
             );
         }
 
