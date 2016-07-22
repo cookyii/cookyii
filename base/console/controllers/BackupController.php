@@ -34,6 +34,7 @@ class BackupController extends \yii\console\Controller
         '--compress',
         '--extended-insert',
         '--triggers',
+        '--replace',
     ];
 
     /**
