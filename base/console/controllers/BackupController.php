@@ -55,6 +55,11 @@ class BackupController extends \yii\console\Controller
     ];
 
     /**
+     * @var array
+     */
+    public $ignoreTables = [];
+
+    /**
      * @var Connection|array|string
      */
     public $db = 'db';
@@ -167,10 +172,21 @@ class BackupController extends \yii\console\Controller
 
         $schema_fullPath = $path . DIRECTORY_SEPARATOR . 'schema.sql';
 
+        $dumpKeys = $this->dumpKeys;
+
+        if (!empty($this->ignoreTables)) {
+            $database = $this->credentials['database'];
+            $ignoreTables = $this->ignoreTables;
+
+            foreach ($ignoreTables as $table) {
+                $dumpKeys[] = "--ignore-table={$database}.{$table}";
+            }
+        }
+
         $cmd = sprintf(
             ' mysqldump --defaults-extra-file=%s --no-data %s %s -v > %s',
             $this->getCredentialsFile(),
-            implode(' ', $this->dumpKeys),
+            implode(' ', $dumpKeys),
             $this->credentials['database'],
             $schema_fullPath
         );
@@ -182,7 +198,7 @@ class BackupController extends \yii\console\Controller
         $cmd = sprintf(
             ' mysqldump --defaults-extra-file=%s --no-create-info %s %s -v > %s',
             $this->getCredentialsFile(),
-            implode(' ', $this->dumpKeys),
+            implode(' ', $dumpKeys),
             $this->credentials['database'],
             $data_fullPath
         );
