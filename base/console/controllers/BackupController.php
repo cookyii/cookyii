@@ -19,6 +19,16 @@ class BackupController extends \yii\console\Controller
 {
 
     /**
+     * @var array
+     */
+    public $credentials = [
+        'host' => DB_HOST,
+        'user' => DB_USER,
+        'password' => DB_PASS,
+        'database' => DB_BASE,
+    ];
+
+    /**
      * @var string
      */
     public $backupPath = '@base/.backups';
@@ -126,7 +136,7 @@ class BackupController extends \yii\console\Controller
             ' mysqldump --defaults-extra-file=%s --no-data %s %s -v > %s',
             $this->getCredentialsFile(),
             implode(' ', $this->dumpKeys),
-            DB_BASE,
+            $this->credentials['database'],
             $schema_fullPath
         );
 
@@ -138,7 +148,7 @@ class BackupController extends \yii\console\Controller
             ' mysqldump --defaults-extra-file=%s --no-create-info %s %s -v > %s',
             $this->getCredentialsFile(),
             implode(' ', $this->dumpKeys),
-            DB_BASE,
+            $this->credentials['database'],
             $data_fullPath
         );
 
@@ -365,7 +375,7 @@ class BackupController extends \yii\console\Controller
                 ' mysql --defaults-extra-file=%s %s %s < %s',
                 $this->getCredentialsFile(),
                 implode(' ', $this->restoreKeys),
-                DB_BASE,
+                $this->credentials['database'],
                 $schema
             );
 
@@ -385,7 +395,7 @@ class BackupController extends \yii\console\Controller
                 ' mysql --defaults-extra-file=%s %s %s < %s',
                 $this->getCredentialsFile(),
                 implode(' ', $this->restoreKeys),
-                DB_BASE,
+                $this->credentials['database'],
                 $data
             );
 
@@ -407,9 +417,9 @@ class BackupController extends \yii\console\Controller
         if (!file_exists($path)) {
             $data = implode("\n", [
                 '[client]',
-                'host=' . DB_HOST,
-                'user=' . DB_USER,
-                'password=' . DB_PASS,
+                'host=' . $this->credentials['host'],
+                'user=' . $this->credentials['user'],
+                'password=' . $this->credentials['password'],
             ]);
 
             file_put_contents($path, $data);
