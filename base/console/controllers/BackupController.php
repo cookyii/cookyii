@@ -22,10 +22,10 @@ class BackupController extends \yii\console\Controller
      * @var array
      */
     public $credentials = [
-        'host' => DB_HOST,
-        'user' => DB_USER,
-        'password' => DB_PASS,
-        'database' => DB_BASE,
+        'host' => null,
+        'user' => null,
+        'password' => null,
+        'database' => null,
     ];
 
     /**
@@ -59,11 +59,42 @@ class BackupController extends \yii\console\Controller
      */
     public $db = 'db';
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
 
         $this->db = Instance::ensure($this->db, Connection::className());
+
+        $this->prepareCredentials();
+    }
+
+    /**
+     * Prepare credentials
+     */
+    protected function prepareCredentials()
+    {
+        $credentials = $this->credentials;
+
+        $credentials['host'] = empty($credentials['host']) && defined('DB_HOST')
+            ? constant('DB_HOST')
+            : $credentials['host'];
+
+        $credentials['user'] = empty($credentials['user']) && defined('DB_USER')
+            ? constant('DB_USER')
+            : $credentials['user'];
+
+        $credentials['password'] = empty($credentials['password']) && defined('DB_PASS')
+            ? constant('DB_PASS')
+            : $credentials['password'];
+
+        $credentials['database'] = empty($credentials['database']) && defined('DB_BASE')
+            ? constant('DB_BASE')
+            : $credentials['database'];
+
+        $this->credentials = $credentials;
     }
 
     /**
@@ -102,6 +133,10 @@ class BackupController extends \yii\console\Controller
         return MigrateController::EXIT_CODE_NORMAL;
     }
 
+    /**
+     * Dump mysql scenario
+     * @throws \yii\console\Exception
+     */
     protected function dumpMysql()
     {
         $this->stdout("Begin dumping database...\n");
@@ -164,6 +199,10 @@ class BackupController extends \yii\console\Controller
         $this->stdout("$data_fullPath\n");
     }
 
+    /**
+     * Restore mysql scenario
+     * @throws \yii\console\Exception
+     */
     protected function restoreMysql()
     {
         $this->stdout('Search backups... ');
@@ -194,10 +233,6 @@ class BackupController extends \yii\console\Controller
                 }
 
                 $sections[] = $file;
-
-//                if (count($sections) >= 100) {
-//                    break;
-//                }
             }
 
             closedir($dh);
@@ -227,10 +262,6 @@ class BackupController extends \yii\console\Controller
                             }
 
                             $backups[] = $section . ' ' . $file;
-
-//                            if (count($backups) >= 100) {
-//                                break;
-//                            }
                         }
 
                         closedir($dh);
@@ -428,6 +459,9 @@ class BackupController extends \yii\console\Controller
         return $path;
     }
 
+    /**
+     * Destruct
+     */
     public function __destruct()
     {
         $file = $this->getCredentialsFile();
