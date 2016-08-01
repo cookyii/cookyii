@@ -228,7 +228,7 @@ class BackupController extends \yii\console\Controller
             $sections = [];
 
             while (($file = readdir($dh)) !== false) {
-                if (in_array($file, ['.', '..', '.gitignore'], true)) {
+                if (in_array($file, ['.', '..'], true) || !is_dir($path . DIRECTORY_SEPARATOR . $file)) {
                     continue;
                 }
 
