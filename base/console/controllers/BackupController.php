@@ -42,6 +42,7 @@ class BackupController extends \yii\console\Controller
         '--add-locks',
         '--disable-keys',
         '--compress',
+        '--complete-insert',
         '--extended-insert',
         '--triggers',
         '--replace',
