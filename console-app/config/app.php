@@ -17,7 +17,13 @@ return array_merge($config, [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
-        'backup' => cookyii\console\controllers\BackupController::className(),
+        'backup' => [
+            'class' => cookyii\console\controllers\BackupController::className(),
+            'ignoreTables' => [
+                'yii_cache',
+                'yii_session',
+            ],
+        ],
         'account' => cookyii\modules\Account\commands\AccountCommand::className(),
         'postman' => cookyii\modules\Postman\commands\PostmanCommand::className(),
         'migrate' => [
