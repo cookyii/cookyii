@@ -18,8 +18,8 @@ return array_merge($config, [
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'backup' => [
-            'class' => cookyii\console\controllers\BackupController::className(),
-            'ignoreTables' => [
+            'class' => cookyii\backup\Controller::className(),
+            'excludeTablesData' => [
                 'yii_cache',
                 'yii_session',
             ],
