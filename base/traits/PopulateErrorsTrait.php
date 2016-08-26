@@ -15,11 +15,11 @@ trait PopulateErrorsTrait
 {
 
     /**
-     * @param \yii\db\ActiveRecord $Model
+     * @param \yii\base\Model
      * @param string $default_attribute
      * @param array $attributes_map
      */
-    public function populateErrors(\yii\db\ActiveRecord $Model, $default_attribute, $attributes_map = [])
+    public function populateErrors(\yii\base\Model $Model, $default_attribute, $attributes_map = [])
     {
         $errors = $Model->getErrors();
         foreach ($errors as $attribute => $messages) {
