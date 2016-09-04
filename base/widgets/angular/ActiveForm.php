@@ -17,19 +17,29 @@ use yii\helpers\Html;
 class ActiveForm extends \yii\widgets\ActiveForm
 {
 
-    /** @var \cookyii\base\FormModel */
+    /**
+     * @var \cookyii\base\FormModel
+     */
     public $model;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $name;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $controller;
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public $fieldClass = 'cookyii\widgets\angular\ActiveField';
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public $enableClientScript = false;
 
     /**

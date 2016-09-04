@@ -100,7 +100,9 @@
             left: '-1000px'
           });
 
-          $element.after($compile('<i class="custom-checkbox fa fa-fw" ng-class="{\'fa-square\':!checked,\'fa-check-square\':checked}"></i>')($scope));
+          var template = '<i class="custom-checkbox" ng-class="{\'checked\':checked,\'ion-android-checkbox-outline-blank\':!checked,\'ion-android-checkbox-outline\':checked}"></i>';
+
+          $element.after($compile(template)($scope));
         });
       }
     };
@@ -136,7 +138,9 @@
             left: '-1000px'
           });
 
-          $element.after($compile('<i class="custom-radio fa fa-fw" ng-class="{\'fa-circle-o\':!checked,\'fa-dot-circle-o\':checked}"></i>')($scope));
+          var template = '<i class="custom-radio" ng-class="{\'checked\':checked,\'ion-android-radio-button-off\':!checked,\'ion-android-radio-button-on\':checked}"></i>';
+
+          $element.after($compile(template)($scope));
         });
       }
     };
