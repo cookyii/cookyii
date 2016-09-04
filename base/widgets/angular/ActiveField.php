@@ -126,7 +126,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function input($type, $options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, sprintf('%s-input', $type));
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -141,7 +143,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function hiddenInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'hidden-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -156,7 +160,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function textInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'text-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -171,7 +177,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function fileInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'file-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -186,7 +194,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function passwordInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'password-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -201,7 +211,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function textarea($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'textarea-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -221,7 +233,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function emailInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'email-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -241,7 +255,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function colorInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'color-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -261,7 +277,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function dateInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'date-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -281,7 +299,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function datetimeInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'datetime-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -301,7 +321,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function timeInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'time-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -321,7 +343,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function datetimeLocalInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'datetime-local-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -341,7 +365,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function monthInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'month-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -361,7 +387,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function numberInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'number-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -381,7 +409,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function rangeInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'range-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -401,7 +431,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function searchInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'search-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -421,7 +453,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function telInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'tel-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -441,7 +475,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function urlInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'url-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -461,7 +497,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function weekInput($options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'week-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -492,7 +530,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function dropdownList($items, $options = [])
     {
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'dropdown-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -509,7 +549,9 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'checkbox-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -527,7 +569,9 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'radio-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['title'] = $this->model->getAttributeLabel($this->attribute);
         $options['ng-model'] = ArrayHelper::remove($options, 'ng-model', sprintf('data.%s', $this->attribute));
@@ -545,7 +589,9 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'checkbox-list-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['item'] = ArrayHelper::remove(
             $options,
@@ -580,7 +626,9 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        $options = array_merge($this->options, $options);
+        Html::addCssClass($this->options, 'radio-list-input');
+
+        $options = array_merge($this->inputOptions, $options);
 
         $options['item'] = ArrayHelper::remove(
             $options,
