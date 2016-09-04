@@ -13,5 +13,4 @@ namespace cookyii\behaviors;
  */
 class TimestampBehavior extends \yii\behaviors\TimestampBehavior
 {
-
 }

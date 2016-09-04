@@ -7,6 +7,9 @@
 
 namespace cookyii\behaviors;
 
+use yii\db\BaseActiveRecord;
+use yii\db\Expression;
+
 /**
  * Class UserIpBehavior
  * @package cookyii\behaviors
@@ -18,6 +21,7 @@ class UserIpBehavior extends \yii\behaviors\AttributeBehavior
      * @var string the attribute that will receive user ip value
      */
     public $userIpAtAttribute = 'user_ip';
+
     /**
      * @var callable|\yii\db\Expression The expression that will be used for generating the id.
      * This can be either an anonymous function that returns the id value,
@@ -36,7 +40,7 @@ class UserIpBehavior extends \yii\behaviors\AttributeBehavior
 
         if (empty($this->attributes)) {
             $this->attributes = [
-                \yii\db\BaseActiveRecord::EVENT_BEFORE_INSERT => $this->userIpAtAttribute,
+                BaseActiveRecord::EVENT_BEFORE_INSERT => $this->userIpAtAttribute,
             ];
         }
     }
@@ -46,7 +50,7 @@ class UserIpBehavior extends \yii\behaviors\AttributeBehavior
      */
     protected function getValue($event)
     {
-        if ($this->value instanceof \yii\db\Expression) {
+        if ($this->value instanceof Expression) {
             return $this->value;
         } else {
             return is_callable($this->value)

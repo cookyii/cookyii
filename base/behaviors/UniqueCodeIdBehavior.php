@@ -7,6 +7,9 @@
 
 namespace cookyii\behaviors;
 
+use yii\db\BaseActiveRecord;
+use yii\db\Expression;
+
 /**
  * Class UniqueCodeIdBehavior
  * @package cookyii\behaviors
@@ -18,10 +21,12 @@ class UniqueCodeIdBehavior extends \yii\behaviors\AttributeBehavior
      * @var string the attribute that will receive id value
      */
     public $codeAtAttribute = 'id';
+
     /**
      * @var array length of random value
      */
     public $length = [6, 12];
+
     /**
      * @var callable|\yii\db\Expression The expression that will be used for generating the id.
      * This can be either an anonymous function that returns the id value,
@@ -39,7 +44,7 @@ class UniqueCodeIdBehavior extends \yii\behaviors\AttributeBehavior
 
         if (empty($this->attributes)) {
             $this->attributes = [
-                \yii\db\BaseActiveRecord::EVENT_BEFORE_INSERT => $this->codeAtAttribute,
+                BaseActiveRecord::EVENT_BEFORE_INSERT => $this->codeAtAttribute,
             ];
         }
     }
@@ -49,7 +54,7 @@ class UniqueCodeIdBehavior extends \yii\behaviors\AttributeBehavior
      */
     protected function getValue($event)
     {
-        if ($this->value instanceof \yii\db\Expression) {
+        if ($this->value instanceof Expression) {
             return $this->value;
         } else {
             return is_callable($this->value)

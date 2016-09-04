@@ -7,6 +7,9 @@
 
 namespace cookyii\behaviors;
 
+use yii\db\BaseActiveRecord;
+use yii\db\Expression;
+
 /**
  * Class TokenBehavior
  * @package cookyii\behaviors
@@ -36,7 +39,7 @@ class TokenBehavior extends \yii\behaviors\AttributeBehavior
 
         if (empty($this->attributes)) {
             $this->attributes = [
-                \yii\db\BaseActiveRecord::EVENT_BEFORE_INSERT => $this->codeAtAttribute,
+                BaseActiveRecord::EVENT_BEFORE_INSERT => $this->codeAtAttribute,
             ];
         }
     }
@@ -46,7 +49,7 @@ class TokenBehavior extends \yii\behaviors\AttributeBehavior
      */
     protected function getValue($event)
     {
-        if ($this->value instanceof \yii\db\Expression) {
+        if ($this->value instanceof Expression) {
             return $this->value;
         } else {
             return is_callable($this->value)
