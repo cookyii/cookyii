@@ -20,12 +20,24 @@ use yii\web\JsExpression;
 class ActiveField extends \yii\widgets\ActiveField
 {
 
+    /**
+     * @var string
+     */
     public $template = "{label}\n{error}\n{input}\n{icon}\n{hint}";
 
+    /**
+     * @var array
+     */
     public $options = ['class' => 'form-group'];
 
+    /**
+     * @var array
+     */
     public $errorOptions = ['class' => 'error-balloon', 'tag' => 'span'];
 
+    /**
+     * Event
+     */
     const EVENT_BEFORE_RENDER_INPUT = 'beforeRenderInput';
 
     /**
