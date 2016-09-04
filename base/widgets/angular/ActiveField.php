@@ -138,7 +138,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function input($type, $options = [])
     {
-        Html::addCssClass($this->options, sprintf('%s-input', $type));
+        Html::addCssClass($this->options, sprintf('form-group--%s-input', $type));
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -155,7 +155,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function hiddenInput($options = [])
     {
-        Html::addCssClass($this->options, 'hidden-input');
+        Html::addCssClass($this->options, 'form-group--hidden-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -172,7 +172,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function textInput($options = [])
     {
-        Html::addCssClass($this->options, 'text-input');
+        Html::addCssClass($this->options, 'form-group--text-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -189,7 +189,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function fileInput($options = [])
     {
-        Html::addCssClass($this->options, 'file-input');
+        Html::addCssClass($this->options, 'form-group--file-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -206,7 +206,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function passwordInput($options = [])
     {
-        Html::addCssClass($this->options, 'password-input');
+        Html::addCssClass($this->options, 'form-group--password-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -223,7 +223,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function textarea($options = [])
     {
-        Html::addCssClass($this->options, 'textarea-input');
+        Html::addCssClass($this->options, 'form-group--textarea-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -245,7 +245,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function emailInput($options = [])
     {
-        Html::addCssClass($this->options, 'email-input');
+        Html::addCssClass($this->options, 'form-group--email-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -267,7 +267,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function colorInput($options = [])
     {
-        Html::addCssClass($this->options, 'color-input');
+        Html::addCssClass($this->options, 'form-group--color-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -289,7 +289,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function dateInput($options = [])
     {
-        Html::addCssClass($this->options, 'date-input');
+        Html::addCssClass($this->options, 'form-group--date-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -311,7 +311,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function datetimeInput($options = [])
     {
-        Html::addCssClass($this->options, 'datetime-input');
+        Html::addCssClass($this->options, 'form-group--datetime-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -333,7 +333,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function timeInput($options = [])
     {
-        Html::addCssClass($this->options, 'time-input');
+        Html::addCssClass($this->options, 'form-group--time-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -355,7 +355,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function datetimeLocalInput($options = [])
     {
-        Html::addCssClass($this->options, 'datetime-local-input');
+        Html::addCssClass($this->options, 'form-group--datetime-local-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -377,7 +377,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function monthInput($options = [])
     {
-        Html::addCssClass($this->options, 'month-input');
+        Html::addCssClass($this->options, 'form-group--month-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -399,7 +399,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function numberInput($options = [])
     {
-        Html::addCssClass($this->options, 'number-input');
+        Html::addCssClass($this->options, 'form-group--number-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -421,7 +421,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function rangeInput($options = [])
     {
-        Html::addCssClass($this->options, 'range-input');
+        Html::addCssClass($this->options, 'form-group--range-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -443,7 +443,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function searchInput($options = [])
     {
-        Html::addCssClass($this->options, 'search-input');
+        Html::addCssClass($this->options, 'form-group--search-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -465,7 +465,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function telInput($options = [])
     {
-        Html::addCssClass($this->options, 'tel-input');
+        Html::addCssClass($this->options, 'form-group--tel-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -487,7 +487,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function urlInput($options = [])
     {
-        Html::addCssClass($this->options, 'url-input');
+        Html::addCssClass($this->options, 'form-group--url-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -509,7 +509,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function weekInput($options = [])
     {
-        Html::addCssClass($this->options, 'week-input');
+        Html::addCssClass($this->options, 'form-group--week-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -542,7 +542,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function dropdownList($items, $options = [])
     {
-        Html::addCssClass($this->options, 'dropdown-input');
+        Html::addCssClass($this->options, 'form-group--dropdown-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -561,7 +561,7 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        Html::addCssClass($this->options, 'checkbox-input');
+        Html::addCssClass($this->options, 'form-group--checkbox-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -581,7 +581,7 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        Html::addCssClass($this->options, 'radio-input');
+        Html::addCssClass($this->options, 'form-group--radio-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -601,7 +601,7 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        Html::addCssClass($this->options, 'checkbox-list-input');
+        Html::addCssClass($this->options, 'form-group--checkbox-list-input');
 
         $options = array_merge($this->inputOptions, $options);
 
@@ -638,7 +638,7 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->setInlineTemplate();
 
-        Html::addCssClass($this->options, 'radio-list-input');
+        Html::addCssClass($this->options, 'form-group--radio-list-input');
 
         $options = array_merge($this->inputOptions, $options);
 
