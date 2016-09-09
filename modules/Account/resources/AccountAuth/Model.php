@@ -74,9 +74,9 @@ class Model extends \cookyii\db\ActiveRecord
             $Auth = new static;
 
             $Auth->setAttributes([
-                'account_id' => $account_id,
-                'social_type' => $social_type,
-                'social_id' => $social_id,
+                'account_id' => (int)$account_id,
+                'social_type' => (string)$social_type,
+                'social_id' => (string)$social_id,
             ]);
         }
 
