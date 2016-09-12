@@ -43,13 +43,13 @@ class ApiAttribute
             : $formats;
 
         if (empty($formats)) {
-            $fields[$attribute] = function (\yii\db\ActiveRecord $Model) use ($attribute) {
+            $fields[$attribute] = function (\yii\db\BaseActiveRecord $Model) use ($attribute) {
                 return $Model->hasAttribute($attribute)
                     ? $Model->getAttribute($attribute)
                     : null;
             };
         } else {
-            $fields[$attribute] = function (\yii\db\ActiveRecord $Model) use ($attribute, $formats) {
+            $fields[$attribute] = function (\yii\db\BaseActiveRecord $Model) use ($attribute, $formats) {
                 $result = [];
 
                 $value = $Model->hasAttribute($attribute)
