@@ -22,14 +22,10 @@ class BlameableBehavior extends \yii\behaviors\BlameableBehavior
     protected function getValue($event)
     {
         if ($this->value === null) {
-            switch (get_class(\Yii::$app)) {
-                default:
-                case \yii\console\Application::className():
-                    $this->value = null;
-                    break;
-                case \yii\web\Application::className():
-                    $this->value = !User()->isGuest ? User()->id : null;
-                    break;
+            if (\Yii::$app instanceof \yii\web\Application) {
+                $this->value = !User()->isGuest ? User()->id : null;
+            } else {
+                $this->value = null;
             }
         }
 
