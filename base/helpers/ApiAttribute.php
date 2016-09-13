@@ -45,7 +45,7 @@ class ApiAttribute
         if (empty($formats)) {
             $fields[$attribute] = function (\yii\db\BaseActiveRecord $Model) use ($attribute) {
                 return $Model->hasAttribute($attribute)
-                    ? $Model->getAttribute($attribute)
+                    ? (string)$Model->getAttribute($attribute)
                     : null;
             };
         } else {
@@ -53,7 +53,7 @@ class ApiAttribute
                 $result = [];
 
                 $value = $Model->hasAttribute($attribute)
-                    ? $Model->getAttribute($attribute)
+                    ? (string)$Model->getAttribute($attribute)
                     : null;
 
                 foreach ($formats as $key => $format) {
