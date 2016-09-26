@@ -18,17 +18,20 @@ class ApiAttribute
         'raw' => 'raw',
         'format' => 'd MMM HH:mm',
         'normal' => 'dd.MM.yyyy HH:mm',
+        'relative' => 'relative',
     ];
 
     public static $dateFormats = [
         'raw' => 'raw',
         'format' => 'd MMM',
         'normal' => 'dd.MM.yyyy',
+        'relative' => 'relative',
     ];
 
     public static $timeFormats = [
         'raw' => 'raw',
         'normal' => 'HH:mm',
+        'relative' => 'relative',
     ];
 
     /**
@@ -57,9 +60,17 @@ class ApiAttribute
                     : null;
 
                 foreach ($formats as $key => $format) {
-                    $result[$key] = $format === 'raw'
-                        ? (empty($value) ? null : $value)
-                        : (empty($value) ? \Yii::t('yii', '(not set)') : Formatter()->asDatetime($value, $format));
+                    switch ($format) {
+                        case 'raw':
+                            $result[$key] = empty($value) ? null : $value;
+                            break;
+                        case 'relative':
+                            $result[$key] = empty($value) ? \Yii::t('yii', '(not set)') : Formatter()->asRelativeTime($value);
+                            break;
+                        default:
+                            $result[$key] = empty($value) ? \Yii::t('yii', '(not set)') : Formatter()->asDatetime($value, $format);
+                            break;
+                    }
                 }
 
                 return $result;
