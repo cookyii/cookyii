@@ -14,25 +14,77 @@ namespace cookyii\helpers;
 class ApiAttribute
 {
 
+    public static $relativeFormats = [
+        'short' => 'd MMM HH:mm',
+        'long' => 'd MMM y',
+    ];
+
     public static $datetimeFormats = [
         'raw' => 'raw',
+        'relative' => 'relative',
         'format' => 'd MMM HH:mm',
         'normal' => 'dd.MM.yyyy HH:mm',
-        'relative' => 'relative',
     ];
 
     public static $dateFormats = [
         'raw' => 'raw',
+        'relative' => 'relative',
         'format' => 'd MMM',
         'normal' => 'dd.MM.yyyy',
-        'relative' => 'relative',
     ];
 
     public static $timeFormats = [
         'raw' => 'raw',
-        'normal' => 'HH:mm',
         'relative' => 'relative',
+        'normal' => 'HH:mm',
     ];
+
+    /**
+     * @param array $fields
+     * @param string $attribute
+     * @param array|null $formats
+     */
+    public static function relativeFormat(array &$fields, $attribute, $formats = [])
+    {
+        $formats = empty($formats) && $formats !== null
+            ? static::$relativeFormats
+            : $formats;
+
+        if (empty($formats)) {
+            $fields[$attribute] = function (\yii\db\BaseActiveRecord $Model) use ($attribute) {
+                return $Model->hasAttribute($attribute)
+                    ? (string)$Model->getAttribute($attribute)
+                    : null;
+            };
+        } else {
+            $fields[$attribute] = function (\yii\db\BaseActiveRecord $Model) use ($attribute, $formats) {
+                $value = $Model->hasAttribute($attribute)
+                    ? (string)$Model->getAttribute($attribute)
+                    : null;
+
+                $value = empty($value)
+                    ? time()
+                    : Formatter()->asTimestamp($value);
+
+                $is_milliseconds = mb_strlen($value, 'utf-8') === 13;
+                $value = $is_milliseconds ? floor($value / 1000) : $value;
+
+                $delta = time() - $value;
+
+                $same_year = Formatter()->asDate($value, 'y') === Formatter()->asDate(time(), 'y');
+
+                if (!$same_year) {
+                    $result = Formatter()->asDatetime($value, $formats['long']);
+                } elseif ($delta > 86400 && $delta <= (86400 * 7)) {
+                    $result = Formatter()->asDatetime($value, $formats['short']);
+                } else {
+                    $result = Formatter()->asRelativeTime($value);
+                }
+
+                return $result;
+            };
+        }
+    }
 
     /**
      * @param array $fields
@@ -58,6 +110,13 @@ class ApiAttribute
                 $value = $Model->hasAttribute($attribute)
                     ? (string)$Model->getAttribute($attribute)
                     : null;
+
+                $value = empty($value)
+                    ? time()
+                    : Formatter()->asTimestamp($value);
+
+                $is_milliseconds = mb_strlen($value, 'utf-8') === 13;
+                $value = $is_milliseconds ? floor($value / 1000) : $value;
 
                 foreach ($formats as $key => $format) {
                     switch ($format) {
