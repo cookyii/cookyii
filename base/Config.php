@@ -152,5 +152,7 @@ class Config
         \Yii::$app->formatter->defaultTimeZone = $timezone;
         \Yii::$app->formatter->timeZone = $timezone;
         \Yii::$app->timeZone = $timezone;
+
+        ini_set('date.timezone', $timezone);
     }
 }
