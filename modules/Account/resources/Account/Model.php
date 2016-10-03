@@ -87,16 +87,18 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
         return [
             /** type validators */
             [['name', 'avatar', 'password', 'password_hash'], 'string'],
-            [['gender', 'timezone', 'created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
+            [['gender', 'timezone', 'status', 'created_at', 'updated_at', 'activated_at', 'deleted_at'], 'integer'],
 
             /** semantic validators */
             [['email'], 'email'],
             [['email'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['name', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
-            [['gender'], 'in', 'range' => [static::MALE, static::FEMALE]],
+            [['gender'], 'in', 'range' => array_keys(static::getGenderValues())],
+            [['status'], 'in', 'range' => array_keys(static::getAllStatuses())],
 
             /** default values */
             [['gender'], 'default', 'value' => static::MALE],
+            [['status'], 'default', 'value' => static::STATUS_NULL],
         ];
     }
 
@@ -379,6 +381,19 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
         return [
             static::MALE => \Yii::t('cookyii.account', 'Male'),
             static::FEMALE => \Yii::t('cookyii.account', 'Female'),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllStatusValues()
+    {
+        return [
+            static::STATUS_NULL => \Yii::t('cookyii.account', 'New user'),
+            static::STATUS_APPROVED => \Yii::t('cookyii.account', 'Approved'),
+            static::STATUS_HOLD => \Yii::t('cookyii.account', 'Hold'),
+            static::STATUS_BANNED => \Yii::t('cookyii.account', 'Banned'),
         ];
     }
 
