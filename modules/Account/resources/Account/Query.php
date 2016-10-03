@@ -35,6 +35,17 @@ class Query extends \yii\db\ActiveQuery
     }
 
     /**
+     * @param integer|array $status
+     * @return static
+     */
+    public function byStatus($status)
+    {
+        $this->andWhere(['status' => $status]);
+
+        return $this;
+    }
+
+    /**
      * @param integer|array $facebook_user_id
      * @return static
      */

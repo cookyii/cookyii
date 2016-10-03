@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Media\resources\Media;
 
-use cookyii\helpers\ApiAttribute;
 use cookyii\modules\Media\media\InternalResource as InternalMediaResource;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
@@ -30,6 +29,8 @@ use yii\helpers\StringHelper;
 class Model extends \cookyii\db\ActiveRecord
 {
 
+    use Serialize;
+
     static $tableName = '{{%media}}';
 
     /** @var string */
@@ -47,34 +48,6 @@ class Model extends \cookyii\db\ActiveRecord
             'blameable' => \cookyii\behaviors\BlameableBehavior::className(),
             'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['created_by'], $fields['updated_by'],
-            $fields['created_at'], $fields['updated_at']
-        );
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-
-        return $fields;
     }
 
     /**

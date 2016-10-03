@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Account\resources\Account;
 
-use cookyii\helpers\ApiAttribute;
 use cookyii\modules\Account\resources\AccountAlert\Model as AccountAlertModel;
 use cookyii\modules\Account\resources\AccountProperty\Model as AccountPropertyModel;
 use yii\helpers\ArrayHelper;
@@ -39,7 +38,8 @@ use yii\helpers\ArrayHelper;
 class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterface, \cookyii\interfaces\AccountInterface
 {
 
-    use traits\SocialTrait,
+    use Serialize,
+        traits\SocialTrait,
         \cookyii\db\traits\ActivationTrait,
         \cookyii\db\traits\SoftDeleteTrait;
 
@@ -77,81 +77,6 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
     {
         $this->on(static::EVENT_BEFORE_INSERT, [$this, 'appendDataBeforeInsert']);
         $this->on(static::EVENT_BEFORE_UPDATE, [$this, 'updatePasswordHashBeforeUpdate']);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['password_hash'], $fields['token'], $fields['auth_key'],
-            $fields['created_at'], $fields['updated_at'], $fields['activated_at'], $fields['deleted_at']
-        );
-
-        $fields['avatar'] = function (self $Model) {
-            return $Model->presentHelper->avatar;
-        };
-
-        $fields['deleted'] = [$this, 'isDeleted'];
-        $fields['activated'] = [$this, 'isActivated'];
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        $fields['roles'] = function (self $Model) {
-            $result = [];
-
-            $roles = AuthManager()->getRolesByUser($Model->id);
-
-            foreach ($roles as $role => $conf) {
-                $result[$role] = true;
-            }
-
-            $result[\common\Roles::USER] = true;
-
-            return $result;
-        };
-
-        $fields['permissions'] = function (self $Model) {
-            $result = [];
-
-            $permissions = AuthManager()->getPermissionsByUser($Model->id);
-
-            foreach ($permissions as $permission => $conf) {
-                $result[$permission] = true;
-            }
-
-            return $result;
-        };
-
-        $fields['properties'] = function (self $Model) {
-            return $Model->properties();
-        };
-
-        $fields['alerts'] = function (self $Model) {
-            $Alerts = $this->alerts;
-
-            return empty($Alerts) ? [] : ArrayHelper::getColumn($Alerts, function (AccountAlertModel $Model) {
-                return $Model->toArray();
-            });
-        };
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-        ApiAttribute::datetimeFormat($fields, 'activated_at');
-        ApiAttribute::datetimeFormat($fields, 'deleted_at');
-
-        return $fields;
     }
 
     /**
@@ -488,4 +413,9 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
 
     const MALE = 1;
     const FEMALE = 2;
+
+    const STATUS_NULL = 0;
+    const STATUS_APPROVED = 100;
+    const STATUS_HOLD = 200;
+    const STATUS_BANNED = 300;
 }

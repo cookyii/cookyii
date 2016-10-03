@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Account\resources\AccountAlert;
 
-use cookyii\helpers\ApiAttribute;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 
 /**
@@ -28,7 +27,8 @@ use cookyii\modules\Account\resources\Account\Model as AccountModel;
 class Model extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\SoftDeleteTrait;
+    use Serialize,
+        \cookyii\db\traits\SoftDeleteTrait;
 
     static $tableName = '{{%account_alert}}';
 
@@ -41,57 +41,6 @@ class Model extends \cookyii\db\ActiveRecord
             'unique-code-id' => \cookyii\behaviors\UniqueCodeIdBehavior::class,
             'timestamp' => \cookyii\behaviors\TimestampBehavior::class,
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['account_id'],
-            $fields['created_at'], $fields['updated_at'], $fields['deleted_at']
-        );
-
-        $fields['class'] = function (self $Model) {
-            switch ($Model->type) {
-                default:
-                    $result = null;
-                    break;
-                case static::TYPE_DANGER:
-                    $result = 'alert-danger';
-                    break;
-                case static::TYPE_WARNING:
-                    $result = 'alert-warning';
-                    break;
-                case static::TYPE_INFO:
-                    $result = 'alert-info';
-                    break;
-                case static::TYPE_SUCCESS:
-                    $result = 'alert-success';
-                    break;
-            }
-
-            return $result;
-        };
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-        ApiAttribute::datetimeFormat($fields, 'deleted_at');
-
-        return $fields;
     }
 
     /**

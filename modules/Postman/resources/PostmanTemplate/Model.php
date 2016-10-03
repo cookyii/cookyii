@@ -31,7 +31,8 @@ use yii\helpers\Json;
 class Model extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\SoftDeleteTrait;
+    use Serialize,
+        \cookyii\db\traits\SoftDeleteTrait;
 
     static $tableName = '{{%postman_template}}';
 
@@ -43,40 +44,6 @@ class Model extends \cookyii\db\ActiveRecord
         return [
             'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['code'],
-            $fields['created_at'], $fields['updated_at'], $fields['deleted_at']
-        );
-
-        $fields['address'] = [$this, 'expandAddress'];
-        $fields['params'] = [$this, 'expandParams'];
-
-        $fields['deleted'] = [$this, 'isDeleted'];
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-        ApiAttribute::datetimeFormat($fields, 'deleted_at');
-
-        return $fields;
     }
 
     /**

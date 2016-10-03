@@ -7,8 +7,6 @@
 
 namespace cookyii\modules\Account\resources\AccountProperty;
 
-use cookyii\helpers\ApiAttribute;
-
 /**
  * Class Model
  * @package cookyii\modules\Account\resources\AccountProperty
@@ -22,6 +20,8 @@ use cookyii\helpers\ApiAttribute;
 class Model extends \cookyii\db\ActiveRecord
 {
 
+    use Serialize;
+
     static $tableName = '{{%account_property}}';
 
     /**
@@ -32,34 +32,6 @@ class Model extends \cookyii\db\ActiveRecord
         return [
             'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['account_id'],
-            $fields['created_at'], $fields['updated_at']
-        );
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-
-        return $fields;
     }
 
     /**

@@ -7,11 +7,9 @@
 
 namespace cookyii\modules\Feed\resources\FeedItem;
 
-use cookyii\helpers\ApiAttribute;
 use cookyii\modules\Feed\resources\FeedItemSection\Model as FeedItemSectionModel;
 use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
 use cookyii\modules\Media\resources\Media\Model as MediaModel;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -42,7 +40,8 @@ use yii\helpers\Json;
 class Model extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\ActivationTrait,
+    use Serialize,
+        \cookyii\db\traits\ActivationTrait,
         \cookyii\db\traits\SoftDeleteTrait;
 
     static $tableName = '{{%feed_item}}';
@@ -56,76 +55,6 @@ class Model extends \cookyii\db\ActiveRecord
             'blameable' => \cookyii\behaviors\BlameableBehavior::className(),
             'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['meta'],
-            $fields['created_by'], $fields['updated_by'],
-            $fields['created_at'], $fields['updated_at'],
-            $fields['published_at'], $fields['archived_at'],
-            $fields['deleted_at'], $fields['activated_at']
-        );
-
-        $fields['published'] = [$this, 'isPublished'];
-        $fields['archived'] = [$this, 'isArchived'];
-        $fields['deleted'] = [$this, 'isDeleted'];
-        $fields['activated'] = [$this, 'isActivated'];
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        $fields['meta'] = function (self $Model) {
-            return $Model->meta();
-        };
-
-        $fields['picture_300'] = function (self $Model) {
-            $result = null;
-
-            $Media = $Model->pictureMedia;
-            if (!empty($Media)) {
-                $result = $Media->image()->resizeByWidth(300)->export();
-            }
-
-            return $result;
-        };
-
-        $fields['sections'] = function (self $Model) {
-            $result = [];
-
-            $item_sections = $Model->getItemSections()
-                ->asArray()
-                ->all();
-
-            if (!empty($item_sections)) {
-                $result = ArrayHelper::getColumn($item_sections, 'section_id');
-                $result = array_map('intval', $result);
-            }
-
-            return $result;
-        };
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-        ApiAttribute::datetimeFormat($fields, 'published_at');
-        ApiAttribute::datetimeFormat($fields, 'archived_at');
-        ApiAttribute::datetimeFormat($fields, 'deleted_at');
-        ApiAttribute::datetimeFormat($fields, 'activated_at');
-
-        return $fields;
     }
 
     /**

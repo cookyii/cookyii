@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Postman\resources\PostmanMessage;
 
-use cookyii\helpers\ApiAttribute;
 use cookyii\helpers\Premailer;
 use cookyii\modules\Postman\jobs\SendMailJob;
 use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
@@ -35,20 +34,27 @@ use yii\helpers\Json;
 class Model extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\SoftDeleteTrait,
+    use Serialize,
+        \cookyii\db\traits\SoftDeleteTrait,
         \cookyii\traits\PopulateErrorsTrait;
 
     const LAYOUT_CODE = '.layout';
 
     static $tableName = '{{%postman_message}}';
 
-    /** @var string ID of postman component */
+    /**
+     * @var string ID of postman component
+     */
     public static $postman = 'postman';
 
-    /** @var string ID of view component */
+    /**
+     * @var string ID of view component
+     */
     public static $view = 'view';
 
-    /** @var string ID of url manager component */
+    /**
+     * @var string ID of url manager component
+     */
     public static $urlManager = 'urlManager';
 
     /**
@@ -67,41 +73,6 @@ class Model extends \cookyii\db\ActiveRecord
                 'updatedAtAttribute' => false,
             ],
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['code'],
-            $fields['created_at'], $fields['scheduled_at'], $fields['sent_at'], $fields['deleted_at']
-        );
-
-        $fields['address'] = [$this, 'expandAddress'];
-
-        $fields['sent'] = [$this, 'isSent'];
-        $fields['deleted'] = [$this, 'isDeleted'];
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'scheduled_at');
-        ApiAttribute::datetimeFormat($fields, 'sent_at');
-        ApiAttribute::datetimeFormat($fields, 'deleted_at');
-
-        return $fields;
     }
 
     /**

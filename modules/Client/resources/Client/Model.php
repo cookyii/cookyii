@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Client\resources\Client;
 
-use cookyii\helpers\ApiAttribute;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Client\resources\ClientProperty\Model as ClientPropertyModel;
 
@@ -33,7 +32,8 @@ use cookyii\modules\Client\resources\ClientProperty\Model as ClientPropertyModel
 class Model extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\SoftDeleteTrait;
+    use Serialize,
+        \cookyii\db\traits\SoftDeleteTrait;
 
     static $tableName = '{{%client}}';
 
@@ -55,62 +55,6 @@ class Model extends \cookyii\db\ActiveRecord
         return [
             'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['account_id'],
-            $fields['created_at'], $fields['updated_at'], $fields['deleted_at']
-        );
-
-        $fields['deleted'] = [$this, 'isDeleted'];
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        $fields['account'] = function (self $Model) {
-            $result = null;
-
-            $Account = $Model->account;
-            if (!empty($Account)) {
-                $result = $Account->toArray();
-            }
-
-            return $result;
-        };
-
-        $fields['properties'] = function (self $Model) {
-            $result = [];
-
-            $properties = $Model->properties();
-
-            if (!empty($properties)) {
-                foreach ($properties as $key => $values) {
-                    $result[$key] = $values;
-                }
-            }
-
-            return $result;
-        };
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-        ApiAttribute::datetimeFormat($fields, 'deleted_at');
-
-        return $fields;
     }
 
     /**

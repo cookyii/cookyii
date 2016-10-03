@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Page\resources\Page;
 
-use cookyii\helpers\ApiAttribute;
 use yii\helpers\Json;
 
 /**
@@ -29,7 +28,8 @@ use yii\helpers\Json;
 class Model extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\ActivationTrait,
+    use Serialize,
+        \cookyii\db\traits\ActivationTrait,
         \cookyii\db\traits\SoftDeleteTrait;
 
     static $tableName = '{{%page}}';
@@ -43,43 +43,6 @@ class Model extends \cookyii\db\ActiveRecord
             'blameable' => \yii\behaviors\BlameableBehavior::className(),
             'timestamp' => \yii\behaviors\TimestampBehavior::className(),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-
-        unset(
-            $fields['meta'],
-            $fields['created_at'], $fields['updated_at'], $fields['activated_at'], $fields['deleted_at']
-        );
-
-        $fields['deleted'] = [$this, 'isDeleted'];
-        $fields['activated'] = [$this, 'isActivated'];
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extraFields()
-    {
-        $fields = parent::extraFields();
-
-        $fields['meta'] = function (self $Model) {
-            return $Model->meta();
-        };
-
-        ApiAttribute::datetimeFormat($fields, 'created_at');
-        ApiAttribute::datetimeFormat($fields, 'updated_at');
-        ApiAttribute::datetimeFormat($fields, 'activated_at');
-        ApiAttribute::datetimeFormat($fields, 'deleted_at');
-
-        return $fields;
     }
 
     /**
