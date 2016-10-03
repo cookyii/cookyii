@@ -94,7 +94,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
             [['email'], 'unique', 'filter' => $this->isNewRecord ? null : ['not', ['id' => $this->id]]],
             [['name', 'email', 'avatar'], 'filter', 'filter' => 'str_clean'],
             [['gender'], 'in', 'range' => array_keys(static::getGenderValues())],
-            [['status'], 'in', 'range' => array_keys(static::getAllStatuses())],
+            [['status'], 'in', 'range' => array_keys(static::getAllStatusValues())],
 
             /** default values */
             [['gender'], 'default', 'value' => static::MALE],
