@@ -7,7 +7,7 @@
 
 namespace cookyii\helpers;
 
-use yii\db\ActiveQuery;
+use yii\db\ActiveQueryInterface;
 
 /**
  * Class RelationHelper
@@ -23,7 +23,7 @@ class RelationHelper
      */
     public static function with($with, $handler = null)
     {
-        return function (ActiveQuery $Query) use ($with, $handler) {
+        return function (ActiveQueryInterface $Query) use ($with, $handler) {
             $Query->with($with);
 
             if (is_callable($handler)) {
