@@ -19,15 +19,19 @@ class Mysql extends AbstractDriver implements DriverInterface
      */
     public function dumpSchema()
     {
+        $time = microtime(true);
+
         $path = $this->prepareDump();
 
         $resultFile = $path . DIRECTORY_SEPARATOR . 'schema.sql';
 
         $dumpKeys = $this->controller->dumpKeys;
 
-        if (!empty($this->excludeTablesSchema)) {
+        $excludeTablesSchema = $this->controller->excludeTablesSchema;
+
+        if (!empty($excludeTablesSchema)) {
             $database = $this->controller->credentials['database'];
-            $tables = $this->excludeTablesSchema;
+            $tables = $excludeTablesSchema;
 
             foreach ($tables as $table) {
                 $dumpKeys[] = "--ignore-table={$database}.{$table}";
@@ -42,7 +46,15 @@ class Mysql extends AbstractDriver implements DriverInterface
             $resultFile
         );
 
+        $this->controller->stdout("    > EXECUTE ----------------------\n");
+        $this->controller->stdout($cmd . "\n");
+        $this->controller->stdout("    > ------------------------------\n");
+
         passthru($cmd);
+
+        $time = sprintf('%.3f', microtime(true) - $time);
+
+        $this->controller->stdout("    > END (time: {$time}s) ---------------\n");
 
         return $resultFile;
     }
@@ -52,15 +64,19 @@ class Mysql extends AbstractDriver implements DriverInterface
      */
     public function dumpData()
     {
+        $time = microtime(true);
+
         $path = $this->prepareDump();
 
         $resultFile = $path . DIRECTORY_SEPARATOR . 'data.sql';
 
         $dumpKeys = $this->controller->dumpKeys;
 
-        if (!empty($this->excludeTablesData)) {
+        $excludeTablesData = $this->controller->excludeTablesData;
+
+        if (!empty($excludeTablesData)) {
             $database = $this->controller->credentials['database'];
-            $tables = $this->excludeTablesData;
+            $tables = $excludeTablesData;
 
             foreach ($tables as $table) {
                 $dumpKeys[] = "--ignore-table={$database}.{$table}";
@@ -68,14 +84,22 @@ class Mysql extends AbstractDriver implements DriverInterface
         }
 
         $cmd = sprintf(
-            ' mysqldump --defaults-extra-file=%s --no-create-info %s %s -v > %s',
+            'mysqldump --defaults-extra-file=%s --no-create-info %s %s -v > %s',
             $this->controller->getCredentialsFile(),
             implode(' ', $dumpKeys),
             $this->controller->credentials['database'],
             $resultFile
         );
 
+        $this->controller->stdout("    > EXECUTE ----------------------\n");
+        $this->controller->stdout($cmd . "\n");
+        $this->controller->stdout("    > ------------------------------\n");
+
         passthru($cmd);
+
+        $time = sprintf('%.3f', microtime(true) - $time);
+
+        $this->controller->stdout("    > END (time: {$time}s) ---------------\n");
 
         return $resultFile;
     }
@@ -131,18 +155,22 @@ class Mysql extends AbstractDriver implements DriverInterface
             $time = microtime(true);
 
             $cmd = sprintf(
-                ' mysql --defaults-extra-file=%s %s %s < %s',
+                'mysql --defaults-extra-file=%s %s %s < %s',
                 $this->controller->getCredentialsFile(),
                 implode(' ', $this->controller->restoreKeys),
                 $this->controller->credentials['database'],
                 $schema
             );
 
+            $this->controller->stdout("    > REST SCHEMA ------------------\n");
+            $this->controller->stdout($cmd . "\n");
+            $this->controller->stdout("    > ------------------------------\n");
+
             passthru($cmd);
 
             $time = sprintf('%.3f', microtime(true) - $time);
 
-            $this->controller->stdout("done (time: {$time}s).\n");
+            $this->controller->stdout("    > END (time: {$time}s) ---------------\n");
         }
 
         if ($dataConfirm) {
@@ -151,18 +179,22 @@ class Mysql extends AbstractDriver implements DriverInterface
             $time = microtime(true);
 
             $cmd = sprintf(
-                ' mysql --defaults-extra-file=%s %s %s < %s',
+                'mysql --defaults-extra-file=%s %s %s < %s',
                 $this->controller->getCredentialsFile(),
                 implode(' ', $this->controller->restoreKeys),
                 $this->controller->credentials['database'],
                 $data
             );
 
+            $this->controller->stdout("    > REST DATA --------------------\n");
+            $this->controller->stdout($cmd . "\n");
+            $this->controller->stdout("    > ------------------------------\n");
+
             passthru($cmd);
 
             $time = sprintf('%.3f', microtime(true) - $time);
 
-            $this->controller->stdout("done (time: {$time}s).\n");
+            $this->controller->stdout("    > END (time: {$time}s) ---------------\n");
         }
     }
 }

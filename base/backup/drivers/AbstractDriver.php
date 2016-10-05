@@ -22,43 +22,42 @@ abstract class AbstractDriver extends \yii\base\Object implements DriverInterfac
     public $controller;
 
     /**
-     * @return string
-     * @throws \yii\console\Exception
+     * @var string
      */
-    protected function prepareDump()
-    {
-        $path = implode(DIRECTORY_SEPARATOR, [
-            \Yii::getAlias($this->controller->backupPath, false),
-            Formatter()->asDate(time(), 'yyyy-MM-dd'),
-            Formatter()->asTime(time(), 'HH:mm:ss'),
-        ]);
-
-        if (!file_exists($path)) {
-            FileHelper::createDirectory($path);
-        }
-
-        if (!file_exists($path) || !is_dir($path)) {
-            throw new \yii\console\Exception('Backup path not found.');
-        }
-
-        if (!is_readable($path)) {
-            throw new \yii\console\Exception('Backup path is not readable.');
-        }
-
-        if (!is_writable($path)) {
-            throw new \yii\console\Exception('Backup path is not writable.');
-        }
-
-        return $path;
-    }
+    private $path;
 
     /**
      * @return string
      * @throws \yii\console\Exception
      */
-    protected function prepareRestore()
+    protected function prepareDump()
     {
+        if (empty($this->path)) {
+            $path = implode(DIRECTORY_SEPARATOR, [
+                \Yii::getAlias($this->controller->backupPath, false),
+                Formatter()->asDate(time(), 'yyyy-MM-dd'),
+                Formatter()->asTime(time(), 'HH:mm:ss'),
+            ]);
 
-        return $path;
+            if (!file_exists($path)) {
+                FileHelper::createDirectory($path);
+            }
+
+            if (!file_exists($path) || !is_dir($path)) {
+                throw new \yii\console\Exception('Backup path not found.');
+            }
+
+            if (!is_readable($path)) {
+                throw new \yii\console\Exception('Backup path is not readable.');
+            }
+
+            if (!is_writable($path)) {
+                throw new \yii\console\Exception('Backup path is not writable.');
+            }
+
+            $this->path = $path;
+        }
+
+        return $this->path;
     }
 }
