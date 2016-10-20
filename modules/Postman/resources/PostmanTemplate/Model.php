@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Postman\resources\PostmanTemplate;
 
-use cookyii\helpers\ApiAttribute;
 use yii\helpers\Json;
 
 /**
@@ -41,9 +40,11 @@ class Model extends \cookyii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
-            'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
-        ];
+        $behaviors = parent::behaviors();
+
+        $behaviors['timestamp'] = \cookyii\behaviors\TimestampBehavior::class;
+
+        return $behaviors;
     }
 
     /**

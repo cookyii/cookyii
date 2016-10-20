@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Feed\resources\FeedSection;
 
-use cookyii\helpers\ApiAttribute;
 use cookyii\modules\Feed\resources\FeedItem\Model as FeedItemModel;
 use cookyii\modules\Feed\resources\FeedItemSection\Model as FeedItemSectionModel;
 use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
@@ -51,10 +50,12 @@ class Model extends \cookyii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
-            'blameable' => \cookyii\behaviors\BlameableBehavior::className(),
-            'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
-        ];
+        $behaviors = parent::behaviors();
+
+        $behaviors['blameable'] = \cookyii\behaviors\BlameableBehavior::class;
+        $behaviors['timestamp'] = \cookyii\behaviors\TimestampBehavior::class;
+
+        return $behaviors;
     }
 
     /**

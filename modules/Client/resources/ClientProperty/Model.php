@@ -29,9 +29,11 @@ class Model extends \cookyii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
-            'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
-        ];
+        $behaviors = parent::behaviors();
+
+        $behaviors['timestamp'] = \cookyii\behaviors\TimestampBehavior::class;
+
+        return $behaviors;
     }
 
     /**

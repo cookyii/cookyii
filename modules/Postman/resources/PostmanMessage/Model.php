@@ -62,17 +62,20 @@ class Model extends \cookyii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
-            'unique-code-id' => [
-                'class' => \cookyii\behaviors\UniqueCodeIdBehavior::className(),
-                'codeAtAttribute' => 'code',
-                'length' => 32,
-            ],
-            'timestamp' => [
-                'class' => \cookyii\behaviors\TimestampBehavior::className(),
-                'updatedAtAttribute' => false,
-            ],
+        $behaviors = parent::behaviors();
+
+        $behaviors['unique-code-id'] = [
+            'class' => \cookyii\behaviors\UniqueCodeIdBehavior::className(),
+            'codeAtAttribute' => 'code',
+            'length' => 32,
         ];
+
+        $behaviors['timestamp'] = [
+            'class' => \cookyii\behaviors\TimestampBehavior::className(),
+            'updatedAtAttribute' => false,
+        ];
+
+        return $behaviors;
     }
 
     /**

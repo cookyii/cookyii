@@ -37,10 +37,12 @@ class Model extends \cookyii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
-            'unique-code-id' => \cookyii\behaviors\UniqueCodeIdBehavior::class,
-            'timestamp' => \cookyii\behaviors\TimestampBehavior::class,
-        ];
+        $behaviors = parent::behaviors();
+
+        $behaviors['unique-code-id'] = \cookyii\behaviors\UniqueCodeIdBehavior::class;
+        $behaviors['timestamp'] = \cookyii\behaviors\TimestampBehavior::class;
+
+        return $behaviors;
     }
 
     /**

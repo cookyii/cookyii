@@ -51,10 +51,12 @@ class Model extends \cookyii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
-            'blameable' => \cookyii\behaviors\BlameableBehavior::className(),
-            'timestamp' => \cookyii\behaviors\TimestampBehavior::className(),
-        ];
+        $behaviors = parent::behaviors();
+
+        $behaviors['blameable'] = \cookyii\behaviors\BlameableBehavior::class;
+        $behaviors['timestamp'] = \cookyii\behaviors\TimestampBehavior::class;
+
+        return $behaviors;
     }
 
     /**

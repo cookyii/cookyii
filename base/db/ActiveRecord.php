@@ -32,6 +32,18 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
+     * @inheritdoc;
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['typecast'] = \cookyii\behaviors\AttributeTypecastBehavior::class;
+
+        return $behaviors;
+    }
+
+    /**
      * Register event handlers
      */
     protected function registerEventHandlers()
