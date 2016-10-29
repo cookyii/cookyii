@@ -58,8 +58,6 @@ trait Serialize
                 $result[$role] = true;
             }
 
-            $result[\common\Roles::USER] = true;
-
             return $result;
         };
 

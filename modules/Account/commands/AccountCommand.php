@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\commands;
 
+use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use rmrevin\yii\rbac\RbacFactory;
 use yii\helpers\Console;
@@ -19,6 +20,11 @@ class AccountCommand extends \yii\console\Controller
 {
 
     /**
+     * @var string
+     */
+    public $accountModule = 'account';
+
+    /**
      * @param string $email
      * @param string $name
      * @param string $pass
@@ -26,6 +32,10 @@ class AccountCommand extends \yii\console\Controller
      */
     public function actionAdd($email = '', $name = '', $pass = '')
     {
+        /** @var Account\backend\Module $Module */
+        $Module = \Yii::$app->getModule($this->accountModule);
+        $roles = $Module->roles;
+
         if (empty($email)) {
             $email = $this->prompt('Enter user email:', [
                 'required' => true,
@@ -55,8 +65,8 @@ class AccountCommand extends \yii\console\Controller
 
         $Account->save();
         if (!$Account->hasErrors()) {
-            AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
-            AuthManager()->assign(RbacFactory::Role(\common\Roles::ADMIN), $Account->id);
+            AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
+            AuthManager()->assign(RbacFactory::Role($roles['admin']), $Account->id);
 
             $this->stdout("User have been successfully added\n", Console::FG_GREEN);
         } else {

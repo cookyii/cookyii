@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
+use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
 use rmrevin\yii\rbac\RbacFactory;
@@ -22,6 +23,8 @@ class FillAttributesForm extends \cookyii\base\FormModel
     use \cookyii\traits\PopulateErrorsTrait;
 
     public $email;
+
+    public $accountModule = 'account';
 
     /**
      * @inheritdoc
@@ -68,6 +71,10 @@ class FillAttributesForm extends \cookyii\base\FormModel
      */
     public function save(\yii\authclient\ClientInterface $Client)
     {
+        /** @var Account\backend\Module $Module */
+        $Module = \Yii::$app->getModule($this->accountModule);
+        $roles = $Module->roles;
+
         /** @var AccountModel $Account */
         $Account = \Yii::createObject(AccountModel::className());
 
@@ -88,7 +95,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
 
             $Account->pushSocialLink($Client);
 
-            AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
+            AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
 
             $SignInFormModel = \Yii::createObject(SignInForm::className());
 

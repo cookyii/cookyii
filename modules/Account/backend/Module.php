@@ -19,6 +19,27 @@ class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModu
 
     public $defaultRoute = 'sign/in';
 
+    public $roles = [
+        'admin' => \common\Roles::ADMIN,
+        'user' => \common\Roles::USER,
+    ];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (!isset($this->roles['admin']) || empty($this->roles['admin'])) {
+            throw new Account\Exception(\Yii::t('app', 'Need configurate admin role in account module.'));
+        }
+
+        if (!isset($this->roles['user']) || empty($this->roles['user'])) {
+            throw new Account\Exception(\Yii::t('app', 'Need configurate user role in account module.'));
+        }
+    }
+
     /**
      * @inheritdoc
      */

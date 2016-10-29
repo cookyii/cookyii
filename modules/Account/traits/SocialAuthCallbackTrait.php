@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\traits;
 
+use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
 use rmrevin\yii\rbac\RbacFactory;
@@ -19,12 +20,18 @@ use yii\helpers\Json;
 trait SocialAuthCallbackTrait
 {
 
+    public $accountModule = 'account';
+
     /**
      * @param \yii\authclient\ClientInterface $Client
      * @throws \yii\web\ForbiddenHttpException
      */
     public function socialAuthCallback(\yii\authclient\ClientInterface $Client)
     {
+        /** @var Account\backend\Module $Module */
+        $Module = \Yii::$app->getModule($this->accountModule);
+        $roles = $Module->roles;
+
         $AuthResponse = AccountAuthResponseModel::createLog($Client);
 
         $attributes = $Client->getUserAttributes();
@@ -115,8 +122,8 @@ trait SocialAuthCallbackTrait
 
                 $AuthResponse->result = Json::encode($Account->id);
 
-                if (!$Account->can(\common\Roles::USER)) {
-                    AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
+                if (!$Account->can($roles['user'])) {
+                    AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
                 }
             }
         }

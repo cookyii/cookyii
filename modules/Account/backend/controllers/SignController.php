@@ -89,6 +89,10 @@ class SignController extends Account\backend\components\Controller
      */
     public function authSuccessCallback(\yii\authclient\ClientInterface $Client)
     {
+        /** @var Account\backend\Module $Module */
+        $Module = $this->module;
+        $roles = $Module->roles;
+
         $AuthResponse = AccountAuthResponseModel::createLog($Client);
 
         $attributes = $Client->getUserAttributes();
@@ -156,7 +160,7 @@ class SignController extends Account\backend\components\Controller
 
                 $AuthResponse->result = Json::encode($Account->id);
 
-                AuthManager()->assign(RbacFactory::Role(\common\Roles::USER), $Account->id);
+                AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
             } else {
                 $AuthResponse->result = Json::encode($Account->getErrors());
             }
