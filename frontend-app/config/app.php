@@ -18,10 +18,16 @@ return array_merge($config, [
     'controllerNamespace' => 'frontend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'account' => cookyii\modules\Account\frontend\Module::className(),
         'page' => cookyii\modules\Page\frontend\Module::className(),
         'media' => $params['module.media'],
         'postman' => $params['module.postman'],
+        'account' => [
+            'class' => cookyii\modules\Account\frontend\Module::className(),
+            'roles' => [
+                'admin' => \common\Roles::ADMIN,
+                'user' => \common\Roles::USER,
+            ],
+        ],
     ],
     'components' => [
         'db' => $params['component.db'],

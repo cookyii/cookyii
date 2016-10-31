@@ -20,8 +20,8 @@ class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModu
     public $defaultRoute = 'sign/in';
 
     public $roles = [
-        'admin' => \common\Roles::ADMIN,
-        'user' => \common\Roles::USER,
+        'admin' => 'admin',
+        'user' => 'user',
     ];
 
     /**

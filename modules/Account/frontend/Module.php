@@ -19,8 +19,8 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface, \
     public $defaultRoute = 'sign/in';
 
     public $roles = [
-        'admin' => \common\Roles::ADMIN,
-        'user' => \common\Roles::USER,
+        'admin' => 'admin',
+        'user' => 'user',
     ];
 
     /**

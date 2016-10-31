@@ -23,10 +23,16 @@ return array_merge($config, [
         'feed' => cookyii\modules\Feed\backend\Module::className(),
         'page' => cookyii\modules\Page\backend\Module::className(),
         'client' => cookyii\modules\Client\backend\Module::className(),
-        'account' => cookyii\modules\Account\backend\Module::className(),
         'translation' => cookyii\modules\Translation\backend\Module::className(),
         'media' => $params['module.media'],
         'postman' => $params['module.postman'],
+        'account' => [
+            'class' => cookyii\modules\Account\backend\Module::className(),
+            'roles' => [
+                'admin' => \common\Roles::ADMIN,
+                'user' => \common\Roles::USER,
+            ],
+        ],
     ],
     'components' => [
         'db' => $params['component.db'],
