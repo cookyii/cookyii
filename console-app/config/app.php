@@ -39,7 +39,6 @@ return array_merge($config, [
     'components' => [
         'db' => $params['component.db'],
 //        'redis' => $params['component.redis'],
-//        'predis' => $params['component.predis'],
 //        'queue' => $params['component.queue'],
         'security' => $params['component.security'],
         'user' => $params['component.user'],
