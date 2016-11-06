@@ -16,5 +16,4 @@ namespace resources\Media;
  */
 class Query extends \cookyii\modules\Media\resources\Media\Query
 {
-
 }

@@ -8,7 +8,6 @@
 namespace cookyii\queue;
 
 use Predis\Transaction\MultiExec;
-use yii\base\InvalidConfigException;
 use yii\helpers\Json;
 
 /**
@@ -28,14 +27,6 @@ class RedisQueue extends \yii\queue\RedisQueue
      */
     public function init()
     {
-        if ($this->redis === null) {
-            throw new InvalidConfigException('The "redis" property must be set.');
-        }
-
-        if (is_string($this->redis)) {
-            $this->redis = \Yii::$app->get($this->redis);
-        }
-
         parent::init();
 
         $this->selectDatabase($this->database);
