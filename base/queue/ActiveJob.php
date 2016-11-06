@@ -14,13 +14,19 @@ namespace cookyii\queue;
 abstract class ActiveJob extends \yii\base\Object
 {
 
-    /** @var mixed */
+    /**
+     * @var mixed
+     */
     public $queue = 'queue';
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $serializer = ['serialize', 'unserialize'];
 
-    /** @var \yii\console\Controller */
+    /**
+     * @var \yii\console\Controller
+     */
     public $controller;
 
     /**

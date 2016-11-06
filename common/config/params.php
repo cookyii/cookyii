@@ -39,6 +39,28 @@ return [
         'password' => DB_PASS,
         'tablePrefix' => 'yii_',
     ],
+//    'component.redis' => [
+//        'class' => yii\redis\Connection::class,
+//        'hostname' => REDIS_HOST,
+//        'port' => REDIS_PORT,
+//        'unixSocket' => REDIS_SOCKET,
+//        'password' => REDIS_PASS,
+//        'database' => REDIS_BASE,
+//    ],
+//    'component.predis' => [
+//        'class' => cookyii\predis\Connection::class,
+//        'scheme' => 'tcp',
+//        'hostname' => REDIS_HOST,
+//        'port' => REDIS_PORT,
+//        'unixSocket' => REDIS_SOCKET,
+//        'password' => REDIS_PASS,
+//        'database' => REDIS_BASE,
+//    ],
+//    'component.queue' => [
+//        'class' => cookyii\queue\RedisQueue::class,
+//        'redis' => 'predis',
+//        'database' => 0,
+//    ],
     'component.mailer' => [
         'class' => yii\swiftmailer\Mailer::className(),
         'transport' => [

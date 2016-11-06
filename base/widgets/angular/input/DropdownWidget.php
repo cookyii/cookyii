@@ -18,13 +18,19 @@ use yii\helpers\Json;
 class DropdownWidget extends AbstractInputWidget
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $optionsScheme = 'key as value for (key, value) in %s';
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $items;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $nullValue;
 
     /**

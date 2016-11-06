@@ -14,6 +14,9 @@ namespace cookyii\behaviors;
 class AttributeTypecastBehavior extends \yii\behaviors\AttributeTypecastBehavior
 {
 
+    /**
+     * @var array
+     */
     private static $autoDetectedAttributeTypes = [];
 
     /**

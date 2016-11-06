@@ -13,22 +13,27 @@ namespace cookyii\authclient\clients;
  */
 class Odnoklassniki extends \yii\authclient\OAuth2
 {
+
     /**
      * @var string
      */
     public $applicationKey;
+
     /**
      * @inheritdoc
      */
     public $authUrl = 'http://www.odnoklassniki.ru/oauth/authorize';
+
     /**
      * @inheritdoc
      */
     public $tokenUrl = 'https://api.odnoklassniki.ru/oauth/token.do';
+
     /**
      * @inheritdoc
      */
     public $apiBaseUrl = 'http://api.odnoklassniki.ru';
+
     /**
      * @inheritdoc
      */

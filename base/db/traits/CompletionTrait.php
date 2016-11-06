@@ -42,7 +42,7 @@ trait CompletionTrait
         if (!$this->hasAttribute('completed_at') && !$this->hasProperty('completed_at')) {
             throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'completed_at'));
         }
-        
+
         $this->completed_at = time();
 
         return $this->update();
@@ -58,7 +58,7 @@ trait CompletionTrait
         if (!$this->hasAttribute('completed_at') && !$this->hasProperty('completed_at')) {
             throw new \yii\base\InvalidConfigException(sprintf('`%s` has no attribute named `%s`.', get_class($this), 'completed_at'));
         }
-        
+
         $this->completed_at = null;
 
         return $this->update();

@@ -14,11 +14,17 @@ namespace cookyii\helpers;
 class ApiAttribute
 {
 
+    /**
+     * @var array
+     */
     public static $relativeFormats = [
         'short' => 'd MMM HH:mm',
         'long' => 'd MMM y',
     ];
 
+    /**
+     * @var array
+     */
     public static $datetimeFormats = [
         'raw' => 'raw',
         'relative' => 'relative',
@@ -26,6 +32,9 @@ class ApiAttribute
         'normal' => 'dd.MM.yyyy HH:mm',
     ];
 
+    /**
+     * @var array
+     */
     public static $dateFormats = [
         'raw' => 'raw',
         'relative' => 'relative',
@@ -33,6 +42,9 @@ class ApiAttribute
         'normal' => 'dd.MM.yyyy',
     ];
 
+    /**
+     * @var array
+     */
     public static $timeFormats = [
         'raw' => 'raw',
         'relative' => 'relative',

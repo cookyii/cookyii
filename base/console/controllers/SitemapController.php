@@ -14,10 +14,19 @@ namespace cookyii\console\controllers;
 abstract class SitemapController extends \yii\console\Controller
 {
 
+    /**
+     * @var string
+     */
     public $defaultAction = 'generate';
 
+    /**
+     * @var string
+     */
     public $filePath = '@app/web/sitemap.xml';
 
+    /**
+     * @var string
+     */
     protected $domain = 'https://sitename.ru';
 
     /**

@@ -13,5 +13,4 @@ namespace cookyii\api;
  */
 class Action extends \yii\base\Action
 {
-
 }

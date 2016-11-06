@@ -14,5 +14,8 @@ namespace cookyii\queue;
 class Event extends \yii\base\Event
 {
 
+    /**
+     * @var string
+     */
     public $queueName;
 }

@@ -13,5 +13,4 @@ namespace cookyii\base;
  */
 class Event extends \yii\base\Event
 {
-
 }

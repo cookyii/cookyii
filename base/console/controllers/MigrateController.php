@@ -14,6 +14,9 @@ namespace cookyii\console\controllers;
 class MigrateController extends \yii\console\controllers\MigrateController
 {
 
+    /**
+     * @var array
+     */
     public $migrationsPath = [];
 
     /**

@@ -21,6 +21,7 @@ class TokenBehavior extends \yii\behaviors\AttributeBehavior
      * @var string the attribute that will receive id value
      */
     public $codeAtAttribute = 'token';
+
     /**
      * @var callable|\yii\db\Expression The expression that will be used for generating the id.
      * This can be either an anonymous function that returns the id value,

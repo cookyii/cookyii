@@ -16,7 +16,9 @@ use yii\helpers\Inflector;
 abstract class AbstractHelper extends \yii\base\Object
 {
 
-    /** @var \yii\db\ActiveRecord */
+    /**
+     * @var \yii\db\ActiveRecord
+     */
     public $Model;
 
     /**

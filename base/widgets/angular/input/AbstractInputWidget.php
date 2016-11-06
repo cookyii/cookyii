@@ -13,5 +13,4 @@ namespace cookyii\widgets\angular\input;
  */
 abstract class AbstractInputWidget extends \yii\widgets\InputWidget
 {
-
 }

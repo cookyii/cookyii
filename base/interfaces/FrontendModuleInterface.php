@@ -13,5 +13,4 @@ namespace cookyii\interfaces;
  */
 interface FrontendModuleInterface
 {
-
 }

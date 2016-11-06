@@ -14,7 +14,9 @@ namespace cookyii\data;
 class CallableActiveDataProvider extends \yii\data\ActiveDataProvider
 {
 
-    /** @var callable map function */
+    /**
+     * @var callable map function
+     */
     public $mapFunction;
 
     /**

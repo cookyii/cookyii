@@ -7,8 +7,6 @@
 
 namespace cookyii\i18n;
 
-use yii\helpers\ArrayHelper;
-
 /**
  * Class Formatter
  * @package cookyii\i18n
@@ -42,28 +40,5 @@ class Formatter extends \yii\i18n\Formatter
         } else {
             return round($d, $precision, $mode) . $this->shortNumberSuffix[$multiplier + 1];
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function asDecimal($value, $decimals = 2, $options = [], $textOptions = [])
-    {
-        $stripNullDecimals = ArrayHelper::remove($options, 'stripNullDecimals', true);
-
-        $result = parent::asDecimal($value, $decimals, $options, $textOptions);
-
-        if ($stripNullDecimals) {
-            if (extension_loaded('intl')) {
-                $f = $this->createNumberFormatter(\NumberFormatter::DECIMAL, $decimals, $options, $textOptions);
-                $sep = $f->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
-            } else {
-                $sep = $this->decimalSeparator;
-            }
-
-            $result = str_replace($sep . str_repeat('0', $decimals), '', $result);
-        }
-
-        return $result;
     }
 }

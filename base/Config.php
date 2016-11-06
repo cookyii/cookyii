@@ -14,6 +14,9 @@ namespace cookyii;
 class Config
 {
 
+    /**
+     * @var array
+     */
     static $config = [];
 
     /**

@@ -18,13 +18,19 @@ use yii\helpers\Json;
 class ButtonGroupInputWidget extends AbstractInputWidget
 {
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $items;
 
-    /** @var string radio or checkbox */
+    /**
+     * @var string radio or checkbox
+     */
     public $type = self::TYPE_RADIO;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $itemOptions = ['class' => 'btn btn-default'];
 
     /**

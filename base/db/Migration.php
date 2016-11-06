@@ -18,6 +18,9 @@ class Migration extends \yii\db\Migration
 
     use \cookyii\db\traits\MigrationCheckSupportTrait;
 
+    /**
+     * @var array
+     */
     public $default = [
         'charset' => 'utf8mb4',
         'collate' => 'utf8mb4_unicode_ci',

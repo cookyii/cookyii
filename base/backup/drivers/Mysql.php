@@ -15,7 +15,7 @@ class Mysql extends AbstractDriver implements DriverInterface
 {
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function dumpSchema()
     {
@@ -60,7 +60,7 @@ class Mysql extends AbstractDriver implements DriverInterface
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function dumpData()
     {
@@ -105,7 +105,7 @@ class Mysql extends AbstractDriver implements DriverInterface
     }
 
     /**
-     * @param string $variant
+     * @inheritdoc
      */
     public function restoreDump($variant)
     {

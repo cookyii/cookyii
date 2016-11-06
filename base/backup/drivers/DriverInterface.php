@@ -14,9 +14,18 @@ namespace cookyii\backup\drivers;
 interface DriverInterface
 {
 
+    /**
+     * @return string
+     */
     public function dumpSchema();
 
+    /**
+     * @return string
+     */
     public function dumpData();
 
+    /**
+     * @param string $variant
+     */
     public function restoreDump($variant);
 }

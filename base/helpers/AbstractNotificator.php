@@ -13,5 +13,4 @@ namespace cookyii\helpers;
  */
 abstract class AbstractNotificator extends \yii\base\Object
 {
-
 }

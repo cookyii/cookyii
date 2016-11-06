@@ -16,6 +16,9 @@ namespace cookyii\traits;
 trait GravatrTrait
 {
 
+    /**
+     * @var array
+     */
     public static $gravatarParams = [
         'r' => 'r',
         's' => 128,

@@ -13,18 +13,22 @@ namespace cookyii\authclient\clients;
  */
 class Instagram extends \yii\authclient\OAuth2
 {
+
     /**
      * @inheritdoc
      */
     public $authUrl = 'https://api.instagram.com/oauth/authorize';
+
     /**
      * @inheritdoc
      */
     public $tokenUrl = 'https://api.instagram.com/oauth/access_token';
+
     /**
      * @inheritdoc
      */
     public $apiBaseUrl = 'https://api.instagram.com/v1';
+
     /**
      * @inheritdoc
      */
