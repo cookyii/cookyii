@@ -206,7 +206,6 @@ function str_clean($str)
  */
 function str_pretty($str)
 {
-    $str = trim($str);
     $str = preg_replace('/[^\P{C}\s]+/u', '', $str);
     $str = preg_replace('/(\r?\n){2,}/', "\r\n\r\n", $str);
     $str = preg_replace('/\t+/', ' ', $str);
