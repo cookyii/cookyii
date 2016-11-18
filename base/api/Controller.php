@@ -7,6 +7,13 @@
 
 namespace cookyii\api;
 
+use yii\filters\AccessControl;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\ContentNegotiator;
+use yii\filters\RateLimiter;
+use yii\filters\VerbFilter;
+use yii\web\Response;
+
 /**
  * Class Controller
  * @package cookyii\api
@@ -21,26 +28,26 @@ abstract class Controller extends \yii\rest\Controller
     {
         return [
             'contentNegotiator' => [
-                'class' => 'yii\filters\ContentNegotiator',
+                'class' => ContentNegotiator::class,
                 'formats' => [
-                    'application/json' => \yii\web\Response::FORMAT_JSON,
-                    'application/xml' => \yii\web\Response::FORMAT_XML,
+                    'application/json' => Response::FORMAT_JSON,
+                    'application/xml' => Response::FORMAT_XML,
                 ],
             ],
             'verbFilter' => [
-                'class' => 'yii\filters\VerbFilter',
+                'class' => VerbFilter::class,
                 'actions' => $this->verbs(),
             ],
 
             'authenticator' => [
-                'class' => 'yii\filters\auth\CompositeAuth',
-//                'class' => 'yii\filters\auth\HttpBearerAuth',
+                'class' => CompositeAuth::class,
+//                'class' => HttpBearerAuth::class,
             ],
             'rateLimiter' => [
-                'class' => 'yii\filters\RateLimiter',
+                'class' => RateLimiter::class,
             ],
             'access' => [
-                'class' => 'yii\filters\AccessControl',
+                'class' => AccessControl::class,
                 'rules' => $this->accessRules(),
             ],
         ];
