@@ -41,9 +41,9 @@ class ImageWrapper extends \yii\base\Object
     protected $mark = [];
 
     /**
-     * @var array
+     * @var callable[]
      */
-    protected $actions = [];
+    protected $handlers = [];
 
     /**
      * @var ImageInterface
@@ -71,7 +71,8 @@ class ImageWrapper extends \yii\base\Object
      */
     public function export()
     {
-        $mark = sha1(serialize($this->mark));
+        $mark_ser = serialize($this->mark);
+        $mark = sha1($mark_ser);
 
         $mediaAbsolutePath = $this->getMarkedMediaPath($mark);
 
@@ -79,7 +80,7 @@ class ImageWrapper extends \yii\base\Object
             \Yii::trace(sprintf('create new file cache: ', $this->Media->id), __METHOD__);
             $this->createMarkedMediaFile($mark);
         } else {
-            \Yii::trace(sprintf('file already cached: %s (%s)', $this->Media->id, serialize($this->mark)), __METHOD__);
+            \Yii::trace(sprintf('file already cached: %s (%s)', $this->Media->id, $mark_ser), __METHOD__);
         }
 
         \Yii::endProfile(sprintf('manipulating with file `%s`', $this->Media->id), 'Media\Manipulation');
@@ -350,8 +351,8 @@ class ImageWrapper extends \yii\base\Object
 
         $Image = $this->imagine->copy();
 
-        if (!empty($this->actions)) {
-            foreach ($this->actions as $handler) {
+        if (!empty($this->handlers)) {
+            foreach ($this->handlers as $handler) {
                 if (is_callable($handler)) {
                     $Image = $handler($Image);
                 }
@@ -371,8 +372,10 @@ class ImageWrapper extends \yii\base\Object
      */
     protected function addMarkItem($method, array $data, callable $handler)
     {
-        $this->mark[] = func_get_args();
+        $args = func_get_args();
 
-        $this->actions[] = $handler;
+        $this->handlers[] = array_pop($args);
+
+        $this->mark[] = $args;
     }
 }
