@@ -37,10 +37,10 @@ class EditController extends Client\backend\components\Controller
     public function actionIndex()
     {
         /** @var ClientModel $ClientModel */
-        $ClientModel = \Yii::createObject(ClientModel::className());
+        $ClientModel = \Yii::createObject(ClientModel::class);
 
         $ClientEditForm = \Yii::createObject([
-            'class' => Client\backend\forms\ClientEditForm::className(),
+            'class' => Client\backend\forms\ClientEditForm::class,
             'Client' => $ClientModel,
         ]);
 

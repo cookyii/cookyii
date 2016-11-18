@@ -125,7 +125,7 @@ class ItemEditForm extends \cookyii\base\FormModel
             $this->populateErrors($Item, 'title');
         } else {
             /** @var FeedItemSectionModel $ItemSectionModel */
-            $ItemSectionModel = \Yii::createObject(FeedItemSectionModel::className());
+            $ItemSectionModel = \Yii::createObject(FeedItemSectionModel::class);
 
             $ItemSectionModel::deleteAll(['item_id' => $Item->id]);
 

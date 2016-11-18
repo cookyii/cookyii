@@ -44,7 +44,7 @@ class EditFormAction extends \cookyii\rest\Action
         }
 
         $PageEditForm = \Yii::createObject([
-            'class' => Page\backend\forms\PageEditForm::className(),
+            'class' => Page\backend\forms\PageEditForm::class,
             'Page' => $Page,
         ]);
 

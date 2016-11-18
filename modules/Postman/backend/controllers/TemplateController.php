@@ -47,10 +47,10 @@ class TemplateController extends Postman\backend\components\Controller
     public function actionEdit()
     {
         /** @var PostmanTemplateModel $TemplateModel */
-        $TemplateModel = \Yii::createObject(PostmanTemplateModel::className());
+        $TemplateModel = \Yii::createObject(PostmanTemplateModel::class);
 
         $TemplateEditForm = \Yii::createObject([
-            'class' => Postman\backend\forms\TemplateEditForm::className(),
+            'class' => Postman\backend\forms\TemplateEditForm::class,
             'Template' => $TemplateModel,
         ]);
 
@@ -74,7 +74,7 @@ class TemplateController extends Postman\backend\components\Controller
         $use_layout = $use_layout === 'true';
 
         /** @var PostmanMessageModel $MessageModel */
-        $MessageModel = \Yii::createObject(PostmanMessageModel::className());
+        $MessageModel = \Yii::createObject(PostmanMessageModel::class);
 
         if (\Yii::$app->has('urlManager.frontend')) {
             $MessageModel::$urlManager = 'urlManager.frontend';

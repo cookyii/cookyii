@@ -7,7 +7,7 @@
 
 return [
     'component.authClientCollection' => [
-        'class' => yii\authclient\Collection::className(),
+        'class' => yii\authclient\Collection::class,
         'clients' => require __DIR__ . '/auth_clients.php',
     ],
 ];

@@ -22,7 +22,7 @@ $form = ActiveForm::begin([
 ]);
 
 /** @var PostmanMessageModel $MessageModel */
-$MessageModel = \Yii::createObject(PostmanMessageModel::className());
+$MessageModel = \Yii::createObject(PostmanMessageModel::class);
 
 ?>
 

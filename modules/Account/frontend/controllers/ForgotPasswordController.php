@@ -36,7 +36,7 @@ class ForgotPasswordController extends Account\frontend\components\Controller
     public function actionIndex()
     {
         /** @var Account\forms\ForgotPasswordForm $ForgotPasswordForm */
-        $ForgotPasswordForm = \Yii::createObject(Account\forms\ForgotPasswordForm::className());
+        $ForgotPasswordForm = \Yii::createObject(Account\forms\ForgotPasswordForm::class);
 
         $this->layout = '//wide';
 
@@ -53,7 +53,7 @@ class ForgotPasswordController extends Account\frontend\components\Controller
     public function actionCheck($email, $hash)
     {
         /** @var Account\forms\ForgotPasswordForm $ForgotPasswordForm */
-        $ForgotPasswordForm = \Yii::createObject(Account\forms\ForgotPasswordForm::className());
+        $ForgotPasswordForm = \Yii::createObject(Account\forms\ForgotPasswordForm::class);
         $ForgotPasswordForm->email = $email;
         $ForgotPasswordForm->hash = $hash;
 

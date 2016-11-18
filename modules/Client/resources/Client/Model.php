@@ -139,9 +139,9 @@ class Model extends \cookyii\db\ActiveRecord
     public function getAccount()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
-        return $this->hasOne($AccountModel::className(), ['id' => 'account_id']);
+        return $this->hasOne(get_class($AccountModel), ['id' => 'account_id']);
     }
 
     /**
@@ -150,9 +150,9 @@ class Model extends \cookyii\db\ActiveRecord
     public function getProperties()
     {
         /** @var ClientPropertyModel $ClientPropertyModel */
-        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::className());
+        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::class);
 
-        return $this->hasMany($ClientPropertyModel::className(), ['client_id' => 'id']);
+        return $this->hasMany(get_class($ClientPropertyModel), ['client_id' => 'id']);
     }
 
     /**

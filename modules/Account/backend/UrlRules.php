@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Account\backend;
 
+use cookyii\rest\UrlRule;
+
 /**
  * Class UrlRules
  * @package cookyii\modules\Account\backend
@@ -38,7 +40,7 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
             ],
 
             [
-                'class' => \cookyii\rest\UrlRule::className(),
+                'class' => UrlRule::class,
                 'controller' => 'account/rest/account',
             ],
         ];

@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Client\backend;
 
+use cookyii\rest\UrlRule;
+
 /**
  * Class UrlRules
  * @package cookyii\modules\Client\backend
@@ -41,7 +43,7 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
             ],
 
             [
-                'class' => \cookyii\rest\UrlRule::className(),
+                'class' => UrlRule::class,
                 'controller' => 'client/rest/client',
             ]
         ];

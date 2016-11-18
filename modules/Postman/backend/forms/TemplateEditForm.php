@@ -45,7 +45,7 @@ class TemplateEditForm extends \cookyii\base\FormModel
     public function rules()
     {
         /** @var PostmanTemplateModel $TemplateModel */
-        $TemplateModel = \Yii::createObject(PostmanTemplateModel::className());
+        $TemplateModel = \Yii::createObject(PostmanTemplateModel::class);
 
         return [
             /** type validators */

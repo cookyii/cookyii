@@ -29,8 +29,8 @@ trait SocialTrait
 
         $attributes = $Client->getUserAttributes();
 
-        /** @var $class AccountAuthModel */
-        $class = \Yii::createObject(AccountAuthModel::className());
+        /** @var $Model AccountAuthModel */
+        $Model = \Yii::createObject(AccountAuthModel::class);
 
         $token = null;
         if ($Client instanceof \yii\authclient\BaseOAuth) {
@@ -39,7 +39,7 @@ trait SocialTrait
             $token['params'] = $Token->getParams();
         }
 
-        return $class::push($self->id, $Client->getId(), $attributes['id'], $token);
+        return $Model::push($self->id, $Client->getId(), $attributes['id'], $token);
     }
 
     /**

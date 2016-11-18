@@ -36,10 +36,10 @@ class EditController extends Account\backend\components\Controller
     public function actionIndex()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         $AccountEditForm = \Yii::createObject([
-            'class' => Account\backend\forms\AccountEditForm::className(),
+            'class' => Account\backend\forms\AccountEditForm::class,
             'Account' => $AccountModel,
         ]);
 

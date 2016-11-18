@@ -44,7 +44,7 @@ class EditFormAction extends \cookyii\rest\Action
         }
 
         $TemplateEditForm = \Yii::createObject([
-            'class' => Postman\backend\forms\TemplateEditForm::className(),
+            'class' => Postman\backend\forms\TemplateEditForm::class,
             'Template' => $Template,
         ]);
 

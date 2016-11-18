@@ -62,49 +62,49 @@ class ClientController extends \cookyii\rest\Controller
         $actions['index']['prepareDataProvider'] = [$this, 'prepareListDataProvider'];
 
         $actions['create-account'] = [
-            'class' => Client\backend\controllers\rest\ClientController\CreateAccountAction::className(),
+            'class' => Client\backend\controllers\rest\ClientController\CreateAccountAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['unlink-account'] = [
-            'class' => Client\backend\controllers\rest\ClientController\UnlinkAccountAction::className(),
+            'class' => Client\backend\controllers\rest\ClientController\UnlinkAccountAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['edit'] = [
-            'class' => Client\backend\controllers\rest\ClientController\EditFormAction::className(),
+            'class' => Client\backend\controllers\rest\ClientController\EditFormAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['detail'] = [
-            'class' => Client\backend\controllers\rest\ClientController\DetailAction::className(),
+            'class' => Client\backend\controllers\rest\ClientController\DetailAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['activate'] = [
-            'class' => \cookyii\rest\actions\ActivateAction::className(),
+            'class' => \cookyii\rest\actions\ActivateAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['deactivate'] = [
-            'class' => \cookyii\rest\actions\DeactivateAction::className(),
+            'class' => \cookyii\rest\actions\DeactivateAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['delete'] = [
-            'class' => \cookyii\rest\actions\DeleteAction::className(),
+            'class' => \cookyii\rest\actions\DeleteAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['restore'] = [
-            'class' => \cookyii\rest\actions\RestoreAction::className(),
+            'class' => \cookyii\rest\actions\RestoreAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];

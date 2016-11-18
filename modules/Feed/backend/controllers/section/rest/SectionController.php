@@ -58,43 +58,43 @@ class SectionController extends \cookyii\rest\Controller
         $actions = parent::actions();
 
         $actions['edit'] = [
-            'class' => Feed\backend\controllers\section\rest\SectionController\EditFormAction::className(),
+            'class' => Feed\backend\controllers\section\rest\SectionController\EditFormAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['tree'] = [
-            'class' => Feed\backend\controllers\section\rest\SectionController\TreeAction::className(),
+            'class' => Feed\backend\controllers\section\rest\SectionController\TreeAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['detail'] = [
-            'class' => Feed\backend\controllers\section\rest\SectionController\DetailAction::className(),
+            'class' => Feed\backend\controllers\section\rest\SectionController\DetailAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['activate'] = [
-            'class' => \cookyii\rest\actions\ActivateAction::className(),
+            'class' => \cookyii\rest\actions\ActivateAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['deactivate'] = [
-            'class' => \cookyii\rest\actions\DeactivateAction::className(),
+            'class' => \cookyii\rest\actions\DeactivateAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['delete'] = [
-            'class' => \cookyii\rest\actions\DeleteAction::className(),
+            'class' => \cookyii\rest\actions\DeleteAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['restore'] = [
-            'class' => \cookyii\rest\actions\RestoreAction::className(),
+            'class' => \cookyii\rest\actions\RestoreAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];

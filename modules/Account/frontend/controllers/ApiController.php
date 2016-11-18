@@ -56,7 +56,7 @@ class ApiController extends \cookyii\api\Controller
         ];
 
         /** @var Account\forms\SignInForm $SignInForm */
-        $SignInForm = \Yii::createObject(Account\forms\SignInForm::className());
+        $SignInForm = \Yii::createObject(Account\forms\SignInForm::class);
 
         if ($SignInForm->load(Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
             $result = [
@@ -97,7 +97,7 @@ class ApiController extends \cookyii\api\Controller
         ];
 
         /** @var Account\forms\SignUpForm $SignUpForm */
-        $SignUpForm = \Yii::createObject(Account\forms\SignUpForm::className());
+        $SignUpForm = \Yii::createObject(Account\forms\SignUpForm::class);
 
         if ($SignUpForm->load(Request()->post()) && $SignUpForm->validate() && $SignUpForm->register()) {
             $result = [
@@ -138,7 +138,7 @@ class ApiController extends \cookyii\api\Controller
         ];
 
         /** @var Account\forms\ForgotPasswordForm $ForgotPasswordForm */
-        $ForgotPasswordForm = \Yii::createObject(Account\forms\ForgotPasswordForm::className());
+        $ForgotPasswordForm = \Yii::createObject(Account\forms\ForgotPasswordForm::class);
 
         if ($ForgotPasswordForm->load(Request()->post()) && $ForgotPasswordForm->validate() && $ForgotPasswordForm->sendNotification()) {
             $result = [
@@ -185,7 +185,7 @@ class ApiController extends \cookyii\api\Controller
         }
 
         /** @var Account\forms\FillAttributesForm $FillAttributesForm */
-        $FillAttributesForm = \Yii::createObject(Account\forms\FillAttributesForm::className());
+        $FillAttributesForm = \Yii::createObject(Account\forms\FillAttributesForm::class);
 
         if ($FillAttributesForm->load(Request()->post()) && $FillAttributesForm->validate() && $FillAttributesForm->save($Client)) {
             $result = [

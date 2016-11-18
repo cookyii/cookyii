@@ -12,7 +12,7 @@ $params = array_merge(
     require(__DIR__ . '/params.php')
 );
 
-$params['module.postman']['class'] = cookyii\modules\Postman\backend\Module::className();
+$params['module.postman']['class'] = cookyii\modules\Postman\backend\Module::class;
 
 return array_merge($config, [
     'id' => 'backend-app',
@@ -20,14 +20,14 @@ return array_merge($config, [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'feed' => cookyii\modules\Feed\backend\Module::className(),
-        'page' => cookyii\modules\Page\backend\Module::className(),
-        'client' => cookyii\modules\Client\backend\Module::className(),
-        'translation' => cookyii\modules\Translation\backend\Module::className(),
+        'feed' => cookyii\modules\Feed\backend\Module::class,
+        'page' => cookyii\modules\Page\backend\Module::class,
+        'client' => cookyii\modules\Client\backend\Module::class,
+        'translation' => cookyii\modules\Translation\backend\Module::class,
         'media' => $params['module.media'],
         'postman' => $params['module.postman'],
         'account' => [
-            'class' => cookyii\modules\Account\backend\Module::className(),
+            'class' => cookyii\modules\Account\backend\Module::class,
             'roles' => [
                 'admin' => \common\Roles::ADMIN,
                 'user' => \common\Roles::USER,
@@ -58,7 +58,7 @@ return array_merge($config, [
         'view' => $params['component.view'],
         'log' => $params['component.log'],
         'errorHandler' => [
-            'class' => cookyii\web\ErrorHandler::className(),
+            'class' => cookyii\web\ErrorHandler::class,
             'errorAction' => 'site/error',
         ],
     ],

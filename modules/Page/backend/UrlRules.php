@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Page\backend;
 
+use cookyii\rest\UrlRule;
+
 /**
  * Class UrlRules
  * @package cookyii\modules\Page\backend
@@ -23,7 +25,7 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
             'pages' => 'page/list/index',
 
             [
-                'class' => \cookyii\rest\UrlRule::className(),
+                'class' => UrlRule::class,
                 'controller' => 'page/rest/page',
             ],
         ];

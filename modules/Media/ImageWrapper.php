@@ -20,26 +20,38 @@ use yii\helpers\FileHelper;
 class ImageWrapper extends \yii\base\Object
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public static $mediaModule = 'media';
 
-    /** @var MediaModel */
+    /**
+     * @var MediaModel
+     */
     public $Media = null;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $result = [null, null];
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $mark = [];
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $actions = [];
 
-    /** @var ImageInterface */
+    /**
+     * @var ImageInterface
+     */
     protected $imagine;
 
     /**
-     * Init
+     * @inheritdoc
      */
     public function init()
     {
@@ -49,31 +61,19 @@ class ImageWrapper extends \yii\base\Object
 
         if (!($Media instanceof MediaModel)) {
             throw new \yii\base\InvalidConfigException(\Yii::t('cookyii', 'Model must be `{class}`.', [
-                'class' => MediaModel::className(),
+                'class' => MediaModel::class,
             ]));
         }
-
-        $this->imagine = Media\components\Image::getImagine()
-            ->open(\Yii::getAlias($Media->getAbsolutePath()));
     }
 
     /**
-     * @return \Imagine\Image\BoxInterface
-     */
-    public function getSize()
-    {
-        return $this->imagine->getSize();
-    }
-
-    /**
-     * @return static
+     * @return string
      */
     public function export()
     {
         $mark = sha1(serialize($this->mark));
 
         $mediaAbsolutePath = $this->getMarkedMediaPath($mark);
-        $mediaWebPath = $this->getMarkedMediaWebPath($mark);
 
         if (!file_exists($mediaAbsolutePath)) {
             \Yii::trace(sprintf('create new file cache: ', $this->Media->id), __METHOD__);
@@ -84,7 +84,7 @@ class ImageWrapper extends \yii\base\Object
 
         \Yii::endProfile(sprintf('manipulating with file `%s`', $this->Media->id), 'Media\Manipulation');
 
-        return $mediaWebPath;
+        return $this->getMarkedMediaWebPath($mark);
     }
 
     /**
@@ -98,10 +98,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('resize file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($width, $height, $strict, $filter) {
-            return Media\components\Image::resize($Image, $width, $height, $strict, $filter);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($width, $height, $strict, $filter) {
+                return Media\components\Image::resize($Image, $width, $height, $strict, $filter);
+            }
+        );
 
         return $this;
     }
@@ -116,10 +119,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('resizeByWidth file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($width, $strict, $filter) {
-            return Media\components\Image::resizeByWidth($Image, $width, $strict, $filter);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($width, $strict, $filter) {
+                return Media\components\Image::resizeByWidth($Image, $width, $strict, $filter);
+            }
+        );
 
         return $this;
 
@@ -135,10 +141,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('resizeByHeight file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($height, $strict, $filter) {
-            return Media\components\Image::resizeByHeight($Image, $height, $strict, $filter);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($height, $strict, $filter) {
+                return Media\components\Image::resizeByHeight($Image, $height, $strict, $filter);
+            }
+        );
 
         return $this;
     }
@@ -153,10 +162,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('crop file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($width, $height, $start) {
-            return Media\components\Image::crop($Image, $width, $height, $start);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($width, $height, $start) {
+                return Media\components\Image::crop($Image, $width, $height, $start);
+            }
+        );
 
         return $this;
     }
@@ -171,10 +183,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('thumbnail file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($width, $height, $mode) {
-            return Media\components\Image::thumbnail($Image, $width, $height, $mode);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($width, $height, $mode) {
+                return Media\components\Image::thumbnail($Image, $width, $height, $mode);
+            }
+        );
 
         return $this;
     }
@@ -188,10 +203,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('watermark file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($watermarkFilename, $start) {
-            return Media\components\Image::watermark($Image, $watermarkFilename, $start);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($watermarkFilename, $start) {
+                return Media\components\Image::watermark($Image, $watermarkFilename, $start);
+            }
+        );
 
         return $this;
     }
@@ -207,10 +225,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('text file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($text, $fontFile, $start, $fontOptions) {
-            return Media\components\Image::text($Image, $text, $fontFile, $start, $fontOptions);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($text, $fontFile, $start, $fontOptions) {
+                return Media\components\Image::text($Image, $text, $fontFile, $start, $fontOptions);
+            }
+        );
 
         return $this;
     }
@@ -225,10 +246,13 @@ class ImageWrapper extends \yii\base\Object
     {
         \Yii::trace('frame file', __METHOD__);
 
-        $this->appendMark(__METHOD__, func_get_args());
-        $this->actions[] = function ($Image) use ($margin, $color, $alpha) {
-            return Media\components\Image::frame($Image, $margin, $color, $alpha);
-        };
+        $this->addMarkItem(
+            __METHOD__,
+            func_get_args(),
+            function ($Image) use ($margin, $color, $alpha) {
+                return Media\components\Image::frame($Image, $margin, $color, $alpha);
+            }
+        );
 
         return $this;
     }
@@ -240,9 +264,12 @@ class ImageWrapper extends \yii\base\Object
      */
     protected function calculatePathByFilename($filename, $separator)
     {
+        $charset = \Yii::$app->charset;
+
         $filename = basename($filename);
-        $p1 = mb_substr($filename, 0, 2, \Yii::$app->charset);
-        $p2 = mb_substr($filename, 2, 2, \Yii::$app->charset);
+
+        $p1 = mb_substr($filename, 0, 2, $charset);
+        $p2 = mb_substr($filename, 2, 2, $charset);
 
         return $separator . $p1 . $separator . $p2;
     }
@@ -256,7 +283,7 @@ class ImageWrapper extends \yii\base\Object
         $p = $this->calculatePathByFilename($this->Media->name, $separator);
 
         /** @var MediaModel $MediaModel */
-        $MediaModel = \Yii::createObject(MediaModel::className());
+        $MediaModel = \Yii::createObject(MediaModel::class);
 
         return $MediaModel::getMediaModule()->storagePath . $p;
     }
@@ -270,39 +297,33 @@ class ImageWrapper extends \yii\base\Object
         $p = $this->calculatePathByFilename($this->Media->name, $separator);
 
         /** @var MediaModel $MediaModel */
-        $MediaModel = \Yii::createObject(MediaModel::className());
+        $MediaModel = \Yii::createObject(MediaModel::class);
 
         return $MediaModel::getMediaModule()->storageWebPath . $p;
     }
 
     /**
      * @param string $mark
+     * @param string $separator
      * @return string
      */
-    protected function getMarkedMediaPath($mark)
+    protected function getMarkedMediaPath($mark, $separator = DIRECTORY_SEPARATOR)
     {
-        \Yii::trace('calculate mark file path', __METHOD__);
+        $Media = $this->Media;
 
-        $ext = pathinfo($this->Media->name, PATHINFO_EXTENSION);
-
-        $separator = DIRECTORY_SEPARATOR;
-
-        return $this->getAbsolutePath($separator) . $separator . $mark . '.' . $ext;
+        return $this->getAbsolutePath($separator) . $separator . $mark . '.' . $Media->getExt();
     }
 
     /**
      * @param string $mark
+     * @param string $separator
      * @return string
      */
-    protected function getMarkedMediaWebPath($mark)
+    protected function getMarkedMediaWebPath($mark, $separator = '/')
     {
-        \Yii::trace('calculate mark file path', __METHOD__);
+        $Media = $this->Media;
 
-        $ext = pathinfo($this->Media->name, PATHINFO_EXTENSION);
-
-        $separator = '/';
-
-        return $this->getWebPath($separator) . $separator . $mark . '.' . $ext;
+        return $this->getWebPath($separator) . $separator . $mark . '.' . $Media->getExt();
     }
 
     /**
@@ -310,10 +331,15 @@ class ImageWrapper extends \yii\base\Object
      */
     protected function createMarkedMediaFile($mark)
     {
-        \Yii::beginProfile(sprintf('create cache file: %s', $this->Media->id), __METHOD__);
+        $Media = $this->Media;
+
+        \Yii::beginProfile(sprintf('create cache file: %s', $Media->id), __METHOD__);
+
+        $this->imagine = Media\components\Image::getImagine()
+            ->open(\Yii::getAlias($Media->getAbsolutePath()));
 
         /** @var MediaModel $MediaModel */
-        $MediaModel = \Yii::createObject(MediaModel::className());
+        $MediaModel = \Yii::createObject(MediaModel::class);
 
         $mark_file_path = $this->getMarkedMediaPath($mark);
 
@@ -335,15 +361,18 @@ class ImageWrapper extends \yii\base\Object
         $Image->save($mark_file_path, ['quality' => 90]);
         @chmod($mark_file_path, $MediaModel::getMediaModule()->fileChmod);
 
-        \Yii::endProfile(sprintf('create cache file: %s', $this->Media->id), __METHOD__);
+        \Yii::endProfile(sprintf('create cache file: %s', $Media->id), __METHOD__);
     }
 
     /**
      * @param string $method
      * @param array $data
+     * @param callable $handler
      */
-    protected function appendMark($method, array $data)
+    protected function addMarkItem($method, array $data, callable $handler)
     {
         $this->mark[] = func_get_args();
+
+        $this->actions[] = $handler;
     }
 }

@@ -29,7 +29,7 @@ class UploadController extends \cookyii\rest\controllers\ImperaviUploadControlle
         ]);
 
         /** @var MediaModel $MediaModel */
-        $MediaModel = \Yii::createObject(MediaModel::className());
+        $MediaModel = \Yii::createObject(MediaModel::class);
 
         $Media = $MediaModel::push($Resource);
 

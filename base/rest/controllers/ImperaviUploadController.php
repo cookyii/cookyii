@@ -29,7 +29,7 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
         ]);
 
         /** @var MediaModel $MediaModel */
-        $MediaModel = \Yii::createObject(MediaModel::className());
+        $MediaModel = \Yii::createObject(MediaModel::class);
 
         $Media = $MediaModel::push($UploadedResource);
 
@@ -54,7 +54,7 @@ abstract class ImperaviUploadController extends \yii\rest\Controller
         ]);
 
         /** @var MediaModel $MediaModel */
-        $MediaModel = \Yii::createObject(MediaModel::className());
+        $MediaModel = \Yii::createObject(MediaModel::class);
 
         $Media = $MediaModel::push($UploadedResource);
 

@@ -6,6 +6,6 @@
  */
 
 return [
-    ['class' => \cookyii\modules\Account\frontend\UrlRules::className()],
-    ['class' => \cookyii\modules\Page\frontend\UrlRules::className()],
+    ['class' => \cookyii\modules\Account\frontend\UrlRules::class],
+    ['class' => \cookyii\modules\Page\frontend\UrlRules::class],
 ];

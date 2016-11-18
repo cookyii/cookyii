@@ -29,7 +29,7 @@ class DetailAction extends \cookyii\rest\Action
         $result = $Model->toArray();
 
         /** @var PostmanTemplateModel $TemplateModel */
-        $TemplateModel = \Yii::createObject(PostmanTemplateModel::className());
+        $TemplateModel = \Yii::createObject(PostmanTemplateModel::class);
 
         $result['use_layout'] = $result['use_layout'] === $TemplateModel::USE_LAYOUT;
 

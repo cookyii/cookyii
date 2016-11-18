@@ -31,7 +31,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     public function rules()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         return [
             /** type validators */
@@ -43,7 +43,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             [
                 ['email'],
                 'exist',
-                'targetClass' => $AccountModel::className(),
+                'targetClass' => get_class($AccountModel),
                 'targetAttribute' => 'email',
                 'message' => \Yii::t('cookyii.account', '{attribute} not found.'),
             ],
@@ -148,7 +148,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             $Account->refreshToken();
 
             if ($this->loginAfterReset) {
-                $SignInFormModel = \Yii::createObject(SignInForm::className());
+                $SignInFormModel = \Yii::createObject(SignInForm::class);
 
                 User()->login($Account, $SignInFormModel::REMEMBER_TIME);
             }
@@ -170,7 +170,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     {
         if ($this->_Account === null) {
             /** @var AccountModel $AccountModel */
-            $AccountModel = \Yii::createObject(AccountModel::className());
+            $AccountModel = \Yii::createObject(AccountModel::class);
 
             $this->_Account = $AccountModel::find()
                 ->byEmail($this->email)

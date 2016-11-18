@@ -58,31 +58,31 @@ class MessageController extends \cookyii\rest\Controller
         $actions['index']['prepareDataProvider'] = [$this, 'prepareListDataProvider'];
 
         $actions['edit'] = [
-            'class' => Postman\backend\controllers\rest\MessageController\EditFormAction::className(),
+            'class' => Postman\backend\controllers\rest\MessageController\EditFormAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['detail'] = [
-            'class' => Postman\backend\controllers\rest\MessageController\DetailAction::className(),
+            'class' => Postman\backend\controllers\rest\MessageController\DetailAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['resent'] = [
-            'class' => Postman\backend\controllers\rest\MessageController\ResentAction::className(),
+            'class' => Postman\backend\controllers\rest\MessageController\ResentAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['delete'] = [
-            'class' => \cookyii\rest\actions\DeleteAction::className(),
+            'class' => \cookyii\rest\actions\DeleteAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['restore'] = [
-            'class' => \cookyii\rest\actions\RestoreAction::className(),
+            'class' => \cookyii\rest\actions\RestoreAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];

@@ -44,25 +44,25 @@ class TemplateController extends \yii\rest\ActiveController
         $actions['index']['prepareDataProvider'] = [$this, 'prepareListDataProvider'];
 
         $actions['edit'] = [
-            'class' => Postman\backend\controllers\rest\TemplateController\EditFormAction::className(),
+            'class' => Postman\backend\controllers\rest\TemplateController\EditFormAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['detail'] = [
-            'class' => Postman\backend\controllers\rest\TemplateController\DetailAction::className(),
+            'class' => Postman\backend\controllers\rest\TemplateController\DetailAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['delete'] = [
-            'class' => \cookyii\rest\actions\DeleteAction::className(),
+            'class' => \cookyii\rest\actions\DeleteAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];
 
         $actions['restore'] = [
-            'class' => \cookyii\rest\actions\RestoreAction::className(),
+            'class' => \cookyii\rest\actions\RestoreAction::class,
             'modelClass' => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
         ];

@@ -18,11 +18,11 @@ return array_merge($config, [
     'controllerNamespace' => 'frontend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'page' => cookyii\modules\Page\frontend\Module::className(),
+        'page' => cookyii\modules\Page\frontend\Module::class,
         'media' => $params['module.media'],
         'postman' => $params['module.postman'],
         'account' => [
-            'class' => cookyii\modules\Account\frontend\Module::className(),
+            'class' => cookyii\modules\Account\frontend\Module::class,
             'roles' => [
                 'admin' => \common\Roles::ADMIN,
                 'user' => \common\Roles::USER,
@@ -53,7 +53,7 @@ return array_merge($config, [
         'view' => $params['component.view'],
         'log' => $params['component.log'],
         'errorHandler' => [
-            'class' => cookyii\web\ErrorHandler::className(),
+            'class' => cookyii\web\ErrorHandler::class,
             'errorAction' => 'site/error',
         ],
     ],

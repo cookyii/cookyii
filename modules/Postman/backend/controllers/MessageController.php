@@ -45,10 +45,10 @@ class MessageController extends Postman\backend\components\Controller
     public function actionEdit()
     {
         /** @var PostmanMessageModel $MessageModel */
-        $MessageModel = \Yii::createObject(PostmanMessageModel::className());
+        $MessageModel = \Yii::createObject(PostmanMessageModel::class);
 
         $MessageEditForm = \Yii::createObject([
-            'class' => Postman\backend\forms\MessageEditForm::className(),
+            'class' => Postman\backend\forms\MessageEditForm::class,
             'Message' => $MessageModel,
         ]);
 
@@ -71,7 +71,7 @@ class MessageController extends Postman\backend\components\Controller
         $use_layout = $use_layout === 'true';
 
         /** @var PostmanMessageModel $MessageModel */
-        $MessageModel = \Yii::createObject(PostmanMessageModel::className());
+        $MessageModel = \Yii::createObject(PostmanMessageModel::class);
 
         switch ($type) {
             default:

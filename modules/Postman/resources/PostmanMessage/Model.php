@@ -65,13 +65,13 @@ class Model extends \cookyii\db\ActiveRecord
         $behaviors = parent::behaviors();
 
         $behaviors['unique-code-id'] = [
-            'class' => \cookyii\behaviors\UniqueCodeIdBehavior::className(),
+            'class' => \cookyii\behaviors\UniqueCodeIdBehavior::class,
             'codeAtAttribute' => 'code',
             'length' => 32,
         ];
 
         $behaviors['timestamp'] = [
-            'class' => \cookyii\behaviors\TimestampBehavior::className(),
+            'class' => \cookyii\behaviors\TimestampBehavior::class,
             'updatedAtAttribute' => false,
         ];
 
@@ -204,7 +204,7 @@ class Model extends \cookyii\db\ActiveRecord
             if (!$Message->hasErrors()) {
                 /** @var SendMailJob $Job */
                 $Job = \Yii::createObject(
-                    SendMailJob::className(),
+                    SendMailJob::class,
                     ['postmanMessageId' => $Message->id]
                 );
 
@@ -239,7 +239,7 @@ class Model extends \cookyii\db\ActiveRecord
         if (!$this->isNewRecord) {
             /** @var SendMailJob $Job */
             $Job = \Yii::createObject(
-                SendMailJob::className(),
+                SendMailJob::class,
                 ['postmanMessageId' => $this->id]
             );
 
@@ -358,7 +358,7 @@ class Model extends \cookyii\db\ActiveRecord
     public static function create($template_code, $placeholders = [], $subject = null)
     {
         /** @var PostmanTemplateModel $TemplateModel */
-        $TemplateModel = \Yii::createObject(PostmanTemplateModel::className());
+        $TemplateModel = \Yii::createObject(PostmanTemplateModel::class);
 
         $Template = $TemplateModel::find()
             ->byCode($template_code)
@@ -502,7 +502,7 @@ class Model extends \cookyii\db\ActiveRecord
             }
         } elseif ($layout === 'database') {
             /** @var PostmanTemplateModel $TemplateModel */
-            $TemplateModel = \Yii::createObject(PostmanTemplateModel::className());
+            $TemplateModel = \Yii::createObject(PostmanTemplateModel::class);
 
             $LayoutTemplate = $TemplateModel::find()
                 ->byCode(static::LAYOUT_CODE)

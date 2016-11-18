@@ -100,7 +100,7 @@ class AccountEditForm extends \cookyii\base\FormModel
         } else {
             /** @var AccountModel $Account */
             $Account = \Yii::createObject([
-                'class' => AccountModel::className(),
+                'class' => AccountModel::class,
             ]);
 
             $roles = array_keys($Account::getAllRoles());
@@ -175,7 +175,7 @@ class AccountEditForm extends \cookyii\base\FormModel
     public static function getRoleValues()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         return $AccountModel::getAllRoles();
     }
@@ -186,7 +186,7 @@ class AccountEditForm extends \cookyii\base\FormModel
     public static function getGenderValues()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         return $AccountModel::getGenderValues();
     }
@@ -197,7 +197,7 @@ class AccountEditForm extends \cookyii\base\FormModel
     public static function getGroupedPermissionValues()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         $permissions = $AccountModel::getAllPermissions();
 

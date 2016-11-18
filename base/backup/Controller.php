@@ -84,7 +84,7 @@ class Controller extends \yii\console\Controller
     {
         parent::init();
 
-        $this->db = Instance::ensure($this->db, Connection::className());
+        $this->db = Instance::ensure($this->db, Connection::class);
 
         if (empty($this->db_driver)) {
             $this->db_driver = $this->db->driverName;

@@ -29,7 +29,7 @@ class NotificationHelper extends \cookyii\db\helpers\AbstractHelper
     protected function createMessage($template_code, $placeholders = [], $subject = null)
     {
         /** @var PostmanMessageModel $MessageModel */
-        $MessageModel = \Yii::createObject(PostmanMessageModel::className());
+        $MessageModel = \Yii::createObject(PostmanMessageModel::class);
 
         $Message = $MessageModel::create($template_code, $placeholders, $subject);
 

@@ -31,7 +31,7 @@ class EditFormAction extends \cookyii\rest\Action
         $Client = null;
 
         /** @var ClientModel $ClientModel */
-        $ClientModel = \Yii::createObject(ClientModel::className());
+        $ClientModel = \Yii::createObject(ClientModel::class);
 
         if ($client_id > 0) {
             $Client = $ClientModel::find()
@@ -44,7 +44,7 @@ class EditFormAction extends \cookyii\rest\Action
         }
 
         $ClientEditForm = \Yii::createObject([
-            'class' => \cookyii\modules\Client\backend\forms\ClientEditForm::className(),
+            'class' => \cookyii\modules\Client\backend\forms\ClientEditForm::class,
             'Client' => $Client,
         ]);
 

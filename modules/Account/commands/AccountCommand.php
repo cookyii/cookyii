@@ -55,7 +55,7 @@ class AccountCommand extends \yii\console\Controller
         }
 
         /** @var AccountModel $Account */
-        $Account = \Yii::createObject(AccountModel::className());
+        $Account = \Yii::createObject(AccountModel::class);
         $Account->setAttributes([
             'name' => $name,
             'email' => $email,

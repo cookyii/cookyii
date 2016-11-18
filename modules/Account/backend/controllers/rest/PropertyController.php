@@ -59,7 +59,7 @@ class PropertyController extends \cookyii\api\Controller
         }
 
         /** @var AccountPropertyModel $AccountPropertyModel */
-        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::className());
+        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::class);
 
         $Property = null;
 
@@ -128,7 +128,7 @@ class PropertyController extends \cookyii\api\Controller
         }
 
         /** @var AccountPropertyModel $AccountPropertyModel */
-        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::className());
+        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::class);
 
         $Property = $AccountPropertyModel::find()
             ->byAccountId($account_id)

@@ -37,7 +37,7 @@ class SignUpForm extends \cookyii\base\FormModel
     public function rules()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         return [
             /** type validators */
@@ -48,7 +48,7 @@ class SignUpForm extends \cookyii\base\FormModel
             /** semantic validators */
             [['name', 'email', 'password', 'password_app'], 'required'],
             [['name', 'email'], 'filter', 'filter' => 'str_clean'],
-            [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
+            [['email'], 'unique', 'targetClass' => get_class($AccountModel), 'targetAttribute' => 'email'],
             [['password_app'], 'compare', 'compareAttribute' => 'password'],
             [['agree'], 'compare', 'compareValue' => 'true', 'operator' => '===', 'message' => \Yii::t('cookyii.account', 'You must accept the terms')],
         ];
@@ -86,7 +86,7 @@ class SignUpForm extends \cookyii\base\FormModel
         $roles = $Module->roles;
 
         /** @var AccountModel $Account */
-        $Account = \Yii::createObject(AccountModel::className());
+        $Account = \Yii::createObject(AccountModel::class);
         $Account->setAttributes([
             'name' => $this->name,
             'email' => $this->email,
@@ -103,7 +103,7 @@ class SignUpForm extends \cookyii\base\FormModel
             AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
 
             if ($this->loginAfterRegister) {
-                $SignInFormModel = \Yii::createObject(SignInForm::className());
+                $SignInFormModel = \Yii::createObject(SignInForm::class);
 
                 User()->login($Account, $SignInFormModel::REMEMBER_TIME);
             }

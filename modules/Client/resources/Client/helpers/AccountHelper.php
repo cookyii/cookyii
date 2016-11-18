@@ -39,7 +39,7 @@ class AccountHelper extends \cookyii\db\helpers\AbstractHelper
         $password = empty($password) ? Security()->generateRandomString(10) : $password;
 
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         $Account = $AccountModel::find()
             ->byEmail($email)

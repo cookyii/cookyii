@@ -7,6 +7,8 @@
 
 namespace cookyii\web;
 
+use yii\filters\AccessControl;
+
 /**
  * Class Controller
  * @package cookyii\web
@@ -40,7 +42,7 @@ abstract class Controller extends \yii\web\Controller
     {
         return [
             'access' => [
-                'class' => \yii\filters\AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => $this->accessRules(),
             ],
         ];

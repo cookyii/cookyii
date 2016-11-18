@@ -124,7 +124,7 @@ class Model extends \cookyii\db\ActiveRecord
         ];
 
         /** @var FeedSectionModel $SectionModel */
-        $SectionModel = \Yii::createObject(FeedSectionModel::className());
+        $SectionModel = \Yii::createObject(FeedSectionModel::class);
 
         if (empty($Sections) && empty($parent)) {
             /** @var \cookyii\modules\Feed\resources\FeedSection\Query $SectionsQuery */
@@ -187,10 +187,10 @@ class Model extends \cookyii\db\ActiveRecord
     public function getParents()
     {
         /** @var FeedSectionModel $FeedSectionModel */
-        $FeedSectionModel = \Yii::createObject(FeedSectionModel::className());
+        $FeedSectionModel = \Yii::createObject(FeedSectionModel::class);
 
         /** @var \cookyii\modules\Feed\resources\FeedSection\Query $Query */
-        $Query = $this->hasMany($FeedSectionModel::className(), ['id' => 'parent_id']);
+        $Query = $this->hasMany(get_class($FeedSectionModel), ['id' => 'parent_id']);
 
         return $Query
             ->inverseOf('section');
@@ -202,10 +202,10 @@ class Model extends \cookyii\db\ActiveRecord
     public function getChildren()
     {
         /** @var FeedSectionModel $FeedSectionModel */
-        $FeedSectionModel = \Yii::createObject(FeedSectionModel::className());
+        $FeedSectionModel = \Yii::createObject(FeedSectionModel::class);
 
         /** @var \cookyii\modules\Feed\resources\FeedSection\Query $Query */
-        $Query = $this->hasMany($FeedSectionModel::className(), ['parent_id' => 'id']);
+        $Query = $this->hasMany(get_class($FeedSectionModel), ['parent_id' => 'id']);
 
         return $Query
             ->inverseOf('section');
@@ -217,10 +217,10 @@ class Model extends \cookyii\db\ActiveRecord
     public function getSectionItems()
     {
         /** @var FeedItemSectionModel $FeedItemSectionModel */
-        $FeedItemSectionModel = \Yii::createObject(FeedItemSectionModel::className());
+        $FeedItemSectionModel = \Yii::createObject(FeedItemSectionModel::class);
 
         /** @var \cookyii\modules\Feed\resources\FeedItemSection\Query $Query */
-        $Query = $this->hasMany($FeedItemSectionModel::className(), ['section_id' => 'id']);
+        $Query = $this->hasMany(get_class($FeedItemSectionModel), ['section_id' => 'id']);
 
         return $Query
             ->inverseOf('section');
@@ -232,10 +232,10 @@ class Model extends \cookyii\db\ActiveRecord
     public function getItems()
     {
         /** @var FeedItemModel $FeedItemModel */
-        $FeedItemModel = \Yii::createObject(FeedItemModel::className());
+        $FeedItemModel = \Yii::createObject(FeedItemModel::class);
 
         /** @var \cookyii\modules\Feed\resources\FeedItem\Query $Query */
-        $Query = $this->hasMany($FeedItemModel::className(), ['id' => 'item_id']);
+        $Query = $this->hasMany(get_class($FeedItemModel), ['id' => 'item_id']);
 
         return $Query
             ->via('sectionItems');

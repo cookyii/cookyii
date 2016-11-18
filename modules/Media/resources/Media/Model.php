@@ -78,6 +78,14 @@ class Model extends \cookyii\db\ActiveRecord
     }
 
     /**
+     * @return mixed
+     */
+    public function getExt()
+    {
+        return pathinfo($this->name, PATHINFO_EXTENSION);
+    }
+
+    /**
      * @param bool $recalculate
      * @return integer
      */
@@ -183,7 +191,7 @@ class Model extends \cookyii\db\ActiveRecord
         $image = \Yii::getAlias(static::getMediaModule()->placeholderAlias);
 
         /** @var InternalMediaResource $Resource */
-        $Resource = \Yii::createObject(InternalMediaResource::className(), [['source' => $image]]);
+        $Resource = \Yii::createObject(InternalMediaResource::class, [['source' => $image]]);
 
         return static::push($Resource);
     }
@@ -209,12 +217,12 @@ class Model extends \cookyii\db\ActiveRecord
         $result = null;
         if ($this->isImage()) {
             $result = \Yii::createObject([
-                'class' => \cookyii\modules\Media\ImageWrapper::className(),
+                'class' => \cookyii\modules\Media\ImageWrapper::class,
                 'Media' => $this,
             ]);
         } else {
             $result = \Yii::createObject([
-                'class' => \cookyii\modules\Media\ImageWrapper::className(),
+                'class' => \cookyii\modules\Media\ImageWrapper::class,
                 'Media' => static::getPlaceholder(),
             ]);
         }

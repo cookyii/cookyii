@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Feed\backend;
 
+use cookyii\rest\UrlRule;
+
 /**
  * Class UrlRules
  * @package cookyii\modules\Feed\backend
@@ -24,10 +26,10 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
             'feed/section/rest/sections/tree' => 'feed/section/rest/section/tree',
 
             [
-                'class' => \cookyii\rest\UrlRule::className(),
+                'class' => UrlRule::class,
                 'controller' => 'feed/section/rest/section',
             ], [
-                'class' => \cookyii\rest\UrlRule::className(),
+                'class' => UrlRule::class,
                 'controller' => 'feed/item/rest/item',
             ],
         ];

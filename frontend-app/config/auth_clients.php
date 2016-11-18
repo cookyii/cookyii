@@ -7,42 +7,42 @@
 
 $providers = [
     'facebook' => [
-        'class' => \yii\authclient\clients\Facebook::className(),
+        'class' => \yii\authclient\clients\Facebook::class,
         'clientId' => __constant('FACEBOOK_CLIENT_ID'),
         'clientSecret' => __constant('FACEBOOK_CLIENT_SECRET'),
     ],
     'github' => [
-        'class' => \yii\authclient\clients\GitHub::className(),
+        'class' => \yii\authclient\clients\GitHub::class,
         'clientId' => __constant('GITHUB_CLIENT_ID'),
         'clientSecret' => __constant('GITHUB_CLIENT_SECRET'),
     ],
     'google' => [
-        'class' => \yii\authclient\clients\GoogleOAuth::className(),
+        'class' => \yii\authclient\clients\GoogleOAuth::class,
         'clientId' => __constant('GOOGLE_CLIENT_ID'),
         'clientSecret' => __constant('GOOGLE_CLIENT_SECRET'),
     ],
     'linkedin' => [
-        'class' => \yii\authclient\clients\LinkedIn::className(),
+        'class' => \yii\authclient\clients\LinkedIn::class,
         'clientId' => __constant('LINKEDIN_CLIENT_ID'),
         'clientSecret' => __constant('LINKEDIN_CLIENT_SECRET'),
     ],
     'live' => [
-        'class' => \yii\authclient\clients\Live::className(),
+        'class' => \yii\authclient\clients\Live::class,
         'clientId' => __constant('LIVE_CLIENT_ID'),
         'clientSecret' => __constant('LIVE_CLIENT_SECRET'),
     ],
     'twitter' => [
-        'class' => \yii\authclient\clients\Twitter::className(),
+        'class' => \yii\authclient\clients\Twitter::class,
         'consumerKey' => __constant('TWITTER_CLIENT_ID'),
         'consumerSecret' => __constant('TWITTER_CLIENT_SECRET'),
     ],
     'vkontakte' => [
-        'class' => \yii\authclient\clients\VKontakte::className(),
+        'class' => \yii\authclient\clients\VKontakte::class,
         'clientId' => __constant('VKONTAKTE_CLIENT_ID'),
         'clientSecret' => __constant('VKONTAKTE_CLIENT_SECRET'),
     ],
     'yandex' => [
-        'class' => \yii\authclient\clients\YandexOAuth::className(),
+        'class' => \yii\authclient\clients\YandexOAuth::class,
         'clientId' => __constant('YANDEX_CLIENT_ID'),
         'clientSecret' => __constant('YANDEX_CLIENT_SECRET'),
     ],

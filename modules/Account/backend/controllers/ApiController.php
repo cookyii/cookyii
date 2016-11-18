@@ -53,7 +53,7 @@ class ApiController extends \cookyii\api\Controller
         ];
 
         /** @var Account\forms\SignInForm $SignInForm */
-        $SignInForm = \Yii::createObject(Account\forms\SignInForm::className());
+        $SignInForm = \Yii::createObject(Account\forms\SignInForm::class);
 
         if ($SignInForm->load(Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
             $result = [

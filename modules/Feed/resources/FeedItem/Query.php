@@ -53,7 +53,7 @@ class Query extends \yii\db\ActiveQuery
     public function bySectionId($section_id)
     {
         /** @var FeedItemSectionModel $ItemSectionModel */
-        $ItemSectionModel = \Yii::createObject(FeedItemSectionModel::className());
+        $ItemSectionModel = \Yii::createObject(FeedItemSectionModel::class);
 
         /** @var array $item_sections */
         $item_sections = $ItemSectionModel::find()
@@ -77,7 +77,7 @@ class Query extends \yii\db\ActiveQuery
     public function bySectionSlug($section_slug)
     {
         /** @var FeedSectionModel $FeedSectionModel */
-        $FeedSectionModel = \Yii::createObject(FeedSectionModel::className());
+        $FeedSectionModel = \Yii::createObject(FeedSectionModel::class);
 
         /** @var array $sections */
         $sections = $FeedSectionModel::find()

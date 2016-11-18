@@ -6,11 +6,11 @@
  */
 
 return [
-    ['class' => \cookyii\modules\Account\backend\UrlRules::className()],
-    ['class' => \cookyii\modules\Page\backend\UrlRules::className()],
-    ['class' => \cookyii\modules\Feed\backend\UrlRules::className()],
-    ['class' => \cookyii\modules\Client\backend\UrlRules::className()],
-    ['class' => \cookyii\modules\Postman\backend\UrlRules::className()],
-    ['class' => \cookyii\modules\Translation\backend\UrlRules::className()],
+    ['class' => \cookyii\modules\Account\backend\UrlRules::class],
+    ['class' => \cookyii\modules\Page\backend\UrlRules::class],
+    ['class' => \cookyii\modules\Feed\backend\UrlRules::class],
+    ['class' => \cookyii\modules\Client\backend\UrlRules::class],
+    ['class' => \cookyii\modules\Postman\backend\UrlRules::class],
+    ['class' => \cookyii\modules\Translation\backend\UrlRules::class],
     '/dash' => 'dash/index'
 ];

@@ -44,7 +44,7 @@ class EditFormAction extends \cookyii\rest\Action
         }
 
         $AccountEditForm = \Yii::createObject([
-            'class' => Account\backend\forms\AccountEditForm::className(),
+            'class' => Account\backend\forms\AccountEditForm::class,
             'Account' => $Account,
         ]);
 

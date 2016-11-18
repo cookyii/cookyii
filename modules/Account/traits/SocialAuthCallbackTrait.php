@@ -37,7 +37,7 @@ trait SocialAuthCallbackTrait
         $attributes = $Client->getUserAttributes();
 
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         $AccountQuery = $AccountModel::find();
 

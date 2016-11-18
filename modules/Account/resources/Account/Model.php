@@ -331,9 +331,9 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
     public function getProperties()
     {
         /** @var AccountPropertyModel $AccountPropertyModel */
-        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::className());
+        $AccountPropertyModel = \Yii::createObject(AccountPropertyModel::class);
 
-        return $this->hasMany($AccountPropertyModel::className(), ['account_id' => 'id']);
+        return $this->hasMany(get_class($AccountPropertyModel), ['account_id' => 'id']);
     }
 
     /**
@@ -342,10 +342,10 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
     public function getAlerts()
     {
         /** @var AccountAlertModel $AccountAlertModel */
-        $AccountAlertModel = \Yii::createObject(AccountAlertModel::className());
+        $AccountAlertModel = \Yii::createObject(AccountAlertModel::class);
 
         /** @var \cookyii\modules\Account\resources\AccountAlert\Query $Query */
-        $Query = $this->hasMany($AccountAlertModel::className(), ['account_id' => 'id']);
+        $Query = $this->hasMany(get_class($AccountAlertModel), ['account_id' => 'id']);
 
         return $Query
             ->withoutDeleted();

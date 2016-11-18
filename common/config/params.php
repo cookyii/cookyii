@@ -20,15 +20,15 @@ $cookieDomain = str_replace('backend', '', parse_url(BACKEND_URL, PHP_URL_HOST))
 
 return [
     'module.media' => [
-        'class' => cookyii\modules\Media\Module::className(),
+        'class' => cookyii\modules\Media\Module::class,
     ],
     'module.postman' => [
-        'class' => cookyii\modules\Postman\Module::className(),
+        'class' => cookyii\modules\Postman\Module::class,
         'subjectPrefix' => 'Cookyii //',
     ],
 
     'component.db' => [
-        'class' => yii\db\Connection::className(),
+        'class' => yii\db\Connection::class,
         'charset' => 'utf8mb4',
         'enableSchemaCache' => true,
         'schemaCache' => 'cache.schema',
@@ -57,7 +57,7 @@ return [
 //        ],
 //    ],
     'component.mailer' => [
-        'class' => yii\swiftmailer\Mailer::className(),
+        'class' => yii\swiftmailer\Mailer::class,
         'transport' => [
             'class' => 'Swift_SmtpTransport',
             'host' => SMTP_HOST,
@@ -68,29 +68,29 @@ return [
         ],
     ],
     'component.session' => [
-        'class' => yii\web\DbSession::className(),
+        'class' => yii\web\DbSession::class,
         'cookieParams' => [
             'httpOnly' => true,
             'domain' => $cookieDomain,
         ],
     ],
     'component.security' => [
-        'class' => yii\base\Security::className(),
+        'class' => yii\base\Security::class,
     ],
     'component.log' => [
-        'class' => yii\log\Dispatcher::className(),
+        'class' => yii\log\Dispatcher::class,
         'targets' => [],
     ],
     'component.view' => [
-        'class' => rmrevin\yii\minify\View::className(),
+        'class' => rmrevin\yii\minify\View::class,
         'enableMinify' => !YII_DEBUG,
         'compress_output' => !YII_DEBUG,
     ],
     'component.user' => [
-        'class' => yii\web\User::className(),
+        'class' => yii\web\User::class,
         'enableAutoLogin' => true,
         'loginUrl' => ['/account/sign/in'],
-        'identityClass' => resources\Account\Model::className(),
+        'identityClass' => resources\Account\Model::class,
         'identityCookie' => [
             'name' => '_identity',
             'httpOnly' => true,
@@ -98,7 +98,7 @@ return [
         ],
     ],
     'component.authManager' => [
-        'class' => yii\rbac\DbManager::className(),
+        'class' => yii\rbac\DbManager::class,
         'itemTable' => '{{%rbac_item}}',
         'itemChildTable' => '{{%rbac_item_child}}',
         'assignmentTable' => '{{%rbac_assignment}}',
@@ -106,26 +106,26 @@ return [
         'cache' => 'cache.authManager',
     ],
     'component.cache' => [
-        'class' => yii\caching\DbCache::className(),
+        'class' => yii\caching\DbCache::class,
         'keyPrefix' => 'normal-',
     ],
     'component.cache.authManager' => [
-        'class' => yii\caching\ApcCache::className(), // apc cache not available in cli!
+        'class' => yii\caching\ApcCache::class, // apc cache not available in cli!
         'keyPrefix' => 'authManager-',
     ],
     'component.cache.schema' => [
-        'class' => yii\caching\ApcCache::className(), // apc cache not available in cli!
+        'class' => yii\caching\ApcCache::class, // apc cache not available in cli!
         'keyPrefix' => 'schema-',
     ],
     'component.cache.query' => [
-        'class' => yii\caching\DummyCache::className(),
+        'class' => yii\caching\DummyCache::class,
         'keyPrefix' => 'query-',
     ],
     'component.assetManager' => [
         'linkAssets' => true,
     ],
     'component.urlManager.frontend' => [
-        'class' => yii\web\UrlManager::className(),
+        'class' => yii\web\UrlManager::class,
         'baseUrl' => isset($frontend['path']) ? $frontend['path'] : '/',
         'hostInfo' => sprintf('%s://%s', $frontend['scheme'], $frontend['host']),
         'enablePrettyUrl' => true,
@@ -134,7 +134,7 @@ return [
         'rules' => require(\Yii::getAlias('@frontend/config/urls.php')),
     ],
     'component.urlManager.backend' => [
-        'class' => yii\web\UrlManager::className(),
+        'class' => yii\web\UrlManager::class,
         'baseUrl' => isset($backend['path']) ? $backend['path'] : '/',
         'hostInfo' => sprintf('%s://%s', $backend['scheme'], $backend['host']),
         'enablePrettyUrl' => true,
@@ -147,20 +147,20 @@ return [
         'parsers' => ['application/json' => 'yii\web\JsonParser'],
     ],
     'component.i18n' => [
-        'class' => yii\i18n\I18N::className(),
+        'class' => yii\i18n\I18N::class,
         'translations' => [
             'app*' => [
-                'class' => yii\i18n\PhpMessageSource::className(),
+                'class' => yii\i18n\PhpMessageSource::class,
                 'basePath' => '@messages',
             ],
             'cookyii*' => [
-                'class' => yii\i18n\PhpMessageSource::className(),
+                'class' => yii\i18n\PhpMessageSource::class,
                 'basePath' => '@cookyii/messages',
             ],
         ],
     ],
     'component.formatter' => [
-        'class' => cookyii\i18n\Formatter::className(),
+        'class' => cookyii\i18n\Formatter::class,
         'timeZone' => 'Etc/GMT',
         'dateFormat' => 'dd MMMM y',
         'timeFormat' => 'HH:mm',

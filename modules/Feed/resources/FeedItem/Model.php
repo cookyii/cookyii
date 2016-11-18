@@ -117,10 +117,10 @@ class Model extends \cookyii\db\ActiveRecord
     public function getPictureMedia()
     {
         /** @var MediaModel $MediaModel */
-        $MediaModel = \Yii::createObject(MediaModel::className());
+        $MediaModel = \Yii::createObject(MediaModel::class);
 
         /** @var \cookyii\modules\Media\resources\Media\Query $Query */
-        $Query = $this->hasOne($MediaModel::className(), ['id' => 'picture_media_id']);
+        $Query = $this->hasOne(get_class($MediaModel), ['id' => 'picture_media_id']);
 
         return $Query;
     }
@@ -131,10 +131,10 @@ class Model extends \cookyii\db\ActiveRecord
     public function getItemSections()
     {
         /** @var FeedItemSectionModel $ItemSectionModel */
-        $ItemSectionModel = \Yii::createObject(FeedItemSectionModel::className());
+        $ItemSectionModel = \Yii::createObject(FeedItemSectionModel::class);
 
         /** @var \cookyii\modules\Feed\resources\FeedItemSection\Query $Query */
-        $Query = $this->hasMany($ItemSectionModel::className(), ['item_id' => 'id']);
+        $Query = $this->hasMany(get_class($ItemSectionModel), ['item_id' => 'id']);
 
         return $Query
             ->inverseOf('item');
@@ -146,10 +146,10 @@ class Model extends \cookyii\db\ActiveRecord
     public function getSections()
     {
         /** @var FeedSectionModel $SectionModel */
-        $SectionModel = \Yii::createObject(FeedSectionModel::className());
+        $SectionModel = \Yii::createObject(FeedSectionModel::class);
 
         /** @var \cookyii\modules\Feed\resources\FeedSection\Query $Query */
-        $Query = $this->hasMany($SectionModel::className(), ['id' => 'section_id']);
+        $Query = $this->hasMany(get_class($SectionModel), ['id' => 'section_id']);
 
         return $Query
             ->via('itemSections');

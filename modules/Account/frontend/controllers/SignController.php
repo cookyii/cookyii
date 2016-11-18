@@ -44,7 +44,7 @@ class SignController extends Account\frontend\components\Controller
     {
         return [
             'auth' => [
-                'class' => \yii\authclient\AuthAction::className(),
+                'class' => \yii\authclient\AuthAction::class,
                 'redirectView' => $this->redirectView,
                 'successCallback' => [$this, 'socialAuthCallback'],
             ],
@@ -82,7 +82,7 @@ class SignController extends Account\frontend\components\Controller
         $this->layout = '//wide';
 
         /** @var Account\forms\SignInForm $SignInForm */
-        $SignInForm = \Yii::createObject(Account\forms\SignInForm::className());
+        $SignInForm = \Yii::createObject(Account\forms\SignInForm::class);
 
         return $this->render('in', [
             'SignInForm' => $SignInForm,
@@ -101,7 +101,7 @@ class SignController extends Account\frontend\components\Controller
         $this->layout = '//wide';
 
         /** @var Account\forms\SignUpForm $SignUpForm */
-        $SignUpForm = \Yii::createObject(Account\forms\SignUpForm::className());
+        $SignUpForm = \Yii::createObject(Account\forms\SignUpForm::class);
 
         return $this->render('up', [
             'SignUpForm' => $SignUpForm,
@@ -133,7 +133,7 @@ class SignController extends Account\frontend\components\Controller
         $this->layout = '//wide';
 
         /** @var Account\forms\FillAttributesForm $FillAttributesForm */
-        $FillAttributesForm = \Yii::createObject(Account\forms\FillAttributesForm::className());
+        $FillAttributesForm = \Yii::createObject(Account\forms\FillAttributesForm::class);
 
         return $this->render('fill', [
             'FillAttributesForm' => $FillAttributesForm,

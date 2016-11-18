@@ -66,7 +66,7 @@ class SignController extends Account\backend\components\Controller
         $this->layout = '//wide';
 
         /** @var Account\forms\SignInForm $SignInForm */
-        $SignInForm = \Yii::createObject(Account\forms\SignInForm::className());
+        $SignInForm = \Yii::createObject(Account\forms\SignInForm::class);
 
         return $this->render('in', [
             'SignInForm' => $SignInForm,
@@ -98,7 +98,7 @@ class SignController extends Account\backend\components\Controller
         $attributes = $Client->getUserAttributes();
 
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         $AccountQuery = $AccountModel::find();
 

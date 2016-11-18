@@ -37,10 +37,10 @@ class EditController extends Page\backend\components\Controller
     public function actionIndex()
     {
         /** @var PageModel $PageModel */
-        $PageModel = \Yii::createObject(PageModel::className());
+        $PageModel = \Yii::createObject(PageModel::class);
 
         $PageEditForm = \Yii::createObject([
-            'class' => Page\backend\forms\PageEditForm::className(),
+            'class' => Page\backend\forms\PageEditForm::class,
             'Page' => $PageModel,
         ]);
 

@@ -211,9 +211,9 @@ class Query extends \yii\db\ActiveQuery
     protected function bySocialId($social_type, $social_id)
     {
         /** @var $class AccountAuthModel */
-        $class = \Yii::createObject(AccountAuthModel::className());
+        $Model = \Yii::createObject(AccountAuthModel::class);
 
-        $Social = $class::find()
+        $Social = $Model::find()
             ->bySocialType($social_type)
             ->bySocialId($social_id)
             ->one();

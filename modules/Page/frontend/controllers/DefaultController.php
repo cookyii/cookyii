@@ -38,7 +38,7 @@ class DefaultController extends Page\frontend\components\Controller
     public function actionIndex($slug)
     {
         /** @var PageModel $PageModel */
-        $PageModel = \Yii::createObject(PageModel::className());
+        $PageModel = \Yii::createObject(PageModel::class);
 
         $Page = $PageModel::find()
             ->bySlug($slug)

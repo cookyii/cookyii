@@ -32,7 +32,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
     public function rules()
     {
         /** @var AccountModel $AccountModel */
-        $AccountModel = \Yii::createObject(AccountModel::className());
+        $AccountModel = \Yii::createObject(AccountModel::class);
 
         return [
             /** type validators */
@@ -42,7 +42,11 @@ class FillAttributesForm extends \cookyii\base\FormModel
             [['email'], 'required'],
             [['email'], 'email'],
             [['email'], 'filter', 'filter' => 'str_clean'],
-            [['email'], 'unique', 'targetClass' => $AccountModel::className(), 'targetAttribute' => 'email'],
+            [
+                ['email'], 'unique',
+                'targetClass' => get_class($AccountModel),
+                'targetAttribute' => 'email',
+            ],
         ];
     }
 
@@ -76,7 +80,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
         $roles = $Module->roles;
 
         /** @var AccountModel $Account */
-        $Account = \Yii::createObject(AccountModel::className());
+        $Account = \Yii::createObject(AccountModel::class);
 
         $Account->appendClientAttributes($Client);
 
@@ -97,7 +101,7 @@ class FillAttributesForm extends \cookyii\base\FormModel
 
             AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
 
-            $SignInFormModel = \Yii::createObject(SignInForm::className());
+            $SignInFormModel = \Yii::createObject(SignInForm::class);
 
             User()->login($Account, $SignInFormModel::REMEMBER_TIME);
         }

@@ -59,7 +59,7 @@ class PropertyController extends \cookyii\api\Controller
         }
 
         /** @var ClientPropertyModel $ClientPropertyModel */
-        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::className());
+        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::class);
 
         $Property = null;
 
@@ -128,7 +128,7 @@ class PropertyController extends \cookyii\api\Controller
         }
 
         /** @var ClientPropertyModel $ClientPropertyModel */
-        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::className());
+        $ClientPropertyModel = \Yii::createObject(ClientPropertyModel::class);
 
         $Property = $ClientPropertyModel::find()
             ->byClientId($client_id)

@@ -50,19 +50,4 @@ abstract class Controller extends \yii\rest\ActiveController
      * @return array
      */
     abstract protected function accessRules();
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-
-        /** @var \yii\base\Object $ModelClass */
-        $ModelClass = \Yii::createObject($this->modelClass);
-
-        $this->modelClass = $ModelClass::className();
-
-        unset($ModelClass);
-    }
 }
