@@ -29,6 +29,12 @@ return array_merge($config, [
         'migrate' => [
             'class' => cookyii\console\controllers\MigrateController::class,
             'templateFile' => '@console/views/migration.php',
+            'migrationConfig' => [
+                'charset' => 'utf8mb4',
+                'collate' => 'utf8mb4_unicode_ci',
+                'engine' => 'InnoDB',
+                'row-format' => 'COMPACT',
+            ],
         ],
     ],
     'bootstrap' => ['log'],
