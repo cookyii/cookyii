@@ -1,7 +1,12 @@
 <?php
 
+use cookyii\modules\Postman\migrations\traits\PreparePostmanMessageTemplateTrait;
+use yii\helpers\Json;
+
 class m150715_122414_postman_template_demo_data extends \cookyii\db\Migration
 {
+
+    use PreparePostmanMessageTemplateTrait;
 
     public function up()
     {
@@ -45,7 +50,7 @@ class m150715_122414_postman_template_demo_data extends \cookyii\db\Migration
             ],
         ];
 
-        $this->insertPostmanMessageTemplate(
+        $this->insert('{{%postman_template}}', $this->preparePostmanMessageTemplate(
             'example',
             'Good Day!',
             'This is a sample letter template.',
@@ -53,9 +58,9 @@ class m150715_122414_postman_template_demo_data extends \cookyii\db\Migration
             $params,
             [
                 'styles' => $styles,
-                'address' => $address,
+                'address' => Json::encode($address),
             ]
-        );
+        ));
     }
 
     public function down()

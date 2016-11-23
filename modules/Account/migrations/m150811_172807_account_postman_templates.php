@@ -1,7 +1,11 @@
 <?php
 
+use cookyii\modules\Postman\migrations\traits\PreparePostmanMessageTemplateTrait;
+
 class m150811_172807_account_postman_templates extends \cookyii\db\Migration
 {
+
+    use PreparePostmanMessageTemplateTrait;
 
     public function up()
     {
@@ -53,13 +57,13 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p><strong style="color:#dd4b39">Attention!</strong> No they do not share your password.</p>',
         ];
 
-        $this->insertPostmanMessageTemplate(
+        $this->insert('{{%postman_template}}', $this->preparePostmanMessageTemplate(
             $code,
             'Your registration details',
             'This letter will be sent after the registration of the new user in the frontend.',
             $content,
             $params
-        );
+        ));
     }
 
     protected function insertForgotPasswordRequestTemplate($code)
@@ -88,13 +92,13 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p><textarea style="width:100%;min-height:100px">{url}</textarea></p>',
         ];
 
-        $this->insertPostmanMessageTemplate(
+        $this->insert('{{%postman_template}}', $this->preparePostmanMessageTemplate(
             $code,
             'Password recovery',
             'This letter will be sent when the user requests password recovery.',
             $content,
             $params
-        );
+        ));
     }
 
     protected function insertForgotPasswordNewPasswordTemplate($code)
@@ -123,13 +127,13 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p><strong style="color:#dd4b39">Attention!</strong> No they do not share your password.</p>',
         ];
 
-        $this->insertPostmanMessageTemplate(
+        $this->insert('{{%postman_template}}', $this->preparePostmanMessageTemplate(
             $code,
             'Your new password',
             'This letter will be sent when you need to send a new password',
             $content,
             $params
-        );
+        ));
     }
 
     protected function insertBanTemplate($code)
@@ -148,13 +152,13 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
                 . '<p>We are sorry for inconvenience.</p>',
         ];
 
-        $this->insertPostmanMessageTemplate(
+        $this->insert('{{%postman_template}}', $this->preparePostmanMessageTemplate(
             $code,
             'Your account is blocked',
             'This letter is sent when the user banned',
             $content,
             $params
-        );
+        ));
     }
 
     protected function insertUnbanTemplate($code)
@@ -171,12 +175,12 @@ class m150811_172807_account_postman_templates extends \cookyii\db\Migration
             'html' => '<p>Congratulations, your account is blocked on <a href="{host}">{host}</a>.</p>' . PHP_EOL,
         ];
 
-        $this->insertPostmanMessageTemplate(
+        $this->insert('{{%postman_template}}', $this->preparePostmanMessageTemplate(
             $code,
             'Your account is unblocked',
             'This letter is sent when the user unbanned',
             $content,
             $params
-        );
+        ));
     }
 }

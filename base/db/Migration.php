@@ -7,7 +7,7 @@
 
 namespace cookyii\db;
 
-use yii\helpers\Json;
+use cookyii\console\controllers\MigrateController;
 
 /**
  * Class Migration
@@ -21,12 +21,21 @@ class Migration extends \yii\db\Migration
     /**
      * @var array
      */
-    public $default = [
-        'charset' => 'utf8mb4',
-        'collate' => 'utf8mb4_unicode_ci',
-        'engine' => 'InnoDB',
-        'row-format' => 'COMPACT',
-    ];
+    public $config = [];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        $controller = \Yii::$app->controller;
+
+        $this->config = $controller instanceof MigrateController
+            ? $controller->migrationConfig
+            : [];
+    }
 
     /**
      * @inheritdoc
@@ -36,10 +45,10 @@ class Migration extends \yii\db\Migration
         if ($options === null && $this->db->driverName === 'mysql') {
             $options = sprintf(
                 'CHARACTER SET %s COLLATE %s ENGINE=%s ROW_FORMAT=%s',
-                $this->default['charset'],
-                $this->default['collate'],
-                $this->default['engine'],
-                $this->default['row-format']
+                $this->config['charset'],
+                $this->config['collate'],
+                $this->config['engine'],
+                $this->config['row-format']
             );
         }
 
@@ -98,36 +107,6 @@ class Migration extends \yii\db\Migration
     public function unixTimestamp()
     {
         return $this->integer(10)->unsigned();
-    }
-
-    /**
-     * @param string $code
-     * @param string $subject
-     * @param string $description
-     * @param array $content
-     * @param array $params
-     * @param array $options
-     */
-    public function insertPostmanMessageTemplate($code, $subject, $description, array $content, array $params = [], array $options = [])
-    {
-        $time = time();
-
-        $options = array_merge([
-            'code' => $code,
-            'subject' => $subject,
-            'content_text' => $content['text'],
-            'content_html' => $content['html'],
-            'styles' => null,
-            'description' => $description,
-            'address' => Json::encode([]),
-            'params' => Json::encode($params),
-            'use_layout' => true,
-            'created_at' => $time,
-            'updated_at' => $time,
-            'deleted_at' => null,
-        ], $options);
-
-        $this->insert('{{%postman_template}}', $options);
     }
 
     /**

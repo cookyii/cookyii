@@ -20,6 +20,16 @@ class MigrateController extends \yii\console\controllers\MigrateController
     public $migrationsPath = [];
 
     /**
+     * @var array
+     */
+    public $migrationConfig = [
+        'charset' => 'utf8mb4',
+        'collate' => 'utf8mb4_unicode_ci',
+        'engine' => 'InnoDB',
+        'row-format' => 'COMPACT',
+    ];
+
+    /**
      * Creates a new migration instance.
      * @param string $class the migration class name
      * @return \yii\db\MigrationInterface the migration instance
