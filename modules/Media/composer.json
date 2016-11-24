@@ -30,12 +30,12 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5.0",
 
     "cookyii/base": "dev-master",
 
-    "yiisoft/yii2": "2.0.*",
-    "yiisoft/yii2-imagine": "2.0.*"
+    "yiisoft/yii2": "~2.0",
+    "yiisoft/yii2-imagine": "~2.1"
   },
   "autoload": {
     "psr-4": {

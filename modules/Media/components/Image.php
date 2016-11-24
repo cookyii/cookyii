@@ -163,8 +163,10 @@ class Image extends \yii\imagine\Image
         /** @var Imagine\Image\ImageInterface $Image */
         $Image = $Image->thumbnail($box, $mode);
 
+        $Palette = new Imagine\Image\Palette\RGB;
+
         // create empty image to preserve aspect ratio of thumbnail
-        $thumb = static::getImagine()->create($box, new Imagine\Image\Color('FFF', 100));
+        $thumb = static::getImagine()->create($box, $Palette->color('#ffffff'));
 
         // calculate points
         $size = $Image->getSize();
@@ -227,36 +229,38 @@ class Image extends \yii\imagine\Image
         }
 
         $fontSize = ArrayHelper::getValue($fontOptions, 'size', 12);
-        $fontColor = ArrayHelper::getValue($fontOptions, 'color', 'fff');
+        $fontColor = ArrayHelper::getValue($fontOptions, 'color', '#ffffff');
         $fontAngle = ArrayHelper::getValue($fontOptions, 'angle', 0);
+
+        $Palette = new Imagine\Image\Palette\RGB;
 
         /** @var Imagine\Image\AbstractFont $font */
         $font = static::getImagine()
-            ->font(\Yii::getAlias($fontFile), $fontSize, new Imagine\Image\Color($fontColor));
+            ->font(\Yii::getAlias($fontFile), $fontSize, $Palette->color($fontColor));
 
         $Image->draw()->text($text, $font, new Imagine\Image\Point($start[0], $start[1]), $fontAngle);
 
         return $Image;
     }
 
-    /**
+    /**F
      * Adds a frame around of the image. Please note that the image size will increase by `$margin` x 2.
      * @param Imagine\Image\ImageInterface $Image the image
      * @param integer $margin the frame size to add around the image
      * @param string $color the frame color
-     * @param integer $alpha the alpha value of the frame.
+     * @param integer|null $alpha the alpha value of the frame.
      * @return \Imagine\Image\ImageInterface
      */
-    public static function frame($Image, $margin = 20, $color = '666', $alpha = 100)
+    public static function frame($Image, $margin = 20, $color = '#666666', $alpha = null)
     {
         $size = $Image->getSize();
 
         $pasteTo = new Imagine\Image\Point($margin, $margin);
-        $padColor = new Imagine\Image\Color($color, $alpha);
+        $Palette = new Imagine\Image\Palette\RGB;
 
         $box = new Imagine\Image\Box($size->getWidth() + ceil($margin * 2), $size->getHeight() + ceil($margin * 2));
 
-        $image = static::getImagine()->create($box, $padColor);
+        $image = static::getImagine()->create($box, $Palette->color($color, $alpha));
 
         $image->paste($Image, $pasteTo);
 
