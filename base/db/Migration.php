@@ -94,11 +94,28 @@ class Migration extends \yii\db\Migration
     }
 
     /**
+     * @param int $length
+     * @return \yii\db\ColumnSchemaBuilder
+     */
+    public function bits($length = 8)
+    {
+        return $this->getDb()->getSchema()->createColumnSchemaBuilder('BIT', $length);
+    }
+
+    /**
      * @return \yii\db\ColumnSchemaBuilder
      */
     public function boolean()
     {
         return parent::boolean()->notNull();
+    }
+
+    /**
+     * @return \yii\db\ColumnSchemaBuilder
+     */
+    public function status()
+    {
+        return $this->smallInteger()->notNull()->defaultValue(0);
     }
 
     /**
