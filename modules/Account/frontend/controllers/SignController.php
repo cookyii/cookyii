@@ -19,6 +19,8 @@ class SignController extends Account\frontend\components\Controller
 
     use Account\traits\SocialAuthCallbackTrait;
 
+    public $cookieExpire = 86400;
+
     /**
      * @var string name or alias of the view file, which should be rendered in order to perform redirection.
      * If not set default one will be used.

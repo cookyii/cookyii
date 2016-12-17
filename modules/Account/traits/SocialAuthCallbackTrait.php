@@ -28,6 +28,10 @@ trait SocialAuthCallbackTrait
      */
     public function socialAuthCallback(\yii\authclient\ClientInterface $Client)
     {
+        $cookie_expire = property_exists($this, 'cookieExpire')
+            ? $this->cookieExpire
+            : 0;
+
         /** @var Account\backend\Module $Module */
         $Module = \Yii::$app->getModule($this->accountModule);
         $roles = $Module->roles;
@@ -133,7 +137,7 @@ trait SocialAuthCallbackTrait
         if ($Account instanceof AccountModel && !$Account->isNewRecord && !$Account->hasErrors()) {
             $Account->save();
 
-            User()->login($Account, 86400);
+            User()->login($Account, $cookie_expire);
         } else {
             $errors = $Account->getFirstErrors();
 
