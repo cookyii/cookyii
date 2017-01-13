@@ -89,6 +89,8 @@ class ApiAttribute
                     $result = Formatter()->asDatetime($value, $formats['long']);
                 } elseif ($delta > 86400 && $delta <= (86400 * 7)) {
                     $result = Formatter()->asDatetime($value, $formats['short']);
+                } elseif ($delta < 60) {
+                    $result = \Yii::t('cookyii', 'just now');
                 } else {
                     $result = Formatter()->asRelativeTime($value);
                 }
