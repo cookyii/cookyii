@@ -393,6 +393,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
     {
         return [
             static::STATUS_NULL => \Yii::t('cookyii.account', 'New user'),
+            static::STATUS_INVITE => \Yii::t('cookyii.account', 'Invite'),
             static::STATUS_APPROVED => \Yii::t('cookyii.account', 'Approved'),
             static::STATUS_HOLD => \Yii::t('cookyii.account', 'Hold'),
             static::STATUS_BANNED => \Yii::t('cookyii.account', 'Banned'),
@@ -431,8 +432,9 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
     const MALE = 1;
     const FEMALE = 2;
 
+    const STATUS_BANNED = -100;
     const STATUS_NULL = 0;
+    const STATUS_INVITE = 50;
     const STATUS_APPROVED = 100;
     const STATUS_HOLD = 200;
-    const STATUS_BANNED = 300;
 }

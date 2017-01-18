@@ -45,6 +45,7 @@ return [
     'I agree to the {terms} of use' => 'Я соглашаюсь с {terms}',
     'I forgot my password' => 'Я забыл мой пароль',
     'ID' => 'ID',
+    'Invite' => '',
     'Key' => 'Ключ',
     'Male' => 'Мужчина',
     'Name' => 'Имя',

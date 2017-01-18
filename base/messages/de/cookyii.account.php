@@ -45,6 +45,7 @@ return [
     'I agree to the {terms} of use' => '',
     'I forgot my password' => '',
     'ID' => '',
+    'Invite' => '',
     'Key' => '',
     'Male' => '',
     'Name' => '',
