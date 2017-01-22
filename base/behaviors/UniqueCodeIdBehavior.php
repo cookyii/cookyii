@@ -7,6 +7,7 @@
 
 namespace cookyii\behaviors;
 
+use cookyii\Decorator as D;
 use yii\db\BaseActiveRecord;
 use yii\db\Expression;
 
@@ -76,6 +77,6 @@ class UniqueCodeIdBehavior extends \yii\behaviors\AttributeBehavior
         $length = $length <= 0 ? 12 : $length;
         $length = $length > 32 ? 32 : $length;
 
-        return Security()->generateRandomString($length);
+        return D::Security()->generateRandomString($length);
     }
 }

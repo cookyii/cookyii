@@ -8,6 +8,7 @@
  * @var Client\backend\forms\ClientEditForm $ClientEditForm
  */
 
+use cookyii\Decorator as D;
 use cookyii\modules\Client;
 use cookyii\widgets\angular\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
@@ -32,13 +33,13 @@ $form = ActiveForm::begin([
 
                 <span ng-if="!data.account">
                     Not created. <?= Html::tag('a', 'Create', [
-                        'data-action' => UrlManager()->createUrl(['/client/rest/client/create-account']),
+                        'data-action' => D::UrlManager()->createUrl(['/client/rest/client/create-account']),
                         'ng-click' => 'account.create($event)',
                     ]) ?>
                 </span>
                 <span ng-if="data.account">
                     #{{ data.account.id }} {{ data.account.name }} <?= Html::tag('a', 'unlink', [
-                        'data-action' => UrlManager()->createUrl(['/client/rest/client/unlink-account']),
+                        'data-action' => D::UrlManager()->createUrl(['/client/rest/client/unlink-account']),
                         'ng-click' => 'account.unlink($event)',
                     ]) ?>
                 </span>

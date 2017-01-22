@@ -7,6 +7,8 @@
 
 namespace cookyii\traits;
 
+use cookyii\Decorator as D;
+
 /**
  * Class CacheArrayableTrait
  * @package cookyii\traits
@@ -42,12 +44,12 @@ trait CacheArrayableTrait
 
         $key = sprintf('active-record-%s-%s', get_called_class(), sha1(implode('|', $hash)));
 
-        $data = Cache()->get($key);
+        $data = D::Cache()->get($key);
 
         if (empty($data)) {
             $data = parent::toArray($fields, $expand, $recursive);
 
-            Cache()->set($key, $data, 3600);
+            D::Cache()->set($key, $data, 3600);
         }
 
         return $data;

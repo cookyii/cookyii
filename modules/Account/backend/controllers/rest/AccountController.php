@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\backend\controllers\rest;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 
@@ -116,12 +117,12 @@ class AccountController extends \cookyii\rest\Controller
 
         $Query = $modelClass::find();
 
-        $search = str_clean(Request()->get('search'));
+        $search = str_clean(D::Request()->get('search'));
         if (!empty($search)) {
             $Query->search($search);
         }
 
-        $deleted = Request()->get('deleted');
+        $deleted = D::Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

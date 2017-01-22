@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Feed\backend\controllers\section\rest\SectionController;
 
+use cookyii\Decorator as D;
+
 /**
  * Class DetailAction
  * @package cookyii\modules\Feed\backend\controllers\section\rest\SectionController
@@ -37,11 +39,11 @@ class DetailAction extends \cookyii\rest\Action
 
         $result['published_at'] = empty($result['published_at'])
             ? null
-            : Formatter()->asDatetime($result['published_at'], 'dd.MM.yyyy HH:mm');
+            : D::Formatter()->asDatetime($result['published_at'], 'dd.MM.yyyy HH:mm');
 
         $result['archived_at'] = empty($result['archived_at'])
             ? null
-            : Formatter()->asDate($result['archived_at'], 'dd.MM.yyyy');
+            : D::Formatter()->asDate($result['archived_at'], 'dd.MM.yyyy');
 
         $result['hash'] = sha1(serialize($result));
 

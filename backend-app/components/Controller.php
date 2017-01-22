@@ -7,6 +7,8 @@
 
 namespace backend\components;
 
+use cookyii\Decorator as D;
+
 /**
  * Class Controller
  * @package backend\components
@@ -31,8 +33,8 @@ abstract class Controller extends \cookyii\web\Controller
         $this->on(self::EVENT_BEFORE_ACTION, function (\yii\base\ActionEvent $ActionEvent) {
             $Action = $ActionEvent->action;
 
-            if (!User()->isGuest && !in_array($Action->getUniqueId(), ['site/error'], true)) {
-                $Account = Account();
+            if (!D::User()->isGuest && !in_array($Action->getUniqueId(), ['site/error'], true)) {
+                $Account = D::Account();
 
                 if (($reason = $Account->isAvailable()) !== true) {
                     switch ($reason) {

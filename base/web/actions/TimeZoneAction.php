@@ -7,6 +7,8 @@
 
 namespace cookyii\web\actions;
 
+use cookyii\Decorator as D;
+
 /**
  * Class TimeZoneAction
  * @package cookyii\web\actions
@@ -26,7 +28,7 @@ class TimeZoneAction extends \yii\base\Action
             ? 0
             : $gmt;
 
-        Session()->set('timezone', $gmt);
+        D::Session()->set('timezone', $gmt);
 
         return true;
     }

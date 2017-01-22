@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Client\backend\controllers\rest\ClientController;
 
+use cookyii\Decorator as D;
+
 /**
  * Class UnlinkAccountAction
  * @package cookyii\modules\Client\backend\controllers\rest\ClientController
@@ -22,7 +24,7 @@ class UnlinkAccountAction extends \cookyii\rest\Action
      */
     public function run()
     {
-        $client_id = (int)Request()->post('client_id');
+        $client_id = (int)D::Request()->post('client_id');
 
         if (empty($client_id)) {
             throw new \yii\web\BadRequestHttpException;

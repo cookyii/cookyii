@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\backend;
 
+use cookyii\Decorator as D;
 use rmrevin\yii\fontawesome\FA;
 
 /**
@@ -26,7 +27,7 @@ class Module extends \cookyii\modules\Postman\Module implements \cookyii\interfa
                 'label' => \Yii::t('cookyii.postman', 'Postman'),
                 'url' => ['/postman'],
                 'icon' => FA::icon('envelope'),
-                'visible' => User()->can(\cookyii\modules\Postman\backend\Permissions::ACCESS),
+                'visible' => D::User()->can(\cookyii\modules\Postman\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'postman',
                 'sort' => 9000,
                 'items' => [

@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\resources\PostmanMessage;
 
+use cookyii\Decorator as D;
 use cookyii\helpers\Premailer;
 use cookyii\modules\Postman\jobs\SendMailJob;
 use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
@@ -422,8 +423,8 @@ class Model extends \cookyii\db\ActiveRecord
             '{username}' => null,
         ];
 
-        if (Request() instanceof \yii\web\Request) {
-            $Account = User()->identity;
+        if (D::Request() instanceof \yii\web\Request) {
+            $Account = D::User()->identity;
             if ($Account instanceof \cookyii\interfaces\AccountInterface) {
                 $base_placeholders['{user_id}'] = $Account->getId();
                 $base_placeholders['{username}'] = $Account->getName();

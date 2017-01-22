@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\backend\controllers\rest;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\AccountProperty\Model as AccountPropertyModel;
 
@@ -43,9 +44,9 @@ class PropertyController extends \cookyii\api\Controller
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $account_id = (int)Request()->post('account_id');
-        $key = str_clean(Request()->post('key'));
-        $property = Request()->post('property', []);
+        $account_id = (int)D::Request()->post('account_id');
+        $key = str_clean(D::Request()->post('key'));
+        $property = D::Request()->post('property', []);
 
         $property_key = str_clean(isset($property['key']) ? $property['key'] : null);
         $property_value = isset($property['value']) ? $property['value'] : null;
@@ -120,8 +121,8 @@ class PropertyController extends \cookyii\api\Controller
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $account_id = (int)Request()->get('account_id');
-        $key = str_clean(Request()->get('key'));
+        $account_id = (int)D::Request()->get('account_id');
+        $key = str_clean(D::Request()->get('key'));
 
         if (empty($account_id)) {
             throw new \yii\web\BadRequestHttpException('Empty account id');

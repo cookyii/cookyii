@@ -8,9 +8,10 @@
  * @var string $content
  */
 
+use cookyii\Decorator as D;
 use yii\helpers\Html;
 
-$Account = Account();
+$Account = D::Account();
 
 $this->beginContent('@app/views/layouts/_layout.php', ['content' => $content]);
 

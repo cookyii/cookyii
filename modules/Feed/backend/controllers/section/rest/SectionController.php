@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Feed\backend\controllers\section\rest;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Feed;
 use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
 
@@ -146,12 +147,12 @@ class SectionController extends \cookyii\rest\Controller
 
         $Query = $modelClass::find();
 
-        $search = str_clean(Request()->get('search'));
+        $search = str_clean(D::Request()->get('search'));
         if (!empty($search)) {
             $Query->search($search);
         }
 
-        $deleted = Request()->get('deleted');
+        $deleted = D::Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

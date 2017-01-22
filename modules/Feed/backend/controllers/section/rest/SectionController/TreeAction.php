@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Feed\backend\controllers\section\rest\SectionController;
 
+use cookyii\Decorator as D;
+
 /**
  * Class TreeAction
  * @package cookyii\modules\Feed\backend\controllers\section\rest\SectionController
@@ -23,7 +25,7 @@ class TreeAction extends \cookyii\rest\Action
         /* @var $modelClass \cookyii\modules\Feed\resources\FeedSection\Model */
         $modelClass = $this->modelClass;
 
-        $with_deleted = Request()->get('deleted', 'false') === 'true';
+        $with_deleted = D::Request()->get('deleted', 'false') === 'true';
 
         return $modelClass::getTree($with_deleted);
     }

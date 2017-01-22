@@ -5,9 +5,11 @@
  * @link https://rmrevin.com
  */
 
+use cookyii\Decorator as D;
+
 $menu = [];
 
-if (User()->isGuest) {
+if (D::User()->isGuest) {
     $menu[] = [
         'label' => Yii::t('app', 'Sign in'),
         'url' => ['/account/sign/in'],
@@ -23,7 +25,7 @@ if (User()->isGuest) {
         'selected' => false,
     ];
 } else {
-    $Account = Account();
+    $Account = D::Account();
 
     $menu[] = [
         'label' => $Account->name,

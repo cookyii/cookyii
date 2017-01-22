@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\frontend\controllers;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 
 /**
@@ -52,20 +53,20 @@ class ApiController extends \cookyii\api\Controller
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Sign in'),
                 'text' => \Yii::t('cookyii', 'Unknown error'),
-            ]
+            ],
         ];
 
         /** @var Account\forms\SignInForm $SignInForm */
         $SignInForm = \Yii::createObject(Account\forms\SignInForm::class);
 
-        if ($SignInForm->load(Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
+        if ($SignInForm->load(D::Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
             $result = [
                 'result' => true,
                 'message' => [
                     'title' => \Yii::t('cookyii.account', 'Sign in'),
                     'text' => \Yii::t('cookyii.account', 'Welcome!'),
                 ],
-                'redirect' => UrlManager()->createUrl(['/']),
+                'redirect' => D::UrlManager()->createUrl(['/']),
             ];
         }
 
@@ -93,20 +94,20 @@ class ApiController extends \cookyii\api\Controller
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Sign up'),
                 'text' => \Yii::t('cookyii', 'Unknown error'),
-            ]
+            ],
         ];
 
         /** @var Account\forms\SignUpForm $SignUpForm */
         $SignUpForm = \Yii::createObject(Account\forms\SignUpForm::class);
 
-        if ($SignUpForm->load(Request()->post()) && $SignUpForm->validate() && $SignUpForm->register()) {
+        if ($SignUpForm->load(D::Request()->post()) && $SignUpForm->validate() && $SignUpForm->register()) {
             $result = [
                 'result' => true,
                 'message' => [
                     'title' => \Yii::t('cookyii.account', 'Sign up'),
                     'text' => \Yii::t('cookyii.account', 'Welcome!'),
                 ],
-                'redirect' => UrlManager()->createUrl(['/']),
+                'redirect' => D::UrlManager()->createUrl(['/']),
             ];
         }
 
@@ -134,13 +135,13 @@ class ApiController extends \cookyii\api\Controller
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Forgot password'),
                 'text' => \Yii::t('cookyii', 'Unknown error'),
-            ]
+            ],
         ];
 
         /** @var Account\forms\ForgotPasswordForm $ForgotPasswordForm */
         $ForgotPasswordForm = \Yii::createObject(Account\forms\ForgotPasswordForm::class);
 
-        if ($ForgotPasswordForm->load(Request()->post()) && $ForgotPasswordForm->validate() && $ForgotPasswordForm->sendNotification()) {
+        if ($ForgotPasswordForm->load(D::Request()->post()) && $ForgotPasswordForm->validate() && $ForgotPasswordForm->sendNotification()) {
             $result = [
                 'result' => true,
                 'message' => [
@@ -175,10 +176,10 @@ class ApiController extends \cookyii\api\Controller
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Fill attributes'),
                 'text' => \Yii::t('cookyii', 'Unknown error'),
-            ]
+            ],
         ];
 
-        $Client = Session()->get('OAuthResponseClient');
+        $Client = D::Session()->get('OAuthResponseClient');
 
         if (empty($Client)) {
             throw new \yii\web\BadRequestHttpException;
@@ -187,14 +188,14 @@ class ApiController extends \cookyii\api\Controller
         /** @var Account\forms\FillAttributesForm $FillAttributesForm */
         $FillAttributesForm = \Yii::createObject(Account\forms\FillAttributesForm::class);
 
-        if ($FillAttributesForm->load(Request()->post()) && $FillAttributesForm->validate() && $FillAttributesForm->save($Client)) {
+        if ($FillAttributesForm->load(D::Request()->post()) && $FillAttributesForm->validate() && $FillAttributesForm->save($Client)) {
             $result = [
                 'result' => true,
                 'message' => [
                     'title' => \Yii::t('cookyii.account', 'Fill attributes'),
                     'text' => \Yii::t('cookyii.account', 'Welcome!'),
                 ],
-                'redirect' => UrlManager()->createUrl(['/account/sign/fill-redirect']),
+                'redirect' => D::UrlManager()->createUrl(['/account/sign/fill-redirect']),
             ];
         }
 

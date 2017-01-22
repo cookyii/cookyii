@@ -8,7 +8,9 @@
  * @var string $content
  */
 
-use rmrevin\yii\fontawesome\FA;use yii\helpers\Html;
+use cookyii\Decorator as D;
+use rmrevin\yii\fontawesome\FA;
+use yii\helpers\Html;
 
 $this->beginPage();
 
@@ -22,13 +24,13 @@ $title = empty($this->title)
 $controller = $this->context;
 
 /** @var \resources\Account\Model|null $Account */
-$Account = User()->identity;
+$Account = D::User()->identity;
 
 $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()], 'canonical');
 
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'], 'viewport');
-if (!User()->isGuest) {
+if (!D::User()->isGuest) {
     $this->registerMetaTag(['name' => 'token', 'content' => $Account->token], 'token');
 }
 

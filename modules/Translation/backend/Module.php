@@ -6,6 +6,7 @@
 
 namespace cookyii\modules\Translation\backend;
 
+use cookyii\Decorator as D;
 use rmrevin\yii\fontawesome\FA;
 
 /**
@@ -28,7 +29,7 @@ class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModu
                 'label' => \Yii::t('cookyii.translation', 'Translation'),
                 'url' => ['/translation/list/index'],
                 'icon' => FA::icon('globe'),
-                'visible' => User()->can(Permissions::ACCESS),
+                'visible' => D::User()->can(Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'translation',
                 'sort' => 9000,
             ],

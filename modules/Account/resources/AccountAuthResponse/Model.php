@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\resources\AccountAuthResponse;
 
+use cookyii\Decorator as D;
 use yii\helpers\Json;
 
 /**
@@ -40,7 +41,7 @@ class Model extends \cookyii\db\ActiveRecord
 
             /** default values */
             [['received_at'], 'default', 'value' => time()],
-            [['user_ip'], 'default', 'value' => Request()->userIP],
+            [['user_ip'], 'default', 'value' => D::Request()->userIP],
         ];
     }
 

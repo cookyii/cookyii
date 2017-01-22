@@ -11,9 +11,6 @@
 use rmrevin\yii\fontawesome\FA;
 use yii\helpers\Html;
 
-/** @var \resources\User $User */
-$User = User()->identity;
-
 $this->beginContent('@app/views/layouts/_layout.php', ['content' => $content]);
 
 ?>

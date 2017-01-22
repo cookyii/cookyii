@@ -7,6 +7,8 @@
 
 @umask(0002);
 
+use cookyii\Decorator as D;
+
 /**
  * Dumps a variable in terms of a string.
  * This method achieves the similar functionality as var_dump and print_r
@@ -31,14 +33,16 @@ function dump($var, $depth = 10, $highlight = true, $return = false)
 }
 
 /**
+ * @deprecated
  * @return \resources\Account\Model
  */
 function Account()
 {
-    return User()->identity;
+    return D::User()->identity;
 }
 
 /**
+ * @deprecated
  * @return \yii\web\Request|\yii\console\Request
  */
 function Request()
@@ -47,6 +51,7 @@ function Request()
 }
 
 /**
+ * @deprecated
  * @return \yii\web\Response|\yii\console\Response
  */
 function Response()
@@ -55,6 +60,7 @@ function Response()
 }
 
 /**
+ * @deprecated
  * @return \yii\web\Session
  */
 function Session()
@@ -63,6 +69,7 @@ function Session()
 }
 
 /**
+ * @deprecated
  * @return \yii\base\Security
  */
 function Security()
@@ -71,6 +78,7 @@ function Security()
 }
 
 /**
+ * @deprecated
  * @param string|null $type
  * @return \yii\web\UrlManager
  * @throws \yii\base\InvalidConfigException
@@ -83,6 +91,7 @@ function UrlManager($type = null)
 }
 
 /**
+ * @deprecated
  * @return \yii\log\Dispatcher
  */
 function YiiLog()
@@ -91,6 +100,7 @@ function YiiLog()
 }
 
 /**
+ * @deprecated
  * @return \yii\web\ErrorHandler|\yii\console\ErrorHandler
  */
 function ErrorHandler()
@@ -99,6 +109,7 @@ function ErrorHandler()
 }
 
 /**
+ * @deprecated
  * @param string|null $type
  * @return \yii\caching\Cache
  * @throws \yii\base\InvalidConfigException
@@ -111,6 +122,7 @@ function Cache($type = null)
 }
 
 /**
+ * @deprecated
  * @return \yii\db\Connection
  */
 function Db()
@@ -119,6 +131,7 @@ function Db()
 }
 
 /**
+ * @deprecated
  * @return \yii\i18n\I18N
  */
 function I18N()
@@ -127,6 +140,7 @@ function I18N()
 }
 
 /**
+ * @deprecated
  * @return \yii\i18n\Formatter
  */
 function Formatter()
@@ -135,6 +149,7 @@ function Formatter()
 }
 
 /**
+ * @deprecated
  * @return \yii\base\View|\yii\web\View
  */
 function View()
@@ -143,6 +158,7 @@ function View()
 }
 
 /**
+ * @deprecated
  * @return \yii\mail\MailerInterface
  */
 function Mailer()
@@ -151,6 +167,7 @@ function Mailer()
 }
 
 /**
+ * @deprecated
  * @return \yii\rbac\DbManager
  */
 function AuthManager()
@@ -159,6 +176,7 @@ function AuthManager()
 }
 
 /**
+ * @deprecated
  * @return \yii\web\User
  */
 function User()
@@ -167,6 +185,7 @@ function User()
 }
 
 /**
+ * @deprecated
  * @return \yii\web\AssetManager
  */
 function AssetManager()
@@ -175,6 +194,7 @@ function AssetManager()
 }
 
 /**
+ * @deprecated
  * @return \yii\authclient\Collection
  */
 function AuthClientCollection()

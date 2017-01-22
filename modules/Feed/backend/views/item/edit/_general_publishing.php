@@ -9,10 +9,12 @@
  * @var cookyii\modules\Feed\backend\forms\ItemEditForm $ItemEditForm
  */
 
+use cookyii\Decorator as D;
+
 echo $ActiveForm->field($ItemEditForm, 'published_at')
     ->textInput([
         'ng-datetime-picker' => true,
-        'placeholder' => Formatter()->asDatetime(time(), 'dd.MM.yyyy HH:mm'),
+        'placeholder' => D::Formatter()->asDatetime(time(), 'dd.MM.yyyy HH:mm'),
     ]);
 
 echo $ActiveForm->field($ItemEditForm, 'archived_at')

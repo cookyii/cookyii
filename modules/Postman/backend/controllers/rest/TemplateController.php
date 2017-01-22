@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\backend\controllers\rest;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Postman;
 use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
 
@@ -81,12 +82,12 @@ class TemplateController extends \yii\rest\ActiveController
 
         $Query = $modelClass::find();
 
-        $search = str_clean(Request()->get('search'));
+        $search = str_clean(D::Request()->get('search'));
         if (!empty($search)) {
             $Query->search($search);
         }
 
-        $deleted = Request()->get('deleted');
+        $deleted = D::Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

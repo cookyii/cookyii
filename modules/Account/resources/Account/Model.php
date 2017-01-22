@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\resources\Account;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account\resources\AccountAlert\Model as AccountAlertModel;
 use cookyii\modules\Account\resources\AccountProperty\Model as AccountPropertyModel;
 use yii\helpers\ArrayHelper;
@@ -150,7 +151,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
         if ($allowCaching && empty($params) && isset($this->_access[$permissionName])) {
             return $this->_access[$permissionName];
         }
-        $access = AuthManager()->checkAccess($this->id, $permissionName, $params);
+        $access = D::AuthManager()->checkAccess($this->id, $permissionName, $params);
         if ($allowCaching && empty($params)) {
             $this->_access[$permissionName] = $access;
         }
@@ -190,7 +191,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
      */
     public function refreshToken($save = true)
     {
-        $token = Security()->generateRandomString();
+        $token = D::Security()->generateRandomString();
 
         $this->token = $token;
 
@@ -257,7 +258,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
      */
     public function validatePassword($password)
     {
-        return Security()->validatePassword($password, $this->password_hash);
+        return D::Security()->validatePassword($password, $this->password_hash);
     }
 
     /**
@@ -268,7 +269,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
         $result = [];
 
         $roles = static::getAllRoles();
-        $Assignments = AuthManager()->getAssignments($this->id);
+        $Assignments = D::AuthManager()->getAssignments($this->id);
 
         foreach (array_keys($Assignments) as $role) {
             $result[$role] = $roles[$role];
@@ -364,7 +365,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
      */
     public static function getAllRoles()
     {
-        return ArrayHelper::map(AuthManager()->getRoles(), 'name', 'description');
+        return ArrayHelper::map(D::AuthManager()->getRoles(), 'name', 'description');
     }
 
     /**
@@ -372,7 +373,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
      */
     public static function getAllPermissions()
     {
-        return ArrayHelper::map(AuthManager()->getPermissions(), 'name', 'description');
+        return ArrayHelper::map(D::AuthManager()->getPermissions(), 'name', 'description');
     }
 
     /**
@@ -409,10 +410,10 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
         /** @var static $Model */
         $Model = $Event->sender;
 
-        $Model->password_hash = empty($this->password) ? null : Security()->generatePasswordHash($this->password);
+        $Model->password_hash = empty($this->password) ? null : D::Security()->generatePasswordHash($this->password);
         $Model->timezone = isset($_COOKIE['timezone']) && !empty($_COOKIE['timezone']) ? $_COOKIE['timezone'] : 0;
-        $Model->auth_key = Security()->generateRandomString();
-        $Model->token = Security()->generateRandomString();
+        $Model->auth_key = D::Security()->generateRandomString();
+        $Model->token = D::Security()->generateRandomString();
     }
 
     /**
@@ -425,7 +426,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
         $Model = $Event->sender;
 
         if (!empty($this->password)) {
-            $Model->password_hash = Security()->generatePasswordHash($this->password);
+            $Model->password_hash = D::Security()->generatePasswordHash($this->password);
         }
     }
 

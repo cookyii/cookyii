@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\traits;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
@@ -127,7 +128,7 @@ trait SocialAuthCallbackTrait
                 $AuthResponse->result = Json::encode($Account->id);
 
                 if (!$Account->can($roles['user'])) {
-                    AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
+                    D::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
                 }
             }
         }
@@ -137,7 +138,7 @@ trait SocialAuthCallbackTrait
         if ($Account instanceof AccountModel && !$Account->isNewRecord && !$Account->hasErrors()) {
             $Account->save();
 
-            User()->login($Account, $cookie_expire);
+            D::User()->login($Account, $cookie_expire);
         } else {
             $errors = $Account->getFirstErrors();
 

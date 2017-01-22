@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use yii\helpers\Json;
 
@@ -135,7 +136,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
     {
         $Account = $this->getAccount();
 
-        $new_password = Security()->generateRandomString(8);
+        $new_password = D::Security()->generateRandomString(8);
 
         $Account->password = $new_password;
 
@@ -150,7 +151,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             if ($this->loginAfterReset) {
                 $SignInFormModel = \Yii::createObject(SignInForm::class);
 
-                User()->login($Account, $SignInFormModel::REMEMBER_TIME);
+                D::User()->login($Account, $SignInFormModel::REMEMBER_TIME);
             }
         }
 
@@ -193,7 +194,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             's' => $Account->token,
         ]);
 
-        return base64_encode(Security()->encryptByKey($data, $Account->getEncryptKey()));
+        return base64_encode(D::Security()->encryptByKey($data, $Account->getEncryptKey()));
     }
 
     /**
@@ -206,7 +207,7 @@ class ForgotPasswordForm extends \cookyii\base\FormModel
             throw new \yii\base\InvalidParamException('Empty hash.');
         }
 
-        $data = Security()->decryptByKey(base64_decode($this->hash), $Account->getEncryptKey());
+        $data = D::Security()->decryptByKey(base64_decode($this->hash), $Account->getEncryptKey());
 
         if (empty($data)) {
             throw new \yii\base\InvalidParamException('Invalid hash.');

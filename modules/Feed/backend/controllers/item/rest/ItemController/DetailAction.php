@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Feed\backend\controllers\item\rest\ItemController;
 
+use cookyii\Decorator as D;
+
 /**
  * Class DetailAction
  * @package cookyii\modules\Feed\backend\controllers\item\rest\ItemController
@@ -28,11 +30,11 @@ class DetailAction extends \cookyii\rest\Action
 
         $result['published_at'] = empty($Model->published_at)
             ? null
-            : Formatter()->asDatetime($Model->published_at, 'dd.MM.yyyy HH:mm');
+            : D::Formatter()->asDatetime($Model->published_at, 'dd.MM.yyyy HH:mm');
 
         $result['archived_at'] = empty($Model->archived_at)
             ? null
-            : Formatter()->asDate($Model->archived_at, 'dd.MM.yyyy');
+            : D::Formatter()->asDate($Model->archived_at, 'dd.MM.yyyy');
 
         $result['hash'] = sha1(serialize($result));
 

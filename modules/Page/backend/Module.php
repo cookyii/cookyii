@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Page\backend;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Page;
 use rmrevin\yii\fontawesome\FA;
 
@@ -27,7 +28,7 @@ class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModu
                 'label' => \Yii::t('cookyii.page', 'Pages'),
                 'url' => ['/page/list/index'],
                 'icon' => FA::icon('file'),
-                'visible' => User()->can(Page\backend\Permissions::ACCESS),
+                'visible' => D::User()->can(Page\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'page',
                 'sort' => 8000,
             ],

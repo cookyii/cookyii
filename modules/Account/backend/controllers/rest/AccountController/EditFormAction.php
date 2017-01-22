@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\backend\controllers\rest\AccountController;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 
 /**
@@ -26,7 +27,7 @@ class EditFormAction extends \cookyii\rest\Action
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $account_id = (int)Request()->post('account_id');
+        $account_id = (int)D::Request()->post('account_id');
 
         /** @var $modelClass \cookyii\modules\Account\resources\Account\Model */
         $modelClass = $this->modelClass;
@@ -48,7 +49,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Account' => $Account,
         ]);
 
-        $AccountEditForm->load(Request()->post(), 'FormData') && $AccountEditForm->validate() && $AccountEditForm->save();
+        $AccountEditForm->load(D::Request()->post(), 'FormData') && $AccountEditForm->validate() && $AccountEditForm->save();
 
         if ($AccountEditForm->hasErrors()) {
             $result = [

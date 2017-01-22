@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\frontend\controllers;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use yii\helpers\Url;
 
@@ -77,7 +78,7 @@ class SignController extends Account\frontend\components\Controller
      */
     public function actionIn()
     {
-        if (!User()->isGuest) {
+        if (!D::User()->isGuest) {
             return $this->redirect(['/']);
         }
 
@@ -96,7 +97,7 @@ class SignController extends Account\frontend\components\Controller
      */
     public function actionUp()
     {
-        if (!User()->isGuest) {
+        if (!D::User()->isGuest) {
             return $this->redirect(['/']);
         }
 
@@ -115,7 +116,7 @@ class SignController extends Account\frontend\components\Controller
      */
     public function actionOut()
     {
-        User()->logout();
+        D::User()->logout();
 
         return $this->goHome();
     }
@@ -126,7 +127,7 @@ class SignController extends Account\frontend\components\Controller
      */
     public function actionFill()
     {
-        $Client = Session()->get('OAuthResponseClient');
+        $Client = D::Session()->get('OAuthResponseClient');
 
         if (empty($Client)) {
             throw new \yii\web\BadRequestHttpException;
@@ -148,7 +149,7 @@ class SignController extends Account\frontend\components\Controller
      */
     public function actionFillRedirect()
     {
-        Session()->remove('OAuthResponseClient');
+        D::Session()->remove('OAuthResponseClient');
 
         return $this->renderFile($this->redirectView, [
             'url' => Url::to(['/']),

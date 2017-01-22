@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\backend\controllers;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
@@ -59,7 +60,7 @@ class SignController extends Account\backend\components\Controller
      */
     public function actionIn()
     {
-        if (!User()->isGuest) {
+        if (!D::User()->isGuest) {
             return $this->redirect(['/']);
         }
 
@@ -78,7 +79,7 @@ class SignController extends Account\backend\components\Controller
      */
     public function actionOut()
     {
-        User()->logout();
+        D::User()->logout();
 
         return $this->goHome();
     }
@@ -160,7 +161,7 @@ class SignController extends Account\backend\components\Controller
 
                 $AuthResponse->result = Json::encode($Account->id);
 
-                AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
+                D::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
             } else {
                 $AuthResponse->result = Json::encode($Account->getErrors());
             }
@@ -171,7 +172,7 @@ class SignController extends Account\backend\components\Controller
         if ($Account instanceof AccountModel && !$Account->isNewRecord && !$Account->hasErrors()) {
             $Account->save();
 
-            User()->login($Account, 86400);
+            D::User()->login($Account, 86400);
         } else {
             $errors = $Account->getFirstErrors();
 

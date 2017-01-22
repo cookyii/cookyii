@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\backend;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use rmrevin\yii\fontawesome\FA;
 
@@ -50,7 +51,7 @@ class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModu
                 'label' => \Yii::t('cookyii.account', 'Accounts'),
                 'url' => ['/account/list/index'],
                 'icon' => FA::icon('user'),
-                'visible' => User()->can(Account\backend\Permissions::ACCESS),
+                'visible' => D::User()->can(Account\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'account',
                 'sort' => 10000,
             ],

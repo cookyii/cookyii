@@ -7,6 +7,8 @@
 
 namespace cookyii\backup\drivers;
 
+use cookyii\Decorator as D;
+
 /**
  * Class Mysql
  * @package cookyii\backup\drivers
@@ -110,7 +112,7 @@ class Mysql extends AbstractDriver implements DriverInterface
     public function restoreDump($variant)
     {
         $time = strtotime($variant);
-        $date = Formatter()->asDatetime($time, 'dd MMM yyyy HH:mm');
+        $date = D::Formatter()->asDatetime($time, 'dd MMM yyyy HH:mm');
 
         $this->controller->stdout("    > Selected backup $date.\n");
 

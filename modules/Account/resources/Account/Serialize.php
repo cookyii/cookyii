@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\resources\Account;
 
+use cookyii\Decorator as D;
 use cookyii\helpers\ApiAttribute;
 use cookyii\modules\Account\resources\AccountAlert\Model as AccountAlertModel;
 use yii\helpers\ArrayHelper;
@@ -52,7 +53,7 @@ trait Serialize
         $fields['roles'] = function (Model $Model) {
             $result = [];
 
-            $roles = AuthManager()->getRolesByUser($Model->id);
+            $roles = D::AuthManager()->getRolesByUser($Model->id);
 
             foreach ($roles as $role => $conf) {
                 $result[$role] = true;
@@ -64,7 +65,7 @@ trait Serialize
         $fields['permissions'] = function (Model $Model) {
             $result = [];
 
-            $permissions = AuthManager()->getPermissionsByUser($Model->id);
+            $permissions = D::AuthManager()->getPermissionsByUser($Model->id);
 
             foreach ($permissions as $permission => $conf) {
                 $result[$permission] = true;

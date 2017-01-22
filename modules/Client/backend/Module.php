@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Client\backend;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Client;
 use rmrevin\yii\fontawesome\FA;
 
@@ -27,7 +28,7 @@ class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModu
                 'label' => \Yii::t('cookyii.client', 'Clients'),
                 'url' => ['/client/list/index'],
                 'icon' => FA::icon('users'),
-                'visible' => User()->can(Client\backend\Permissions::ACCESS),
+                'visible' => D::User()->can(Client\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'client',
                 'sort' => 2000,
             ],

@@ -7,6 +7,8 @@
 
 namespace cookyii;
 
+use cookyii\Decorator as D;
+
 /**
  * Class Config
  * @package cookyii
@@ -108,9 +110,9 @@ class Config
             $gmt = $cookie_gmt = (int)$_COOKIE['timezone'];
         }
 
-        if (!User()->isGuest) {
+        if (!D::User()->isGuest) {
             /** @var \resources\Account\Model $Account */
-            $Account = User()->identity;
+            $Account = D::User()->identity;
 
             $gmt = $account_gmt = !empty($Account->timezone)
                 ? $Account->timezone

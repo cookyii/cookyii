@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\backend\controllers;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 
 /**
@@ -49,20 +50,20 @@ class ApiController extends \cookyii\api\Controller
             'message' => [
                 'title' => \Yii::t('cookyii.account', 'Sign in'),
                 'text' => \Yii::t('cookyii', 'Unknown error'),
-            ]
+            ],
         ];
 
         /** @var Account\forms\SignInForm $SignInForm */
         $SignInForm = \Yii::createObject(Account\forms\SignInForm::class);
 
-        if ($SignInForm->load(Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
+        if ($SignInForm->load(D::Request()->post()) && $SignInForm->validate() && $SignInForm->login()) {
             $result = [
                 'result' => true,
                 'message' => [
                     'title' => \Yii::t('cookyii.account', 'Sign in'),
                     'text' => \Yii::t('cookyii.account', 'Welcome!'),
                 ],
-                'redirect' => UrlManager()->createUrl(['/']),
+                'redirect' => D::UrlManager()->createUrl(['/']),
             ];
         }
 

@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Page\backend\controllers\rest;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Page;
 use cookyii\modules\Page\resources\Page\Model as PageModel;
 
@@ -108,12 +109,12 @@ class PageController extends \cookyii\rest\Controller
 
         $Query = $modelClass::find();
 
-        $search = str_clean(Request()->get('search'));
+        $search = str_clean(D::Request()->get('search'));
         if (!empty($search)) {
             $Query->search($search);
         }
 
-        $deleted = Request()->get('deleted');
+        $deleted = D::Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

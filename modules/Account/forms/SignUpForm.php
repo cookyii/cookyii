@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
+use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use rmrevin\yii\rbac\RbacFactory;
@@ -100,12 +101,12 @@ class SignUpForm extends \cookyii\base\FormModel
             $Account->notificationHelper
                 ->sendSignUpEmail();
 
-            AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
+            D::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
 
             if ($this->loginAfterRegister) {
                 $SignInFormModel = \Yii::createObject(SignInForm::class);
 
-                User()->login($Account, $SignInFormModel::REMEMBER_TIME);
+                D::User()->login($Account, $SignInFormModel::REMEMBER_TIME);
             }
         }
 
