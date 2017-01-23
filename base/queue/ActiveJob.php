@@ -15,6 +15,16 @@ abstract class ActiveJob extends \yii\base\Object
 {
 
     /**
+     * @var string
+     */
+    public $_id;
+
+    /**
+     * @var string
+     */
+    public $_debug;
+
+    /**
      * @var mixed
      */
     public $queue = 'queue';
@@ -38,6 +48,18 @@ abstract class ActiveJob extends \yii\base\Object
      * @return string
      */
     abstract public function queueName();
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->_id)) {
+            $this->_id = md5(uniqid(mt_rand()));
+        }
+    }
 
     /**
      * Pushs the job.

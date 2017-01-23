@@ -64,6 +64,6 @@ class SendMailJob extends \cookyii\queue\ActiveJob
      */
     public function queueName()
     {
-        return 'mail';
+        return 'cookyii-mail-queue';
     }
 }
