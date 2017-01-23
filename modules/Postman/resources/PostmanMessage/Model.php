@@ -204,10 +204,10 @@ class Model extends \cookyii\db\ActiveRecord
 
             if (!$Message->hasErrors()) {
                 /** @var SendMailJob $Job */
-                $Job = \Yii::createObject(
-                    SendMailJob::class,
-                    ['postmanMessageId' => $Message->id]
-                );
+                $Job = \Yii::createObject([
+                    'class' => SendMailJob::class,
+                    'postmanMessageId' => $Message->id,
+                ]);
 
                 if (\Yii::$app->has($Job->queue)) {
                     $Job->push();
@@ -239,10 +239,10 @@ class Model extends \cookyii\db\ActiveRecord
 
         if (!$this->isNewRecord) {
             /** @var SendMailJob $Job */
-            $Job = \Yii::createObject(
-                SendMailJob::class,
-                ['postmanMessageId' => $this->id]
-            );
+            $Job = \Yii::createObject([
+                'class' => SendMailJob::class,
+                'postmanMessageId' => $this->id,
+            ]);
 
             if (\Yii::$app->has($Job->queue)) {
                 $Job->push();
