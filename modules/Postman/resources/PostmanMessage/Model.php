@@ -221,12 +221,25 @@ class Model extends \cookyii\db\ActiveRecord
     }
 
     /**
-     * Save message to database
-     * @inheritdoc
+     * @return string
      */
-    public function save($runValidation = true, $attributeNames = null)
+    public function getWebVersionUrl()
     {
-        return parent::save($runValidation, $attributeNames);
+        $code = $this->code;
+
+        $hash = D::Security()->encryptByPassword(Json::encode([
+            'c' => $code,
+            't' => time(),
+            'u' => uniqid(),
+        ]), COOKIE_VALIDATION_KEY);
+
+        $hash = base64_encode($hash);
+
+        return D::UrlManager('frontend')->createAbsoluteUrl([
+            '/postman/letter/show',
+            'token' => $code,
+            'hash' => $hash,
+        ]);
     }
 
     /**
@@ -313,12 +326,17 @@ class Model extends \cookyii\db\ActiveRecord
                     ? 'Postman'
                     : $Postman->from;
 
+                $web_version = $this->getWebVersionUrl();
+
+                $content_text = str_replace('{web_version}', $web_version, $this->content_text);
+                $content_html = str_replace('{web_version}', $web_version, $this->content_html);
+
                 $Message = \Yii::$app->mailer->compose()
                     ->setCharset('UTF-8')
                     ->setFrom([SMTP_USER => $from])
                     ->setSubject($this->subject)
-                    ->setTextBody($this->content_text)
-                    ->setHtmlBody($this->content_html);
+                    ->setTextBody($content_text)
+                    ->setHtmlBody($content_html);
 
                 if (!empty($reply_to)) {
                     $Message->setReplyTo($reply_to);
