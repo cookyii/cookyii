@@ -328,8 +328,8 @@ class Model extends \cookyii\db\ActiveRecord
 
                 $web_version = $this->getWebVersionUrl();
 
-                $content_text = str_replace('{web_version}', $web_version, $this->content_text);
-                $content_html = str_replace('{web_version}', $web_version, $this->content_html);
+                $content_text = str_replace('#web_version#', $web_version, $this->content_text);
+                $content_html = str_replace('#web_version#', $web_version, $this->content_html);
 
                 $Message = \Yii::$app->mailer->compose()
                     ->setCharset('UTF-8')
