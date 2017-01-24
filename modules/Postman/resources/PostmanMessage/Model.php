@@ -271,6 +271,8 @@ class Model extends \cookyii\db\ActiveRecord
     {
         $result = false;
 
+        $Mailer = D::Mailer();
+
         $this->executed_at = time();
 
         $this->validate() && $this->save();
@@ -334,7 +336,11 @@ class Model extends \cookyii\db\ActiveRecord
                     $Message->setBcc($bcc);
                 }
 
-                $result = $Message->send();
+                $result = $Message->send($Mailer);
+
+                if ($Mailer instanceof \yii\swiftmailer\Mailer) {
+                    $Mailer->getTransport()->stop();
+                }
 
                 if ($result === true) {
                     $this->sent_at = time();
