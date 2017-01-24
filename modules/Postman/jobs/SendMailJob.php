@@ -32,7 +32,10 @@ class SendMailJob extends \cookyii\queue\ActiveJob
             throw new \yii\base\ErrorException(\Yii::t('cookyii.postman', 'Unable to determine the id of the message'));
         }
 
-        $Message = PostmanMessageModel::find()
+        /** @var PostmanMessageModel $MessageModel */
+        $MessageModel = \Yii::createObject(PostmanMessageModel::class);
+
+        $Message = $MessageModel::find()
             ->byId($id)
             ->one();
 
@@ -49,7 +52,7 @@ class SendMailJob extends \cookyii\queue\ActiveJob
             $Message->validate() && $Message->save();
         } elseif (is_bool($result) && $result === true) {
         } elseif (is_bool($result) && $result === false) {
-            $Postman = PostmanMessageModel::getPostman();
+            $Postman = $MessageModel::getPostman();
 
             $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
         } else {
