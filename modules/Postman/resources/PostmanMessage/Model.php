@@ -151,6 +151,16 @@ class Model extends \cookyii\db\ActiveRecord
      * @param string|null $name
      * @return static
      */
+    public function addReplyTo($email, $name = null)
+    {
+        return $this->addAddress(static::ADDRESS_TYPE_REPLY_TO, $email, $name);
+    }
+
+    /**
+     * @param string $email
+     * @param string|null $name
+     * @return static
+     */
     public function addTo($email, $name = null)
     {
         return $this->addAddress(static::ADDRESS_TYPE_TO, $email, $name);
