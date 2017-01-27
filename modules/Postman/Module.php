@@ -17,7 +17,7 @@ class Module extends \yii\base\Module
     /**
      * @var string
      */
-    public $from = 'Postman';
+    public $from = [SMTP_USER => 'Postman'];
 
     /**
      * @var string|null

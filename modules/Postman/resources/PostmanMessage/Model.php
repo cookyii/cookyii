@@ -15,6 +15,7 @@ use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateMo
 use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\validators\EmailValidator;
 
 /**
  * Class Model
@@ -325,8 +326,14 @@ class Model extends \cookyii\db\ActiveRecord
                 }
 
                 $from = empty($Postman->from)
-                    ? 'Postman'
+                    ? [SMTP_USER => 'Postman']
                     : $Postman->from;
+
+                $Validator = new EmailValidator;
+
+                if (is_string($from) && !$Validator->validate($from)) {
+                    $from = [SMTP_USER => 'Postman'];
+                }
 
                 $web_version = $this->getWebVersionUrl();
 
@@ -335,7 +342,7 @@ class Model extends \cookyii\db\ActiveRecord
 
                 $Message = \Yii::$app->mailer->compose()
                     ->setCharset('UTF-8')
-                    ->setFrom([SMTP_USER => $from])
+                    ->setFrom($from)
                     ->setSubject($this->subject)
                     ->setTextBody($content_text)
                     ->setHtmlBody($content_html);
