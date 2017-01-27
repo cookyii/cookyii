@@ -16,7 +16,9 @@ use rmrevin\yii\fontawesome\FA;
 class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModuleInterface
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $messagesConfig = '@base/messages/config.php';
 
     /**

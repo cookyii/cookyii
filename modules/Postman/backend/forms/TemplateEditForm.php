@@ -8,6 +8,7 @@
 namespace cookyii\modules\Postman\backend\forms;
 
 use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
+use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Json;
 
 /**
@@ -17,9 +18,11 @@ use yii\helpers\Json;
 class TemplateEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
-    /** @var PostmanTemplateModel */
+    /**
+     * @var PostmanTemplateModel
+     */
     public $Template;
 
     public $code;

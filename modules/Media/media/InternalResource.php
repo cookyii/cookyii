@@ -14,7 +14,9 @@ namespace cookyii\modules\Media\media;
 class InternalResource extends AbstractResource implements ResourceInterface
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $temp;
 
     /**

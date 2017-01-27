@@ -9,6 +9,7 @@ namespace cookyii\modules\Account\forms;
 
 use cookyii\Decorator as D;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
+use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Json;
 
 /**
@@ -18,7 +19,7 @@ use yii\helpers\Json;
 class ForgotPasswordForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
     public $email;
 

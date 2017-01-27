@@ -7,10 +7,12 @@
 
 namespace cookyii\modules\Postman\resources\PostmanMessage;
 
+use cookyii\db\traits\SoftDeleteTrait;
 use cookyii\Decorator as D;
 use cookyii\helpers\Premailer;
 use cookyii\modules\Postman\jobs\SendMailJob;
 use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
+use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
@@ -36,8 +38,8 @@ class Model extends \cookyii\db\ActiveRecord
 {
 
     use Serialize,
-        \cookyii\db\traits\SoftDeleteTrait,
-        \cookyii\traits\PopulateErrorsTrait;
+        SoftDeleteTrait,
+        PopulateErrorsTrait;
 
     const LAYOUT_CODE = '.layout';
 

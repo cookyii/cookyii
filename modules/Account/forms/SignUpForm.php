@@ -10,6 +10,7 @@ namespace cookyii\modules\Account\forms;
 use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
+use cookyii\traits\PopulateErrorsTrait;
 use rmrevin\yii\rbac\RbacFactory;
 
 /**
@@ -19,7 +20,7 @@ use rmrevin\yii\rbac\RbacFactory;
 class SignUpForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
     public $name;
     public $email;

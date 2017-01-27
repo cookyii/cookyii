@@ -24,6 +24,7 @@ Account\frontend\assets\FillAttributesAssetBundle::register($this);
 
     <div class="box-body">
         <?php
+
         /** @var ActiveForm $form */
         $form = ActiveForm::begin([
             'model' => $FillAttributesForm,

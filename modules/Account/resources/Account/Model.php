@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Account\resources\Account;
 
+use cookyii\db\traits\ActivationTrait;
+use cookyii\db\traits\SoftDeleteTrait;
 use cookyii\Decorator as D;
 use cookyii\modules\Account\resources\AccountAlert\Model as AccountAlertModel;
 use cookyii\modules\Account\resources\AccountProperty\Model as AccountPropertyModel;
@@ -41,8 +43,8 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
 
     use Serialize,
         traits\SocialTrait,
-        \cookyii\db\traits\ActivationTrait,
-        \cookyii\db\traits\SoftDeleteTrait;
+        ActivationTrait,
+        SoftDeleteTrait;
 
     static $tableName = '{{%account}}';
 
@@ -137,7 +139,9 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
         return $this->gender === static::FEMALE;
     }
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $_access = [];
 
     /**
@@ -168,8 +172,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
     }
 
     /**
-     * @return \cookyii\modules\Account\resources\Account\helpers\Present
-     * @throws \yii\base\InvalidConfigException
+     * @return \cookyii\modules\Account\resources\Account\helpers\PresentHelper
      */
     public function getPresentHelper()
     {
@@ -177,8 +180,7 @@ class Model extends \cookyii\db\ActiveRecord implements \yii\web\IdentityInterfa
     }
 
     /**
-     * @return \cookyii\modules\Account\resources\Account\helpers\Notification
-     * @throws \yii\base\InvalidConfigException
+     * @return \cookyii\modules\Account\resources\Account\helpers\NotificationHelper
      */
     public function getNotificationHelper()
     {

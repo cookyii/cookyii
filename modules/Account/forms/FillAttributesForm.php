@@ -11,6 +11,7 @@ use cookyii\Decorator as D;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
+use cookyii\traits\PopulateErrorsTrait;
 use rmrevin\yii\rbac\RbacFactory;
 use yii\helpers\Json;
 
@@ -21,7 +22,7 @@ use yii\helpers\Json;
 class FillAttributesForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
     public $email;
 

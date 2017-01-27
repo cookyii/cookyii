@@ -16,7 +16,9 @@ class RbacController extends \rmrevin\yii\rbac\Command
 
     public $defaultAction = 'update';
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $forceAssign = 'user';
 
     /**

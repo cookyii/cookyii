@@ -28,7 +28,9 @@ class Permissions extends AbstractPermissionsDict implements PermissionsDictInte
 
     const ACCESS = 'backend.access';
 
-    /** @var array */
+    /**
+     * @var array
+     */
     static $merge = [
         Account::class,
         Feed::class,

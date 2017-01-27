@@ -27,6 +27,7 @@ Account\frontend\assets\SignInAssetBundle::register($this);
 
     <div class="box-body">
         <?php
+
         /** @var ActiveForm $form */
         $form = ActiveForm::begin([
             'model' => $SignInForm,

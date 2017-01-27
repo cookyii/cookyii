@@ -8,6 +8,7 @@
 namespace cookyii\modules\Page\backend\forms;
 
 use cookyii\modules\Page\resources\Page\Model as PageModel;
+use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Json;
 
 /**
@@ -17,9 +18,11 @@ use yii\helpers\Json;
 class PageEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
-    /** @var PageModel */
+    /**
+     * @var PageModel
+     */
     public $Page;
 
     public $title;

@@ -14,7 +14,9 @@ namespace cookyii\i18n;
 class Formatter extends \yii\i18n\Formatter
 {
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $shortNumberSuffix = [
         0 => '',
         1 => 'k',

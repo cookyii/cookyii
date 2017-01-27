@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Account\resources\AccountAlert;
 
+use cookyii\db\traits\SoftDeleteTrait;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 
 /**
@@ -28,7 +29,7 @@ class Model extends \cookyii\db\ActiveRecord
 {
 
     use Serialize,
-        \cookyii\db\traits\SoftDeleteTrait;
+        SoftDeleteTrait;
 
     static $tableName = '{{%account_alert}}';
 

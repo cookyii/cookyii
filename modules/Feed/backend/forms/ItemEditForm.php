@@ -10,6 +10,7 @@ namespace cookyii\modules\Feed\backend\forms;
 use cookyii\modules\Feed;
 use cookyii\modules\Feed\resources\FeedItem\Model as FeedItemModel;
 use cookyii\modules\Feed\resources\FeedItemSection\Model as FeedItemSectionModel;
+use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Json;
 
 /**
@@ -19,9 +20,11 @@ use yii\helpers\Json;
 class ItemEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
-    /** @var FeedItemModel */
+    /**
+     * @var FeedItemModel
+     */
     public $Item;
 
     public $slug;

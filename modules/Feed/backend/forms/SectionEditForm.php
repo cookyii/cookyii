@@ -8,6 +8,7 @@
 namespace cookyii\modules\Feed\backend\forms;
 
 use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
+use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Json;
 
 /**
@@ -17,9 +18,11 @@ use yii\helpers\Json;
 class SectionEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
-    /** @var FeedSectionModel */
+    /**
+     * @var FeedSectionModel
+     */
     public $Section;
 
     public $parent_id;

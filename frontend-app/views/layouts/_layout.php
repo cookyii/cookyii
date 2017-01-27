@@ -22,8 +22,7 @@ $title = empty($this->title)
 /** @var \frontend\components\Controller $controller */
 $controller = $this->context;
 
-/** @var \resources\Account\Model|null $Account */
-$Account = D::User()->identity;
+$Account = D::Account();
 
 $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()], 'canonical');
 

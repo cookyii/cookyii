@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Feed\resources\FeedSection;
 
+use cookyii\db\traits\ActivationTrait;
+use cookyii\db\traits\SoftDeleteTrait;
 use cookyii\modules\Feed\resources\FeedItem\Model as FeedItemModel;
 use cookyii\modules\Feed\resources\FeedItemSection\Model as FeedItemSectionModel;
 use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
@@ -40,8 +42,8 @@ use yii\helpers\Json;
 class Model extends \cookyii\db\ActiveRecord
 {
 
-    use \cookyii\db\traits\ActivationTrait,
-        \cookyii\db\traits\SoftDeleteTrait;
+    use ActivationTrait,
+        SoftDeleteTrait;
 
     static $tableName = '{{%feed_section}}';
 

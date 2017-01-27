@@ -9,6 +9,7 @@ namespace cookyii\modules\Account\backend\forms;
 
 use cookyii\Decorator as D;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
+use cookyii\traits\PopulateErrorsTrait;
 use rmrevin\yii\rbac\RbacFactory;
 
 /**
@@ -18,9 +19,11 @@ use rmrevin\yii\rbac\RbacFactory;
 class AccountEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
-    /** @var AccountModel */
+    /**
+     * @var AccountModel
+     */
     public $Account;
 
     public $name;

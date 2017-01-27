@@ -27,11 +27,11 @@ trait GetHelperTrait
     protected function getHelper($helperClass)
     {
         if (empty($helperClass)) {
-            throw new \yii\base\InvalidConfigException('The "presentHelperClass" property must be set.');
+            throw new \yii\base\InvalidConfigException('The "$helperClass" property must be set.');
         }
 
         if (!class_exists($helperClass)) {
-            throw new \yii\base\InvalidConfigException(sprintf('Class "%s" not found.', $this->presentHelperClass));
+            throw new \yii\base\InvalidConfigException(sprintf('Class "%s" not found.', $helperClass));
         }
 
         if (!isset($this->_helpers[$helperClass])) {

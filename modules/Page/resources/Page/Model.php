@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Page\resources\Page;
 
+use cookyii\db\traits\ActivationTrait;
+use cookyii\db\traits\SoftDeleteTrait;
 use yii\helpers\Json;
 
 /**
@@ -29,8 +31,8 @@ class Model extends \cookyii\db\ActiveRecord
 {
 
     use Serialize,
-        \cookyii\db\traits\ActivationTrait,
-        \cookyii\db\traits\SoftDeleteTrait;
+        ActivationTrait,
+        SoftDeleteTrait;
 
     static $tableName = '{{%page}}';
 

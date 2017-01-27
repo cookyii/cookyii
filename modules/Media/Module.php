@@ -16,31 +16,49 @@ use yii\helpers\FileHelper;
 class Module extends \yii\base\Module
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $moduleName = 'media';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $uploadPath = '@upload';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $uploadWebPath = '/upload';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $storagePath = '@upload/storage';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $storageWebPath = '/upload/storage';
 
-    /** @var int */
+    /**
+     * @var integer
+     */
     public $maxUploadFileSize = 10; // megabytes
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $placeholderAlias = '@app/web/img/placeholder.png';
 
-    /** @var int */
+    /**
+     * @var integer
+     */
     public $pathChmod = 0775;
 
-    /** @var int */
+    /**
+     * @var integer
+     */
     public $fileChmod = 0664;
 
     /**

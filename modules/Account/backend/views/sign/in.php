@@ -27,6 +27,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
 
     <div class="login-box-body">
         <?php
+
         /** @var ActiveForm $form */
         $form = ActiveForm::begin([
             'model' => $SignInForm,
@@ -61,6 +62,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
             </div>
         </div>
         <?php
+
         ActiveForm::end();
 
         $authAuthChoice = AuthChoice::begin([
@@ -103,6 +105,7 @@ Account\backend\assets\SignInAssetBundle::register($this);
             </div>
             <?php
         }
+
         AuthChoice::end();
 
         ?>

@@ -8,6 +8,7 @@
 namespace cookyii\modules\Postman\backend\forms;
 
 use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
+use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Json;
 
 /**
@@ -17,9 +18,11 @@ use yii\helpers\Json;
 class MessageEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
-    /** @var PostmanMessageModel */
+    /**
+     * @var PostmanMessageModel
+     */
     public $Message;
 
     public $subject;

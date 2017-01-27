@@ -9,6 +9,7 @@ namespace cookyii\modules\Client\backend\forms;
 
 use cookyii\Decorator as D;
 use cookyii\modules\Client\resources\Client\Model as ClientModel;
+use cookyii\traits\PopulateErrorsTrait;
 
 /**
  * Class ClientEditForm
@@ -17,9 +18,11 @@ use cookyii\modules\Client\resources\Client\Model as ClientModel;
 class ClientEditForm extends \cookyii\base\FormModel
 {
 
-    use \cookyii\traits\PopulateErrorsTrait;
+    use PopulateErrorsTrait;
 
-    /** @var ClientModel */
+    /**
+     * @var ClientModel
+     */
     public $Client;
 
     public $name;

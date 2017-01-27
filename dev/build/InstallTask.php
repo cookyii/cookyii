@@ -16,49 +16,79 @@ use cookyii\build\tasks\CallableTask;
 class InstallTask extends CallableTask
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $envDistFile = '.env.dist.php';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $envFile = '.env.php';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $mysqlHost = 'localhost';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $mysqlPort = 3306;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $mysqlSocket;
 
-    /** @var string|array required */
+    /**
+     * @var string|array required
+     */
     public $database;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $mysqlUserHost = 'localhost';
 
-    /** @var string required */
+    /**
+     * @var string required
+     */
     public $mysqlUserName;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $mysqlUserPassword;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $mysqlUserPasswordConst = 'DB_PASS';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $mysqlRootPassword;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $cookieValidationKey;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $cookieValidationKeyConst = 'COOKIE_VALIDATION_KEY';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $domain;
 
-    /** @var \mysqli */
+    /**
+     * @var \mysqli
+     */
     protected $connect;
 
     /**

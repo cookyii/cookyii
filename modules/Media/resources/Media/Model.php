@@ -33,10 +33,14 @@ class Model extends \cookyii\db\ActiveRecord
 
     static $tableName = '{{%media}}';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public static $mediaModule = 'media';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $path;
 
     /**

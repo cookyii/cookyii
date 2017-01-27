@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Client\resources\Client;
 
+use cookyii\db\traits\SoftDeleteTrait;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Client\resources\ClientProperty\Model as ClientPropertyModel;
 
@@ -33,7 +34,7 @@ class Model extends \cookyii\db\ActiveRecord
 {
 
     use Serialize,
-        \cookyii\db\traits\SoftDeleteTrait;
+        SoftDeleteTrait;
 
     static $tableName = '{{%client}}';
 

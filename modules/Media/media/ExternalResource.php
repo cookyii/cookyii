@@ -14,10 +14,14 @@ namespace cookyii\modules\Media\media;
 class ExternalResource extends AbstractResource implements ResourceInterface
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $temp;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $source;
 
     /**

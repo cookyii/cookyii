@@ -14,27 +14,43 @@ namespace cookyii\modules\Postman;
 class Module extends \yii\base\Module
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $from = 'Postman';
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $subjectPrefix;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $subjectSuffix;
 
-    /** @var integer */
+    /**
+     * @var integer
+     */
     public $resentTry = 3;
 
-    /** @var integer */
+    /**
+     * @var integer
+     */
     public $resentOffset = '+5 min';
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $usePremailer = false;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $defaultLayout = 'database';
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $layoutVariants = [];
 }

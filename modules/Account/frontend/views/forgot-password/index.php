@@ -26,6 +26,7 @@ Account\frontend\assets\ForgotPasswordAssetBundle::register($this);
 
     <div class="box-body">
         <?php
+
         /** @var ActiveForm $form */
         $form = ActiveForm::begin([
             'model' => $ForgotPasswordForm,

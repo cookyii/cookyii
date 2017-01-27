@@ -7,6 +7,8 @@
 
 namespace cookyii\modules\Feed\resources\FeedItem;
 
+use cookyii\db\traits\ActivationTrait;
+use cookyii\db\traits\SoftDeleteTrait;
 use cookyii\modules\Feed\resources\FeedItemSection\Model as FeedItemSectionModel;
 use cookyii\modules\Feed\resources\FeedSection\Model as FeedSectionModel;
 use cookyii\modules\Media\resources\Media\Model as MediaModel;
@@ -41,8 +43,8 @@ class Model extends \cookyii\db\ActiveRecord
 {
 
     use Serialize,
-        \cookyii\db\traits\ActivationTrait,
-        \cookyii\db\traits\SoftDeleteTrait;
+        ActivationTrait,
+        SoftDeleteTrait;
 
     static $tableName = '{{%feed_item}}';
 

@@ -16,7 +16,9 @@ use yii\helpers\FileHelper;
 class UploadedResource extends AbstractResource implements ResourceInterface
 {
 
-    /** @var \yii\web\UploadedFile */
+    /**
+     * @var \yii\web\UploadedFile
+     */
     private $file;
 
     /**

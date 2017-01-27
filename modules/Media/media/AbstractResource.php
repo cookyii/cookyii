@@ -18,7 +18,9 @@ use yii\helpers\StringHelper;
 abstract class AbstractResource extends \yii\base\Object implements ResourceInterface
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public static $mediaModule = 'media';
 
     /**

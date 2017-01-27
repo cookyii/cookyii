@@ -7,6 +7,7 @@
 
 namespace cookyii\modules\Postman\resources\PostmanTemplate;
 
+use cookyii\db\traits\SoftDeleteTrait;
 use yii\helpers\Json;
 
 /**
@@ -31,7 +32,7 @@ class Model extends \cookyii\db\ActiveRecord
 {
 
     use Serialize,
-        \cookyii\db\traits\SoftDeleteTrait;
+        SoftDeleteTrait;
 
     static $tableName = '{{%postman_template}}';
 

@@ -17,7 +17,9 @@ use yii\helpers\Json;
 class SendMailJob extends \cookyii\queue\ActiveJob
 {
 
-    /** @var integer */
+    /**
+     * @var integer
+     */
     public $postmanMessageId;
 
     /**
