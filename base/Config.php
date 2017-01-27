@@ -111,8 +111,7 @@ class Config
         }
 
         if (!D::User()->isGuest) {
-            /** @var \resources\Account\Model $Account */
-            $Account = D::User()->identity;
+            $Account = D::Account();
 
             $gmt = $account_gmt = !empty($Account->timezone)
                 ? $Account->timezone

@@ -450,7 +450,8 @@ class Model extends \cookyii\db\ActiveRecord
         ];
 
         if (D::Request() instanceof \yii\web\Request) {
-            $Account = D::User()->identity;
+            $Account = D::Account();
+
             if ($Account instanceof \cookyii\interfaces\AccountInterface) {
                 $base_placeholders['{user_id}'] = $Account->getId();
                 $base_placeholders['{username}'] = $Account->getName();
