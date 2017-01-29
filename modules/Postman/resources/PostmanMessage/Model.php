@@ -347,13 +347,32 @@ class Model extends \cookyii\db\ActiveRecord
 
                 $web_version = $this->getWebVersionUrl();
 
-                $content_text = str_replace('#web_version#', $web_version, $this->content_text);
-                $content_html = str_replace('#web_version#', $web_version, $this->content_html);
-
                 $Message = \Yii::$app->mailer->compose()
                     ->setCharset('UTF-8')
                     ->setFrom($from)
-                    ->setSubject($this->subject)
+                    ->setSubject($this->subject);
+
+                $content_text = str_replace('#web_version#', $web_version, $this->content_text);
+                $content_html = str_replace('#web_version#', $web_version, $this->content_html);
+
+                preg_match_all('/(\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([^)"\']*)\s*)/i', $content_html, $matches);
+
+                $embed = [];
+                if (!empty($matches)) {
+                    foreach ($matches[0] as $key => $match) {
+                        $hash = md5($match);
+
+                        if (!isset($embed[$hash])) {
+                            $embed[$hash] = $Message->embedContent(file_get_contents($match), [
+                                'contentType' => $matches[2][$key],
+                            ]);
+
+                            $content_html = str_replace($match, $embed[$hash], $content_html);
+                        }
+                    }
+                }
+
+                $Message
                     ->setTextBody($content_text)
                     ->setHtmlBody($content_html);
 
