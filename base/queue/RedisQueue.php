@@ -43,6 +43,29 @@ class RedisQueue extends \yii\queue\RedisQueue
     /**
      * @inheritdoc
      */
+    public function push($payload, $queue, $delay = 0)
+    {
+        $id = md5(uniqid('', true));
+        $execute_at = time() + $delay;
+
+        $payload = Json::encode([
+            'id' => $id,
+            'time' => $execute_at,
+            'body' => $payload,
+        ]);
+
+        if ($delay > 0) {
+            $this->redis->zadd($queue . ':delayed', [$payload => $execute_at]);
+        } else {
+            $this->redis->rpush($queue, [$payload]);
+        }
+
+        return $id;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function pop($queue)
     {
         foreach ([':delayed', ':reserved'] as $type) {
