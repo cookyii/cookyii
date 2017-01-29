@@ -127,6 +127,14 @@ class Migration extends \yii\db\Migration
     }
 
     /**
+     * @return \yii\db\ColumnSchemaBuilder
+     */
+    public function mediumText()
+    {
+        return $this->getDb()->getSchema()->createColumnSchemaBuilder('mediumtext');
+    }
+
+    /**
      * @param integer $count
      * @param integer|array $maxNbChars
      * @return string
