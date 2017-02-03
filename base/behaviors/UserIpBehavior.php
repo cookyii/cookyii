@@ -7,7 +7,7 @@
 
 namespace cookyii\behaviors;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use yii\db\BaseActiveRecord;
 use yii\db\Expression;
 
@@ -65,8 +65,8 @@ class UserIpBehavior extends \yii\behaviors\AttributeBehavior
      */
     protected function getDefaultValue()
     {
-        return D::Request() instanceof \yii\web\Request
-            ? D::Request()->getUserIP()
+        return F::Request() instanceof \yii\web\Request
+            ? F::Request()->getUserIP()
             : null;
     }
 }

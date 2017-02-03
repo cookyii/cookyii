@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Translation\backend\controllers;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Translation;
 use yii\helpers\VarDumper;
 
@@ -165,9 +165,9 @@ class ApiController extends \cookyii\api\Controller
 
         $config = $this->getConfig();
 
-        $category = D::Request()->post('category');
-        $phrase = D::Request()->post('phrase');
-        $variants = D::Request()->post('variants');
+        $category = F::Request()->post('category');
+        $phrase = F::Request()->post('phrase');
+        $variants = F::Request()->post('variants');
 
         $format = $config['format'];
         $messagePath = $config['messagePath'];

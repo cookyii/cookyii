@@ -7,7 +7,6 @@
 
 namespace cookyii\modules\Account\resources\Account;
 
-use cookyii\modules\Account;
 use cookyii\modules\Account\resources\AccountAuth\Model as AccountAuthModel;
 
 /**

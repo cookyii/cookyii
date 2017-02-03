@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Account\commands;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use rmrevin\yii\rbac\RbacFactory;
@@ -66,8 +66,8 @@ class AccountCommand extends \yii\console\Controller
 
         $Account->save();
         if (!$Account->hasErrors()) {
-            D::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
-            D::AuthManager()->assign(RbacFactory::Role($roles['admin']), $Account->id);
+            F::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
+            F::AuthManager()->assign(RbacFactory::Role($roles['admin']), $Account->id);
 
             $this->stdout("User have been successfully added\n", Console::FG_GREEN);
         } else {

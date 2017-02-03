@@ -1,19 +1,19 @@
 /*********************************** Other *****************/
-.sections { padding-right: 10px !important; border-right: 1px solid #c5ceda; }
+.sections { padding-right: 10px !important; border-right: 1px solid #C5CEDA; }
 .sections ul { list-style: none; padding-left: 0; }
-.sections li > ul { display: none; padding-right: 10px; margin-right: 3px; border-right: 1px solid #c5ceda; }
+.sections li > ul { display: none; padding-right: 10px; margin-right: 3px; border-right: 1px solid #C5CEDA; }
 .sections li > a { display: inline-block !important; opacity: 0.8; }
-.sections li > span.dash { font-weight: bold; color: #c5ceda; margin-right: -11px; }
+.sections li > span.dash { font-weight: bold; color: #C5CEDA; margin-right: -11px; }
 .sections li.deleted > a { text-decoration: line-through; }
 .sections li.active > a { font-weight: bold; opacity: 1; }
 .sections li.active > ul,
 .sections.opened li > ul { display: block; }
 a.new-section { margin-top: 5px; }
 md-fab-speed-dial {
-  position: fixed;
-  bottom: 55px;
-  right: 35px;
-  z-index: 10;
+    position: fixed;
+    bottom: 55px;
+    right: 35px;
+    z-index: 10;
 }
 /*********************************** Search ****************/
 .search { width: 150px; margin-right: 100px; transition: width .4s ease-out; }
@@ -22,15 +22,15 @@ md-fab-speed-dial {
 .box-section { display: inline-block; margin-left: 50px; }
 .box-item { }
 .box-item .preview-picture {
-  width: 100%;
-  height: 150px;
-  color: white;
-  background-color: #cacaca;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+    width: 100%;
+    height: 150px;
+    color: white;
+    background-color: #CACACA;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 .box-item .preview-picture img { width: 100%; }
 .box-item .activated { text-align: center; }
@@ -42,4 +42,4 @@ md-fab-speed-dial {
 .box-item:hover .actions > a,
 .box-item:focus .actions > a { opacity: 0.9; }
 .box-item.deleted * { text-decoration: line-through; }
-.box-item.deactivated * { color: #b8b8b8; }
+.box-item.deactivated * { color: #B8B8B8; }

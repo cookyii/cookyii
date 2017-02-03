@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\modules\Account\resources\AccountAuthResponse\Model as AccountAuthResponseModel;
@@ -101,11 +101,11 @@ class FillAttributesForm extends \cookyii\base\FormModel
 
             $Account->pushSocialLink($Client);
 
-            D::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
+            F::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
 
             $SignInFormModel = \Yii::createObject(SignInForm::class);
 
-            D::User()->login($Account, $SignInFormModel::REMEMBER_TIME);
+            F::User()->login($Account, $SignInFormModel::REMEMBER_TIME);
         }
 
         $AuthResponse->validate() && $AuthResponse->save();

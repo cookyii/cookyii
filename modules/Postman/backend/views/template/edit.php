@@ -37,7 +37,7 @@ Postman\backend\assets\TemplateEditAssetBundle::register($this);
                             'refresh' => Html::a(FA::icon('refresh') . ' ' . Yii::t('cookyii', 'Refresh'), null, [
                                 'class' => 'btn btn-danger btn-xs',
                                 'ng-click' => 'reload()',
-                            ])
+                            ]),
                         ]) ?>
                     </span>
                 </div>

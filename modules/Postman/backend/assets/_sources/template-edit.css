@@ -1,12 +1,12 @@
 form { }
 form .box-notify {
-  position: fixed;
-  top: 50px; left: 0; right: 0;
-  z-index: 1;
-  display: none;
-  background-color: #ffd696;
-  padding: 10px 0;
-  text-align: center;
+    position: fixed;
+    top: 50px; left: 0; right: 0;
+    z-index: 1;
+    display: none;
+    background-color: #FFD696;
+    padding: 10px 0;
+    text-align: center;
 }
 form.ng-dirty .box-notify { display: block; }
 form .box-notify .btn { margin-left: 10px; }
@@ -15,12 +15,12 @@ form .box-notify .btn { margin-left: 10px; }
 .param textarea { height: 34px; }
 div.address a.remove, div.param a.remove { color: orangered; font-size: 1.8em; display: block; text-align: center; opacity: 0.1; line-height: 1.2; }
 div.address:hover a.remove, div.param:hover a.remove { opacity: 0.8; }
-iframe.preview { width: 100%; min-height: 200px; border: 1px solid #dddddd; }
+iframe.preview { width: 100%; min-height: 200px; border: 1px solid #DDDDDD; }
 .actions { margin: 10px 5px; }
 /** Tabs */
 ul.nav.nav-tabs { margin-bottom: 20px; margin-top: -40px; }
 .left-chunk { padding-top: 22px; }
 @media (max-width: 991px) {
-  .left-chunk { padding-top: 0; }
-  ul.nav.nav-tabs { margin-top: 10px; }
+    .left-chunk { padding-top: 0; }
+    ul.nav.nav-tabs { margin-top: 10px; }
 }

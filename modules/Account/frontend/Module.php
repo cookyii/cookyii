@@ -7,8 +7,6 @@
 
 namespace cookyii\modules\Account\frontend;
 
-use cookyii\modules\Account;
-
 /**
  * Class Module
  * @package cookyii\modules\Account\frontend

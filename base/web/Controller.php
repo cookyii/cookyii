@@ -7,7 +7,7 @@
 
 namespace cookyii\web;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use yii\filters\AccessControl;
 
 /**
@@ -25,10 +25,10 @@ abstract class Controller extends \yii\web\Controller
         parent::init();
 
         if (isset($_GET['clear'])) {
-            D::Cache()->flush();
-            D::Cache('authManager')->flush();
-            D::Cache('schema')->flush();
-            D::Cache('query')->flush();
+            F::Cache()->flush();
+            F::Cache('authManager')->flush();
+            F::Cache('schema')->flush();
+            F::Cache('query')->flush();
 
             if (function_exists('opcache_reset')) {
                 opcache_reset();

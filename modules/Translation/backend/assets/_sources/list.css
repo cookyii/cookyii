@@ -18,5 +18,5 @@ ul.categories > li > a.active { font-weight: bold; }
     resize: vertical;
     transition: background-color 0.2s ease-out;
 }
-.table-phrases td.lang textarea.success { background-color: #eaffdf; }
-.table-phrases td.lang textarea.danger { background-color: #ffdfdf; }
+.table-phrases td.lang textarea.success { background-color: #EAFFDF; }
+.table-phrases td.lang textarea.danger { background-color: #FFDFDF; }

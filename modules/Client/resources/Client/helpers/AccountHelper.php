@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Client\resources\Client\helpers;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 
 /**
@@ -36,7 +36,7 @@ class AccountHelper extends \cookyii\db\helpers\AbstractHelper
 
         $name = empty($name) ? $Client->name : $name;
         $email = empty($email) ? $Client->email : $email;
-        $password = empty($password) ? D::Security()->generateRandomString(10) : $password;
+        $password = empty($password) ? F::Security()->generateRandomString(10) : $password;
 
         /** @var AccountModel $AccountModel */
         $AccountModel = \Yii::createObject(AccountModel::class);

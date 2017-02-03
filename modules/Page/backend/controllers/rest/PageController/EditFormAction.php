@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Page\backend\controllers\rest\PageController;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Page;
 
 /**
@@ -27,7 +27,7 @@ class EditFormAction extends \cookyii\rest\Action
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $page_id = (int)D::Request()->post('page_id');
+        $page_id = (int)F::Request()->post('page_id');
 
         /** @var $modelClass \cookyii\modules\Page\resources\Page\Model */
         $modelClass = $this->modelClass;
@@ -49,7 +49,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Page' => $Page,
         ]);
 
-        $PageEditForm->load(D::Request()->post())
+        $PageEditForm->load(F::Request()->post())
         && $PageEditForm->validate()
         && $PageEditForm->save();
 

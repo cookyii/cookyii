@@ -7,7 +7,7 @@
 
 namespace console\controllers;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\queue\Event;
 use yii\helpers\Console;
 
@@ -154,7 +154,7 @@ class QueueController extends \yii\console\Controller
      */
     protected function getTime()
     {
-        return D::Formatter()->asTime(time(), 'HH:mm:ss');
+        return F::Formatter()->asTime(time(), 'HH:mm:ss');
     }
 
     /**

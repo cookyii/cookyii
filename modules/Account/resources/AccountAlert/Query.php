@@ -16,7 +16,7 @@ namespace cookyii\modules\Account\resources\AccountAlert;
  */
 class Query extends \yii\db\ActiveQuery
 {
-    
+
     use \cookyii\db\traits\query\DeletedQueryTrait;
 
     /**

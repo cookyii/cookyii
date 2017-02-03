@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Client\backend\controllers\rest\ClientController;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Client\resources\Client\Model as ClientModel;
 
 /**
@@ -27,7 +27,7 @@ class EditFormAction extends \cookyii\rest\Action
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $client_id = (int)D::Request()->post('client_id');
+        $client_id = (int)F::Request()->post('client_id');
 
         $Client = null;
 
@@ -49,7 +49,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Client' => $Client,
         ]);
 
-        $ClientEditForm->load(D::Request()->post())
+        $ClientEditForm->load(F::Request()->post())
         && $ClientEditForm->validate()
         && $ClientEditForm->save();
 

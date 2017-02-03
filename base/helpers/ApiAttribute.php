@@ -7,7 +7,7 @@
 
 namespace cookyii\helpers;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 
 /**
  * Class ApiAttribute
@@ -78,23 +78,23 @@ class ApiAttribute
 
                 $value = empty($value)
                     ? time()
-                    : D::Formatter()->asTimestamp($value);
+                    : F::Formatter()->asTimestamp($value);
 
                 $is_milliseconds = mb_strlen($value, 'utf-8') === 13;
                 $value = $is_milliseconds ? floor($value / 1000) : $value;
 
                 $delta = time() - $value;
 
-                $same_year = D::Formatter()->asDate($value, 'y') === D::Formatter()->asDate(time(), 'y');
+                $same_year = F::Formatter()->asDate($value, 'y') === F::Formatter()->asDate(time(), 'y');
 
                 if (!$same_year) {
-                    $result = D::Formatter()->asDatetime($value, $formats['long']);
+                    $result = F::Formatter()->asDatetime($value, $formats['long']);
                 } elseif ($delta > 86400 && $delta <= (86400 * 7)) {
-                    $result = D::Formatter()->asDatetime($value, $formats['short']);
+                    $result = F::Formatter()->asDatetime($value, $formats['short']);
                 } elseif ($delta < 60) {
                     $result = \Yii::t('cookyii', 'just now');
                 } else {
-                    $result = D::Formatter()->asRelativeTime($value);
+                    $result = F::Formatter()->asRelativeTime($value);
                 }
 
                 return $result;
@@ -129,7 +129,7 @@ class ApiAttribute
 
                 $value = empty($value)
                     ? time()
-                    : D::Formatter()->asTimestamp($value);
+                    : F::Formatter()->asTimestamp($value);
 
                 $is_milliseconds = mb_strlen($value, 'utf-8') === 13;
                 $value = $is_milliseconds ? floor($value / 1000) : $value;
@@ -140,10 +140,14 @@ class ApiAttribute
                             $result[$key] = empty($value) ? null : $value;
                             break;
                         case 'relative':
-                            $result[$key] = empty($value) ? \Yii::t('yii', '(not set)') : D::Formatter()->asRelativeTime($value);
+                            $result[$key] = empty($value)
+                                ? \Yii::t('yii', '(not set)')
+                                : F::Formatter()->asRelativeTime($value);
                             break;
                         default:
-                            $result[$key] = empty($value) ? \Yii::t('yii', '(not set)') : D::Formatter()->asDatetime($value, $format);
+                            $result[$key] = empty($value)
+                                ? \Yii::t('yii', '(not set)')
+                                : F::Formatter()->asDatetime($value, $format);
                             break;
                     }
                 }

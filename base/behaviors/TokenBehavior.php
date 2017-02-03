@@ -7,7 +7,7 @@
 
 namespace cookyii\behaviors;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use yii\db\BaseActiveRecord;
 use yii\db\Expression;
 
@@ -56,7 +56,7 @@ class TokenBehavior extends \yii\behaviors\AttributeBehavior
         } else {
             return is_callable($this->value)
                 ? call_user_func($this->value, $event)
-                : D::Security()->generateRandomString(32);
+                : F::Security()->generateRandomString(32);
         }
     }
 }

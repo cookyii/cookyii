@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Feed\backend\controllers\item\rest;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Feed;
 use cookyii\modules\Feed\resources\FeedItem\Model as FeedItemModel;
 
@@ -109,17 +109,17 @@ class ItemController extends \cookyii\rest\Controller
 
         $Query = $modelClass::find();
 
-        $section = str_clean(D::Request()->get('section'));
+        $section = str_clean(F::Request()->get('section'));
         if (!empty($section)) {
             $Query->bySectionSlug($section);
         }
 
-        $search = str_clean(D::Request()->get('search'));
+        $search = str_clean(F::Request()->get('search'));
         if (!empty($search)) {
             $Query->search($search);
         }
 
-        $deleted = D::Request()->get('deleted');
+        $deleted = F::Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

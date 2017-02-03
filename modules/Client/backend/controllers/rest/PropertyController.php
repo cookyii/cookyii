@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Client\backend\controllers\rest;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Client;
 use cookyii\modules\Client\resources\ClientProperty\Model as ClientPropertyModel;
 
@@ -44,9 +44,9 @@ class PropertyController extends \cookyii\api\Controller
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $client_id = (int)D::Request()->post('client_id');
-        $key = str_clean(D::Request()->post('key'));
-        $property = D::Request()->post('property', []);
+        $client_id = (int)F::Request()->post('client_id');
+        $key = str_clean(F::Request()->post('key'));
+        $property = F::Request()->post('property', []);
 
         $property_key = str_clean(isset($property['key']) ? $property['key'] : null);
         $property_value = isset($property['value']) ? $property['value'] : null;
@@ -121,8 +121,8 @@ class PropertyController extends \cookyii\api\Controller
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $client_id = (int)D::Request()->get('client_id');
-        $key = str_clean(D::Request()->get('key'));
+        $client_id = (int)F::Request()->get('client_id');
+        $key = str_clean(F::Request()->get('key'));
 
         if (empty($client_id)) {
             throw new \yii\web\BadRequestHttpException('Empty client id');

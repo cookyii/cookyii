@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Postman\backend\controllers\rest;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Postman;
 use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
 
@@ -103,12 +103,12 @@ class MessageController extends \cookyii\rest\Controller
         /** @var  $Query */
         $Query = $modelClass::find();
 
-        $search = str_clean(D::Request()->get('search'));
+        $search = str_clean(F::Request()->get('search'));
         if (!empty($search)) {
             $Query->search($search);
         }
 
-        $deleted = D::Request()->get('deleted');
+        $deleted = F::Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

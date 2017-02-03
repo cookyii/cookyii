@@ -7,7 +7,7 @@
 
 namespace cookyii\backup\drivers;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use yii\helpers\FileHelper;
 
 /**
@@ -36,8 +36,8 @@ abstract class AbstractDriver extends \yii\base\Object implements DriverInterfac
         if (empty($this->path)) {
             $path = implode(DIRECTORY_SEPARATOR, [
                 \Yii::getAlias($this->controller->backupPath, false),
-                D::Formatter()->asDate(time(), 'yyyy-MM-dd'),
-                D::Formatter()->asTime(time(), 'HH:mm:ss'),
+                F::Formatter()->asDate(time(), 'yyyy-MM-dd'),
+                F::Formatter()->asTime(time(), 'HH:mm:ss'),
             ]);
 
             if (!file_exists($path)) {

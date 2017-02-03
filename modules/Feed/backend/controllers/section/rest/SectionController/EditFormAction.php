@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Feed\backend\controllers\section\rest\SectionController;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Feed;
 
 /**
@@ -27,7 +27,7 @@ class EditFormAction extends \cookyii\rest\Action
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $section_slug = str_clean(D::Request()->post('section_slug'));
+        $section_slug = str_clean(F::Request()->post('section_slug'));
 
         /** @var $modelClass \cookyii\modules\Feed\resources\FeedSection\Model */
         $modelClass = $this->modelClass;
@@ -49,7 +49,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Section' => $Section,
         ]);
 
-        $SectionEditForm->load(D::Request()->post())
+        $SectionEditForm->load(F::Request()->post())
         && $SectionEditForm->validate()
         && $SectionEditForm->save();
 

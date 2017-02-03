@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Account\backend\forms;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\traits\PopulateErrorsTrait;
 use rmrevin\yii\rbac\RbacFactory;
@@ -151,20 +151,20 @@ class AccountEditForm extends \cookyii\base\FormModel
         if ($Account->hasErrors()) {
             $this->populateErrors($Account, 'name');
         } else {
-            D::AuthManager()->revokeAll($Account->id);
+            F::AuthManager()->revokeAll($Account->id);
 
             $roles = $this->roles;
             if (!empty($roles)) {
                 foreach ($roles as $role => $checked) {
                     if ($checked === true) {
-                        D::AuthManager()->assign(RbacFactory::Role($role), $Account->id);
+                        F::AuthManager()->assign(RbacFactory::Role($role), $Account->id);
                     }
                 }
             }
         }
 
-        if (D::AuthManager() instanceof \yii\rbac\DbManager) {
-            D::AuthManager()->invalidateCache();
+        if (F::AuthManager() instanceof \yii\rbac\DbManager) {
+            F::AuthManager()->invalidateCache();
         }
 
         $this->Account = $Account;

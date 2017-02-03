@@ -534,7 +534,8 @@ class ActiveField extends \yii\widgets\ActiveField
      * the labels will also be HTML-encoded.
      * @param array $options the tag options in terms of name-value pairs.
      *
-     * For the list of available options please refer to the `$options` parameter of [[\yii\helpers\Html::activeDropDownList()]].
+     * For the list of available options please refer to the `$options` parameter of
+     *     [[\yii\helpers\Html::activeDropDownList()]].
      *
      * If you set a custom `id` for the input element, you may need to adjust the [[$selectors]] accordingly.
      *

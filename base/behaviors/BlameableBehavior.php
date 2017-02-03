@@ -7,7 +7,7 @@
 
 namespace cookyii\behaviors;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 
 /**
  * Class BlameableBehavior
@@ -25,8 +25,8 @@ class BlameableBehavior extends \yii\behaviors\BlameableBehavior
     {
         if ($this->value === null) {
             if (\Yii::$app instanceof \yii\web\Application) {
-                $this->value = !D::User()->isGuest
-                    ? D::User()->id
+                $this->value = !F::User()->isGuest
+                    ? F::User()->id
                     : null;
             } else {
                 $this->value = null;

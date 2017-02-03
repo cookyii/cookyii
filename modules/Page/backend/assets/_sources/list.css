@@ -14,5 +14,5 @@ md-switch { margin: 0 10px; }
 .table-pages td.actions > a { opacity: 0.1; }
 .table-pages tr:hover .actions > a,
 .table-pages tr:focus .actions > a { opacity: 0.9; }
-.table-pages tr.deactivated td { color: #b8b8b8; }
+.table-pages tr.deactivated td { color: #B8B8B8; }
 .table-pages tr.deleted td { text-decoration: line-through; }

@@ -128,7 +128,8 @@ class Image extends \yii\imagine\Image
      * @param Imagine\Image\ImageInterface $Image the image
      * @param integer $width the crop width
      * @param integer $height the crop height
-     * @param array $start the starting point. This must be an array with two elements representing `x` and `y` coordinates.
+     * @param array $start the starting point. This must be an array with two elements representing `x` and `y`
+     *     coordinates.
      * @return \Imagine\Image\ImageInterface
      * @throws \yii\base\InvalidParamException if the `$start` parameter is invalid
      */
@@ -189,7 +190,8 @@ class Image extends \yii\imagine\Image
      * Adds a watermark to an existing image.
      * @param Imagine\Image\ImageInterface $Image the image
      * @param string $watermarkFilename the file path or path alias of the watermark image.
-     * @param array $start the starting point. This must be an array with two elements representing `x` and `y` coordinates.
+     * @param array $start the starting point. This must be an array with two elements representing `x` and `y`
+     *     coordinates.
      * @return \Imagine\Image\ImageInterface
      * @throws \yii\base\InvalidParamException if `$start` is invalid
      */
@@ -212,7 +214,8 @@ class Image extends \yii\imagine\Image
      * @param Imagine\Image\ImageInterface $Image the image
      * @param string $text the text to write to the image
      * @param string $fontFile the file path or path alias
-     * @param array $start the starting position of the text. This must be an array with two elements representing `x` and `y` coordinates.
+     * @param array $start the starting position of the text. This must be an array with two elements representing `x`
+     *     and `y` coordinates.
      * @param array $fontOptions the font options. The following options may be specified:
      *
      * - color: The font color. Defaults to "fff".

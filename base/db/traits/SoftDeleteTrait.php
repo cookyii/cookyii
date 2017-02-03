@@ -39,7 +39,8 @@ trait SoftDeleteTrait
     }
 
     /**
-     * @param bool $permanently если true, то запись будет безусловно удалена, восстановить (@see restore) её будет нельзя
+     * @param bool $permanently если true, то запись будет безусловно удалена, восстановить (@see restore) её будет
+     *     нельзя
      * @return integer|boolean the number of rows affected, or false if validation fails
      * or [[beforeSave()]] stops the updating process.
      * @throws \yii\base\InvalidConfigException

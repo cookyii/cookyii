@@ -27,12 +27,9 @@
   "prefer-stable": true,
   "require": {
     "php": ">=5.5.0",
-
     "yiisoft/yii2-authclient": "~2.0",
-
     "cookyii/base": "dev-master",
     "cookyii/module-postman": "dev-master",
-
     "rmrevin/yii2-fontawesome": "~2.10",
     "rmrevin/yii2-rbac-command": "~1.3"
   },

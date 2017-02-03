@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Postman\backend\controllers\rest\TemplateController;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Postman;
 
 /**
@@ -27,7 +27,7 @@ class EditFormAction extends \cookyii\rest\Action
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $template_id = (int)D::Request()->post('template_id');
+        $template_id = (int)F::Request()->post('template_id');
 
         /** @var $modelClass \cookyii\modules\Postman\resources\PostmanTemplate\Model */
         $modelClass = $this->modelClass;
@@ -49,7 +49,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Template' => $Template,
         ]);
 
-        $TemplateEditForm->load(D::Request()->post())
+        $TemplateEditForm->load(F::Request()->post())
         && $TemplateEditForm->validate()
         && $TemplateEditForm->save();
 

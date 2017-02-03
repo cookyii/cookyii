@@ -20,4 +20,4 @@ md-switch { margin: 0 10px; }
 .table-messages tr:hover .sent > a,
 .table-messages tr:focus .sent > a { opacity: 0.9; }
 .table-messages tr.deleted { }
-.table-messages tr.deleted td { color: #b8b8b8; text-decoration: line-through; }
+.table-messages tr.deleted td { color: #B8B8B8; text-decoration: line-through; }

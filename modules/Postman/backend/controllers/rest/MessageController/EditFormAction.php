@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Postman\backend\controllers\rest\MessageController;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Postman;
 
 /**
@@ -27,7 +27,7 @@ class EditFormAction extends \cookyii\rest\Action
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $message_id = (int)D::Request()->post('message_id');
+        $message_id = (int)F::Request()->post('message_id');
 
         /** @var $modelClass \cookyii\modules\Postman\resources\PostmanMessage\Model */
         $modelClass = $this->modelClass;
@@ -49,7 +49,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Message' => $Message,
         ]);
 
-        $MessageEditForm->load(D::Request()->post())
+        $MessageEditForm->load(F::Request()->post())
         && $MessageEditForm->validate()
         && $MessageEditForm->save();
 

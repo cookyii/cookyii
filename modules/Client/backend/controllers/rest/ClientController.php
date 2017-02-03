@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Client\backend\controllers\rest;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Client;
 use cookyii\modules\Client\resources\Client\Model as ClientModel;
 
@@ -133,12 +133,12 @@ class ClientController extends \cookyii\rest\Controller
         $Query = $modelClass::find()
             ->with(['account']);
 
-        $search = str_clean(D::Request()->get('search'));
+        $search = str_clean(F::Request()->get('search'));
         if (!empty($search)) {
             $Query->search($search);
         }
 
-        $deleted = D::Request()->get('deleted');
+        $deleted = F::Request()->get('deleted');
         if ($deleted === 'false') {
             $Query->withoutDeleted();
         }

@@ -16,6 +16,6 @@ md-switch { margin: 0 10px; }
 .table-clients tr:hover .actions > a,
 .table-clients tr:focus .actions > a { opacity: 0.9; }
 .table-clients tr.deactivated { }
-.table-clients tr.deactivated td { color: #b8b8b8; }
+.table-clients tr.deactivated td { color: #B8B8B8; }
 .table-clients tr.deleted { }
-.table-clients tr.deleted td { color: #b8b8b8; text-decoration: line-through; }
+.table-clients tr.deleted td { color: #B8B8B8; text-decoration: line-through; }

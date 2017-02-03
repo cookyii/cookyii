@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Account;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 use cookyii\traits\PopulateErrorsTrait;
@@ -102,12 +102,12 @@ class SignUpForm extends \cookyii\base\FormModel
             $Account->notificationHelper
                 ->sendSignUpEmail();
 
-            D::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
+            F::AuthManager()->assign(RbacFactory::Role($roles['user']), $Account->id);
 
             if ($this->loginAfterRegister) {
                 $SignInFormModel = \Yii::createObject(SignInForm::class);
 
-                D::User()->login($Account, $SignInFormModel::REMEMBER_TIME);
+                F::User()->login($Account, $SignInFormModel::REMEMBER_TIME);
             }
         }
 

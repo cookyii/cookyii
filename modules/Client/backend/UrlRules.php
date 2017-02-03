@@ -28,7 +28,7 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
                 'pattern' => 'client/rest/create-account',
                 'route' => 'client/rest/client/create-account',
                 'verb' => 'POST',
-            ],[
+            ], [
                 'pattern' => 'client/rest/unlink-account',
                 'route' => 'client/rest/client/unlink-account',
                 'verb' => 'POST',
@@ -45,7 +45,7 @@ class UrlRules extends \cookyii\web\CompositeUrlRule
             [
                 'class' => UrlRule::class,
                 'controller' => 'client/rest/client',
-            ]
+            ],
         ];
     }
 }

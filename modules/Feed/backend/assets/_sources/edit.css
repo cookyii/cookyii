@@ -3,6 +3,6 @@
 ul.nav.nav-tabs { margin-bottom: 20px; margin-top: -40px; }
 .left-chunk { padding-top: 22px; }
 @media (max-width: 991px) {
-  .left-chunk { padding-top: 0; }
-  ul.nav.nav-tabs { margin-top: 10px; }
+    .left-chunk { padding-top: 0; }
+    ul.nav.nav-tabs { margin-top: 10px; }
 }

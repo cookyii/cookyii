@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Feed\backend;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Feed;
 use rmrevin\yii\fontawesome\FA;
 
@@ -28,7 +28,7 @@ class Module extends \yii\base\Module implements \cookyii\interfaces\BackendModu
                 'label' => \Yii::t('cookyii.feed', 'Feeds'),
                 'url' => ['/feed/list/index'],
                 'icon' => FA::icon('bars'),
-                'visible' => D::User()->can(Feed\backend\Permissions::ACCESS),
+                'visible' => F::User()->can(Feed\backend\Permissions::ACCESS),
                 'selected' => $Controller->module->id === 'feed',
                 'sort' => 1000,
             ],

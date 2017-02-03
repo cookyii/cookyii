@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Feed\backend\controllers\item\rest\ItemController;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Feed;
 
 /**
@@ -27,7 +27,7 @@ class EditFormAction extends \cookyii\rest\Action
             'message' => \Yii::t('cookyii', 'Unknown error'),
         ];
 
-        $item_id = (int)D::Request()->post('item_id');
+        $item_id = (int)F::Request()->post('item_id');
 
         /** @var $modelClass \cookyii\modules\Feed\resources\FeedItem\Model */
         $modelClass = $this->modelClass;
@@ -49,7 +49,7 @@ class EditFormAction extends \cookyii\rest\Action
             'Item' => $Item,
         ]);
 
-        $ItemEditForm->load(D::Request()->post())
+        $ItemEditForm->load(F::Request()->post())
         && $ItemEditForm->validate()
         && $ItemEditForm->save();
 

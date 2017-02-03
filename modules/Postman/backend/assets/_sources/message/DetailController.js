@@ -5,7 +5,7 @@ angular.module('BackendApp')
   .controller('postman.message.DetailController', [
     '$scope', '$timeout', 'QueryScope', 'postman.MessageResource',
     function ($scope, $timeout, QueryScope, Message) {
-     
+
       var hash = null,
         query = QueryScope($scope),
         defaultValues = {

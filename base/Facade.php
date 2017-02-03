@@ -1,6 +1,6 @@
 <?php
 /**
- * Decorator.php
+ * Facade.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
@@ -8,10 +8,10 @@
 namespace cookyii;
 
 /**
- * Class Decorator
+ * Class Facade
  * @package cookyii
  */
-class Decorator
+class Facade
 {
 
     /**

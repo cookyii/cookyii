@@ -12,7 +12,7 @@ namespace cookyii\modules\Account\resources\Account\helpers;
  * @package cookyii\modules\Account\resources\Account\helpers
  *
  * @property \cookyii\modules\Account\resources\Account\Model $Model
- * 
+ *
  * @property string $avatar
  */
 class PresentHelper extends \cookyii\db\helpers\AbstractHelper

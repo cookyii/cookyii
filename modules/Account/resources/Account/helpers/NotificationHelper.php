@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Account\resources\Account\helpers;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
 
 /**
@@ -71,8 +71,8 @@ class NotificationHelper extends \cookyii\db\helpers\AbstractHelper
     {
         $Account = $this->Model;
 
-        $url = D::UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
-        $short_url = D::UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
+        $url = F::UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email, 'hash' => $hash]);
+        $short_url = F::UrlManager()->createAbsoluteUrl(['/account/forgot-password/check', 'email' => $Account->email]);
 
         $Message = $this->createMessage('account.frontend.forgot-password.request', [
             '{user_id}' => $Account->id,

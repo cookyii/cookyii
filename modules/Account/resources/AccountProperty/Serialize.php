@@ -8,8 +8,6 @@
 namespace cookyii\modules\Account\resources\AccountProperty;
 
 use cookyii\helpers\ApiAttribute;
-use cookyii\modules\Account\resources\AccountAlert\Model as AccountAlertModel;
-use yii\helpers\ArrayHelper;
 
 /**
  * Trait Serialize

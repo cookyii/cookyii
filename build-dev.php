@@ -6,6 +6,7 @@
  */
 
 require __DIR__ . '/dev/build/ExtractTask.php';
+require __DIR__ . '/dev/build/PushTask.php';
 
 /** @var array $apps list of existing applications */
 $apps = json_decode(file_get_contents(__DIR__ . '/.apps.json'), true);
@@ -26,13 +27,27 @@ $buildConfig = [
         '.depends' => ['extract'],
     ],
 
+    'p' => [
+        '.depends' => ['push'],
+    ],
+
     'extract' => [
-        '.description' => 'Extract codebase to split repos',
+        '.description' => 'Extract codebase to split projects',
         '.depends' => [
             'clear', 'clear/backups', 'less',
         ],
         '.task' => [
             'class' => 'dev\build\ExtractTask',
+        ],
+    ],
+
+    'push' => [
+        '.description' => 'Push codebase to github repos',
+        '.depends' => [
+            'extract',
+        ],
+        '.task' => [
+            'class' => 'dev\build\PushTask',
         ],
     ],
 

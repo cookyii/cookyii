@@ -7,7 +7,7 @@
 
 namespace cookyii\backup;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use yii\db\Connection;
 use yii\di\Instance;
 use yii\helpers\FileHelper;
@@ -343,7 +343,7 @@ class Controller extends \yii\console\Controller
             $time = strtotime($variant);
 
             if ($time) {
-                $date = D::Formatter()->asDatetime($time, 'dd MMM yyyy HH:mm');
+                $date = F::Formatter()->asDatetime($time, 'dd MMM yyyy HH:mm');
 
                 $this->stdout("    $key => $date\n");
             } else {

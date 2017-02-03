@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Account\forms;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Account\resources\Account\Model as AccountModel;
 
 /**
@@ -83,7 +83,7 @@ class SignInForm extends \cookyii\base\FormModel
         $Account = $this->getAccount();
 
         if (true === ($reason = $Account->isAvailable())) {
-            return D::User()->login(
+            return F::User()->login(
                 $Account,
                 $this->remember === 'true'
                     ? static::REMEMBER_TIME

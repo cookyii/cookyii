@@ -7,7 +7,7 @@
 
 namespace cookyii\modules\Client\backend\forms;
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\modules\Client\resources\Client\Model as ClientModel;
 use cookyii\traits\PopulateErrorsTrait;
 
@@ -101,8 +101,8 @@ class ClientEditForm extends \cookyii\base\FormModel
             $this->populateErrors($Client, 'name');
         }
 
-        if (D::AuthManager() instanceof \yii\rbac\DbManager) {
-            D::AuthManager()->invalidateCache();
+        if (F::AuthManager() instanceof \yii\rbac\DbManager) {
+            F::AuthManager()->invalidateCache();
         }
 
         $this->Client = $Client;

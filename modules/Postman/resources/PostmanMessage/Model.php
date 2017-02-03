@@ -8,7 +8,7 @@
 namespace cookyii\modules\Postman\resources\PostmanMessage;
 
 use cookyii\db\traits\SoftDeleteTrait;
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 use cookyii\helpers\Premailer;
 use cookyii\modules\Postman\jobs\SendMailJob;
 use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
@@ -240,7 +240,7 @@ class Model extends \cookyii\db\ActiveRecord
     {
         $code = $this->code;
 
-        $hash = D::Security()->encryptByPassword(Json::encode([
+        $hash = F::Security()->encryptByPassword(Json::encode([
             'c' => $code,
             't' => time(),
             'u' => uniqid(),
@@ -248,7 +248,7 @@ class Model extends \cookyii\db\ActiveRecord
 
         $hash = base64_encode($hash);
 
-        return D::UrlManager('frontend')->createAbsoluteUrl([
+        return F::UrlManager('frontend')->createAbsoluteUrl([
             '/postman/letter/show',
             'token' => $code,
             'hash' => $hash,
@@ -297,7 +297,7 @@ class Model extends \cookyii\db\ActiveRecord
     {
         $result = false;
 
-        $Mailer = D::Mailer();
+        $Mailer = F::Mailer();
 
         $this->executed_at = time();
 
@@ -485,8 +485,8 @@ class Model extends \cookyii\db\ActiveRecord
             '{username}' => null,
         ];
 
-        if (D::Request() instanceof \yii\web\Request) {
-            $Account = D::Account();
+        if (F::Request() instanceof \yii\web\Request) {
+            $Account = F::Account();
 
             if ($Account instanceof \cookyii\interfaces\AccountInterface) {
                 $base_placeholders['{user_id}'] = $Account->getId();

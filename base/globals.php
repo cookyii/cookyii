@@ -7,7 +7,7 @@
 
 @umask(0002);
 
-use cookyii\Decorator as D;
+use cookyii\Facade as F;
 
 /**
  * Dumps a variable in terms of a string.
@@ -38,7 +38,7 @@ function dump($var, $depth = 10, $highlight = true, $return = false)
  */
 function Account()
 {
-    return D::User()->identity;
+    return F::User()->identity;
 }
 
 /**
