@@ -92,20 +92,24 @@ abstract class CronJob extends ActiveJob
                     unset($_min, $_max);
                 }
 
-                foreach (range($threshold[$type]['min'], $threshold[$type]['max']) as $val) {
+                $values = range($threshold[$type]['min'], $threshold[$type]['max']);
+
+                foreach ($values as $val) {
                     if (is_numeric($val) && ($val >= $min && $val <= $max)) {
-                        $result[$type][] = $val;
+                        $result[$type][] = (int)$val;
                     }
                 }
 
             } elseif (preg_match('/\*\/\d+/', $value)) {
                 $repeatDivider = explode('/', $value)[1];
 
-                foreach (range($threshold[$type]['min'], $threshold[$type]['max']) as $range) {
-                    if ($range === 0) {
-                        $result[$type][] = $range;
-                    } elseif ($range % $repeatDivider === 0) {
-                        $result[$type][] = $range;
+                $values = range($threshold[$type]['min'], $threshold[$type]['max']);
+
+                foreach ($values as $val) {
+                    if ($val === 0) {
+                        $result[$type][] = (int)$val;
+                    } elseif ($val % $repeatDivider === 0) {
+                        $result[$type][] = (int)$val;
                     }
                 }
             } elseif (preg_match('/[,\d+]/', $value)) {
@@ -113,7 +117,7 @@ abstract class CronJob extends ActiveJob
 
                 foreach ($values as $val) {
                     if (is_numeric($val) && ($val >= $threshold[$type]['min'] && $val <= $threshold[$type]['max'])) {
-                        $result[$type][] = $val;
+                        $result[$type][] = (int)$val;
                     }
                 }
             } else {
