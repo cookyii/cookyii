@@ -7,9 +7,9 @@
 
 namespace console\controllers;
 
+use cookyii\console\DaemonOutputTrait;
 use cookyii\Facade as F;
 use cookyii\queue\Event;
-use yii\helpers\Console;
 
 /**
  * Class QueueController
@@ -17,6 +17,8 @@ use yii\helpers\Console;
  */
 class QueueController extends \yii\console\Controller
 {
+
+    use DaemonOutputTrait;
 
     /**
      * @var integer
@@ -158,71 +160,11 @@ class QueueController extends \yii\console\Controller
     }
 
     /**
-     * @param string $message
-     * @param bool $nl
-     */
-    protected function out($message, $nl = true)
-    {
-        $message = empty($message)
-            ? ''
-            : sprintf('  %s > %s', $this->getTime(), $message);
-
-        $nl = $nl ? "\n" : '';
-
-        $this->stdout($message . $nl);
-    }
-
-    /**
-     * @param string $message
-     * @param bool $nl
-     */
-    protected function err($message, $nl = true)
-    {
-        $message = empty($message)
-            ? ''
-            : sprintf('  %s > Error: %s', $this->getTime(), $message);
-
-        $nl = $nl ? "\n" : '';
-
-        $this->stderr($message . $nl, Console::FG_RED);
-    }
-
-    /**
-     * @param string $message
-     * @param bool $nl
-     */
-    protected function sep($message, $nl = true)
-    {
-        $nl = $nl ? "\n" : '';
-
-        $this->stdout('  ' . $message . $nl);
-    }
-
-    /**
      * @return \yii\queue\QueueInterface
      * @throws \yii\base\InvalidConfigException
      */
     public function getQueue()
     {
         return \Yii::$app->get($this->queue);
-    }
-
-    /**
-     * Events handlers
-     */
-    protected function registerEventHandlers()
-    {
-        $this->on(static::EVENT_BEFORE_ACTION, function (\yii\base\ActionEvent $Event) {
-            /** self $Controller */
-            $Controller = $Event->sender;
-
-            if (getenv('QUEUE_TIMEOUT')) {
-                $Controller->timeout = (int)getenv('QUEUE_TIMEOUT') + time();
-            }
-
-            if (getenv('QUEUE_SLEEP')) {
-                $Controller->sleep = (int)getenv('QUEUE_SLEEP');
-            }
-        });
     }
 }

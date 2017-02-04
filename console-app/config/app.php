@@ -17,6 +17,10 @@ return array_merge($config, [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
+        'cron' => [
+            'class' => console\controllers\CronController::class,
+            'jobs' => [],
+        ],
         'backup' => [
             'class' => cookyii\backup\Controller::class,
             'excludeTablesData' => [
