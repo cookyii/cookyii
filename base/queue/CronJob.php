@@ -76,7 +76,7 @@ abstract class CronJob extends ActiveJob
 
         foreach ($timing AS $type => $value) {
             if (is_numeric($value) && ($value >= $threshold[$type]['min'] && $value <= $threshold[$type]['max'])) {
-                $result[$type][] = $value;
+                $result[$type][] = (int)$value;
             } elseif ($value === '*') {
                 $result[$type] = range($threshold[$type]['min'], $threshold[$type]['max']);
             } elseif (preg_match('/\d+-\d+/', $value)) {
