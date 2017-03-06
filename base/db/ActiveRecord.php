@@ -68,4 +68,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ? static::$tableName
             : parent::tableName();
     }
+
+    /**
+     * @param string $field
+     * @param string|null $table
+     * @return string
+     */
+    public static function fieldName($field, $table = null)
+    {
+        $table = empty($table) ? static::tableName() : $table;
+
+        return "$table.[[$field]]";
+    }
 }
