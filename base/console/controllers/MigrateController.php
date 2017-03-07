@@ -46,7 +46,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
                         if (file_exists($file)) {
                             require_once($file);
 
-                            return new $class();
+                            return $this->createMigrationInstance($class);
                         }
                     }
                 }
@@ -62,7 +62,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
                     if (file_exists($file)) {
                         require_once($file);
 
-                        return new $class();
+                        return $this->createMigrationInstance($class);
                     }
                 }
             }
@@ -72,10 +72,23 @@ class MigrateController extends \yii\console\controllers\MigrateController
         if (file_exists($file)) {
             require_once($file);
 
-            return new $class();
+            return $this->createMigrationInstance($class);
         }
 
         throw new \RuntimeException(sprintf('Could not find the migration `%s`', $class));
+    }
+
+    /**
+     * @param string $class
+     * @return \yii\db\MigrationInterface
+     */
+    protected function createMigrationInstance($class)
+    {
+        $Migration = new $class;
+
+        $Migration->db = $this->db;
+
+        return $Migration;
     }
 
     /**

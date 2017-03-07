@@ -8,7 +8,7 @@ class m160115_225122_account_auth_response_user_ip_string extends \cookyii\db\Mi
         $data = (new yii\db\Query)
             ->select('*')
             ->from('{{%account_auth_response}}')
-            ->all();
+            ->all($this->db);
 
         $this->alterColumn('{{%account_auth_response}}', 'user_ip', $this->string());
 
@@ -28,7 +28,7 @@ class m160115_225122_account_auth_response_user_ip_string extends \cookyii\db\Mi
         $data = (new yii\db\Query)
             ->select('*')
             ->from('{{%account_auth_response}}')
-            ->all();
+            ->all($this->db);
 
         $this->update(
             '{{%account_auth_response}}',

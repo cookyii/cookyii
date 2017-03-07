@@ -35,7 +35,7 @@ class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
             $data = (new \yii\db\Query)
                 ->select('*')
                 ->from($table)
-                ->all();
+                ->all($this->db);
 
             $this->dropTable($table);
 
@@ -57,7 +57,7 @@ class m160115_202234_account_merging_auth_tables extends \cookyii\db\Migration
         $data = (new \yii\db\Query)
             ->select('*')
             ->from('{{%account_auth}}')
-            ->all();
+            ->all($this->db);
 
         $this->dropForeignKey('fkey_account_auth_account', '{{%account_auth}}');
 
