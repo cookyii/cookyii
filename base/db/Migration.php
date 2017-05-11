@@ -21,7 +21,12 @@ class Migration extends \yii\db\Migration
     /**
      * @var array
      */
-    public $config = [];
+    public $config = [
+        'charset'    => 'utf8mb4',
+        'collate'    => 'utf8mb4_unicode_ci',
+        'engine'     => 'InnoDB',
+        'row-format' => 'COMPACT',
+    ];
 
     /**
      * @inheritdoc
@@ -34,7 +39,7 @@ class Migration extends \yii\db\Migration
 
         $this->config = $controller instanceof MigrateController
             ? $controller->migrationConfig
-            : [];
+            : $this->config;
     }
 
     /**

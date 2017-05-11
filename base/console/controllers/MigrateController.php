@@ -23,9 +23,9 @@ class MigrateController extends \yii\console\controllers\MigrateController
      * @var array
      */
     public $migrationConfig = [
-        'charset' => 'utf8mb4',
-        'collate' => 'utf8mb4_unicode_ci',
-        'engine' => 'InnoDB',
+        'charset'    => 'utf8mb4',
+        'collate'    => 'utf8mb4_unicode_ci',
+        'engine'     => 'InnoDB',
         'row-format' => 'COMPACT',
     ];
 
