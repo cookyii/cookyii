@@ -83,9 +83,9 @@ class Migration extends \yii\db\Migration
             }
 
             if (isset($columns['fkeys'])) {
-                foreach ($columns['fkeys'] as $name => $config) {
+                foreach ($columns['fkeys'] as $config) {
                     $this->addForeignKey(
-                        $name,
+                        $this->getFkeyName($table, $config['from']),
                         $table, $config['from'],
                         $config['to'][0], $config['to'][1],
                         isset($config['delete']) ? $config['delete'] : null,
@@ -96,6 +96,25 @@ class Migration extends \yii\db\Migration
         } else {
             parent::createTable($table, $columns, $options);
         }
+    }
+
+    /**
+     * @param string $table
+     * @param string $column
+     * @return string
+     */
+    private function getFkeyName($table, $column)
+    {
+        $table = str_replace(['{{%', '}}'], '', $table);
+
+        $name = "fkey_{$table}_{$column}";
+
+        if (mb_strlen($name, 'utf-8') > 64) {
+            $hash = md5($name);
+            $name = "fkey_$hash";
+        }
+
+        return $name;
     }
 
     /**
