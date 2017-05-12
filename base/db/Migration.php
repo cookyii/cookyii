@@ -106,6 +106,7 @@ class Migration extends \yii\db\Migration
     private function getFkeyName($table, $column)
     {
         $table = str_replace(['{{%', '}}'], '', $table);
+        $column = preg_replace('/(\_id)$/i', '', $column);
 
         $name = "fkey_{$table}_{$column}";
 
