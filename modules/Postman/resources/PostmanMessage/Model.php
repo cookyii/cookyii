@@ -222,9 +222,7 @@ class Model extends \cookyii\db\ActiveRecord
                     'postmanMessageId' => $Message->id,
                 ]);
 
-                if (\Yii::$app->has($Job->queue)) {
-                    $Job->push();
-                }
+                F::Queue()->push($Job);
             } else {
                 $this->populateErrors($Message, 'id');
             }
@@ -235,14 +233,15 @@ class Model extends \cookyii\db\ActiveRecord
 
     /**
      * @return string
+     * @throws \yii\base\InvalidParamException
      */
     public function getWebVersionUrl()
     {
         $code = $this->code;
 
         $hash = F::Security()->encryptByPassword(Json::encode([
-            'c' => $code,
             't' => time(),
+            'c' => $code,
             'u' => uniqid(),
         ]), COOKIE_VALIDATION_KEY);
 
@@ -270,9 +269,7 @@ class Model extends \cookyii\db\ActiveRecord
                 'postmanMessageId' => $this->id,
             ]);
 
-            if (\Yii::$app->has($Job->queue)) {
-                $Job->push();
-            }
+            F::Queue()->push($Job);
         }
 
         return $result;
@@ -282,6 +279,7 @@ class Model extends \cookyii\db\ActiveRecord
      * Send message to user immediately
      * @deprecated
      * @return bool|array
+     * @throws \Exception
      */
     public function send()
     {
