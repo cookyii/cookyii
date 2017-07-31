@@ -58,12 +58,14 @@ class SendMailJob extends BaseJob
 
             $Message->error = Json::encode($errors);
             $Message->validate() && $Message->save();
-        } elseif (is_bool($result) && $result === false) {
-            $Postman = $MessageModel::getPostman();
+        } elseif (is_bool($result) && $result !== true) {
+            if ($result === false) {
+                $Postman = $MessageModel::getPostman();
 
-            $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
-        } else {
-            throw new ErrorException(\Yii::t('cookyii.postman', 'Emergency response'));
+                $Message->repeatAfter($Postman->resentTry, $Postman->resentOffset);
+            } else {
+                throw new ErrorException(\Yii::t('cookyii.postman', 'Emergency response'));
+            }
         }
 
         return $result;
