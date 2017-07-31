@@ -48,13 +48,9 @@ return [
 //        'database' => REDIS_BASE,
 //    ],
 //    'component.queue' => [
-//        'class' => cookyii\queue\RedisQueue::class,
-//        'database' => 0,
-//        'redis' => [
-//            'host' => REDIS_HOST,
-//            'port' => REDIS_PORT,
-//            'password' => REDIS_PASS,
-//        ],
+//        'class' => yii\queue\redis\Queue::class,
+//        'as log'  => yii\queue\LogBehavior::class,
+//        'channel' => 'myproject-queue',
 //    ],
     'component.mailer' => [
         'class' => yii\swiftmailer\Mailer::class,

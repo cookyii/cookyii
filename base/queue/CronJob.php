@@ -1,39 +1,42 @@
 <?php
 /**
- * ActiveJob.php
+ * CronJob.php
  * @author Revin Roman
  * @link https://rmrevin.com
  */
 
 namespace cookyii\queue;
 
-use cookyii\Facade as F;
+use cookyii\Facade;
 use yii\base\InvalidParamException;
 
 /**
- * Class ActiveJob
+ * Class CronJob
  * @package cookyii\queue
  */
-abstract class CronJob extends ActiveJob
+abstract class CronJob extends EchoJob
 {
 
     public $timing = [];
 
     public $defaultTiming = [
-        'min' => '*',
-        'hour' => '*',
-        'day' => '*',
-        'month' => '*',
+        'min'       => '*',
+        'hour'      => '*',
+        'day'       => '*',
+        'month'     => '*',
         'dayOfWeek' => '*',
     ];
 
     /**
      * @return bool
+     * @throws \Exception
      */
     abstract public function schedule();
 
     /**
      * @return bool
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidParamException
      */
     public function isNeedExecute()
     {
@@ -43,7 +46,7 @@ abstract class CronJob extends ActiveJob
 
         $current = array_combine(
             ['min', 'hour', 'day', 'month', 'dayOfWeek'],
-            explode(' ', F::Formatter()->asDatetime($time, 'm H d M e'))
+            explode(' ', Facade::Formatter()->asDatetime($time, 'm H d M e'))
         );
 
         $result = true;
@@ -59,6 +62,7 @@ abstract class CronJob extends ActiveJob
 
     /**
      * @return array
+     * @throws \yii\base\InvalidParamException
      */
     protected function getTiming()
     {
@@ -67,10 +71,10 @@ abstract class CronJob extends ActiveJob
         $timing = array_merge($this->defaultTiming, $this->timing);
 
         $threshold = [
-            'min' => ['min' => 0, 'max' => 59],
-            'hour' => ['min' => 0, 'max' => 23],
-            'day' => ['min' => 1, 'max' => 31],
-            'month' => ['min' => 1, 'max' => 12],
+            'min'       => ['min' => 0, 'max' => 59],
+            'hour'      => ['min' => 0, 'max' => 23],
+            'day'       => ['min' => 1, 'max' => 31],
+            'month'     => ['min' => 1, 'max' => 12],
             'dayOfWeek' => ['min' => 1, 'max' => 7],
         ];
 
