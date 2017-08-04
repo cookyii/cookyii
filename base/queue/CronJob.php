@@ -14,7 +14,7 @@ use yii\base\InvalidParamException;
  * Class CronJob
  * @package cookyii\queue
  */
-abstract class CronJob extends EchoJob
+abstract class CronJob extends BaseJob
 {
 
     public $timing = [];
