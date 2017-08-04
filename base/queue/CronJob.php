@@ -17,15 +17,10 @@ use yii\base\InvalidParamException;
 abstract class CronJob extends BaseJob
 {
 
-    public $timing = [];
-
-    public $defaultTiming = [
-        'min'       => '*',
-        'hour'      => '*',
-        'day'       => '*',
-        'month'     => '*',
-        'dayOfWeek' => '*',
-    ];
+    /**
+     * @var array
+     */
+    protected $timing = [];
 
     /**
      * @return bool
@@ -66,9 +61,13 @@ abstract class CronJob extends BaseJob
      */
     protected function getTiming()
     {
-        $result = [];
-
-        $timing = array_merge($this->defaultTiming, $this->timing);
+        $timing = array_merge([
+            'min'       => '*',
+            'hour'      => '*',
+            'day'       => '*',
+            'month'     => '*',
+            'dayOfWeek' => '*',
+        ], $this->timing);
 
         $threshold = [
             'min'       => ['min' => 0, 'max' => 59],
@@ -77,6 +76,19 @@ abstract class CronJob extends BaseJob
             'month'     => ['min' => 1, 'max' => 12],
             'dayOfWeek' => ['min' => 1, 'max' => 7],
         ];
+
+        return $this->parseTiming($timing, $threshold);
+    }
+
+    /**
+     * @param array $timing
+     * @param array $threshold
+     * @return array
+     * @throws \yii\base\InvalidParamException
+     */
+    private function parseTiming(array $timing, array $threshold)
+    {
+        $result = [];
 
         foreach ($timing AS $type => $value) {
             if (is_numeric($value) && ($value >= $threshold[$type]['min'] && $value <= $threshold[$type]['max'])) {

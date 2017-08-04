@@ -25,7 +25,7 @@ abstract class BaseJob extends Object implements Job
     /**
      * @var array
      */
-    private $timing = [
+    private $timer = [
         'start' => null,
         'done'  => null,
     ];
@@ -37,10 +37,13 @@ abstract class BaseJob extends Object implements Job
 
     /**
      * BaseJob constructor.
+     * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct($config = [])
     {
-        $this->id = md5(uniqid(mt_rand()));
+        parent::__construct($config);
+
+        $this->id = md5(uniqid(mt_rand(), true));
     }
 
     /**
@@ -61,7 +64,7 @@ abstract class BaseJob extends Object implements Job
      */
     public function isTimerStarted()
     {
-        return !empty($this->timing['start']);
+        return !empty($this->timer['start']);
     }
 
     /**
@@ -69,27 +72,27 @@ abstract class BaseJob extends Object implements Job
      */
     public function isTimerStopped()
     {
-        return !empty($this->timing['done']);
+        return !empty($this->timer['done']);
     }
 
     public function startTimer()
     {
-        $this->timing['start'] = microtime(true);
-        $this->timing['done'] = null;
+        $this->timer['start'] = microtime(true);
+        $this->timer['done'] = null;
     }
 
     public function stopTimer()
     {
-        $this->timing['done'] = microtime(true);
+        $this->timer['done'] = microtime(true);
     }
 
     /**
-     * @return bool|int
+     * @return bool|float
      */
     public function getDuration()
     {
-        return !empty($this->timing['start']) && !empty($this->timing['done'])
-            ? (int)round($this->timing['done'] - $this->timing['start'], 0)
+        return !empty($this->timer['start']) && !empty($this->timer['done'])
+            ? round($this->timer['done'] - $this->timer['start'], 4)
             : false;
     }
 
@@ -104,7 +107,7 @@ abstract class BaseJob extends Object implements Job
     /**
      * @param string $message
      */
-    protected function log($message)
+    public function log($message)
     {
         $this->logs[] = [
             'date'    => new \DateTime,
@@ -117,7 +120,7 @@ abstract class BaseJob extends Object implements Job
      * @param string $message
      * @param mixed $extra
      */
-    protected function logerr($message, $extra = null)
+    public function logerr($message, $extra = null)
     {
         $this->logs[] = [
             'date'    => new \DateTime,
