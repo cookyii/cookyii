@@ -17,19 +17,36 @@ use yii\queue\Job;
 abstract class BaseJob extends Object implements Job
 {
 
+    /**
+     * @var string
+     */
     private $id;
 
+    /**
+     * @var array
+     */
     private $timing = [
         'start' => null,
         'done'  => null,
     ];
 
+    /**
+     * @var array
+     */
     private $logs = [];
 
+    /**
+     * BaseJob constructor.
+     */
     public function __construct()
     {
         $this->id = md5(uniqid(mt_rand()));
     }
+
+    /**
+     * @return array
+     */
+    abstract public function exportData();
 
     /**
      * @return string

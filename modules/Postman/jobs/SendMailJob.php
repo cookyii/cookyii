@@ -25,6 +25,16 @@ class SendMailJob extends BaseJob
     public $postmanMessageId;
 
     /**
+     * @return array
+     */
+    public function exportData()
+    {
+        return [
+            'postmanMessageId' => $this->postmanMessageId,
+        ];
+    }
+
+    /**
      * @param \yii\queue\Queue $queue
      * @return bool
      * @throws \Exception
@@ -44,8 +54,8 @@ class SendMailJob extends BaseJob
         $MessageModel = \Yii::createObject(PostmanMessageModel::class);
 
         $Message = $MessageModel::find()
-            ->byId($id)
-            ->one();
+                                ->byId($id)
+                                ->one();
 
         if (empty($Message)) {
             throw new ErrorException(\Yii::t('cookyii.postman', 'Failed to find message'));
