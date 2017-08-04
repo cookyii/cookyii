@@ -7,6 +7,7 @@
 
 require __DIR__ . '/dev/build/ExtractTask.php';
 require __DIR__ . '/dev/build/PushTask.php';
+require __DIR__ . '/dev/build/UpdateTask.php';
 
 /** @var array $apps list of existing applications */
 $apps = json_decode(file_get_contents(__DIR__ . '/.apps.json'), true);
@@ -15,12 +16,12 @@ $apps = json_decode(file_get_contents(__DIR__ . '/.apps.json'), true);
 $buildConfig = [
     'default' => [
         '.description' => 'Default build',
-        '.depends' => ['map'],
+        '.depends'     => ['map'],
     ],
 
     'map' => [
         '.description' => 'Show map of all tasks in current build config',
-        '.task' => 'cookyii\build\tasks\MapTask',
+        '.task'        => 'cookyii\build\tasks\MapTask',
     ],
 
     'e' => [
@@ -33,28 +34,35 @@ $buildConfig = [
 
     'extract' => [
         '.description' => 'Extract codebase to split projects',
-        '.depends' => [
-            'clear', 'clear/backups', 'less',
+        '.depends'     => [
+            'clear', 'clear/backups', 'less', 'update',
         ],
-        '.task' => [
+        '.task'        => [
             'class' => 'dev\build\ExtractTask',
+        ],
+    ],
+
+    'update' => [
+        '.description' => 'Update codebase from github repos',
+        '.task'        => [
+            'class' => 'dev\build\UpdateTask',
         ],
     ],
 
     'push' => [
         '.description' => 'Push codebase to github repos',
-        '.depends' => [
+        '.depends'     => [
             'extract',
         ],
-        '.task' => [
+        '.task'        => [
             'class' => 'dev\build\PushTask',
         ],
     ],
 
     'messages' => [
         '.description' => 'Extract codebase to split repos',
-        '.task' => [
-            'class' => 'cookyii\build\tasks\CommandTask',
+        '.task'        => [
+            'class'       => 'cookyii\build\tasks\CommandTask',
             'commandline' => [
                 './yii message ./messages/config.php',
                 './yii message ./base/messages/config.php',
@@ -64,12 +72,12 @@ $buildConfig = [
 
     'clear' => [
         '.description' => 'Delete all temporary files and remove installed packages',
-        'backups' => [
+        'backups'      => [
             '.description' => 'Remove all backups',
-            '.task' => [
-                'class' => 'cookyii\build\tasks\DeleteTask',
+            '.task'        => [
+                'class'     => 'cookyii\build\tasks\DeleteTask',
                 'deleteDir' => false,
-                'fileSets' => [
+                'fileSets'  => [
                     ['dir' => __DIR__ . '/.backups', 'exclude' => ['.gitignore']],
                 ],
             ],
@@ -78,9 +86,9 @@ $buildConfig = [
 
     'less' => [
         '.description' => 'Compile base less styles',
-        '.task' => [
-            'class' => 'cookyii\build\tasks\CommandTask',
-            'cwd' => __DIR__ . '/base/assets/_sources',
+        '.task'        => [
+            'class'       => 'cookyii\build\tasks\CommandTask',
+            'cwd'         => __DIR__ . '/base/assets/_sources',
             'commandline' => __DIR__ . '/node_modules/.bin/gulp css/optimize',
         ],
     ],
@@ -107,10 +115,10 @@ function appendClearTask(array &$buildConfig, $task_name, $app)
     $buildConfig[$task_name]['.depends'][] = sprintf('*/%s', $app);
     $buildConfig[$task_name][$app] = [
         '.description' => 'Remove all temp files',
-        '.task' => [
-            'class' => 'cookyii\build\tasks\DeleteTask',
+        '.task'        => [
+            'class'     => 'cookyii\build\tasks\DeleteTask',
             'deleteDir' => false,
-            'fileSets' => [
+            'fileSets'  => [
                 ['dir' => sprintf('%s/runtime', $appPath), 'exclude' => ['.gitignore']],
                 ['dir' => sprintf('%s/web/assets', $appPath), 'exclude' => ['.gitignore']],
                 ['dir' => sprintf('%s/web/minify', $appPath), 'exclude' => ['.gitignore']],

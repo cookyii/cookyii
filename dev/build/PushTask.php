@@ -25,7 +25,6 @@ git commit -am "Update"
 git push origin master
 BASH;
 
-
         $this->commandline = [
             str_replace('{path}', '../base/', $cmd),
             str_replace('{path}', '../module-account/', $cmd),
@@ -44,6 +43,7 @@ BASH;
             if (!is_string($from)) {
                 $from = $to;
             }
+
             $this->commandline[] = sprintf('rsync -t ./%s ../project/%s', $from, $to);
         }
     }
