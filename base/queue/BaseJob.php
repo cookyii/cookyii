@@ -16,4 +16,19 @@ use yii\queue\Job;
  */
 abstract class BaseJob extends Object implements Job
 {
+
+    private $id;
+
+    public function __construct()
+    {
+        $this->id = md5(uniqid(mt_rand()));
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
