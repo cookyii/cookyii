@@ -56,9 +56,26 @@ abstract class BaseJob extends Object implements Job
         return $this->id;
     }
 
+    /**
+     * @return bool
+     */
+    public function isTimerStarted()
+    {
+        return !empty($this->timing['start']);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTimerStopped()
+    {
+        return !empty($this->timing['done']);
+    }
+
     public function startTimer()
     {
         $this->timing['start'] = microtime(true);
+        $this->timing['done'] = null;
     }
 
     public function stopTimer()
@@ -67,12 +84,12 @@ abstract class BaseJob extends Object implements Job
     }
 
     /**
-     * @return bool|float
+     * @return bool|int
      */
     public function getDuration()
     {
         return !empty($this->timing['start']) && !empty($this->timing['done'])
-            ? round($this->timing['done'] - $this->timing['start'], 4)
+            ? (int)round($this->timing['done'] - $this->timing['start'], 0)
             : false;
     }
 
