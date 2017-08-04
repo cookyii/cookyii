@@ -24,6 +24,13 @@
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "notify-on-install": false,
+    "discard-changes": "stash"
+  },
   "replace": {
     "bower-asset/jquery": "*",
     "bower-asset/jquery.inputmask": "*",
@@ -48,7 +55,7 @@
     "yiisoft/yii2-imagine": "~2.1",
     "yiisoft/yii2-authclient": "~2.0",
     "yiisoft/yii2-swiftmailer": "~2.0",
-    "yiisoft/yii2-queue": "dev-master",
+    "yiisoft/yii2-queue": "~2.0",
 
     "cookyii/base": "dev-master",
     "cookyii/module-feed": "dev-master",
@@ -70,10 +77,10 @@
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0",
     "yiisoft/yii2-faker": "~2.0",
-    "codeception/codeception": "~2.0",
-    "codeception/phpbuiltinserver": "~1.2",
+    "codeception/codeception": "~2.3",
+    "codeception/phpbuiltinserver": "~1.3",
     "codeception/specify": "~0.4",
-    "codeception/verify": "~0.2"
+    "codeception/verify": "~0.4"
   },
   "suggest": {
     "predis/predis": "For redis queue need predis client."

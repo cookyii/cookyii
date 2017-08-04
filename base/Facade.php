@@ -67,6 +67,14 @@ class Facade
     }
 
     /**
+     * @return \yii\queue\Queue
+     */
+    public static function Queue()
+    {
+        return \Yii::$app->get('queue');
+    }
+
+    /**
      * @return \yii\log\Dispatcher
      */
     public static function YiiLog()
