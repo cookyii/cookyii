@@ -7,13 +7,19 @@
 
 namespace cookyii\modules\Postman\resources\PostmanMessageAttach;
 
+use cookyii\modules\Media\resources\Media\Model as MediaModel;
+use cookyii\modules\Postman\resources\PostmanMessage\Model as PostmanMessageModel;
+
 /**
  * Class Model
  * @package cookyii\modules\Postman\resources\PostmanMessageAttach
  *
- * @property integer $letter_id
+ * @property integer $message_id
  * @property integer $media_id
- * @property integer $embed
+ * @property string $embed
+ *
+ * @property MediaModel $media
+ * @property PostmanMessageModel $message
  */
 class Model extends \cookyii\db\ActiveRecord
 {
@@ -27,15 +33,28 @@ class Model extends \cookyii\db\ActiveRecord
     {
         return [
             /** type validators */
-            [['letter_id', 'media_id'], 'integer'],
-            [['type'], 'boolean'],
+            [['message_id', 'media_id'], 'integer'],
+            [['embed'], 'string'],
 
             /** semantic validators */
-            [['letter_id', 'media_id'], 'required'],
-
-            /** default values */
-            [['embed'], 'default', 'value' => static::EMBED_NO],
+            [['message_id', 'media_id'], 'required'],
         ];
+    }
+
+    /**
+     * @return \cookyii\modules\Postman\resources\PostmanMessage\Query
+     */
+    public function getMessage()
+    {
+        return $this->hasOne(PostmanMessageModel::class, ['id' => 'message_id']);
+    }
+
+    /**
+     * @return \cookyii\modules\Media\resources\Media\Query
+     */
+    public function getMedia()
+    {
+        return $this->hasOne(MediaModel::class, ['id' => 'media_id']);
     }
 
     /**
@@ -45,7 +64,4 @@ class Model extends \cookyii\db\ActiveRecord
     {
         return \Yii::createObject(Query::class, [get_called_class()]);
     }
-
-    const EMBED_NO = 0;
-    const EMBED_YES = 1;
 }

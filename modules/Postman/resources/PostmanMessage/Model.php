@@ -11,6 +11,7 @@ use cookyii\db\traits\SoftDeleteTrait;
 use cookyii\Facade as F;
 use cookyii\helpers\Premailer;
 use cookyii\modules\Postman\jobs\SendMailJob;
+use cookyii\modules\Postman\resources\PostmanMessageAttach\Model as PostmanMessageAttachModel;
 use cookyii\modules\Postman\resources\PostmanTemplate\Model as PostmanTemplateModel;
 use cookyii\traits\PopulateErrorsTrait;
 use yii\helpers\Html;
@@ -34,6 +35,8 @@ use yii\validators\EmailValidator;
  * @property integer $executed_at
  * @property integer $sent_at
  * @property integer $deleted_at
+ *
+ * @property PostmanMessageAttachModel[] $messageAttachments
  */
 class Model extends \cookyii\db\ActiveRecord
 {
@@ -303,106 +306,137 @@ class Model extends \cookyii\db\ActiveRecord
 
         $Postman = static::getPostman();
 
-        if (!$this->hasErrors()) {
-            $address = empty($this->address)
-                ? []
-                : Json::decode($this->address);
+        if ($this->hasErrors()) {
+            return $result;
+        }
 
-            $reply_to = [];
-            $to = [];
-            $cc = [];
-            $bcc = [];
+        $address = empty($this->address)
+            ? []
+            : Json::decode($this->address);
 
-            if (empty($address)) {
-                $this->addError('address', \Yii::t('cookyii.postman', 'Cannot send message without a recipient'));
-            } else {
-                foreach ($address as $addr) {
-                    switch ($addr['type']) {
-                        case static::ADDRESS_TYPE_REPLY_TO:
-                            $reply_to[$addr['email']] = $addr['name'];
-                            break;
-                        case static::ADDRESS_TYPE_TO:
-                            $to[$addr['email']] = $addr['name'];
-                            break;
-                        case static::ADDRESS_TYPE_CC:
-                            $cc[$addr['email']] = $addr['name'];
-                            break;
-                        case static::ADDRESS_TYPE_BCC:
-                            $bcc[$addr['email']] = $addr['name'];
-                            break;
-                    }
-                }
+        $reply_to = [];
+        $to = [];
+        $cc = [];
+        $bcc = [];
 
-                $from = empty($Postman->from)
-                    ? [SMTP_USER => 'Postman']
-                    : $Postman->from;
+        if (empty($address)) {
+            $this->addError('address', \Yii::t('cookyii.postman', 'Cannot send message without a recipient'));
 
-                $Validator = new EmailValidator;
+            return $result;
+        }
 
-                if (is_string($from) && !$Validator->validate($from)) {
-                    $from = [SMTP_USER => 'Postman'];
-                }
+        foreach ($address as $addr) {
+            switch ($addr['type']) {
+                case static::ADDRESS_TYPE_REPLY_TO:
+                    $reply_to[$addr['email']] = $addr['name'];
+                    break;
+                case static::ADDRESS_TYPE_TO:
+                    $to[$addr['email']] = $addr['name'];
+                    break;
+                case static::ADDRESS_TYPE_CC:
+                    $cc[$addr['email']] = $addr['name'];
+                    break;
+                case static::ADDRESS_TYPE_BCC:
+                    $bcc[$addr['email']] = $addr['name'];
+                    break;
+            }
+        }
 
-                $web_version = $this->getWebVersionUrl();
+        $from = empty($Postman->from)
+            ? [SMTP_USER => 'Postman']
+            : $Postman->from;
 
-                $Message = \Yii::$app->mailer->compose()
-                    ->setCharset('UTF-8')
-                    ->setFrom($from)
-                    ->setSubject($this->subject);
+        $Validator = new EmailValidator;
 
-                $content_text = str_replace('#web_version#', $web_version, $this->content_text);
-                $content_html = str_replace('#web_version#', $web_version, $this->content_html);
+        if (is_string($from) && !$Validator->validate($from)) {
+            $from = [SMTP_USER => 'Postman'];
+        }
 
-                preg_match_all('/(\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([^)"\']*)\s*)/i', $content_html, $matches);
+        $web_version = $this->getWebVersionUrl();
 
-                $embed = [];
-                if (!empty($matches)) {
-                    foreach ($matches[0] as $key => $match) {
-                        $hash = md5($match);
+        $Message = \Yii::$app->mailer->compose()
+            ->setCharset('UTF-8')
+            ->setFrom($from)
+            ->setSubject($this->subject);
 
-                        if (!isset($embed[$hash])) {
-                            $embed[$hash] = $Message->embedContent(file_get_contents($match), [
-                                'contentType' => $matches[2][$key],
-                            ]);
+        $content_text = str_replace('#web_version#', $web_version, $this->content_text);
+        $content_html = str_replace('#web_version#', $web_version, $this->content_html);
 
-                            $content_html = str_replace($match, $embed[$hash], $content_html);
-                        }
-                    }
-                }
+        $embed = [];
 
-                $Message
-                    ->setTextBody($content_text)
-                    ->setHtmlBody($content_html);
+        preg_match_all('/(\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([^)"\']*)\s*)/i', $content_html, $matches);
 
-                if (!empty($reply_to)) {
-                    $Message->setReplyTo($reply_to);
-                }
+        if (!empty($matches)) {
+            foreach ($matches[0] as $key => $match) {
+                $hash = md5($match);
 
-                if (!empty($to)) {
-                    $Message->setTo($to);
-                }
+                if (!isset($embed[$hash])) {
+                    $embed[$hash] = $Message->embedContent(file_get_contents($match), [
+                        'contentType' => $matches[2][$key],
+                    ]);
 
-                if (!empty($cc)) {
-                    $Message->setCc($cc);
-                }
-
-                if (!empty($bcc)) {
-                    $Message->setBcc($bcc);
-                }
-
-                $result = $Message->send($Mailer);
-
-                if ($Mailer instanceof \yii\swiftmailer\Mailer) {
-                    $Mailer->getTransport()->stop();
-                }
-
-                if ($result === true) {
-                    $this->sent_at = time();
-                    $this->update();
-                } else {
-                    $this->addError('sent_at', \Yii::t('cookyii.postman', 'Failed to send message'));
+                    $content_html = str_replace($match, $embed[$hash], $content_html);
                 }
             }
+        }
+
+        $embed = [];
+
+        $attachments = $this->messageAttachments;
+
+        foreach ($attachments as $attachment) {
+            $media = $attachment->media;
+            if (null === $media) {
+                continue;
+            }
+
+            if ($attachment->embed === null) {
+                $Message->attach($media->getAbsolutePath(), [
+                    'fileName' => $media->origin_name,
+                ]);
+            } else {
+                $embed[$attachment->embed] = $Message->embed($media->getAbsolutePath(), [
+                    'fileName' => $media->origin_name,
+                ]);
+
+                $content_html = str_replace([
+                    '#embed[' . $attachment->embed . ']#',
+                    '#embed%5B' . $attachment->embed . '%5D#',
+                ], $embed[$attachment->embed], $content_html);
+            }
+        }
+
+        $Message
+            ->setTextBody($content_text)
+            ->setHtmlBody($content_html);
+
+        if (!empty($reply_to)) {
+            $Message->setReplyTo($reply_to);
+        }
+
+        if (!empty($to)) {
+            $Message->setTo($to);
+        }
+
+        if (!empty($cc)) {
+            $Message->setCc($cc);
+        }
+
+        if (!empty($bcc)) {
+            $Message->setBcc($bcc);
+        }
+
+        $result = $Message->send($Mailer);
+
+        if ($Mailer instanceof \yii\swiftmailer\Mailer) {
+            $Mailer->getTransport()->stop();
+        }
+
+        if ($result === true) {
+            $this->sent_at = time();
+            $this->update();
+        } else {
+            $this->addError('sent_at', \Yii::t('cookyii.postman', 'Failed to send message'));
         }
 
         return $result;
@@ -457,8 +491,14 @@ class Model extends \cookyii\db\ActiveRecord
      * @param bool $use_layout
      * @return static
      */
-    public static function compose($subject, $content_text, $content_html, $placeholders = [], $styles = '', $use_layout = true)
-    {
+    public static function compose(
+        $subject,
+        $content_text,
+        $content_html,
+        $placeholders = [],
+        $styles = '',
+        $use_layout = true
+    ) {
         if (!$use_layout) {
             $layout_text = '{content}';
             $layout_html = '{content}';
@@ -592,6 +632,15 @@ class Model extends \cookyii\db\ActiveRecord
         $params['content'] = '{content}';
 
         return \Yii::$app->get(static::$view)->renderFile($viewFile, $params);
+    }
+
+    /**
+     * @return \cookyii\modules\Postman\resources\PostmanMessageAttach\Query
+     */
+    public function getMessageAttachments()
+    {
+        return $this->hasMany(PostmanMessageAttachModel::class, ['message_id' => 'id'])
+            ->inverseOf('message');
     }
 
     /**

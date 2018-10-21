@@ -55,7 +55,7 @@ class QueueController extends \yii\console\Controller
     {
         parent::init();
 
-        $this->registerEventHandlers();
+        // $this->registerEventHandlers();
     }
 
     /**
